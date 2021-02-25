@@ -14,7 +14,8 @@ install:
   - ps: nuget update -self
 
 build_script:
-  - ps: .\build.ps1 -Target CI
+    - ps ./RunAppVeyor.cmd
+##  - ps: .\build.ps1 -Target CI
 
 # Tests
 test_script:
