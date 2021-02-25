@@ -9,10 +9,9 @@
     <description>Anorisoft Expression Observers</description>
     <copyright>Copyright © Anorisoft</copyright>
     <license type="expression">MIT</license>
+	<repository type="git" url="https://github.com/anorisoft/Anori.ExpressionObservers"/>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <repository type="git" url="https://github.com/anorisoft/Anori.ExpressionObservers"/>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <tags />
+    <tags>Expression, Observers</tags>
     <dependencies>
       <dependency id="JetBrains.Annotations" version="2020.3.0" />
     </dependencies>
