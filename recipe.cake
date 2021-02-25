@@ -10,6 +10,7 @@ BuildParameters.SetParameters(
     repositoryOwner: "anorisoft",
     repositoryName: "Anori.ExpressionObservers",
     appVeyorAccountName: "anorisoft",
+	shouldPublishNuGet: true,                           
     shouldGenerateDocumentation: false,
     shouldRunDupFinder: false);
 
