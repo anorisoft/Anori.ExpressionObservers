@@ -13,6 +13,32 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.ExpressionObservers.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.ExpressionObservers.UnitTests", "..\Tests\Anori.ExpressionObservers.UnitTests\Anori.ExpressionObservers.UnitTests.csproj", "{D84FFB93-44E0-44A9-B94B-74BF2B7876EB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items", "{8AC06E84-D608-4615-A4A3-A00A56EC89D7}"
+	ProjectSection(SolutionItems) = preProject
+		..\.appveyor.yml = ..\.appveyor.yml
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
+		..\build.cmd = ..\build.cmd
+		..\build.ps1 = ..\build.ps1
+		..\build.sh = ..\build.sh
+		..\cake.config = ..\cake.config
+		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+		..\recipe.cake = ..\recipe.cake
+		..\Run.cake = ..\Run.cake
+		..\Run.cmd = ..\Run.cmd
+		..\RunAppVeyor.cmd = ..\RunAppVeyor.cmd
+		..\RunNuGet.cake = ..\RunNuGet.cake
+		..\RunNuget.cmd = ..\RunNuget.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soution Items", "Soution Items", "{8D68EC6D-D06D-4979-AC83-0A90093F0D61}"
+	ProjectSection(SolutionItems) = preProject
+		Anori.ExpressionObservers.nuspec = Anori.ExpressionObservers.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
