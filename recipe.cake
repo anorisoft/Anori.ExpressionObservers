@@ -12,7 +12,7 @@ BuildParameters.SetParameters(
     appVeyorAccountName: "anorisoft",
 	shouldGenerateDocumentation: false,
     shouldRunDupFinder: false,
-	nuspecFilePath: "./Source/Anori.ExpressionObservers.nuspec");
+	nuspecFilePath: "Source/Anori.ExpressionObservers.nuspec");
 
 BuildParameters.PrintParameters(Context);
 

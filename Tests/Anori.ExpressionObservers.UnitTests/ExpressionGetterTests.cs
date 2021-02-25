@@ -225,6 +225,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testB = CreateTestInstanceB();
             const bool expected = false;
             var getValue = ExpressionGetter.CreateValueGetter(
+                // ReSharper disable once NegativeEqualityExpression
                 (TestClass1 a, TestStruct1 b) => !(a.Test2.Test3.Property == b.Test2.Test3.Property));
             var actual = getValue(testA, testB);
 
