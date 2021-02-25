@@ -20,4 +20,4 @@ ToolSettings.SetToolSettings(
     context: Context,
     buildMSBuildToolVersion: MSBuildToolVersion.VS2019);
 
-//Build.RunDotNetCore();
+Build.RunDotNetCore();
