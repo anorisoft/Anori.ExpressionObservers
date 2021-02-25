@@ -2,12 +2,12 @@
 <package>
   <metadata>
     <id>Anori.ExpressionObservers</id>
-    <version>$version$</version>
+    <version>0.0.0</version>
     <authors>Martin Egli</authors>
     <owners>Anori Soft</owners>
-    <title>$title$</title>
+    <title>Anori.ExpressionObservers</title>
     <description>Anorisoft ExpressionObservers</description>
-    <copyright>$copyright$</copyright>
+    <copyright>Copyright © Anorisoft</copyright>
     <!--
     <licenseUrl></licenseUrl>
     <projectUrl></projectUrl>
