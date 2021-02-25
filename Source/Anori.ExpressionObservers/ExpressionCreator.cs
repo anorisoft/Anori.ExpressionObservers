@@ -1,4 +1,5 @@
 ﻿using Anori.ExpressionObservers.Nodes;
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,37 @@ using System.Linq.Expressions;
 namespace Anori.ExpressionObservers
 {
     internal static class ExpressionCreator
-
     {
+        /// <summary>
+        /// Gets the false constant expression.
+        /// </summary>
+        /// <value>
+        /// The false constant expression.
+        /// </value>
+        [NotNull]
         private static ConstantExpression FalseConstantExpression => Expression.Constant(false);
 
+        /// <summary>
+        /// Gets the true constant expression.
+        /// </summary>
+        /// <value>
+        /// The true constant expression.
+        /// </value>
+        [NotNull]
         private static ConstantExpression TrueConstantExpression => Expression.Constant(true);
 
+        /// <summary>
+        /// Creates the value body.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="expression">The expression.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns></returns>
+        [NotNull]
         internal static BlockExpression CreateValueBody(
-            Type resultType,
-            Expression expression,
-            Expression fallback)
+            [NotNull] Type resultType,
+            [NotNull] Expression expression,
+            [NotNull] Expression fallback)
         {
             var returnTarget = Expression.Label(resultType);
             var tree = ExpressionTree.GetTree(expression);
@@ -24,9 +46,16 @@ namespace Anori.ExpressionObservers
             return body;
         }
 
+        /// <summary>
+        /// Creates the value body.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="expression">The expression.</param>
+        /// <returns></returns>
+        [NotNull]
         internal static BlockExpression CreateValueBody(
-            Type resultType,
-            Expression expression)
+            [NotNull] Type resultType,
+            [NotNull] Expression expression)
 
         {
             var returnTarget = Expression.Label(resultType);
@@ -35,9 +64,16 @@ namespace Anori.ExpressionObservers
             return body;
         }
 
+        /// <summary>
+        /// Creates the value body.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="tree">The tree.</param>
+        /// <returns></returns>
+        [NotNull]
         internal static BlockExpression CreateValueBody(
-            Type resultType,
-            Tree tree)
+            [NotNull] Type resultType,
+            [NotNull] Tree tree)
 
         {
             var returnTarget = Expression.Label(resultType);
@@ -45,9 +81,18 @@ namespace Anori.ExpressionObservers
             return body;
         }
 
+        /// <summary>
+        /// Creates the value body.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns></returns>
+        [NotNull]
         internal static BlockExpression CreateValueBody(
-            Type resultType,
-            Tree tree, Expression fallback)
+            [NotNull] Type resultType,
+            [NotNull] Tree tree,
+            [NotNull] Expression fallback)
 
         {
             var returnTarget = Expression.Label(resultType);
@@ -55,22 +100,40 @@ namespace Anori.ExpressionObservers
             return body;
         }
 
+        /// <summary>
+        /// Creates the parameter body.
+        /// </summary>
+        /// <param name="resultParameter">The result parameter.</param>
+        /// <returns></returns>
+        [NotNull]
         internal static Expression CreateParameterBody(
-            ParameterNode resultParameter,
-            Expression expression)
+            [NotNull] ParameterNode resultParameter)
 
         {
-            var returnTarget = Expression.Label(resultParameter.Type);
-            var tree = ExpressionTree.GetTree(expression);
             var body = resultParameter.Expression;
             return body;
         }
 
-        private static Expression NullExpressionOf(Type type) => Expression.Constant(null, type);
+        /// <summary>
+        /// Nulls the expression of.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
+        [NotNull]
+        private static Expression NullExpressionOf([NotNull] Type type) => Expression.Constant(null, type);
+
+        /// <summary>
+        /// Creates the value block.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="nodes">The nodes.</param>
+        /// <param name="returnTarget">The return target.</param>
+        /// <returns></returns>
+        [NotNull]
         private static BlockExpression CreateValueBlock(
-            Type resultType,
-            Tree nodes,
-            LabelTarget returnTarget)
+            [NotNull] Type resultType,
+            [NotNull] Tree nodes,
+            [NotNull] LabelTarget returnTarget)
         {
             var expressions = new List<Expression>();
             var variables = new VaribalesCollection();
@@ -83,11 +146,20 @@ namespace Anori.ExpressionObservers
             return body;
         }
 
+        /// <summary>
+        /// Creates the value block.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="nodes">The nodes.</param>
+        /// <param name="returnTarget">The return target.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns></returns>
+        [NotNull]
         private static BlockExpression CreateValueBlock(
-            Type resultType,
-            Tree nodes,
-            LabelTarget returnTarget,
-            Expression fallback)
+            [NotNull] Type resultType,
+            [NotNull] Tree nodes,
+            [NotNull] LabelTarget returnTarget,
+            [NotNull] Expression fallback)
         {
             var expressions = new List<Expression>();
             var variables = new VaribalesCollection();
@@ -100,13 +172,23 @@ namespace Anori.ExpressionObservers
             return body;
         }
 
+        /// <summary>
+        /// Creates the value expressions.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="nodes">The nodes.</param>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
+        /// <exception cref="NotSupportedException"></exception>
         private static void CreateValueExpressions(
-            Type resultType,
-            NodeCollection nodes,
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression ifNull,
-            LabelTarget returnTarget)
+            [NotNull] Type resultType,
+            [NotNull] NodeCollection nodes,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget)
         {
             switch (nodes.Count)
             {
@@ -123,24 +205,41 @@ namespace Anori.ExpressionObservers
             }
         }
 
+        /// <summary>
+        /// Creates the value chain expressions.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="nodes">The nodes.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
         private static void CreateValueChainExpressions(
-            Type resultType,
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            NodeCollection nodes,
-            Expression ifNull,
-            LabelTarget returnTarget)
+            [NotNull] Type resultType,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] NodeCollection nodes,
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget)
         {
             var target = CreateVariableInnerExpressions(expressions, variables, nodes, ifNull);
             InsertEndValueExpression(resultType, expressions, variables, target, nodes.First(), ifNull,
                 returnTarget);
         }
 
+        /// <summary>
+        /// Creates the variable expressions.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="nodes">The nodes.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
         private static Expression CreateVariableExpressions(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            NodeCollection nodes,
-            Expression ifNull)
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] NodeCollection nodes,
+            [NotNull] Expression ifNull)
         {
             var source = CreateVariableInnerExpressions(expressions, variables, nodes, ifNull);
             if (nodes.Count == 1)
@@ -154,11 +253,20 @@ namespace Anori.ExpressionObservers
             return target;
         }
 
+        /// <summary>
+        /// Creates the variable inner expressions.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="nodes">The nodes.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private static Expression CreateVariableInnerExpressions(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            NodeCollection nodes,
-            Expression ifNull)
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] NodeCollection nodes,
+            [NotNull] Expression ifNull)
         {
             var list = nodes.ToList();
             list.Reverse();
@@ -262,11 +370,19 @@ namespace Anori.ExpressionObservers
             return target;
         }
 
+        /// <summary>
+        /// Members the initialize next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="targetParameter">The target parameter.</param>
+        /// <param name="memberInit">The member initialize.</param>
+        /// <param name="ifNull">If null.</param>
         private static void MemberInitNextElement(IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression targetParameter,
-            MemberInitNode memberInit,
-            Expression ifNull)
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression targetParameter,
+            [NotNull] MemberInitNode memberInit,
+            [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(targetParameter,
                 MemberInitMakeExpression(expressions, variables, memberInit, ifNull)));
@@ -278,8 +394,20 @@ namespace Anori.ExpressionObservers
                 ifNull));
         }
 
-        private static Expression MemberInitMakeExpression(IList<Expression> expressions, VaribalesCollection variables,
-            MemberInitNode memberInit, Expression ifNull)
+        /// <summary>
+        /// Members the initialize make expression.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="memberInit">The member initialize.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        [NotNull]
+        private static Expression MemberInitMakeExpression(
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] MemberInitNode memberInit,
+            [NotNull] Expression ifNull)
         {
             var args = memberInit.Parameters.Select(argument =>
                     CreateVariableExpressions(expressions, variables, argument, ifNull))
@@ -290,11 +418,21 @@ namespace Anori.ExpressionObservers
                 Expression.New(memberInit.MemberInitExpression.NewExpression.Constructor, args), bindings);
         }
 
+        /// <summary>
+        /// Creates the binding expressions.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="binding">The binding.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        [NotNull]
         private static MemberBinding CreateBindingExpressions(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            IBindingNode binding,
-            Expression ifNull)
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] IBindingNode binding,
+            [NotNull] Expression ifNull)
         {
             switch (binding)
             {
@@ -333,11 +471,19 @@ namespace Anori.ExpressionObservers
             }
         }
 
+        /// <summary>
+        /// Constructors the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="targetParameter">The target parameter.</param>
+        /// <param name="constructor">The constructor.</param>
+        /// <param name="ifNull">If null.</param>
         private static void ConstructorNextElement(IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression targetParameter,
-            ConstructorNode constructor,
-            Expression ifNull)
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression targetParameter,
+            [NotNull] ConstructorNode constructor,
+            [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(targetParameter,
                 ConstructorMakeExpression(expressions, variables, constructor, ifNull)));
@@ -349,14 +495,25 @@ namespace Anori.ExpressionObservers
                 ifNull));
         }
 
+        /// <summary>
+        /// Inserts the end value expression.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="node">The node.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private static void InsertEndValueExpression(
-            Type resultType,
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression source,
-            IExpressionNode node,
-            Expression ifNull,
-            LabelTarget returnTarget)
+            [NotNull] Type resultType,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression source,
+            [NotNull] IExpressionNode node,
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget)
         {
             switch (node)
             {
@@ -365,7 +522,7 @@ namespace Anori.ExpressionObservers
                     break;
 
                 case PropertyNode property:
-                    PropertyLastElement(expressions, source, resultType, property, ifNull, returnTarget);
+                    PropertyLastElement(expressions, source, resultType, property, returnTarget);
                     break;
 
                 case FieldNode field:
@@ -377,13 +534,23 @@ namespace Anori.ExpressionObservers
             }
         }
 
+        /// <summary>
+        /// Inserts the expression.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="node">The node.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="target">The target.</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private static void InsertExpression(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression source,
-            IExpressionNode node,
-            Expression ifNull,
-            Expression target)
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression source,
+            [NotNull] IExpressionNode node,
+            [NotNull] Expression ifNull,
+            [NotNull] Expression target)
         {
             switch (node)
             {
@@ -428,20 +595,39 @@ namespace Anori.ExpressionObservers
             }
         }
 
+        /// <summary>
+        /// Fields the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="sourceParameter">The source parameter.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="returnTarget">The return target.</param>
         private static void FieldLastElement(
-            IList<Expression> expressions, Expression sourceParameter,
-            Type resultType,
+            [NotNull] ICollection<Expression> expressions, Expression sourceParameter,
+            [NotNull] Type resultType,
             FieldNode field,
-            LabelTarget returnTarget) =>
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget,
                 Expression.Convert(Expression.Field(sourceParameter, field.FieldInfo), resultType)));
 
-        private static void CreateValueSingleExpressions(Type resultType,
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            NodeCollection nodes,
-            Expression ifNull,
-            LabelTarget returnTarget)
+        /// <summary>
+        /// Creates the value single expressions.
+        /// </summary>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="nodes">The nodes.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        private static void CreateValueSingleExpressions(
+            [NotNull] Type resultType,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] NodeCollection nodes,
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget)
         {
             var element = nodes.First();
             switch (element)
@@ -479,16 +665,32 @@ namespace Anori.ExpressionObservers
             }
         }
 
-        private static void ConstantLastElement(ICollection<Expression> expressions, Type resultType,
-            ConstantNode constant,
-            LabelTarget returnTarget) =>
+        /// <summary>
+        /// Constants the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="constant">The constant.</param>
+        /// <param name="returnTarget">The return target.</param>
+        private static void ConstantLastElement(
+            [NotNull] ICollection<Expression> expressions,
+            [NotNull] Type resultType,
+            [NotNull] ConstantNode constant,
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget, Expression.Constant(constant.Value, resultType)));
 
+        /// <summary>
+        /// Constants the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="targetParameter">The target parameter.</param>
+        /// <param name="constant">The constant.</param>
+        /// <param name="ifExpression">If expression.</param>
         private static void ConstantNextElement(
-            ICollection<Expression> expressions,
-            Expression targetParameter,
-            ConstantNode constant,
-            Expression ifExpression)
+            [NotNull] ICollection<Expression> expressions,
+            [NotNull] Expression targetParameter,
+            [NotNull] ConstantNode constant,
+            [NotNull] Expression ifExpression)
         {
             expressions.Add(Expression.Assign(targetParameter,
                 Expression.Constant(constant.Value, constant.Type)));
@@ -499,25 +701,45 @@ namespace Anori.ExpressionObservers
                     ifExpression));
         }
 
+        /// <summary>
+        /// Parameterts the make expression.
+        /// </summary>
+        /// <param name="parameter">The parameter.</param>
+        /// <returns></returns>
+        [NotNull]
         private static Expression ParametertMakeExpression(
-            ParameterNode parameter)
+            [NotNull] ParameterNode parameter)
         {
             return parameter.Expression;
         }
 
+        /// <summary>
+        /// Parameterts the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="returnTarget">The return target.</param>
         private static void ParametertLastElement(
-            IList<Expression> expressions,
-            Type resultType,
-            ParameterNode parameter,
-            LabelTarget returnTarget) =>
+            [NotNull] ICollection<Expression> expressions,
+            [NotNull] Type resultType,
+            [NotNull] ParameterNode parameter,
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget,
                 Expression.Convert(ParametertMakeExpression(parameter), resultType)));
 
+        /// <summary>
+        /// Parameters the next parameter.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="targetParameter">The target parameter.</param>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="ifExpression">If expression.</param>
         private static void ParameterNextParameter(
-            ICollection<Expression> expressions,
-            Expression targetParameter,
-            IExpressionNode parameter,
-            Expression ifExpression)
+            [NotNull] ICollection<Expression> expressions,
+            [NotNull] Expression targetParameter,
+            [NotNull] IExpressionNode parameter,
+            [NotNull] Expression ifExpression)
         {
             if (parameter.Type.IsValueType && !parameter.Type.IsNullable()) return;
 
@@ -527,11 +749,20 @@ namespace Anori.ExpressionObservers
                     ifExpression));
         }
 
-        private static void FieldNextElement(ICollection<Expression> expressions,
-            Expression sourceParameter,
-            Expression targetParameter,
+        /// <summary>
+        /// Fields the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="sourceParameter">The source parameter.</param>
+        /// <param name="targetParameter">The target parameter.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="ifExpression">If expression.</param>
+        private static void FieldNextElement(
+            [NotNull] ICollection<Expression> expressions,
+            [NotNull] Expression sourceParameter,
+            [NotNull] Expression targetParameter,
             FieldNode field,
-            Expression ifExpression)
+            [NotNull] Expression ifExpression)
         {
             expressions.Add(Expression.Assign(targetParameter,
                 Expression.Field(sourceParameter, field.FieldInfo)));
@@ -544,31 +775,53 @@ namespace Anori.ExpressionObservers
             );
         }
 
-        private static Expression PropertyMakeExpression(IList<Expression> expressions,
-            Expression sourceParameter,
-            PropertyNode property,
-            Expression ifNull) =>
+        /// <summary>
+        /// Properties the make expression.
+        /// </summary>
+        /// <param name="sourceParameter">The source parameter.</param>
+        /// <param name="property">The property.</param>
+        /// <returns></returns>
+        [NotNull]
+        private static Expression PropertyMakeExpression(
+            [NotNull] Expression sourceParameter,
+            PropertyNode property) =>
             Expression.Call(sourceParameter, property.MethodInfo, property.Args);
 
-        private static void PropertyLastElement(IList<Expression> expressions,
-            Expression sourceParameter,
-            Type resultType,
+        /// <summary>
+        /// Properties the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="sourceParameter">The source parameter.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="property">The property.</param>
+        /// <param name="returnTarget">The return target.</param>
+        private static void PropertyLastElement(
+            [NotNull] ICollection<Expression> expressions,
+            [NotNull] Expression sourceParameter,
+            [NotNull] Type resultType,
             PropertyNode property,
-            Expression ifNull,
-            LabelTarget returnTarget) =>
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget,
-                Expression.Convert(PropertyMakeExpression(expressions, sourceParameter, property, ifNull),
+                Expression.Convert(PropertyMakeExpression(sourceParameter, property),
                     resultType)));
 
+        /// <summary>
+        /// Properties the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="sourceParameter">The source parameter.</param>
+        /// <param name="targetParameter">The target parameter.</param>
+        /// <param name="property">The property.</param>
+        /// <param name="ifNull">If null.</param>
         private static void PropertyNextElement(
-            IList<Expression> expressions,
-            Expression sourceParameter,
-            Expression targetParameter,
+            [NotNull] ICollection<Expression> expressions,
+            [NotNull] Expression sourceParameter,
+            [NotNull] Expression targetParameter,
             PropertyNode property,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(targetParameter,
-                PropertyMakeExpression(expressions, sourceParameter, property, ifNull)));
+                PropertyMakeExpression(sourceParameter, property)));
 
             if (property.Type.IsValueType && !property.Type.IsNullable()) return;
 
@@ -577,11 +830,20 @@ namespace Anori.ExpressionObservers
                 ifNull));
         }
 
+        /// <summary>
+        /// Constructors the make expression.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="constructor">The constructor.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        [NotNull]
         private static Expression ConstructorMakeExpression(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            ConstructorNode constructor,
-            Expression ifNull)
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] ConstructorNode constructor,
+            [NotNull] Expression ifNull)
         {
             var args = constructor.Parameters.Select(argument =>
                     CreateVariableExpressions(expressions, variables, argument, ifNull))
@@ -590,11 +852,20 @@ namespace Anori.ExpressionObservers
             return Expression.New(constructor.Constructor, args);
         }
 
+        /// <summary>
+        /// Methods the make expression.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="method">The method.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        [NotNull]
         private static Expression MethodMakeExpression(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
             MethodNode method,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             var @object = CreateVariableExpressions(expressions, variables, method.Object, ifNull);
 
@@ -605,23 +876,40 @@ namespace Anori.ExpressionObservers
             return Expression.Call(@object, method.MethodInfo, args);
         }
 
+        /// <summary>
+        /// Methods the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="method">The method.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
         private static void MethodLastElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Type resultType,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Type resultType,
             MethodNode method,
-            Expression ifNull,
-            LabelTarget returnTarget) =>
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget,
                 Expression.Convert(MethodMakeExpression(expressions, variables, method, ifNull),
                     resultType)));
 
+        /// <summary>
+        /// Methods the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="targetParameter">The target parameter.</param>
+        /// <param name="method">The method.</param>
+        /// <param name="ifNull">If null.</param>
         private static void MethodNextElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression targetParameter,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression targetParameter,
             MethodNode method,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(targetParameter,
                 MethodMakeExpression(expressions, variables, method, ifNull)));
@@ -633,23 +921,40 @@ namespace Anori.ExpressionObservers
                 ifNull));
         }
 
+        /// <summary>
+        /// Conditionals the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="conditional">The conditional.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
         private static void ConditionalLastElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Type resultType,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Type resultType,
             in ConditionalNode conditional,
-            Expression ifNull,
-            LabelTarget returnTarget) =>
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget,
                 Expression.Convert(ConditionalMakeExpression(expressions, variables, conditional, ifNull),
                     resultType)));
 
+        /// <summary>
+        /// Conditionals the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="target">The target.</param>
+        /// <param name="conditional">The conditional.</param>
+        /// <param name="ifNull">If null.</param>
         private static void ConditionalNextElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression target,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression target,
             ConditionalNode conditional,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(target,
                 ConditionalMakeExpression(expressions, variables, conditional, ifNull)));
@@ -661,11 +966,20 @@ namespace Anori.ExpressionObservers
                 ifNull));
         }
 
+        /// <summary>
+        /// Conditionals the make expression.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="conditional">The conditional.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        [NotNull]
         private static Expression ConditionalMakeExpression(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
             ConditionalNode conditional,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             var test = CreateVariableExpressions(expressions, variables, conditional.Test, ifNull);
 
@@ -678,22 +992,39 @@ namespace Anori.ExpressionObservers
             return Expression.Condition(test, Expression.Block(ifTrue), Expression.Block(ifFalse));
         }
 
+        /// <summary>
+        /// Unaries the make expression.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="unary">The unary.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        [NotNull]
         private static Expression UnaryMakeExpression(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
             UnaryNode unary,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             var operand = CreateVariableExpressions(expressions, variables, unary.Operand, ifNull);
             return Expression.MakeUnary(unary.UnaryExpression.NodeType, operand, unary.Type);
         }
 
+        /// <summary>
+        /// Unaries the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="target">The target.</param>
+        /// <param name="unary">The unary.</param>
+        /// <param name="ifNull">If null.</param>
         private static void UnaryNextElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression target,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression target,
             UnaryNode unary,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(target, UnaryMakeExpression(expressions, variables, unary, ifNull)));
 
@@ -704,32 +1035,58 @@ namespace Anori.ExpressionObservers
                 ifNull));
         }
 
+        /// <summary>
+        /// Unaries the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="unary">The unary.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
         private static void UnaryLastElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Type resultType,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Type resultType,
             UnaryNode unary,
-            Expression ifNull,
-            LabelTarget returnTarget) =>
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget,
                 Expression.Convert(UnaryMakeExpression(expressions, variables, unary, ifNull), resultType)));
 
+        /// <summary>
+        /// Bineries the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="binary">The binary.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
         private static void BineryLastElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Type resultType,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Type resultType,
             BinaryNode binary,
-            Expression ifNull,
-            LabelTarget returnTarget) =>
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget,
                 Expression.Convert(BinaryMakeExpression(expressions, variables, binary, ifNull), resultType)));
 
+        /// <summary>
+        /// Binaries the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="target">The target.</param>
+        /// <param name="binary">The binary.</param>
+        /// <param name="ifNull">If null.</param>
         private static void BinaryNextElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression target,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression target,
             BinaryNode binary,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(target, BinaryMakeExpression(expressions, variables, binary, ifNull)));
 
@@ -740,11 +1097,20 @@ namespace Anori.ExpressionObservers
                 ifNull));
         }
 
+        /// <summary>
+        /// Binaries the make expression.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="binary">The binary.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        [NotNull]
         private static Expression BinaryMakeExpression(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
             BinaryNode binary,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             switch (binary.BinaryExpression.NodeType)
             {
@@ -804,11 +1170,20 @@ namespace Anori.ExpressionObservers
             }
         }
 
+        /// <summary>
+        /// Functions the make expression.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="function">The function.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <returns></returns>
+        [NotNull]
         private static Expression FunctionMakeExpression(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
             FunctionNode function,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             var args = function.Parameters.Select(functionParameter =>
                     CreateVariableExpressions(expressions, variables, functionParameter, ifNull))
@@ -817,22 +1192,39 @@ namespace Anori.ExpressionObservers
             return Expression.Call(function.MethodInfo, args);
         }
 
+        /// <summary>
+        /// Functions the last element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="resultType">Type of the result.</param>
+        /// <param name="function">The function.</param>
+        /// <param name="ifNull">If null.</param>
+        /// <param name="returnTarget">The return target.</param>
         private static void FunctionLastElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Type resultType,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Type resultType,
             FunctionNode function,
-            Expression ifNull,
-            LabelTarget returnTarget) =>
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget) =>
             expressions.Add(Expression.Return(returnTarget,
                 Expression.Convert(FunctionMakeExpression(expressions, variables, function, ifNull), resultType)));
 
+        /// <summary>
+        /// Functions the next element.
+        /// </summary>
+        /// <param name="expressions">The expressions.</param>
+        /// <param name="variables">The variables.</param>
+        /// <param name="targetParameter">The target parameter.</param>
+        /// <param name="function">The function.</param>
+        /// <param name="ifNull">If null.</param>
         private static void FunctionNextElement(
-            IList<Expression> expressions,
-            VaribalesCollection variables,
-            Expression targetParameter,
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VaribalesCollection variables,
+            [NotNull] Expression targetParameter,
             FunctionNode function,
-            Expression ifNull)
+            [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(targetParameter,
                 FunctionMakeExpression(expressions, variables, function, ifNull)));
