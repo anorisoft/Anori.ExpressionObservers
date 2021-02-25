@@ -3,6 +3,10 @@ using System.Linq.Expressions;
 using Anori.ExpressionObservers.UnitTests.TestClasses;
 using Anori.PropertyChain.UnitTest;
 using NUnit.Framework;
+// ReSharper disable RedundantAssignment
+// ReSharper disable ExpressionIsAlwaysNull
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
+// ReSharper disable UnusedVariable
 
 namespace Anori.ExpressionObservers.UnitTests
 {
@@ -225,7 +229,6 @@ namespace Anori.ExpressionObservers.UnitTests
             var testB = CreateTestInstanceB();
             const bool expected = false;
             var getValue = ExpressionGetter.CreateValueGetter(
-                // ReSharper disable once NegativeEqualityExpression
                 (TestClass1 a, TestStruct1 b) => !(a.Test2.Test3.Property == b.Test2.Test3.Property));
             var actual = getValue(testA, testB);
 
@@ -1096,7 +1099,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             test = null;
-            int expected = 10;
+            var expected = 10;
             var getValue = ExpressionGetter.CreateValueGetter(
                 (TestClass1 t) => t.intProperty, 10);
             var actual = getValue(test);
@@ -1366,7 +1369,6 @@ namespace Anori.ExpressionObservers.UnitTests
         [Test]
         public void CreateReferenceGetter_A_t_Test2_null_coalescing_test2_t_null_ReturnInstanceOfTestClass2()
         {
-            var test = CreateTestInstanceA();
             var test2 = new TestClass2();
             var expected = test2;
             var getValue = ExpressionGetter.CreateReferenceGetter(

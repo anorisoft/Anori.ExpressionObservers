@@ -30,13 +30,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items"
 		..\Run.cake = ..\Run.cake
 		..\Run.cmd = ..\Run.cmd
 		..\RunAppVeyor.cmd = ..\RunAppVeyor.cmd
-		..\RunNuGet.cake = ..\RunNuGet.cake
-		..\RunNuget.cmd = ..\RunNuget.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soution Items", "Soution Items", "{8D68EC6D-D06D-4979-AC83-0A90093F0D61}"
 	ProjectSection(SolutionItems) = preProject
-		Anori.ExpressionObservers.nuspec = Anori.ExpressionObservers.nuspec
+		..\nuspec\nuget\Anori.ExpressionObservers.nuspec = ..\nuspec\nuget\Anori.ExpressionObservers.nuspec
 	EndProjectSection
 EndProject
 Global
