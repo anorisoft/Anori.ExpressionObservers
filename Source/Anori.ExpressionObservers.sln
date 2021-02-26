@@ -18,12 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items"
 		..\.appveyor.yml = ..\.appveyor.yml
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
-		..\azure-pipelines.yml = ..\azure-pipelines.yml
-		..\build.cmd = ..\build.cmd
 		..\build.ps1 = ..\build.ps1
 		..\build.sh = ..\build.sh
-		..\cake.config = ..\cake.config
-		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
 		..\recipe.cake = ..\recipe.cake
@@ -36,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soution Items", "Soution It
 	ProjectSection(SolutionItems) = preProject
 		..\nuspec\nuget\Anori.ExpressionObservers.nuspec = ..\nuspec\nuget\Anori.ExpressionObservers.nuspec
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Externals", "Externals", "{221613C9-C2BB-4707-B345-53D377E8E39F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

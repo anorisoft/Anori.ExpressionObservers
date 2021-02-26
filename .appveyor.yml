@@ -14,11 +14,10 @@ install:
   - ps: nuget update -self
 
 build_script:
-    - ps: ./RunAppVeyor.cmd
-##  - ps: .\build.ps1 -Target CI
+  - ps: .\build.ps1 -Target CI
 
 # Tests
-test_script:
+# test_script:
 #  - ps: .\demos\build.ps1
 
 # Tests

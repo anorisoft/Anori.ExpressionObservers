@@ -6,13 +6,13 @@ BuildParameters.SetParameters(
     context: Context,
     buildSystem: BuildSystem,
     sourceDirectoryPath: "./Source",
-    title: "Anori.ExpressionObservers",
+    title: "Anori.Extensions",
     repositoryOwner: "anorisoft",
-    repositoryName: "Anori.ExpressionObservers",
+    repositoryName: "Anori.Extensions",
     appVeyorAccountName: "anorisoft",
 	shouldGenerateDocumentation: false,
     shouldRunDupFinder: false,
-	nuspecFilePath: "./Source/Anori.ExpressionObservers.nuspec");
+	nuspecFilePath: "./Source/Anori.Extensions.nuspec");
 
 BuildParameters.PrintParameters(Context);
 
