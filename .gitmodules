@@ -1,6 +1,3 @@
 [submodule "Externals"]
 	path = Externals
 	url = https://github.com/anorisoft/Anori.Extensions
-[submodule "Submodules/Anori.Extensions"]
-	path = Submodules/Anori.Extensions
-	url = https://github.com/anorisoft/Anori.Extensions

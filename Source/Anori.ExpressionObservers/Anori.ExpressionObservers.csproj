@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions\Anori.Extensions.csproj" />
+    <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
   </ItemGroup>
 
 </Project>
