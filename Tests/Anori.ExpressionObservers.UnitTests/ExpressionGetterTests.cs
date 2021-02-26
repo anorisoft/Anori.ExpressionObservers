@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using Anori.ExpressionObservers.UnitTests.TestClasses;
+using Anori.Extensions;
 using Anori.PropertyChain.UnitTest;
 using NUnit.Framework;
 // ReSharper disable RedundantAssignment
