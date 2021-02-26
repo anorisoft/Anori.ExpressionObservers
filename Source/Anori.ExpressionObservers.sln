@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soution Items", "Soution It
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Externals", "Externals", "{221613C9-C2BB-4707-B345-53D377E8E39F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.Extensions", "..\Externals\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions\Anori.Extensions.csproj", "{7A9D3FEC-4894-4DBF-82C2-E82D7EF4460A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{D84FFB93-44E0-44A9-B94B-74BF2B7876EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D84FFB93-44E0-44A9-B94B-74BF2B7876EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D84FFB93-44E0-44A9-B94B-74BF2B7876EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9D3FEC-4894-4DBF-82C2-E82D7EF4460A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9D3FEC-4894-4DBF-82C2-E82D7EF4460A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9D3FEC-4894-4DBF-82C2-E82D7EF4460A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9D3FEC-4894-4DBF-82C2-E82D7EF4460A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{0508DDC6-EF23-457D-8974-0CB8200C6DBD} = {F7ACE4F7-C711-42B6-96D1-06E13E761659}
 		{C014B4C7-5708-45C8-8A88-90469EFA264F} = {7B787744-DF68-49AF-89C8-B8DD0AE2A08E}
 		{D84FFB93-44E0-44A9-B94B-74BF2B7876EB} = {7B787744-DF68-49AF-89C8-B8DD0AE2A08E}
+		{7A9D3FEC-4894-4DBF-82C2-E82D7EF4460A} = {221613C9-C2BB-4707-B345-53D377E8E39F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBA0E37C-4CB3-40D3-B84D-D374EBCEB2EB}
