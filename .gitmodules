@@ -1,0 +1,3 @@
+[submodule "Anori.Extensions/Source"]
+	path = Externals
+	url = https://github.com/anorisoft/Anori.Extensions
