@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net4.8</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
+    <Configurations>Debug;Release;Debug Submodules</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

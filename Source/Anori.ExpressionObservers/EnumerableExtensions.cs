@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Anori.Extensions;
+using Anori.ExpressionObservers;
 using JetBrains.Annotations;
+using Anori.Extensions;
 
 namespace Anori.ExpressionObservers
 {

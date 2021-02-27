@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">expression</exception>
         /// <exception cref="ArgumentNullException">expression</exception>
         [NotNull]
         public static Func<TResult?> CreateValueGetter<TResult>(
@@ -34,14 +35,18 @@ namespace Anori.ExpressionObservers
         /// <param name="parameters">The parameters.</param>
         /// <param name="tree">The tree.</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         /// parameters
         /// or
         /// tree
         /// </exception>
+        /// <exception cref="ArgumentNullException">parameters
+        /// or
+        /// tree</exception>
         [NotNull]
        public static Func<TResult?> CreateValueGetter<TResult>(
-           [NotNull] ReadOnlyCollection<ParameterExpression> parameters, [NotNull] Tree tree)
+           [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
+           [NotNull] ExpressionTree tree)
             where TResult : struct
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
@@ -58,14 +63,18 @@ namespace Anori.ExpressionObservers
         /// <param name="parameters">The parameters.</param>
         /// <param name="tree">The tree.</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         /// parameters
         /// or
         /// tree
         /// </exception>
+        /// <exception cref="ArgumentNullException">parameters
+        /// or
+        /// tree</exception>
         [NotNull]
         public static Func<TResult> CreateReferenceGetter<TResult>(
-            [NotNull] ReadOnlyCollection<ParameterExpression> parameters, [NotNull] Tree tree)
+            [NotNull] ReadOnlyCollection<ParameterExpression> parameters, 
+            [NotNull] ExpressionTree tree)
             where TResult : class
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
@@ -90,7 +99,7 @@ namespace Anori.ExpressionObservers
         /// </exception>
         [NotNull]
         public static Func<TResult> CreateValueGetter<TResult>(
-            [NotNull] ReadOnlyCollection<ParameterExpression> parameters, [NotNull] Tree tree, TResult fallback)
+            [NotNull] ReadOnlyCollection<ParameterExpression> parameters, [NotNull] ExpressionTree tree, TResult fallback)
             where TResult : struct
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
@@ -116,7 +125,7 @@ namespace Anori.ExpressionObservers
         /// </exception>
         [NotNull]
         public static Func<TParameter1, TResult> CreateValueGetter<TParameter1, TResult>(
-            [NotNull] ReadOnlyCollection<ParameterExpression> parameters, [NotNull] Tree tree, TResult fallback)
+            [NotNull] ReadOnlyCollection<ParameterExpression> parameters, [NotNull] ExpressionTree tree, TResult fallback)
             where TResult : struct
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
@@ -141,7 +150,7 @@ namespace Anori.ExpressionObservers
         /// </exception>
         [NotNull]
         public static Func<TResult> CreateReferenceGetter<TResult>(
-            [NotNull] ReadOnlyCollection<ParameterExpression> parameters, [NotNull] Tree tree, TResult fallback)
+            [NotNull] ReadOnlyCollection<ParameterExpression> parameters, [NotNull] ExpressionTree tree, TResult fallback)
             where TResult : class
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));

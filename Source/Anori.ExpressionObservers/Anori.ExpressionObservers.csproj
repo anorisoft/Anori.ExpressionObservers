@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
+    <Configurations>Debug;Release;Debug Submodules</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +11,11 @@
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
+    <PackageReference Include="Anori.Extensions" Version="0.1.12" />
+  </ItemGroup>
+
+  <ItemGroup Condition="($(Configuration.Contains('Submodules')))">
     <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
   </ItemGroup>
 

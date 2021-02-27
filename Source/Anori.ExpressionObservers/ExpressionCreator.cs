@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Anori.ExpressionObservers.Exceptions;
 using Anori.Extensions;
 
 namespace Anori.ExpressionObservers
@@ -74,7 +75,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         internal static BlockExpression CreateValueBody(
             [NotNull] Type resultType,
-            [NotNull] Tree tree)
+            [NotNull] ExpressionTree tree)
 
         {
             var returnTarget = Expression.Label(resultType);
@@ -92,7 +93,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         internal static BlockExpression CreateValueBody(
             [NotNull] Type resultType,
-            [NotNull] Tree tree,
+            [NotNull] ExpressionTree tree,
             [NotNull] Expression fallback)
 
         {
@@ -133,7 +134,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static BlockExpression CreateValueBlock(
             [NotNull] Type resultType,
-            [NotNull] Tree nodes,
+            [NotNull] ExpressionTree nodes,
             [NotNull] LabelTarget returnTarget)
         {
             var expressions = new List<Expression>();
@@ -158,7 +159,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static BlockExpression CreateValueBlock(
             [NotNull] Type resultType,
-            [NotNull] Tree nodes,
+            [NotNull] ExpressionTree nodes,
             [NotNull] LabelTarget returnTarget,
             [NotNull] Expression fallback)
         {

@@ -9,17 +9,40 @@ using System.Reflection;
 
 namespace Anori.ExpressionObservers
 {
-    public static class ExpressionTree
+    public class ExpressionTree : ITree
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
+        /// </summary>
+        private ExpressionTree()
+        {
+        }
+
+        /// <summary>
+        /// Gets the roots.
+        /// </summary>
+        /// <value>
+        /// The roots.
+        /// </value>
+        public IList<IExpressionNode> Roots { get; } = new List<IExpressionNode>();
+
+        /// <summary>
+        /// Gets or sets the nodes.
+        /// </summary>
+        /// <value>
+        /// The nodes.
+        /// </value>
+        public NodeCollection Nodes { get; set; }
+
         /// <summary>
         /// Gets the tree.
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
-        public static Tree GetTree(
+        public static ExpressionTree GetTree(
             Expression expression)
         {
-            var tree = new Tree();
+            var tree = new ExpressionTree();
             tree.Nodes = GetTree(expression, tree, null);
             return tree;
         }

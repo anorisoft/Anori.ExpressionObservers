@@ -275,6 +275,7 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 tools/**
+Submodules/*/tools/**
 !tools/packages.config
 BuildArtifacts/
 
