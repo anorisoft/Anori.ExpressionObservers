@@ -1,26 +1,104 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Reflection;
+﻿// -----------------------------------------------------------------------
+// <copyright file="FieldNode.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Nodes
 {
-    public struct FieldNode : IExpressionNode
+    using System;
+    using System.Linq.Expressions;
+    using System.Reflection;
+
+    using JetBrains.Annotations;
+
+    /// <summary>
+    /// Field Expression Tree Node.
+    /// </summary>
+    /// <seealso cref="Anori.ExpressionObservers.Nodes.IInternalExpressionNode" />
+    public struct FieldNode : IInternalExpressionNode
     {
-        public FieldNode(MemberExpression expression, FieldInfo fieldInfo)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FieldNode"/> struct.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="fieldInfo">The field information.</param>
+        public FieldNode([NotNull] MemberExpression expression, [NotNull] FieldInfo fieldInfo)
         {
-            Expression = expression;
-            Type = expression.Type;
-            FieldInfo = fieldInfo;
-            Previous = null;
-            Next = null;
-            Parent = null;
+            this.Expression = expression;
+            this.Type = expression.Type;
+            this.FieldInfo = fieldInfo;
+            this.Previous = null;
+            this.Next = null;
+            this.Parent = null;
         }
 
+        /// <summary>
+        ///     Gets the expression.
+        /// </summary>
+        /// <value>
+        ///     The expression.
+        /// </value>
+        [NotNull]
         public MemberExpression Expression { get; }
+
+        /// <summary>
+        ///     Gets the type.
+        /// </summary>
+        /// <value>
+        ///     The type.
+        /// </value>
         public Type Type { get; }
-        public IExpressionNode Previous { get; set; }
-        public IExpressionNode Next { get; set; }
-        public IExpressionNode Parent { get; set; }
+
+        /// <summary>
+        ///     Gets the previous.
+        /// </summary>
+        /// <value>
+        ///     The previous.
+        /// </value>
+        public IExpressionNode Previous { get; private set; }
+
+        /// <summary>
+        ///     Gets the next.
+        /// </summary>
+        /// <value>
+        ///     The next.
+        /// </value>
+        public IExpressionNode Next { get; private set; }
+
+        /// <summary>
+        ///     Gets the parent.
+        /// </summary>
+        /// <value>
+        ///     The parent.
+        /// </value>
+        public IExpressionNode Parent { get; private set; }
+
+        /// <summary>
+        /// Gets the field information.
+        /// </summary>
+        /// <value>
+        /// The field information.
+        /// </value>
+        [NotNull]
         public FieldInfo FieldInfo { get; }
+
+        /// <summary>
+        ///     Sets the previous.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        void IInternalExpressionNode.SetPrevious(IExpressionNode node) => this.Previous = node;
+
+        /// <summary>
+        ///     Sets the next.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        void IInternalExpressionNode.SetNext(IExpressionNode node) => this.Next = node;
+
+        /// <summary>
+        ///     Sets the parent.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        void IInternalExpressionNode.SetParent(IExpressionNode node) => this.Parent = node;
     }
 }

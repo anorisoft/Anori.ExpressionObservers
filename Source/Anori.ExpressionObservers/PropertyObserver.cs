@@ -1,19 +1,46 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using Anori.ExpressionObservers.Observers;
-using JetBrains.Annotations;
+﻿// -----------------------------------------------------------------------
+// <copyright file="PropertyObserver.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Observers;
+
+    using JetBrains.Annotations;
+
+    /// <summary>
+    ///     Property Observer.
+    /// </summary>
     public static class PropertyObserver
     {
+        /// <summary>
+        ///     Observeses the specified property expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <returns>The Property Observer.</returns>
         [NotNull]
         public static PropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action) =>
             new PropertyObserver<TResult>(propertyExpression, action);
 
+        /// <summary>
+        ///     Observeses the specified parameter1.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <returns>The Property Observer.</returns>
         [NotNull]
         public static PropertyObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] TParameter1 parameter1,
@@ -22,6 +49,17 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged =>
             new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
 
+        /// <summary>
+        ///     Observeses the specified parameter1.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <returns>The Property Observer.</returns>
         [NotNull]
         public static PropertyObserver<TParameter1, TParameter2, TResult> Observes<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
@@ -31,6 +69,5 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
             new PropertyObserver<TParameter1, TParameter2, TResult>(parameter1, parameter2, propertyExpression, action);
-
     }
 }

@@ -1,23 +1,92 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿// -----------------------------------------------------------------------
+// <copyright file="ParameterNode.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Nodes
 {
-    public class ParameterNode : IExpressionNode
+    using System;
+    using System.Linq.Expressions;
+
+    using JetBrains.Annotations;
+
+    /// <summary>
+    ///     Parameter Expression Tree Node.
+    /// </summary>
+    /// <seealso cref="Anori.ExpressionObservers.Nodes.IInternalExpressionNode" />
+    public struct ParameterNode : IInternalExpressionNode
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParameterNode"/> struct.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        public ParameterNode([NotNull] ParameterExpression expression)
+        {
+            this.Type = expression.Type;
+            this.Expression = expression;
+            this.Previous = null;
+            this.Next = null;
+            this.Parent = null;
+        }
+
+        /// <summary>
+        ///     Gets the type.
+        /// </summary>
+        /// <value>
+        ///     The type.
+        /// </value>
         public Type Type { get; }
-        public IExpressionNode Previous { get; set; }
-        public IExpressionNode Next { get; set; }
-        public IExpressionNode Parent { get; set; }
+
+        /// <summary>
+        ///     Gets the previous.
+        /// </summary>
+        /// <value>
+        ///     The previous.
+        /// </value>
+        public IExpressionNode Previous { get; private set; }
+
+        /// <summary>
+        ///     Gets the next.
+        /// </summary>
+        /// <value>
+        ///     The next.
+        /// </value>
+        public IExpressionNode Next { get; private set; }
+
+        /// <summary>
+        ///     Gets the parent.
+        /// </summary>
+        /// <value>
+        ///     The parent.
+        /// </value>
+        public IExpressionNode Parent { get; private set; }
+
+        /// <summary>
+        /// Gets the expression.
+        /// </summary>
+        /// <value>
+        /// The expression.
+        /// </value>
+        [NotNull]
         public ParameterExpression Expression { get; }
 
-        public ParameterNode(ParameterExpression expression)
-        {
-            Type = expression.Type;
-            Expression = expression;
-            Previous = null;
-            Next = null;
-            Parent = null;
-        }
+        /// <summary>
+        ///     Sets the previous.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        void IInternalExpressionNode.SetPrevious(IExpressionNode node) => this.Previous = node;
+
+        /// <summary>
+        ///     Sets the next.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        void IInternalExpressionNode.SetNext(IExpressionNode node) => this.Next = node;
+
+        /// <summary>
+        ///     Sets the parent.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        void IInternalExpressionNode.SetParent(IExpressionNode node) => this.Parent = node;
     }
 }

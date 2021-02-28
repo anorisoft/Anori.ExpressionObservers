@@ -1,18 +1,57 @@
-﻿using System.Linq.Expressions;
+﻿// -----------------------------------------------------------------------
+// <copyright file="MemberAssignmentNode.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Nodes
 {
-    internal class MemberAssignmentNode : IBindingNode
-    {
-        public MemberAssignment MemberAssignment { get; }
-        public NodeCollection Nodes { get; }
+    using System.Linq.Expressions;
 
-        public MemberAssignmentNode(MemberAssignment memberAssignment, NodeCollection nodes)
+    using JetBrains.Annotations;
+
+    /// <summary>
+    ///     Member Assignment Node.
+    /// </summary>
+    /// <seealso cref="Anori.ExpressionObservers.Nodes.IBindingNode" />
+    internal readonly struct MemberAssignmentNode : IBindingNode
+    {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MemberAssignmentNode" /> struct.
+        /// </summary>
+        /// <param name="memberAssignment">The member assignment.</param>
+        /// <param name="nodes">The nodes.</param>
+        public MemberAssignmentNode([NotNull] MemberAssignment memberAssignment, [NotNull] NodeCollection nodes)
         {
-            MemberAssignment = memberAssignment;
-            Nodes = nodes;
+            this.MemberAssignment = memberAssignment;
+            this.Nodes = nodes;
         }
 
-        public MemberBinding Binding => MemberAssignment;
+        /// <summary>
+        ///     Gets the member assignment.
+        /// </summary>
+        /// <value>
+        ///     The member assignment.
+        /// </value>
+        [NotNull]
+        public MemberAssignment MemberAssignment { get; }
+
+        /// <summary>
+        ///     Gets the nodes.
+        /// </summary>
+        /// <value>
+        ///     The nodes.
+        /// </value>
+        [NotNull]
+        public NodeCollection Nodes { get; }
+
+        /// <summary>
+        ///     Gets the binding.
+        /// </summary>
+        /// <value>
+        ///     The binding.
+        /// </value>
+        [NotNull]
+        public MemberBinding Binding => this.MemberAssignment;
     }
 }

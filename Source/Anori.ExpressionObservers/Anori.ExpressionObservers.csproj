@@ -4,19 +4,38 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <Configurations>Debug;Release;Debug Submodules</Configurations>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <Description>Anori Expression Observers</Description>
+    <Product>Anorisoft Expression Observers</Product>
+    <Authors>Martin Egli,Anorisoft</Authors>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Anorisoft.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ReferenceObservers\PropertyReferenceObserverBase{TParameter1,TParameter2,TResult}.cs" />
+    <Compile Remove="ReferenceObservers\PropertyReferenceObserverBase{TParameter1,TResult}.cs" />
+    <Compile Remove="ReferenceObservers\PropertyReferenceObserverBase{TResult}.cs" />
+    <Compile Remove="ValueObservers\PropertyValueObserverBase{TParameter1,TParameter2,TResult}.cs" />
+    <Compile Remove="ValueObservers\PropertyValueObserverBase{TParameter1,TResult}.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
+    <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
 
   <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
-    <PackageReference Include="Anori.Extensions" Version="0.1.12" />
+    <PackageReference Include="Anori.Extensions" Version="0.2.0" />
   </ItemGroup>
 
   <ItemGroup Condition="($(Configuration.Contains('Submodules')))">
     <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
   </ItemGroup>
-
 </Project>

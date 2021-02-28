@@ -1,33 +1,79 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿// -----------------------------------------------------------------------
+// <copyright file="NodeCollection.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Nodes
 {
-    public class NodeCollection : List<IExpressionNode>, ITree
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using JetBrains.Annotations;
+
+    /// <summary>
+    ///     Expression Tree Node Collection.
+    /// </summary>
+    /// <seealso cref="System.Collections.Generic.List{Anori.ExpressionObservers.Nodes.IExpressionNode}" />
+    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionTree" />
+    public class NodeCollection : List<IExpressionNode>, IExpressionTree
     {
-
-        public NodeCollection(ITree tree, IExpressionNode parent)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="NodeCollection" /> class.
+        /// </summary>
+        /// <param name="expressionTree">The expression tree.</param>
+        /// <param name="parent">The parent.</param>
+        public NodeCollection([NotNull] IExpressionTree expressionTree, [NotNull] IExpressionNode parent)
         {
-            Tree = tree;
-            Parent = parent;
+            this.ExpressionTree = expressionTree;
+            this.Parent = parent;
         }
 
-        public void AddElement(IExpressionNode node)
-        {
-            if (this.Any())
-            {
-                this.Last().Previous = node;
+        /// <summary>
+        ///     Gets the expression tree.
+        /// </summary>
+        /// <value>
+        ///     The expression tree.
+        /// </value>
+        [NotNull]
+        public IExpressionTree ExpressionTree { get; }
 
-                node.Next = this.Last();
-            }
-
-            node.Parent = Parent;
-            Add(node);
-        }
-
-        public ITree Tree { get; }
+        /// <summary>
+        ///     Gets the parent.
+        /// </summary>
+        /// <value>
+        ///     The parent.
+        /// </value>
         public IExpressionNode Parent { get; }
 
-        public IList<IExpressionNode> Roots => Tree.Roots;
+        /// <summary>
+        ///     Gets the roots.
+        /// </summary>
+        /// <value>
+        ///     The roots.
+        /// </value>
+        public IList<IExpressionNode> Roots => this.ExpressionTree.Roots;
+
+        /// <summary>
+        ///     Adds an Expressione Tree Node and update relations.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <returns>
+        ///     The Node.
+        /// </returns>
+        public IExpressionNode AddElement([NotNull] IExpressionNode node)
+        {
+            var internalNode = (IInternalExpressionNode)node;
+            if (this.Any())
+            {
+                ((IInternalExpressionNode)this.Last()).SetPrevious(node);
+
+                internalNode.SetNext(this.Last());
+            }
+
+            internalNode.SetParent(this.Parent);
+            this.Add(internalNode);
+            return internalNode;
+        }
     }
 }

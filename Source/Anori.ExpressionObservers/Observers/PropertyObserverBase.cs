@@ -1,179 +1,193 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using Anori.ExpressionObservers.Nodes;
+﻿// -----------------------------------------------------------------------
+// <copyright file="PropertyObserverBase.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Observers
 {
-    public abstract class PropertyObserverBase : IDisposable, IEquatable<PropertyObserverBase>
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+
+    using Anori.ExpressionObservers.Nodes;
+
+    /// <summary>
+    /// Property Observer Base.
+    /// </summary>
+    /// <seealso cref="System.Collections.Generic.IEqualityComparer{Anori.ExpressionObservers.Observers.PropertyObserverBase}" />
+    /// <seealso cref="System.IDisposable" />
+    /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Observers.PropertyObserverBase}" />
+    public abstract class PropertyObserverBase : IDisposable, IEqualityComparer<PropertyObserverBase>, IEquatable<PropertyObserverBase>
     {
         /// <summary>
-        ///     The root observerNode
+        ///     Gets the expression string.
         /// </summary>
+        /// <value>
+        ///     The expression string.
+        /// </value>
+        public abstract string ExpressionString { get; }
+
+        /// <summary>
+        ///     Gets the root nodes.
+        /// </summary>
+        /// <value>
+        ///     The root nodes.
+        /// </value>
         internal IList<RootPropertyObserverNode> RootNodes { get; } = new List<RootPropertyObserverNode>();
 
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        public void Dispose()
-        {
-            this.Unsubscribe();
-        }
-
         /// <summary>
         ///     Subscribes this instance.
         /// </summary>
         public void Subscribe()
         {
-            foreach (var rootPropertyObserverNode in RootNodes)
+            foreach (var rootPropertyObserverNode in this.RootNodes)
             {
                 rootPropertyObserverNode.SubscribeListenerForOwner();
             }
 
-            OnAction();
+            this.OnAction();
         }
 
         /// <summary>
-        ///     The expression
-        /// </summary>
-        public abstract string ExpressionString { get; }
-
-        /// <summary>
-        /// Unsubscribes this instance.
+        ///     Unsubscribes this instance.
         /// </summary>
         public void Unsubscribe()
         {
-            foreach (var rootPropertyObserverNode in RootNodes)
+            foreach (var rootPropertyObserverNode in this.RootNodes)
             {
                 rootPropertyObserverNode.UnsubscribeListener();
             }
         }
 
         /// <summary>
-        ///     The action
+        ///     Indicates whether the current object is equal to another object of the same type.
         /// </summary>
-        protected abstract void OnAction();
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(PropertyObserverBase other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.RootNodes.SequenceEqual(other.RootNodes) && this.ExpressionString == other.ExpressionString;
+        }
 
         /// <summary>
-        /// Creates the chain.
+        ///     Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <param name="nodes">The nodes.</param>
-        /// <exception cref="NotSupportedException"></exception>
-        protected void CreateChain(INotifyPropertyChanged parameter1, ITree nodes)
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
         {
-            foreach (var treeRoot in nodes.Roots)
+            if (ReferenceEquals(null, obj))
             {
-                switch (treeRoot)
-                {
-                    case ParameterNode parameterElement:
-                        {
-                            if (!(parameterElement.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
+                return false;
+            }
 
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                parameter1);
-                            Looptree(propertyElement, root);
-                            RootNodes.Add(root);
-                            break;
-                        }
-                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
-                        {
-                            if (!(fieldElement.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
 
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                (INotifyPropertyChanged)fieldElement.FieldInfo.GetValue(constantElement.Value));
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
 
-                            Looptree(propertyElement, root);
-                            RootNodes.Add(root);
-                            break;
-                        }
-                    case ConstantNode constantElement:
-                        {
-                            if (!(treeRoot.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
+            return this.Equals((PropertyObserverBase)obj);
+        }
 
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                (INotifyPropertyChanged)constantElement.Value);
-
-                            Looptree(propertyElement, root);
-                            RootNodes.Add(root);
-
-                            break;
-                        }
-                    default:
-                        throw new NotSupportedException();
-                }
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((this.RootNodes != null ? this.RootNodes.GetHashCode() : 0) * 397)
+                       ^ (this.ExpressionString != null ? this.ExpressionString.GetHashCode() : 0);
             }
         }
 
         /// <summary>
-        /// Creates the chain.
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <param name="nodes">The nodes.</param>
-        /// <exception cref="NotSupportedException"></exception>
-        protected void CreateChain(ITree nodes)
+        public void Dispose()
         {
-            foreach (var treeRoot in nodes.Roots)
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        ///     Determines whether the specified objects are equal.
+        /// </summary>
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        ///     true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        public bool Equals(PropertyObserverBase x, PropertyObserverBase y)
+        {
+            if (ReferenceEquals(x, y))
             {
-                switch (treeRoot)
-                {
-                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
-                        {
-                            if (!(fieldElement.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
+                return true;
+            }
 
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                fieldElement.FieldInfo.GetValue(constantElement.Value));
+            if (ReferenceEquals(x, null))
+            {
+                return false;
+            }
 
-                            Looptree(propertyElement, root);
-                            RootNodes.Add(root);
-                            break;
-                        }
-                    case ConstantNode constantElement:
-                        {
-                            if (!(treeRoot.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
+            if (ReferenceEquals(y, null))
+            {
+                return false;
+            }
 
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                (INotifyPropertyChanged)constantElement.Value);
+            if (x.GetType() != y.GetType())
+            {
+                return false;
+            }
 
-                            Looptree(propertyElement, root);
-                            RootNodes.Add(root);
+            return x.ExpressionString == y.ExpressionString && Equals(x.RootNodes, y.RootNodes);
+        }
 
-                            break;
-                        }
-                  
-                    default:
-                        throw new NotSupportedException($"{treeRoot}");
-                }
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>
+        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public int GetHashCode(PropertyObserverBase obj)
+        {
+            unchecked
+            {
+                return ((obj.ExpressionString != null ? obj.ExpressionString.GetHashCode() : 0) * 397)
+                       ^ (obj.RootNodes != null ? obj.RootNodes.GetHashCode() : 0);
             }
         }
 
         /// <summary>
-        /// Looptrees the specified expression node.
+        ///     Looptrees the specified expression node.
         /// </summary>
         /// <param name="expressionNode">The expression node.</param>
         /// <param name="observerNode">The observer node.</param>
@@ -191,46 +205,143 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
+        ///     The action.
         /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns>
-        /// true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
-        /// </returns>
-        public bool Equals(PropertyObserverBase other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return RootNodes.SequenceEqual(other.RootNodes) && ExpressionString == other.ExpressionString;
-        }
+        protected abstract void OnAction();
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        ///     Creates the chain.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="nodes">The nodes.</param>
+        /// <exception cref="NotSupportedException">Expression Tree Node not supported.</exception>
+        protected void CreateChain(INotifyPropertyChanged parameter1, IExpressionTree nodes)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((PropertyObserverBase)obj);
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            unchecked
+            foreach (var treeRoot in nodes.Roots)
             {
-                return ((RootNodes != null ? RootNodes.GetHashCode() : 0) * 397) ^ (ExpressionString != null ? ExpressionString.GetHashCode() : 0);
+                switch (treeRoot)
+                {
+                    case ParameterNode parameterElement:
+                        {
+                            if (!(parameterElement.Next is PropertyNode propertyElement))
+                            {
+                                continue;
+                            }
+
+                            var root = new RootPropertyObserverNode(
+                                propertyElement.PropertyInfo,
+                                this.OnAction,
+                                parameter1);
+                            this.Looptree(propertyElement, root);
+                            this.RootNodes.Add(root);
+                            break;
+                        }
+
+                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
+                        {
+                            if (!(fieldElement.Next is PropertyNode propertyElement))
+                            {
+                                continue;
+                            }
+
+                            var root = new RootPropertyObserverNode(
+                                propertyElement.PropertyInfo,
+                                this.OnAction,
+                                (INotifyPropertyChanged)fieldElement.FieldInfo.GetValue(constantElement.Value));
+
+                            this.Looptree(propertyElement, root);
+                            this.RootNodes.Add(root);
+                            break;
+                        }
+
+                    case ConstantNode constantElement:
+                        {
+                            if (!(treeRoot.Next is PropertyNode propertyElement))
+                            {
+                                continue;
+                            }
+
+                            var root = new RootPropertyObserverNode(
+                                propertyElement.PropertyInfo,
+                                this.OnAction,
+                                (INotifyPropertyChanged)constantElement.Value);
+
+                            this.Looptree(propertyElement, root);
+                            this.RootNodes.Add(root);
+
+                            break;
+                        }
+
+                    default:
+                        throw new NotSupportedException();
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Creates the chain.
+        /// </summary>
+        /// <param name="nodes">The nodes.</param>
+        /// <exception cref="NotSupportedException">Expression Tree Node not supported.</exception>
+        protected void CreateChain(IExpressionTree nodes)
+        {
+            foreach (var treeRoot in nodes.Roots)
+            {
+                switch (treeRoot)
+                {
+                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
+                        {
+                            if (!(fieldElement.Next is PropertyNode propertyElement))
+                            {
+                                continue;
+                            }
+
+                            var root = new RootPropertyObserverNode(
+                                propertyElement.PropertyInfo,
+                                this.OnAction,
+                                fieldElement.FieldInfo.GetValue(constantElement.Value));
+
+                            this.Looptree(propertyElement, root);
+                            this.RootNodes.Add(root);
+                            break;
+                        }
+
+                    case ConstantNode constantElement:
+                        {
+                            if (!(treeRoot.Next is PropertyNode propertyElement))
+                            {
+                                continue;
+                            }
+
+                            var root = new RootPropertyObserverNode(
+                                propertyElement.PropertyInfo,
+                                this.OnAction,
+                                (INotifyPropertyChanged)constantElement.Value);
+
+                            this.Looptree(propertyElement, root);
+                            this.RootNodes.Add(root);
+
+                            break;
+                        }
+
+                    default:
+                        throw new NotSupportedException($"{treeRoot}");
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        ///     unmanaged resources.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.Unsubscribe();
             }
         }
     }

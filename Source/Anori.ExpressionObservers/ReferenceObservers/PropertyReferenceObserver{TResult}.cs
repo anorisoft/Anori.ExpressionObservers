@@ -1,34 +1,47 @@
-﻿using System;
-using System.Linq.Expressions;
-using JetBrains.Annotations;
+﻿// -----------------------------------------------------------------------
+// <copyright file="PropertyReferenceObserver{TResult}.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.ReferenceObservers
 {
-    public sealed class PropertyReferenceObserver<TResult> : PropertyReferenceObserverBase<TResult>
+    using System;
+    using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Observers;
+
+    using JetBrains.Annotations;
+
+    /// <summary>
+    ///     Property Reference Observer.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TResult}" />
+    public sealed class PropertyReferenceObserver<TResult> : PropertyObserverBase<TResult>
         where TResult : class
     {
         /// <summary>
-        /// Gets the action.
+        ///     The action.
         /// </summary>
-        /// <value>
-        /// The action.
-        /// </value>
-        [NotNull] public Action Action { get; }
+        [NotNull]
+        private readonly Action action;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserver{TResult}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">The action is null.</exception>
         internal PropertyReferenceObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action) : base(propertyExpression) =>
-            Action = action ?? throw new ArgumentNullException(nameof(action));
+            [NotNull] Action action)
+            : base(propertyExpression) =>
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
 
         /// <summary>
-        /// The action
+        ///     On the action.
         /// </summary>
-        protected override void OnAction() => Action();
+        protected override void OnAction() => this.action();
     }
 }

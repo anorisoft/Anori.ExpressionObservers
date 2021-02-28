@@ -1,36 +1,47 @@
-﻿using System;
-using System.Linq.Expressions;
-using JetBrains.Annotations;
+﻿// -----------------------------------------------------------------------
+// <copyright file="PropertyObserver{TResult}.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Observers
 {
+    using System;
+    using System.Linq.Expressions;
+
+    using JetBrains.Annotations;
+
+    /// <summary>
+    ///     Property Observer.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TResult}" />
     public sealed class PropertyObserver<TResult> : PropertyObserverBase<TResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValueObservers.PropertyObserver{TResult}"/> class.
+        ///     Gets the action.
+        /// </summary>
+        /// <value>
+        ///     The action.
+        /// </value>
+        [NotNull]
+        private readonly Action action;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyObserver{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
-        internal PropertyObserver(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action) : base(propertyExpression)
+        /// <exception cref="System.ArgumentNullException">The action is null.</exception>
+        internal PropertyObserver([NotNull] Expression<Func<TResult>> propertyExpression, [NotNull] Action action)
+            : base(propertyExpression)
         {
-            Action = action ?? throw new ArgumentNullException(nameof(action));
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
         }
 
         /// <summary>
-        /// Gets the action.
+        ///     The action.
         /// </summary>
-        /// <value>
-        /// The action.
-        /// </value>
-        [NotNull]
-        public Action Action { get; }
-
-        /// <summary>
-        /// The action
-        /// </summary>
-        protected override void OnAction() => Action();
+        protected override void OnAction() => this.action();
     }
 }

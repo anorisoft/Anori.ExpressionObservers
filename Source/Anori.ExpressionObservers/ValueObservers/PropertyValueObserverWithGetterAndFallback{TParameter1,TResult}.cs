@@ -1,73 +1,98 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using Anori.ExpressionObservers.Observers;
-using JetBrains.Annotations;
+﻿// -----------------------------------------------------------------------
+// <copyright file="PropertyValueObserverWithGetterAndFallback{TParameter1,TResult}.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.ValueObservers
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Observers;
+
+    using JetBrains.Annotations;
+
     /// <summary>
-    /// Property Value Observer With Getter And Fallback
+    /// Property Value Observer With Getter And Fallback.
     /// </summary>
+    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverWithGetterAndFallback<TParameter1, TResult> : PropertyObserverBase
-        where TResult : struct 
+    public sealed class PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>
+        : PropertyObserverBase
+        where TResult : struct
         where TParameter1 : INotifyPropertyChanged
     {
-        public TParameter1 Parameter { get; }
+        /// <summary>
+        ///     The action.
+        /// </summary>
+        [NotNull]
+        private readonly Action action;
 
         /// <summary>
-        /// The action
+        ///     The getter.
         /// </summary>
-        [NotNull] private readonly Action action;
+        [NotNull]
+        private readonly Func<TResult> getter;
 
         /// <summary>
-        /// The getter
+        /// Initializes a new instance of the <see cref="PropertyValueObserverWithGetterAndFallback{TParameter1, TResult}"/> class.
         /// </summary>
-        [NotNull] private readonly Func<TParameter1, TResult> getter;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverWithGetterAndFallback{TResult}"/> class.
-        /// </summary>
-        /// <param name="action">The property expression.</param>
-        /// <param name="fallback">The action.</param>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="PropertyValueObserverWithGetterAndFallback{TResult}">
+        /// <exception cref="System.ArgumentNullException">parameter
+        /// or
         /// action
         /// or
-        /// propertyExpression
-        /// </exception>
+        /// propertyExpression is null.</exception>
         internal PropertyValueObserverWithGetterAndFallback(
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TParameter1 parameter,
-            [NotNull] Action action, TResult fallback)
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] Action action,
+            TResult fallback)
         {
-            Parameter = parameter ?? throw new ArgumentNullException(nameof(parameter));
+            this.Parameter = parameter ?? throw new ArgumentNullException(nameof(parameter));
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            ExpressionString = propertyExpression.ToString();
+            this.ExpressionString = propertyExpression.ToString();
 
-            base.CreateChain(parameter, tree);
-            this.getter = ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree, fallback);
+            this.CreateChain(parameter, tree);
+            this.getter = ExpressionGetter.CreateValueGetter(propertyExpression.Parameters, tree, fallback);
         }
 
         /// <summary>
-        /// The action
+        ///     Gets the parameter.
         /// </summary>
-        protected override void OnAction() => action();
-
-
+        /// <value>
+        ///     The parameter.
+        /// </value>
+        public TParameter1 Parameter { get; }
+        
         /// <summary>
-        /// The expression
+        /// Gets the expression string.
         /// </summary>
+        /// <value>
+        /// The expression string.
+        /// </value>
         public override string ExpressionString { get; }
 
         /// <summary>
         /// Gets the value.
         /// </summary>
-        /// <returns></returns>
-        public TResult GetValue(TParameter1 p) => getter(p);
+        /// <returns>
+        /// The result value.
+        /// </returns>
+        public TResult GetValue() => this.getter();
+
+        /// <summary>
+        /// On the action.
+        /// </summary>
+        protected override void OnAction() => this.action();
     }
 }

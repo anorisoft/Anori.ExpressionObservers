@@ -1,46 +1,57 @@
-﻿using Anori.ExpressionObservers.Exceptions;
-using Anori.ExpressionObservers.Nodes;
-using JetBrains.Annotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
+﻿// -----------------------------------------------------------------------
+// <copyright file="ExpressionTree.cs" company="Anori Soft">
+// Copyright (c) Anori Soft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers
 {
-    public class ExpressionTree : ITree
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+
+    using Anori.ExpressionObservers.Exceptions;
+    using Anori.ExpressionObservers.Nodes;
+
+    using JetBrains.Annotations;
+
+    /// <summary>
+    ///     Expression Tree.
+    /// </summary>
+    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionTree" />
+    public class ExpressionTree : IExpressionTree
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
+        ///     Initializes a new instance of the <see cref="ExpressionTree" /> class.
         /// </summary>
         private ExpressionTree()
         {
         }
 
         /// <summary>
-        /// Gets the roots.
+        ///     Gets the roots.
         /// </summary>
         /// <value>
-        /// The roots.
+        ///     The roots.
         /// </value>
         public IList<IExpressionNode> Roots { get; } = new List<IExpressionNode>();
 
         /// <summary>
-        /// Gets or sets the nodes.
+        ///     Gets or sets the nodes.
         /// </summary>
         /// <value>
-        /// The nodes.
+        ///     The nodes.
         /// </value>
         public NodeCollection Nodes { get; set; }
 
         /// <summary>
-        /// Gets the tree.
+        ///     Gets the tree.
         /// </summary>
         /// <param name="expression">The expression.</param>
-        /// <returns></returns>
-        public static ExpressionTree GetTree(
-            Expression expression)
+        /// <returns>The expression tree.</returns>
+        public static ExpressionTree GetTree(Expression expression)
         {
             var tree = new ExpressionTree();
             tree.Nodes = GetTree(expression, tree, null);
@@ -48,28 +59,39 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        /// Gets the tree.
+        ///     Gets the tree.
         /// </summary>
         /// <param name="expression">The expression.</param>
-        /// <param name="tree">The tree.</param>
+        /// <param name="expressionTree">The tree.</param>
         /// <param name="parent">The parent.</param>
-        /// <returns></returns>
+        /// <returns>The expression tree.</returns>
         /// <exception cref="ExpressionObserversException">
-        /// Expression member is not a PropertyInfo
-        /// or
-        /// Method call has no ReturnParameter
-        /// or
-        /// Expression body is null
-        /// or
-        /// Expression body is not a supportet Expression {expression} type {expression.Type}
+        ///     Expression member is not a PropertyInfo
+        ///     or
+        ///     Method call has no ReturnParameter
+        ///     or
+        ///     Expression body is null
+        ///     or
+        ///     Expression body is not a supportet Expression {expression} type {expression.Type}.
         /// </exception>
-        public static NodeCollection GetTree([NotNull] Expression expression, [NotNull] ITree tree,
+        public static NodeCollection GetTree(
+            [NotNull] Expression expression,
+            [NotNull] IExpressionTree expressionTree,
             [CanBeNull] IExpressionNode parent)
         {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
-            if (tree == null) throw new ArgumentNullException(nameof(tree));
-            var nodeCollection = new NodeCollection(tree, parent);
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            if (expressionTree == null)
+            {
+                throw new ArgumentNullException(nameof(expressionTree));
+            }
+
+            var nodeCollection = new NodeCollection(expressionTree, parent);
             while (true)
+            {
                 switch (expression)
                 {
                     case MemberExpression memberExpression when memberExpression.Member is PropertyInfo propertyInfo:
@@ -78,19 +100,22 @@ namespace Anori.ExpressionObservers
                             nodeCollection.AddElement(new PropertyNode(memberExpression, propertyInfo));
                             break;
                         }
+
                     case MemberExpression memberExpression when memberExpression.Member is FieldInfo fieldInfo:
-                        expression = memberExpression.Expression;
-                        nodeCollection.AddElement(new FieldNode(memberExpression, fieldInfo));
-                        break;
+                        {
+                            expression = memberExpression.Expression;
+                            nodeCollection.AddElement(new FieldNode(memberExpression, fieldInfo));
+                            break;
+                        }
 
                     case MemberExpression _:
                         throw new ExpressionObserversException("Expression member is not a PropertyInfo");
 
                     case ParameterExpression parameterExpression:
                         {
-                            var element = (new ParameterNode(parameterExpression));
-                            nodeCollection.AddElement(element);
-                            nodeCollection.Roots.Add(element);
+                            var element = new ParameterNode(parameterExpression);
+                            var node = nodeCollection.AddElement(element);
+                            nodeCollection.Roots.Add(node);
                             return nodeCollection;
                         }
 
@@ -121,7 +146,10 @@ namespace Anori.ExpressionObservers
                             var element = new FunctionNode(methodCallExpression);
                             var parameters = new List<NodeCollection>();
                             foreach (var argument in methodCallExpression.Arguments)
+                            {
                                 parameters.Add(GetTree(argument, nodeCollection, element));
+                            }
+
                             element.Parameters = parameters;
                             nodeCollection.AddElement(element);
                             return nodeCollection;
@@ -130,8 +158,8 @@ namespace Anori.ExpressionObservers
                     case ConstantExpression constantExpression:
                         {
                             var element = new ConstantNode(constantExpression);
-                            nodeCollection.AddElement(element);
-                            nodeCollection.Roots.Add(element);
+                            var node = nodeCollection.AddElement(element);
+                            nodeCollection.Roots.Add(node);
                             return nodeCollection;
                         }
 
@@ -139,10 +167,11 @@ namespace Anori.ExpressionObservers
                         {
                             var element = new BinaryNode(binaryExpression);
                             element.LeftNodes = GetTree(binaryExpression.Left, nodeCollection, element);
-                            element.Righttree = GetTree(binaryExpression.Right, nodeCollection, element);
+                            element.RightNodes = GetTree(binaryExpression.Right, nodeCollection, element);
                             nodeCollection.AddElement(element);
                             return nodeCollection;
                         }
+
                     case UnaryExpression unaryExpression:
                         {
                             var element = new UnaryNode(unaryExpression);
@@ -170,7 +199,8 @@ namespace Anori.ExpressionObservers
                             {
                                 parameters.Add(GetTree(argument, nodeCollection, element));
                             }
-                            element.Parameters = parameters;
+
+                            element.Parameters.AddRange(parameters);
                             nodeCollection.AddElement(element);
                             return nodeCollection;
                         }
@@ -183,15 +213,17 @@ namespace Anori.ExpressionObservers
                             {
                                 parameters.Add(GetTree(argument, nodeCollection, element));
                             }
-                            element.Parameters = parameters;
+
+                            element.Parameters.AddRange(parameters);
 
                             var bindings = memberInitExpression.Bindings;
                             var bindingtree = CreateBindingtree(nodeCollection, bindings, element);
 
-                            element.Bindings = bindingtree;
+                            element.Bindings.AddRange(bindingtree);
                             nodeCollection.AddElement(element);
                             return nodeCollection;
                         }
+
                     case null:
                         throw new ExpressionObserversException("Expression body is null");
 
@@ -199,17 +231,18 @@ namespace Anori.ExpressionObservers
                         throw new ExpressionObserversException(
                             $"Expression body is not a supportet Expression {expression} type {expression.Type}");
                 }
+            }
         }
 
         /// <summary>
-        /// Creates the bindingtree.
+        ///     Creates the bindingtree.
         /// </summary>
-        /// <param name="tree">The tree.</param>
+        /// <param name="expressionTree">The tree.</param>
         /// <param name="bindings">The bindings.</param>
         /// <param name="node">The node.</param>
-        /// <returns></returns>
+        /// <returns>The binding list.</returns>
         private static List<IBindingNode> CreateBindingtree(
-            ITree tree,
+            IExpressionTree expressionTree,
             IEnumerable<MemberBinding> bindings,
             MemberInitNode node)
         {
@@ -222,24 +255,28 @@ namespace Anori.ExpressionObservers
                         {
                             var b = new MemberAssignmentNode(
                                 memberAssignment,
-                                GetTree(memberAssignment.Expression, tree, node));
+                                GetTree(memberAssignment.Expression, expressionTree, node));
                             bindingtree.Add(b);
                             break;
                         }
+
                     case MemberMemberBinding memberMemberBinding:
                         {
-                            var bs = CreateBindingtree(tree, memberMemberBinding.Bindings, node);
+                            var bs = CreateBindingtree(expressionTree, memberMemberBinding.Bindings, node);
                             var b = new MemberMemberBindingNode(memberMemberBinding, bs, node);
                             bindingtree.Add(b);
                             break;
                         }
+
                     case MemberListBinding memberListBinding:
                         {
                             var elementInits = new List<ElementInitNode>();
                             foreach (var i in memberListBinding.Initializers)
                             {
-                                elementInits.Add(new ElementInitNode(i,
-                                    i.Arguments.Select(a => GetTree(a, tree, node)).ToList()));
+                                elementInits.Add(
+                                    new ElementInitNode(
+                                        i,
+                                        i.Arguments.Select(a => GetTree(a, expressionTree, node)).ToList()));
                             }
 
                             var b = new MemberListBindingNode(memberListBinding, elementInits);

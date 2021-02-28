@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     public abstract class PropertyReferenceObserverBase<TParameter1, TParameter2, TResult> : PropertyObserverBase
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
-        where TResult : class
     {
         /// <summary>
         /// The property expression
@@ -87,11 +86,11 @@ namespace Anori.ExpressionObservers.ReferenceObservers
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
-        /// <param name="nodes">The nodes.</param>
+        /// <param name="tree">The nodes.</param>
         /// <exception cref="NotSupportedException"></exception>
-        private void CreateChain(TParameter1 parameter1, TParameter2 parameter2, ITree nodes)
+        private void CreateChain(TParameter1 parameter1, TParameter2 parameter2, ITree tree)
         {
-            foreach (var treeRoot in nodes.Roots)
+            foreach (var treeRoot in tree.Roots)
             {
                 switch (treeRoot)
                 {

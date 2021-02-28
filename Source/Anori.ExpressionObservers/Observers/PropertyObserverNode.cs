@@ -4,103 +4,104 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using System;
-using System.ComponentModel;
-using System.Reflection;
-
 namespace Anori.ExpressionObservers.Observers
 {
+    using System;
+    using System.ComponentModel;
+    using System.Reflection;
+
     /// <summary>
     ///     Represents each node of nested properties expression and takes care of
     ///     subscribing/unsubscribing INotifyPropertyChanged.PropertyChanged listeners on it.
     /// </summary>
     internal class PropertyObserverNode
-
     {
         /// <summary>
-        /// The action
+        ///     The action.
         /// </summary>
         private readonly Action action;
 
         /// <summary>
-        /// The notify property changed
+        ///     The notify property changed.
         /// </summary>
         private INotifyPropertyChanged notifyPropertyChanged;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverNode"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverNode" /> class.
         /// </summary>
         /// <param name="propertyInfo">The property information.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="ArgumentNullException">propertyInfo</exception>
+        /// <exception cref="ArgumentNullException">propertyInfo is null.</exception>
         public PropertyObserverNode(PropertyInfo propertyInfo, Action action)
         {
-            PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
+            this.PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
             this.action = () =>
-            {
-                action?.Invoke();
-                if (Previous == null)
                 {
-                    return;
-                }
+                    action?.Invoke();
+                    if (this.Previous == null)
+                    {
+                        return;
+                    }
 
-                Previous.UnsubscribeListener();
-                GenerateNextNode();
-            };
+                    this.Previous.UnsubscribeListener();
+                    this.GenerateNextNode();
+                };
         }
 
         /// <summary>
-        /// Gets or sets the next.
+        ///     Gets or sets the next.
         /// </summary>
         /// <value>
-        /// The next.
+        ///     The next.
         /// </value>
         public PropertyObserverNode Previous { get; set; }
 
         /// <summary>
-        /// Gets the property information.
+        ///     Gets the property information.
         /// </summary>
         /// <value>
-        /// The property information.
+        ///     The property information.
         /// </value>
         public PropertyInfo PropertyInfo { get; }
 
         /// <summary>
-        /// Subscribes the listener for.
+        ///     Subscribes the listener for.
         /// </summary>
         /// <param name="propertyChanged">The property changed.</param>
         public void SubscribeListenerFor(INotifyPropertyChanged propertyChanged)
         {
-            notifyPropertyChanged = propertyChanged;
-            notifyPropertyChanged.PropertyChanged += OnPropertyChanged;
+            this.notifyPropertyChanged = propertyChanged;
+            this.notifyPropertyChanged.PropertyChanged += this.OnPropertyChanged;
 
-            if (Previous != null)
+            if (this.Previous != null)
             {
-                GenerateNextNode();
+                this.GenerateNextNode();
             }
         }
 
         /// <summary>
-        /// Unsubscribes the listener.
+        ///     Unsubscribes the listener.
         /// </summary>
         public void UnsubscribeListener()
         {
-            if (notifyPropertyChanged != null)
+            if (this.notifyPropertyChanged != null)
             {
-                notifyPropertyChanged.PropertyChanged -= OnPropertyChanged;
+                this.notifyPropertyChanged.PropertyChanged -= this.OnPropertyChanged;
             }
 
-            Previous?.UnsubscribeListener();
+            this.Previous?.UnsubscribeListener();
         }
 
         /// <summary>
-        /// Generates the next node.
+        ///     Generates the next node.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Trying to subscribe PropertyChanged listener in object that "
-        ///                     + $"owns '{this.Previous.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.</exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Trying to subscribe PropertyChanged listener in object that "
+        ///     + $"owns '{this.Previous.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.
+        /// </exception>
         private void GenerateNextNode()
         {
-            var nextProperty = PropertyInfo.GetValue(notifyPropertyChanged);
+            var nextProperty = this.PropertyInfo.GetValue(this.notifyPropertyChanged);
             if (nextProperty == null)
             {
                 return;
@@ -110,22 +111,22 @@ namespace Anori.ExpressionObservers.Observers
             {
                 throw new InvalidOperationException(
                     "Trying to subscribe PropertyChanged listener in object that "
-                    + $"owns '{Previous.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.");
+                    + $"owns '{this.Previous.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.");
             }
 
-            Previous.SubscribeListenerFor(propertyChanged);
+            this.Previous.SubscribeListenerFor(propertyChanged);
         }
 
         /// <summary>
-        /// Called when [property changed].
+        ///     Called when [property changed].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="PropertyChangedEventArgs" /> instance containing the event data.</param>
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e?.PropertyName == PropertyInfo.Name || string.IsNullOrEmpty(e?.PropertyName))
+            if (e?.PropertyName == this.PropertyInfo.Name || string.IsNullOrEmpty(e?.PropertyName))
             {
-                action?.Invoke();
+                this.action?.Invoke();
             }
         }
     }
