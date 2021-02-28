@@ -21,8 +21,9 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
-    public abstract class PropertyObserverBase<TParameter1, TParameter2, TResult> : PropertyObserverBase
-        where TParameter1 : INotifyPropertyChanged 
+    public abstract class PropertyObserverBase<TParameter1, TParameter2, TResult>
+        : PropertyObserverBase
+        where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
     {
         /// <summary>

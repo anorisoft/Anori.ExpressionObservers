@@ -73,7 +73,7 @@ namespace Anori.ExpressionObservers.ValueObservers
         ///     The parameter.
         /// </value>
         public TParameter1 Parameter { get; }
-        
+
         /// <summary>
         /// Gets the expression string.
         /// </summary>
