@@ -36,7 +36,7 @@ namespace Anori.ExpressionObservers.ValueObservers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult> getter;
+        private readonly Func<TParameter1, TResult> getter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyValueObserverWithGetterAndFallback{TParameter1, TResult}"/> class.
@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.ValueObservers
             this.ExpressionString = propertyExpression.ToString();
 
             this.CreateChain(parameter, tree);
-            this.getter = ExpressionGetter.CreateValueGetter(propertyExpression.Parameters, tree, fallback);
+            this.getter = ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree, fallback);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Anori.ExpressionObservers.ValueObservers
         /// <returns>
         /// The result value.
         /// </returns>
-        public TResult GetValue() => this.getter();
+        public TResult GetValue() => this.getter(this.Parameter);
 
         /// <summary>
         /// On the action.
