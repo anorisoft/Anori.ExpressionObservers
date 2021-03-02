@@ -6,12 +6,11 @@
 
 namespace Anori.ExpressionObservers.Observers
 {
+    using Anori.ExpressionObservers.Nodes;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-
-    using Anori.ExpressionObservers.Nodes;
 
     /// <summary>
     /// Property Observer Base.
@@ -36,6 +35,32 @@ namespace Anori.ExpressionObservers.Observers
         ///     The root nodes.
         /// </value>
         internal IList<RootPropertyObserverNode> RootNodes { get; } = new List<RootPropertyObserverNode>();
+
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator ==(PropertyObserverBase a, PropertyObserverBase b)
+        {
+            return Equals(a,b);
+        }
+
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator !=(PropertyObserverBase a, PropertyObserverBase b)
+        {
+            return !a.Equals(b);
+        }
 
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -145,7 +170,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
-        public bool Equals(PropertyObserverBase x, PropertyObserverBase y)
+        public static bool Equals(PropertyObserverBase x, PropertyObserverBase y)
         {
             if (ReferenceEquals(x, y))
             {
@@ -167,7 +192,30 @@ namespace Anori.ExpressionObservers.Observers
                 return false;
             }
 
-            return x.ExpressionString == y.ExpressionString && Equals(x.RootNodes, y.RootNodes);
+            if (x.ExpressionString != y.ExpressionString)
+            {
+                return false;
+            }
+            
+            if(!x.RootNodes.SequenceEqual(y.RootNodes))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Determines whether the specified objects are equal.
+        /// </summary>
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        /// true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase x, PropertyObserverBase y)
+        {
+            return Equals(x, y);
         }
 
         /// <summary>
