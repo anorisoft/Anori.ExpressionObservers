@@ -55,5 +55,33 @@ namespace Anori.ExpressionObservers.UnitTests
                 () => { });
             Assert.False(observer1 != observer2);
         }
+
+
+        [Test]
+        public void NotifyPropertyChanged_Expression_ObservesIntegerAndBoolean_Test()
+        {
+            var actionIntegerRaised = false;
+            var actionBooleanRaised = false;
+            var notifyPropertyChangedTestObject =
+                new NotifyPropertyChangedTestObject { IntProperty = 1, BoolProperty = false };
+            using var integerObserver = PropertyObserver.Observes(
+                notifyPropertyChangedTestObject.IntPropertyExpression,
+                () => actionIntegerRaised = true, false);
+            integerObserver.Subscribe(true);
+
+            using var booleanObserver = PropertyObserver.Observes(
+                notifyPropertyChangedTestObject.BoolPropertyExpression,
+                () => actionBooleanRaised = true, false);
+            booleanObserver.Subscribe(true);
+
+            Assert.False(actionIntegerRaised);
+            Assert.False(actionBooleanRaised);
+            notifyPropertyChangedTestObject.BoolProperty = true;
+            Assert.True(actionBooleanRaised);
+            Assert.False(actionIntegerRaised);
+            notifyPropertyChangedTestObject.IntProperty = 2;
+            Assert.True(actionBooleanRaised);
+            Assert.True(actionIntegerRaised);
+        }
     }
 }

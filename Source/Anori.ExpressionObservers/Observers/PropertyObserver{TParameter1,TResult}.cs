@@ -22,6 +22,12 @@ namespace Anori.ExpressionObservers.Observers
         where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
+        ///     The action.
+        /// </summary>
+        [NotNull]
+        private readonly Action action;
+
+        /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyObserver{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -33,20 +39,11 @@ namespace Anori.ExpressionObservers.Observers
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action)
             : base(parameter1, propertyExpression) =>
-            this.Action = action ?? throw new ArgumentNullException(nameof(action));
-
-        /// <summary>
-        ///     Gets the action.
-        /// </summary>
-        /// <value>
-        ///     The action.
-        /// </value>
-        [NotNull]
-        public Action Action { get; }
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
 
         /// <summary>
         ///     The action.
         /// </summary>
-        protected override void OnAction() => this.Action();
+        protected override void OnAction() => this.action();
     }
 }
