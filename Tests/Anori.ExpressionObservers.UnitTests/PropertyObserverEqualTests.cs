@@ -42,5 +42,18 @@ namespace Anori.ExpressionObservers.UnitTests
                 () => { });
             Assert.True(observer1 == observer2);
         }
+
+        [Test]
+        public void NotifyPropertyChanged_SameAre_NotEqualOperator_Test()
+        {
+            var notifyPropertyChangedTestObject = new NotifyPropertyChangedTestObject();
+            using var observer1 = PropertyObserver.Observes(
+                notifyPropertyChangedTestObject.IntPropertyExpression,
+                () => { });
+            using var observer2 = PropertyObserver.Observes(
+                notifyPropertyChangedTestObject.IntPropertyExpression,
+                () => { });
+            Assert.False(observer1 != observer2);
+        }
     }
 }
