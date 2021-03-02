@@ -1,0 +1,46 @@
+﻿using Anori.ExpressionObservers.UnitTests.TestClasses;
+using Anori.PropertyChain.UnitTest;
+
+using NUnit.Framework;
+
+namespace Anori.ExpressionObservers.UnitTests
+{
+    using Anori.WinUI.Commands.Tests;
+
+    public class PropertyObserverEqualTests : Bindable
+    {
+        [SetUp]
+        public void Setup()
+        {
+        }
+
+      
+
+
+        [Test]
+        public void NotifyPropertyChanged_SameAre_Equal_Test()
+        {
+            var notifyPropertyChangedTestObject = new NotifyPropertyChangedTestObject();
+            using var observer1 = PropertyObserver.Observes(
+                notifyPropertyChangedTestObject.IntPropertyExpression,
+                () => { });
+            using var observer2 = PropertyObserver.Observes(
+                notifyPropertyChangedTestObject.IntPropertyExpression,
+                () => { });
+            Assert.True(observer1.Equals(observer2));
+        }
+
+        [Test]
+        public void NotifyPropertyChanged_SameAre_EqualOperator_Test()
+        {
+            var notifyPropertyChangedTestObject = new NotifyPropertyChangedTestObject();
+            using var observer1 = PropertyObserver.Observes(
+                notifyPropertyChangedTestObject.IntPropertyExpression,
+                () => { });
+            using var observer2 = PropertyObserver.Observes(
+                notifyPropertyChangedTestObject.IntPropertyExpression,
+                () => { });
+            Assert.True(observer1 == observer2);
+        }
+    }
+}
