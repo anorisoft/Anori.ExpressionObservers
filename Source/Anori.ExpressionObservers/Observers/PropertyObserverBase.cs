@@ -191,7 +191,7 @@ namespace Anori.ExpressionObservers.Observers
         /// </summary>
         /// <param name="expressionNode">The expression node.</param>
         /// <param name="observerNode">The observer node.</param>
-        internal void Looptree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
+        internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
         {
             var previousNode = observerNode;
             while (expressionNode.Next is PropertyNode property)
@@ -232,7 +232,7 @@ namespace Anori.ExpressionObservers.Observers
                                 propertyElement.PropertyInfo,
                                 this.OnAction,
                                 parameter1);
-                            this.Looptree(propertyElement, root);
+                            this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
                             break;
                         }
@@ -249,7 +249,7 @@ namespace Anori.ExpressionObservers.Observers
                                 this.OnAction,
                                 (INotifyPropertyChanged)fieldElement.FieldInfo.GetValue(constantElement.Value));
 
-                            this.Looptree(propertyElement, root);
+                            this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
                             break;
                         }
@@ -266,7 +266,7 @@ namespace Anori.ExpressionObservers.Observers
                                 this.OnAction,
                                 (INotifyPropertyChanged)constantElement.Value);
 
-                            this.Looptree(propertyElement, root);
+                            this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
 
                             break;
@@ -301,7 +301,7 @@ namespace Anori.ExpressionObservers.Observers
                                 this.OnAction,
                                 fieldElement.FieldInfo.GetValue(constantElement.Value));
 
-                            this.Looptree(propertyElement, root);
+                            this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
                             break;
                         }
@@ -318,7 +318,7 @@ namespace Anori.ExpressionObservers.Observers
                                 this.OnAction,
                                 (INotifyPropertyChanged)constantElement.Value);
 
-                            this.Looptree(propertyElement, root);
+                            this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
 
                             break;
