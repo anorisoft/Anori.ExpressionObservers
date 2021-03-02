@@ -21,9 +21,14 @@ namespace Anori.ExpressionObservers.Observers
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TParameter2, TResult}" />
     public sealed class
         PropertyObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<TParameter1, TParameter2, TResult>
-        where TParameter1 : INotifyPropertyChanged
-        where TParameter2 : INotifyPropertyChanged
+        where TParameter1 : INotifyPropertyChanged where TParameter2 : INotifyPropertyChanged
     {
+        /// <summary>
+        ///     The action.
+        /// </summary>
+        [NotNull]
+        private readonly Action action;
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyObserver{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
@@ -39,21 +44,12 @@ namespace Anori.ExpressionObservers.Observers
             [NotNull] Action action)
             : base(parameter1, parameter2, propertyExpression)
         {
-            this.Action = action ?? throw new ArgumentNullException(nameof(action));
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
         }
 
         /// <summary>
-        ///     Gets the action.
-        /// </summary>
-        /// <value>
-        ///     The action.
-        /// </value>
-        [NotNull]
-        public Action Action { get; }
-
-        /// <summary>
         ///     The action.
         /// </summary>
-        protected override void OnAction() => this.Action();
+        protected override void OnAction() => this.action();
     }
 }

@@ -38,7 +38,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <summary>
         ///     Subscribes the listener for parameter.
         /// </summary>
-        public void SubscribeListenerForOwner()
+        public void SubscribeListenerForRoot()
         {
             if (this.Parameter is INotifyPropertyChanged notifyPropertyChanged)
             {

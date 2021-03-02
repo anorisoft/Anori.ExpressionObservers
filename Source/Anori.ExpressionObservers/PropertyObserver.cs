@@ -25,12 +25,24 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Observer.</returns>
+        /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
         [NotNull]
         public static PropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action) =>
-            new PropertyObserver<TResult>(propertyExpression, action);
+            [NotNull] Action action,
+            bool autoSubscribe = true)
+        {
+            var observer = new PropertyObserver<TResult>(propertyExpression, action);
+            if (autoSubscribe)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -40,14 +52,26 @@ namespace Anori.ExpressionObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Observer.</returns>
+        /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
         [NotNull]
         public static PropertyObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            [NotNull] Action action)
-            where TParameter1 : INotifyPropertyChanged =>
-            new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            [NotNull] Action action,
+            bool autoSubscribe = true)
+            where TParameter1 : INotifyPropertyChanged
+        {
+            var observer = new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            if (autoSubscribe)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -59,15 +83,31 @@ namespace Anori.ExpressionObservers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Observer.</returns>
+        /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
         [NotNull]
         public static PropertyObserver<TParameter1, TParameter2, TResult> Observes<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action action)
-            where TParameter1 : INotifyPropertyChanged
-            where TParameter2 : INotifyPropertyChanged =>
-            new PropertyObserver<TParameter1, TParameter2, TResult>(parameter1, parameter2, propertyExpression, action);
+            [NotNull] Action action,
+            bool autoSubscribe = true)
+            where TParameter1 : INotifyPropertyChanged 
+            where TParameter2 : INotifyPropertyChanged
+        {
+            var observer = new PropertyObserver<TParameter1, TParameter2, TResult>(
+                parameter1,
+                parameter2,
+                propertyExpression,
+                action);
+            if (autoSubscribe)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
     }
 }
