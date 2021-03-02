@@ -131,7 +131,7 @@ namespace Anori.ExpressionObservers.Observers
                                 this.OnAction,
                                 (INotifyPropertyChanged)parameterGetter(parameter1, parameter2));
 
-                            this.Looptree(propertyElement, root);
+                            this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
                             break;
                         }
@@ -148,7 +148,7 @@ namespace Anori.ExpressionObservers.Observers
                                 this.OnAction,
                                 (INotifyPropertyChanged)fieldElement.FieldInfo.GetValue(constantElement.Value));
 
-                            this.Looptree(propertyElement, root);
+                            this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
                             break;
                         }
@@ -165,7 +165,7 @@ namespace Anori.ExpressionObservers.Observers
                                 this.OnAction,
                                 (INotifyPropertyChanged)constantElement.Value);
 
-                            this.Looptree(propertyElement, root);
+                            this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
 
                             break;
