@@ -17,7 +17,7 @@ namespace Anori.ExpressionObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Expression Creator.
+    ///     Expression Creator .
     /// </summary>
     internal static class ExpressionCreator
     {

@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserver{TParameter1,TParameter2,TResult}.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyObserver{TParameter1,TParameter2,TResult}.cs" company="Anorisoft">
+// Copyright (c) bfa solutions ltd. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -19,9 +19,10 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TParameter2, TResult}" />
-    public sealed class
-        PropertyObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<TParameter1, TParameter2, TResult>
-        where TParameter1 : INotifyPropertyChanged where TParameter2 : INotifyPropertyChanged
+    public sealed class PropertyObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<
+        PropertyObserver<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
+        where TParameter1 : INotifyPropertyChanged
+        where TParameter2 : INotifyPropertyChanged
     {
         /// <summary>
         ///     The action.
@@ -48,7 +49,7 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     The action.
+        ///     The on action.
         /// </summary>
         protected override void OnAction() => this.action();
     }

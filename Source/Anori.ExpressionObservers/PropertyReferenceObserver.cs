@@ -89,7 +89,9 @@ namespace Anori.ExpressionObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Reference Observer.</returns>
+        /// <returns>
+        /// The Property Reference Observer.
+        /// </returns>
         [NotNull]
         public static PropertyReferenceObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] TParameter1 parameter1,

@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.ValueObservers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverWithGetterAndFallback<TResult> : PropertyObserverBase
+    public sealed class PropertyValueObserverWithGetterAndFallback<TResult> : PropertyObserverBase<PropertyValueObserverWithGetterAndFallback<TResult>>
         where TResult : struct
     {
         /// <summary>

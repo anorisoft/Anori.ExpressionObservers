@@ -15,16 +15,19 @@ namespace Anori.ExpressionObservers.Observers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Observer Base.
+    /// Property Observer Base.
     /// </summary>
+    /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TSelf}" />
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
-    public abstract class PropertyObserverBase<TParameter1, TParameter2, TResult>
-        : PropertyObserverBase
+    public abstract class PropertyObserverBase<TSelf, TParameter1, TParameter2, TResult>
+        : PropertyObserverBase<TSelf>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
+        where TSelf : PropertyObserverBase<TSelf, TParameter1, TParameter2, TResult>
     {
         /// <summary>
         ///     The property expression.
@@ -32,18 +35,23 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverBase{TParameter1, TParameter2, TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserverBase{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <exception cref="System.ArgumentNullException">
-        ///     propertyExpression
-        ///     or
-        ///     parameter1
-        ///     or
-        ///     parameter2 is null.
+        /// <exception cref="ArgumentNullException">
+        /// propertyExpression
+        /// or
+        /// parameter1
+        /// or
+        /// parameter2
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">propertyExpression
+        /// or
+        /// parameter1
+        /// or
+        /// parameter2 is null.</exception>
         protected PropertyObserverBase(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
@@ -104,7 +112,7 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Creates the chain.
+        /// Creates the chain.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>

@@ -13,13 +13,17 @@ namespace Anori.ExpressionObservers.Observers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Observer Base.
+    /// Property Observer Base.
     /// </summary>
+    /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TSelf}" />
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
-    public abstract class PropertyObserverBase<TParameter1, TResult> : PropertyObserverBase
+    public abstract class PropertyObserverBase<TSelf, TParameter1, TResult> : PropertyObserverBase<TSelf>
         where TParameter1 : INotifyPropertyChanged
+        where TSelf : PropertyObserverBase<TSelf, TParameter1, TResult>
+
     {
         /// <summary>
         ///     The property expression.
@@ -27,15 +31,18 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Expression<Func<TParameter1, TResult>> propertyExpression;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverBase{TParameter1,TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserverBase{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <exception cref="System.ArgumentNullException">
-        ///     propertyExpression
-        ///     or
-        ///     parameter1 in null.
+        /// <exception cref="ArgumentNullException">
+        /// propertyExpression
+        /// or
+        /// parameter1
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">propertyExpression
+        /// or
+        /// parameter1 in null.</exception>
         protected PropertyObserverBase(
             TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
@@ -46,10 +53,10 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Gets the expression string.
+        /// Gets the expression string.
         /// </summary>
         /// <value>
-        ///     The expression string.
+        /// The expression string.
         /// </value>
         public override string ExpressionString { get; }
 
@@ -63,14 +70,14 @@ namespace Anori.ExpressionObservers.Observers
         public TParameter1 Parameter1 { get; }
 
         /// <summary>
-        ///     Creates the chain.
+        /// Creates the chain.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
-        /// <returns>The Expression String.</returns>
-        /// <exception cref="NotSupportedException">
-        ///     Operation not supported for the given expression type {expression.Type}. "
-        ///     + "Only MemberExpression and ConstantExpression are currently supported.
-        /// </exception>
+        /// <returns>
+        /// The Expression String.
+        /// </returns>
+        /// <exception cref="NotSupportedException">Operation not supported for the given expression type {expression.Type}. "
+        /// + "Only MemberExpression and ConstantExpression are currently supported.</exception>
         private string CreateChain(TParameter1 parameter1)
         {
             var tree = ExpressionTree.GetTree(this.propertyExpression.Body);
