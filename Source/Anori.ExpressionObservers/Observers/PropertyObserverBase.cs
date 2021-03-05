@@ -1,12 +1,13 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverBase.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyObserverBase.cs" company="Anorisoft">
+// Copyright (c) bfa solutions ltd. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Observers
 {
     using Anori.ExpressionObservers.Nodes;
+
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -22,6 +23,8 @@ namespace Anori.ExpressionObservers.Observers
                                                  IEqualityComparer<PropertyObserverBase>,
                                                  IEquatable<PropertyObserverBase>
     {
+        private bool isSubscribe;
+
         /// <summary>
         ///     Gets the expression string.
         /// </summary>
@@ -51,15 +54,33 @@ namespace Anori.ExpressionObservers.Observers
             return Equals(a, b);
         }
 
+        public static bool operator ==(PropertyObserverBase a, object b)
+        {
+            return Equals(a, b);
+        }
+
         /// <summary>
-        ///     Implements the operator !=.
+        /// Implements the operator !=.
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
         /// <returns>
-        ///     The result of the operator.
+        /// The result of the operator.
         /// </returns>
         public static bool operator !=(PropertyObserverBase a, PropertyObserverBase b)
+        {
+            return !a.Equals(b);
+        }
+
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator !=(PropertyObserverBase a, object b)
         {
             return !a.Equals(b);
         }
@@ -105,45 +126,6 @@ namespace Anori.ExpressionObservers.Observers
             }
 
             return true;
-        }
-
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <summary>
-        ///     Subscribes this instance.
-        /// </summary>
-        public void Subscribe()
-        {
-            this.Subscribe(false);
-        }
-
-        /// <summary>
-        /// Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        public void Subscribe(bool silent)
-        {
-            foreach (var rootPropertyObserverNode in this.RootNodes)
-            {
-                rootPropertyObserverNode.SubscribeListenerForRoot();
-            }
-
-            if (!silent)
-            {
-                this.OnAction();
-            }
-        }
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        public void Unsubscribe()
-        {
-            foreach (var rootPropertyObserverNode in this.RootNodes)
-            {
-                rootPropertyObserverNode.UnsubscribeListener();
-            }
         }
 
         /// <summary>
@@ -245,6 +227,58 @@ namespace Anori.ExpressionObservers.Observers
             {
                 return ((obj.ExpressionString != null ? obj.ExpressionString.GetHashCode() : 0) * 397)
                        ^ (obj.RootNodes != null ? obj.RootNodes.GetHashCode() : 0);
+            }
+        }
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <summary>
+        ///     Subscribes this instance.
+        /// </summary>
+        public void Subscribe()
+        {
+            this.Subscribe(false);
+        }
+
+        /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        public void Subscribe(bool silent)
+        {
+            if (this.isSubscribe)
+            {
+                return;
+            }
+
+            this.isSubscribe = true;
+            foreach (var rootPropertyObserverNode in this.RootNodes)
+            {
+                rootPropertyObserverNode.SubscribeListenerForRoot();
+            }
+
+            if (!silent)
+            {
+                this.OnAction();
+            }
+        }
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        public void Unsubscribe()
+        {
+            if (!this.isSubscribe)
+            {
+                return;
+            }
+
+            this.isSubscribe = false;
+
+            foreach (var rootPropertyObserverNode in this.RootNodes)
+            {
+                rootPropertyObserverNode.UnsubscribeListener();
             }
         }
 

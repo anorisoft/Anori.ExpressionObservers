@@ -21,7 +21,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TResult}" />
     public sealed class
-        PropertyReferenceGetterObserver<TParameter1, TResult> : PropertyObserverBase<TParameter1, TResult>
+        PropertyReferenceGetterObserver<TParameter1, TResult> 
+        : PropertyObserverBase<PropertyReferenceGetterObserver<TParameter1, TResult>, TParameter1, TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : class
     {

@@ -12,19 +12,22 @@ namespace Anori.ExpressionObservers.Observers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Observer Base.
+    /// Property Observer Base.
     /// </summary>
+    /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TSelf}" />
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
-    public abstract class PropertyObserverBase<TResult> : PropertyObserverBase
+    public abstract class PropertyObserverBase<TSelf, TResult> : PropertyObserverBase<TSelf>
+        where TSelf : PropertyObserverBase<TSelf, TResult>
     {
         /// <summary>
-        ///     The property expression.
+        /// The property expression.
         /// </summary>
         private readonly Expression<Func<TResult>> propertyExpression;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverBase{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserverBase{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
@@ -43,14 +46,13 @@ namespace Anori.ExpressionObservers.Observers
         public override string ExpressionString { get; }
 
         /// <summary>
-        ///     Creates the chain.
+        /// Creates the chain.
         /// </summary>
-        /// <param name="owner">The parameter1.</param>
-        /// <returns>The Expression String.</returns>
-        /// <exception cref="NotSupportedException">
-        ///     Operation not supported for the given expression type {expression.Type}. "
-        ///     + "Only MemberExpression and ConstantExpression are currently supported.
-        /// </exception>
+        /// <returns>
+        /// The Expression String.
+        /// </returns>
+        /// <exception cref="NotSupportedException">Operation not supported for the given expression type {expression.Type}. "
+        /// + "Only MemberExpression and ConstantExpression are currently supported.</exception>
         protected string CreateChain()
         {
             var tree = ExpressionTree.GetTree(this.propertyExpression.Body);

@@ -22,7 +22,7 @@ namespace Anori.ExpressionObservers.ValueObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TParameter2, TResult}" />
     public sealed class
-        PropertyValueObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<TParameter1, TParameter2,
+        PropertyValueObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<PropertyValueObserver<TParameter1, TParameter2, TResult>,TParameter1, TParameter2,
             TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged

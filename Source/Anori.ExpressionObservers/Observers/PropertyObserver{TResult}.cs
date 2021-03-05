@@ -16,7 +16,7 @@ namespace Anori.ExpressionObservers.Observers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TResult}" />
-    public sealed class PropertyObserver<TResult> : PropertyObserverBase<TResult>
+    public sealed class PropertyObserver<TResult> : PropertyObserverBase<PropertyObserver<TResult>,TResult>
     {
         /// <summary>
         ///     Gets the action.
