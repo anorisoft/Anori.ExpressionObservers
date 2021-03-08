@@ -57,6 +57,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
 
+
         [Test]
         public void NotifyPropertyChanged_Expression_ObservesIntegerAndBoolean_Test()
         {
