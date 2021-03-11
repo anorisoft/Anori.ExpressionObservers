@@ -1,13 +1,13 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverBase.cs" company="Anorisoft">
-// Copyright (c) bfa solutions ltd. All rights reserved.
+// <copyright file="PropertyObserverBase{TSelf}.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Observers
 {
     /// <summary>
-    /// Property Observer Base for flurnent.
+    ///     Property Observer Base for flurnent.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
@@ -15,13 +15,13 @@ namespace Anori.ExpressionObservers.Observers
         where TSelf : PropertyObserverBase<TSelf>
     {
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <returns>Self object.</returns>
         public new TSelf Subscribe() => this.Subscribe(false);
 
         /// <summary>
-        /// Subscribes the specified silent.
+        ///     Subscribes the specified silent.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>Self object.</returns>
@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        /// Unsubscribes this instance.
+        ///     Unsubscribes this instance.
         /// </summary>
         /// <returns>Self object.</returns>
         public new TSelf Unsubscribe()

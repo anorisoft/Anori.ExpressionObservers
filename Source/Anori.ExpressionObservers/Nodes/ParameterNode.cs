@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ParameterNode.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="ParameterNode.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Nodes
     public struct ParameterNode : IInternalExpressionNode
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ParameterNode"/> struct.
+        ///     Initializes a new instance of the <see cref="ParameterNode" /> struct.
         /// </summary>
         /// <param name="expression">The expression.</param>
         public ParameterNode([NotNull] ParameterExpression expression)
@@ -63,10 +63,10 @@ namespace Anori.ExpressionObservers.Nodes
         public IExpressionNode Parent { get; private set; }
 
         /// <summary>
-        /// Gets the expression.
+        ///     Gets the expression.
         /// </summary>
         /// <value>
-        /// The expression.
+        ///     The expression.
         /// </value>
         [NotNull]
         public ParameterExpression Expression { get; }

@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserver.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyObserver.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -94,7 +94,8 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action action,
             bool autoSubscribe = true)
-            where TParameter1 : INotifyPropertyChanged where TParameter2 : INotifyPropertyChanged
+            where TParameter1 : INotifyPropertyChanged
+            where TParameter2 : INotifyPropertyChanged
         {
             var observer = new PropertyObserver<TParameter1, TParameter2, TResult>(
                 parameter1,

@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ExpressionCreator.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="ExpressionCreator.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -69,9 +69,7 @@ namespace Anori.ExpressionObservers
         ///     The block expression.
         /// </returns>
         [NotNull]
-        internal static BlockExpression CreateValueBody(
-            [NotNull] Type resultType,
-            [NotNull] Expression expression)
+        internal static BlockExpression CreateValueBody([NotNull] Type resultType, [NotNull] Expression expression)
         {
             var returnTarget = Expression.Label(resultType);
             var tree = ExpressionTree.GetTree(expression);

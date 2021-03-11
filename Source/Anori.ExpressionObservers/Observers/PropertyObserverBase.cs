@@ -1,17 +1,17 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverBase.cs" company="Anorisoft">
-// Copyright (c) bfa solutions ltd. All rights reserved.
+// <copyright file="PropertyObserverBase.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Observers
 {
-    using Anori.ExpressionObservers.Nodes;
-
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+
+    using Anori.ExpressionObservers.Nodes;
 
     /// <summary>
     ///     Property Observer Base.
@@ -60,12 +60,12 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        /// Implements the operator !=.
+        ///     Implements the operator !=.
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
         /// <returns>
-        /// The result of the operator.
+        ///     The result of the operator.
         /// </returns>
         public static bool operator !=(PropertyObserverBase a, PropertyObserverBase b)
         {
@@ -73,12 +73,12 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        /// Implements the operator !=.
+        ///     Implements the operator !=.
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
         /// <returns>
-        /// The result of the operator.
+        ///     The result of the operator.
         /// </returns>
         public static bool operator !=(PropertyObserverBase a, object b)
         {

@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceGetterObserver{TParameter1,TResult}.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyReferenceGetterObserver{TParameter1,TResult}.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -20,11 +20,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TResult}" />
-    public sealed class
-        PropertyReferenceGetterObserver<TParameter1, TResult> 
-        : PropertyObserverBase<PropertyReferenceGetterObserver<TParameter1, TResult>, TParameter1, TResult>
-        where TParameter1 : INotifyPropertyChanged
-        where TResult : class
+    public sealed class PropertyReferenceGetterObserver<TParameter1, TResult> : PropertyObserverBase<
+        PropertyReferenceGetterObserver<TParameter1, TResult>, TParameter1, TResult>
+        where TParameter1 : INotifyPropertyChanged where TResult : class
     {
         /// <summary>
         ///     The action.
@@ -39,7 +37,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers
         private readonly Func<TParameter1, TResult> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>

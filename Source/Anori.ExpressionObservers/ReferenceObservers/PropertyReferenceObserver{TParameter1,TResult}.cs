@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserver{TParameter1,TResult}.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyReferenceObserver{TParameter1,TResult}.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -20,12 +20,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TResult}" />
-    public sealed class PropertyReferenceObserver<TParameter1, TResult> : PropertyObserverBase<PropertyReferenceObserver<TParameter1, TResult>,TParameter1, TResult>
-        where TParameter1 : INotifyPropertyChanged
-        where TResult : class
+    public sealed class PropertyReferenceObserver<TParameter1, TResult> : PropertyObserverBase<
+        PropertyReferenceObserver<TParameter1, TResult>, TParameter1, TResult>
+        where TParameter1 : INotifyPropertyChanged where TResult : class
     {
         /// <summary>
-        /// The action.
+        ///     The action.
         /// </summary>
         [NotNull]
         private readonly Action action;

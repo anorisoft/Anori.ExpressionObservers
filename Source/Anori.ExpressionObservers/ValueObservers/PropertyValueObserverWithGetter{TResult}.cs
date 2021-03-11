@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverWithGetter{TResult}.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyValueObserverWithGetter{TResult}.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -18,7 +18,8 @@ namespace Anori.ExpressionObservers.ValueObservers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
-    public sealed class PropertyValueObserverWithGetter<TResult> : PropertyObserverBase<PropertyValueObserverWithGetter<TResult>>
+    public sealed class
+        PropertyValueObserverWithGetter<TResult> : PropertyObserverBase<PropertyValueObserverWithGetter<TResult>>
         where TResult : struct
     {
         /// <summary>

@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="RootPropertyObserverNode.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="RootPropertyObserverNode.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Observers
     using System.Reflection;
 
     /// <summary>
-    /// Root Property Observer Node.
+    ///     Root Property Observer Node.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverNode" />
     /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Observers.RootPropertyObserverNode}" />
@@ -55,7 +55,7 @@ namespace Anori.ExpressionObservers.Observers
         /// </returns>
         public bool Equals(RootPropertyObserverNode other)
         {
-            if (ReferenceEquals(null, other))
+            if (other is null)
             {
                 return false;
             }
@@ -77,7 +77,7 @@ namespace Anori.ExpressionObservers.Observers
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
             {
                 return false;
             }
@@ -96,10 +96,10 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
+        ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode() => this.Parameter != null ? this.Parameter.GetHashCode() : 0;
     }

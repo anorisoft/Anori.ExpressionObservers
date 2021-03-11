@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserver{TParameter1,TParameter2,TResult}.cs" company="Anorisoft">
-// Copyright (c) bfa solutions ltd. All rights reserved.
+// <copyright file="PropertyObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -21,8 +21,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TParameter2, TResult}" />
     public sealed class PropertyObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<
         PropertyObserver<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
-        where TParameter1 : INotifyPropertyChanged
-        where TParameter2 : INotifyPropertyChanged
+        where TParameter1 : INotifyPropertyChanged where TParameter2 : INotifyPropertyChanged
     {
         /// <summary>
         ///     The action.

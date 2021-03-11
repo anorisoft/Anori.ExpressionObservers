@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="FieldNode.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="FieldNode.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -13,13 +13,13 @@ namespace Anori.ExpressionObservers.Nodes
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Field Expression Tree Node.
+    ///     Field Expression Tree Node.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IInternalExpressionNode" />
     public struct FieldNode : IInternalExpressionNode
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FieldNode"/> struct.
+        ///     Initializes a new instance of the <see cref="FieldNode" /> struct.
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <param name="fieldInfo">The field information.</param>
@@ -75,10 +75,10 @@ namespace Anori.ExpressionObservers.Nodes
         public IExpressionNode Parent { get; private set; }
 
         /// <summary>
-        /// Gets the field information.
+        ///     Gets the field information.
         /// </summary>
         /// <value>
-        /// The field information.
+        ///     The field information.
         /// </value>
         [NotNull]
         public FieldInfo FieldInfo { get; }

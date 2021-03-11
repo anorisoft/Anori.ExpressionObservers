@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserver{TResult}.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyReferenceObserver{TResult}.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -18,7 +18,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TResult}" />
-    public sealed class PropertyReferenceObserver<TResult> : PropertyObserverBase<PropertyReferenceObserver<TResult>,TResult>
+    public sealed class
+        PropertyReferenceObserver<TResult> : PropertyObserverBase<PropertyReferenceObserver<TResult>, TResult>
         where TResult : class
     {
         /// <summary>

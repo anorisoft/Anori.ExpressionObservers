@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserver{TParameter1,TResult}.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyValueObserver{TParameter1,TResult}.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -20,9 +20,9 @@ namespace Anori.ExpressionObservers.ValueObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TResult}" />
-    public sealed class PropertyValueObserver<TParameter1, TResult> : PropertyObserverBase<PropertyValueObserver<TParameter1, TResult>,TParameter1, TResult>
-        where TParameter1 : INotifyPropertyChanged
-        where TResult : struct
+    public sealed class PropertyValueObserver<TParameter1, TResult> : PropertyObserverBase<
+        PropertyValueObserver<TParameter1, TResult>, TParameter1, TResult>
+        where TParameter1 : INotifyPropertyChanged where TResult : struct
     {
         /// <summary>
         ///     The action.

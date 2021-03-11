@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverWithGetterAndFallback{TResult}.cs" company="Anori Soft">
-// Copyright (c) Anori Soft. All rights reserved.
+// <copyright file="PropertyValueObserverWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -18,7 +18,9 @@ namespace Anori.ExpressionObservers.ValueObservers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverWithGetterAndFallback<TResult> : PropertyObserverBase<PropertyValueObserverWithGetterAndFallback<TResult>>
+    public sealed class
+        PropertyValueObserverWithGetterAndFallback<TResult> : PropertyObserverBase<
+            PropertyValueObserverWithGetterAndFallback<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -34,14 +36,16 @@ namespace Anori.ExpressionObservers.ValueObservers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverWithGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverWithGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="System.ArgumentNullException">action
-        /// or
-        /// propertyExpression is null.</exception>
+        /// <exception cref="System.ArgumentNullException">
+        ///     action
+        ///     or
+        ///     propertyExpression is null.
+        /// </exception>
         internal PropertyValueObserverWithGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
@@ -57,10 +61,10 @@ namespace Anori.ExpressionObservers.ValueObservers
         }
 
         /// <summary>
-        /// Gets the expression string.
+        ///     Gets the expression string.
         /// </summary>
         /// <value>
-        /// The expression string.
+        ///     The expression string.
         /// </value>
         public override string ExpressionString { get; }
 
