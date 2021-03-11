@@ -5,8 +5,6 @@ using NUnit.Framework;
 
 namespace Anori.ExpressionObservers.UnitTests
 {
-    using Anori.WinUI.Commands.Tests;
-
     public class PropertyObserverEqualTests : Bindable
     {
         [SetUp]

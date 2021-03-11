@@ -6,8 +6,6 @@
 
 namespace Anori.ExpressionObservers.UnitTests
 {
-    using Anori.WinUI.Commands.Tests;
-
     public class ComplexType : TestPurposeBindableBase
     {
         private ComplexType _innerComplexProperty;

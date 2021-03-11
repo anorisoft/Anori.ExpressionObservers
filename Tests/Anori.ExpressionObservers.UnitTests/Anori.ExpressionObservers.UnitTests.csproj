@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net4.8</TargetFrameworks>
+    <TargetFrameworks>net48</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <IsPackable>false</IsPackable>
     <Configurations>Debug;Release;Debug Submodules</Configurations>
@@ -16,5 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Anori.ExpressionObservers\Anori.ExpressionObservers.csproj" />
+    <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
   </ItemGroup>
 </Project>

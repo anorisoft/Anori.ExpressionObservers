@@ -23,7 +23,8 @@ namespace Anori.ExpressionObservers.ValueObservers
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyValueObserverWithGetterAndFallback<TParameter1, TResult> : PropertyObserverBase<
         PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>>
-        where TResult : struct where TParameter1 : INotifyPropertyChanged
+        where TResult : struct
+        where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
         ///     The action.

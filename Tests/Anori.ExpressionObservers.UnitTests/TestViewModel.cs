@@ -4,13 +4,12 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.WinUI.Commands.Tests
+namespace Anori.ExpressionObservers.UnitTests
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
     using JetBrains.Annotations;
-
 
     public class TestViewModel : INotifyPropertyChanged
     {

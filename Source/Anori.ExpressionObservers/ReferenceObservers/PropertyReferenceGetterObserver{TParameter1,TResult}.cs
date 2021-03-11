@@ -22,7 +22,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TResult}" />
     public sealed class PropertyReferenceGetterObserver<TParameter1, TResult> : PropertyObserverBase<
         PropertyReferenceGetterObserver<TParameter1, TResult>, TParameter1, TResult>
-        where TParameter1 : INotifyPropertyChanged where TResult : class
+        where TParameter1 : INotifyPropertyChanged
+        where TResult : class
     {
         /// <summary>
         ///     The action.

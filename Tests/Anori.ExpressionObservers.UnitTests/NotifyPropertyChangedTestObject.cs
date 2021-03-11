@@ -9,8 +9,6 @@ namespace Anori.ExpressionObservers.UnitTests
     using System;
     using System.Linq.Expressions;
 
-    using Anori.WinUI.Commands.Tests;
-
     public class NotifyPropertyChangedTestObject : TestViewModel
     {
         private bool boolProperty;

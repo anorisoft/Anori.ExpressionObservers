@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.WinUI.Commands.Tests
+namespace Anori.ExpressionObservers.UnitTests
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
