@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
         }
 
-        private NotifyPropertyChangedClass1 instance1 = new NotifyPropertyChangedClass1();
+        private readonly NotifyPropertyChangedClass1 instance1 = new NotifyPropertyChangedClass1();
 
         private NotifyPropertyChangedClass1 _instance1 = new NotifyPropertyChangedClass1();
 

@@ -9,7 +9,7 @@
   "settings": {
     "documentationRules": {
       "xmlHeader": true,
-      "companyName": "Anori Soft",
+      "companyName": "AnoriSoft",
       "copyrightText": "Copyright (c) {companyName}. All rights reserved.",
       "headerDecoration": "-----------------------------------------------------------------------"
     }
