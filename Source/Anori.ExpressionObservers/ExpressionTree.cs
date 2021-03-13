@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers
         /// <value>
         ///     The nodes.
         /// </value>
-        public NodeCollection Nodes { get; set; }
+        public INodeCollection Nodes { get; set; }
 
         /// <summary>
         ///     Gets the tree.

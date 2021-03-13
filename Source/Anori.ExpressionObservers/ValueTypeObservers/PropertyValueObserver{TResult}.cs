@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueObservers
+namespace Anori.ExpressionObservers.ValueTypeObservers
 {
     using System;
     using System.Linq.Expressions;

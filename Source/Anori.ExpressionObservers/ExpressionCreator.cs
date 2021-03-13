@@ -193,7 +193,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="NotSupportedException">Not suppoerted node nubmers.</exception>
         private static void CreateValueExpressions(
             [NotNull] Type resultType,
-            [NotNull] NodeCollection nodes,
+            [NotNull] INodeCollection nodes,
             [NotNull] IList<Expression> expressions,
             [NotNull] VaribalesCollection variables,
             [NotNull] Expression ifNull,
@@ -227,7 +227,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Type resultType,
             [NotNull] IList<Expression> expressions,
             [NotNull] VaribalesCollection variables,
-            [NotNull] NodeCollection nodes,
+            [NotNull] INodeCollection nodes,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
         {
@@ -246,7 +246,7 @@ namespace Anori.ExpressionObservers
         private static Expression CreateVariableExpressions(
             [NotNull] IList<Expression> expressions,
             [NotNull] VaribalesCollection variables,
-            [NotNull] NodeCollection nodes,
+            [NotNull] INodeCollection nodes,
             [NotNull] Expression ifNull)
         {
             var source = CreateVariableInnerExpressions(expressions, variables, nodes, ifNull);
@@ -273,7 +273,7 @@ namespace Anori.ExpressionObservers
         private static Expression CreateVariableInnerExpressions(
             [NotNull] IList<Expression> expressions,
             [NotNull] VaribalesCollection variables,
-            [NotNull] NodeCollection nodes,
+            [NotNull] INodeCollection nodes,
             [NotNull] Expression ifNull)
         {
             var list = nodes.ToList();
@@ -658,7 +658,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Type resultType,
             [NotNull] IList<Expression> expressions,
             [NotNull] VaribalesCollection variables,
-            [NotNull] NodeCollection nodes,
+            [NotNull] INodeCollection nodes,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
         {

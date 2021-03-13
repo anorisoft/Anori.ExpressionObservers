@@ -4,7 +4,7 @@ using static Anori.ExpressionObservers.ExpressionGetter;
 
 namespace Anori.ExpressionObservers.ConsoleTests
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main()
         {
@@ -94,7 +94,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = f1(test);
+                f1(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -104,7 +104,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = Test1Method(test);
+                Test1Method(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -114,7 +114,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = Test2Method(test);
+                Test2Method(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -124,7 +124,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = Test3MethodExcepion(test);
+                Test3MethodExcepion(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -135,7 +135,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = f1(test);
+                f1(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -145,7 +145,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = Test1Method(test);
+                Test1Method(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -155,7 +155,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = Test2Method(test);
+                Test2Method(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -165,7 +165,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = Test3MethodExcepion(test);
+                Test3MethodExcepion(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -175,7 +175,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = f1(test);
+                f1(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -185,7 +185,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = Test1Method(test);
+                Test1Method(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -195,7 +195,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                s = Test2Method(test);
+                Test2Method(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
@@ -205,7 +205,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             stopwatch.Start();
             for (var i = 0; i < count; i++)
             {
-                var r = Test3MethodExcepion(test);
+                Test3MethodExcepion(test);
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);

@@ -9,6 +9,8 @@ namespace Anori.ExpressionObservers.Exceptions
     using System;
     using System.Runtime.Serialization;
 
+    using Anori.Common;
+
     /// <summary>
     ///     ExpressionObservers Exception.
     /// </summary>

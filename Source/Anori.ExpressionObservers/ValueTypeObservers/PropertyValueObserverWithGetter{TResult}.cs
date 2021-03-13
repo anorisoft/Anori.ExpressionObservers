@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserverWithGetter{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueObservers
+namespace Anori.ExpressionObservers.ValueTypeObservers
 {
     using System;
     using System.Linq.Expressions;
@@ -14,13 +14,12 @@ namespace Anori.ExpressionObservers.ValueObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Observer With Getter And Fallback.
+    ///     Property Value Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
     public sealed class
-        PropertyValueObserverWithGetterAndFallback<TResult> : PropertyObserverBase<
-            PropertyValueObserverWithGetterAndFallback<TResult>>
+        PropertyValueObserverWithGetter<TResult> : PropertyObserverBase<PropertyValueObserverWithGetter<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -33,23 +32,21 @@ namespace Anori.ExpressionObservers.ValueObservers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult> getter;
+        private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverWithGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverWithGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         ///     action
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal PropertyValueObserverWithGetterAndFallback(
+        internal PropertyValueObserverWithGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
-            TResult fallback)
+            [NotNull] Action action)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
@@ -57,7 +54,7 @@ namespace Anori.ExpressionObservers.ValueObservers
             this.ExpressionString = propertyExpression.ToString();
 
             this.CreateChain(tree);
-            this.getter = ExpressionGetter.CreateValueGetter(propertyExpression.Parameters, tree, fallback);
+            this.getter = ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
         }
 
         /// <summary>
@@ -71,8 +68,10 @@ namespace Anori.ExpressionObservers.ValueObservers
         /// <summary>
         ///     Gets the value.
         /// </summary>
-        /// <returns>The result value.</returns>
-        public TResult GetValue() => this.getter();
+        /// <returns>
+        ///     The result value.
+        /// </returns>
+        public TResult? GetValue() => this.getter();
 
         /// <summary>
         ///     On the action.

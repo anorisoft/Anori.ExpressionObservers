@@ -1,12 +1,13 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserver{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserver{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceObservers
+namespace Anori.ExpressionObservers.ValueTypeObservers
 {
     using System;
+    using System.ComponentModel;
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Observers;
@@ -14,13 +15,15 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Reference Observer.
+    ///     Property Value Observer.
     /// </summary>
+    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TResult}" />
-    public sealed class
-        PropertyReferenceObserver<TResult> : PropertyObserverBase<PropertyReferenceObserver<TResult>, TResult>
-        where TResult : class
+    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TResult}" />
+    public sealed class PropertyValueObserver<TParameter1, TResult> : PropertyObserverBase<
+        PropertyValueObserver<TParameter1, TResult>, TParameter1, TResult>
+        where TParameter1 : INotifyPropertyChanged
+        where TResult : struct
     {
         /// <summary>
         ///     The action.
@@ -29,16 +32,20 @@ namespace Anori.ExpressionObservers.ReferenceObservers
         private readonly Action action;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1, TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <exception cref="ArgumentNullException">The action is null.</exception>
-        internal PropertyReferenceObserver(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+        internal PropertyValueObserver(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action)
-            : base(propertyExpression) =>
+            : base(parameter1, propertyExpression)
+        {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
+        }
 
         /// <summary>
         ///     On the action.

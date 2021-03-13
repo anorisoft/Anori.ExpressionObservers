@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceGetterObserver{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceObservers
+namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
     using System;
     using System.Linq.Expressions;
@@ -14,19 +14,20 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Reference Getter Observer.
+    ///     Property Reference Observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
     public sealed class
-        PropertyReferenceGetterObserver<TResult> : PropertyObserverBase<PropertyReferenceGetterObserver<TResult>>
+        PropertyReferenceObserverWithGetterAndFallback<TResult> : PropertyObserverBase<
+            PropertyReferenceObserverWithGetterAndFallback<TResult>>
         where TResult : class
     {
         /// <summary>
         ///     The action.
         /// </summary>
         [NotNull]
-        private readonly Action<TResult> action;
+        private readonly Action action;
 
         /// <summary>
         ///     The getter.
@@ -35,25 +36,27 @@ namespace Anori.ExpressionObservers.ReferenceObservers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="ArgumentNullException">
+        /// <param name="fallback">The fallback.</param>
+        /// <exception cref="System.ArgumentNullException">
         ///     action
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal PropertyReferenceGetterObserver(
+        internal PropertyReferenceObserverWithGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action<TResult> action)
+            [NotNull] Action action,
+            TResult fallback)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var tree = ExpressionTree.GetTree(propertyExpression.Body);
             this.ExpressionString = propertyExpression.ToString();
             this.CreateChain(tree);
-            this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
+            this.getter = ExpressionGetter.CreateReferenceGetter(propertyExpression.Parameters, tree, fallback);
         }
 
         /// <summary>
@@ -73,6 +76,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.action(this.getter());
+        protected override void OnAction() => this.action();
     }
 }

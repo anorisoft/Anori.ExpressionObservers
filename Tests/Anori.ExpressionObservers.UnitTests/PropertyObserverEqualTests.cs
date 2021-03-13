@@ -7,14 +7,6 @@ namespace Anori.ExpressionObservers.UnitTests
 {
     public class PropertyObserverEqualTests : Bindable
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-      
-
-
         [Test]
         public void NotifyPropertyChanged_SameAre_Equal_Test()
         {

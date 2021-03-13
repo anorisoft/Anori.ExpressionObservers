@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.ReferenceObservers;
+    using Anori.ExpressionObservers.ReferenceTypeObservers;
 
     using JetBrains.Annotations;
 
@@ -20,13 +20,13 @@ namespace Anori.ExpressionObservers
     public static class PropertyReferenceObserver
     {
         /// <summary>
-        /// Observeses the specified property expression.
+        ///     Observeses the specified property expression.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
         public static PropertyReferenceObserver<TResult> Observes<TResult>(
@@ -34,38 +34,6 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TResult : class =>
             new PropertyReferenceObserver<TResult>(propertyExpression, action);
-
-        /// <summary>
-        ///     Observeses the and get.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <returns>The Property Reference Observer.</returns>
-        [NotNull]
-        public static PropertyReferenceObserverWithGetter<TResult> ObservesAndGet<TResult>(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action)
-            where TResult : class =>
-            new PropertyReferenceObserverWithGetter<TResult>(propertyExpression, action);
-
-        /// <summary>
-        ///     Observeses the and get.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        [NotNull]
-        public static PropertyReferenceObserverWithGetterAndFallback<TResult> ObservesAndGet<TResult>(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
-            TResult fallback)
-            where TResult : class =>
-            new PropertyReferenceObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -172,5 +140,37 @@ namespace Anori.ExpressionObservers
                 parameter2,
                 propertyExpression,
                 action);
+
+        /// <summary>
+        ///     Observeses the and get.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <returns>The Property Reference Observer.</returns>
+        [NotNull]
+        public static PropertyReferenceObserverWithGetter<TResult> ObservesAndGet<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action)
+            where TResult : class =>
+            new PropertyReferenceObserverWithGetter<TResult>(propertyExpression, action);
+
+        /// <summary>
+        ///     Observeses the and get.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static PropertyReferenceObserverWithGetterAndFallback<TResult> ObservesAndGet<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action,
+            TResult fallback)
+            where TResult : class =>
+            new PropertyReferenceObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback);
     }
 }

@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceObservers
+namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
     using System;
     using System.ComponentModel;

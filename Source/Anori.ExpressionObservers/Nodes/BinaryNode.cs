@@ -15,7 +15,7 @@ namespace Anori.ExpressionObservers.Nodes
     ///     Binary Expression Tree Node.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
-    internal struct BinaryNode : IInternalExpressionNode
+    internal struct BinaryNode : IInternalExpressionNode, IBinaryNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="BinaryNode" /> struct.
@@ -87,7 +87,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The left nodes.
         /// </value>
-        public NodeCollection LeftNodes { get; internal set; }
+        public INodeCollection LeftNodes { get; internal set; }
 
         /// <summary>
         ///     Gets or sets the righttree.
@@ -95,7 +95,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The righttree.
         /// </value>
-        public NodeCollection RightNodes { get; internal set; }
+        public INodeCollection RightNodes { get; internal set; }
 
         /// <summary>
         ///     Sets the previous.

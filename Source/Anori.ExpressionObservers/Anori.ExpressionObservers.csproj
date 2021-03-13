@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Configurations>Debug;Release;Debug Submodules</Configurations>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -15,14 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ReferenceObservers\PropertyReferenceObserverBase{TParameter1,TParameter2,TResult}.cs" />
-    <Compile Remove="ReferenceObservers\PropertyReferenceObserverBase{TParameter1,TResult}.cs" />
-    <Compile Remove="ReferenceObservers\PropertyReferenceObserverBase{TResult}.cs" />
-    <Compile Remove="ValueObservers\PropertyValueObserverBase{TParameter1,TParameter2,TResult}.cs" />
-    <Compile Remove="ValueObservers\PropertyValueObserverBase{TParameter1,TResult}.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Anori.Common" Version="1.0.0-alpha0001" />
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
@@ -33,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
-    <PackageReference Include="Anori.Extensions" Version="0.2.1-alpha0004" />
+    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0008" />
   </ItemGroup>
 
   <ItemGroup Condition="($(Configuration.Contains('Submodules')))">

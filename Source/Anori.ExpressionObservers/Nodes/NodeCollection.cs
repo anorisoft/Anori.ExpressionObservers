@@ -12,11 +12,11 @@ namespace Anori.ExpressionObservers.Nodes
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Expression Tree Node Collection.
-    /// </summary>
-    /// <seealso cref="System.Collections.Generic.List{Anori.ExpressionObservers.Nodes.IExpressionNode}" />
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionTree" />
-    public class NodeCollection : List<IExpressionNode>, IExpressionTree
+        ///     Expression Tree Node Collection.
+        /// </summary>
+        /// <seealso cref="System.Collections.Generic.List{Anori.ExpressionObservers.Nodes.IExpressionNode}" />
+        /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionTree" />
+        public class NodeCollection : List<IExpressionNode>, INodeCollection
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="NodeCollection" /> class.

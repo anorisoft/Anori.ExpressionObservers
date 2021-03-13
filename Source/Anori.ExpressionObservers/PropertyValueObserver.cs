@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.ValueObservers;
+    using Anori.ExpressionObservers.ValueTypeObservers;
 
     using JetBrains.Annotations;
 
@@ -32,61 +32,6 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TResult : struct =>
             new PropertyValueObserver<TResult>(propertyExpression, action);
-
-        /// <summary>
-        ///     Observeses the and get.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <returns>The Property Value Observer.</returns>
-        [NotNull]
-        public static PropertyValueObserverWithGetter<TResult> ObservesAndGet<TResult>(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action)
-            where TResult : struct =>
-            new PropertyValueObserverWithGetter<TResult>(propertyExpression, action);
-
-        /// <summary>
-        ///     Observeses the and get.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Value Observer.</returns>
-        [NotNull]
-        public static PropertyValueObserverWithGetterAndFallback<TResult> ObservesAndGet<TResult>(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
-            TResult fallback)
-            where TResult : struct =>
-            new PropertyValueObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback);
-
-        /// <summary>
-        ///     Observeses the and get.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter">The parameter.</param>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Value Observer.</returns>
-        [NotNull]
-        public static PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>
-            ObservesAndGet<TParameter1, TResult>(
-                [NotNull] TParameter1 parameter,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                [NotNull] Action action,
-                TResult fallback)
-            where TResult : struct
-            where TParameter1 : INotifyPropertyChanged =>
-            new PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>(
-                parameter,
-                propertyExpression,
-                action,
-                fallback);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -199,5 +144,60 @@ namespace Anori.ExpressionObservers
                 parameter2,
                 propertyExpression,
                 action);
+
+        /// <summary>
+        ///     Observeses the and get.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <returns>The Property Value Observer.</returns>
+        [NotNull]
+        public static PropertyValueObserverWithGetter<TResult> ObservesAndGet<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action)
+            where TResult : struct =>
+            new PropertyValueObserverWithGetter<TResult>(propertyExpression, action);
+
+        /// <summary>
+        ///     Observeses the and get.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>The Property Value Observer.</returns>
+        [NotNull]
+        public static PropertyValueObserverWithGetterAndFallback<TResult> ObservesAndGet<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action,
+            TResult fallback)
+            where TResult : struct =>
+            new PropertyValueObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback);
+
+        /// <summary>
+        ///     Observeses the and get.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>The Property Value Observer.</returns>
+        [NotNull]
+        public static PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>
+            ObservesAndGet<TParameter1, TResult>(
+                [NotNull] TParameter1 parameter,
+                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+                [NotNull] Action action,
+                TResult fallback)
+            where TResult : struct
+            where TParameter1 : INotifyPropertyChanged =>
+            new PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>(
+                parameter,
+                propertyExpression,
+                action,
+                fallback);
     }
 }

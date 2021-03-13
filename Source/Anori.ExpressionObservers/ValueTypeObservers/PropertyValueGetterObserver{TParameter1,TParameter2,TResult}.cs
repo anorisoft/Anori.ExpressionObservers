@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyValueGetterObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueObservers
+namespace Anori.ExpressionObservers.ValueTypeObservers
 {
     using System;
     using System.ComponentModel;
@@ -21,39 +21,49 @@ namespace Anori.ExpressionObservers.ValueObservers
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TParameter2, TResult}" />
-    public sealed class PropertyValueObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<
-        PropertyValueObserver<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
+    public sealed class PropertyValueGetterObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<
+        PropertyValueGetterObserver<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
         where TResult : struct
     {
         /// <summary>
-        ///     The action.
+        ///     Gets the action.
         /// </summary>
+        /// <value>
+        ///     The action.
+        /// </value>
         [NotNull]
-        private readonly Action action;
+        private readonly Action<TResult?> action;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1, TParameter2, TResult}" /> class.
+        ///     The getter.
+        /// </summary>
+        private readonly Func<TParameter1, TParameter2, TResult?> getter;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyValueGetterObserver{TParameter1, TParameter2, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <exception cref="ArgumentNullException">The action is null.</exception>
-        internal PropertyValueObserver(
+        internal PropertyValueGetterObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action action)
+            [NotNull] Action<TResult?> action)
             : base(parameter1, parameter2, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.getter = ExpressionGetter.CreateValueGetter(propertyExpression);
         }
 
         /// <summary>
-        ///     On the action.
+        ///     The action.
         /// </summary>
-        protected override void OnAction() => this.action();
+        protected override void OnAction() => this.action(this.getter(this.Parameter1, this.Parameter2));
     }
 }

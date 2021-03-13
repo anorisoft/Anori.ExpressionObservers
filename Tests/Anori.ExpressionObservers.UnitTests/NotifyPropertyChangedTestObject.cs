@@ -49,9 +49,6 @@ namespace Anori.ExpressionObservers.UnitTests
         public Expression<Func<int>> IntPropertyExpression => () => this.IntProperty;
 
         public bool Type { get; set; }
-
-        public void Dollens()
-        {
-        }
+        
     }
 }

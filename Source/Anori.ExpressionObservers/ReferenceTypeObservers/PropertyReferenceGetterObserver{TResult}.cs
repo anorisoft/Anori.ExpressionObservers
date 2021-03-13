@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverWithGetter{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceGetterObserver{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueObservers
+namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
     using System;
     using System.Linq.Expressions;
@@ -14,28 +14,28 @@ namespace Anori.ExpressionObservers.ValueObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Observer With Getter.
+    ///     Property Reference Getter Observer.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
     public sealed class
-        PropertyValueObserverWithGetter<TResult> : PropertyObserverBase<PropertyValueObserverWithGetter<TResult>>
-        where TResult : struct
+        PropertyReferenceGetterObserver<TResult> : PropertyObserverBase<PropertyReferenceGetterObserver<TResult>>
+        where TResult : class
     {
         /// <summary>
         ///     The action.
         /// </summary>
         [NotNull]
-        private readonly Action action;
+        private readonly Action<TResult> action;
 
         /// <summary>
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult?> getter;
+        private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverWithGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -44,17 +44,16 @@ namespace Anori.ExpressionObservers.ValueObservers
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal PropertyValueObserverWithGetter(
+        internal PropertyReferenceGetterObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action)
+            [NotNull] Action<TResult> action)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var tree = ExpressionTree.GetTree(propertyExpression.Body);
             this.ExpressionString = propertyExpression.ToString();
-
             this.CreateChain(tree);
-            this.getter = ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
+            this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
         }
 
         /// <summary>
@@ -68,14 +67,12 @@ namespace Anori.ExpressionObservers.ValueObservers
         /// <summary>
         ///     Gets the value.
         /// </summary>
-        /// <returns>
-        ///     The result value.
-        /// </returns>
-        public TResult? GetValue() => this.getter();
+        /// <returns>The result value.</returns>
+        public TResult GetValue() => this.getter();
 
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.action();
+        protected override void OnAction() => this.action(this.getter());
     }
 }

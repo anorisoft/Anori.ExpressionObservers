@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceGetterObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceObservers
+namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
     using System;
     using System.ComponentModel;
@@ -15,14 +15,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Reference Observer.
+    ///     Property Reference Getter Observer.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TParameter2, TResult}" />
-    public sealed class PropertyReferenceObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<
-        PropertyReferenceObserver<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
+    public sealed class PropertyReferenceGetterObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<
+        PropertyReferenceGetterObserver<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
         where TResult : class
@@ -31,27 +31,36 @@ namespace Anori.ExpressionObservers.ReferenceObservers
         ///     The action.
         /// </summary>
         [NotNull]
-        private readonly Action action;
+        private readonly Action<TResult> action;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TParameter1,TParameter2,TResult}" /> class.
+        ///     The getter.
+        /// </summary>
+        private readonly Func<TParameter1, TParameter2, TResult> getter;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TParameter1,TParameter2,TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="System.ArgumentNullException">The action is null.</exception>
-        internal PropertyReferenceObserver(
+        /// <exception cref="ArgumentNullException">The action is null.</exception>
+        internal PropertyReferenceGetterObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action action)
-            : base(parameter1, parameter2, propertyExpression) =>
+            [NotNull] Action<TResult> action)
+            : base(parameter1, parameter2, propertyExpression)
+        {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.getter = ExpressionGetter.CreateReferenceGetter(propertyExpression);
+        }
 
         /// <summary>
-        ///     On the action.
+        ///     The action.
         /// </summary>
-        protected override void OnAction() => this.action();
+        protected override void OnAction() => this.action(this.getter(this.Parameter1, this.Parameter2));
     }
 }
