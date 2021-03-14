@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Anori.Common" Version="1.0.0-alpha0001" />
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
@@ -28,10 +27,12 @@
 
   <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
     <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0008" />
+    <PackageReference Include="Anori.Common" Version="1.0.0-alpha0001" />
   </ItemGroup>
 
   <ItemGroup Condition="($(Configuration.Contains('Submodules')))">
     <ProjectReference Include="$(SolutionDir)..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
+    <ProjectReference Include="$(SolutionDir)..\Submodules\Anori.Common\Source\Anori.Common\Anori.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
