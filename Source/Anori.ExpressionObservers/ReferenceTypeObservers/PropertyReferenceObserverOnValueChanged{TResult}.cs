@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
