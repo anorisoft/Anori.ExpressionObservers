@@ -10,6 +10,8 @@ namespace Anori.ExpressionObservers.Observers
     using System.ComponentModel;
     using System.Reflection;
 
+    using Anori.Extensions;
+
     /// <summary>
     ///     Represents each node of nested properties expression and takes care of
     ///     subscribing/unsubscribing INotifyPropertyChanged.PropertyChanged listeners on it.
@@ -37,7 +39,7 @@ namespace Anori.ExpressionObservers.Observers
             this.PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
             this.action = () =>
                 {
-                    action?.Invoke();
+                    action.Raise();
                     if (this.Previous == null)
                     {
                         return;
@@ -126,7 +128,7 @@ namespace Anori.ExpressionObservers.Observers
         {
             if (e?.PropertyName == this.PropertyInfo.Name || string.IsNullOrEmpty(e?.PropertyName))
             {
-                this.action?.Invoke();
+                this.action.Raise();
             }
         }
     }
