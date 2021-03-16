@@ -1,24 +1,24 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IExpressionTree.cs" company="AnoriSoft">
+// <copyright file="IParameterNode.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Nodes
+namespace Anori.ExpressionObservers.Interfaces
 {
-    using System.Collections.Generic;
+    using System.Linq.Expressions;
 
     /// <summary>
-    ///     Expression Tree Interface.
+    /// The Parameter Node interface.
     /// </summary>
-    public interface IExpressionTree
+    public interface IParameterNode : IExpressionNode
     {
         /// <summary>
-        ///     Gets the roots.
+        ///     Gets the expression.
         /// </summary>
         /// <value>
-        ///     The roots.
+        ///     The expression.
         /// </value>
-        IList<IExpressionNode> Roots { get; }
+        ParameterExpression Expression { get; }
     }
 }

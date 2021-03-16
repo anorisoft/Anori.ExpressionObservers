@@ -11,17 +11,21 @@ namespace Anori.ExpressionObservers.Observers
     using System.ComponentModel;
     using System.Linq;
 
+    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
 
     /// <summary>
     ///     Property Observer Base.
     /// </summary>
-    /// <seealso cref="System.Collections.Generic.IEqualityComparer{Anori.ExpressionObservers.Observers.PropertyObserverBase}" />
-    /// <seealso cref="System.IDisposable" />
-    /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Observers.PropertyObserverBase}" />
+    /// <seealso cref="IEqualityComparer{T}" />
+    /// <seealso cref="IEquatable{T}" />
+    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="IDisposable" />
+#pragma warning disable S4035 // Classes implementing "IEquatable<T>" should be sealed
     public abstract class PropertyObserverBase : IDisposable,
                                                  IEqualityComparer<PropertyObserverBase>,
                                                  IEquatable<PropertyObserverBase>
+#pragma warning restore S4035 // Classes implementing "IEquatable<T>" should be sealed
     {
         private bool isSubscribe;
 
@@ -49,12 +53,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator ==(PropertyObserverBase a, PropertyObserverBase b)
-        {
-            return Equals(a, b);
-        }
-
-        public static bool operator ==(PropertyObserverBase a, object b)
+        public static bool operator ==(PropertyObserverBase? a, PropertyObserverBase? b)
         {
             return Equals(a, b);
         }
@@ -70,6 +69,19 @@ namespace Anori.ExpressionObservers.Observers
         public static bool operator !=(PropertyObserverBase a, PropertyObserverBase b)
         {
             return !a.Equals(b);
+        }
+
+        /// <summary>
+        ///     Implements the operator ==.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator ==(PropertyObserverBase a, object b)
+        {
+            return Equals(a, b);
         }
 
         /// <summary>
@@ -93,7 +105,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
-        public static bool Equals(PropertyObserverBase x, PropertyObserverBase y)
+        public static bool Equals(PropertyObserverBase? x, PropertyObserverBase? y)
         {
             if (ReferenceEquals(x, y))
             {
@@ -129,13 +141,22 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
         ///     Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>
         ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
         /// </returns>
-        public bool Equals(PropertyObserverBase other)
+        public bool Equals(PropertyObserverBase? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -157,7 +178,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
             {
@@ -190,28 +211,6 @@ namespace Anori.ExpressionObservers.Observers
                 return ((this.RootNodes != null ? this.RootNodes.GetHashCode() : 0) * 397)
                        ^ (this.ExpressionString != null ? this.ExpressionString.GetHashCode() : 0);
             }
-        }
-
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        ///     Determines whether the specified objects are equal.
-        /// </summary>
-        /// <param name="x">The first object of type T to compare.</param>
-        /// <param name="y">The second object of type T to compare.</param>
-        /// <returns>
-        ///     true if the specified objects are equal; otherwise, false.
-        /// </returns>
-        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase x, PropertyObserverBase y)
-        {
-            return Equals(x, y);
         }
 
         /// <summary>
@@ -283,6 +282,19 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
+        ///     Determines whether the specified objects are equal.
+        /// </summary>
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        ///     true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y)
+        {
+            return Equals(x, y);
+        }
+
+        /// <summary>
         ///     Looptrees the specified expression node.
         /// </summary>
         /// <param name="expressionNode">The expression node.</param>
@@ -299,11 +311,6 @@ namespace Anori.ExpressionObservers.Observers
                 expressionNode = expressionNode.Next;
             }
         }
-
-        /// <summary>
-        ///     The action.
-        /// </summary>
-        protected abstract void OnAction();
 
         /// <summary>
         ///     Creates the chain.
@@ -360,7 +367,7 @@ namespace Anori.ExpressionObservers.Observers
                             var root = new RootPropertyObserverNode(
                                 propertyElement.PropertyInfo,
                                 this.OnAction,
-                                (INotifyPropertyChanged)constantElement.Value);
+                                (INotifyPropertyChanged)constantElement.Value!);
 
                             this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
@@ -412,7 +419,7 @@ namespace Anori.ExpressionObservers.Observers
                             var root = new RootPropertyObserverNode(
                                 propertyElement.PropertyInfo,
                                 this.OnAction,
-                                (INotifyPropertyChanged)constantElement.Value);
+                                (INotifyPropertyChanged)constantElement.Value!);
 
                             this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
@@ -440,5 +447,10 @@ namespace Anori.ExpressionObservers.Observers
                 this.Unsubscribe();
             }
         }
+
+        /// <summary>
+        ///     The action.
+        /// </summary>
+        protected abstract void OnAction();
     }
 }

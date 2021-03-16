@@ -8,12 +8,14 @@ namespace Anori.ExpressionObservers.Nodes
 {
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
+
     using JetBrains.Annotations;
 
     /// <summary>
     ///     Member Assignment Node.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IBindingNode" />
+    /// <seealso cref="IBindingNode" />
     internal readonly struct MemberAssignmentNode : IBindingNode
     {
         /// <summary>
@@ -21,7 +23,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// </summary>
         /// <param name="memberAssignment">The member assignment.</param>
         /// <param name="nodes">The nodes.</param>
-        public MemberAssignmentNode([NotNull] MemberAssignment memberAssignment, [NotNull] NodeCollection nodes)
+        public MemberAssignmentNode([NotNull] MemberAssignment memberAssignment, [NotNull] INodeCollection nodes)
         {
             this.MemberAssignment = memberAssignment;
             this.Nodes = nodes;
@@ -43,7 +45,7 @@ namespace Anori.ExpressionObservers.Nodes
         ///     The nodes.
         /// </value>
         [NotNull]
-        public NodeCollection Nodes { get; }
+        public INodeCollection Nodes { get; }
 
         /// <summary>
         ///     Gets the binding.

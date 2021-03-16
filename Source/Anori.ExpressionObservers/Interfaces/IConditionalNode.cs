@@ -1,50 +1,51 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IBinaryNode.cs" company="AnoriSoft">
+// <copyright file="IConditionalNode.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Nodes
+namespace Anori.ExpressionObservers.Interfaces
 {
-    using System;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Nodes;
+
     /// <summary>
-    /// Binary Node Interface.
+    /// The Conditional Node interface.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
-    public interface IBinaryNode : IExpressionNode
+    public interface IConditionalNode : IExpressionNode
     {
         /// <summary>
-        ///     Gets the binary expression.
+        ///     Gets the conditional expression.
         /// </summary>
         /// <value>
-        ///     The binary expression.
+        ///     The conditional expression.
         /// </value>
-        BinaryExpression BinaryExpression { get; }
+        ConditionalExpression ConditionalExpression { get; }
 
         /// <summary>
-        ///     Gets the type of the node.
+        ///     Gets the test.
         /// </summary>
         /// <value>
-        ///     The type of the node.
+        ///     The test.
         /// </value>
-        ExpressionType NodeType { get; }
+        INodeCollection Test { get;  }
 
         /// <summary>
-        ///     Gets the left nodes.
+        ///     Gets if true.
         /// </summary>
         /// <value>
-        ///     The left nodes.
+        ///     If true.
         /// </value>
-        INodeCollection LeftNodes { get; }
+        INodeCollection IfTrue { get;  }
 
         /// <summary>
-        ///     Gets the righttree.
+        ///     Gets if false.
         /// </summary>
         /// <value>
-        ///     The righttree.
+        ///     If false.
         /// </value>
-        INodeCollection RightNodes { get; }
+        INodeCollection IfFalse { get; }
     }
 }

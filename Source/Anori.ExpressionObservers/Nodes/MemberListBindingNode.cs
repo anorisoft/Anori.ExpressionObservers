@@ -9,12 +9,14 @@ namespace Anori.ExpressionObservers.Nodes
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
+
     using JetBrains.Annotations;
 
     /// <summary>
     ///     Member List Binding Node.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IBindingNode" />
+    /// <seealso cref="IBindingNode" />
     internal readonly struct MemberListBindingNode : IBindingNode
     {
         /// <summary>

@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Nodes
+namespace Anori.ExpressionObservers.Interfaces
 {
     using System;
 
@@ -31,7 +31,7 @@ namespace Anori.ExpressionObservers.Nodes
         ///     The previous.
         /// </value>
         [CanBeNull]
-        IExpressionNode Previous { get; }
+        IExpressionNode? Previous { get; }
 
         /// <summary>
         ///     Gets the next.
@@ -40,7 +40,7 @@ namespace Anori.ExpressionObservers.Nodes
         ///     The next.
         /// </value>
         [CanBeNull]
-        IExpressionNode Next { get; }
+        IExpressionNode? Next { get; }
 
         /// <summary>
         ///     Gets the parent.
@@ -49,6 +49,6 @@ namespace Anori.ExpressionObservers.Nodes
         ///     The parent.
         /// </value>
         [CanBeNull]
-        IExpressionNode Parent { get; }
+        IExpressionNode? Parent { get; }
     }
 }

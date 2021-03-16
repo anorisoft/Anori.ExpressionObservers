@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers
     using System.Linq;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
     using Anori.Extensions;
 
@@ -117,7 +118,7 @@ namespace Anori.ExpressionObservers
         /// <param name="resultParameter">The result parameter.</param>
         /// <returns>The expression.</returns>
         [NotNull]
-        internal static Expression CreateParameterBody(ParameterNode resultParameter)
+        internal static Expression CreateParameterBody(IParameterNode resultParameter)
         {
             var body = resultParameter.Expression;
             return body;

@@ -38,17 +38,17 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <summary>
         ///     The value.
         /// </summary>
-        private TResult value;
+        private TResult? value;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TaskScheduler taskScheduler = null)
+            TaskScheduler? taskScheduler = null)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var tree = ExpressionTree.GetTree(propertyExpression.Body);
@@ -71,7 +71,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets the expression string.
@@ -87,12 +87,12 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <value>
         ///     The value.
         /// </value>
-        public TResult Value
+        public TResult? Value
         {
             get => this.value;
             private set
             {
-                if (EqualityComparer<TResult>.Default.Equals(value, this.value))
+                if (EqualityComparer<TResult?>.Default.Equals(value, this.value))
                 {
                     return;
                 }
@@ -112,7 +112,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

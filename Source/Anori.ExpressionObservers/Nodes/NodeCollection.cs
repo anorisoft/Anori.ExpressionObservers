@@ -9,21 +9,23 @@ namespace Anori.ExpressionObservers.Nodes
     using System.Collections.Generic;
     using System.Linq;
 
+    using Anori.ExpressionObservers.Interfaces;
+
     using JetBrains.Annotations;
 
     /// <summary>
-        ///     Expression Tree Node Collection.
-        /// </summary>
-        /// <seealso cref="System.Collections.Generic.List{Anori.ExpressionObservers.Nodes.IExpressionNode}" />
-        /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionTree" />
-        public class NodeCollection : List<IExpressionNode>, INodeCollection
+    ///     Expression Tree Node Collection.
+    /// </summary>
+    /// <seealso cref="IExpressionNode" />
+    /// <seealso cref="IExpressionTree" />
+    internal class NodeCollection : List<IExpressionNode>, INodeCollection
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="NodeCollection" /> class.
         /// </summary>
         /// <param name="expressionTree">The expression tree.</param>
         /// <param name="parent">The parent.</param>
-        public NodeCollection([NotNull] IExpressionTree expressionTree, [NotNull] IExpressionNode parent)
+        public NodeCollection([NotNull] IExpressionTree expressionTree, IExpressionNode? parent)
         {
             this.ExpressionTree = expressionTree;
             this.Parent = parent;
@@ -44,7 +46,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The parent.
         /// </value>
-        public IExpressionNode Parent { get; }
+        public IExpressionNode? Parent { get; }
 
         /// <summary>
         ///     Gets the roots.

@@ -41,18 +41,18 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached = false,
             LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None,
-            TaskScheduler taskScheduler = null)
+            TaskScheduler? taskScheduler = null)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var tree = ExpressionTree.GetTree(propertyExpression.Body);
@@ -93,7 +93,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets the expression string.
@@ -119,7 +119,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

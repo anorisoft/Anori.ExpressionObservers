@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
 
     using JetBrains.Annotations;
@@ -229,7 +230,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         [CanBeNull]
         public static Func<TParameter1, TParameter2, object> CreateParameterGetter<TParameter1, TParameter2, TResult>(
-            ParameterNode parameter,
+            IParameterNode parameter,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression)
         {
             var parameters = expression.Parameters;

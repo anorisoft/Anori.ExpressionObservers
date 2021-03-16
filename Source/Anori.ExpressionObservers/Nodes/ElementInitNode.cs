@@ -9,6 +9,8 @@ namespace Anori.ExpressionObservers.Nodes
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -21,7 +23,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// </summary>
         /// <param name="elementInit">The element initialize.</param>
         /// <param name="arguments">The arguments.</param>
-        public ElementInitNode([NotNull] ElementInit elementInit, IEnumerable<NodeCollection> arguments)
+        public ElementInitNode([NotNull] ElementInit elementInit, IEnumerable<INodeCollection> arguments)
         {
             this.ElementInit = elementInit;
             this.Arguments = arguments;
@@ -41,6 +43,6 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The arguments.
         /// </value>
-        public IEnumerable<NodeCollection> Arguments { get; }
+        public IEnumerable<INodeCollection> Arguments { get; }
     }
 }

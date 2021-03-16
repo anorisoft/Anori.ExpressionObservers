@@ -54,7 +54,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached = false,
             LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None,
-            TaskScheduler taskScheduler = null)
+            TaskScheduler? taskScheduler = null)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var tree = ExpressionTree.GetTree(propertyExpression.Body);
@@ -95,7 +95,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets the expression string.
@@ -121,7 +121,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

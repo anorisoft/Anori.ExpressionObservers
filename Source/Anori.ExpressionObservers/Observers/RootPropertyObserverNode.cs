@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyInfo">The property information.</param>
         /// <param name="action">The action.</param>
         /// <param name="parameter">The parameter.</param>
-        public RootPropertyObserverNode(PropertyInfo propertyInfo, Action action, object parameter)
+        public RootPropertyObserverNode(PropertyInfo propertyInfo, Action action, object? parameter)
             : base(propertyInfo, action) =>
             this.Parameter = parameter;
 
@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <value>
         ///     The parameter.
         /// </value>
-        public object Parameter { get; }
+        public object? Parameter { get; }
 
         /// <summary>
         ///     Subscribes the listener for parameter.
@@ -53,7 +53,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
         /// </returns>
-        public bool Equals(RootPropertyObserverNode other)
+        public bool Equals(RootPropertyObserverNode? other)
         {
             if (other is null)
             {
@@ -75,7 +75,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is null)
             {

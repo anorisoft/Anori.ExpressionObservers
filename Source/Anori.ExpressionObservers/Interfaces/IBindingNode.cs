@@ -4,12 +4,12 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Nodes
+namespace Anori.ExpressionObservers.Interfaces
 {
     /// <summary>
     ///     Binding Node Interface.
     /// </summary>
-    internal interface IBindingNode
+    public interface IBindingNode
     {
     }
 }

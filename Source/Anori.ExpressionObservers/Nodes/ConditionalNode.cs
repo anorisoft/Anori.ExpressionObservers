@@ -9,13 +9,15 @@ namespace Anori.ExpressionObservers.Nodes
     using System;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
+
     using JetBrains.Annotations;
 
     /// <summary>
     ///     Conditional Node.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
-    internal struct ConditionalNode : IInternalExpressionNode
+    /// <seealso cref="IExpressionNode" />
+    internal struct ConditionalNode : IInternalExpressionNode, IConditionalNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ConditionalNode" /> struct.
@@ -24,9 +26,9 @@ namespace Anori.ExpressionObservers.Nodes
         public ConditionalNode([NotNull] ConditionalExpression conditionalExpression)
         {
             this.ConditionalExpression = conditionalExpression;
-            this.Test = null;
-            this.IfTrue = null;
-            this.IfFalse = null;
+            this.Test = null!;
+            this.IfTrue = null!;
+            this.IfFalse = null!;
             this.Type = conditionalExpression.Type;
             this.Previous = null;
             this.Next = null;
@@ -47,7 +49,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The test.
         /// </value>
-        public NodeCollection Test { get; set; }
+        public INodeCollection Test { get; set; }
 
         /// <summary>
         ///     Gets or sets if true.
@@ -55,7 +57,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     If true.
         /// </value>
-        public NodeCollection IfTrue { get; set; }
+        public INodeCollection IfTrue { get; set; }
 
         /// <summary>
         ///     Gets or sets if false.
@@ -63,7 +65,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     If false.
         /// </value>
-        public NodeCollection IfFalse { get; set; }
+        public INodeCollection IfFalse { get; set; }
 
         /// <summary>
         ///     Gets the type.
@@ -79,7 +81,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The previous.
         /// </value>
-        public IExpressionNode Previous { get; private set; }
+        public IExpressionNode? Previous { get; private set; }
 
         /// <summary>
         ///     Gets the next.
@@ -87,7 +89,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The next.
         /// </value>
-        public IExpressionNode Next { get; private set; }
+        public IExpressionNode? Next { get; private set; }
 
         /// <summary>
         ///     Gets the parent.
@@ -95,24 +97,24 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The parent.
         /// </value>
-        public IExpressionNode Parent { get; private set; }
+        public IExpressionNode? Parent { get; private set; }
 
         /// <summary>
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetPrevious(IExpressionNode node) => this.Previous = node;
+        void IInternalExpressionNode.SetPrevious(IExpressionNode? node) => this.Previous = node;
 
         /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetNext(IExpressionNode node) => this.Next = node;
+        void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
 
         /// <summary>
         ///     Sets the parent.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetParent(IExpressionNode node) => this.Parent = node;
+        void IInternalExpressionNode.SetParent(IExpressionNode? node) => this.Parent = node;
     }
 }

@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers.Observers
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
 
     using JetBrains.Annotations;
@@ -163,7 +164,7 @@ namespace Anori.ExpressionObservers.Observers
                             var root = new RootPropertyObserverNode(
                                 propertyElement.PropertyInfo,
                                 this.OnAction,
-                                (INotifyPropertyChanged)constantElement.Value);
+                                (INotifyPropertyChanged)constantElement.Value!);
 
                             this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);

@@ -9,6 +9,8 @@ namespace Anori.ExpressionObservers.Nodes
     using System;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -18,15 +20,15 @@ namespace Anori.ExpressionObservers.Nodes
     internal struct BinaryNode : IInternalExpressionNode, IBinaryNode
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="BinaryNode" /> struct.
+        /// Initializes a new instance of the <see cref="BinaryNode" /> struct.
         /// </summary>
         /// <param name="binaryExpression">The binary expression.</param>
         public BinaryNode([NotNull] BinaryExpression binaryExpression)
         {
             this.BinaryExpression = binaryExpression;
             this.NodeType = binaryExpression.NodeType;
-            this.LeftNodes = null;
-            this.RightNodes = null;
+            this.LeftNodes = null!;
+            this.RightNodes = null!;
             this.Type = binaryExpression.Type;
             this.Previous = null;
             this.Next = null;
@@ -55,7 +57,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The previous.
         /// </value>
-        public IExpressionNode Previous { get; private set; }
+        public IExpressionNode? Previous { get; private set; }
 
         /// <summary>
         ///     Gets the next.
@@ -63,7 +65,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The next.
         /// </value>
-        public IExpressionNode Next { get; private set; }
+        public IExpressionNode? Next { get; private set; }
 
         /// <summary>
         ///     Gets the parent.
@@ -71,7 +73,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The parent.
         /// </value>
-        public IExpressionNode Parent { get; private set; }
+        public IExpressionNode? Parent { get; private set; }
 
         /// <summary>
         ///     Gets the type of the node.
@@ -101,18 +103,18 @@ namespace Anori.ExpressionObservers.Nodes
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetPrevious(IExpressionNode node) => this.Previous = node;
+        void IInternalExpressionNode.SetPrevious(IExpressionNode? node) => this.Previous = node;
 
         /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetNext(IExpressionNode node) => this.Next = node;
+        void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
 
         /// <summary>
         ///     Sets the parent.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetParent(IExpressionNode node) => this.Parent = node;
+        void IInternalExpressionNode.SetParent(IExpressionNode? node) => this.Parent = node;
     }
 }

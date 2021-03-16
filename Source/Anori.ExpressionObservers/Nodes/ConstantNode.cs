@@ -9,13 +9,15 @@ namespace Anori.ExpressionObservers.Nodes
     using System;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
+
     using JetBrains.Annotations;
 
     /// <summary>
     ///     Constant Expressen Tree Node.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IInternalExpressionNode" />
-    internal struct ConstantNode : IInternalExpressionNode
+    /// <seealso cref="IInternalExpressionNode" />
+    internal struct ConstantNode : IInternalExpressionNode, IConstantNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ConstantNode" /> struct.
@@ -36,7 +38,6 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The expression.
         /// </value>
-        [NotNull]
         public ConstantExpression Expression { get; }
 
         /// <summary>
@@ -45,8 +46,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The value.
         /// </value>
-        [CanBeNull]
-        public object Value => this.Expression.Value;
+        public object? Value => this.Expression.Value;
 
         /// <summary>
         ///     Gets the type.
@@ -62,7 +62,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The previous.
         /// </value>
-        public IExpressionNode Previous { get; private set; }
+        public IExpressionNode? Previous { get; private set; }
 
         /// <summary>
         ///     Gets the next.
@@ -70,7 +70,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The next.
         /// </value>
-        public IExpressionNode Next { get; private set; }
+        public IExpressionNode? Next { get; private set; }
 
         /// <summary>
         ///     Gets the parent.
@@ -78,24 +78,24 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The parent.
         /// </value>
-        public IExpressionNode Parent { get; private set; }
+        public IExpressionNode? Parent { get; private set; }
 
         /// <summary>
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetPrevious(IExpressionNode node) => this.Previous = node;
+        void IInternalExpressionNode.SetPrevious(IExpressionNode? node) => this.Previous = node;
 
         /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetNext(IExpressionNode node) => this.Next = node;
+        void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
 
         /// <summary>
         ///     Sets the parent.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetParent(IExpressionNode node) => this.Parent = node;
+        void IInternalExpressionNode.SetParent(IExpressionNode? node) => this.Parent = node;
     }
 }

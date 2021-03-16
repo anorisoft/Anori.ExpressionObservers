@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Nodes
+namespace Anori.ExpressionObservers.Interfaces
 {
     using JetBrains.Annotations;
 
@@ -18,18 +18,18 @@ namespace Anori.ExpressionObservers.Nodes
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void SetPrevious([CanBeNull] IExpressionNode node);
+        void SetPrevious(IExpressionNode? node);
 
         /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void SetNext([CanBeNull] IExpressionNode node);
+        void SetNext(IExpressionNode? node);
 
         /// <summary>
         ///     Sets the parent.
         /// </summary>
         /// <param name="node">The node.</param>
-        void SetParent([CanBeNull] IExpressionNode node);
+        void SetParent(IExpressionNode? node);
     }
 }
