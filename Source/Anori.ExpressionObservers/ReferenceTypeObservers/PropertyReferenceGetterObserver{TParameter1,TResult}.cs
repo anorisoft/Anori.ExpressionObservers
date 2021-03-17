@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Observers;
 
     using JetBrains.Annotations;
@@ -19,7 +20,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{TParameter1, TResult}" />
+    /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
     public sealed class PropertyReferenceGetterObserver<TParameter1, TResult> : PropertyObserverBase<
         PropertyReferenceGetterObserver<TParameter1, TResult>, TParameter1, TResult>
         where TParameter1 : INotifyPropertyChanged

@@ -16,6 +16,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ReferenceTypeObservers\PropertyReferenceObserver{TParameter1,TParameter2,TResult}.cs" />
+    <Compile Remove="ReferenceTypeObservers\PropertyReferenceObserver{TParameter1,TResult}.cs" />
+    <Compile Remove="ReferenceTypeObservers\PropertyReferenceObserver{TResult}.cs" />
+    <Compile Remove="ValueTypeObservers\PropertyValueObserver{TParameter1,TParameter2,TResult}.cs" />
+    <Compile Remove="ValueTypeObservers\PropertyValueObserver{TParameter1,TResult}.cs" />
+    <Compile Remove="ValueTypeObservers\PropertyValueObserver{TResult}.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
@@ -26,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
-    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0008" />
+    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0009" />
     <PackageReference Include="Anori.Common" Version="1.0.0-alpha0002" />
   </ItemGroup>
 
@@ -40,6 +49,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,9 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Observers;
+    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -17,7 +19,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     ///     Property Reference Observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverBase" />
     public sealed class
         PropertyReferenceObserverWithGetterAndFallback<TResult> : PropertyObserverBase<
             PropertyReferenceObserverWithGetterAndFallback<TResult>>
@@ -71,7 +73,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult GetValue() => this.getter();
+        public TResult GeTResult() => this.getter();
 
         /// <summary>
         ///     On the action.

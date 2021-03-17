@@ -13,6 +13,9 @@ namespace Anori.ExpressionObservers
 
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
+    using Anori.ExpressionObservers.Tree;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.ExpressionObservers.Tree.Nodes;
     using Anori.Extensions;
 
     using JetBrains.Annotations;

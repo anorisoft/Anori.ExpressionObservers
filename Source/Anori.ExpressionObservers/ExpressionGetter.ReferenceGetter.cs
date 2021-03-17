@@ -12,6 +12,7 @@ namespace Anori.ExpressionObservers
 
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
+    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -113,6 +114,22 @@ namespace Anori.ExpressionObservers
             var parameters = expression.Parameters;
             var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body);
             var lambda = Expression.Lambda<Func<TParameter, TResult>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        [NotNull]
+        public static Func<TResult> CreateReferenceGetter<TResult>(
+            [NotNull] Expression<Func<TResult>> expression)
+            where TResult : class
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var parameters = expression.Parameters;
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body);
+            var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
             return lambda.Compile();
         }
 
