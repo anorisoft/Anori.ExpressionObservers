@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.Nodes
     using System.Reflection;
 
     using Anori.Common;
+    using Anori.Extensions;
 
     /// <summary>
     ///     Represents each node of nested properties expression and takes care of
