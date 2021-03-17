@@ -10,7 +10,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Observers;
+    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -19,7 +21,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverBase" />
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyValueObserverWithGetterAndFallback<TParameter1, TResult> : PropertyObserverBase<
         PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>>
@@ -94,7 +96,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <returns>
         ///     The result value.
         /// </returns>
-        public TResult GetValue() => this.getter(this.Parameter);
+        public TResult GeTResult() => this.getter(this.Parameter);
 
         /// <summary>
         ///     On the action.

@@ -13,7 +13,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Threading.Tasks;
 
     using Anori.Common;
+    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Observers;
+    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -21,7 +23,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnNotifyProperyChanged{TResult}}" />
+    /// <seealso cref="PropertyObserverBase{TSelf}.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnNotifyProperyChanged{TResult}}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public sealed class PropertyValueObserverOnNotifyProperyChanged<TResult> :
         PropertyObserverBase<PropertyValueObserverOnNotifyProperyChanged<TResult>>,

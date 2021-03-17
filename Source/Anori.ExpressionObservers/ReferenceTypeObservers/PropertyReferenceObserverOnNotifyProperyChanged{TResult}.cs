@@ -13,7 +13,9 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Threading.Tasks;
 
     using Anori.Common;
+    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Observers;
+    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -24,7 +26,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <seealso
     ///     cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="Anori.ExpressionObservers.Observers.PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyReferenceObserverOnNotifyProperyChanged<TResult> :
         PropertyObserverBase<PropertyReferenceObserverOnNotifyProperyChanged<TResult>>,
         INotifyPropertyChanged
