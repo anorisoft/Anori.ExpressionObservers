@@ -14,7 +14,8 @@ BuildParameters.SetParameters(
     shouldRunDupFinder: false,
     shouldRunCodecov: false,
     shouldRunCoveralls: true,
-    shouldRunDotNetCorePack: true);
+    shouldRunDotNetCorePack: true,
+    resharperSettingsFileName: "AnoriSoft.DotSettings");
 
 BuildParameters.PrintParameters(Context);
 

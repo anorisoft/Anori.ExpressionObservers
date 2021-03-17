@@ -29,9 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soution Items", "Soution Items", "{8D68EC6D-D06D-4979-AC83-0A90093F0D61}"
-	ProjectSection(SolutionItems) = preProject
-		..\nuspec\nuget\Anori.ExpressionObservers.nuspec = ..\nuspec\nuget\Anori.ExpressionObservers.nuspec
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodule", "Submodule", "{221613C9-C2BB-4707-B345-53D377E8E39F}"
 EndProject
