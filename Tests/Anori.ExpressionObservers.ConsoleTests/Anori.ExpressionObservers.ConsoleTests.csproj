@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0009" />
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
   </ItemGroup>
 

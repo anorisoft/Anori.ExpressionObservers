@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0009" />
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
@@ -16,6 +17,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Anori.ExpressionObservers\Anori.ExpressionObservers.csproj" />
-    <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
   </ItemGroup>
+
+  <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
+    <PackageReference Include="Anori.Common" Version="1.0.0-alpha0004" />
+    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0009" />
+  </ItemGroup>
+
+  <ItemGroup Condition="($(Configuration.Contains('Submodules')))">
+    <ProjectReference Include="$(SolutionDir)..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
+    <ProjectReference Include="$(SolutionDir)..\Submodules\Anori.Common\Source\Anori.Common\Anori.Common.csproj" />
+  </ItemGroup>
+
 </Project>

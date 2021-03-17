@@ -241,15 +241,14 @@ namespace Anori.ExpressionObservers
 
 
         /// <summary>
-        ///     Creates the parameter getter.
+        /// Creates the parameter getter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameter">The parameter.</param>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The getter.
+        /// The getter.
         /// </returns>
         [CanBeNull]
         public static Func<TParameter1, object> CreateParameterGetter<TParameter1, TResult>(

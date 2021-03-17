@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers.Observers
     using System.ComponentModel;
     using System.Reflection;
 
-    using Anori.Extensions;
+    using Anori.Common;
 
     /// <summary>
     ///     Represents each node of nested properties expression and takes care of
