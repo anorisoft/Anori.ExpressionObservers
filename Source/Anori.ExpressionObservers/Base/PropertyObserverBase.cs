@@ -319,7 +319,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="tree">The nodes.</param>
         /// <exception cref="NotSupportedException">Expression Tree Node not supported.</exception>
-        protected void CreateChain(INotifyPropertyChanged parameter1, IExpressionTree tree)
+        protected void CreateChain(INotifyPropertyChanged parameter1, IRootAweare tree)
         {
             foreach (var treeRoot in tree.Roots)
             {
@@ -387,13 +387,13 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         /// <param name="tree">The nodes.</param>
         /// <exception cref="System.NotSupportedException">Expression Tree Node not supported.</exception>
-        protected void CreateChain(IExpressionTree tree)
+        protected void CreateChain(IRootAweare tree)
         {
             foreach (var treeRoot in tree.Roots)
             {
                 switch (treeRoot)
                 {
-                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
+                   case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
                         {
                             if (!(fieldElement.Next is PropertyNode propertyElement))
                             {

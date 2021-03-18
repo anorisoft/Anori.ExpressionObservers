@@ -22,7 +22,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyValueObserverWithGetterAndFallback<TParameter1, TResult> : PropertyObserverBase<
         PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>>
         where TResult : struct
@@ -96,7 +95,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <returns>
         ///     The result value.
         /// </returns>
-        public TResult GeTResult() => this.getter(this.Parameter);
+        public TResult GetValue() => this.getter(this.Parameter);
 
         /// <summary>
         ///     On the action.

@@ -45,10 +45,8 @@ namespace Anori.ExpressionObservers.Observers
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action action)
-            : base(parameter1, parameter2, propertyExpression)
-        {
+            : base(parameter1, parameter2, propertyExpression) =>
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-        }
 
         /// <summary>
         ///     The on action.

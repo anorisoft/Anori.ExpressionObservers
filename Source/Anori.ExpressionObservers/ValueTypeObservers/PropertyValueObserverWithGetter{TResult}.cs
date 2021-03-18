@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
@@ -73,7 +72,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <returns>
         ///     The result value.
         /// </returns>
-        public TResult? GeTResult() => this.getter();
+        public TResult? GetValue() => this.getter();
 
         /// <summary>
         ///     On the action.

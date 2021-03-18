@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers.Nodes
     using System.ComponentModel;
     using System.Reflection;
 
-    using Anori.Common;
     using Anori.Extensions;
 
     /// <summary>
@@ -27,7 +26,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <summary>
         ///     The notify property changed.
         /// </summary>
-        private INotifyPropertyChanged notifyPropertyChanged;
+        private INotifyPropertyChanged? notifyPropertyChanged;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyObserverNode" /> class.
@@ -57,7 +56,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The next.
         /// </value>
-        public PropertyObserverNode Previous { get; set; }
+        public PropertyObserverNode? Previous { get; set; }
 
         /// <summary>
         ///     Gets the property information.
@@ -114,10 +113,10 @@ namespace Anori.ExpressionObservers.Nodes
             {
                 throw new InvalidOperationException(
                     "Trying to subscribe PropertyChanged listener in object that "
-                    + $"owns '{this.Previous.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.");
+                    + $"owns '{this.Previous?.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.");
             }
 
-            this.Previous.SubscribeListenerFor(propertyChanged);
+            this.Previous?.SubscribeListenerFor(propertyChanged);
         }
 
         /// <summary>

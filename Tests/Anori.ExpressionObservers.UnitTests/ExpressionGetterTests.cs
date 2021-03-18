@@ -1,9 +1,10 @@
-using System;
-using System.Linq.Expressions;
 using Anori.ExpressionObservers.UnitTests.TestClasses;
 using Anori.Extensions;
 using Anori.PropertyChain.UnitTest;
 using NUnit.Framework;
+using System;
+using System.Linq.Expressions;
+
 // ReSharper disable RedundantAssignment
 // ReSharper disable ExpressionIsAlwaysNull
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
@@ -1356,7 +1357,6 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             TestClass2 test21 = null;
             var test22 = new TestClass2();
-            var x = ((TestClass1)null)?.Test2 ?? test21 ?? test22;
             var expected = test22;
             var getValue = ExpressionGetter.CreateReferenceGetter(
                 (TestClass1 t) => t.Test2 ?? test21 ?? test22);

@@ -12,8 +12,8 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     /// The Node Collection interface.
     /// </summary>
     /// <seealso cref="System.Collections.Generic.IList{Anori.ExpressionObservers.Interfaces.IExpressionNode}" />
-    /// <seealso cref="IExpressionTree" />
-    public interface INodeCollection : IList<IExpressionNode>, IExpressionTree
+    /// <seealso cref="IRootAweare" />
+    public interface INodeCollection : IList<IExpressionNode>, IRootAweare
     {
     }
 }

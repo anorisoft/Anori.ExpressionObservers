@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Tree;
+    using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -60,7 +61,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         public static Func<TResult?> CreateValueGetter<TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
-            [NotNull] ExpressionTree expressionTree)
+            [NotNull] IExpressionTree expressionTree)
             where TResult : struct
         {
             if (parameters == null)
@@ -94,7 +95,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         public static Func<TResult> CreateValueGetter<TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
-            [NotNull] ExpressionTree expressionTree,
+            [NotNull] IExpressionTree expressionTree,
             TResult fallback)
             where TResult : struct
         {
@@ -130,7 +131,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         public static Func<TParameter1, TResult> CreateValueGetter<TParameter1, TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
-            [NotNull] ExpressionTree expressionTree,
+            [NotNull] IExpressionTree expressionTree,
             TResult fallback)
             where TResult : struct
         {
@@ -146,6 +147,73 @@ namespace Anori.ExpressionObservers
 
             var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback));
             var lambda = Expression.Lambda<Func<TParameter1, TResult>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        /// Creates the value getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="expressionTree">The expression tree.</param>
+        /// <returns>The Getter.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// parameters or expressionTree is null.
+        /// </exception>
+        [NotNull]
+        public static Func<TParameter1, TResult?> CreateValueGetter<TParameter1, TResult>(
+           [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
+           [NotNull] IExpressionTree expressionTree)
+           where TResult : struct
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            if (expressionTree == null)
+            {
+                throw new ArgumentNullException(nameof(expressionTree));
+            }
+
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult?), expressionTree);
+            var lambda = Expression.Lambda<Func<TParameter1, TResult?>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        /// Creates the value getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="expressionTree">The expression tree.</param>
+        /// <returns>The Getter.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// parameters
+        /// or
+        /// expressionTree is null.
+        /// </exception>
+        [NotNull]
+        public static Func<TParameter1, TParameter2, TResult?> CreateValueGetter<TParameter1, TParameter2, TResult>(
+           [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
+           [NotNull] IExpressionTree expressionTree)
+           where TResult : struct
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            if (expressionTree == null)
+            {
+                throw new ArgumentNullException(nameof(expressionTree));
+            }
+
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult?), expressionTree);
+            var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult?>>(body, parameters);
             return lambda.Compile();
         }
 

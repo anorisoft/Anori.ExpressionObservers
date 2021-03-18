@@ -90,7 +90,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         internal static BlockExpression CreateValueBody(
             [NotNull] Type resultType,
-            [NotNull] ExpressionTree expressionTree)
+            [NotNull] IExpressionTree expressionTree)
         {
             var returnTarget = Expression.Label(resultType);
             var body = CreateValueBlock(resultType, expressionTree, returnTarget);
@@ -107,7 +107,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         internal static BlockExpression CreateValueBody(
             [NotNull] Type resultType,
-            [NotNull] ExpressionTree expressionTree,
+            [NotNull] IExpressionTree expressionTree,
             [NotNull] Expression fallback)
         {
             var returnTarget = Expression.Label(resultType);
@@ -139,20 +139,20 @@ namespace Anori.ExpressionObservers
         ///     Creates the value block.
         /// </summary>
         /// <param name="resultType">Type of the result.</param>
-        /// <param name="nodes">The nodes.</param>
+        /// <param name="tree">The nodes.</param>
         /// <param name="returnTarget">The return target.</param>
         /// <returns>The block expression.</returns>
         [NotNull]
         private static BlockExpression CreateValueBlock(
             [NotNull] Type resultType,
-            [NotNull] ExpressionTree nodes,
+            [NotNull] IExpressionTree tree,
             [NotNull] LabelTarget returnTarget)
         {
             var expressions = new List<Expression>();
             var variables = new VaribalesCollection();
             var ifNull = Expression.Return(returnTarget, NullExpressionOf(resultType));
 
-            CreateValueExpressions(resultType, nodes.Nodes, expressions, variables, ifNull, returnTarget);
+            CreateValueExpressions(resultType, tree.Nodes, expressions, variables, ifNull, returnTarget);
 
             expressions.Add(Expression.Label(returnTarget, NullExpressionOf(resultType)));
             var body = Expression.Block(variables, expressions);
@@ -170,7 +170,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static BlockExpression CreateValueBlock(
             [NotNull] Type resultType,
-            [NotNull] ExpressionTree nodes,
+            [NotNull] IExpressionTree nodes,
             [NotNull] LabelTarget returnTarget,
             [NotNull] Expression fallback)
         {

@@ -22,11 +22,11 @@ namespace Anori.ExpressionObservers.Tree
     /// <summary>
     ///     Expression Tree.
     /// </summary>
-    /// <seealso cref="IExpressionTree" />
+    /// <seealso cref="IRootAweare" />
     public class ExpressionTree : IExpressionTree
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ExpressionTree" /> class.
+        ///     Initializes a new instance of the <see cref="RootAweare" /> class.
         /// </summary>
         private ExpressionTree()
         {
@@ -54,7 +54,7 @@ namespace Anori.ExpressionObservers.Tree
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>The expression tree.</returns>
-        public static ExpressionTree GetTree(Expression expression)
+        public static IExpressionTree GetTree(Expression expression)
         {
             var tree = new ExpressionTree();
             tree.Nodes = GetTree(expression, tree, null);
@@ -94,7 +94,7 @@ namespace Anori.ExpressionObservers.Tree
         /// </exception>
         public static INodeCollection GetTree(
             [NotNull] Expression expression,
-            [NotNull] IExpressionTree expressionTree,
+            [NotNull] IRootAweare expressionTree,
             IExpressionNode? parent)
         {
             if (expression == null)
@@ -260,7 +260,7 @@ namespace Anori.ExpressionObservers.Tree
         /// <param name="node">The node.</param>
         /// <returns>The binding list.</returns>
         private static List<IBindingNode> CreateBindingtree(
-            IExpressionTree expressionTree,
+            IRootAweare expressionTree,
             IEnumerable<MemberBinding> bindings,
             MemberInitNode node)
         {

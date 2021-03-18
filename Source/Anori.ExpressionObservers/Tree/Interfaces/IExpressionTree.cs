@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     /// <summary>
     ///     Expression Tree Interface.
     /// </summary>
-    public interface IExpressionTree
+    public interface IRootAweare
     {
         /// <summary>
         ///     Gets the roots.
@@ -23,4 +23,21 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
         /// </value>
         IList<IExpressionNode> Roots { get; }
     }
+
+    /// <summary>
+    /// The I Expression Tree interface.
+    /// </summary>
+    /// <seealso cref="Anori.ExpressionObservers.Tree.Interfaces.IRootAweare" />
+    public interface IExpressionTree : IRootAweare
+    {
+        /// <summary>
+        /// Gets the nodes.
+        /// </summary>
+        /// <value>
+        /// The nodes.
+        /// </value>
+        INodeCollection Nodes { get;  }
+    }
+
+    
 }

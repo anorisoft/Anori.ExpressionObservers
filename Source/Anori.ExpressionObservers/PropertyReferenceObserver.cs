@@ -12,7 +12,6 @@ namespace Anori.ExpressionObservers
 
     using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.ReferenceTypeObservers;
-
     using JetBrains.Annotations;
 
     /// <summary>
@@ -35,6 +34,32 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TResult : class =>
             new PropertyObserver<TResult>(propertyExpression, action);
+
+        /// <summary>
+        /// Observeses the specified property expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
+        /// <param name="action">The action.</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static PropertyObserver<TResult> Observes<TResult>(
+         [NotNull] Expression<Func<TResult>> propertyExpression,
+         bool isAutoActivate,
+         [NotNull] Action action)
+         where TResult : class
+        {
+            var observer = new PropertyObserver<TResult>(propertyExpression, action);
+            if (isAutoActivate)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
 
         /// <summary>
         ///     Observeses the specified property expression.

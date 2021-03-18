@@ -35,11 +35,11 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <exception cref="System.ArgumentNullException">The action is null.</exception>
-        internal PropertyObserver([NotNull] Expression<Func<TResult>> propertyExpression, [NotNull] Action action)
-            : base(propertyExpression)
-        {
+        internal PropertyObserver(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action)
+            : base(propertyExpression) =>
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-        }
 
         /// <summary>
         ///     The action.

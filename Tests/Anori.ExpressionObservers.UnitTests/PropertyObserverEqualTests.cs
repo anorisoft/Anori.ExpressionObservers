@@ -56,13 +56,13 @@ namespace Anori.ExpressionObservers.UnitTests
             var notifyPropertyChangedTestObject =
                 new NotifyPropertyChangedTestObject { IntProperty = 1, BoolProperty = false };
             using var integerObserver = PropertyObserver.Observes(
-                notifyPropertyChangedTestObject.IntPropertyExpression,
-                () => actionIntegerRaised = true, false);
+                notifyPropertyChangedTestObject.IntPropertyExpression, false,
+                () => actionIntegerRaised = true);
             integerObserver.Subscribe(true);
 
             using var booleanObserver = PropertyObserver.Observes(
-                notifyPropertyChangedTestObject.BoolPropertyExpression,
-                () => actionBooleanRaised = true, false);
+                notifyPropertyChangedTestObject.BoolPropertyExpression, false,
+                () => actionBooleanRaised = true);
             booleanObserver.Subscribe(true);
 
             Assert.False(actionIntegerRaised);
