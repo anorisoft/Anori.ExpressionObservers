@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType Condition="($(Configuration.Contains('Debug')))">Exe</OutputType>
+    <OutputType Condition="($(Configuration.Contains('Submodules')))">Exe</OutputType>
     <TargetFrameworks>net48</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <IsPackable>false</IsPackable>
