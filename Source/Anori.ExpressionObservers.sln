@@ -52,6 +52,7 @@ Global
 		{C014B4C7-5708-45C8-8A88-90469EFA264F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C014B4C7-5708-45C8-8A88-90469EFA264F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C014B4C7-5708-45C8-8A88-90469EFA264F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C014B4C7-5708-45C8-8A88-90469EFA264F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D84FFB93-44E0-44A9-B94B-74BF2B7876EB}.Debug Submodules|Any CPU.ActiveCfg = Debug Submodules|Any CPU
 		{D84FFB93-44E0-44A9-B94B-74BF2B7876EB}.Debug Submodules|Any CPU.Build.0 = Debug Submodules|Any CPU
 		{D84FFB93-44E0-44A9-B94B-74BF2B7876EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
