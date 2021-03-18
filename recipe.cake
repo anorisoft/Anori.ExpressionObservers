@@ -6,6 +6,7 @@ BuildParameters.SetParameters(
     context: Context,
     buildSystem: BuildSystem,
     sourceDirectoryPath: "./Source",
+    solutionFilePath: "./Source/Anori.ExpressionObservers.sln",
     title: "Anori.ExpressionObservers",
     repositoryOwner: "anorisoft",
     repositoryName: "Anori.ExpressionObservers",
