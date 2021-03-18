@@ -8,15 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="PropertyChain - Copy.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0011" />
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Anori.ExpressionObservers\Anori.ExpressionObservers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
+    <PackageReference Include="Anori.Common" Version="1.0.0-alpha0005" />
+    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0011" />
+  </ItemGroup>
+
+  <ItemGroup Condition="($(Configuration.Contains('Submodules')))">
+    <ProjectReference Include="$(SolutionDir)..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
+    <ProjectReference Include="$(SolutionDir)..\Submodules\Anori.Common\Source\Anori.Common\Anori.Common.csproj" />
   </ItemGroup>
 </Project>
