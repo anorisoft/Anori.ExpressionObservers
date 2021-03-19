@@ -9,11 +9,11 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Collections.Generic;
 
     /// <summary>
-    /// The Node Collection interface.
+    ///     The Node Collection interface.
     /// </summary>
-    /// <seealso cref="System.Collections.Generic.IList{Anori.ExpressionObservers.Interfaces.IExpressionNode}" />
-    /// <seealso cref="IRootAweare" />
-    public interface INodeCollection : IList<IExpressionNode>, IRootAweare
+    /// <seealso cref="System.Collections.Generic.IList{Anori.ExpressionObservers.Tree.Interfaces.IExpressionNode}" />
+    /// <seealso cref="Anori.ExpressionObservers.Tree.Interfaces.IRootAware" />
+    public interface INodeCollection : IList<IExpressionNode>, IRootAware
     {
     }
 }

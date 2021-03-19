@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
 
     using JetBrains.Annotations;
 
@@ -61,6 +60,12 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = ExpressionGetter.CreateValueGetter(propertyExpression);
         }
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The result value.</returns>
+        public TResult? GetValue() => this.getter(this.Parameter1, this.Parameter2);
 
         /// <summary>
         ///     The action.

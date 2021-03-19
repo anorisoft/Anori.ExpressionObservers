@@ -10,8 +10,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
-    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -21,7 +19,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     public sealed class
-        PropertyValueGetterObserver<TResult> : PropertyObserverBase<PropertyValueGetterObserver<TResult>>
+        PropertyValueGetterObserver<TResult> : PropertyObserverBase<PropertyValueGetterObserver<TResult>, TResult>
         where TResult : struct
     {
         /// <summary>
@@ -49,23 +47,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         internal PropertyValueGetterObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
+            : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            this.ExpressionString = propertyExpression.ToString();
-
-            this.CreateChain(tree);
-            this.getter = ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
+            this.getter = ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, this.Tree);
         }
-
-        /// <summary>
-        ///     Gets the expression string.
-        /// </summary>
-        /// <value>
-        ///     The expression string.
-        /// </value>
-        public override string ExpressionString { get; }
 
         /// <summary>
         ///     Gets the value.

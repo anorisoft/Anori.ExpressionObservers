@@ -6,27 +6,25 @@
 
 namespace Anori.ExpressionObservers.Tree
 {
+    using Anori.ExpressionObservers.Exceptions;
+    using Anori.ExpressionObservers.Nodes;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.ExpressionObservers.Tree.Nodes;
+    using JetBrains.Annotations;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using Anori.ExpressionObservers.Exceptions;
-    using Anori.ExpressionObservers.Nodes;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.ExpressionObservers.Tree.Nodes;
-
-    using JetBrains.Annotations;
-
     /// <summary>
     ///     Expression Tree.
     /// </summary>
-    /// <seealso cref="IRootAweare" />
+    /// <seealso cref="IRootAware" />
     public class ExpressionTree : IExpressionTree
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RootAweare" /> class.
+        /// Prevents a default instance of the <see cref="ExpressionTree"/> class from being created.
         /// </summary>
         private ExpressionTree()
         {
@@ -94,7 +92,7 @@ namespace Anori.ExpressionObservers.Tree
         /// </exception>
         public static INodeCollection GetTree(
             [NotNull] Expression expression,
-            [NotNull] IRootAweare expressionTree,
+            [NotNull] IRootAware expressionTree,
             IExpressionNode? parent)
         {
             if (expression == null)
@@ -260,7 +258,7 @@ namespace Anori.ExpressionObservers.Tree
         /// <param name="node">The node.</param>
         /// <returns>The binding list.</returns>
         private static List<IBindingNode> CreateBindingtree(
-            IRootAweare expressionTree,
+            IRootAware expressionTree,
             IEnumerable<MemberBinding> bindings,
             MemberInitNode node)
         {

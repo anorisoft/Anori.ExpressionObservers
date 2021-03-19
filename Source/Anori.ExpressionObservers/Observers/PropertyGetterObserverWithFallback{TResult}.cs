@@ -1,35 +1,34 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyGetterObserverWithFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueTypeObservers
+namespace Anori.ExpressionObservers.Observers
 {
     using System;
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
-    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Observer With Getter And Fallback.
+    ///     Property Value Getter Observer.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyGetterObserverWithFallback{TResult}, TResult}" />
     /// <seealso cref="PropertyObserverBase" />
     public sealed class
-        PropertyValueObserverWithGetterAndFallback<TResult> : PropertyObserverBase<
-            PropertyValueObserverWithGetterAndFallback<TResult>>
-        where TResult : struct
+        PropertyGetterObserverWithFallback<TResult> : PropertyObserverBase<PropertyGetterObserverWithFallback<TResult>,
+            TResult>
     {
         /// <summary>
         ///     The action.
         /// </summary>
         [NotNull]
-        private readonly Action action;
+        private readonly Action<TResult> action;
 
         /// <summary>
         ///     The getter.
@@ -38,37 +37,25 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverWithGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyGetterObserverWithFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         ///     action
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal PropertyValueObserverWithGetterAndFallback(
+        internal PropertyGetterObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
+            [NotNull] Action<TResult> action,
             TResult fallback)
+            : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            this.ExpressionString = propertyExpression.ToString();
-
-            this.CreateChain(tree);
-            this.getter = ExpressionGetter.CreateValueGetter(propertyExpression.Parameters, tree, fallback);
+            this.getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
         }
-
-        /// <summary>
-        ///     Gets the expression string.
-        /// </summary>
-        /// <value>
-        ///     The expression string.
-        /// </value>
-        public override string ExpressionString { get; }
 
         /// <summary>
         ///     Gets the value.
@@ -79,6 +66,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.action();
+        protected override void OnAction() => this.action(this.getter());
     }
 }

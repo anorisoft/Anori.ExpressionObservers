@@ -943,11 +943,11 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void CreateValueGetter_Fallback_A_t_Property_Return1()
+        public void CreateGetter_Fallback_A_t_Property_Return1()
         {
             var test = CreateTestInstanceA();
             const int expected = 1;
-            var getValue = ExpressionGetter.CreateValueGetter(
+            var getValue = ExpressionGetter.CreateGetter(
                 (TestClass1 t) => t.IntProperty, 10);
             var actual = getValue(test);
 
@@ -1071,12 +1071,12 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void CreateReferenceGetter_Fallback_A_t_Property_null_Return10()
+        public void CreateGetter_Fallback_A_t_Property_null_Return10()
         {
             var test = CreateTestInstanceA();
             test = null;
             var expected = 10;
-            var getValue = ExpressionGetter.CreateValueGetter(
+            var getValue = ExpressionGetter.CreateGetter(
                 (TestClass1 t) => t.intProperty, 10);
             var actual = getValue(test);
 

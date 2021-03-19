@@ -1,18 +1,16 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverWithGetterAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverWithGetterAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueTypeObservers
+namespace Anori.ExpressionObservers.Observers
 {
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
-    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -20,12 +18,16 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     ///     Property Value Observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+    /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Observers.PropertyObserverWithGetterAndFallback{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverWithGetterAndFallback<TParameter1, TResult> : PropertyObserverBase<
-        PropertyValueObserverWithGetterAndFallback<TParameter1, TResult>>
+    public sealed class PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult> : PropertyObserverBase<
+        PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
+        where TParameter2 : INotifyPropertyChanged
     {
         /// <summary>
         ///     The action.
@@ -40,54 +42,37 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Func<TParameter1, TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverWithGetterAndFallback{TParameter1, TResult}" />
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithGetterAndFallback{TParameter1, TParameter2, TResult}" />
         ///     class.
         /// </summary>
-        /// <param name="parameter">The parameter.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="System.ArgumentNullException">
-        ///     parameter
+        /// <exception cref="ArgumentNullException">
+        ///     parameter1
         ///     or
         ///     action
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal PropertyValueObserverWithGetterAndFallback(
-            [NotNull] TParameter1 parameter,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+        internal PropertyObserverWithGetterAndFallback(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action action,
             TResult fallback)
+            : base(parameter1, parameter2, propertyExpression)
         {
-            this.Parameter = parameter ?? throw new ArgumentNullException(nameof(parameter));
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            this.ExpressionString = propertyExpression.ToString();
 
-            this.CreateChain(parameter, tree);
-            this.getter = ExpressionGetter.CreateValueGetter<TParameter1, TResult>(
+            this.getter = ExpressionGetter.CreateGetter<TParameter1, TResult>(
                 propertyExpression.Parameters,
-                tree,
+                this.Tree,
                 fallback);
         }
-
-        /// <summary>
-        ///     Gets the parameter.
-        /// </summary>
-        /// <value>
-        ///     The parameter.
-        /// </value>
-        public TParameter1 Parameter { get; }
-
-        /// <summary>
-        ///     Gets the expression string.
-        /// </summary>
-        /// <value>
-        ///     The expression string.
-        /// </value>
-        public override string ExpressionString { get; }
 
         /// <summary>
         ///     Gets the value.
@@ -95,7 +80,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <returns>
         ///     The result value.
         /// </returns>
-        public TResult GetValue() => this.getter(this.Parameter);
+        public TResult GetValue() => this.getter(this.Parameter1);
 
         /// <summary>
         ///     On the action.

@@ -1,29 +1,26 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceTypeObservers
+namespace Anori.ExpressionObservers.Observers
 {
     using System;
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
-    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Reference Observer With Getter And Fallback.
+    ///     Property Value Observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     public sealed class
-        PropertyReferenceObserverWithGetterAndFallback<TResult> : PropertyObserverBase<
-            PropertyReferenceObserverWithGetterAndFallback<TResult>>
-        where TResult : class
+        PropertyObserverWithGetterAndFallback<TResult> : PropertyObserverBase<
+            PropertyObserverWithGetterAndFallback<TResult>, TResult>
     {
         /// <summary>
         ///     The action.
@@ -38,36 +35,26 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         ///     action
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal PropertyReferenceObserverWithGetterAndFallback(
+        internal PropertyObserverWithGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             TResult fallback)
+            : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            this.ExpressionString = propertyExpression.ToString();
-            this.CreateChain(tree);
-            this.getter = ExpressionGetter.CreateReferenceGetter(propertyExpression.Parameters, tree, fallback);
-        }
 
-        /// <summary>
-        ///     Gets the expression string.
-        /// </summary>
-        /// <value>
-        ///     The expression string.
-        /// </value>
-        public override string ExpressionString { get; }
+            this.getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
+        }
 
         /// <summary>
         ///     Gets the value.

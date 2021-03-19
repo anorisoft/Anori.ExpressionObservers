@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Tree;
     using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;
@@ -100,18 +99,18 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        /// Creates the reference getter.
+        ///     Creates the reference getter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
         /// <param name="expressionTree">The expression tree.</param>
-        /// <returns></returns>
+        /// <returns>The getter.</returns>
         /// <exception cref="ArgumentNullException">
-        /// parameters
-        /// or
-        /// expressionTree
+        ///     parameters
+        ///     or
+        ///     expressionTree is null.
         /// </exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TResult> CreateReferenceGetter<TParameter1, TParameter2, TResult>(
@@ -135,17 +134,17 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        /// Creates the reference getter.
+        ///     Creates the reference getter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
         /// <param name="expressionTree">The expression tree.</param>
-        /// <returns></returns>
+        /// <returns>The getter.</returns>
         /// <exception cref="ArgumentNullException">
-        /// parameters
-        /// or
-        /// expressionTree
+        ///     parameters
+        ///     or
+        ///     expressionTree is null.
         /// </exception>
         [NotNull]
         public static Func<TParameter1, TResult> CreateReferenceGetter<TParameter1, TResult>(

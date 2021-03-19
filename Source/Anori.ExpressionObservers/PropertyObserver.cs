@@ -20,35 +20,35 @@ namespace Anori.ExpressionObservers
     public static class PropertyObserver
     {
         /// <summary>
-        /// Observeses the specified property expression.
+        ///     Observeses the specified property expression.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        /// The Property Observer.
+        ///     The Property Observer.
         /// </returns>
         [NotNull]
         public static PropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action)
-        => new PropertyObserver<TResult>(propertyExpression, action);
+            [NotNull] Action action) =>
+            new PropertyObserver<TResult>(propertyExpression, action);
 
         /// <summary>
-        /// Observeses the specified property expression.
+        ///     Observeses the specified property expression.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        /// The Property Observer.
+        ///     The Property Observer.
         /// </returns>
         [NotNull]
         public static PropertyObserver<TResult> Observes<TResult>(
-           [NotNull] Expression<Func<TResult>> propertyExpression,
-           bool autoSubscribe,
-           [NotNull] Action action)
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            bool autoSubscribe,
+            [NotNull] Action action)
         {
             var observer = new PropertyObserver<TResult>(propertyExpression, action);
             if (autoSubscribe)
@@ -60,7 +60,61 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        /// Observeses the specified parameter1.
+        ///     Observeses the specified property expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
+        /// <param name="action">The action.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
+        [NotNull]
+        public static PropertyObserverWithGetterAndFallback<TResult> Observes<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            bool autoSubscribe,
+            [NotNull] Action action,
+            [NotNull] TResult fallback)
+        {
+            var observer = new PropertyObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback);
+            if (autoSubscribe)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Observeses the specified property expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
+        /// <param name="action">The action.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
+        [NotNull]
+        public static PropertyGetterObserverWithFallback<TResult> Observes<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            bool autoSubscribe,
+            [NotNull] Action<TResult> action,
+            [NotNull] TResult fallback)
+        {
+            var observer = new PropertyGetterObserverWithFallback<TResult>(propertyExpression, action, fallback);
+            if (autoSubscribe)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Observeses the specified parameter1.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -69,7 +123,7 @@ namespace Anori.ExpressionObservers
         /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        /// The Property Observer.
+        ///     The Property Observer.
         /// </returns>
         [NotNull]
         public static PropertyObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
@@ -89,7 +143,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        /// Observeses the specified parameter1.
+        ///     Observeses the specified parameter1.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -97,17 +151,18 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        /// The Property Observer.
+        ///     The Property Observer.
         /// </returns>
         [NotNull]
         public static PropertyObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
-           [NotNull] TParameter1 parameter1,
-           [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-           [NotNull] Action action)
-           where TParameter1 : INotifyPropertyChanged => new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] Action action)
+            where TParameter1 : INotifyPropertyChanged =>
+            new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
 
         /// <summary>
-        /// Observeses the specified parameter1.
+        ///     Observeses the specified parameter1.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -118,7 +173,7 @@ namespace Anori.ExpressionObservers
         /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        /// The Property Observer.
+        ///     The Property Observer.
         /// </returns>
         [NotNull]
         public static PropertyObserver<TParameter1, TParameter2, TResult> Observes<TParameter1, TParameter2, TResult>(
@@ -144,7 +199,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        /// Observeses the specified parameter1.
+        ///     Observeses the specified parameter1.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -156,15 +211,12 @@ namespace Anori.ExpressionObservers
         /// <returns>Property Observer.</returns>
         [NotNull]
         public static PropertyObserver<TParameter1, TParameter2, TResult> Observes<TParameter1, TParameter2, TResult>(
-         [NotNull] TParameter1 parameter1,
-         [NotNull] TParameter2 parameter2,
-         [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-         [NotNull] Action action)
-         where TParameter1 : INotifyPropertyChanged
-         where TParameter2 : INotifyPropertyChanged => new PropertyObserver<TParameter1, TParameter2, TResult>(
-                parameter1,
-                parameter2,
-                propertyExpression,
-                action);
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action)
+            where TParameter1 : INotifyPropertyChanged
+            where TParameter2 : INotifyPropertyChanged =>
+            new PropertyObserver<TParameter1, TParameter2, TResult>(parameter1, parameter2, propertyExpression, action);
     }
 }

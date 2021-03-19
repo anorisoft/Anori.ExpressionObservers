@@ -17,7 +17,7 @@ namespace Anori.ExpressionObservers.Tree.Nodes
     ///     Expression Tree Node Collection.
     /// </summary>
     /// <seealso cref="IExpressionNode" />
-    /// <seealso cref="IRootAweare" />
+    /// <seealso cref="IRootAware" />
     internal class NodeCollection : List<IExpressionNode>, INodeCollection
     {
         /// <summary>
@@ -25,9 +25,9 @@ namespace Anori.ExpressionObservers.Tree.Nodes
         /// </summary>
         /// <param name="expressionTree">The expression tree.</param>
         /// <param name="parent">The parent.</param>
-        public NodeCollection([NotNull] IRootAweare expressionTree, IExpressionNode? parent)
+        public NodeCollection([NotNull] IRootAware expressionTree, IExpressionNode? parent)
         {
-            this.RootAweare = expressionTree;
+            this.RootAware = expressionTree;
             this.Parent = parent;
         }
 
@@ -38,7 +38,7 @@ namespace Anori.ExpressionObservers.Tree.Nodes
         ///     The expression tree.
         /// </value>
         [NotNull]
-        public IRootAweare RootAweare { get; }
+        public IRootAware RootAware { get; }
 
         /// <summary>
         ///     Gets the parent.
@@ -54,7 +54,7 @@ namespace Anori.ExpressionObservers.Tree.Nodes
         /// <value>
         ///     The roots.
         /// </value>
-        public IList<IExpressionNode> Roots => this.RootAweare.Roots;
+        public IList<IExpressionNode> Roots => this.RootAware.Roots;
 
         /// <summary>
         ///     Adds an Expressione Tree Node and update relations.

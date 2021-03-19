@@ -10,8 +10,8 @@ namespace Anori.ExpressionObservers.Base
     using System.ComponentModel;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.Tree;
+    using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -48,7 +48,7 @@ namespace Anori.ExpressionObservers.Base
         {
             this.propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             this.Parameter1 = parameter1 ?? throw new ArgumentNullException(nameof(parameter1));
-            this.ExpressionString = this.CreateChain(parameter1);
+            (this.ExpressionString, this.Tree) = this.CreateChain(parameter1);
         }
 
         /// <summary>
@@ -69,6 +69,14 @@ namespace Anori.ExpressionObservers.Base
         public TParameter1 Parameter1 { get; }
 
         /// <summary>
+        ///     Gets the tree.
+        /// </summary>
+        /// <value>
+        ///     The tree.
+        /// </value>
+        public IExpressionTree Tree { get; }
+
+        /// <summary>
         ///     Creates the chain.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -79,14 +87,14 @@ namespace Anori.ExpressionObservers.Base
         ///     Operation not supported for the given expression type {expression.Type}. "
         ///     + "Only MemberExpression and ConstantExpression are currently supported.
         /// </exception>
-        private string CreateChain(TParameter1 parameter1)
+        private (string, IExpressionTree) CreateChain(TParameter1 parameter1)
         {
             var tree = ExpressionTree.GetTree(this.propertyExpression.Body);
             var expressionString = this.propertyExpression.ToString();
 
             this.CreateChain(parameter1, tree);
 
-            return expressionString;
+            return (expressionString, tree);
         }
     }
 }

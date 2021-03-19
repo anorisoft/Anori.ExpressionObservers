@@ -1,23 +1,24 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IExpressionTree.cs" company="AnoriSoft">
+// <copyright file="IRootAware.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Tree.Interfaces
 {
+    using System.Collections.Generic;
+
     /// <summary>
-    /// The I Expression Tree interface.
+    ///     Expression Tree Interface.
     /// </summary>
-    /// <seealso cref="IRootAware" />
-    public interface IExpressionTree : IRootAware
+    public interface IRootAware
     {
         /// <summary>
-        /// Gets the nodes.
+        ///     Gets the roots.
         /// </summary>
         /// <value>
-        /// The nodes.
+        ///     The roots.
         /// </value>
-        INodeCollection Nodes { get; }
+        IList<IExpressionNode> Roots { get; }
     }
 }

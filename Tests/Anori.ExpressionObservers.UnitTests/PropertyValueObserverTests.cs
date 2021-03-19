@@ -43,17 +43,27 @@ namespace Anori.ExpressionObservers.UnitTests
                 (p1, p2) => instance1.IntProperty,
                 () => callCount++);
             Assert.AreEqual(0, callCount);
+            Assert.AreEqual(0, observes.GetValue());
+
             instance1.IntProperty = 1;
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(1, observes.GetValue());
+            
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, observes.GetValue());
+
             instance1.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
+            
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
+
             instance1.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]
@@ -68,14 +78,66 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             this.readonlyFieldInstance.IntProperty = 1;
             Assert.AreEqual(0, callCount);
+            Assert.AreEqual(1, observes.GetValue());
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
             this.readonlyFieldInstance.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
             this.readonlyFieldInstance.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
+        }
+
+        [Test]
+        public void PropertyObserver_p1_instance1_IntProperty_AutoActivateFalse()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var callCount = 0;
+            using var observes = PropertyValueObserver.Observes(
+                instance,
+                p1 => this.readonlyFieldInstance.IntProperty,
+                false,
+                () => callCount++);
+            Assert.AreEqual(0, callCount);
+            this.readonlyFieldInstance.IntProperty = 1;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(1, observes.GetValue());
+            observes.Subscribe();
+            Assert.AreEqual(1, callCount);
+            this.readonlyFieldInstance.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            this.readonlyFieldInstance.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
+        }
+        
+        [Test]
+        public void PropertyObserver_p1_instance1_IntProperty_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var callCount = 0;
+            using var observes = PropertyValueObserver.Observes(
+                instance,
+                p1 => this.readonlyFieldInstance.IntProperty,
+                true,
+                () => callCount++);
+            Assert.AreEqual(0, callCount);
+            this.readonlyFieldInstance.IntProperty = 1;
+            Assert.AreEqual(1, callCount);
+            this.readonlyFieldInstance.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            this.readonlyFieldInstance.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]
@@ -94,13 +156,34 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(1, callCount);
             this.readonlyFieldInstance.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
             this.readonlyFieldInstance.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
-      
+        [Test]
+        public void PropertyGenericObserver_instance1_IntProperty_AutoActivateTrue()
+        {
+            var callCount = 0;
+            using var observes = PropertyValueObserver.Observes(
+                () => this.readonlyFieldInstance.IntProperty,
+                true,
+                () => callCount++);
+            Assert.AreEqual(0, callCount);
+            this.readonlyFieldInstance.IntProperty = 1;
+            Assert.AreEqual(1, callCount);
+            this.readonlyFieldInstance.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            this.readonlyFieldInstance.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
+        }
 
         [Test]
         public void PropertyObserver_instance1_IntProperty()
@@ -112,14 +195,17 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             this.readonlyFieldInstance.IntProperty = 1;
             Assert.AreEqual(0, callCount);
+            Assert.AreEqual(1, observes.GetValue());
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
             this.readonlyFieldInstance.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
             this.readonlyFieldInstance.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]
@@ -134,14 +220,17 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             this.readonlyFieldInstance.Class2.IntProperty = 1;
             Assert.AreEqual(0, callCount);
+            Assert.AreEqual(1, observes.GetValue());
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
             this.readonlyFieldInstance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
             this.readonlyFieldInstance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]
@@ -156,14 +245,17 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             this.PropertyInstance.IntProperty = 1;
             Assert.AreEqual(0, callCount);
+            Assert.AreEqual(1, observes.GetValue());
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
             this.PropertyInstance.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
             this.PropertyInstance.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]
@@ -175,14 +267,17 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             instance.IntProperty = 1;
             Assert.AreEqual(0, callCount);
+            Assert.AreEqual(1, observes.GetValue());
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
             instance.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
             instance.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]
@@ -194,14 +289,17 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             instance.IntProperty = 1;
             Assert.AreEqual(0, callCount);
+            Assert.AreEqual(1, observes.GetValue());
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
             instance.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
             instance.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]
@@ -213,14 +311,17 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             instance.Class2.IntProperty = 1;
             Assert.AreEqual(0, callCount);
+            Assert.AreEqual(1, observes.GetValue());
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
             observes.Unsubscribe();
             Assert.AreEqual(2, callCount);
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]
@@ -232,6 +333,8 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(null, value);
             instance.Class2.IntProperty = 1;
             Assert.AreEqual(null, value);
+            Assert.AreEqual(1, observes.GetValue());
+
             observes.Subscribe();
             Assert.AreEqual(1, value);
             instance.Class2.IntProperty = 2;
@@ -240,6 +343,261 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, value);
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, value);
+        }
+
+        [Test]
+        public void PropertyObserver_p_Class2_IntProperty_Value_AutoActivateFalse()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var value = (int?)null;
+            using var observes = PropertyValueObserver.Observes(instance, i => i.Class2.IntProperty, false, v => value = v);
+            Assert.AreEqual(null, value);
+            instance.Class2.IntProperty = 1;
+            Assert.AreEqual(null, value);
+            Assert.AreEqual(1, observes.GetValue());
+
+            observes.Subscribe();
+            Assert.AreEqual(1, value);
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, value);
+            observes.Unsubscribe();
+            Assert.AreEqual(2, value);
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, value);
+        }
+
+        [Test]
+        public void PropertyObserver_p_Class2_IntProperty_Value_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var value = (int?)null;
+            using var observes = PropertyValueObserver.Observes(instance, i => i.Class2.IntProperty, true, v => value = v);
+            Assert.AreEqual(null, value);
+            instance.Class2.IntProperty = 1;
+            Assert.AreEqual(1, value);
+            Assert.AreEqual(1, observes.GetValue());
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, value);
+            observes.Unsubscribe();
+            Assert.AreEqual(2, value);
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, value);
+        }
+
+        [Test]
+        public void PropertyObserver_Instance_Class2_IntProperty_Value()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var value = (int?)null;
+            using var observes = PropertyValueObserver.Observes(() => instance.Class2.IntProperty, v => value = v);
+            Assert.AreEqual(null, value);
+            instance.Class2.IntProperty = 1;
+            Assert.AreEqual(null, value);
+            Assert.AreEqual(1, observes.GetValue());
+
+            observes.Subscribe();
+            Assert.AreEqual(1, value);
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, value);
+            observes.Unsubscribe();
+            Assert.AreEqual(2, value);
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, value);
+        }
+
+        [Test]
+        public void PropertyObserver_Fallback_Instance_Class2_IntProperty_Value()
+        {
+            var instance = new NotifyPropertyChangedClass1 { Class2 = null };
+            var value = 0;
+            var count = 0;
+            using var observes = PropertyValueObserver.Observes(() => instance.Class2.IntProperty, v =>
+                {
+                    value = v;
+                    count++;
+                }, 10);
+
+            Assert.AreEqual(0, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(0, count);
+
+            instance.Class2 = new NotifyPropertyChangedClass2();
+            Assert.AreEqual(0, value);
+            Assert.AreEqual(0, observes.GetValue());
+            Assert.AreEqual(0, count);
+
+            instance.Class2.IntProperty = 1;
+            Assert.AreEqual(0, value);
+            Assert.AreEqual(1, observes.GetValue());
+            Assert.AreEqual(0, count);
+
+            observes.Subscribe();
+            Assert.AreEqual(1, value);
+            Assert.AreEqual(1, observes.GetValue());
+            Assert.AreEqual(1, count);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, value);
+            Assert.AreEqual(2, observes.GetValue());
+            Assert.AreEqual(2, count);
+
+            instance.Class2 = null;
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(3, count);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(3, count);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 3 };
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(3, observes.GetValue());
+            Assert.AreEqual(3, count);
+        }
+
+        [Test]
+        public void PropertyObserver_Fallback_Instance_Class2_IntProperty_Value_AutoActivateFalse()
+        {
+            var instance = new NotifyPropertyChangedClass1 { Class2 = null };
+            var value = 0;
+            var count = 0;
+            using var observes = PropertyObserver.Observes(() => instance.Class2.IntProperty, false, v =>
+                {
+                    value = v;
+                    count++;
+                }, 10);
+
+            Assert.AreEqual(0, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(0, count);
+
+            instance.Class2 = new NotifyPropertyChangedClass2();
+            Assert.AreEqual(0, value);
+            Assert.AreEqual(0, observes.GetValue());
+            Assert.AreEqual(0, count);
+
+            instance.Class2.IntProperty = 1;
+            Assert.AreEqual(0, value);
+            Assert.AreEqual(1, observes.GetValue());
+            Assert.AreEqual(0, count);
+
+            observes.Subscribe();
+            Assert.AreEqual(1, value);
+            Assert.AreEqual(1, observes.GetValue());
+            Assert.AreEqual(1, count);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, value);
+            Assert.AreEqual(2, observes.GetValue());
+            Assert.AreEqual(2, count);
+
+            instance.Class2 = null;
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(3, count);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(3, count);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 3 };
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(3, observes.GetValue());
+            Assert.AreEqual(3, count);
+        }
+
+        [Test]
+        public void PropertyObserver_Fallback_Instance_Class2_IntProperty_Value_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1 { Class2 = null };
+            var value = 0;
+            var count = 0;
+            using var observes = PropertyObserver.Observes(() => instance.Class2.IntProperty, true, v =>
+                {
+                    value = v;
+                    count++;
+                }, 10);
+
+            Assert.AreEqual(0, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(0, count);
+
+            instance.Class2 = new NotifyPropertyChangedClass2();
+            Assert.AreEqual(0, value);
+            Assert.AreEqual(0, observes.GetValue());
+            Assert.AreEqual(1, count);
+
+            instance.Class2.IntProperty = 1;
+            Assert.AreEqual(1, value);
+            Assert.AreEqual(1, observes.GetValue());
+            Assert.AreEqual(2, count);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, value);
+            Assert.AreEqual(2, observes.GetValue());
+            Assert.AreEqual(3, count);
+
+            instance.Class2 = null;
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(4, count);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(10, observes.GetValue());
+            Assert.AreEqual(4, count);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 3 };
+            Assert.AreEqual(10, value);
+            Assert.AreEqual(3, observes.GetValue());
+            Assert.AreEqual(4, count);
+        }
+
+
+        [Test]
+        public void PropertyObserver_Instance_Class2_IntProperty_Value_AutoActivateFalse()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var value = (int?)null;
+            using var observes = PropertyValueObserver.Observes(() => instance.Class2.IntProperty, false, v => value = v);
+            Assert.AreEqual(null, value);
+            instance.Class2.IntProperty = 1;
+            Assert.AreEqual(null, value);
+            Assert.AreEqual(1, observes.GetValue());
+            observes.Subscribe();
+            Assert.AreEqual(1, value);
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, value);
+            Assert.AreEqual(2, observes.GetValue());
+            observes.Unsubscribe();
+            Assert.AreEqual(2, value);
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, value);
+            Assert.AreEqual(3, observes.GetValue());
+        }
+
+        [Test]
+        public void PropertyObserver_Instance_Class2_IntProperty_Value_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var value = (int?)null;
+            using var observes = PropertyValueObserver.Observes(() => instance.Class2.IntProperty, true, v => value = v);
+            Assert.AreEqual(null, value);
+            instance.Class2.IntProperty = 1;
+            Assert.AreEqual(1, value);
+            Assert.AreEqual(1, observes.GetValue());
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, value);
+            Assert.AreEqual(2, observes.GetValue());
+            observes.Unsubscribe();
+            Assert.AreEqual(2, value);
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, value);
+            Assert.AreEqual(3, observes.GetValue());
         }
 
         [Test]

@@ -14,7 +14,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
 
     using Anori.Common;
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
@@ -121,9 +120,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

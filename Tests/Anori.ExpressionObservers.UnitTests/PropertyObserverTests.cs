@@ -199,6 +199,46 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
+        public void PropertyGenericObserver_Fallback_instance1_IntProperty_AutoActivateFalse()
+        {
+            var callCount = 0;
+            using var observes = PropertyObserver.Observes(
+                () => this.readonlyFieldInstance.IntProperty,
+                false,
+                () => callCount++, 10);
+            Assert.AreEqual(0, callCount);
+            this.readonlyFieldInstance.IntProperty = 1;
+            Assert.AreEqual(0, callCount);
+            observes.Subscribe();
+            Assert.AreEqual(1, callCount);
+            this.readonlyFieldInstance.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            this.readonlyFieldInstance.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+        }
+
+        [Test]
+        public void PropertyGenericObserver_Fallback_instance1_IntProperty_AutoActivateTrue()
+        {
+            var callCount = 0;
+            using var observes = PropertyObserver.Observes(
+                () => this.readonlyFieldInstance.IntProperty,
+                true,
+                () => callCount++, 10);
+            Assert.AreEqual(0, callCount);
+            this.readonlyFieldInstance.IntProperty = 1;
+            Assert.AreEqual(1, callCount);
+            this.readonlyFieldInstance.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            this.readonlyFieldInstance.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+        }
+
+        [Test]
         public void PropertyGenericObserver_instance1_IntProperty_AutoActivateTrue()
         {
             var callCount = 0;

@@ -55,7 +55,10 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             : base(parameter1, parameter2, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter =() => ExpressionGetter.CreateReferenceGetter<TParameter1, TParameter2, TResult>(propertyExpression.Parameters, this.Tree)(parameter1,parameter2);
+            this.getter = () =>
+                ExpressionGetter.CreateReferenceGetter<TParameter1, TParameter2, TResult>(
+                    propertyExpression.Parameters,
+                    this.Tree)(parameter1, parameter2);
         }
 
         /// <summary>

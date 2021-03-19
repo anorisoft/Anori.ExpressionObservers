@@ -60,7 +60,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             : base(parameter1, parameter2, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             this.getter = () => ExpressionGetter.CreateValueGetter<TParameter1, TParameter2, TResult>(propertyExpression.Parameters, this.Tree)(parameter1, parameter2);
         }
 
