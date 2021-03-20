@@ -59,7 +59,7 @@ namespace Anori.ExpressionObservers.Observers
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult GetValue() => this.getter();
+        public TResult Value => this.getter();
 
         /// <summary>
         ///     On the action.

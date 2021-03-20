@@ -58,7 +58,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getter(this.Parameter1);
+        public TResult? Value => this.getter(this.Parameter1);
 
         /// <summary>
         ///     On the action.

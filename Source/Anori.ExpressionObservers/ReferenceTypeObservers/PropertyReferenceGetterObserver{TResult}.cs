@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -20,7 +19,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     public sealed class
-        PropertyReferenceGetterObserver<TResult> : PropertyObserverBase<PropertyReferenceGetterObserver<TResult>>
+        PropertyReferenceGetterObserver<TResult> : PropertyObserverBase<PropertyReferenceGetterObserver<TResult>,
+            TResult>
         where TResult : class
     {
         /// <summary>
@@ -48,28 +48,17 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         internal PropertyReferenceGetterObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action)
+            : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            this.ExpressionString = propertyExpression.ToString();
-            this.CreateChain(tree);
-            this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
+            this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
         }
-
-        /// <summary>
-        ///     Gets the expression string.
-        /// </summary>
-        /// <value>
-        ///     The expression string.
-        /// </value>
-        public override string ExpressionString { get; }
 
         /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult GetValue() => this.getter();
+        public TResult Value => this.getter();
 
         /// <summary>
         ///     On the action.

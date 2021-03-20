@@ -9,7 +9,9 @@ namespace Anori.ExpressionObservers
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
+    using Anori.Common;
     using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.ReferenceTypeObservers;
 
@@ -20,21 +22,21 @@ namespace Anori.ExpressionObservers
     /// </summary>
     public static class PropertyReferenceObserver
     {
-        /// <summary>
-        ///     Observeses the specified property expression.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        [NotNull]
-        public static PropertyObserver<TResult> Observes<TResult>(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action)
-            where TResult : class =>
-            new PropertyObserver<TResult>(propertyExpression, action);
+        ///// <summary>
+        /////     Observeses the specified property expression.
+        ///// </summary>
+        ///// <typeparam name="TResult">The type of the result.</typeparam>
+        ///// <param name="propertyExpression">The property expression.</param>
+        ///// <param name="action">The action.</param>
+        ///// <returns>
+        /////     The Property Reference Observer.
+        ///// </returns>
+        //[NotNull]
+        //public static PropertyObserver<TResult> Observes<TResult>(
+        //    [NotNull] Expression<Func<TResult>> propertyExpression,
+        //    [NotNull] Action action)
+        //    where TResult : class =>
+        //    new PropertyObserver<TResult>(propertyExpression, action);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -75,6 +77,30 @@ namespace Anori.ExpressionObservers
             [NotNull] Action<TResult> action)
             where TResult : class =>
             new PropertyReferenceGetterObserver<TResult>(propertyExpression, action);
+
+        /// <summary>
+        ///     Observeses the specified property expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
+        /// <param name="action">The action.</param>
+        /// <returns>The Property Reference Observer.</returns>
+        [NotNull]
+        public static PropertyReferenceGetterObserver<TResult> Observes<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            bool isAutoActivate,
+            [NotNull] Action<TResult> action)
+            where TResult : class
+        {
+            var observer = new PropertyReferenceGetterObserver<TResult>(propertyExpression, action);
+            if (isAutoActivate)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -178,21 +204,111 @@ namespace Anori.ExpressionObservers
             new PropertyReferenceObserverWithGetter<TResult>(propertyExpression, action);
 
         /// <summary>
-        ///     Observeses the and get.
+        /// Observeses the on notify propery changed.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        /// The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static PropertyReferenceObserverOnNotifyProperyChanged<TResult> ObservesOnNotifyProperyChanged<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression)
+            where TResult : class =>
+            new PropertyReferenceObserverOnNotifyProperyChanged<TResult>(propertyExpression);
+
+        /// <summary>
+        /// Observeses the on notify propery changed.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns></returns>
+        [NotNull]
+        public static PropertyReferenceObserverOnNotifyProperyChanged<TResult> ObservesOnNotifyProperyChanged<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode)
+            where TResult : class =>
+            new PropertyReferenceObserverOnNotifyProperyChanged<TResult>(propertyExpression,isCached, safetyMode);
+
+        /// <summary>
+        /// Observeses the on notify propery changed.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyObserverWithGetterAndFallback<TResult> ObservesAndGet<TResult>(
+        public static PropertyReferenceObserverOnNotifyProperyChanged<TResult> ObservesOnNotifyProperyChanged<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
-            TResult fallback)
+            bool isAutoActivate)
+            where TResult : class
+        {
+            var observer = new PropertyReferenceObserverOnNotifyProperyChanged<TResult>(propertyExpression);
+            if (isAutoActivate)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Observeses the on value changed.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static PropertyReferenceObserverOnValueChanged<TResult> ObservesOnValueChanged<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression)
             where TResult : class =>
-            new PropertyObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback);
+            new PropertyReferenceObserverOnValueChanged<TResult>(propertyExpression);
+
+        /// <summary>
+        ///     Observeses the on value changed.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static PropertyReferenceObserverOnValueChanged<TResult> ObservesOnValueChanged<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            bool isAutoActivate)
+            where TResult : class
+        {
+            var observer = new PropertyReferenceObserverOnValueChanged<TResult>(propertyExpression);
+            if (isAutoActivate)
+            {
+                observer.Subscribe(true);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Observeses the specified property expression.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static PropertyReferenceObserverOnValueChanged<TResult> ObservesOnValueChanged<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TaskScheduler taskScheduler)
+            where TResult : class =>
+            new PropertyReferenceObserverOnValueChanged<TResult>(propertyExpression, taskScheduler);
     }
 }

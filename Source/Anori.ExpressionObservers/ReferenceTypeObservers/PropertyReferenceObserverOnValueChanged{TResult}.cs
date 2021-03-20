@@ -14,8 +14,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
-    using Anori.ExpressionObservers.Tree;
 
     using JetBrains.Annotations;
 
@@ -28,7 +26,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyReferenceObserverOnValueChanged<TResult> :
-        PropertyObserverBase<PropertyReferenceObserverOnValueChanged<TResult>>,
+        PropertyObserverBase<PropertyReferenceObserverOnValueChanged<TResult>, TResult>,
         INotifyPropertyChanged
         where TResult : class
     {
@@ -44,7 +42,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private TResult? value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
@@ -52,13 +50,10 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler? taskScheduler = null)
+            : base(propertyExpression)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            this.ExpressionString = propertyExpression.ToString();
-
-            this.CreateChain(tree);
-            var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
+            var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
 
             if (taskScheduler == null)
             {
@@ -75,14 +70,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <returns></returns>
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
-        ///     Gets the expression string.
-        /// </summary>
-        /// <value>
-        ///     The expression string.
-        /// </value>
-        public override string ExpressionString { get; }
 
         /// <summary>
         ///     Gets the value.
@@ -115,9 +102,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -121,7 +121,7 @@ namespace Anori.ExpressionObservers.UnitTests
         public void PropertyObserver_instance1_StringProperty()
         {
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.Observes(
+            using var observes = PropertyObserver.Observes(
                 () => this.readonlyFieldInstance.StringProperty,
                 () => callCount++);
             Assert.AreEqual(0, callCount);

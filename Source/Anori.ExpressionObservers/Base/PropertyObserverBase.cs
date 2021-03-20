@@ -179,12 +179,12 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Implements the operator ==.
+        /// Implements the operator ==.
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
         /// <returns>
-        ///     The result of the operator.
+        /// The result of the operator.
         /// </returns>
         public static bool operator ==(PropertyObserverBase? a, PropertyObserverBase? b)
         {

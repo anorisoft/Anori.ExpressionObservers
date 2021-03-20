@@ -10,8 +10,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
-    using Anori.ExpressionObservers.Tree;
     using Anori.ExpressionObservers.ValueTypeObservers;
 
     using JetBrains.Annotations;
@@ -22,8 +20,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     public sealed class
-        PropertyReferenceObserverWithGetter<TResult>
-        : PropertyObserverBase<PropertyReferenceObserverWithGetter<TResult>>
+        PropertyReferenceObserverWithGetter<TResult> : PropertyObserverBase<PropertyReferenceObserverWithGetter<TResult>
+            , TResult>
         where TResult : class
     {
         /// <summary>
@@ -39,35 +37,22 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="PropertyValueObserverWithGetter{TResult}">
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
+        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="PropertyValueObserverWithGetter{TResult}">action
+        /// or
+        /// propertyExpression is null.</exception>
         internal PropertyReferenceObserverWithGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action)
+            : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            this.ExpressionString = propertyExpression.ToString();
-
-            this.CreateChain(tree);
-            this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
+            this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
         }
-
-        /// <summary>
-        ///     Gets the expression string.
-        /// </summary>
-        /// <value>
-        ///     The expression string.
-        /// </value>
-        public override string ExpressionString { get; }
 
         /// <summary>
         ///     Gets the value.

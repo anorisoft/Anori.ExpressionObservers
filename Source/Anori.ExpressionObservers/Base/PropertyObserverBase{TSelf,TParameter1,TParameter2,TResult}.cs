@@ -61,7 +61,7 @@ namespace Anori.ExpressionObservers.Base
         /// <value>
         ///     The expression string.
         /// </value>
-        public override string ExpressionString { get; }
+        public sealed override string ExpressionString { get; }
 
         /// <summary>
         ///     Gets the parameter1.

@@ -342,8 +342,18 @@ namespace Anori.ExpressionObservers
             [NotNull] ICollection<Expression> expressions,
             [NotNull] Type resultType,
             ConstantNode constant,
-            [NotNull] LabelTarget returnTarget) =>
+            Expression ifNull,
+            [NotNull] LabelTarget returnTarget)
+        {
+            if (constant.Type.IsValueType && !constant.Type.IsNullable())
+            {
+                expressions.Add(Expression.Return(returnTarget, Expression.Constant(constant.Value, resultType)));
+                return;
+            }
+
+            expressions.Add(Expression.IfThen(Expression.Equal(Expression.Constant(constant.Value, resultType), NullExpressionOf(resultType)), ifNull));
             expressions.Add(Expression.Return(returnTarget, Expression.Constant(constant.Value, resultType)));
+        }
 
         /// <summary>
         ///     Constants the next element.
@@ -608,7 +618,7 @@ namespace Anori.ExpressionObservers
                     break;
 
                 case ConstantNode constant:
-                    ConstantLastElement(expressions, resultType, constant, returnTarget);
+                    ConstantLastElement(expressions, resultType, constant, ifNull, returnTarget);
                     break;
 
                 case ParameterNode parameter:

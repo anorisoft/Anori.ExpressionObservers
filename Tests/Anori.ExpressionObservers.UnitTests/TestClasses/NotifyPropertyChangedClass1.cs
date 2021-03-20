@@ -17,6 +17,11 @@
             }
         }
 
+
+        public const string StringConstant = "Constant";
+        public const string NullStringConstant = null;
+
+
         public string StringProperty
         {
             get => _stringProperty;
