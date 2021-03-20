@@ -52,7 +52,6 @@ namespace Anori.ExpressionObservers.Observers
             : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-
             this.getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
         }
 
