@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodule", "Submodule", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.Extensions", "..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj", "{1F0F835C-F1E5-4FF3-AF5D-6261EBE36F1D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{B9BA4EBD-E37A-4BE0-BDCB-B596772C6C5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Submodules|Any CPU = Debug Submodules|Any CPU

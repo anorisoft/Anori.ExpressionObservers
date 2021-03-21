@@ -6,6 +6,7 @@
 
 namespace Anori.ExpressionObservers.UnitTests
 {
+    using Anori.Common;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
 
     using NUnit.Framework;
@@ -141,7 +142,6 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("2", observes.Value);
         }
 
-
         [Test]
         public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty()
         {
@@ -177,6 +177,44 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("3", observes.Value);
         }
+
+
+        [Test]
+        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_Cashed()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var callCount = 0;
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None);
+
+            observes.PropertyChanged += (sender, args) => callCount++;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.StringProperty = "1";
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            observes.Subscribe();
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.StringProperty = "3";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+        }
+
 
         [Test]
         public void PropertyObserver_Observes_instance_StringProperty_AutoActivateFalse()
