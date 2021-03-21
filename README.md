@@ -4,4 +4,4 @@
 
 [![Donate](https://img.shields.io/badge/donate-PayPal-yellow.svg)](https://www.paypal.me/AnoriSoft/10)
 
-![your-UML-diagram-name](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/anorisoft/Anori.ExpressionObservers/master/Docs/input/getter.iuml)
+![your-UML-diagram-name](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/anorisoft/Anori.ExpressionObservers/master/Docs/input/Getter.iuml)
