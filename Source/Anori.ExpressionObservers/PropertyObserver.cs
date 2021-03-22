@@ -127,9 +127,8 @@ namespace Anori.ExpressionObservers
                 action,
                 fallback);
 
-
         /// <summary>
-        /// Observeses the specified parameter1.
+        ///     Observeses the specified parameter1.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -139,14 +138,17 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
-        public static PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult> Observes<TParameter1, TParameter2, TResult>(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] TParameter2 parameter2,
-            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action action,
-            [NotNull] TResult fallback)
-            where TParameter1 : INotifyPropertyChanged 
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
+        public static PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>
+            Observes<TParameter1, TParameter2, TResult>(
+                [NotNull] TParameter1 parameter1,
+                [NotNull] TParameter2 parameter2,
+                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+                [NotNull] Action action,
+                [NotNull] TResult fallback)
+            where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
             new PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>(
                 parameter1,
@@ -277,7 +279,6 @@ namespace Anori.ExpressionObservers
             [NotNull] Action<TResult> action,
             [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
-
         {
             var observer = new PropertyGetterObserverWithFallback<TParameter1, TResult>(
                 parameter1,

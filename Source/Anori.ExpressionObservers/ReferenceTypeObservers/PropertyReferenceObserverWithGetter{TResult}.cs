@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         /// <exception cref="PropertyValueObserverWithGetter{TResult}">
         ///     action
         ///     or

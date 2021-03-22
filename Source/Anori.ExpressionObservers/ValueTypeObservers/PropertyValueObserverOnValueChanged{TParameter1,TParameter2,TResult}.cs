@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverOnValueChanged{TResult} - Copy.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserverOnValueChanged{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -18,16 +18,18 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnValueChanged{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnValueChanged{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult> :
-        PropertyObserverBase<PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>,
+        PropertyObserverBase<PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>, TParameter1,
+            TParameter2, TResult>,
         INotifyPropertyChanged
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
@@ -45,7 +47,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private TResult? value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TParameter1,TParameter2,  TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyValueObserverOnValueChanged{TParameter1,TParameter2,  TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -59,7 +62,10 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             TaskScheduler? taskScheduler = null)
             : base(parameter1, parameter2, propertyExpression)
         {
-            TResult? Getter() => ExpressionGetter.CreateValueGetter<TParameter1, TParameter2, TResult>(propertyExpression.Parameters, this.Tree)(parameter1, parameter2);
+            TResult? Getter() =>
+                ExpressionGetter.CreateValueGetter<TParameter1, TParameter2, TResult>(
+                    propertyExpression.Parameters,
+                    this.Tree)(parameter1, parameter2);
 
             if (taskScheduler == null)
             {

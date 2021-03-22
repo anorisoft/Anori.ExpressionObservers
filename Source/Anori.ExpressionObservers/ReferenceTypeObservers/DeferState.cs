@@ -24,6 +24,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <summary>
         ///     The update.
         /// </summary>
-        Update = 2
+        Update = 2,
     }
 }

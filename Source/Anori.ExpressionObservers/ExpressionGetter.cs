@@ -15,7 +15,7 @@ namespace Anori.ExpressionObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The Expression Getter class.
+    ///     The Expression Getter class.
     /// </summary>
     public static partial class ExpressionGetter
     {
@@ -168,7 +168,24 @@ namespace Anori.ExpressionObservers
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult>>(body, parameters);
             return lambda.Compile();
         }
-        
+
+        /// <summary>
+        ///     Creates the getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="expressionTree">The expression tree.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The getter.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///     parameters
+        ///     or
+        ///     expressionTree is null.
+        /// </exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TResult> CreateGetter<TParameter1, TParameter2, TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,

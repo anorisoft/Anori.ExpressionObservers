@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverOnValueChanged{TResult} - Copy.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserverOnValueChanged{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -18,11 +18,12 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnValueChanged{TParameter1, TResult}, TParameter1, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnValueChanged{TParameter1, TResult}, TParameter1, TResult}" />
     /// <seealso cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
@@ -44,7 +45,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private TResult? value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -56,7 +57,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             TaskScheduler? taskScheduler = null)
             : base(parameter1, propertyExpression)
         {
-            TResult? Getter() => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(parameter1);
+            TResult? Getter() =>
+                ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
+                    parameter1);
 
             if (taskScheduler == null)
             {

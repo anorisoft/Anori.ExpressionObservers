@@ -6,16 +6,18 @@
 
 namespace Anori.ExpressionObservers.Tree
 {
-    using Anori.ExpressionObservers.Exceptions;
-    using Anori.ExpressionObservers.Nodes;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.ExpressionObservers.Tree.Nodes;
-    using JetBrains.Annotations;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+
+    using Anori.ExpressionObservers.Exceptions;
+    using Anori.ExpressionObservers.Nodes;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.ExpressionObservers.Tree.Nodes;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     ///     Expression Tree.
@@ -24,7 +26,7 @@ namespace Anori.ExpressionObservers.Tree
     public class ExpressionTree : IExpressionTree
     {
         /// <summary>
-        /// Prevents a default instance of the <see cref="ExpressionTree"/> class from being created.
+        ///     Prevents a default instance of the <see cref="ExpressionTree" /> class from being created.
         /// </summary>
         private ExpressionTree()
         {
