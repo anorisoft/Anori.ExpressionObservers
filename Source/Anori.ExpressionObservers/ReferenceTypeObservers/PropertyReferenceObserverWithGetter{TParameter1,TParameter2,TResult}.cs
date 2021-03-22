@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverWithGetter{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverWithGetter{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,12 +16,13 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverWithGetter{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverWithGetter{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyReferenceObserverWithGetter<TParameter1, TParameter2, TResult> : PropertyObserverBase<
         PropertyReferenceObserverWithGetter<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
@@ -42,16 +43,19 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverWithGetter{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <exception cref="ArgumentNullException">actionis null.</exception>
-        /// <exception cref="PropertyValueObserverWithGetter{TParameter1,TResult}">action
-        /// or
-        /// propertyExpression is null.</exception>
+        /// <exception cref="PropertyValueObserverWithGetter{TParameter1,TResult}">
+        ///     action
+        ///     or
+        ///     propertyExpression is null.
+        /// </exception>
         internal PropertyReferenceObserverWithGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,

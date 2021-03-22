@@ -37,14 +37,16 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <exception cref="ArgumentNullException">action</exception>
-        /// <exception cref="PropertyValueObserverWithGetter{TResult}">action
-        /// or
-        /// propertyExpression is null.</exception>
+        /// <exception cref="PropertyValueObserverWithGetter{TResult}">
+        ///     action
+        ///     or
+        ///     propertyExpression is null.
+        /// </exception>
         internal PropertyReferenceObserverWithGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action)

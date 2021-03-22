@@ -30,15 +30,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         INotifyPropertyChanged
         where TResult : class
     {
-        public enum DeferState
-        {
-            NotDeferred = 0,
-
-            Deferred = 1,
-
-            Update = 2
-        }
-
         /// <summary>
         ///     The action.
         /// </summary>
@@ -124,15 +115,15 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is defer.
+        ///     Gets a value indicating whether this instance is defer.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if this instance is defer; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
         /// </value>
         public bool IsDefer => this.deferState != DeferState.NotDeferred;
 
         /// <summary>
-        /// Defers this instance.
+        ///     Defers this instance.
         /// </summary>
         /// <returns>The deferrer.</returns>
         public IDisposable Defer() =>

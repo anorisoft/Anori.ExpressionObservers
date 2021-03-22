@@ -6,11 +6,13 @@
 
 namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
-    using Anori.ExpressionObservers.Base;
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Base;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Reference Getter Observer.

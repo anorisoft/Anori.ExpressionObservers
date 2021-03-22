@@ -1,27 +1,30 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1,TResult} - Copy.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
-    using Anori.Common;
-    using Anori.ExpressionObservers.Base;
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
+    using Anori.Common;
+    using Anori.ExpressionObservers.Base;
+
+    using JetBrains.Annotations;
+
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
@@ -46,8 +49,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -74,7 +77,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             }
             else
             {
-
                 get = () => new TaskFactory<TResult?>(taskScheduler).StartNew(
                         p =>
                             {
