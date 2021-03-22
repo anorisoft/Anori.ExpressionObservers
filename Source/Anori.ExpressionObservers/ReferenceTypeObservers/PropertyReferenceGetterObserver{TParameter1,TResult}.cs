@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Observers;
 
     using JetBrains.Annotations;
 
@@ -54,6 +53,12 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = ExpressionGetter.CreateReferenceGetter(propertyExpression);
         }
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The result value.</returns>
+        public TResult Value => this.getter(this.Parameter1);
 
         /// <summary>
         ///     The action.
