@@ -46,9 +46,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="ArgumentNullException">action
-        /// or
-        /// propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">action or propertyExpression is null.</exception>
         internal PropertyGetterObserverWithFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,

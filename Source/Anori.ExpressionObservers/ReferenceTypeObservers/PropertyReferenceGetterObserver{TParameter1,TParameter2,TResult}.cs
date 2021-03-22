@@ -62,6 +62,12 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The result value.</returns>
+        public TResult Value => this.getter();
+
+        /// <summary>
         ///     The action.
         /// </summary>
         protected override void OnAction() => this.action(this.getter());

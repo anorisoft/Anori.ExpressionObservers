@@ -6,13 +6,11 @@
 
 namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
+    using Anori.ExpressionObservers.Base;
+    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
-
-    using Anori.ExpressionObservers.Base;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Reference Getter Observer.
@@ -35,7 +33,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TParameter1, TResult> getter;
+        private readonly Func<TResult> getter;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TParameter1,TResult}" /> class.
@@ -51,18 +49,18 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             : base(parameter1, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = ExpressionGetter.CreateReferenceGetter(propertyExpression);
+            this.getter = () => ExpressionGetter.CreateReferenceGetter(propertyExpression)(parameter1);
         }
 
         /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult Value => this.getter(this.Parameter1);
+        public TResult Value => this.getter();
 
         /// <summary>
         ///     The action.
         /// </summary>
-        protected override void OnAction() => this.action(this.getter(this.Parameter1));
+        protected override void OnAction() => this.action(this.getter());
     }
 }

@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnValueChanged{TResult} - Copy.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserverOnValueChanged{TResult} - Copy.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceTypeObservers
+namespace Anori.ExpressionObservers.ValueTypeObservers
 {
     using System;
     using System.Collections.Generic;
@@ -22,15 +22,15 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverOnValueChanged{TParameter1, TResult}, TParameter1, TResult}" />
-    /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnValueChanged{TParameter1, TResult}, TParameter1, TResult}" />
+    /// <seealso cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyReferenceObserverOnValueChanged<TParameter1, TResult> :
-        PropertyObserverBase<PropertyReferenceObserverOnValueChanged<TParameter1, TResult>, TParameter1, TResult>,
+    public sealed class PropertyValueObserverOnValueChanged<TParameter1, TResult> :
+        PropertyObserverBase<PropertyValueObserverOnValueChanged<TParameter1, TResult>, TParameter1, TResult>,
         INotifyPropertyChanged
+        where TResult : struct
         where TParameter1 : INotifyPropertyChanged
-        where TResult : class
     {
         /// <summary>
         ///     The action.
@@ -44,19 +44,19 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" />
-        ///     class.
+        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TParameter1, TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyReferenceObserverOnValueChanged(
+        internal PropertyValueObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             TaskScheduler? taskScheduler = null)
             : base(parameter1, propertyExpression)
         {
-            TResult Getter() => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(parameter1);
+            TResult? Getter() => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(parameter1);
 
             if (taskScheduler == null)
             {

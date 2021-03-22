@@ -25,7 +25,6 @@ namespace Anori.ExpressionObservers.Observers
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult> : PropertyObserverBase<
         PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
-        where TResult : struct
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
     {
@@ -39,7 +38,7 @@ namespace Anori.ExpressionObservers.Observers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TParameter1, TResult> getter;
+        private readonly Func<TResult> getter;
 
         /// <summary>
         ///     Initializes a new instance of the
@@ -68,10 +67,10 @@ namespace Anori.ExpressionObservers.Observers
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
 
-            this.getter = ExpressionGetter.CreateGetter<TParameter1, TResult>(
+            this.getter = () => ExpressionGetter.CreateGetter<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 this.Tree,
-                fallback);
+                fallback)(parameter1, parameter2);
         }
 
         /// <summary>
@@ -80,7 +79,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     The result value.
         /// </returns>
-        public TResult GetValue() => this.getter(this.Parameter1);
+        public TResult Value => this.getter();
 
         /// <summary>
         ///     On the action.

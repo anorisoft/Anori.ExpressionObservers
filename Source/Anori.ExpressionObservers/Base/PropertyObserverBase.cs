@@ -47,15 +47,6 @@ namespace Anori.ExpressionObservers.Base
         internal IList<RootPropertyObserverNode> RootNodes { get; } = new List<RootPropertyObserverNode>();
 
         /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
         ///     Determines whether the specified objects are equal.
         /// </summary>
         /// <param name="x">The first object of type T to compare.</param>
@@ -98,6 +89,66 @@ namespace Anori.ExpressionObservers.Base
             return true;
         }
 
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator ==(PropertyObserverBase? a, PropertyObserverBase? b)
+        {
+            return Equals(a, b);
+        }
+
+        /// <summary>
+        ///     Implements the operator ==.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator ==(PropertyObserverBase a, object b)
+        {
+            return Equals(a, b);
+        }
+
+        /// <summary>
+        ///     Implements the operator !=.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator !=(PropertyObserverBase a, PropertyObserverBase b)
+        {
+            return !a.Equals(b);
+        }
+
+        /// <summary>
+        ///     Implements the operator !=.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator !=(PropertyObserverBase a, object b)
+        {
+            return !a.Equals(b);
+        }
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
         /// <summary>
         ///     Indicates whether the current object is equal to another object of the same type.
         /// </summary>
@@ -177,59 +228,6 @@ namespace Anori.ExpressionObservers.Base
                        ^ (obj.RootNodes != null ? obj.RootNodes.GetHashCode() : 0);
             }
         }
-
-        /// <summary>
-        /// Implements the operator ==.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        /// The result of the operator.
-        /// </returns>
-        public static bool operator ==(PropertyObserverBase? a, PropertyObserverBase? b)
-        {
-            return Equals(a, b);
-        }
-
-        /// <summary>
-        ///     Implements the operator ==.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator ==(PropertyObserverBase a, object b)
-        {
-            return Equals(a, b);
-        }
-
-        /// <summary>
-        ///     Implements the operator !=.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator !=(PropertyObserverBase a, PropertyObserverBase b)
-        {
-            return !a.Equals(b);
-        }
-
-        /// <summary>
-        ///     Implements the operator !=.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator !=(PropertyObserverBase a, object b)
-        {
-            return !a.Equals(b);
-        }
-
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -283,123 +281,33 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Creates the chain.
+        /// Determines whether the specified objects are equal.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <param name="tree">The nodes.</param>
-        /// <exception cref="NotSupportedException">Expression Tree Node not supported.</exception>
-        protected void CreateChain(INotifyPropertyChanged parameter1, IRootAware tree)
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        /// true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y)
         {
-            foreach (var treeRoot in tree.Roots)
-            {
-                switch (treeRoot)
-                {
-                    case ParameterNode parameterElement:
-                        {
-                            if (!(parameterElement.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
-
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                parameter1);
-                            this.LoopTree(propertyElement, root);
-                            this.RootNodes.Add(root);
-                            break;
-                        }
-
-                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
-                        {
-                            if (!(fieldElement.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
-
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                (INotifyPropertyChanged)fieldElement.FieldInfo.GetValue(constantElement.Value));
-
-                            this.LoopTree(propertyElement, root);
-                            this.RootNodes.Add(root);
-                            break;
-                        }
-
-                    case ConstantNode constantElement:
-                        {
-                            if (!(treeRoot.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
-
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                (INotifyPropertyChanged)constantElement.Value!);
-
-                            this.LoopTree(propertyElement, root);
-                            this.RootNodes.Add(root);
-
-                            break;
-                        }
-
-                    default:
-                        throw new NotSupportedException();
-                }
-            }
+            return Equals(x, y);
         }
 
         /// <summary>
-        ///     Creates the chain.
+        /// Looptrees the specified expression node.
         /// </summary>
-        /// <param name="tree">The nodes.</param>
-        /// <exception cref="System.NotSupportedException">Expression Tree Node not supported.</exception>
-        protected void CreateChain(IRootAware tree)
+        /// <param name="expressionNode">The expression node.</param>
+        /// <param name="observerNode">The observer node.</param>
+        internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
         {
-            foreach (var treeRoot in tree.Roots)
+            var previousNode = observerNode;
+            while (expressionNode.Next is PropertyNode property)
             {
-                switch (treeRoot)
-                {
-                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
-                        {
-                            if (!(fieldElement.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
+                var currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
 
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                fieldElement.FieldInfo.GetValue(constantElement.Value));
-
-                            this.LoopTree(propertyElement, root);
-                            this.RootNodes.Add(root);
-                            break;
-                        }
-
-                    case ConstantNode constantElement:
-                        {
-                            if (!(treeRoot.Next is PropertyNode propertyElement))
-                            {
-                                continue;
-                            }
-
-                            var root = new RootPropertyObserverNode(
-                                propertyElement.PropertyInfo,
-                                this.OnAction,
-                                (INotifyPropertyChanged)constantElement.Value!);
-
-                            this.LoopTree(propertyElement, root);
-                            this.RootNodes.Add(root);
-
-                            break;
-                        }
-
-                    default:
-                        throw new NotSupportedException($"{treeRoot}");
-                }
+                previousNode.Previous = currentNode;
+                previousNode = currentNode;
+                expressionNode = expressionNode.Next;
             }
         }
 
@@ -422,36 +330,5 @@ namespace Anori.ExpressionObservers.Base
         ///     The action.
         /// </summary>
         protected abstract void OnAction();
-
-        /// <summary>
-        /// Looptrees the specified expression node.
-        /// </summary>
-        /// <param name="expressionNode">The expression node.</param>
-        /// <param name="observerNode">The observer node.</param>
-        internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
-        {
-            var previousNode = observerNode;
-            while (expressionNode.Next is PropertyNode property)
-            {
-                var currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
-
-                previousNode.Previous = currentNode;
-                previousNode = currentNode;
-                expressionNode = expressionNode.Next;
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified objects are equal.
-        /// </summary>
-        /// <param name="x">The first object of type T to compare.</param>
-        /// <param name="y">The second object of type T to compare.</param>
-        /// <returns>
-        /// true if the specified objects are equal; otherwise, false.
-        /// </returns>
-        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y)
-        {
-            return Equals(x, y);
-        }
     }
 }

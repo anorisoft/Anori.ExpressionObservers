@@ -168,6 +168,27 @@ namespace Anori.ExpressionObservers
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult>>(body, parameters);
             return lambda.Compile();
         }
+        
+        [NotNull]
+        public static Func<TParameter1, TParameter2, TResult> CreateGetter<TParameter1, TParameter2, TResult>(
+            [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
+            [NotNull] IExpressionTree expressionTree,
+            TResult fallback)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            if (expressionTree == null)
+            {
+                throw new ArgumentNullException(nameof(expressionTree));
+            }
+
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback));
+            var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult>>(body, parameters);
+            return lambda.Compile();
+        }
 
         /// <summary>
         ///     Creates the value getter.

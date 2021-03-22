@@ -34,21 +34,23 @@ namespace Anori.ExpressionObservers.Observers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TParameter1, TResult> getter;
+        private readonly Func<TResult> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TParameter1, TResult}" />
-        /// class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TParameter1, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="ArgumentNullException">parameter1
-        /// or
-        /// action
-        /// or
-        /// propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     parameter1
+        ///     or
+        ///     action
+        ///     or
+        ///     propertyExpression is null.
+        /// </exception>
         internal PropertyObserverWithGetterAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -58,10 +60,10 @@ namespace Anori.ExpressionObservers.Observers
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
 
-            this.getter = ExpressionGetter.CreateGetter<TParameter1, TResult>(
+            this.getter = () => ExpressionGetter.CreateGetter<TParameter1, TResult>(
                 propertyExpression.Parameters,
                 this.Tree,
-                fallback);
+                fallback)(parameter1);
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     The result value.
         /// </returns>
-        public TResult Value => this.getter(this.Parameter1);
+        public TResult Value => this.getter();
 
         /// <summary>
         ///     On the action.

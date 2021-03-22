@@ -1,26 +1,29 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnNotifyProperyChanged{TResult} - Copy.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
-    using Anori.Common;
-    using Anori.ExpressionObservers.Base;
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
+    using Anori.Common;
+    using Anori.ExpressionObservers.Base;
+
+    using JetBrains.Annotations;
+
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}, TParameter1, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}, TParameter1, TResult}" />
     /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
@@ -44,7 +47,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -63,12 +67,18 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             Func<TResult> get;
             if (taskScheduler == null)
             {
-                get = () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(parameter1);
+                get = () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(
+                    propertyExpression.Parameters,
+                    this.Tree)(parameter1);
             }
             else
             {
-                get = () => new TaskFactory<TResult>(taskScheduler).StartNew(p => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters,
-                                    this.Tree)((TParameter1)p), parameter1).Result;
+                get = () => new TaskFactory<TResult>(taskScheduler).StartNew(
+                        p => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(
+                            propertyExpression.Parameters,
+                            this.Tree)((TParameter1)p),
+                        parameter1)
+                    .Result;
             }
 
             if (isCached)
@@ -110,9 +120,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

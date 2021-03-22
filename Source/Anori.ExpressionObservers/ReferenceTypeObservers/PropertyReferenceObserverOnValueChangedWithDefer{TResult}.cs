@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverOnValueChanged{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverOnValueChangedWithDefer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueTypeObservers
+namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
     using System;
     using System.Collections.Generic;
@@ -22,19 +22,35 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="PropertyValueObserverOnValueChanged{TResult}" />
+    ///     cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverOnValueChanged<TResult> :
-        PropertyObserverBase<PropertyValueObserverOnValueChanged<TResult>, TResult>,
+    public sealed class PropertyReferenceObserverOnValueChangedWithDefer<TResult> :
+        PropertyObserverBase<PropertyReferenceObserverOnValueChangedWithDefer<TResult>, TResult>,
         INotifyPropertyChanged
-        where TResult : struct
+        where TResult : class
     {
+        public enum DeferState
+        {
+            NotDeferred = 0,
+
+            Deferred = 1,
+
+            Update = 2
+        }
+
         /// <summary>
         ///     The action.
         /// </summary>
         [NotNull]
         private readonly Action action;
+
+        private readonly Func<TResult> getter;
+
+        /// <summary>
+        ///     The defer state.
+        /// </summary>
+        private DeferState deferState;
 
         /// <summary>
         ///     The value.
@@ -42,25 +58,41 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyValueObserverOnValueChanged(
+        internal PropertyReferenceObserverOnValueChangedWithDefer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler? taskScheduler = null)
             : base(propertyExpression)
         {
-            var getter = ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, this.Tree);
+            propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
+            this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
 
             if (taskScheduler == null)
             {
-                this.action = () => this.Value = getter();
+                this.action = () =>
+                    {
+                        if (this.deferState == DeferState.Update)
+                        {
+                            return;
+                        }
+
+                        if (this.deferState == DeferState.Deferred)
+                        {
+                            this.deferState = DeferState.Update;
+                            return;
+                        }
+
+                        this.Value = this.getter();
+                    };
             }
             else
             {
-                this.action = () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait();
+                this.action = () =>
+                    new TaskFactory(taskScheduler).StartNew(() => { return this.Value = this.getter(); }).Wait();
             }
         }
 
@@ -90,6 +122,31 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
                 this.OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is defer.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is defer; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDefer => this.deferState != DeferState.NotDeferred;
+
+        /// <summary>
+        /// Defers this instance.
+        /// </summary>
+        /// <returns>The deferrer.</returns>
+        public IDisposable Defer() =>
+            new Deferrer(
+                () => this.deferState = DeferState.Deferred,
+                () =>
+                    {
+                        if (this.deferState == DeferState.Update)
+                        {
+                            this.Value = this.getter();
+                        }
+
+                        this.deferState = DeferState.NotDeferred;
+                    });
 
         /// <summary>
         ///     On the action.

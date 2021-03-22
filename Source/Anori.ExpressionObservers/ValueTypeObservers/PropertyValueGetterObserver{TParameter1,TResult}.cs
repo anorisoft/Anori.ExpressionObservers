@@ -35,7 +35,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TParameter1, TResult?> getter;
+        private readonly Func<TResult?> getter;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyValueGetterObserver{TParameter1, TResult}" /> class.
@@ -51,18 +51,18 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             : base(parameter1, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = ExpressionGetter.CreateValueGetter(propertyExpression);
+            this.getter = () => ExpressionGetter.CreateValueGetter(propertyExpression)(parameter1);
         }
 
         /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult? Value => this.getter(this.Parameter1);
+        public TResult? Value => this.getter();
 
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.action(this.getter(this.Parameter1));
+        protected override void OnAction() => this.action(this.getter());
     }
 }

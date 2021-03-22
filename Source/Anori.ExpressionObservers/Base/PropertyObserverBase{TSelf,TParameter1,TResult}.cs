@@ -10,8 +10,10 @@ namespace Anori.ExpressionObservers.Base
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Tree;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.ExpressionObservers.Tree.Nodes;
 
     using JetBrains.Annotations;
 
@@ -75,6 +77,75 @@ namespace Anori.ExpressionObservers.Base
         ///     The tree.
         /// </value>
         public IExpressionTree Tree { get; }
+
+        /// <summary>
+        ///     Creates the chain.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="tree">The nodes.</param>
+        /// <exception cref="NotSupportedException">Expression Tree Node not supported.</exception>
+        protected void CreateChain(INotifyPropertyChanged parameter1, IRootAware tree)
+        {
+            foreach (var treeRoot in tree.Roots)
+            {
+                switch (treeRoot)
+                {
+                    case ParameterNode parameterElement:
+                        {
+                            if (!(parameterElement.Next is PropertyNode propertyElement))
+                            {
+                                continue;
+                            }
+
+                            var root = new RootPropertyObserverNode(
+                                propertyElement.PropertyInfo,
+                                this.OnAction,
+                                parameter1);
+                            this.LoopTree(propertyElement, root);
+                            this.RootNodes.Add(root);
+                            break;
+                        }
+
+                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
+                        {
+                            if (!(fieldElement.Next is PropertyNode propertyElement))
+                            {
+                                continue;
+                            }
+
+                            var root = new RootPropertyObserverNode(
+                                propertyElement.PropertyInfo,
+                                this.OnAction,
+                                (INotifyPropertyChanged)fieldElement.FieldInfo.GetValue(constantElement.Value));
+
+                            this.LoopTree(propertyElement, root);
+                            this.RootNodes.Add(root);
+                            break;
+                        }
+
+                    case ConstantNode constantElement:
+                        {
+                            if (!(treeRoot.Next is PropertyNode propertyElement))
+                            {
+                                continue;
+                            }
+
+                            var root = new RootPropertyObserverNode(
+                                propertyElement.PropertyInfo,
+                                this.OnAction,
+                                (INotifyPropertyChanged)constantElement.Value!);
+
+                            this.LoopTree(propertyElement, root);
+                            this.RootNodes.Add(root);
+
+                            break;
+                        }
+
+                    default:
+                        throw new NotSupportedException();
+                }
+            }
+        }
 
         /// <summary>
         ///     Creates the chain.

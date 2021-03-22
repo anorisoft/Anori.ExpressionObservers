@@ -769,6 +769,36 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
+        public void PropertyObserver_Getter_Observes_instance_StringProperty_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1() { StringProperty = null };
+            var callCount = 0;
+            using var observes = PropertyReferenceObserver.ObservesAndGet(() => instance.StringProperty, true, () => callCount++);
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.StringProperty = "1";
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.StringProperty = "3";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("3", observes.Value);
+
+            instance.StringProperty = null;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(null, observes.Value);
+        }
+
+        [Test]
         public void PropertyObserver_ValueGetter_Observes_instance_StringProperty()
         {
             var instance = new NotifyPropertyChangedClass1() { StringProperty = null };
