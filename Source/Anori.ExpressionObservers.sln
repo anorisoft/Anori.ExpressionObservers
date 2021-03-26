@@ -29,6 +29,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soution Items", "Soution Items", "{8D68EC6D-D06D-4979-AC83-0A90093F0D61}"
+	ProjectSection(SolutionItems) = preProject
+		AnoriSoft.DotSettings = AnoriSoft.DotSettings
+		Anorisoft.png = Anorisoft.png
+		Anorisoft.snk = Anorisoft.snk
+		CodeMaid.config = CodeMaid.config
+		stylecop.json = stylecop.json
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodule", "Submodule", "{221613C9-C2BB-4707-B345-53D377E8E39F}"
 EndProject
@@ -36,7 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.Extensions", "..\Subm
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{B9BA4EBD-E37A-4BE0-BDCB-B596772C6C5C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.Common", "..\..\..\..\Anori.ExpressionObservers\Submodules\Anori.Common\Source\Anori.Common\Anori.Common.csproj", "{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.Common", "..\Submodules\Anori.Common\Source\Anori.Common\Anori.Common.csproj", "{0146337B-F8A7-4F1A-94DE-EE5B87727230}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,14 +83,14 @@ Global
 		{1F0F835C-F1E5-4FF3-AF5D-6261EBE36F1D}.Release Submodules|Any CPU.ActiveCfg = Release Submodules|Any CPU
 		{1F0F835C-F1E5-4FF3-AF5D-6261EBE36F1D}.Release Submodules|Any CPU.Build.0 = Release Submodules|Any CPU
 		{1F0F835C-F1E5-4FF3-AF5D-6261EBE36F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}.Debug Submodules|Any CPU.ActiveCfg = Debug Submodules|Any CPU
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}.Debug Submodules|Any CPU.Build.0 = Debug Submodules|Any CPU
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}.Release Submodules|Any CPU.ActiveCfg = Release Submodules|Any CPU
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}.Release Submodules|Any CPU.Build.0 = Release Submodules|Any CPU
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0146337B-F8A7-4F1A-94DE-EE5B87727230}.Debug Submodules|Any CPU.ActiveCfg = Debug Submodules|Any CPU
+		{0146337B-F8A7-4F1A-94DE-EE5B87727230}.Debug Submodules|Any CPU.Build.0 = Debug Submodules|Any CPU
+		{0146337B-F8A7-4F1A-94DE-EE5B87727230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0146337B-F8A7-4F1A-94DE-EE5B87727230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0146337B-F8A7-4F1A-94DE-EE5B87727230}.Release Submodules|Any CPU.ActiveCfg = Release Submodules|Any CPU
+		{0146337B-F8A7-4F1A-94DE-EE5B87727230}.Release Submodules|Any CPU.Build.0 = Release Submodules|Any CPU
+		{0146337B-F8A7-4F1A-94DE-EE5B87727230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0146337B-F8A7-4F1A-94DE-EE5B87727230}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,7 +100,6 @@ Global
 		{C014B4C7-5708-45C8-8A88-90469EFA264F} = {7B787744-DF68-49AF-89C8-B8DD0AE2A08E}
 		{D84FFB93-44E0-44A9-B94B-74BF2B7876EB} = {7B787744-DF68-49AF-89C8-B8DD0AE2A08E}
 		{1F0F835C-F1E5-4FF3-AF5D-6261EBE36F1D} = {221613C9-C2BB-4707-B345-53D377E8E39F}
-		{CF9007AD-D8A2-43D3-8EC3-37EC5D18323C} = {221613C9-C2BB-4707-B345-53D377E8E39F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBA0E37C-4CB3-40D3-B84D-D374EBCEB2EB}
