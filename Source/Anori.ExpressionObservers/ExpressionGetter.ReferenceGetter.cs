@@ -214,7 +214,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TParameter, TResult?> CreateReferenceGetter<TParameter, TResult>(
-            [NotNull] Expression<Func<TParameter, TResult>> expression)
+            [NotNull] this Expression<Func<TParameter, TResult>> expression)
             where TResult : class
         {
             if (expression == null)
@@ -238,7 +238,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
-        public static Func<TResult?> CreateReferenceGetter<TResult>([NotNull] Expression<Func<TResult>> expression)
+        public static Func<TResult?> CreateReferenceGetter<TResult>([NotNull] this Expression<Func<TResult>> expression)
             where TResult : class
         {
             if (expression == null)
@@ -265,7 +265,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TParameter, TResult?> CreateReferenceGetter<TParameter, TResult>(
-            [NotNull] Expression<Func<TParameter, TResult>> expression,
+            [NotNull] this Expression<Func<TParameter, TResult>> expression,
             TResult fallback)
             where TResult : class
         {
@@ -291,7 +291,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TResult?> CreateReferenceGetter<TParameter1, TParameter2, TResult>(
-            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression)
+            [NotNull] this Expression<Func<TParameter1, TParameter2, TResult>> expression)
             where TResult : class
         {
             if (expression == null)
@@ -343,7 +343,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         public static Func<TParameter1, TParameter2, TParameter3, TResult?>
             CreateReferenceGetter<TParameter1, TParameter2, TParameter3, TResult>(
-                [NotNull] Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression,
+                [NotNull] this Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression,
                 [CanBeNull] TResult fallback)
             where TResult : class
         {
