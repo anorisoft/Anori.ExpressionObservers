@@ -20,8 +20,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     public sealed class
-        PropertyReferenceObserverWithGetter<TResult> : PropertyObserverBase<PropertyReferenceObserverWithGetter<TResult>
-            , TResult>
+        PropertyReferenceObserverWithGetter<TResult> : PropertyObserverBase<PropertyReferenceObserverWithGetter<TResult>, TResult>
         where TResult : class
     {
         /// <summary>
@@ -34,7 +33,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult> getter;
+        private readonly Func<TResult?> getter;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TResult}" /> class.
@@ -60,7 +59,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult Value => this.getter();
+        public TResult? Value => this.getter();
 
         /// <summary>
         ///     On the action.

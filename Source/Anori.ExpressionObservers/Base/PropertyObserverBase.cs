@@ -185,10 +185,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator ==(PropertyObserverBase? a, PropertyObserverBase? b)
-        {
-            return Equals(a, b);
-        }
+        public static bool operator ==(PropertyObserverBase? a, PropertyObserverBase? b) => Equals(a, b);
 
         /// <summary>
         ///     Implements the operator ==.
@@ -327,9 +324,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
-        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y)
-        {
-            return Equals(x, y);
-        }
+        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y) =>
+            Equals(x, y);
     }
 }

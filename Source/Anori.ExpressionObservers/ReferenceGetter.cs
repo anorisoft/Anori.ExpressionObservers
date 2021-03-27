@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>Reference Getter.</returns>
-        public static Func<TParameter, TResult> CreateGetter<TParameter, TResult>(
+        public static Func<TParameter, TResult?> CreateGetter<TParameter, TResult>(
             Expression<Func<TParameter, TResult>> propertyExpression)
             where TResult : class
         {

@@ -94,7 +94,7 @@ namespace Anori.ExpressionObservers
             }
 
             var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree);
-            var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
+            var lambda = Expression.Lambda<Func<TResult?>>(body, parameters);
             return lambda.Compile();
         }
 
@@ -198,7 +198,7 @@ namespace Anori.ExpressionObservers
             }
 
             var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback));
-            var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
+            var lambda = Expression.Lambda<Func<TResult?>>(body, parameters);
             return lambda.Compile();
         }
 
@@ -248,7 +248,7 @@ namespace Anori.ExpressionObservers
 
             var parameters = expression.Parameters;
             var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body);
-            var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
+            var lambda = Expression.Lambda<Func<TResult?>>(body, parameters);
             return lambda.Compile();
         }
 

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverTParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -38,7 +38,7 @@ namespace Anori.ExpressionObservers
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
                 [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-                [NotNull] Action<TResult> action)
+                [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : class =>
@@ -67,7 +67,7 @@ namespace Anori.ExpressionObservers
                 [NotNull] TParameter2 parameter2,
                 [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
                 bool isAutoActivate,
-                [NotNull] Action<TResult> action)
+                [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : class

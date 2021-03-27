@@ -4,14 +4,12 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Nodes
+namespace Anori.ExpressionObservers.Tree.Nodes
 {
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.ExpressionObservers.Tree.Nodes;
 
     using JetBrains.Annotations;
 

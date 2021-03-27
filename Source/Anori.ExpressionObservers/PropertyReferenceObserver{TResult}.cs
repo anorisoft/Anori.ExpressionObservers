@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         public static PropertyReferenceGetterObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action<TResult> action)
+            [NotNull] Action<TResult?> action)
             where TResult : class =>
             new PropertyReferenceGetterObserver<TResult>(propertyExpression, action);
 
@@ -46,7 +46,7 @@ namespace Anori.ExpressionObservers
         public static PropertyReferenceGetterObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isAutoActivate,
-            [NotNull] Action<TResult> action)
+            [NotNull] Action<TResult?> action)
             where TResult : class
         {
             var observer = new PropertyReferenceGetterObserver<TResult>(propertyExpression, action);

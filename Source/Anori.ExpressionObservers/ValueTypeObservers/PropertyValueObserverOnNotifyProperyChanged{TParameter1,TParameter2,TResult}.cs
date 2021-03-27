@@ -31,8 +31,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     ///     cref="PropertyObserverBase{TSelf}.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}}" />
     /// <seealso cref="INotifyPropertyChanged" />
     public sealed class PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult> :
-        PropertyObserverBase<PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>, TParameter1
-            , TParameter2, TResult>,
+        PropertyObserverBase<PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>,
         INotifyPropertyChanged
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
