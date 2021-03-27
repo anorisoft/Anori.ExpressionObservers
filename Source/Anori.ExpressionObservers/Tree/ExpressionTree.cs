@@ -235,7 +235,7 @@ namespace Anori.ExpressionObservers.Tree
                             element.Parameters = parameters;
 
                             var bindings = memberInitExpression.Bindings;
-                            var bindingtree = CreateBindingtree(nodeCollection, bindings, element);
+                            var bindingtree = CreateBindingTree(nodeCollection, bindings, element);
 
                             element.Bindings = bindingtree;
                             nodeCollection.AddElement(element);
@@ -259,7 +259,7 @@ namespace Anori.ExpressionObservers.Tree
         /// <param name="bindings">The bindings.</param>
         /// <param name="node">The node.</param>
         /// <returns>The binding list.</returns>
-        private static List<IBindingNode> CreateBindingtree(
+        private static List<IBindingNode> CreateBindingTree(
             IRootAware expressionTree,
             IEnumerable<MemberBinding> bindings,
             MemberInitNode node)
@@ -271,18 +271,17 @@ namespace Anori.ExpressionObservers.Tree
                 {
                     case MemberAssignment memberAssignment:
                         {
-                            var b = new MemberAssignmentNode(
-                                memberAssignment,
-                                GetTree(memberAssignment.Expression, expressionTree, node));
-                            bindingtree.Add(b);
+                            bindingtree.Add(
+                                new MemberAssignmentNode(
+                                    memberAssignment,
+                                    GetTree(memberAssignment.Expression, expressionTree, node)));
                             break;
                         }
 
                     case MemberMemberBinding memberMemberBinding:
                         {
-                            var bs = CreateBindingtree(expressionTree, memberMemberBinding.Bindings, node);
-                            var b = new MemberMemberBindingNode(memberMemberBinding, bs, node);
-                            bindingtree.Add(b);
+                            var bs = CreateBindingTree(expressionTree, memberMemberBinding.Bindings, node);
+                            bindingtree.Add(new MemberMemberBindingNode(memberMemberBinding, bs, node));
                             break;
                         }
 
@@ -297,8 +296,7 @@ namespace Anori.ExpressionObservers.Tree
                                         i.Arguments.Select(a => GetTree(a, expressionTree, node)).ToList()));
                             }
 
-                            var b = new MemberListBindingNode(memberListBinding, elementInits);
-                            bindingtree.Add(b);
+                            bindingtree.Add(new MemberListBindingNode(memberListBinding, elementInits));
                             break;
                         }
                 }
