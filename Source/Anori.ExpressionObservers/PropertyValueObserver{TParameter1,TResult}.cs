@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserver{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserver{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,14 +12,14 @@ namespace Anori.ExpressionObservers
     using System.Threading.Tasks;
 
     using Anori.Common;
-    using Anori.ExpressionObservers.ReferenceTypeObservers;
+    using Anori.ExpressionObservers.ValueTypeObservers;
 
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     The Property Reference Observer class.
+    /// The Property Value Observer class.
     /// </summary>
-    public static partial class PropertyReferenceObserver
+    public static partial class PropertyValueObserver
     {
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -29,15 +29,17 @@ namespace Anori.ExpressionObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Reference Observer.</returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         [NotNull]
-        public static PropertyReferenceGetterObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyValueGetterObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
-            where TResult : class =>
-            new PropertyReferenceGetterObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            where TResult : struct =>
+            new PropertyValueGetterObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -48,18 +50,20 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Reference Observer.</returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         [NotNull]
-        public static PropertyReferenceGetterObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyValueGetterObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate,
             [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
-            where TResult : class
+            where TResult : struct
         {
             var observer =
-                new PropertyReferenceGetterObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+                new PropertyValueGetterObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
             if (isAutoActivate)
             {
                 observer.Subscribe(true);
@@ -76,15 +80,15 @@ namespace Anori.ExpressionObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Reference Observer.</returns>
+        /// <returns>The Property Value Observer.</returns>
         [NotNull]
-        public static PropertyReferenceObserverWithGetter<TParameter1, TResult> ObservesAndGet<TParameter1, TResult>(
+        public static PropertyValueObserverWithGetter<TParameter1, TResult> ObservesAndGet<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action)
-            where TResult : class
+            where TResult : struct
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyReferenceObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action);
+            new PropertyValueObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action);
 
         /// <summary>
         ///     Observeses the and get.
@@ -95,18 +99,20 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Reference Observer.</returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverWithGetter<TParameter1, TResult> ObservesAndGet<TParameter1, TResult>(
+        public static PropertyValueObserverWithGetter<TParameter1, TResult> ObservesAndGet<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate,
             [NotNull] Action action)
-            where TResult : class
+            where TResult : struct
             where TParameter1 : INotifyPropertyChanged
         {
             var observer =
-                new PropertyReferenceObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action);
+                new PropertyValueObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action);
             if (isAutoActivate)
             {
                 observer.Subscribe(true);
@@ -122,15 +128,15 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>The Property Reference Observer.</returns>
+        /// <returns>The Property Value Observer.</returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
-            where TResult : class =>
-            new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(parameter1, propertyExpression);
+            where TResult : struct =>
+            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(parameter1, propertyExpression);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -142,18 +148,18 @@ namespace Anori.ExpressionObservers
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
                 bool isCached,
                 LazyThreadSafetyMode safetyMode)
-            where TResult : class
+            where TResult : struct
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 isCached,
@@ -170,19 +176,19 @@ namespace Anori.ExpressionObservers
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
                 bool isCached,
                 LazyThreadSafetyMode safetyMode,
                 TaskScheduler taskScheduler)
-            where TResult : class
+            where TResult : struct
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 isCached,
@@ -201,10 +207,10 @@ namespace Anori.ExpressionObservers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -212,10 +218,10 @@ namespace Anori.ExpressionObservers
                 LazyThreadSafetyMode safetyMode,
                 TaskScheduler taskScheduler,
                 bool isAutoActivate)
-            where TResult : class
+            where TResult : struct
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 isCached,
@@ -240,20 +246,20 @@ namespace Anori.ExpressionObservers
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
                 bool isCached,
                 LazyThreadSafetyMode safetyMode,
                 bool isAutoActivate)
-            where TResult : class
+            where TResult : struct
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 isCached,
@@ -275,21 +281,19 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
                 bool isAutoActivate)
-            where TResult : class
+            where TResult : struct
             where TParameter1 : INotifyPropertyChanged
         {
             var observer =
-                new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
-                    parameter1,
-                    propertyExpression);
+                new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(parameter1, propertyExpression);
             if (isAutoActivate)
             {
                 observer.Subscribe(true);
@@ -306,16 +310,16 @@ namespace Anori.ExpressionObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnValueChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnValueChanged<TParameter1, TResult>
             ObservesOnValueChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
-            where TResult : class =>
-            new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression);
+            where TResult : struct =>
+            new PropertyValueObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression);
 
         /// <summary>
         ///     Observeses the on value changed.
@@ -326,19 +330,19 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnValueChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnValueChanged<TParameter1, TResult>
             ObservesOnValueChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
                 bool isAutoActivate)
             where TParameter1 : INotifyPropertyChanged
-            where TResult : class
+            where TResult : struct
         {
             var observer =
-                new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression);
+                new PropertyValueObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression);
             if (isAutoActivate)
             {
                 observer.Subscribe(true);
@@ -356,17 +360,17 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnValueChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnValueChanged<TParameter1, TResult>
             ObservesOnValueChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
                 [NotNull] TaskScheduler taskScheduler)
             where TParameter1 : INotifyPropertyChanged
-            where TResult : class =>
-            new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
+            where TResult : struct =>
+            new PropertyValueObserverOnValueChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler);
@@ -381,19 +385,19 @@ namespace Anori.ExpressionObservers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Reference Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnValueChanged<TParameter1, TResult>
+        public static PropertyValueObserverOnValueChanged<TParameter1, TResult>
             ObservesOnValueChanged<TParameter1, TResult>(
                 [NotNull] this TParameter1 parameter1,
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
                 [NotNull] TaskScheduler taskScheduler,
                 bool isAutoActivate)
             where TParameter1 : INotifyPropertyChanged
-            where TResult : class
+            where TResult : struct
         {
-            var observer = new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
+            var observer = new PropertyValueObserverOnValueChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler);

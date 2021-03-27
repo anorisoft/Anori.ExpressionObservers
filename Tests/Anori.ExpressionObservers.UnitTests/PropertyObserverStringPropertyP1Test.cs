@@ -705,7 +705,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { StringProperty = null };
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesAndGet(instance, i => i.StringProperty, () => callCount++);
+            using var observes = instance.ObservesAndGet(i => i.StringProperty, () => callCount++);
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
@@ -739,7 +739,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { StringProperty = null };
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesAndGet(instance, i => i.StringProperty, false, () => callCount++);
+            using var observes = instance.ObservesAndGet(i => i.StringProperty, false, () => callCount++);
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 

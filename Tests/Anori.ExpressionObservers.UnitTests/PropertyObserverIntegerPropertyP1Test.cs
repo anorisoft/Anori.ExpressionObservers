@@ -503,7 +503,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyValueObserver.ObservesOnNotifyProperyChanged(instance, i => i.Class2.IntProperty, true, LazyThreadSafetyMode.None, TaskScheduler.Current);
+            using var observes = instance.ObservesOnNotifyProperyChanged(i => i.Class2.IntProperty, true, LazyThreadSafetyMode.None, TaskScheduler.Current);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);

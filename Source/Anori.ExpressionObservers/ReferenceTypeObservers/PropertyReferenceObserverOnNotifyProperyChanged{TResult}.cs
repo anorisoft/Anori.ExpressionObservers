@@ -40,7 +40,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult> getter;
+        private readonly Func<TResult?> getter;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" /> class.
@@ -57,21 +57,21 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             TaskScheduler? taskScheduler = null)
             : base(propertyExpression)
         {
-            Func<TResult> get;
+            Func<TResult?> get;
             if (taskScheduler == null)
             {
                 get = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
             }
             else
             {
-                get = () => new TaskFactory<TResult>(taskScheduler).StartNew(
+                get = () => new TaskFactory<TResult?>(taskScheduler).StartNew(
                         ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree))
                     .Result;
             }
 
             if (isCached)
             {
-                var cache = new ResetLazy<TResult>(() => get(), safetyMode);
+                var cache = new ResetLazy<TResult?>(() => get(), safetyMode);
                 this.action = () =>
                     {
                         cache.Reset();
@@ -96,7 +96,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult Value => this.getter();
+        public TResult? Value => this.getter();
 
         /// <summary>
         ///     On the action.

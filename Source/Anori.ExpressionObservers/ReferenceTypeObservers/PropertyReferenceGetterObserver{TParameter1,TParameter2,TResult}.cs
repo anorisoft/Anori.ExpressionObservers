@@ -30,13 +30,12 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <summary>
         ///     The action.
         /// </summary>
-        [NotNull]
-        private readonly Action<TResult> action;
+        private readonly Action<TResult?> action;
 
         /// <summary>
         ///     The getter.
         /// </summary>
-        private readonly Func<TResult> getter;
+        private readonly Func<TResult?> getter;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TParameter1,TParameter2,TResult}" />
@@ -51,7 +50,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult> action)
+            [NotNull] Action<TResult?> action)
             : base(parameter1, parameter2, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
@@ -65,7 +64,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult Value => this.getter();
+        public TResult? Value => this.getter();
 
         /// <summary>
         ///     The action.
