@@ -4,6 +4,10 @@ using static Anori.ExpressionObservers.ExpressionGetter;
 
 namespace Anori.ExpressionObservers.ConsoleTests
 {
+    using System.Linq.Expressions;
+    using System.Reflection.Metadata;
+    using System.Windows;
+
     internal static class Program
     {
         private static void Main()
@@ -35,6 +39,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             Console.WriteLine("Reference (new TestClass1()): " + (reference != null ? reference.ToString() : "null"));
 
             var f3 = CreateValueGetter((TestClass1 t) => t.Test2.GetTest3(1, null).Property);
+
             var s = f3(test);
             Console.WriteLine(s.HasValue ? s.ToString() : "null");
 
@@ -209,6 +214,11 @@ namespace Anori.ExpressionObservers.ConsoleTests
             }
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
+        }
+
+        private static object Expression<T>(T p)
+        {
+            throw new NotImplementedException();
         }
 
         private static int? Test3MethodExcepion(TestClass1 test)

@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
-        public static Func<TResult?> CreateValueGetter<TResult>([NotNull] this Expression<Func<TResult>> expression)
+        public static Func<TResult?> CreateValueGetter<TResult>([NotNull] Expression<Func<TResult>> expression)
             where TResult : struct
         {
             if (expression == null)
@@ -155,7 +155,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TParameter, TResult?> CreateValueGetter<TParameter, TResult>(
-            [NotNull] this Expression<Func<TParameter, TResult>> expression)
+            [NotNull] Expression<Func<TParameter, TResult>> expression)
             where TResult : struct
         {
             if (expression == null)
@@ -182,7 +182,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TResult?> CreateValueGetter<TParameter1, TParameter2, TResult>(
-            [NotNull] this Expression<Func<TParameter1, TParameter2, TResult>> expression)
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression)
             where TResult : struct
         {
             if (expression == null)
@@ -210,7 +210,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TParameter3, TResult?> CreateValueGetter<TParameter1, TParameter2,
-            TParameter3, TResult>([NotNull] this Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression)
+            TParameter3, TResult>([NotNull] Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression)
             where TResult : struct
         {
             if (expression == null)
