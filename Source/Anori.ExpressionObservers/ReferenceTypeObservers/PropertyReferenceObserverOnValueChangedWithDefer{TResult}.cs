@@ -36,7 +36,10 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         [NotNull]
         private readonly Action action;
 
-        private readonly Func<TResult> getter;
+        /// <summary>
+        /// The getter.
+        /// </summary>
+        private readonly Func<TResult?> getter;
 
         /// <summary>
         ///     The defer state.

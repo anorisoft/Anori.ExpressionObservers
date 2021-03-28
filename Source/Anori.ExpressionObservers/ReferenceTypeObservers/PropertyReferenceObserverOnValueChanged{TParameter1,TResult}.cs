@@ -58,7 +58,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             TaskScheduler? taskScheduler = null)
             : base(parameter1, propertyExpression)
         {
-            TResult Getter() =>
+            TResult? Getter() =>
                 ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
                     parameter1);
 

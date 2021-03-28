@@ -40,7 +40,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult> getter;
+        private readonly Func<TResult?> getter;
 
         /// <summary>
         ///     Initializes a new instance of the
@@ -73,7 +73,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult Value => this.getter();
+        public TResult? Value => this.getter();
 
         /// <summary>
         ///     On the action.
