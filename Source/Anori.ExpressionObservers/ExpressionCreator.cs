@@ -12,7 +12,6 @@ namespace Anori.ExpressionObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Tree;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.Tree.Nodes;
@@ -351,7 +350,10 @@ namespace Anori.ExpressionObservers
                 return;
             }
 
-            expressions.Add(Expression.IfThen(Expression.Equal(Expression.Constant(constant.Value, resultType), NullExpressionOf(resultType)), ifNull));
+            expressions.Add(
+                Expression.IfThen(
+                    Expression.Equal(Expression.Constant(constant.Value, resultType), NullExpressionOf(resultType)),
+                    ifNull));
             expressions.Add(Expression.Return(returnTarget, Expression.Constant(constant.Value, resultType)));
         }
 
@@ -703,8 +705,10 @@ namespace Anori.ExpressionObservers
                     }
 
                 case ConstantNode constant:
-                    target = constant.Expression;
-                    break;
+                    {
+                        target = constant.Expression;
+                        break;
+                    }
 
                 case MethodNode method:
                     {

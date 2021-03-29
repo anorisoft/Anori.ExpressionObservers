@@ -1,0 +1,134 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="ExpressionGetterBuilder.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Anori.ExpressionObservers.Builder
+{
+    using System;
+    using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Interfaces;
+
+    /// <summary>
+    ///     The Expression Getter Builder class.
+    /// </summary>
+    /// <seealso cref="IExpressionGetterBuilder" />
+    public class ExpressionGetterBuilder : IExpressionGetterBuilder
+    {
+        /// <summary>
+        /// Gets the builder.
+        /// </summary>
+        /// <value>
+        /// The builder.
+        /// </value>
+        public static IExpressionGetterBuilder Builder { get; } = new ExpressionGetterBuilder();
+
+        /// <summary>
+        ///     Resources the getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The Reference Getter Builder.
+        /// </returns>
+        public IReferenceGetterBuilder<TParameter1, TParameter2, TResult>
+            ReferenceGetter<TParameter1, TParameter2, TResult>(
+                Expression<Func<TParameter1, TParameter2, TResult>> expression)
+            where TResult : class
+        {
+            return new ExpressionReferenceGetterBuilder<TParameter1, TParameter2, TResult>(expression);
+        }
+
+        /// <summary>
+        ///     Resources the getter.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The Reference Getter Builder.
+        /// </returns>
+        public IReferenceGetterBuilder<TResult> ReferenceGetter<TResult>(Expression<Func<TResult>> expression)
+            where TResult : class
+        {
+            return new ExpressionReferenceGetterBuilder<TResult>(expression);
+        }
+
+        public IReferenceGetterBuilder<TParameter1, TParameter2, TParameter3, TResult> ReferenceGetter<TParameter1, TParameter2, TParameter3, TResult>(Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression)
+            where TResult : class
+        {
+            return new ExpressionReferenceGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>(expression);
+        }
+
+        public IValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult> ValueGetter<TParameter1, TParameter2, TParameter3, TResult>(Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression)
+            where TResult : struct
+        {
+            return new ExpressionValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>(expression);
+        }
+
+        /// <summary>
+        ///     Values the getter.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The Value Getter Builder.
+        /// </returns>
+        public IValueGetterBuilder<TResult> ValueGetter<TResult>(Expression<Func<TResult>> expression)
+            where TResult : struct
+        {
+            return new ExpressionValueGetterBuilder<TResult>(expression);
+        }
+
+        /// <summary>
+        ///     Resources the getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>Reference Getter Builder.</returns>
+        IReferenceGetterBuilder<TParameter1, TResult> IExpressionGetterBuilder.ReferenceGetter<TParameter1, TResult>(
+            Expression<Func<TParameter1, TResult>> expression)
+            where TResult : class
+        {
+            return new ExpressionReferenceGetterBuilder<TParameter1, TResult>(expression);
+        }
+
+        /// <summary>
+        ///     Values the getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The Value Getter Builder.
+        /// </returns>
+        IValueGetterBuilder<TParameter1, TResult> IExpressionGetterBuilder.ValueGetter<TParameter1, TResult>(
+            Expression<Func<TParameter1, TResult>> expression)
+            where TResult : struct
+        {
+            return new ExpressionValueGetterBuilder<TParameter1, TResult>(expression);
+        }
+
+        /// <summary>
+        ///     Values the getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The Value Getter Builder.
+        /// </returns>
+        IValueGetterBuilder<TParameter1, TParameter2, TResult> IExpressionGetterBuilder.
+            ValueGetter<TParameter1, TParameter2, TResult>(
+                Expression<Func<TParameter1, TParameter2, TResult>> expression)
+            where TResult : struct
+        {
+            return new ExpressionValueGetterBuilder<TParameter1, TParameter2, TResult>(expression);
+        }
+    }
+}

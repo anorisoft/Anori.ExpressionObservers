@@ -101,7 +101,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TParameter, TResult> CreateGetter<TParameter, TResult>(
-            [NotNull] this Expression<Func<TParameter, TResult>> expression,
+            [NotNull] Expression<Func<TParameter, TResult>> expression,
             TResult fallback)
         {
             if (expression == null)
@@ -127,7 +127,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TResult> CreateGetter<TResult>(
-            [NotNull] this Expression<Func<TResult>> expression,
+            [NotNull] Expression<Func<TResult>> expression,
             TResult fallback)
         {
             if (expression == null)
@@ -155,7 +155,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentNullException">expression is null.</exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TResult> CreateGetter<TParameter1, TParameter2, TResult>(
-            [NotNull] this Expression<Func<TParameter1, TParameter2, TResult>> expression,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression,
             TResult fallback)
         {
             if (expression == null)
@@ -222,7 +222,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         public static Func<TParameter1, TParameter2, TParameter3, TResult>
             CreateGetter<TParameter1, TParameter2, TParameter3, TResult>(
-                [NotNull] this Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression,
+                [NotNull] Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression,
                 TResult fallback)
         {
             var parameters = expression.Parameters;
