@@ -44,12 +44,12 @@ namespace Anori.ExpressionObservers.Builder
         }
 
         /// <summary>
-        ///     Resources the getter.
+        /// Resources the getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Reference Getter Builder.
+        /// The Reference Getter Builder.
         /// </returns>
         public IReferenceGetterBuilder<TResult> ReferenceGetter<TResult>(Expression<Func<TResult>> expression)
             where TResult : class
@@ -57,12 +57,34 @@ namespace Anori.ExpressionObservers.Builder
             return new ExpressionReferenceGetterBuilder<TResult>(expression);
         }
 
+        /// <summary>
+        /// References the getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TParameter3">The type of the parameter3.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The Value Getter Builder.
+        /// </returns>
         public IReferenceGetterBuilder<TParameter1, TParameter2, TParameter3, TResult> ReferenceGetter<TParameter1, TParameter2, TParameter3, TResult>(Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression)
             where TResult : class
         {
             return new ExpressionReferenceGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>(expression);
         }
 
+        /// <summary>
+        /// Values the getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TParameter3">The type of the parameter3.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The Value Getter Builder.
+        /// </returns>
         public IValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult> ValueGetter<TParameter1, TParameter2, TParameter3, TResult>(Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression)
             where TResult : struct
         {
