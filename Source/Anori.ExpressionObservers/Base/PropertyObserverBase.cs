@@ -55,6 +55,21 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
+        ///     Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        ///     unmanaged resources.
+        /// </param>
+        public virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.Unsubscribe();
+            }
+        }
+
+        /// <summary>
         ///     Determines whether the specified objects are equal.
         /// </summary>
         /// <param name="x">The first object of type T to compare.</param>
@@ -275,21 +290,6 @@ namespace Anori.ExpressionObservers.Base
             foreach (var rootPropertyObserverNode in this.RootNodes)
             {
                 rootPropertyObserverNode.UnsubscribeListener();
-            }
-        }
-
-        /// <summary>
-        ///     Releases unmanaged and - optionally - managed resources.
-        /// </summary>
-        /// <param name="disposing">
-        ///     <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
-        ///     unmanaged resources.
-        /// </param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.Unsubscribe();
             }
         }
 

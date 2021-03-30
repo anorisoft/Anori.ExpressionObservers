@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Builder;
 
     using JetBrains.Annotations;
 
@@ -20,10 +21,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverWithGetter{TParameter1, TResult}}" />
+    ///     cref="PropertyValueObserverWithGetter{TResult}" />
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyValueObserverWithGetter<TParameter1, TResult> : PropertyObserverBase<
-        PropertyValueObserverWithGetter<TParameter1, TResult>, TParameter1, TResult>
+        PropertyValueObserverWithGetter<TParameter1, TResult>, TParameter1, TResult>,
+        IPropertyValueObserverWithGetter<TParameter1, TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
     {
@@ -50,7 +52,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action)
-            : base(parameter1, propertyExpression)
+            : base(parameter1, propertyExpression) 
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = () =>

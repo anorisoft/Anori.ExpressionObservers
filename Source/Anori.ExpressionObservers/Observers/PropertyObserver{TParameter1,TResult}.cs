@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.Observers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -20,9 +21,9 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
-    public sealed class
-        PropertyObserver<TParameter1, TResult> : PropertyObserverBase<PropertyObserver<TParameter1, TResult>,
-            TParameter1, TResult>
+    public sealed class PropertyObserver<TParameter1, TResult> :
+        PropertyObserverBase<PropertyObserver<TParameter1, TResult>, TParameter1, TResult>,
+        IPropertyObserver<TParameter1, TResult>
         where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
@@ -49,5 +50,30 @@ namespace Anori.ExpressionObservers.Observers
         ///     The action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        ///     Subscribes this instance.
+        /// </summary>
+        /// <returns>The Property Observer.</returns>
+        IPropertyObserver<TParameter1, TResult> IPropertyGetterObserverBase<IPropertyObserver<TParameter1, TResult>>.
+            Subscribe() =>
+            this.Subscribe();
+
+        /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <returns>The Property Observer.</returns>
+        IPropertyObserver<TParameter1, TResult> IPropertyGetterObserverBase<IPropertyObserver<TParameter1, TResult>>.
+            Subscribe(bool silent) =>
+            this.Subscribe(silent);
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        /// <returns>The Property Observer.</returns>
+        IPropertyObserver<TParameter1, TResult> IPropertyGetterObserverBase<IPropertyObserver<TParameter1, TResult>>.
+            Unsubscribe() =>
+            this.Unsubscribe();
     }
 }

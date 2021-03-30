@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.Observers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Builder;
 
     using JetBrains.Annotations;
 
@@ -21,8 +22,10 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyObserverWithGetterAndFallback<TParameter1, TResult> : PropertyObserverBase<
-        PropertyObserverWithGetterAndFallback<TParameter1, TResult>, TParameter1, TResult>
+        PropertyObserverWithGetterAndFallback<TParameter1, TResult>, TParameter1, TResult>,
+        IPropertyObserverWithGetterAndFallback<TParameter1, TResult>
         where TParameter1 : INotifyPropertyChanged
+
     {
         /// <summary>
         ///     The action.
