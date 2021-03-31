@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Interfaces
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyValueObserverBuilderWithAction<TParameter1, TResult>
+    public interface IPropertyValueObserverBuilderWithAction<TParameter1, TResult> : IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithAction<TParameter1, TResult>>
         where TResult : struct
     {
         /// <summary>

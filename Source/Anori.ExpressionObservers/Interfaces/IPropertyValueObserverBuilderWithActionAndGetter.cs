@@ -9,11 +9,13 @@ namespace Anori.ExpressionObservers.Interfaces
     using Anori.ExpressionObservers.Builder;
 
     /// <summary>
-    /// The Property Value Observer Builder With Action And Getter interface.
+    ///     The Property Value Observer Builder With Action And Getter interface.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyValueObserverBuilderWithActionAndGetter<TParameter1, TResult>
+    public interface IPropertyValueObserverBuilderWithActionAndGetter<TParameter1, TResult> :
+        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetter<TParameter1, TResult>>,
+        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetter<TParameter1, TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -26,6 +28,7 @@ namespace Anori.ExpressionObservers.Interfaces
         /// Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
+        /// <returns></returns>
         IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TParameter1, TResult>
             WithFallback(TResult fallback);
     }
