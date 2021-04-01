@@ -13,17 +13,26 @@ namespace Anori.ExpressionObservers.Interfaces
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyValueObserverBuilderWithAction{TParameter1,TResult}" />
-    public interface IPropertyValueObserverBuilderWithNotifyProperyChanged<TParameter1, TResult> : 
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithAction<TParameter1, TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithNotifyProperyChanged<TParameter1, TResult>>
+    /// <seealso cref="IPropertyValueObserverBuilderWithAction{TResult}" />
+    public interface IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> : 
+        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithAction<TResult>>,
+        IGetterTaskScheduler<IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>>
         where TResult : struct
     {
         /// <summary>
         /// Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <returns></returns>
-        IPropertyValueObserverBuilderWithNotifyProperyChanged<TParameter1, TResult> Cached(LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None);
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
+        IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> Cached(LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None);
+
+        /// <summary>
+        /// Creates this instance.
+        /// </summary>
+        /// <returns>Property Value Observer On Notify Propery Changed,</returns>
+        IPropertyValueObserverOnValueChanged<TResult> Create();
+
     }
 }

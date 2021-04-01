@@ -13,23 +13,23 @@ namespace Anori.ExpressionObservers.Interfaces
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyValueObserverBuilderWithActionAndGetter<TParameter1, TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetter<TParameter1, TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetter<TParameter1, TResult>>
+    public interface IPropertyValueObserverBuilderWithActionAndGetter<TResult> :
+        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetter<TResult>>,
+        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetter<TResult>>
         where TResult : struct
     {
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>The Property Observer.</returns>
-        IPropertyValueObserverWithGetter<TParameter1, TResult> Create();
+        IPropertyValueObserverWithGetter<TResult> Create();
 
         /// <summary>
         /// Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns></returns>
-        IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TParameter1, TResult>
+        IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>
             WithFallback(TResult fallback);
     }
 }

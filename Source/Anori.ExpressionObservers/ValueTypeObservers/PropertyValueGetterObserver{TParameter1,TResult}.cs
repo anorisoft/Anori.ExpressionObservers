@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
     public sealed class PropertyValueGetterObserver<TParameter1, TResult> :
         PropertyObserverBase<PropertyValueGetterObserver<TParameter1, TResult>, TParameter1, TResult>,
-        IPropertyValueGetterObserver<TParameter1, TResult>
+        IPropertyValueGetterObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : struct
     {
@@ -73,8 +73,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <returns>
         ///     Property Value Getter Observer.
         /// </returns>
-        IPropertyValueGetterObserver<TParameter1, TResult>
-            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TParameter1, TResult>>.Subscribe() =>
+        IPropertyValueGetterObserver<TResult>
+            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TResult>>.Subscribe() =>
             this.Subscribe();
 
         /// <summary>
@@ -82,16 +82,16 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueGetterObserver<TParameter1, TResult>
-            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TParameter1, TResult>>.Subscribe(bool silent) =>
+        IPropertyValueGetterObserver<TResult>
+            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TResult>>.Subscribe(bool silent) =>
             this.Subscribe(silent);
 
         /// <summary>
         ///     Unsubscribes this instance.
         /// </summary>
         /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueGetterObserver<TParameter1, TResult>
-            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TParameter1, TResult>>.Unsubscribe() =>
+        IPropertyValueGetterObserver<TResult>
+            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TResult>>.Unsubscribe() =>
             this.Unsubscribe();
     }
 }

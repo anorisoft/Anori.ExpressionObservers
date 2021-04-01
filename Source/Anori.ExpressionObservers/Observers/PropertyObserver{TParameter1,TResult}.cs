@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
     public sealed class PropertyObserver<TParameter1, TResult> :
         PropertyObserverBase<PropertyObserver<TParameter1, TResult>, TParameter1, TResult>,
-        IPropertyObserver<TParameter1, TResult>
+        IPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
@@ -55,7 +55,7 @@ namespace Anori.ExpressionObservers.Observers
         ///     Subscribes this instance.
         /// </summary>
         /// <returns>The Property Observer.</returns>
-        IPropertyObserver<TParameter1, TResult> IPropertyGetterObserverBase<IPropertyObserver<TParameter1, TResult>>.
+        IPropertyObserver<TResult> IPropertyGetterObserverBase<IPropertyObserver<TResult>>.
             Subscribe() =>
             this.Subscribe();
 
@@ -64,7 +64,7 @@ namespace Anori.ExpressionObservers.Observers
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>The Property Observer.</returns>
-        IPropertyObserver<TParameter1, TResult> IPropertyGetterObserverBase<IPropertyObserver<TParameter1, TResult>>.
+        IPropertyObserver<TResult> IPropertyGetterObserverBase<IPropertyObserver<TResult>>.
             Subscribe(bool silent) =>
             this.Subscribe(silent);
 
@@ -72,7 +72,7 @@ namespace Anori.ExpressionObservers.Observers
         ///     Unsubscribes this instance.
         /// </summary>
         /// <returns>The Property Observer.</returns>
-        IPropertyObserver<TParameter1, TResult> IPropertyGetterObserverBase<IPropertyObserver<TParameter1, TResult>>.
+        IPropertyObserver<TResult> IPropertyGetterObserverBase<IPropertyObserver<TResult>>.
             Unsubscribe() =>
             this.Unsubscribe();
     }

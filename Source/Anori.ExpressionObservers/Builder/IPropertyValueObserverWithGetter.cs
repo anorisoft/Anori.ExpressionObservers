@@ -9,10 +9,16 @@ namespace Anori.ExpressionObservers.Builder
     /// <summary>
     /// The I Property Value Observer With Getter interface.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyValueObserverWithGetter<TParameter1, TResult>
+    public interface IPropertyValueObserverWithGetter<TResult>
         where TResult : struct
     {
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <value>
+        /// The value.
+        /// </value>
+        TResult? Value { get; }
     }
 }

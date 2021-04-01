@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyValueObserverWithGetter<TParameter1, TResult> : PropertyObserverBase<
         PropertyValueObserverWithGetter<TParameter1, TResult>, TParameter1, TResult>,
-        IPropertyValueObserverWithGetter<TParameter1, TResult>
+        IPropertyValueObserverWithGetter<TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
     {
@@ -69,8 +69,16 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         public TResult? Value => this.getter();
 
         /// <summary>
-        ///     On the action.
+        /// On the action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <value>
+        /// The value.
+        /// </value>
+        TResult? IPropertyValueObserverWithGetter<TResult>.Value => Value;
     }
 }

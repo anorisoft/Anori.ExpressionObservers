@@ -6,12 +6,22 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
+    using System;
+
+    using Anori.ExpressionObservers.Interfaces;
+
     /// <summary>
     /// The I Property Observer With Getter And Fallback interface.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyObserverWithGetterAndFallback<TParameter1, TResult>
+    public interface IPropertyObserverWithGetterAndFallback<out TResult> : IPropertyGetterObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>
     {
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <value>
+        /// The value.
+        /// </value>
+        public TResult Value { get; }
     }
 }

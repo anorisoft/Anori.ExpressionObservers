@@ -1,21 +1,21 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyValueGetterObserver.cs" company="AnoriSoft">
+// <copyright file="IPropertyValueObserverOnNotifyProperyChanged.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Interfaces
 {
+    using System.ComponentModel;
+
     /// <summary>
-    ///     The I Property Value Getter Observer interface.
+    /// The I Property Value Observer On Notify Propery Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="IPropertyGetterObserverBase{TSelf}.ExpressionObservers.ValueTypeObservers.IPropertyValueGetterObserver{TResult}}" />
-    public interface
-        IPropertyValueGetterObserver<TResult> : IPropertyGetterObserverBase<
-            IPropertyValueGetterObserver<TResult>>
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
+    public interface IPropertyValueObserverOnNotifyProperyChanged<TResult> : INotifyPropertyChanged
         where TResult : struct
+
     {
         /// <summary>
         /// Gets the value.
@@ -23,6 +23,6 @@ namespace Anori.ExpressionObservers.Interfaces
         /// <value>
         /// The value.
         /// </value>
-        TResult? Value { get; }
+        public TResult? Value { get; }
     }
 }

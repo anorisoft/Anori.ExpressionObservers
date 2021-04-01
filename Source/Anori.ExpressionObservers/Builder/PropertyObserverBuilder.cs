@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers.Builder
         /// </summary>
         /// <param name="autoActivate">if set to <c>true</c> [automatic activate].</param>
         /// <param name="silentActivate">if set to <c>true</c> [silent activate].</param>
-        public PropertyObserverBuilder(bool autoActivate = true, bool silentActivate = true)
+        public PropertyObserverBuilder(bool autoActivate = false, bool silentActivate = true)
         {
             this.isAutoActivate = autoActivate;
             this.isSilentActivate = silentActivate;
@@ -57,7 +57,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     Value Property Observer Builder.
         /// </returns>
-        public IPropertyValueObserverBuilder<TParameter1, TResult> ValueObserverBuilder<TParameter1, TResult>(
+        public IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
             TParameter1 parameter1,
             Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged

@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
 
     using Anori.Common;
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -27,7 +28,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso cref="INotifyPropertyChanged" />
     public sealed class PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult> :
         PropertyObserverBase<PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>, TParameter1, TResult>,
-        INotifyPropertyChanged
+        IPropertyValueObserverOnNotifyProperyChanged<TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
     {

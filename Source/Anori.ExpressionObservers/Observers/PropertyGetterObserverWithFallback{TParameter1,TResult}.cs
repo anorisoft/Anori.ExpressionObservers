@@ -11,21 +11,20 @@ namespace Anori.ExpressionObservers.Observers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
 
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Getter Observer.
+    /// Property Value Getter Observer.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Observers.PropertyGetterObserverWithFallback{TParameter1, TResult}, TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyGetterObserverWithFallback{TResult}, TResult}" />
-    /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyGetterObserverWithFallback<TParameter1, TResult> : PropertyObserverBase<
-        PropertyGetterObserverWithFallback<TParameter1, TResult>, TParameter1, TResult>
+    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Observers.PropertyGetterObserverWithFallback{TParameter1, TResult}, TParameter1, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyGetterObserverWithFallback{TResult}" />
+    public sealed class PropertyGetterObserverWithFallback<TParameter1, TResult> :
+        PropertyObserverBase<PropertyGetterObserverWithFallback<TParameter1, TResult>, TParameter1, TResult>,
+        IPropertyGetterObserverWithFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
@@ -71,5 +70,36 @@ namespace Anori.ExpressionObservers.Observers
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action(this.getter());
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyGetterObserverWithFallback<TResult>
+            IPropertyGetterObserverBase<IPropertyGetterObserverWithFallback<TResult>>.Subscribe() =>
+            this.Subscribe();
+
+        /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyGetterObserverWithFallback<TResult>
+            IPropertyGetterObserverBase<IPropertyGetterObserverWithFallback<TResult>>.Subscribe(bool silent) =>
+            this.Subscribe(silent);
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyGetterObserverWithFallback<TResult>
+            IPropertyGetterObserverBase<IPropertyGetterObserverWithFallback<TResult>>.Unsubscribe() =>
+            this.Unsubscribe();
     }
 }

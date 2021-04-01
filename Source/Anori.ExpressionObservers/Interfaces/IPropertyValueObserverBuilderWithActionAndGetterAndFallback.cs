@@ -9,19 +9,31 @@ namespace Anori.ExpressionObservers.Interfaces
     using Anori.ExpressionObservers.Builder;
 
     /// <summary>
-    ///     The I Property Value Observer Builder With Action And Getter And Fallback interface.
+    ///     The Property Value Observer Builder With Action And Getter And Fallback interface.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TParameter1, TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TParameter1, TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TParameter1, TResult>>
+    public interface IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult> :
+        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>>,
+        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>>
         where TResult : struct
     {
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns></returns>
-        IPropertyObserverWithGetterAndFallback<TParameter1, TResult> Create();
+        /// <returns>Property Observer With Getter And Fallback.</returns>
+        IPropertyObserverWithGetterAndFallback<TResult> Create();
     }
+
+
+    //public interface IPropertyValueObserverBuilderWithActionAndFallback<TResult> :
+    //    IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>>,
+    //    IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>>
+    //    where TResult : struct
+    //{
+    //    /// <summary>
+    //    ///     Creates this instance.
+    //    /// </summary>
+    //    /// <returns>Property Observer With Getter And Fallback.</returns>
+    //    IPropertyObserverWithFallback<TResult> Create();
+    //}
 }

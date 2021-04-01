@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Interfaces
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyValueObserverBuilder<TParameter1, TResult> : IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilder<TParameter1, TResult>>
+    public interface IPropertyValueObserverBuilder<TResult> : IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilder<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -21,26 +21,32 @@ namespace Anori.ExpressionObservers.Interfaces
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>The Value Property Observer Builder.</returns>
-        IPropertyValueObserverBuilderWithActionOfTResult<TParameter1, TResult> WithAction(Action<TResult?> action);
+        IPropertyValueObserverBuilderWithActionOfTResult<TResult> WithAction(Action<TResult?> action);
+        /// <summary>
+        /// Withes the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns></returns>
+        IPropertyValueObserverBuilderWithActionOfTResult<TResult> WithAction(Action<TResult> action);
 
         /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>The Value Property Observer Builder.</returns>
-        IPropertyValueObserverBuilderWithAction<TParameter1, TResult> WithAction(Action action);
+        IPropertyValueObserverBuilderWithAction<TResult> WithAction(Action action);
 
         /// <summary>
         /// Withes the notify propery changed.
         /// </summary>
-        /// <returns></returns>
-        IPropertyValueObserverBuilderWithNotifyProperyChanged<TParameter1, TResult> WithNotifyProperyChanged();
+        /// <returns>The Value Property Observer Builder.</returns>
+        IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> WithNotifyProperyChanged();
 
 
         /// <summary>
         /// Withes the value changed.
         /// </summary>
-        /// <returns></returns>
-        IPropertyValueObserverBuilderWithValueChanged<TParameter1, TResult> WithValueChanged();
+        /// <returns>The Value Property Observer Builder.</returns>
+        IPropertyValueObserverBuilderWithValueChanged<TResult> WithValueChanged();
     }
 }

@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -23,13 +24,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnValueChanged{TParameter1, TResult}, TParameter1, TResult}" />
+    ///     cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
     public sealed class PropertyValueObserverOnValueChanged<TParameter1, TResult> :
         PropertyObserverBase<PropertyValueObserverOnValueChanged<TParameter1, TResult>, TParameter1, TResult>,
-        INotifyPropertyChanged
+        IPropertyValueObserverOnValueChanged<TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
     {
@@ -97,6 +98,14 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
                 this.OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <value>
+        ///     The value.
+        /// </value>
+        TResult? IPropertyValueObserverOnValueChanged<TResult>.Value => this.Value;
 
         /// <summary>
         ///     On the action.

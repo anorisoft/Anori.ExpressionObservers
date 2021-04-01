@@ -11,20 +11,30 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <summary>
     /// The I Property Value Observer Builder With Value Changed interface.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TResult}}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TResult}}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TParameter1, TResult}}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TParameter1, TResult}}" />
-    public interface IPropertyValueObserverBuilderWithValueChanged<TParameter1, TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithValueChanged<TParameter1, TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithValueChanged<TParameter1, TResult>>
+    public interface IPropertyValueObserverBuilderWithValueChanged<TResult> :
+        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithValueChanged<TResult>>,
+        IGetterTaskScheduler<IPropertyValueObserverBuilderWithValueChanged<TResult>>
         where TResult : struct
     {
         /// <summary>
         /// Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <returns></returns>
-        IPropertyValueObserverBuilderWithValueChanged<TParameter1, TResult> Cached(LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None);
+        /// <returns>The Property Value Observer Builder.</returns>
+        IPropertyValueObserverBuilderWithValueChanged<TResult> Cached(LazyThreadSafetyMode safetyMode);
+
+        /// <summary>
+        /// Cacheds the specified safety mode.
+        /// </summary>
+        /// <returns>
+        /// The Property Value Observer Builder.
+        /// </returns>
+        IPropertyValueObserverBuilderWithValueChanged<TResult> Cached();
+
     }
 }

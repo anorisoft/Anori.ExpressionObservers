@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.Interfaces
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>Value Property Observer Builder.</returns>
-        IPropertyValueObserverBuilder<TParameter1, TResult> ValueObserverBuilder<TParameter1, TResult>(
+        IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
