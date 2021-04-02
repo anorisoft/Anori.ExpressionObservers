@@ -6,10 +6,11 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using Anori.Common;
-    using Anori.ExpressionObservers.Interfaces;
     using System;
     using System.Threading.Tasks;
+
+    using Anori.Common;
+    using Anori.ExpressionObservers.Interfaces;
 
     /// <summary>
     ///     The Property Value Observer Builder Base class.
@@ -126,12 +127,20 @@ namespace Anori.ExpressionObservers.Builder
         /// </value>
         private protected Action<TResult?>? ActionOfTResult { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the action of t result with fallback.
+        /// </summary>
+        /// <value>
+        ///     The action of t result with fallback.
+        /// </value>
         private protected Action<TResult>? ActionOfTResultWithFallback { get; set; }
 
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         public TSelf AutoActivate()
         {
             this.IsAutoActivate = true;
@@ -150,53 +159,69 @@ namespace Anori.ExpressionObservers.Builder
         /// <summary>
         ///     Cacheds this instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf Cached();
 
         /// <summary>
         ///     Creates the property value observer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         protected abstract IPropertyValueObserver<TResult> CreatePropertyValueObserver();
 
         /// <summary>
         ///     Creates the property value observer builder with action.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         protected abstract IPropertyObserver<TResult> CreatePropertyValueObserverBuilderWithAction();
 
         /// <summary>
         ///     Creates the property value observer builder with action and getter.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         protected abstract IPropertyValueObserverWithGetter<TResult>
             CreatePropertyValueObserverBuilderWithActionAndGetter();
 
         /// <summary>
         ///     Creates the property value observer builder with action and getter and fallback.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         protected abstract IPropertyObserverWithAndFallback<TResult>
             CreatePropertyValueObserverBuilderWithActionAndGetterAndFallback();
 
         /// <summary>
         ///     Creates the property value observer builder with action of t result and fallback.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         protected abstract IPropertyGetterObserverWithFallback<TResult>
             CreatePropertyValueObserverBuilderWithActionOfTResultAndFallback();
 
         /// <summary>
         ///     Creates the property value observer builder with value changed.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         protected abstract IPropertyValueObserverOnValueChanged<TResult>
             CreatePropertyValueObserverBuilderWithValueChanged();
 
         /// <summary>
         ///     Creates the property value observer on notify propery changed.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
         protected abstract IPropertyValueObserverOnNotifyProperyChanged<TResult>
             CreatePropertyValueObserverOnNotifyProperyChanged();
 
@@ -204,7 +229,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf PropertyValueObserverBuilderWithActionAndGetterWithFallback(TResult fallback);
 
         ///// <summary>
@@ -215,45 +242,64 @@ namespace Anori.ExpressionObservers.Builder
         //protected abstract TSelf PropertyValueObserverBuilderWithActionOfTResultNullableWithFallback(TResult fallback);
 
         /// <summary>
-        /// Properties the value observer builder with action of t result with fallback.
+        ///     Properties the value observer builder with action of t result with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf PropertyValueObserverBuilderWithActionOfTResultWithFallback(TResult fallback);
 
         /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf WithAction(Action action);
 
         /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf WithAction(Action<TResult?> action);
 
+        /// <summary>
+        ///     Withes the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf WithAction(Action<TResult> action);
 
         /// <summary>
         ///     Withes the getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf WithGetterTaskScheduler(TaskScheduler taskScheduler);
 
         /// <summary>
         ///     Withes the notify propery changed.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf WithNotifyProperyChanged();
 
         /// <summary>
         ///     Withes the value changed.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         protected abstract TSelf WithValueChanged();
 
         /// <summary>
@@ -305,6 +351,12 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyValueObserverBuilderWithValueChanged<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
+        /// <summary>
+        ///     Automatics the activate.
+        /// </summary>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
             IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>>.
             AutoActivate() =>
@@ -313,12 +365,20 @@ namespace Anori.ExpressionObservers.Builder
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
         IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>
             IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
 
+        /// <summary>
+        ///     Automatics the activate.
+        /// </summary>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> IPropertyValueObserverBuilderBase<
             IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>.AutoActivate()
         {
@@ -338,7 +398,9 @@ namespace Anori.ExpressionObservers.Builder
         /// <summary>
         ///     Cacheds this instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
         IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>
             IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>.Cached() =>
             this.Cached();
@@ -464,7 +526,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResult<TResult> IPropertyValueObserverBuilder<TResult>.WithAction(
             Action<TResult> action) =>
             this.WithAction(action);
@@ -475,11 +539,16 @@ namespace Anori.ExpressionObservers.Builder
         //    return this.PropertyValueObserverBuilderWithActionOfTResultNullableWithFallback(fallback);
         //}
 
+        /// <summary>
+        ///     Withes the fallback.
+        /// </summary>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
-            IPropertyValueObserverBuilderWithActionOfTResult<TResult>.WithFallback(TResult fallback)
-        {
-            return this.PropertyValueObserverBuilderWithActionOfTResultWithFallback(fallback);
-        }
+            IPropertyValueObserverBuilderWithActionOfTResult<TResult>.WithFallback(TResult fallback) =>
+            this.PropertyValueObserverBuilderWithActionOfTResultWithFallback(fallback);
 
         /// <summary>
         ///     Withes the fallback.
@@ -564,7 +633,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     Withes the getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
             IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>>.
             WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
@@ -578,11 +649,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>.
-            WithGetterTaskScheduler(TaskScheduler taskScheduler)
-        {
-            return this.WithGetterTaskScheduler(taskScheduler);
-        }
+            IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>.
+            WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterTaskScheduler(taskScheduler);
 
         /// <summary>
         ///     Withes the notify propery changed.
