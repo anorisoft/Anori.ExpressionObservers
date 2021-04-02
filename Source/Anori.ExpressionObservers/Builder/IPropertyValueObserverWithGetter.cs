@@ -6,11 +6,13 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
+    using Anori.ExpressionObservers.Interfaces;
+
     /// <summary>
     /// The I Property Value Observer With Getter interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyValueObserverWithGetter<TResult>
+    public interface IPropertyValueObserverWithGetter<TResult> : IPropertyObserverBase<IPropertyValueObserverWithGetter<TResult>>
         where TResult : struct
     {
         /// <summary>

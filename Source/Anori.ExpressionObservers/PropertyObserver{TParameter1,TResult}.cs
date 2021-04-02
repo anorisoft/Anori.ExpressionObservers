@@ -31,13 +31,13 @@ namespace Anori.ExpressionObservers
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        public static PropertyObserverWithGetterAndFallback<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyObserverWithAndFallback<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyObserverWithGetterAndFallback<TParameter1, TResult>(
+            new PropertyObserverWithAndFallback<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -56,7 +56,7 @@ namespace Anori.ExpressionObservers
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        public static PropertyObserverWithGetterAndFallback<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyObserverWithAndFallback<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool autoSubscribe,
@@ -64,7 +64,7 @@ namespace Anori.ExpressionObservers
             [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyObserverWithGetterAndFallback<TParameter1, TResult>(
+            var observer = new PropertyObserverWithAndFallback<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -110,7 +110,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static PropertyGetterObserverWithFallback<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyObserverWithFallback<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool autoSubscribe,
@@ -118,7 +118,7 @@ namespace Anori.ExpressionObservers
             [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyGetterObserverWithFallback<TParameter1, TResult>(
+            var observer = new PropertyObserverWithFallback<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -144,13 +144,13 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static PropertyGetterObserverWithFallback<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyObserverWithFallback<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
             [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyGetterObserverWithFallback<TParameter1, TResult>(
+            new PropertyObserverWithFallback<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,

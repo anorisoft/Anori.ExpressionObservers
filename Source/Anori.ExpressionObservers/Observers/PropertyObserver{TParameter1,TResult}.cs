@@ -55,7 +55,7 @@ namespace Anori.ExpressionObservers.Observers
         ///     Subscribes this instance.
         /// </summary>
         /// <returns>The Property Observer.</returns>
-        IPropertyObserver<TResult> IPropertyGetterObserverBase<IPropertyObserver<TResult>>.
+        IPropertyObserver<TResult> IPropertyObserverBase<IPropertyObserver<TResult>>.
             Subscribe() =>
             this.Subscribe();
 
@@ -64,7 +64,7 @@ namespace Anori.ExpressionObservers.Observers
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>The Property Observer.</returns>
-        IPropertyObserver<TResult> IPropertyGetterObserverBase<IPropertyObserver<TResult>>.
+        IPropertyObserver<TResult> IPropertyObserverBase<IPropertyObserver<TResult>>.
             Subscribe(bool silent) =>
             this.Subscribe(silent);
 
@@ -72,7 +72,7 @@ namespace Anori.ExpressionObservers.Observers
         ///     Unsubscribes this instance.
         /// </summary>
         /// <returns>The Property Observer.</returns>
-        IPropertyObserver<TResult> IPropertyGetterObserverBase<IPropertyObserver<TResult>>.
+        IPropertyObserver<TResult> IPropertyObserverBase<IPropertyObserver<TResult>>.
             Unsubscribe() =>
             this.Unsubscribe();
     }

@@ -10,10 +10,10 @@ namespace Anori.ExpressionObservers.Interfaces
     /// The I Property Getter Observer With Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyGetterObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyGetterObserverWithFallback{TResult}}" />
+    /// <seealso cref="IPropertyObserverBase{TSelf}.ExpressionObservers.Interfaces.IPropertyGetterObserverWithFallback{TResult}}" />
     public interface
-        IPropertyGetterObserverWithFallback<out TResult> : IPropertyGetterObserverBase<
-            IPropertyGetterObserverWithFallback<TResult>>
+        IPropertyObserverWithFallback<out TResult> : IPropertyObserverBase<
+            IPropertyObserverWithFallback<TResult>>
     {
         /// <summary>
         /// Gets the value.

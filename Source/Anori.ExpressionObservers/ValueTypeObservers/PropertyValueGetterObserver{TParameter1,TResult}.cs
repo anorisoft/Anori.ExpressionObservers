@@ -21,9 +21,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
-    public sealed class PropertyValueGetterObserver<TParameter1, TResult> :
-        PropertyObserverBase<PropertyValueGetterObserver<TParameter1, TResult>, TParameter1, TResult>,
-        IPropertyValueGetterObserver<TResult>
+    public sealed class PropertyValueObserver<TParameter1, TResult> :
+        PropertyObserverBase<PropertyValueObserver<TParameter1, TResult>, TParameter1, TResult>,
+        IPropertyValueObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : struct
     {
@@ -40,13 +40,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueGetterObserver{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <exception cref="ArgumentNullException">The action is null.</exception>
-        internal PropertyValueGetterObserver(
+        internal PropertyValueObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
@@ -73,8 +73,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <returns>
         ///     Property Value Getter Observer.
         /// </returns>
-        IPropertyValueGetterObserver<TResult>
-            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TResult>>.Subscribe() =>
+        IPropertyValueObserver<TResult>
+            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe() =>
             this.Subscribe();
 
         /// <summary>
@@ -82,16 +82,16 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueGetterObserver<TResult>
-            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TResult>>.Subscribe(bool silent) =>
+        IPropertyValueObserver<TResult>
+            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe(bool silent) =>
             this.Subscribe(silent);
 
         /// <summary>
         ///     Unsubscribes this instance.
         /// </summary>
         /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueGetterObserver<TResult>
-            IPropertyGetterObserverBase<IPropertyValueGetterObserver<TResult>>.Unsubscribe() =>
+        IPropertyValueObserver<TResult>
+            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Unsubscribe() =>
             this.Unsubscribe();
     }
 }

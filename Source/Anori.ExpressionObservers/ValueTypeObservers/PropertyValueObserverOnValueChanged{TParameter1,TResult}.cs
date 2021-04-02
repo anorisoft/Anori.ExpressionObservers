@@ -119,5 +119,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        IPropertyValueObserverOnValueChanged<TResult> IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe()
+            => this.Subscribe();
+        IPropertyValueObserverOnValueChanged<TResult> IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe(bool silent)
+            => this.Subscribe(silent);
+        IPropertyValueObserverOnValueChanged<TResult> IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Unsubscribe()
+            => this.Unsubscribe();
+
     }
 }

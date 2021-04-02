@@ -22,9 +22,9 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyObserverWithGetterAndFallback<TParameter1, TResult> :
-        PropertyObserverBase<PropertyObserverWithGetterAndFallback<TParameter1, TResult>, TParameter1, TResult>,
-        IPropertyObserverWithGetterAndFallback<TResult>
+    public sealed class PropertyObserverWithAndFallback<TParameter1, TResult> :
+        PropertyObserverBase<PropertyObserverWithAndFallback<TParameter1, TResult>, TParameter1, TResult>,
+        IPropertyObserverWithAndFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
 
     {
@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TParameter1, TResult}" />
+        ///     Initializes a new instance of the <see cref="PropertyObserverWithAndFallback{TParameter1,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -55,7 +55,7 @@ namespace Anori.ExpressionObservers.Observers
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal PropertyObserverWithGetterAndFallback(
+        internal PropertyObserverWithAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
@@ -89,8 +89,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyGetterObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Subscribe() =>
+        IPropertyObserverWithAndFallback<TResult>
+            IPropertyObserverBase<IPropertyObserverWithAndFallback<TResult>>.Subscribe() =>
             this.Subscribe();
 
         /// <summary>
@@ -100,8 +100,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyGetterObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Subscribe(bool silent) =>
+        IPropertyObserverWithAndFallback<TResult>
+            IPropertyObserverBase<IPropertyObserverWithAndFallback<TResult>>.Subscribe(bool silent) =>
             this.Subscribe(silent);
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyGetterObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Unsubscribe() =>
+        IPropertyObserverWithAndFallback<TResult>
+            IPropertyObserverBase<IPropertyObserverWithAndFallback<TResult>>.Unsubscribe() =>
             this.Unsubscribe();
     }
 }

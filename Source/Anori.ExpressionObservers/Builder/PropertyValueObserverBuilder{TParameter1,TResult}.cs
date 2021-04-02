@@ -101,9 +101,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     Creates the property getter observer with fallback.
         /// </summary>
         /// <returns></returns>
-        protected override IPropertyGetterObserverWithFallback<TResult> CreatePropertyGetterObserverWithFallback()
+        protected override IPropertyObserverWithFallback<TResult> CreatePropertyGetterObserverWithFallback()
         {
-            var observer = new PropertyGetterObserverWithFallback<TParameter1, TResult>(
+            var observer = new PropertyObserverWithFallback<TParameter1, TResult>(
                 this.parameter1,
                 this.propertyExpression,
                 this.ActionOfTResultWithFallback!,
@@ -161,10 +161,10 @@ namespace Anori.ExpressionObservers.Builder
         ///     Creates this instance.
         /// </summary>
         /// <returns>The Value Property Observer Builder.</returns>
-        protected override IPropertyObserverWithGetterAndFallback<TResult>
+        protected override IPropertyObserverWithAndFallback<TResult>
             CreatePropertyValueObserverBuilderWithActionAndGetterAndFallback()
         {
-            var observer = new PropertyObserverWithGetterAndFallback<TParameter1, TResult>(
+            var observer = new PropertyObserverWithAndFallback<TParameter1, TResult>(
                 this.parameter1,
                 this.propertyExpression,
                 this.Action!,
@@ -183,9 +183,9 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        protected override IPropertyValueGetterObserver<TResult> CreatePropertyValueObserverBuilderWithActionOfTResult()
+        protected override IPropertyValueObserver<TResult> CreatePropertyValueObserverBuilderWithActionOfTResult()
         {
-            var observer = new PropertyValueGetterObserver<TParameter1, TResult>(
+            var observer = new PropertyValueObserver<TParameter1, TResult>(
                 this.parameter1,
                 this.propertyExpression,
                 this.ActionOfTResult!);
@@ -201,10 +201,10 @@ namespace Anori.ExpressionObservers.Builder
         ///     Creates the property value observer builder with action of t result and fallback.
         /// </summary>
         /// <returns></returns>
-        protected override IPropertyGetterObserverWithFallback<TResult>
+        protected override IPropertyObserverWithFallback<TResult>
             CreatePropertyValueObserverBuilderWithActionOfTResultAndFallback()
         {
-            var observer = new PropertyGetterObserverWithFallback<TParameter1, TResult>(
+            var observer = new PropertyObserverWithFallback<TParameter1, TResult>(
                 this.parameter1,
                 this.propertyExpression,
                 this.ActionOfTResultWithFallback!,

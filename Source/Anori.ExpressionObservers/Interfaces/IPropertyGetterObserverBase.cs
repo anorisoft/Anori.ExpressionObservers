@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Interfaces
     ///     The I Property Getter Observer Base interface.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
-    public interface IPropertyGetterObserverBase<out TSelf> : IDisposable
+    public interface IPropertyObserverBase<out TSelf> : IDisposable
     {
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.

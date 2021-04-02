@@ -33,13 +33,13 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyValueGetterObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyValueObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueGetterObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            new PropertyValueObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -54,7 +54,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static PropertyValueGetterObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyValueObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate,
@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
         {
             var observer =
-                new PropertyValueGetterObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+                new PropertyValueObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
             if (isAutoActivate)
             {
                 observer.Subscribe(true);

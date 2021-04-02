@@ -14,7 +14,7 @@ namespace Anori.ExpressionObservers.Builder
     /// The I Property Observer With Getter And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyObserverWithGetterAndFallback<out TResult> : IPropertyGetterObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>
+    public interface IPropertyObserverWithAndFallback<out TResult> : IPropertyObserverBase<IPropertyObserverWithAndFallback<TResult>>
     {
         /// <summary>
         /// Gets the value.
