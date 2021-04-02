@@ -649,7 +649,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, value);
             Assert.AreEqual(null, observes.Value);
         }
-
+        
         [Test]
         public void PropertyObserver_ValueGetter_Observes_instance_IntProperty()
         {

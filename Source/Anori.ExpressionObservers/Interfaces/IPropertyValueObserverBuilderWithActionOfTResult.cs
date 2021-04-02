@@ -17,36 +17,12 @@ namespace Anori.ExpressionObservers.Interfaces
         IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResult<TResult>>
         where TResult : struct
     {
-        
         /// <summary>
         /// Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns></returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
-            WithFallback(TResult fallback);
-    }
-
-
-    public interface IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>
-        where TResult : struct
-    {
-        /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Property Observer.
-        /// </returns>
-        IPropertyValueObserver<TResult> Create();
-
-        /// <summary>
-        /// Withes the fallback.
-        /// </summary>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
-        IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>
             WithFallback(TResult fallback);
     }
 }
