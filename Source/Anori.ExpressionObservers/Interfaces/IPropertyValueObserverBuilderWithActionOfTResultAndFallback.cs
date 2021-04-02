@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Interfaces
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IPropertyObserverWithFallback<TResult> Create();
+        IPropertyGetterObserverWithFallback<TResult> Create();
 
        
     }

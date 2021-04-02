@@ -21,10 +21,10 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Observers.PropertyGetterObserverWithFallback{TParameter1, TResult}, TParameter1, TResult}" />
-    /// <seealso cref="IPropertyObserverWithFallback{TResult}" />
+    /// <seealso cref="IPropertyGetterObserverWithFallback{TResult}" />
     public sealed class PropertyObserverWithFallback<TParameter1, TResult> :
         PropertyObserverBase<PropertyObserverWithFallback<TParameter1, TResult>, TParameter1, TResult>,
-        IPropertyObserverWithFallback<TResult>
+        IPropertyGetterObserverWithFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
@@ -77,8 +77,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyObserverWithFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>.Subscribe() =>
+        IPropertyGetterObserverWithFallback<TResult>
+            IPropertyObserverBase<IPropertyGetterObserverWithFallback<TResult>>.Subscribe() =>
             this.Subscribe();
 
         /// <summary>
@@ -88,8 +88,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyObserverWithFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>.Subscribe(bool silent) =>
+        IPropertyGetterObserverWithFallback<TResult>
+            IPropertyObserverBase<IPropertyGetterObserverWithFallback<TResult>>.Subscribe(bool silent) =>
             this.Subscribe(silent);
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyObserverWithFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>.Unsubscribe() =>
+        IPropertyGetterObserverWithFallback<TResult>
+            IPropertyObserverBase<IPropertyGetterObserverWithFallback<TResult>>.Unsubscribe() =>
             this.Unsubscribe();
     }
 }

@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Interfaces
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>The Value Property Observer Builder.</returns>
-        IPropertyValueObserverBuilderWithActionOfTResult<TResult> WithAction(Action<TResult?> action);
+        IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> WithAction(Action<TResult?> action);
         /// <summary>
         /// Withes the action.
         /// </summary>

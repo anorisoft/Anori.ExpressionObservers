@@ -6,6 +6,7 @@
 
 namespace Anori.ExpressionObservers.Interfaces
 {
+    using System;
     using System.ComponentModel;
 
     /// <summary>
@@ -13,7 +14,7 @@ namespace Anori.ExpressionObservers.Interfaces
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    public interface IPropertyValueObserverOnNotifyProperyChanged<TResult> : INotifyPropertyChanged
+    public interface IPropertyValueObserverOnNotifyProperyChanged<TResult> : IPropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>>, INotifyPropertyChanged ,IDisposable
         where TResult : struct
 
     {

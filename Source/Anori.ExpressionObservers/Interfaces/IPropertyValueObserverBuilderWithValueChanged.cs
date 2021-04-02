@@ -36,5 +36,12 @@ namespace Anori.ExpressionObservers.Interfaces
         /// </returns>
         IPropertyValueObserverBuilderWithValueChanged<TResult> Cached();
 
+
+        /// <summary>
+        /// Creates this instance.
+        /// </summary>
+        /// <returns>Property Value Observer On Notify Propery Changed,</returns>
+        IPropertyValueObserverOnValueChanged<TResult> Create();
+
     }
 }

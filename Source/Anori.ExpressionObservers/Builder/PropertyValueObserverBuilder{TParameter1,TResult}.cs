@@ -54,27 +54,6 @@ namespace Anori.ExpressionObservers.Builder
         }
 
         /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>Property Value Observer OnNotifyProperyChanged.</returns>
-        public IPropertyValueObserverOnNotifyProperyChanged<TResult> Create()
-        {
-            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
-                this.parameter1,
-                this.propertyExpression,
-                this.IsCached,
-                this.SafetyMode,
-                this.TaskScheduler);
-
-            if (this.IsAutoActivate)
-            {
-                observer.Subscribe(this.IsSilentActivate);
-            }
-
-            return observer;
-        }
-
-        /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
@@ -101,13 +80,31 @@ namespace Anori.ExpressionObservers.Builder
         ///     Creates the property getter observer with fallback.
         /// </summary>
         /// <returns></returns>
-        protected override IPropertyObserverWithFallback<TResult> CreatePropertyGetterObserverWithFallback()
+        protected override IPropertyGetterObserverWithFallback<TResult> CreatePropertyGetterObserverWithFallback()
         {
             var observer = new PropertyObserverWithFallback<TParameter1, TResult>(
                 this.parameter1,
                 this.propertyExpression,
                 this.ActionOfTResultWithFallback!,
                 this.Fallback);
+            if (this.IsAutoActivate)
+            {
+                observer.Subscribe(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        /// Creates the property value observer.
+        /// </summary>
+        /// <returns></returns>
+        protected override IPropertyValueObserver<TResult> CreatePropertyValueObserver()
+        {
+            var observer = new PropertyValueObserver<TParameter1, TResult>(
+                this.parameter1,
+                this.propertyExpression,
+                this.ActionOfTResult!);
             if (this.IsAutoActivate)
             {
                 observer.Subscribe(this.IsSilentActivate);
@@ -201,7 +198,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     Creates the property value observer builder with action of t result and fallback.
         /// </summary>
         /// <returns></returns>
-        protected override IPropertyObserverWithFallback<TResult>
+        protected override IPropertyGetterObserverWithFallback<TResult>
             CreatePropertyValueObserverBuilderWithActionOfTResultAndFallback()
         {
             var observer = new PropertyObserverWithFallback<TParameter1, TResult>(
@@ -209,6 +206,48 @@ namespace Anori.ExpressionObservers.Builder
                 this.propertyExpression,
                 this.ActionOfTResultWithFallback!,
                 this.Fallback);
+            if (this.IsAutoActivate)
+            {
+                observer.Subscribe(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the property value observer builder with value changed.
+        /// </summary>
+        /// <returns></returns>
+        protected override IPropertyValueObserverOnValueChanged<TResult>
+            CreatePropertyValueObserverBuilderWithValueChanged()
+        {
+            var observer = new PropertyValueObserverOnValueChanged<TParameter1, TResult>(
+                this.parameter1,
+                this.propertyExpression,
+                this.TaskScheduler);
+
+            if (this.IsAutoActivate)
+            {
+                observer.Subscribe(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the property value observer on notify propery changed.
+        /// </summary>
+        /// <returns></returns>
+        protected override IPropertyValueObserverOnNotifyProperyChanged<TResult>
+            CreatePropertyValueObserverOnNotifyProperyChanged()
+        {
+            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
+                this.parameter1,
+                this.propertyExpression,
+                this.IsCached,
+                this.SafetyMode,
+                this.TaskScheduler);
+
             if (this.IsAutoActivate)
             {
                 observer.Subscribe(this.IsSilentActivate);
@@ -243,6 +282,18 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>The Value Property Observer Builder.</returns>
         protected override PropertyValueObserverBuilder<TParameter1, TResult>
             PropertyValueObserverBuilderWithActionAndGetterWithFallback(TResult fallback)
+        {
+            this.Fallback = fallback;
+            return this;
+        }
+
+        /// <summary>
+        /// Properties the value observer builder with action of t result nullable with fallback.
+        /// </summary>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns></returns>
+        protected override IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>
+            PropertyValueObserverBuilderWithActionOfTResultNullableWithFallback(TResult fallback)
         {
             this.Fallback = fallback;
             return this;

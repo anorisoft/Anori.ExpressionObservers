@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers.Interfaces
         /// Creates this instance.
         /// </summary>
         /// <returns>Property Value Observer On Notify Propery Changed,</returns>
-        IPropertyValueObserverOnValueChanged<TResult> Create();
+        IPropertyValueObserverOnNotifyProperyChanged<TResult> Create();
 
     }
 }
