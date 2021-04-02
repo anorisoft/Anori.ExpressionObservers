@@ -11,10 +11,11 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <summary>
     /// The I Property Value Observer Builder With Notify Propery Changed interface.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithNotifyProperyChanged{TResult}}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithNotifyProperyChanged{TResult}}" />
     /// <seealso cref="IPropertyValueObserverBuilderWithNotifyProperyChanged{TResult}" />
-    public interface IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> : 
+    public interface IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> :
         IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>>,
         IGetterTaskScheduler<IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>>
         where TResult : struct
@@ -26,13 +27,20 @@ namespace Anori.ExpressionObservers.Interfaces
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> Cached(LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None);
+        IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> Cached(LazyThreadSafetyMode safetyMode);
+
+        /// <summary>
+        /// Cacheds this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
+        IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> Cached();
 
         /// <summary>
         /// Creates this instance.
         /// </summary>
-        /// <returns>Property Value Observer On Notify Propery Changed,</returns>
+        /// <returns>Property Value Observer On Notify Propery Changed.</returns>
         IPropertyValueObserverOnNotifyProperyChanged<TResult> Create();
-
     }
 }

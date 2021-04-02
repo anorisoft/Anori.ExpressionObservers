@@ -6,11 +6,10 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using System;
-    using System.Threading.Tasks;
-
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
+    using System;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     The Property Value Observer Builder Base class.
@@ -140,14 +139,6 @@ namespace Anori.ExpressionObservers.Builder
         }
 
         /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Property Observer.
-        /// </returns>
-        public IPropertyGetterObserverWithFallback<TResult> Create() => this.CreatePropertyGetterObserverWithFallback();
-
-        /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
@@ -163,10 +154,10 @@ namespace Anori.ExpressionObservers.Builder
         protected abstract TSelf Cached();
 
         /// <summary>
-        ///     Creates the property getter observer with fallback.
+        ///     Creates the property value observer.
         /// </summary>
         /// <returns></returns>
-        protected abstract IPropertyGetterObserverWithFallback<TResult> CreatePropertyGetterObserverWithFallback();
+        protected abstract IPropertyValueObserver<TResult> CreatePropertyValueObserver();
 
         /// <summary>
         ///     Creates the property value observer builder with action.
@@ -187,12 +178,6 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns></returns>
         protected abstract IPropertyObserverWithAndFallback<TResult>
             CreatePropertyValueObserverBuilderWithActionAndGetterAndFallback();
-
-        /// <summary>
-        ///     Creates the property value observer builder with action of t result.
-        /// </summary>
-        /// <returns></returns>
-        protected abstract IPropertyValueObserver<TResult> CreatePropertyValueObserverBuilderWithActionOfTResult();
 
         /// <summary>
         ///     Creates the property value observer builder with action of t result and fallback.
@@ -216,21 +201,24 @@ namespace Anori.ExpressionObservers.Builder
             CreatePropertyValueObserverOnNotifyProperyChanged();
 
         /// <summary>
-        ///     Creates the property value observer on value changed.
-        /// </summary>
-        /// <returns></returns>
-        protected abstract IPropertyValueObserverOnValueChanged<TResult> CreatePropertyValueObserverOnValueChanged();
-
-        /// <summary>
         ///     Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns></returns>
         protected abstract TSelf PropertyValueObserverBuilderWithActionAndGetterWithFallback(TResult fallback);
 
-        protected abstract IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultNullableWithFallback(TResult fallback);
+        ///// <summary>
+        ///// Properties the value observer builder with action of t result nullable with fallback.
+        ///// </summary>
+        ///// <param name="fallback">The fallback.</param>
+        ///// <returns></returns>
+        //protected abstract TSelf PropertyValueObserverBuilderWithActionOfTResultNullableWithFallback(TResult fallback);
 
+        /// <summary>
+        /// Properties the value observer builder with action of t result with fallback.
+        /// </summary>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns></returns>
         protected abstract TSelf PropertyValueObserverBuilderWithActionOfTResultWithFallback(TResult fallback);
 
         /// <summary>
@@ -348,6 +336,14 @@ namespace Anori.ExpressionObservers.Builder
             this.Cached();
 
         /// <summary>
+        ///     Cacheds this instance.
+        /// </summary>
+        /// <returns></returns>
+        IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>
+            IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>.Cached() =>
+            this.Cached();
+
+        /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
@@ -425,28 +421,22 @@ namespace Anori.ExpressionObservers.Builder
             this.CreatePropertyValueObserverBuilderWithActionOfTResultAndFallback();
 
         /// <summary>
-        /// Creates this instance.
+        ///     Creates this instance.
         /// </summary>
         /// <returns>
-        /// Property Value Observer On Notify Propery Changed,
+        ///     Property Value Observer On Notify Propery Changed,
         /// </returns>
         IPropertyValueObserverOnValueChanged<TResult> IPropertyValueObserverBuilderWithValueChanged<TResult>.Create() =>
             this.CreatePropertyValueObserverBuilderWithValueChanged();
 
         /// <summary>
-        /// Creates this instance.
+        ///     Creates this instance.
         /// </summary>
         /// <returns>
-        /// The Property Observer.
+        ///     The Property Observer.
         /// </returns>
-        IPropertyValueObserver<TResult> IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>.Create()
-            =>
-                this.CreatePropertyValueObserver();
-        /// <summary>
-        /// Creates the property value observer.
-        /// </summary>
-        /// <returns></returns>
-        protected abstract IPropertyValueObserver<TResult> CreatePropertyValueObserver();
+        IPropertyValueObserver<TResult> IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>.Create() =>
+            this.CreatePropertyValueObserver();
 
         /// <summary>
         ///     Withes the action.
@@ -479,11 +469,11 @@ namespace Anori.ExpressionObservers.Builder
             Action<TResult> action) =>
             this.WithAction(action);
 
-        IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>
-            IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>.WithFallback(TResult fallback)
-        {
-            return this.PropertyValueObserverBuilderWithActionOfTResultNullableWithFallback(fallback);
-        }
+        //IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>
+        //    IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>.WithFallback(TResult fallback)
+        //{
+        //    return this.PropertyValueObserverBuilderWithActionOfTResultNullableWithFallback(fallback);
+        //}
 
         IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
             IPropertyValueObserverBuilderWithActionOfTResult<TResult>.WithFallback(TResult fallback)
@@ -570,13 +560,25 @@ namespace Anori.ExpressionObservers.Builder
                 TaskScheduler taskScheduler) =>
             this.WithGetterTaskScheduler(taskScheduler);
 
+        /// <summary>
+        ///     Withes the getter task scheduler.
+        /// </summary>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <returns></returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
             IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>>.
             WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
             this.WithGetterTaskScheduler(taskScheduler);
 
+        /// <summary>
+        ///     Withes the getter task scheduler.
+        /// </summary>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>
-            IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>.
+        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>.
             WithGetterTaskScheduler(TaskScheduler taskScheduler)
         {
             return this.WithGetterTaskScheduler(taskScheduler);

@@ -19,9 +19,11 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
                 .WithAction(() => callCount++)
                 .Create();
+
             Assert.AreEqual(0, callCount);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
@@ -45,7 +47,12 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithAction(() => callCount++).AutoActivate().Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithAction(() => callCount++)
+                .AutoActivate()
+                .Create();
+            
             Assert.AreEqual(0, callCount);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
@@ -66,7 +73,10 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithValueChanged().Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithValueChanged()
+                .Create();
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -96,15 +106,17 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, observes.Value);
         }
-
-       
-
+        
         [Test]
         public void PropertyObserver_OnValueChanged_Observes_instance_IntProperty_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithValueChanged().AutoActivate().Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithValueChanged()
+                .AutoActivate()
+                .Create();
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -136,7 +148,12 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithValueChanged().WithGetterTaskScheduler(TaskScheduler.Current).Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithValueChanged()
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .Create();
+
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
@@ -166,14 +183,16 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, observes.Value);
         }
 
-     
-
         [Test]
-        public void PropertyObserver_OnValueChanged_Observes_instance_IntProperty_TaskSchedulerCurrent_AutoActivateTrue()
+        public void PropertyObserver_OnValueChanged_Observes_instance_IntProperty_TaskSchedulerCurrent_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithValueChanged().WithGetterTaskScheduler(TaskScheduler.Current).AutoActivate().Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithValueChanged().WithGetterTaskScheduler(TaskScheduler.Current)
+                .AutoActivate()
+                .Create();
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -316,7 +335,11 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithNotifyProperyChanged().Cached().Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithNotifyProperyChanged()
+                .Cached()
+                .Create();
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -354,7 +377,12 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithNotifyProperyChanged().Cached().AutoActivate().Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithNotifyProperyChanged()
+                .Cached()
+                .AutoActivate()
+                .Create();
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -381,12 +409,97 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, observes.Value);
         }
 
+
+        [Test]
+        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithNotifyProperyChanged()
+                .Cached(LazyThreadSafetyMode.Full)
+                .Create();
+
+            observes.PropertyChanged += (sender, args) => callCount++;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            observes.Subscribe();
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full_AutoActivate()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithNotifyProperyChanged()
+                .Cached(LazyThreadSafetyMode.Full)
+                .AutoActivate()
+                .Create();
+
+            observes.PropertyChanged += (sender, args) => callCount++;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+        }
+
+
+
         [Test]
         public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_TaskSchedulerCurrent()
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithNotifyProperyChanged().Cached().WithGetterTaskScheduler(TaskScheduler.Current).Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithNotifyProperyChanged()
+                .Cached()
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .Create();
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -424,7 +537,92 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(instance, i => i.Class2.IntProperty).WithNotifyProperyChanged().Cached().WithGetterTaskScheduler(TaskScheduler.Current).AutoActivate().Create();
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithNotifyProperyChanged()
+                .Cached()
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .AutoActivate()
+                .Create();
+
+            observes.PropertyChanged += (sender, args) => callCount++;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full_TaskSchedulerCurrent()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithNotifyProperyChanged()
+                .Cached(LazyThreadSafetyMode.Full)
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .Create();
+
+            observes.PropertyChanged += (sender, args) => callCount++;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            observes.Subscribe();
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+        }
+        
+        [Test]
+        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full_TaskSchedulerCurrent_AutoActivate()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithNotifyProperyChanged()
+                .Cached(LazyThreadSafetyMode.Full)
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .AutoActivate()
+                .Create();
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -462,6 +660,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithGetter()
                 .WithFallback(99)
                 .Create();
+            
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(99, observes.Value);
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
@@ -489,7 +688,8 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(99, observes.Value);
         }
 
-      public void PropertyObserver_Getter_Fallback_Observes_instance_IntProperty_AutoActivate()
+        [Test]
+        public void PropertyObserver_Getter_Fallback_Observes_instance_IntProperty_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
@@ -498,7 +698,9 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                 .WithGetter()
                 .WithFallback(99)
+                .AutoActivate()
                 .Create(); Assert.AreEqual(0, callCount);
+            
             Assert.AreEqual(99, observes.Value);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
@@ -573,6 +775,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithGetter()
                 .AutoActivate()
                 .Create(); 
+         
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
@@ -609,7 +812,6 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
                 .WithAction((int? v) =>
                     {
-                        
                                     value = v;
                                     callCount++;
                     })
@@ -662,7 +864,6 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
                 .WithAction((int v) =>
                     {
-
                         value = v;
                         callCount++;
                     })
@@ -813,7 +1014,8 @@ namespace Anori.ExpressionObservers.UnitTests
             var value = -1;
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
-                .WithAction(v => {
+                .WithAction(v => 
+                        {
                         value = v;
                         callCount++;
                     }
