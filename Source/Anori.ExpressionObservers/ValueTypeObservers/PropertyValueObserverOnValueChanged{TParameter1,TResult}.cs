@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
@@ -55,21 +56,50 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         internal PropertyValueObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            TaskScheduler? taskScheduler = null)
+            [NotNull] TaskScheduler taskScheduler)
             : base(parameter1, propertyExpression)
         {
             TResult? Getter() =>
                 ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
                     parameter1);
 
-            if (taskScheduler == null)
-            {
-                this.action = () => this.Value = Getter();
-            }
-            else
-            {
-                this.action = () => new TaskFactory(taskScheduler).StartNew(() => this.Value = Getter()).Wait();
-            }
+            this.action = () => new TaskFactory(taskScheduler).StartNew(() => this.Value = Getter()).Wait();
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TParameter1, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        internal PropertyValueObserverOnValueChanged(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] SynchronizationContext synchronizationContext)
+            : base(parameter1, propertyExpression)
+        {
+            TResult? Getter() =>
+                ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
+                    parameter1);
+
+            this.action = () => synchronizationContext.Send(() => this.Value = Getter());
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TParameter1, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        internal PropertyValueObserverOnValueChanged(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
+            : base(parameter1, propertyExpression)
+        {
+            TResult? Getter() =>
+                ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
+                    parameter1);
+
+            this.action = () => this.Value = Getter();
         }
 
         /// <summary>
@@ -120,12 +150,35 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        IPropertyValueObserverOnValueChanged<TResult> IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe()
-            => this.Subscribe();
-        IPropertyValueObserverOnValueChanged<TResult> IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe(bool silent)
-            => this.Subscribe(silent);
-        IPropertyValueObserverOnValueChanged<TResult> IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Unsubscribe()
-            => this.Unsubscribe();
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverOnValueChanged<TResult>
+            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe() =>
+            this.Subscribe();
 
+        /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverOnValueChanged<TResult>
+            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe(bool silent) =>
+            this.Subscribe(silent);
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverOnValueChanged<TResult>
+            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Unsubscribe() =>
+            this.Unsubscribe();
     }
 }

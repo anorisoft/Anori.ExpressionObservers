@@ -15,8 +15,11 @@ namespace Anori.ExpressionObservers.Base
     using Anori.ExpressionObservers.Tree.Nodes;
 
     /// <summary>
-    ///     Property Observer Base.
+    /// Property Observer Base.
     /// </summary>
+    /// <seealso cref="System.IDisposable" />
+    /// <seealso cref="System.Collections.Generic.IEqualityComparer{Anori.ExpressionObservers.Base.PropertyObserverBase}" />
+    /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Base.PropertyObserverBase}" />
     /// <seealso cref="IEqualityComparer{T}" />
     /// <seealso cref="IEquatable{T}" />
     /// <seealso cref="PropertyObserverBase" />
@@ -247,7 +250,7 @@ namespace Anori.ExpressionObservers.Base
         /// <summary>
         ///     Subscribes this instance.
         /// </summary>
-        public void Subscribe()
+        protected void Subscribe()
         {
             this.Subscribe(false);
         }
@@ -256,7 +259,7 @@ namespace Anori.ExpressionObservers.Base
         ///     Subscribes the specified silent.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
-        public void Subscribe(bool silent)
+        protected void Subscribe(bool silent)
         {
             if (this.isSubscribe)
             {
@@ -278,7 +281,7 @@ namespace Anori.ExpressionObservers.Base
         /// <summary>
         ///     Unsubscribes this instance.
         /// </summary>
-        public void Unsubscribe()
+        protected void Unsubscribe()
         {
             if (!this.isSubscribe)
             {

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyValueObserverBuilderWithActionOfTResultNullable.cs" company="AnoriSoft">
+// <copyright file="IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,14 +7,12 @@
 namespace Anori.ExpressionObservers.Interfaces
 {
     /// <summary>
-    /// The I Property Value Observer Builder With Action Of T Result Nullable interface.
+    /// The I Property Value Observer Builder With Action Of T Result Nullable And Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
-    public interface IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler{TResult}}" />
+    public interface IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult> :
+        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>

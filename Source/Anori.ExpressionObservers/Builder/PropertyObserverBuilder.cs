@@ -64,9 +64,10 @@ namespace Anori.ExpressionObservers.Builder
             where TResult : struct
         {
             var builder = new PropertyValueObserverBuilder<TParameter1, TResult>(parameter1, propertyExpression)
-                              {
-                                  IsAutoActivate = this.isAutoActivate, IsSilentActivate = this.isSilentActivate,
-                              };
+            {
+                IsAutoActivate = this.isAutoActivate,
+                IsSilentActivate = this.isSilentActivate,
+            };
             return builder;
         }
     }

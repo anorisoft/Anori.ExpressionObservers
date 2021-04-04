@@ -6,14 +6,25 @@
 
 namespace Anori.ExpressionObservers.UnitTests
 {
-    using Anori.Common;
+    using System.Threading;
+
     using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
     using NUnit.Framework;
     using System.Threading.Tasks;
 
+    using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
+
     public class PropertyObserverBuilderIntegerPropertyP1Test
     {
+
+        [SetUp]
+        public void Init()
+        {
+            SynchronizationContext.SetSynchronizationContext(new TestSynchronizationContext());
+        }
+
+
         [Test]
         public void PropertyObserver_Observes_instance_IntProperty()
         {
@@ -86,6 +97,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
+            observes.Subscribe();
             observes.Subscribe();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, observes.Value);
@@ -190,7 +202,85 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
-                .WithValueChanged().WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithValueChanged()
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .AutoActivate()
+                .Create();
+
+            observes.PropertyChanged += (sender, args) => callCount++;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_OnValueChanged_Observes_instance_IntProperty_Dispatcher()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithValueChanged()
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .Create();
+
+            observes.PropertyChanged += (sender, args) => callCount++;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            observes.Subscribe();
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            observes.Unsubscribe();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_OnValueChanged_Observes_instance_IntProperty_Dispatche_AutoActivate()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            using var observes = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
+                .WithValueChanged()
+                .WithGetterDispatcher()
                 .AutoActivate()
                 .Create();
 

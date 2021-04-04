@@ -14,7 +14,7 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResult{TResult}}" />
     public interface IPropertyValueObserverBuilderWithActionOfTResult<TResult> :
         IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResult<TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResult<TResult>>
+        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>

@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.Common;
@@ -17,6 +18,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using Anori.ExpressionObservers.Interfaces;
 
     using JetBrains.Annotations;
+
+    using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
     ///     Property Reference Observer With Getter.
@@ -58,27 +61,19 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            TaskScheduler taskScheduler,
             bool isCached = false,
-            LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None,
-            TaskScheduler? taskScheduler = null)
+            LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None)
             : base(parameter1, propertyExpression)
         {
             Func<TResult?> get;
-            if (taskScheduler == null)
-            {
-                get = () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(
-                    propertyExpression.Parameters,
-                    this.Tree)(parameter1);
-            }
-            else
-            {
+            
                 get = () => new TaskFactory<TResult?>(taskScheduler).StartNew(
                         p => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(
                             propertyExpression.Parameters,
                             this.Tree)((TParameter1)p),
                         parameter1)
                     .Result;
-            }
 
             if (isCached)
             {
@@ -96,6 +91,74 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
                 this.getter = get;
             }
         }
+
+
+        internal PropertyValueObserverOnNotifyProperyChanged(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            SynchronizationContext synchronizationContext,
+            bool isCached = false,
+            LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None)
+            : base(parameter1, propertyExpression)
+        {
+            Func<TResult?> get;
+
+            get = () => synchronizationContext.Send(
+                    () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(
+                        propertyExpression.Parameters,
+                        this.Tree)(parameter1));
+
+            if (isCached)
+            {
+                var cache = new ResetLazy<TResult?>(() => get(), safetyMode);
+                this.action = () =>
+                    {
+                        cache.Reset();
+                        this.OnPropertyChanged(nameof(this.Value));
+                    };
+                this.getter = () => cache.Value;
+            }
+            else
+            {
+                this.action = () => this.OnPropertyChanged(nameof(this.Value));
+                this.getter = get;
+            }
+        }
+
+
+
+        internal PropertyValueObserverOnNotifyProperyChanged(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached = false,
+            LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None)
+            : base(parameter1, propertyExpression)
+        {
+            Func<TResult?> get;
+            
+                get = () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(
+                    propertyExpression.Parameters,
+                    this.Tree)(parameter1);
+            
+
+            if (isCached)
+            {
+                var cache = new ResetLazy<TResult?>(() => get(), safetyMode);
+                this.action = () =>
+                    {
+                        cache.Reset();
+                        this.OnPropertyChanged(nameof(this.Value));
+                    };
+                this.getter = () => cache.Value;
+            }
+            else
+            {
+                this.action = () => this.OnPropertyChanged(nameof(this.Value));
+                this.getter = get;
+            }
+        }
+
+
 
         /// <summary>
         ///     Occurs when a property value changes.

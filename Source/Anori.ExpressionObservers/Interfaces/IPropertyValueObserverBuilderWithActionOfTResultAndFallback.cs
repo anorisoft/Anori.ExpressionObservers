@@ -12,9 +12,9 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultAndFallback{TResult}}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultAndFallback{TResult}}" />
-    public interface IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult> :
+    public interface IPropertyValueObserverBuilderWithActionOfTResultAndFallback<out TResult> :
         IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>>
+        IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -24,7 +24,5 @@ namespace Anori.ExpressionObservers.Interfaces
         ///     The Property Observer.
         /// </returns>
         IPropertyGetterObserverWithFallback<TResult> Create();
-
-       
     }
 }

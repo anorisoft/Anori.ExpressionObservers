@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyValueObserverBuilderWithNotifyProperyChanged.cs" company="AnoriSoft">
+// <copyright file="IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -9,15 +9,12 @@ namespace Anori.ExpressionObservers.Interfaces
     using Anori.Common;
 
     /// <summary>
-    /// The I Property Value Observer Builder With Notify Propery Changed interface.
+    /// The I Property Value Observer Builder With Notify Propery Changed And Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithNotifyProperyChanged{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithNotifyProperyChanged{TResult}}" />
-    /// <seealso cref="IPropertyValueObserverBuilderWithNotifyProperyChanged{TResult}" />
-    public interface IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>>,
-        IGetterTaskScheduler<IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler{TResult}}" />
+    public interface IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult> :
+        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>

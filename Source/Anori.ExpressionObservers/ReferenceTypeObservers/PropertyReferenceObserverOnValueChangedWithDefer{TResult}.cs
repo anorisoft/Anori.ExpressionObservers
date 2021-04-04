@@ -37,7 +37,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Action action;
 
         /// <summary>
-        /// The getter.
+        ///     The getter.
         /// </summary>
         private readonly Func<TResult?> getter;
 
@@ -69,24 +69,40 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             {
                 this.action = () =>
                     {
-                        if (this.deferState == DeferState.Update)
+                        switch (this.deferState)
                         {
-                            return;
-                        }
+                            case DeferState.Update:
+                                return;
 
-                        if (this.deferState == DeferState.Deferred)
-                        {
-                            this.deferState = DeferState.Update;
-                            return;
-                        }
+                            case DeferState.Deferred:
+                                this.deferState = DeferState.Update;
+                                return;
 
-                        this.Value = this.getter();
+                            default:
+                                this.Value = this.getter();
+                                break;
+                        }
                     };
             }
             else
             {
                 this.action = () =>
-                    new TaskFactory(taskScheduler).StartNew(() => { return this.Value = this.getter(); }).Wait();
+                    {
+                        switch (this.deferState)
+                        {
+                            case DeferState.Update:
+                                return;
+
+                            case DeferState.Deferred:
+                                this.deferState = DeferState.Update;
+                                return;
+
+                            default:
+                                new TaskFactory(taskScheduler).StartNew(() => { return this.Value = this.getter(); })
+                                    .Wait();
+                                break;
+                        }
+                    };
             }
         }
 

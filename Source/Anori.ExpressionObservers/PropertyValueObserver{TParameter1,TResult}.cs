@@ -191,9 +191,9 @@ namespace Anori.ExpressionObservers
             new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
+                taskScheduler,
                 isCached,
-                safetyMode,
-                taskScheduler);
+                safetyMode);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -224,9 +224,9 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
+                taskScheduler,
                 isCached,
-                safetyMode,
-                taskScheduler);
+                safetyMode);
             if (isAutoActivate)
             {
                 observer.Subscribe(true);

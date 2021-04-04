@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <summary>
     ///     The Value Property Observer Builder interface.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IPropertyValueObserverBuilder<TResult> : IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilder<TResult>>
         where TResult : struct
@@ -22,11 +21,12 @@ namespace Anori.ExpressionObservers.Interfaces
         /// <param name="action">The action.</param>
         /// <returns>The Value Property Observer Builder.</returns>
         IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> WithAction(Action<TResult?> action);
+
         /// <summary>
         /// Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
-        /// <returns></returns>
+        /// <returns>The Value Property Observer Builder.</returns>
         IPropertyValueObserverBuilderWithActionOfTResult<TResult> WithAction(Action<TResult> action);
 
         /// <summary>
