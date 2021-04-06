@@ -9,8 +9,13 @@ namespace Anori.ExpressionObservers.Observers
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Builder;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -21,10 +26,12 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Observers.PropertyObserverWithGetterAndFallback{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
+    ///     cref="PropertyObserverWithGetterAndFallback{TResult}" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult> : PropertyObserverBase<
-        PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
+    public sealed class PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult> :
+        PropertyObserverBase<PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>, TParameter1,
+            TParameter2, TResult>,
+        IPropertyObserverWithGetterAndFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
     {
@@ -41,22 +48,20 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyObserverWithGetterAndFallback{TParameter1, TParameter2, TResult}" />
-        ///     class.
+        /// Initializes a new instance of the
+        /// <see cref="PropertyObserverWithGetterAndFallback{TParameter1, TParameter2, TResult}" />
+        /// class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     parameter1
-        ///     or
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
+        /// <exception cref="ArgumentNullException">parameter1
+        /// or
+        /// action
+        /// or
+        /// propertyExpression is null.</exception>
         internal PropertyObserverWithGetterAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
@@ -66,11 +71,66 @@ namespace Anori.ExpressionObservers.Observers
             : base(parameter1, parameter2, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.getter = Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2);
+        }
 
-            this.getter = () => ExpressionGetter.CreateGetter<TParameter1, TParameter2, TResult>(
-                propertyExpression.Parameters,
-                this.Tree,
-                fallback)(parameter1, parameter2);
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="PropertyObserverWithGetterAndFallback{TParameter1, TParameter2, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <exception cref="ArgumentNullException">parameter1
+        /// or
+        /// action
+        /// or
+        /// propertyExpression is null.</exception>
+        internal PropertyObserverWithGetterAndFallback(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
+            TaskScheduler taskScheduler,
+            TResult fallback)
+            : base(parameter1, parameter2, propertyExpression)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            var get = Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2);
+            var taskFactory = new TaskFactory(taskScheduler);
+            this.getter = () => taskFactory.StartNew(get).Result;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="PropertyObserverWithGetterAndFallback{TParameter1,  TParameter2, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <exception cref="ArgumentNullException">parameter1
+        /// or
+        /// action
+        /// or
+        /// propertyExpression is null.</exception>
+        internal PropertyObserverWithGetterAndFallback(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
+            SynchronizationContext synchronizationContext,
+            TResult fallback)
+            : base(parameter1, parameter2, propertyExpression)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            var get = Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2);
+            this.getter = () => synchronizationContext.Send(get);
         }
 
         /// <summary>
@@ -85,5 +145,55 @@ namespace Anori.ExpressionObservers.Observers
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>Getter.</returns>
+        private static Func<TResult> Getter(
+            Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TResult fallback,
+            TParameter1 parameter1,
+            TParameter2 parameter2) =>
+            () => ExpressionGetter.CreateGetter<TParameter1, TParameter2, TResult>(
+                propertyExpression.Parameters,
+                tree,
+                fallback)(parameter1, parameter2);
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyObserverWithGetterAndFallback<TResult>
+            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Subscribe() =>
+            this.Subscribe();
+
+        /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyObserverWithGetterAndFallback<TResult>
+            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Subscribe(bool silent) =>
+            this.Subscribe(silent);
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyObserverWithGetterAndFallback<TResult>
+            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Unsubscribe() =>
+            this.Unsubscribe();
     }
 }

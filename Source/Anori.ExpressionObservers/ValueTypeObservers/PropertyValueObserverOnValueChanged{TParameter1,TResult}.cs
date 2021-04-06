@@ -16,6 +16,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -29,7 +30,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverOnValueChanged<TParameter1, TResult> :
+    internal sealed class PropertyValueObserverOnValueChanged<TParameter1, TResult> :
         PropertyObserverBase<PropertyValueObserverOnValueChanged<TParameter1, TResult>, TParameter1, TResult>,
         IPropertyValueObserverOnValueChanged<TResult>
         where TResult : struct
@@ -59,11 +60,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             [NotNull] TaskScheduler taskScheduler)
             : base(parameter1, propertyExpression)
         {
-            TResult? Getter() =>
-                ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
-                    parameter1);
-
-            this.action = () => new TaskFactory(taskScheduler).StartNew(() => this.Value = Getter()).Wait();
+            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var taskFactory = new TaskFactory(taskScheduler);
+            this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
         }
 
         /// <summary>
@@ -78,11 +77,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             [NotNull] SynchronizationContext synchronizationContext)
             : base(parameter1, propertyExpression)
         {
-            TResult? Getter() =>
-                ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
-                    parameter1);
-
-            this.action = () => synchronizationContext.Send(() => this.Value = Getter());
+            var get = Getter(propertyExpression, this.Tree, parameter1);
+            this.action = () => synchronizationContext.Send(() => this.Value = get());
         }
 
         /// <summary>
@@ -95,12 +91,24 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             : base(parameter1, propertyExpression)
         {
-            TResult? Getter() =>
-                ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
-                    parameter1);
-
-            this.action = () => this.Value = Getter();
+            var get = Getter(propertyExpression, this.Tree, parameter1);
+            this.action = () => this.Value = get();
         }
+
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>Getter.</returns>
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1) =>
+            () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
+            parameter1);
+
 
         /// <summary>
         ///     Occurs when a property value changes.

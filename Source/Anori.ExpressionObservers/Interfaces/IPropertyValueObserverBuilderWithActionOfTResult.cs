@@ -6,12 +6,6 @@
 
 namespace Anori.ExpressionObservers.Interfaces
 {
-    /// <summary>
-    /// The Property Value Observer Builder With Action Of T Result interface.
-    /// </summary>
-    /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResult{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResult{TResult}}" />
     public interface IPropertyValueObserverBuilderWithActionOfTResult<TResult> :
         IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResult<TResult>>,
         IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>

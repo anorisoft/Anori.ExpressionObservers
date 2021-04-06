@@ -31,13 +31,13 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static PropertyReferenceGetterObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyReferenceObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new PropertyReferenceGetterObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            new PropertyReferenceObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -50,7 +50,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static PropertyReferenceGetterObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
+        public static PropertyReferenceObserver<TParameter1, TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate,
@@ -59,7 +59,7 @@ namespace Anori.ExpressionObservers
             where TResult : class
         {
             var observer =
-                new PropertyReferenceGetterObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+                new PropertyReferenceObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
             if (isAutoActivate)
             {
                 observer.Subscribe(true);

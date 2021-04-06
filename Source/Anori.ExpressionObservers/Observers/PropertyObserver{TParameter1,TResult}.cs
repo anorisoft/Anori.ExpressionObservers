@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
-    public sealed class PropertyObserver<TParameter1, TResult> :
+    internal sealed class PropertyObserver<TParameter1, TResult> :
         PropertyObserverBase<PropertyObserver<TParameter1, TResult>, TParameter1, TResult>,
         IPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged

@@ -10,6 +10,8 @@ namespace Anori.ExpressionObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Builder;
+    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers;
 
     using JetBrains.Annotations;
@@ -33,7 +35,7 @@ namespace Anori.ExpressionObservers
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        public static PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>
+        public static IPropertyObserverWithGetterAndFallback<TResult>
             Observes<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -64,7 +66,7 @@ namespace Anori.ExpressionObservers
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        public static PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>
+        public static IPropertyObserverWithGetterAndFallback<TResult>
             Observes<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -105,7 +107,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static PropertyGetterObserverWithFallback<TParameter1, TParameter2, TResult>
+        public static IPropertyObserverWithFallback<TResult>
             Observes<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -116,7 +118,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer = new PropertyGetterObserverWithFallback<TParameter1, TParameter2, TResult>(
+            var observer = new PropertyObserverWithFallback<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -145,7 +147,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static PropertyGetterObserverWithFallback<TParameter1, TParameter2, TResult>
+        public static IPropertyObserverWithFallback<TResult>
             Observes<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -154,7 +156,7 @@ namespace Anori.ExpressionObservers
                 [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
-            new PropertyGetterObserverWithFallback<TParameter1, TParameter2, TResult>(
+            new PropertyObserverWithFallback<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -176,7 +178,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static PropertyObserver<TParameter1, TParameter2, TResult> Observes<TParameter1, TParameter2, TResult>(
+        public static IPropertyObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -210,7 +212,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>Property Observer.</returns>
         [NotNull]
-        public static PropertyObserver<TParameter1, TParameter2, TResult> Observes<TParameter1, TParameter2, TResult>(
+        public static IPropertyObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,

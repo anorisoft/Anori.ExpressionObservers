@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso
     ///     cref="PropertyValueObserverWithGetter{TResult}" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverWithGetter<TParameter1, TResult> :
+    internal sealed class PropertyValueObserverWithGetter<TParameter1, TResult> :
         PropertyObserverBase<PropertyValueObserverWithGetter<TParameter1, TResult>, TParameter1, TResult>,
         IPropertyValueObserverWithGetter<TResult>
         where TResult : struct
@@ -130,7 +130,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <param name="parameter1">The parameter1.</param>
-        /// <returns></returns>
+        /// <returns>The Getter.</returns>
         private static Func<TResult?> Getter(
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,

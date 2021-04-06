@@ -20,8 +20,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
-    public sealed class PropertyReferenceGetterObserver<TParameter1, TResult> : PropertyObserverBase<
-        PropertyReferenceGetterObserver<TParameter1, TResult>, TParameter1, TResult>
+    public sealed class PropertyReferenceObserver<TParameter1, TResult> : PropertyObserverBase<
+        PropertyReferenceObserver<TParameter1, TResult>, TParameter1, TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : class
     {
@@ -38,13 +38,13 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <exception cref="System.ArgumentNullException">The action is null.</exception>
-        internal PropertyReferenceGetterObserver(
+        internal PropertyReferenceObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)

@@ -24,10 +24,10 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyGetterObserverWithFallback{TResult}" />
-    /// <seealso cref="IPropertyGetterObserverWithFallback{TResult}" />
-    public sealed class PropertyObserverWithFallback<TParameter1, TResult> :
+    /// <seealso cref="IPropertyObserverWithFallback{TResult}" />
+    internal sealed class PropertyObserverWithFallback<TParameter1, TResult> :
         PropertyObserverBase<PropertyObserverWithFallback<TParameter1, TResult>, TParameter1, TResult>,
-        IPropertyGetterObserverWithFallback<TResult>
+        IPropertyObserverWithFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
@@ -124,7 +124,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="tree">The tree.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="parameter1">The parameter1.</param>
-        /// <returns></returns>
+        /// <returns>The Getter.</returns>
         private static Func<TResult> Getter(
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
@@ -139,7 +139,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyGetterObserverWithFallback<TResult> IPropertyObserverBase<IPropertyGetterObserverWithFallback<TResult>>
+        IPropertyObserverWithFallback<TResult> IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>
             .Subscribe() =>
             this.Subscribe();
 
@@ -150,7 +150,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyGetterObserverWithFallback<TResult> IPropertyObserverBase<IPropertyGetterObserverWithFallback<TResult>>
+        IPropertyObserverWithFallback<TResult> IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>
             .Subscribe(bool silent) =>
             this.Subscribe(silent);
 
@@ -160,7 +160,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     Self object.
         /// </returns>
-        IPropertyGetterObserverWithFallback<TResult> IPropertyObserverBase<IPropertyGetterObserverWithFallback<TResult>>
+        IPropertyObserverWithFallback<TResult> IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>
             .Unsubscribe() =>
             this.Unsubscribe();
     }

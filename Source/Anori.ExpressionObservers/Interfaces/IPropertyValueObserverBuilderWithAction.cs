@@ -25,6 +25,5 @@ namespace Anori.ExpressionObservers.Interfaces
         /// </summary>
         /// <returns></returns>
         IPropertyValueObserverBuilderWithActionAndGetter<TResult> WithGetter();
-//        IPropertyValueObserverBuilderWithActionAndFallback<TResult> WithFallback(TResult fallback);
     }
 }

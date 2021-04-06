@@ -14,13 +14,13 @@ namespace Anori.ExpressionObservers.Exceptions
     /// </summary>
     /// <seealso cref="System.Exception" />
     [Serializable]
-    public class ExpressionObserversException : Exception
+    public abstract class ExpressionObserversException : Exception
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExpressionObserversException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public ExpressionObserversException(string message)
+        protected ExpressionObserversException(string message)
             : base(message)
         {
         }

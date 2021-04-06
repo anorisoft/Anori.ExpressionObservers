@@ -6,13 +6,12 @@
 
 namespace Anori.ExpressionObservers.Observers
 {
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
-
-    using Anori.ExpressionObservers.Base;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Observer.
@@ -21,8 +20,12 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf,TParameter1,TResult}" />
-    public sealed class PropertyObserver<TParameter1, TParameter2, TResult> : PropertyObserverBase<
-        PropertyObserver<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
+    internal sealed class PropertyObserver<TParameter1, TParameter2, TResult> :
+        PropertyObserverBase<
+                                                                                  PropertyObserver<TParameter1,
+                                                                                      TParameter2, TResult>, TParameter1
+                                                                                  , TParameter2, TResult>,
+                                                                              IPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
     {
@@ -52,5 +55,26 @@ namespace Anori.ExpressionObservers.Observers
         ///     The on action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        ///     Subscribes this instance.
+        /// </summary>
+        /// <returns>The Property Observer.</returns>
+        IPropertyObserver<TResult> IPropertyObserverBase<IPropertyObserver<TResult>>.Subscribe() => this.Subscribe();
+
+        /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <returns>The Property Observer.</returns>
+        IPropertyObserver<TResult> IPropertyObserverBase<IPropertyObserver<TResult>>.Subscribe(bool silent) =>
+            this.Subscribe(silent);
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        /// <returns>The Property Observer.</returns>
+        IPropertyObserver<TResult> IPropertyObserverBase<IPropertyObserver<TResult>>.Unsubscribe() =>
+            this.Unsubscribe();
     }
 }

@@ -11,9 +11,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions;
 
     using JetBrains.Annotations;
 
@@ -25,9 +29,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     ///     cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverOnValueChanged<TResult> :
+    internal sealed class PropertyValueObserverOnValueChanged<TResult> :
         PropertyObserverBase<PropertyValueObserverOnValueChanged<TResult>, TResult>,
-        INotifyPropertyChanged
+        IPropertyValueObserverOnValueChanged<TResult>
         where TResult : struct
     {
         /// <summary>
@@ -42,30 +46,61 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}"/> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyValueObserverOnValueChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TaskScheduler? taskScheduler = null)
+            [NotNull] TaskScheduler taskScheduler)
             : base(propertyExpression)
         {
-            var getter = ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, this.Tree);
-
-            if (taskScheduler == null)
-            {
-                this.action = () => this.Value = getter();
-            }
-            else
-            {
-                this.action = () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait();
-            }
+            var get = Getter(propertyExpression, this.Tree);
+            var taskFactory = new TaskFactory(taskScheduler);
+            this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
         }
 
         /// <summary>
-        ///     Occurs when a property value changes.
+        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        internal PropertyValueObserverOnValueChanged(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] SynchronizationContext synchronizationContext)
+            : base(propertyExpression)
+        {
+            var get = Getter(propertyExpression, this.Tree);
+            this.action = () => synchronizationContext.Send(() => this.Value = get());
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        internal PropertyValueObserverOnValueChanged(
+            [NotNull] Expression<Func<TResult>> propertyExpression)
+            : base(propertyExpression)
+        {
+            var get = Getter(propertyExpression, this.Tree);
+            this.action = () => this.Value = get();
+        }
+
+        /// <summary>
+        /// Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <returns>
+        /// Getter.
+        /// </returns>
+        private static Func<TResult?> Getter(
+            Expression<Func<TResult>> propertyExpression,
+            IExpressionTree tree) =>
+            ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
+
+        /// <summary>
+        /// Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -102,6 +137,38 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged.Raise(this, propertyName);
+
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverOnValueChanged<TResult>
+            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe() =>
+            this.Subscribe();
+
+        /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverOnValueChanged<TResult>
+            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe(bool silent) =>
+            this.Subscribe(silent);
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverOnValueChanged<TResult>
+            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Unsubscribe() =>
+            this.Unsubscribe();
     }
 }

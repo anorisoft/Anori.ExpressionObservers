@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <seealso
     ///     cref="IPropertyObserverBase{TSelf}.ExpressionObservers.Interfaces.IPropertyGetterObserverWithFallback{TResult}}" />
     public interface
-        IPropertyGetterObserverWithFallback<out TResult> : IPropertyObserverBase<IPropertyGetterObserverWithFallback<TResult>>
+        IPropertyObserverWithFallback<out TResult> : IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>
     {
         /// <summary>
         ///     Gets the value.

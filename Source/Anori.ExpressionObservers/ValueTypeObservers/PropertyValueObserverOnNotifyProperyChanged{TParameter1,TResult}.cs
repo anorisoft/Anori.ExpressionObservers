@@ -16,10 +16,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using Anori.Common;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;
+    using LazyThreadSafetyMode = Common.LazyThreadSafetyMode;
 
-    using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
     ///     Property Reference Observer With Getter.
@@ -30,7 +31,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso
     ///     cref="PropertyObserverBase{TSelf}.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}}" />
     /// <seealso cref="INotifyPropertyChanged" />
-    public sealed class PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult> :
+    internal sealed class PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult> :
         PropertyObserverBase<PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>, TParameter1, TResult>,
         IPropertyValueObserverOnNotifyProperyChanged<TResult>
         where TResult : struct
@@ -54,9 +55,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="taskScheduler">The task scheduler.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
@@ -66,18 +67,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None)
             : base(parameter1, propertyExpression)
         {
-            Func<TResult?> get;
-            
-                get = () => new TaskFactory<TResult?>(taskScheduler).StartNew(
-                        p => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(
-                            propertyExpression.Parameters,
-                            this.Tree)((TParameter1)p),
-                        parameter1)
+            TResult? Get() =>
+                new TaskFactory<TResult?>(taskScheduler).StartNew(Getter(propertyExpression, this.Tree, parameter1))
                     .Result;
 
             if (isCached)
             {
-                var cache = new ResetLazy<TResult?>(() => get(), safetyMode);
+                var cache = new ResetLazy<TResult?>(Get, safetyMode);
                 this.action = () =>
                     {
                         cache.Reset();
@@ -88,11 +84,19 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             else
             {
                 this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = get;
+                this.getter = Get;
             }
         }
 
-
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -101,16 +105,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None)
             : base(parameter1, propertyExpression)
         {
-            Func<TResult?> get;
-
-            get = () => synchronizationContext.Send(
-                    () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(
-                        propertyExpression.Parameters,
-                        this.Tree)(parameter1));
+            TResult? Get() => synchronizationContext.Send(Getter(propertyExpression, this.Tree, parameter1));
 
             if (isCached)
             {
-                var cache = new ResetLazy<TResult?>(() => get(), safetyMode);
+                var cache = new ResetLazy<TResult?>(Get, safetyMode);
                 this.action = () =>
                     {
                         cache.Reset();
@@ -121,12 +120,18 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             else
             {
                 this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = get;
+                this.getter = Get;
             }
         }
 
-
-
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -134,16 +139,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             LazyThreadSafetyMode safetyMode = LazyThreadSafetyMode.None)
             : base(parameter1, propertyExpression)
         {
-            Func<TResult?> get;
-            
-                get = () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(
-                    propertyExpression.Parameters,
-                    this.Tree)(parameter1);
-            
+            Func<TResult?> get = Getter(propertyExpression, this.Tree, parameter1);
 
             if (isCached)
             {
-                var cache = new ResetLazy<TResult?>(() => get(), safetyMode);
+                var cache = new ResetLazy<TResult?>(get, safetyMode);
                 this.action = () =>
                     {
                         cache.Reset();
@@ -157,8 +157,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
                 this.getter = get;
             }
         }
-
-
 
         /// <summary>
         ///     Occurs when a property value changes.
@@ -178,6 +176,20 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         protected override void OnAction() => this.action();
 
         /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>Getter.</returns>
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1) =>
+            () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
+                parameter1);
+
+        /// <summary>
         ///     Called when [property changed].
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
@@ -186,31 +198,31 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <returns>
-        /// Self object.
+        ///     Self object.
         /// </returns>
         IPropertyValueObserverOnNotifyProperyChanged<TResult>
             IPropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>>.Subscribe() =>
             this.Subscribe();
 
         /// <summary>
-        /// Subscribes the specified silent.
+        ///     Subscribes the specified silent.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>
-        /// Self object.
+        ///     Self object.
         /// </returns>
         IPropertyValueObserverOnNotifyProperyChanged<TResult>
             IPropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>>.Subscribe(bool silent) =>
             this.Subscribe(silent);
 
         /// <summary>
-        /// Unsubscribes this instance.
+        ///     Unsubscribes this instance.
         /// </summary>
         /// <returns>
-        /// Self object.
+        ///     Self object.
         /// </returns>
         IPropertyValueObserverOnNotifyProperyChanged<TResult>
             IPropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>>.Unsubscribe() =>

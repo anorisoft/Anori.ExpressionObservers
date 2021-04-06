@@ -127,7 +127,7 @@ namespace Anori.ExpressionObservers.Tree
                         }
 
                     case MemberExpression _:
-                        throw new ExpressionObserversException("Expression member is not a PropertyInfo");
+                        throw new TreeException("Expression member is not a PropertyInfo");
 
                     case ParameterExpression parameterExpression:
                         {
@@ -139,7 +139,7 @@ namespace Anori.ExpressionObservers.Tree
 
                     case MethodCallExpression methodCallExpression
                         when methodCallExpression.Method.ReturnParameter == null:
-                        throw new ExpressionObserversException("Method call has no ReturnParameter");
+                        throw new TreeException("Method call has no ReturnParameter");
 
                     case MethodCallExpression methodCallExpression:
                         expression = methodCallExpression.Object;
@@ -243,10 +243,10 @@ namespace Anori.ExpressionObservers.Tree
                         }
 
                     case null:
-                        throw new ExpressionObserversException("Expression body is null");
+                        throw new TreeException("Expression body is null");
 
                     default:
-                        throw new ExpressionObserversException(
+                        throw new TreeException(
                             $"Expression body is not a supportet Expression {expression} type {expression.Type}");
                 }
             }

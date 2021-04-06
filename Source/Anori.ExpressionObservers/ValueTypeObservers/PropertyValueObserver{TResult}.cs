@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueGetterObserver{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserver{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,7 +7,6 @@
 namespace Anori.ExpressionObservers.ValueTypeObservers
 {
     using System;
-    using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
@@ -21,13 +20,10 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <summary>
     ///     Property Value Getter Observer.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
-    public sealed class PropertyValueObserver<TParameter1, TResult> :
-        PropertyObserverBase<PropertyValueObserver<TParameter1, TResult>, TParameter1, TResult>,
-        IPropertyValueObserver<TResult>
-        where TParameter1 : INotifyPropertyChanged
+    /// <seealso cref="PropertyObserverBase" />
+    internal sealed class PropertyValueObserver<TResult> : PropertyObserverBase<PropertyValueObserver<TResult>, TResult>,
+                                                           IPropertyValueObserver<TResult>
         where TResult : struct
     {
         /// <summary>
@@ -43,76 +39,60 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserver{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="ArgumentNullException">The action is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     action
+        ///     or
+        ///     propertyExpression is null.
+        /// </exception>
         internal PropertyValueObserver(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
-            : base(parameter1, propertyExpression)
+            : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree, parameter1);
+            this.getter = Getter(propertyExpression, this.Tree);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1, TResult}"/> class.
+        /// Initializes a new instance of the <see cref="PropertyValueObserver{ TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserver(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             TaskScheduler taskScheduler)
-            : base(parameter1, propertyExpression)
+            : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = Getter(propertyExpression, this.Tree);
             var taskFactory = new TaskFactory(taskScheduler);
             this.getter = () => taskFactory.StartNew(get).Result;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1, TResult}"/> class.
+        /// Initializes a new instance of the <see cref="PropertyValueObserver{ TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserver(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             SynchronizationContext synchronizationContext)
-            : base(parameter1, propertyExpression)
+            : base(propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = Getter(propertyExpression, this.Tree);
             this.getter = () => synchronizationContext.Send(get);
         }
-
-        /// <summary>
-        /// Getters the specified property expression.
-        /// </summary>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="tree">The tree.</param>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <returns>Getter.</returns>
-        private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-                parameter1);
 
         /// <summary>
         ///     Gets the value.
@@ -126,13 +106,22 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         protected override void OnAction() => this.action(this.getter());
 
         /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>Getter.</returns>
+        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
+            ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
+
+        /// <summary>
         ///     Subscribes this instance.
         /// </summary>
         /// <returns>
         ///     Property Value Getter Observer.
         /// </returns>
-        IPropertyValueObserver<TResult>
-            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe() =>
+        IPropertyValueObserver<TResult> IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe() =>
             this.Subscribe();
 
         /// <summary>
@@ -140,16 +129,14 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueObserver<TResult>
-            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe(bool silent) =>
+        IPropertyValueObserver<TResult> IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe(bool silent) =>
             this.Subscribe(silent);
 
         /// <summary>
         ///     Unsubscribes this instance.
         /// </summary>
         /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueObserver<TResult>
-            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Unsubscribe() =>
+        IPropertyValueObserver<TResult> IPropertyObserverBase<IPropertyValueObserver<TResult>>.Unsubscribe() =>
             this.Unsubscribe();
     }
 }

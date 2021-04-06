@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// </summary>
     /// <typeparam name="TArg1">The type of the arg1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public struct SendFuncState<TArg1, TResult>
+    public class SendFuncState<TArg1, TResult>
     {
         /// <summary>
         /// Gets or sets the function.
@@ -42,7 +42,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// SendFuncState.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public struct SendFuncState<TResult>
+    public class SendFuncState<TResult>
     {
         /// <summary>
         /// Gets or sets the function.

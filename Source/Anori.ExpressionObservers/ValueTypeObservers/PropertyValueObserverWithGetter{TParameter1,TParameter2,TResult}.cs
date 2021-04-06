@@ -9,8 +9,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Builder;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -21,12 +26,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverWithGetter{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ValueTypeObservers.PropertyValueObserverWithGetter{TParameter1, TParameter2, TResult}}" />
+    ///     cref="PropertyValueObserverWithGetter{TResult}" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult> : PropertyObserverBase<
-        PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>
+    internal sealed class PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult> : PropertyObserverBase<
+        PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult>, TParameter1, TParameter2, TResult>,
+        IPropertyValueObserverWithGetter<TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
@@ -44,24 +48,80 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverWithGetter{TParameter1,TParameter2,TResult}" />
-        /// class.
+        /// Initializes a new instance of the <see cref="PropertyValueObserverWithGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
-        /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="ArgumentNullException">action or propertyExpression is null.</exception>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserverWithGetter(
-            TParameter1 parameter1,
-            TParameter2 parameter2,
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
+            TaskScheduler taskScheduler)
+            : base(parameter1, parameter2, propertyExpression)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
+            var taskFactory = new TaskFactory(taskScheduler);
+            this.getter = () => taskFactory.StartNew(get).Result;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverWithGetter{TParameter1, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <exception cref="ArgumentNullException">action</exception>
+        internal PropertyValueObserverWithGetter(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action action)
             : base(parameter1, parameter2, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = () => ExpressionGetter.CreateValueGetter<TParameter1, TParameter2, TResult>(propertyExpression.Parameters, this.Tree)(parameter1, parameter2);
+            this.getter = Getter(propertyExpression, this.Tree, parameter1, parameter2);
         }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverWithGetter{TParameter1, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <exception cref="ArgumentNullException">action</exception>
+        internal PropertyValueObserverWithGetter(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
+            SynchronizationContext synchronizationContext)
+            : base(parameter1, parameter2, propertyExpression)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
+            this.getter = () => synchronizationContext.Send(get);
+        }
+
+
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>The Getter.</returns>
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1, TParameter2 parameter2) =>
+            () => ExpressionGetter.CreateValueGetter<TParameter1, TParameter2, TResult>(propertyExpression.Parameters, tree)(
+                parameter1, parameter2);
 
         /// <summary>
         ///     Gets the value.
@@ -75,5 +135,36 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverWithGetter<TResult> IPropertyObserverBase<IPropertyValueObserverWithGetter<TResult>>.
+            Subscribe() =>
+            this.Subscribe();
+
+        /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverWithGetter<TResult> IPropertyObserverBase<IPropertyValueObserverWithGetter<TResult>>.
+            Subscribe(bool silent) =>
+            this.Subscribe(silent);
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        IPropertyValueObserverWithGetter<TResult> IPropertyObserverBase<IPropertyValueObserverWithGetter<TResult>>.
+            Unsubscribe() =>
+            this.Unsubscribe();
     }
 }

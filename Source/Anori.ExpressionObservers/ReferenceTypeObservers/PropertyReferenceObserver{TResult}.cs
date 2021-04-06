@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     public sealed class
-        PropertyReferenceGetterObserver<TResult> : PropertyObserverBase<PropertyReferenceGetterObserver<TResult>,
+        PropertyReferenceObserver<TResult> : PropertyObserverBase<PropertyReferenceObserver<TResult>,
             TResult>
         where TResult : class
     {
@@ -36,7 +36,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceGetterObserver{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -45,7 +45,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal PropertyReferenceGetterObserver(
+        internal PropertyReferenceObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
             : base(propertyExpression)

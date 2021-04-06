@@ -30,5 +30,18 @@ namespace Anori.ExpressionObservers.Interfaces
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct;
+
+        IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
+            where TParameter1 : INotifyPropertyChanged
+            where TParameter2 : INotifyPropertyChanged
+            where TResult : struct;
+
+
+        IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TResult>(
+            [NotNull] Expression<Func<TResult>> propertyExpression)
+            where TResult : struct;
     }
 }

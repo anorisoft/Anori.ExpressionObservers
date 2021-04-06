@@ -6,11 +6,10 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
+    using Anori.ExpressionObservers.Interfaces;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
-
-    using Anori.ExpressionObservers.Interfaces;
 
     /// <summary>
     ///     The Property Observer Builder class.
@@ -64,6 +63,53 @@ namespace Anori.ExpressionObservers.Builder
             where TResult : struct
         {
             var builder = new PropertyValueObserverBuilder<TParameter1, TResult>(parameter1, propertyExpression)
+            {
+                IsAutoActivate = this.isAutoActivate,
+                IsSilentActivate = this.isSilentActivate,
+            };
+            return builder;
+        }
+
+        /// <summary>
+        /// Values the observer builder.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <returns>
+        ///     Value Property Observer Builder.
+        /// </returns>
+        public IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
+            TParameter1 parameter1,
+            TParameter2 parameter2,
+            Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
+            where TParameter1 : INotifyPropertyChanged
+            where TParameter2 : INotifyPropertyChanged
+            where TResult : struct
+        {
+            var builder = new PropertyValueObserverBuilder<TParameter1, TParameter2, TResult>(parameter1, parameter2, propertyExpression)
+            {
+                IsAutoActivate = this.isAutoActivate,
+                IsSilentActivate = this.isSilentActivate,
+            };
+            return builder;
+        }
+
+        /// <summary>
+        /// Values the observer builder.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <returns>
+        ///     Value Property Observer Builder.
+        /// </returns>
+        public IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TResult>(Expression<Func<TResult>> propertyExpression)
+            where TResult : struct
+        {
+            var builder = new PropertyValueObserverBuilder<TResult>(propertyExpression)
             {
                 IsAutoActivate = this.isAutoActivate,
                 IsSilentActivate = this.isSilentActivate,
