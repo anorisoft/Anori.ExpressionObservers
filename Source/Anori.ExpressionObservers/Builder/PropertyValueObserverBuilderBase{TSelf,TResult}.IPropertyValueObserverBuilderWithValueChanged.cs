@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     Automatics the activate.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        IPropertyValueObserverBuilderWithValueChanged<TResult> IPropertyValueObserverBuilderBase<
+        IPropertyValueObserverBuilderWithValueChanged<TResult> IPropertyObserverBuilderBase<
             IPropertyValueObserverBuilderWithValueChanged<TResult>>.AutoActivate() =>
             this.AutoActivate();
 

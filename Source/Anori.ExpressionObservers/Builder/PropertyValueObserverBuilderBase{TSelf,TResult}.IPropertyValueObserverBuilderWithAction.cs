@@ -31,6 +31,7 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilder{TResult}" />
     /// <seealso cref="IPropertyValueObserverBuilderWithActionOfTResult{TResult}" />
+    // ReSharper disable UnusedTypeParameter
     public abstract partial class
         PropertyValueObserverBuilderBase<TSelf, TResult> : IPropertyValueObserverBuilderWithAction<TResult>
     {
@@ -38,7 +39,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     Automatics the activate.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        IPropertyValueObserverBuilderWithAction<TResult> IPropertyValueObserverBuilderBase<
+        IPropertyValueObserverBuilderWithAction<TResult> IPropertyObserverBuilderBase<
             IPropertyValueObserverBuilderWithAction<TResult>>.AutoActivate() =>
             this.AutoActivate();
 

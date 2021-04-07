@@ -22,7 +22,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    internal sealed class PropertyValueObserver<TResult> : PropertyObserverBase<PropertyValueObserver<TResult>, TResult>,
+    internal sealed class PropertyValueObserver<TResult> : PropertyObserverBase<IPropertyValueObserver<TResult>, TResult>,
                                                            IPropertyValueObserver<TResult>
         where TResult : struct
     {
@@ -106,37 +106,14 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         protected override void OnAction() => this.action(this.getter());
 
         /// <summary>
-        ///     Getters the specified property expression.
+        /// Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <returns>Getter.</returns>
+        /// <returns>
+        /// Getter.
+        /// </returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
             ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
-
-        /// <summary>
-        ///     Subscribes this instance.
-        /// </summary>
-        /// <returns>
-        ///     Property Value Getter Observer.
-        /// </returns>
-        IPropertyValueObserver<TResult> IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueObserver<TResult> IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueObserver<TResult> IPropertyObserverBase<IPropertyValueObserver<TResult>>.Unsubscribe() =>
-            this.Unsubscribe();
     }
 }

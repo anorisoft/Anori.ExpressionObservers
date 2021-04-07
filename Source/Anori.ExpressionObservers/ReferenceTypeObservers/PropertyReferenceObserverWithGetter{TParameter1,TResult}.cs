@@ -9,8 +9,12 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.ValueTypeObservers;
 
     using JetBrains.Annotations;
@@ -21,10 +25,10 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverWithGetter{TParameter1, TResult}, TParameter1, TResult}" />
+    ///     cref="PropertyReferenceObserverWithGetter{TResult}" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyReferenceObserverWithGetter<TParameter1, TResult> : PropertyObserverBase<
-        PropertyReferenceObserverWithGetter<TParameter1, TResult>, TParameter1, TResult>
+    internal sealed class PropertyReferenceObserverWithGetter<TParameter1, TResult> : PropertyObserverBase<
+        IPropertyReferenceObserverWithGetter<TResult>, TParameter1, TResult>, IPropertyReferenceObserverWithGetter<TResult>
         where TResult : class
         where TParameter1 : INotifyPropertyChanged
     {
@@ -41,17 +45,36 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TParameter1,TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
         /// <exception cref="ArgumentNullException">actionis null.</exception>
-        /// <exception cref="PropertyValueObserverWithGetter{TParameter1,TResult}">
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
+        /// <exception cref="PropertyValueObserverWithGetter{TParameter1,TResult}">action
+        /// or
+        /// propertyExpression is null.</exception>
+        internal PropertyReferenceObserverWithGetter(
+             [NotNull] TParameter1 parameter1,
+             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+             [NotNull] Action action,
+             TaskScheduler taskScheduler)
+             : base(parameter1, propertyExpression)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var taskFactory = new TaskFactory(taskScheduler);
+            this.getter = () => taskFactory.StartNew(get).Result;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TParameter1, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyReferenceObserverWithGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -59,10 +82,35 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             : base(parameter1, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(
-                propertyExpression.Parameters,
-                this.Tree)(parameter1);
+            this.getter = Getter(propertyExpression, this.Tree, parameter1);
         }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TParameter1, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
+        internal PropertyReferenceObserverWithGetter(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] Action action,
+            SynchronizationContext synchronizationContext)
+            : base(parameter1, propertyExpression)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            var get = Getter(propertyExpression, this.Tree, parameter1);
+            this.getter = () => synchronizationContext.Send(get);
+        }
+
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1) =>
+            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
+                parameter1);
 
         /// <summary>
         ///     Gets the value.

@@ -26,7 +26,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     internal sealed class PropertyObserverWithGetterAndFallback<TParameter1, TResult> :
-        PropertyObserverBase<PropertyObserverWithGetterAndFallback<TParameter1, TResult>, TParameter1, TResult>,
+        PropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>, TParameter1, TResult>,
         IPropertyObserverWithGetterAndFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
 
@@ -156,35 +156,6 @@ namespace Anori.ExpressionObservers.Observers
             () => ExpressionGetter.CreateGetter<TParameter1, TResult>(propertyExpression.Parameters, tree, fallback)(
                 parameter1);
 
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Unsubscribe() =>
-            this.Unsubscribe();
+        
     }
 }

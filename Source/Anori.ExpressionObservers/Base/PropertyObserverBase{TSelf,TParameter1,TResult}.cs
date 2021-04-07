@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers.Base
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Tree;
     using Anori.ExpressionObservers.Tree.Interfaces;
@@ -27,7 +28,7 @@ namespace Anori.ExpressionObservers.Base
     /// <seealso cref="PropertyObserverBase" />
     public abstract class PropertyObserverBase<TSelf, TParameter1, TResult> : PropertyObserverBase<TSelf>
         where TParameter1 : INotifyPropertyChanged
-        where TSelf : PropertyObserverBase<TSelf, TParameter1, TResult>
+        where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
         ///     The property expression.

@@ -12,9 +12,9 @@ namespace Anori.ExpressionObservers.Interfaces
     /// The I Property Value Observer Builder With Action And Getter And Fallback And Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler{TResult}}" />
+    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler{TResult}}" />
     public interface IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<out TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>>
+        IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>

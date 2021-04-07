@@ -42,7 +42,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Property Value Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
-            IPropertyValueObserverBuilderBase<
+            IPropertyObserverBuilderBase<
                 IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>.AutoActivate() =>
             this.AutoActivate();
 

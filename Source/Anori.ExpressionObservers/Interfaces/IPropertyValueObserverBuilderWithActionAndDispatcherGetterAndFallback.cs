@@ -12,9 +12,9 @@ namespace Anori.ExpressionObservers.Interfaces
     /// The I Property Value Observer Builder With Action And Dispatcher Getter And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback{TResult}}" />
+    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback{TResult}}" />
     public interface IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<out TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>>
+        IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>>
         where TResult : struct
     {
         /// <summary>

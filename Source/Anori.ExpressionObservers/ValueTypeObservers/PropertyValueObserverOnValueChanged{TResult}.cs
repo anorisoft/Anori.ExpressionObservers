@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
     internal sealed class PropertyValueObserverOnValueChanged<TResult> :
-        PropertyObserverBase<PropertyValueObserverOnValueChanged<TResult>, TResult>,
+        PropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>, TResult>,
         IPropertyValueObserverOnValueChanged<TResult>
         where TResult : struct
     {
@@ -138,37 +138,5 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
             this.PropertyChanged.Raise(this, propertyName);
-
-
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverOnValueChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverOnValueChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverOnValueChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Unsubscribe() =>
-            this.Unsubscribe();
     }
 }

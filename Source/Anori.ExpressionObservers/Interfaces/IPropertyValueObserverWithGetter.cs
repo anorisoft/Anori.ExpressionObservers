@@ -1,20 +1,17 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyObserverWithGetterAndFallback.cs" company="AnoriSoft">
+// <copyright file="IPropertyValueObserverWithGetter.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder
+namespace Anori.ExpressionObservers.Interfaces
 {
-    using System;
-
-    using Anori.ExpressionObservers.Interfaces;
-
     /// <summary>
-    /// The I Property Observer With Getter And Fallback interface.
+    /// The I Property Value Observer With Getter interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyObserverWithGetterAndFallback<out TResult> : IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>
+    public interface IPropertyValueObserverWithGetter<TResult> : IPropertyObserverBase<IPropertyValueObserverWithGetter<TResult>>
+        where TResult : struct
     {
         /// <summary>
         /// Gets the value.
@@ -22,6 +19,6 @@ namespace Anori.ExpressionObservers.Builder
         /// <value>
         /// The value.
         /// </value>
-        public TResult Value { get; }
+        TResult? Value { get; }
     }
 }

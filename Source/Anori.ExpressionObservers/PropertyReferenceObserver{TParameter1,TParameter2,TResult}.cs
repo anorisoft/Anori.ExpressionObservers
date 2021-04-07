@@ -12,6 +12,7 @@ namespace Anori.ExpressionObservers
     using System.Threading.Tasks;
 
     using Anori.Common;
+    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.ReferenceTypeObservers;
 
     using JetBrains.Annotations;
@@ -33,7 +34,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static PropertyReferenceObserver<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserver<TResult>
             Observes<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -61,7 +62,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static PropertyReferenceObserver<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserver<TResult>
             Observes<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -97,7 +98,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static PropertyReferenceObserverWithGetter<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverWithGetter<TResult>
             ObservesAndGet<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -125,7 +126,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static PropertyReferenceObserverWithGetter<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverWithGetter<TResult>
             ObservesAndGet<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -162,7 +163,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -190,7 +191,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -223,7 +224,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -238,9 +239,9 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
+                taskScheduler,
                 isCached,
-                safetyMode,
-                taskScheduler);
+                safetyMode);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -259,7 +260,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -276,9 +277,9 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
+                taskScheduler,
                 isCached,
-                safetyMode,
-                taskScheduler);
+                safetyMode);
             if (isAutoActivate)
             {
                 observer.Subscribe(true);
@@ -301,7 +302,7 @@ namespace Anori.ExpressionObservers
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -341,7 +342,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -377,7 +378,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnValueChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnValueChanged<TResult>
             ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -404,7 +405,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnValueChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnValueChanged<TResult>
             ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -439,7 +440,7 @@ namespace Anori.ExpressionObservers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static PropertyReferenceObserverOnValueChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnValueChanged<TResult>
             ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -469,7 +470,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static PropertyReferenceObserverOnValueChanged<TParameter1, TParameter2, TResult>
+        public static IPropertyReferenceObserverOnValueChanged<TResult>
             ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,

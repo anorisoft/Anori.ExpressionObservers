@@ -10,10 +10,10 @@ namespace Anori.ExpressionObservers.Interfaces
     /// The I Property Value Observer Builder With Action Of T Result Nullable interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
+    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
     public interface IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>,
+        IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>,
         IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {

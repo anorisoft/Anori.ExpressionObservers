@@ -21,7 +21,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <value>
         /// The function.
         /// </value>
-        public Func<TArg1, TResult> Func { get; set; }
+        public Func<TArg1, TResult>? Func { get; set; }
+
         /// <summary>
         /// Gets or sets the result.
         /// </summary>
@@ -29,6 +30,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// The result.
         /// </value>
         public TResult Result { get; set; }
+
         /// <summary>
         /// Gets or sets the arg1.
         /// </summary>
@@ -50,7 +52,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <value>
         /// The function.
         /// </value>
-        public Func<TResult> Func { get; set; }
+        public Func<TResult>? Func { get; set; }
+
         /// <summary>
         /// Gets or sets the result.
         /// </summary>

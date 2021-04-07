@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf,TResult}" />
     internal sealed class PropertyValueObserver<TParameter1, TResult> :
-        PropertyObserverBase<PropertyValueObserver<TParameter1, TResult>, TParameter1, TResult>,
+        PropertyObserverBase<IPropertyValueObserver<TResult>, TParameter1, TResult>,
         IPropertyValueObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : struct
@@ -124,32 +124,5 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action(this.getter());
-
-        /// <summary>
-        ///     Subscribes this instance.
-        /// </summary>
-        /// <returns>
-        ///     Property Value Getter Observer.
-        /// </returns>
-        IPropertyValueObserver<TResult>
-            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueObserver<TResult>
-            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>Property Value Getter Observer.</returns>
-        IPropertyValueObserver<TResult>
-            IPropertyObserverBase<IPropertyValueObserver<TResult>>.Unsubscribe() =>
-            this.Unsubscribe();
     }
 }

@@ -11,9 +11,13 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
+    using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.ExpressionObservers.ValueTypeObservers;
 
     using JetBrains.Annotations;
 
@@ -23,13 +27,13 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.ReferenceTypeObservers.PropertyReferenceObserverOnValueChanged{TParameter1, TResult}, TParameter1, TResult}" />
+    ///     cref="PropertyReferenceObserverOnValueChanged{TResult}" />
     /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyReferenceObserverOnValueChanged<TParameter1, TResult> :
-        PropertyObserverBase<PropertyReferenceObserverOnValueChanged<TParameter1, TResult>, TParameter1, TResult>,
-        INotifyPropertyChanged
+    internal sealed class PropertyReferenceObserverOnValueChanged<TParameter1, TResult> :
+        PropertyObserverBase<IPropertyReferenceObserverOnValueChanged<TResult>, TParameter1, TResult>,
+        IPropertyReferenceObserverOnValueChanged<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : class
     {
@@ -53,24 +57,60 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChanged(
+             [NotNull] TParameter1 parameter1,
+             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+             [NotNull] TaskScheduler taskScheduler)
+             : base(parameter1, propertyExpression)
+        {
+            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var taskFactory = new TaskFactory(taskScheduler);
+            this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}"/> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            TaskScheduler? taskScheduler = null)
+            [NotNull] SynchronizationContext synchronizationContext)
             : base(parameter1, propertyExpression)
         {
-            TResult? Getter() =>
-                ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, this.Tree)(
-                    parameter1);
-
-            if (taskScheduler == null)
-            {
-                this.action = () => this.Value = Getter();
-            }
-            else
-            {
-                this.action = () => new TaskFactory(taskScheduler).StartNew(() => this.Value = Getter()).Wait();
-            }
+            var get = Getter(propertyExpression, this.Tree, parameter1);
+            this.action = () => synchronizationContext.Send(() => this.Value = get());
         }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" /> class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        internal PropertyReferenceObserverOnValueChanged(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
+            : base(parameter1, propertyExpression)
+        {
+            var get = Getter(propertyExpression, this.Tree, parameter1);
+            this.action = () => this.Value = get();
+        }
+
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>Getter.</returns>
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1) =>
+            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
+            parameter1);
+
 
         /// <summary>
         ///     Occurs when a property value changes.

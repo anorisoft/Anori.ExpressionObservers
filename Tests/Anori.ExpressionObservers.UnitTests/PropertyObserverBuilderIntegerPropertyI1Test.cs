@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.UnitTests
     using System.Threading.Tasks;
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
-    public class PropertyObserverBuilderIntegerPropertyTest
+    public class PropertyObserverBuilderIntegerPropertyI1Test
     {
         [SetUp]
         public void Init()

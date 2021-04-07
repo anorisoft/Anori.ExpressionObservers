@@ -6,13 +6,15 @@
 
 namespace Anori.ExpressionObservers.Base
 {
+    using Anori.ExpressionObservers.Interfaces;
+
     /// <summary>
     ///     Property Observer Base for flurnent.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    public abstract class PropertyObserverBase<TSelf> : PropertyObserverBase
-        where TSelf : PropertyObserverBase<TSelf>
+    public abstract class PropertyObserverBase<TSelf> : PropertyObserverBase, IPropertyObserverBase<TSelf>
+        where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -28,7 +30,7 @@ namespace Anori.ExpressionObservers.Base
         public new TSelf Subscribe(bool silent)
         {
             base.Subscribe(silent);
-            return (TSelf)this;
+            return (TSelf)(IPropertyObserverBase<TSelf>)this;
         }
 
         /// <summary>
@@ -38,8 +40,7 @@ namespace Anori.ExpressionObservers.Base
         public new TSelf Unsubscribe()
         {
             base.Unsubscribe();
-
-            return (TSelf)this;
+            return (TSelf)(IPropertyObserverBase<TSelf>)this;
         }
     }
 }

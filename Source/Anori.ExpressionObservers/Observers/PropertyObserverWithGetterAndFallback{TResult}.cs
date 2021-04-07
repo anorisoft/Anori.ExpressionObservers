@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     internal sealed class PropertyObserverWithGetterAndFallback<TResult> :
-        PropertyObserverBase<PropertyObserverWithGetterAndFallback<TResult>, TResult>,
+        PropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>, TResult>,
         IPropertyObserverWithGetterAndFallback<TResult>
     {
         /// <summary>
@@ -139,35 +139,6 @@ namespace Anori.ExpressionObservers.Observers
             TResult fallback) =>
             ExpressionGetter.CreateGetter(propertyExpression.Parameters, tree, fallback);
 
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithGetterAndFallback<TResult>
-            IPropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>>.Unsubscribe() =>
-            this.Unsubscribe();
+       
     }
 }

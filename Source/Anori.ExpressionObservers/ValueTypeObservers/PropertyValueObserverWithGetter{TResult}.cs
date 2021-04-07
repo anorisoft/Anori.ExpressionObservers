@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
     internal sealed class PropertyValueObserverWithGetter<TResult> :
-        PropertyObserverBase<PropertyValueObserverWithGetter<TResult>, TResult>,
+        PropertyObserverBase<IPropertyValueObserverWithGetter<TResult>, TResult>,
         IPropertyValueObserverWithGetter<TResult>
         where TResult : struct
     {
@@ -113,36 +113,5 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <returns>The Getter.</returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
             ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
-
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverWithGetter<TResult> IPropertyObserverBase<IPropertyValueObserverWithGetter<TResult>>.
-            Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverWithGetter<TResult> IPropertyObserverBase<IPropertyValueObserverWithGetter<TResult>>.
-            Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverWithGetter<TResult> IPropertyObserverBase<IPropertyValueObserverWithGetter<TResult>>.
-            Unsubscribe() =>
-            this.Unsubscribe();
     }
 }

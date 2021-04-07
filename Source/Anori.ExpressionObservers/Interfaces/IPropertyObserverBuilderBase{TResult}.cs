@@ -10,12 +10,12 @@ namespace Anori.ExpressionObservers.Interfaces
     /// The I Property Value Observer Builder Base interface.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
-    public interface IPropertyValueObserverBuilderBase<out TSelf>
+    public interface IPropertyObserverBuilderBase<out TSelf>
     {
         /// <summary>
         /// Automatics the activate.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Property Observer Builder.</returns>
         TSelf AutoActivate();
     }
 }

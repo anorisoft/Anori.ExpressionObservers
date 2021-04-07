@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces
 {
     public interface IPropertyValueObserverBuilderWithActionOfTResult<TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResult<TResult>>,
+        IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResult<TResult>>,
         IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {

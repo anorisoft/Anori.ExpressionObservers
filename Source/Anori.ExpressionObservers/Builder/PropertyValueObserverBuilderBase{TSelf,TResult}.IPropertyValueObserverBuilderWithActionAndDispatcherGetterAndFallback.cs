@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Property Value Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>
-            IPropertyValueObserverBuilderBase<
+            IPropertyObserverBuilderBase<
                 IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>>.AutoActivate() =>
             this.AutoActivate();
 

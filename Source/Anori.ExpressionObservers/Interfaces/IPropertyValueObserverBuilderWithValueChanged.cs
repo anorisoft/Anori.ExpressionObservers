@@ -12,12 +12,12 @@ namespace Anori.ExpressionObservers.Interfaces
     /// The I Property Value Observer Builder With Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TResult}}" />
+    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TResult}}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TParameter1, TResult}}" />
+    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TParameter1, TResult}}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterTaskScheduler{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithValueChanged{TParameter1, TResult}}" />
     public interface IPropertyValueObserverBuilderWithValueChanged<TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithValueChanged<TResult>>,
+        IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithValueChanged<TResult>>,
         IGetterTaskScheduler<IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {

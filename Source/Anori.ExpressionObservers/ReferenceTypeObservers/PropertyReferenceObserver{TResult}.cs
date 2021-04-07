@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceGetterObserver{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserver{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,8 +8,12 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
     using System;
     using System.Linq.Expressions;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -18,9 +22,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class
-        PropertyReferenceObserver<TResult> : PropertyObserverBase<PropertyReferenceObserver<TResult>,
-            TResult>
+    internal sealed class
+        PropertyReferenceObserver<TResult> : PropertyObserverBase<IPropertyReferenceObserver<TResult>, TResult>, IPropertyReferenceObserver<TResult>
         where TResult : class
     {
         /// <summary>
@@ -55,6 +58,43 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserver{TResult}"/> class.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
+        internal PropertyReferenceObserver(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action<TResult?> action,
+            TaskScheduler taskScheduler)
+            : base(propertyExpression)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            var get = Getter(propertyExpression, this.Tree);
+            var taskFactory = new TaskFactory(taskScheduler);
+            this.getter = () => taskFactory.StartNew(get).Result;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TResult}" /> class.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
+        internal PropertyReferenceObserver(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action<TResult?> action,
+            SynchronizationContext synchronizationContext)
+            : base(propertyExpression)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            var get = Getter(propertyExpression, this.Tree);
+            this.getter = () => synchronizationContext.Send(get);
+        }
+
+        /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
@@ -64,5 +104,16 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action(this.getter());
+
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <returns>
+        ///     Getter.
+        /// </returns>
+        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
+            ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
     }
 }

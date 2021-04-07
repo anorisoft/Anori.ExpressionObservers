@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <seealso cref="PropertyGetterObserverWithFallback{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="PropertyObserverBase" />
     internal sealed class PropertyObserverWithFallback<TParameter1, TParameter2, TResult> :
-        PropertyObserverBase<PropertyObserverWithFallback<TParameter1, TParameter2, TResult>, TParameter1, TParameter2,
+        PropertyObserverBase<IPropertyObserverWithFallback<TResult>, TParameter1, TParameter2,
             TResult>,
         IPropertyObserverWithFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
@@ -148,36 +148,5 @@ namespace Anori.ExpressionObservers.Observers
                 propertyExpression.Parameters,
                 tree,
                 fallback)(parameter1, parameter2);
-
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithFallback<TResult> IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>
-            .Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithFallback<TResult> IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>
-            .Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyObserverWithFallback<TResult> IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>
-            .Unsubscribe() =>
-            this.Unsubscribe();
     }
 }

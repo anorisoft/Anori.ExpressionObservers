@@ -31,7 +31,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
     internal sealed class PropertyValueObserverOnValueChanged<TParameter1, TResult> :
-        PropertyObserverBase<PropertyValueObserverOnValueChanged<TParameter1, TResult>, TParameter1, TResult>,
+        PropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>, TParameter1, TResult>,
         IPropertyValueObserverOnValueChanged<TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
@@ -96,21 +96,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         }
 
         /// <summary>
-        ///     Getters the specified property expression.
-        /// </summary>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="tree">The tree.</param>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <returns>Getter.</returns>
-        private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-            parameter1);
-
-
-        /// <summary>
         ///     Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
@@ -122,10 +107,10 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <value>
         ///     The value.
         /// </value>
-        public TResult? Value
+        private TResult? Value
         {
             get => this.value;
-            private set
+            set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))
                 {
@@ -151,42 +136,25 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         protected override void OnAction() => this.action();
 
         /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>Getter.</returns>
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1) =>
+            () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
+                parameter1);
+
+        /// <summary>
         ///     Called when [property changed].
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverOnValueChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverOnValueChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        IPropertyValueObserverOnValueChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>.Unsubscribe() =>
-            this.Unsubscribe();
     }
 }

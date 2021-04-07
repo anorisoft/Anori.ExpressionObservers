@@ -52,7 +52,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> IPropertyValueObserverBuilderBase<
+        IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> IPropertyObserverBuilderBase<
             IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>.AutoActivate() =>
             this.AutoActivate();
 

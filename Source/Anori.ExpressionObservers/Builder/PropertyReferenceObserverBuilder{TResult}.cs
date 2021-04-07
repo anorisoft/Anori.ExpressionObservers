@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilder{TParameter1,TResult} - Copy.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverBuilder{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,59 +7,37 @@
 namespace Anori.ExpressionObservers.Builder
 {
     using System;
-    using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Threading;
 
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers;
-    using Anori.ExpressionObservers.ValueTypeObservers;
+    using Anori.ExpressionObservers.ReferenceTypeObservers;
 
     /// <summary>
     ///     The Value Property Observer Builder class.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyValueObserverBuilder{TParameter1,TResult}" />
+    /// <seealso cref="IPropertyReferenceObserverBuilder{TParameter1,TResult}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithActionOfTResult{TParameter1,  TParameter2, TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithAction{TParameter1,  TParameter2, TResult}" />
-    public sealed class PropertyValueObserverBuilder<TParameter1, TParameter2, TResult> :
-        PropertyValueObserverBuilderBase<PropertyValueObserverBuilder<TParameter1, TParameter2, TResult>, TResult>
-        where TParameter1 : INotifyPropertyChanged
-        where TParameter2 : INotifyPropertyChanged
-        where TResult : struct
+    ///     cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithActionOfTResult{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithAction{TResult}" />
+    public sealed class PropertyReferenceObserverBuilder<TResult> : PropertyReferenceObserverBuilderBase<
+        PropertyReferenceObserverBuilder<TResult>, TResult>
+        where TResult : class
     {
-        /// <summary>
-        ///     The parameter1.
-        /// </summary>
-        private readonly TParameter1 parameter1;
-
-        /// <summary>
-        ///     The parameter2.
-        /// </summary>
-        private readonly TParameter2 parameter2;
-
         /// <summary>
         ///     The property expression.
         /// </summary>
-        private readonly Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression;
+        private readonly Expression<Func<TResult>> propertyExpression;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverBuilder{TParameter1,  TParameter2, TResult}" />
-        ///     class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverBuilder{TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
-        /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        public PropertyValueObserverBuilder(
-            TParameter1 parameter1,
-            TParameter2 parameter2,
-            Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
+        public PropertyReferenceObserverBuilder(Expression<Func<TResult>> propertyExpression)
         {
-            this.parameter1 = parameter1;
-            this.parameter2 = parameter2;
             this.propertyExpression = propertyExpression;
         }
 
@@ -67,7 +45,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     Cacheds this instance.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        protected override PropertyValueObserverBuilder<TParameter1, TParameter2, TResult> Cached() => this;
+        protected override PropertyReferenceObserverBuilder<TResult> Cached() => this;
 
         /// <summary>
         ///     Creates the property value observer builder with action of t result and fallback.
@@ -80,32 +58,26 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyObserverWithFallback<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new PropertyObserverWithFallback<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyObserverWithFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     SynchronizationContext.Current,
-                    this.Fallback!.Value);
+                    this.Fallback!);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new PropertyObserverWithFallback<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyObserverWithFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     this.TaskScheduler,
-                    this.Fallback!.Value);
+                    this.Fallback!);
             }
             else
             {
-                observer = new PropertyObserverWithFallback<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyObserverWithFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
-                    this.Fallback!.Value);
+                    this.Fallback!);
             }
 
             if (this.IsAutoActivate)
@@ -124,11 +96,7 @@ namespace Anori.ExpressionObservers.Builder
         /// </returns>
         protected override IPropertyObserver<TResult> CreatePropertyObserver()
         {
-            var observer = new PropertyObserver<TParameter1, TParameter2, TResult>(
-                this.parameter1,
-                this.parameter2,
-                this.propertyExpression,
-                this.Action!);
+            var observer = new PropertyObserver<TResult>(this.propertyExpression, this.Action!);
             if (this.IsAutoActivate)
             {
                 observer.Subscribe(this.IsSilentActivate);
@@ -148,32 +116,26 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyObserverWithGetterAndFallback<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyObserverWithGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     SynchronizationContext.Current,
-                    this.Fallback!.Value);
+                    this.Fallback!);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyObserverWithGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     this.TaskScheduler,
-                    this.Fallback!.Value);
+                    this.Fallback!);
             }
             else
             {
-                observer = new PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyObserverWithGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
-                    this.Fallback!.Value);
+                    this.Fallback!);
             }
 
             if (this.IsAutoActivate)
@@ -190,34 +152,26 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserver<TResult> CreatePropertyValueObserver()
+        protected override IPropertyReferenceObserver<TResult> CreatePropertyReferenceObserver()
         {
-            IPropertyValueObserver<TResult> observer;
+            IPropertyReferenceObserver<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new PropertyValueObserver<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserver<TResult>(
                     this.propertyExpression,
                     this.ActionOfTResult!,
                     SynchronizationContext.Current);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new PropertyValueObserver<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserver<TResult>(
                     this.propertyExpression,
                     this.ActionOfTResult!,
                     this.TaskScheduler);
             }
             else
             {
-                observer = new PropertyValueObserver<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    this.ActionOfTResult!);
+                observer = new PropertyReferenceObserver<TResult>(this.propertyExpression, this.ActionOfTResult!);
             }
 
             if (this.IsAutoActivate)
@@ -234,32 +188,25 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer.
         /// </returns>
-        protected override IPropertyValueObserverOnValueChanged<TResult>
-            CreatePropertyValueObserverBuilderWithValueChanged()
+        protected override IPropertyReferenceObserverOnValueChanged<TResult>
+            CreatePropertyReferenceObserverBuilderWithValueChanged()
         {
-            IPropertyValueObserverOnValueChanged<TResult> observer;
+            IPropertyReferenceObserverOnValueChanged<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserverOnValueChanged<TResult>(
                     this.propertyExpression,
                     SynchronizationContext.Current);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserverOnValueChanged<TResult>(
                     this.propertyExpression,
                     this.TaskScheduler);
             }
             else
             {
-                observer = new PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression);
+                observer = new PropertyReferenceObserverOnValueChanged<TResult>(this.propertyExpression);
             }
 
             if (this.IsAutoActivate)
@@ -276,15 +223,13 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer.
         /// </returns>
-        protected override IPropertyValueObserverOnNotifyProperyChanged<TResult>
-            CreatePropertyValueObserverOnNotifyProperyChanged()
+        protected override IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
+            CreatePropertyReferenceObserverOnNotifyProperyChanged()
         {
-            IPropertyValueObserverOnNotifyProperyChanged<TResult> observer;
+            IPropertyReferenceObserverOnNotifyProperyChanged<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserverOnNotifyProperyChanged<TResult>(
                     this.propertyExpression,
                     SynchronizationContext.Current,
                     this.IsCached,
@@ -292,9 +237,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserverOnNotifyProperyChanged<TResult>(
                     this.propertyExpression,
                     this.TaskScheduler,
                     this.IsCached,
@@ -302,9 +245,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else
             {
-                observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserverOnNotifyProperyChanged<TResult>(
                     this.propertyExpression,
                     this.IsCached,
                     this.SafetyMode);
@@ -324,34 +265,26 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        protected override IPropertyValueObserverWithGetter<TResult> CreatePropertyValueObserverWithGetter()
+        protected override IPropertyReferenceObserverWithGetter<TResult> CreatePropertyReferenceObserverWithGetter()
         {
-            IPropertyValueObserverWithGetter<TResult> observer;
+            IPropertyReferenceObserverWithGetter<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserverWithGetter<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     SynchronizationContext.Current);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
+                observer = new PropertyReferenceObserverWithGetter<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     this.TaskScheduler);
             }
             else
             {
-                observer = new PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    this.Action!);
+                observer = new PropertyReferenceObserverWithGetter<TResult>(this.propertyExpression, this.Action!);
             }
 
             if (this.IsAutoActivate)
@@ -368,8 +301,9 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler() =>
+        protected override
+            IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>
+            PropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler() =>
             this;
 
         /// <summary>
@@ -378,8 +312,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterTaskScheduler() =>
+        protected override IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler<TResult>
+            PropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler() =>
             this;
 
         /// <summary>
@@ -389,8 +323,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterTaskSchedulerFallback() =>
+        protected override IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>
+            PropertyReferenceObserverBuilderWithActionAndGetterTaskSchedulerFallback() =>
             this;
 
         /// <summary>
@@ -400,8 +334,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override PropertyValueObserverBuilder<TParameter1, TParameter2, TResult>
-            PropertyValueObserverBuilderWithActionAndGetterWithFallback() =>
+        protected override PropertyReferenceObserverBuilder<TResult>
+            PropertyReferenceObserverBuilderWithActionAndGetterWithFallback() =>
             this;
 
         /// <summary>
@@ -410,8 +344,9 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler() =>
+        protected override
+            IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>
+            PropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler() =>
             this;
 
         /// <summary>
@@ -420,8 +355,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler() =>
+        protected override IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
+            PropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler() =>
             this;
 
         /// <summary>
@@ -430,8 +365,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndGetterTaskSchedulerAndFallback() =>
+        protected override IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback<TResult>
+            PropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskSchedulerAndFallback() =>
             this;
 
         /// <summary>
@@ -440,8 +375,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler() =>
+        protected override IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>
+            PropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler() =>
             this;
 
         /// <summary>
@@ -450,8 +385,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected override PropertyValueObserverBuilder<TParameter1, TParameter2, TResult>
-            PropertyValueObserverBuilderWithActionOfTResultWithFallback() =>
+        protected override PropertyReferenceObserverBuilder<TResult>
+            PropertyReferenceObserverBuilderWithActionOfTResultWithFallback() =>
             this;
 
         /// <summary>
@@ -460,8 +395,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler() =>
+        protected override IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
+            PropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler() =>
             this;
 
         /// <summary>
@@ -470,8 +405,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler() =>
+        protected override IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>
+            PropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler() =>
             this;
 
         /// <summary>
@@ -481,15 +416,14 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override PropertyValueObserverBuilder<TParameter1, TParameter2, TResult> WithAction() => this;
+        protected override PropertyReferenceObserverBuilder<TResult> WithAction() => this;
 
         /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>The Value Property Observer Builder.</returns>
-        protected override PropertyValueObserverBuilder<TParameter1, TParameter2, TResult> WithActionOfTResult() =>
-            this;
+        protected override PropertyReferenceObserverBuilder<TResult> WithActionOfTResult() => this;
 
         /// <summary>
         ///     Withes the action.
@@ -498,21 +432,18 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        protected override PropertyValueObserverBuilder<TParameter1, TParameter2, TResult>
-            WithActionOfTResultWithFallback() =>
-            this;
+        protected override PropertyReferenceObserverBuilder<TResult> WithActionOfTResultWithFallback() => this;
 
         /// <summary>
         ///     Withes the notify propery changed.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        protected override PropertyValueObserverBuilder<TParameter1, TParameter2, TResult> WithNotifyProperyChanged() =>
-            this;
+        protected override PropertyReferenceObserverBuilder<TResult> WithNotifyProperyChanged() => this;
 
         /// <summary>
         ///     Withes the value changed.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        protected override PropertyValueObserverBuilder<TParameter1, TParameter2, TResult> WithValueChanged() => this;
+        protected override PropertyReferenceObserverBuilder<TResult> WithValueChanged() => this;
     }
 }

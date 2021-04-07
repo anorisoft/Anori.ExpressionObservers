@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     ///     cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     internal sealed class PropertyValueObserverOnNotifyProperyChanged<TResult> :
-        PropertyObserverBase<PropertyValueObserverOnNotifyProperyChanged<TResult>, TResult>,
+        PropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>, TResult>,
         IPropertyValueObserverOnNotifyProperyChanged<TResult>
         where TResult : struct
     {
@@ -47,7 +47,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -191,36 +191,5 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <returns>
-        /// Self object.
-        /// </returns>
-        IPropertyValueObserverOnNotifyProperyChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>>.Subscribe() =>
-            this.Subscribe();
-
-        /// <summary>
-        /// Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns>
-        /// Self object.
-        /// </returns>
-        IPropertyValueObserverOnNotifyProperyChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>>.Subscribe(bool silent) =>
-            this.Subscribe(silent);
-
-        /// <summary>
-        /// Unsubscribes this instance.
-        /// </summary>
-        /// <returns>
-        /// Self object.
-        /// </returns>
-        IPropertyValueObserverOnNotifyProperyChanged<TResult>
-            IPropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>>.Unsubscribe() =>
-            this.Unsubscribe();
     }
 }

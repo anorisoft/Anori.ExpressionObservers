@@ -7,11 +7,11 @@
 namespace Anori.ExpressionObservers.Interfaces
 {
     /// <summary>
-    ///     The I Value Property Observer Builder With Action interface.
+    /// The I Value Property Observer Builder With Action interface.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyValueObserverBuilderWithAction<TResult> : IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithAction<TResult>>
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBuilderBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithAction{TResult}}" />
+    public interface IPropertyValueObserverBuilderWithAction<TResult> : IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithAction<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Interfaces
         /// <summary>
         /// Withes the getter.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Property Observer Builder.</returns>
         IPropertyValueObserverBuilderWithActionAndGetter<TResult> WithGetter();
     }
 }

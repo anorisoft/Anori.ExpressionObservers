@@ -55,7 +55,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>
-            IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>>.
+            IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
 

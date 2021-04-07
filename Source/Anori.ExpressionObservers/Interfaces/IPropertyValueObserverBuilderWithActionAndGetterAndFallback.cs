@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Interfaces
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IPropertyValueObserverBuilderWithActionAndGetterAndFallback<out TResult> :
-        IPropertyValueObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>>,
+        IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>>,
         IGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {
