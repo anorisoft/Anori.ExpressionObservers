@@ -15,6 +15,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 

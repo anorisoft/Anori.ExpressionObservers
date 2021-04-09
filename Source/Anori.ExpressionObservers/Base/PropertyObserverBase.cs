@@ -10,9 +10,11 @@ namespace Anori.ExpressionObservers.Base
     using System.Collections.Generic;
     using System.Linq;
 
+    using Anori.Common;
     using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.Tree.Nodes;
+    using Anori.Extensions;
 
     /// <summary>
     /// Property Observer Base.
@@ -25,12 +27,12 @@ namespace Anori.ExpressionObservers.Base
     /// <seealso cref="PropertyObserverBase" />
     /// <seealso cref="IDisposable" />
 #pragma warning disable S4035 // Classes implementing "IEquatable<T>" should be sealed
-    public abstract class PropertyObserverBase : IDisposable,
+    internal abstract class PropertyObserverBase : IDisposable,
                                                  IEqualityComparer<PropertyObserverBase>,
-                                                 IEquatable<PropertyObserverBase>
+                                                 IEquatable<PropertyObserverBase>, IActivatable
 #pragma warning restore S4035 // Classes implementing "IEquatable<T>" should be sealed
     {
-        private bool isSubscribe;
+        private bool isActive;
 
         /// <summary>
         ///     Gets the expression string.
@@ -68,7 +70,7 @@ namespace Anori.ExpressionObservers.Base
         {
             if (disposing)
             {
-                this.Unsubscribe();
+                this.Deactivate();
             }
         }
 
@@ -250,23 +252,23 @@ namespace Anori.ExpressionObservers.Base
         /// <summary>
         ///     Subscribes this instance.
         /// </summary>
-        protected void Subscribe()
+        public void Activate()
         {
-            this.Subscribe(false);
+            this.Activate(false);
         }
 
         /// <summary>
         ///     Subscribes the specified silent.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
-        protected void Subscribe(bool silent)
+        protected void Activate(bool silent)
         {
-            if (this.isSubscribe)
+            if (this.IsActive)
             {
                 return;
             }
 
-            this.isSubscribe = true;
+            this.IsActive = true;
             foreach (var rootPropertyObserverNode in this.RootNodes)
             {
                 rootPropertyObserverNode.SubscribeListenerForRoot();
@@ -278,17 +280,18 @@ namespace Anori.ExpressionObservers.Base
             }
         }
 
+
         /// <summary>
-        ///     Unsubscribes this instance.
+        /// Deactivates this instance.
         /// </summary>
-        protected void Unsubscribe()
+        public void Deactivate()
         {
-            if (!this.isSubscribe)
+            if (!this.IsActive)
             {
                 return;
             }
 
-            this.isSubscribe = false;
+            this.IsActive = false;
 
             foreach (var rootPropertyObserverNode in this.RootNodes)
             {
@@ -329,5 +332,30 @@ namespace Anori.ExpressionObservers.Base
         /// </returns>
         bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y) =>
             Equals(x, y);
+        /// <summary>
+        /// Gets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsActive
+        {
+            get => this.isActive;
+            private set
+            {
+                if (this.isActive == value)
+                {
+                    return;
+                }
+
+                this.isActive = value;
+                this.IsActiveChanged.Raise(this, value);
+            }
+        }
+
+        /// <summary>
+        /// Occurs when [is active changed].
+        /// </summary>
+        public event EventHandler<EventArgs<bool>> IsActiveChanged;
     }
 }

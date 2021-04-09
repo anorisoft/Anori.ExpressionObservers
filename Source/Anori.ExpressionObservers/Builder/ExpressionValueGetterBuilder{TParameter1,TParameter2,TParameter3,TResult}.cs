@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers.Builder
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
     /// The Expression Value Getter Builder class.
@@ -18,7 +19,7 @@ namespace Anori.ExpressionObservers.Builder
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TParameter3">The type of the parameter3.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IValueGetterBuilder{TParameter1, TParameter2, TResult}" />
+    /// <seealso cref="IValueGetterBuilder{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterBuilderWithFallback{TParameter1, TParameter2, TResult}" />
     internal class ExpressionValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult> :
         IValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>,
@@ -61,14 +62,14 @@ namespace Anori.ExpressionObservers.Builder
         /// </summary>
         /// <returns>The getter.</returns>
         Func<TParameter1, TParameter2, TParameter3, TResult> IGetterBuilderWithFallback<TParameter1, TParameter2, TParameter3, TResult>.
-            Create() =>
+            Build() =>
             ExpressionGetter.CreateGetter(this.expression, this.fallbackResult);
 
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>The getter.</returns>
-        Func<TParameter1, TParameter2, TParameter3, TResult?> IValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>.Create() =>
+        Func<TParameter1, TParameter2, TParameter3, TResult?> IValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>.Build() =>
             ExpressionGetter.CreateValueGetter(this.expression);
     }
 }

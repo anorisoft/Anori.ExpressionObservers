@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers.Builder
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
     ///     The Expression Value Getter Builder class.
@@ -60,14 +61,14 @@ namespace Anori.ExpressionObservers.Builder
         /// </summary>
         /// <returns>The getter.</returns>
         Func<TParameter1, TParameter2, TResult> IGetterBuilderWithFallback<TParameter1, TParameter2, TResult>.
-            Create() =>
+            Build() =>
             ExpressionGetter.CreateGetter(this.expression, this.fallbackResult);
 
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>The getter.</returns>
-        Func<TParameter1, TParameter2, TResult?> IValueGetterBuilder<TParameter1, TParameter2, TResult>.Create() =>
+        Func<TParameter1, TParameter2, TResult?> IValueGetterBuilder<TParameter1, TParameter2, TResult>.Build() =>
             ExpressionGetter.CreateValueGetter(this.expression);
     }
 }

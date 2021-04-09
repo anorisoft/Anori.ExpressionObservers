@@ -24,13 +24,13 @@ namespace Anori.ExpressionObservers.UnitTests
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
 
             instance.StringProperty = "3";
@@ -48,13 +48,13 @@ namespace Anori.ExpressionObservers.UnitTests
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
 
             instance.StringProperty = "3";
@@ -75,7 +75,7 @@ namespace Anori.ExpressionObservers.UnitTests
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
 
             instance.StringProperty = "3";
@@ -97,7 +97,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -109,7 +109,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -133,7 +133,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -145,7 +145,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -177,7 +177,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -201,7 +201,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -213,7 +213,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -237,7 +237,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -249,7 +249,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -281,7 +281,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -305,7 +305,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -317,7 +317,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -341,7 +341,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -353,7 +353,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -385,7 +385,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -409,7 +409,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -421,7 +421,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -445,7 +445,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -457,7 +457,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -489,7 +489,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -513,7 +513,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -525,7 +525,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -549,7 +549,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -561,7 +561,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -593,7 +593,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -615,7 +615,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -623,7 +623,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -649,7 +649,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -657,7 +657,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -687,7 +687,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -713,7 +713,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -721,7 +721,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -747,7 +747,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
@@ -755,7 +755,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -785,7 +785,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
 
@@ -819,7 +819,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("Nil", value);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
             Assert.AreEqual("1", observes.Value);
@@ -829,7 +829,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
@@ -866,7 +866,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("Nil", value);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
             Assert.AreEqual("1", observes.Value);
@@ -876,7 +876,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
@@ -918,7 +918,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
@@ -955,7 +955,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("Nil", value);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
             Assert.AreEqual("1", observes.Value);
@@ -965,7 +965,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
@@ -1002,7 +1002,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("Nil", value);
             Assert.AreEqual("1", observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
             Assert.AreEqual("1", observes.Value);
@@ -1012,7 +1012,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
@@ -1054,7 +1054,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);

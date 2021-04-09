@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyValueGetterObserver.cs" company="AnoriSoft">
+// <copyright file="IPropertyValueObserver{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,16 +12,14 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="IPropertyObserverBase{TSelf}.ExpressionObservers.ValueTypeObservers.IPropertyValueGetterObserver{TResult}}" />
-    public interface
-        IPropertyValueObserver<TResult> : IPropertyObserverBase<
-            IPropertyValueObserver<TResult>>
+    public interface IPropertyValueObserver<TResult> : IPropertyObserverBase<IPropertyValueObserver<TResult>>
         where TResult : struct
     {
         /// <summary>
-        /// Gets the value.
+        ///     Gets the value.
         /// </summary>
         /// <value>
-        /// The value.
+        ///     The value.
         /// </value>
         TResult? Value { get; }
     }

@@ -7,16 +7,16 @@
 namespace Anori.ExpressionObservers.Tree.Interfaces
 {
     /// <summary>
-    /// The I Expression Tree interface.
+    ///     The I Expression Tree interface.
     /// </summary>
     /// <seealso cref="IRootAware" />
     public interface IExpressionTree : IRootAware
     {
         /// <summary>
-        /// Gets the nodes.
+        ///     Gets the nodes.
         /// </summary>
         /// <value>
-        /// The nodes.
+        ///     The nodes.
         /// </value>
         INodeCollection Nodes { get; }
     }

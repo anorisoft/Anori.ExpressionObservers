@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers.Builder
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
     ///     The Expression Getter Builder class.

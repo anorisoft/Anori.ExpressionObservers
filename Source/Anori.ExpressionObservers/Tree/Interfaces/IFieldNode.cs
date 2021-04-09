@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Reflection;
 
     /// <summary>
-    /// The Field Node interface.
+    ///     The Field Node interface.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IFieldNode : IExpressionNode

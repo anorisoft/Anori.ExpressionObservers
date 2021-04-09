@@ -66,7 +66,7 @@ namespace Anori.ExpressionObservers
                 new PropertyValueObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -115,7 +115,7 @@ namespace Anori.ExpressionObservers
                 new PropertyValueObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -229,7 +229,7 @@ namespace Anori.ExpressionObservers
                 safetyMode);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -266,7 +266,7 @@ namespace Anori.ExpressionObservers
                 safetyMode);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -296,7 +296,7 @@ namespace Anori.ExpressionObservers
                 new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(parameter1, propertyExpression);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -345,7 +345,7 @@ namespace Anori.ExpressionObservers
                 new PropertyValueObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -403,7 +403,7 @@ namespace Anori.ExpressionObservers
                 taskScheduler);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;

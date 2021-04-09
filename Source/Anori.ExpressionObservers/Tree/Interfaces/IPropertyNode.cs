@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Reflection;
 
     /// <summary>
-    /// The Property Node interface.
+    ///     The Property Node interface.
     /// </summary>
     /// <seealso cref="IExpressionNode" />
     public interface IPropertyNode : IExpressionNode

@@ -8,10 +8,8 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
 {
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Interfaces;
-
     /// <summary>
-    /// The Constant Node interface.
+    ///     The Constant Node interface.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IConstantNode : IExpressionNode

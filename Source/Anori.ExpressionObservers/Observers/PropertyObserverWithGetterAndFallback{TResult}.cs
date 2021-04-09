@@ -12,9 +12,9 @@ namespace Anori.ExpressionObservers.Observers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
@@ -138,7 +138,5 @@ namespace Anori.ExpressionObservers.Observers
             IExpressionTree tree,
             TResult fallback) =>
             ExpressionGetter.CreateGetter(propertyExpression.Parameters, tree, fallback);
-
-       
     }
 }

@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.Base
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf}" />
     /// <seealso cref="PropertyObserverBase" />
-    public abstract class PropertyObserverBase<TSelf, TResult> : PropertyObserverBase<TSelf>
+    internal abstract class PropertyObserverBase<TSelf, TResult> : PropertyObserverBase<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>

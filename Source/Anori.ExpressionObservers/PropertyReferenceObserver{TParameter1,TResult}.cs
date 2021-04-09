@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers
                 new PropertyReferenceObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -110,7 +110,7 @@ namespace Anori.ExpressionObservers
                 new PropertyReferenceObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -224,7 +224,7 @@ namespace Anori.ExpressionObservers
                 safetyMode);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -261,7 +261,7 @@ namespace Anori.ExpressionObservers
                 safetyMode);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -293,7 +293,7 @@ namespace Anori.ExpressionObservers
                     propertyExpression);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -342,7 +342,7 @@ namespace Anori.ExpressionObservers
                 new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -400,7 +400,7 @@ namespace Anori.ExpressionObservers
                 taskScheduler);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;

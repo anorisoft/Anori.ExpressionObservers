@@ -13,12 +13,6 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     internal interface IInternalExpressionNode : IExpressionNode
     {
         /// <summary>
-        ///     Sets the previous.
-        /// </summary>
-        /// <param name="node">The node.</param>
-        void SetPrevious(IExpressionNode? node);
-
-        /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
@@ -29,5 +23,10 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
         /// </summary>
         /// <param name="node">The node.</param>
         void SetParent(IExpressionNode? node);
+        /// <summary>
+        ///     Sets the previous.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        void SetPrevious(IExpressionNode? node);
     }
 }

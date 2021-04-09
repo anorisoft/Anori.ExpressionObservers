@@ -83,7 +83,7 @@ namespace Anori.ExpressionObservers
                 action);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -180,7 +180,7 @@ namespace Anori.ExpressionObservers
                 action);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -318,7 +318,7 @@ namespace Anori.ExpressionObservers
                 safetyMode);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -360,7 +360,7 @@ namespace Anori.ExpressionObservers
                 safetyMode);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -397,7 +397,7 @@ namespace Anori.ExpressionObservers
                     propertyExpression);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -459,7 +459,7 @@ namespace Anori.ExpressionObservers
                 propertyExpression);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -527,7 +527,7 @@ namespace Anori.ExpressionObservers
                 taskScheduler);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;

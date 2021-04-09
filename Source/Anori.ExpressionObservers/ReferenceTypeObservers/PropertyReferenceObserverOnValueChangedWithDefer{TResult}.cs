@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     ///     cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyReferenceObserverOnValueChangedWithDefer<TResult> :
+    internal sealed class PropertyReferenceObserverOnValueChangedWithDefer<TResult> :
         PropertyObserverBase<PropertyReferenceObserverOnValueChangedWithDefer<TResult>, TResult>,
         INotifyPropertyChanged
         where TResult : class

@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Tree
     ///     Expression Tree.
     /// </summary>
     /// <seealso cref="IRootAware" />
-    public class ExpressionTree : IExpressionTree
+    internal class ExpressionTree : IExpressionTree
     {
         /// <summary>
         ///     Prevents a default instance of the <see cref="ExpressionTree" /> class from being created.

@@ -4,14 +4,12 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Interfaces
+namespace Anori.ExpressionObservers.Tree.Interfaces
 {
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Tree.Interfaces;
-
     /// <summary>
-    /// The Parameter Node interface.
+    ///     The Parameter Node interface.
     /// </summary>
     public interface IParameterNode : IExpressionNode
     {

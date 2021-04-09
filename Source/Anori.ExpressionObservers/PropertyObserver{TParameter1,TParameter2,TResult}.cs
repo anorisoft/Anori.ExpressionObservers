@@ -85,7 +85,7 @@ namespace Anori.ExpressionObservers
                 fallback);
             if (autoSubscribe)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -126,7 +126,7 @@ namespace Anori.ExpressionObservers
                 fallback);
             if (autoSubscribe)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -194,7 +194,7 @@ namespace Anori.ExpressionObservers
                 action);
             if (autoSubscribe)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;

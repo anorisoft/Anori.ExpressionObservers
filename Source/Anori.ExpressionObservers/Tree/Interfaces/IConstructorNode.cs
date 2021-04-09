@@ -10,10 +10,8 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using Anori.ExpressionObservers.Interfaces;
-
     /// <summary>
-    /// The Constructor Node interface.
+    ///     The Constructor Node interface.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IConstructorNode : IExpressionNode

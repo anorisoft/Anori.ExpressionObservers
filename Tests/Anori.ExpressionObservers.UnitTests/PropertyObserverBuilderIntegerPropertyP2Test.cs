@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                 .WithGetter()
                 .WithFallback(99)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(99, observes.Value);
@@ -45,7 +45,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -53,7 +53,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -82,7 +82,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithGetter()
                 .WithFallback(99)
                 .AutoActivate()
-                .Create();
+                .Build();
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(99, observes.Value);
 
@@ -98,7 +98,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -127,7 +127,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithGetter()
                 .WithGetterDispatcher()
                 .WithFallback(99)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(99, observes.Value);
@@ -140,7 +140,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -148,7 +148,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -178,7 +178,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithFallback(99)
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(99, observes.Value);
 
@@ -194,7 +194,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -223,7 +223,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithGetter()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .WithFallback(99)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(99, observes.Value);
@@ -236,7 +236,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -244,7 +244,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -274,7 +274,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .WithFallback(99)
                 .AutoActivate()
-                .Create();
+                .Build();
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(99, observes.Value);
 
@@ -290,7 +290,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -317,7 +317,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
@@ -330,7 +330,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -338,7 +338,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -366,7 +366,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                 .WithGetter()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
@@ -383,7 +383,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -411,7 +411,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                 .WithGetter()
                 .WithGetterDispatcher()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
@@ -424,7 +424,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -432,7 +432,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -461,7 +461,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithGetter()
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
@@ -478,7 +478,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -506,7 +506,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                 .WithGetter()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
@@ -519,7 +519,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -527,7 +527,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -556,7 +556,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithGetter()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
@@ -573,7 +573,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -599,20 +599,20 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithAction(() => callCount++)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
 
             instance1.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
 
             instance1.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
 
             instance1.Class2.IntProperty = 3;
@@ -629,7 +629,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithAction(() => callCount++)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
 
@@ -639,7 +639,7 @@ namespace Anori.ExpressionObservers.UnitTests
             instance1.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
 
             instance1.Class2.IntProperty = 3;
@@ -658,7 +658,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithNotifyProperyChanged()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -672,7 +672,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -684,7 +684,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -703,7 +703,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithNotifyProperyChanged()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -725,7 +725,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -743,7 +743,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = new PropertyObserverBuilder(true)
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithNotifyProperyChanged()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -765,7 +765,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -784,7 +784,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithNotifyProperyChanged()
                 .Cached()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -798,7 +798,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -810,7 +810,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -830,7 +830,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithNotifyProperyChanged()
                 .Cached()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -852,7 +852,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -872,7 +872,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithNotifyProperyChanged()
                 .Cached()
                 .WithGetterDispatcher()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -886,7 +886,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -898,7 +898,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -920,7 +920,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Cached()
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -942,7 +942,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -961,7 +961,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -975,7 +975,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -987,7 +987,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1007,7 +1007,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1029,7 +1029,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1049,7 +1049,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1063,7 +1063,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -1075,7 +1075,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1097,7 +1097,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1119,7 +1119,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1140,7 +1140,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1154,7 +1154,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -1166,7 +1166,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1188,7 +1188,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1210,7 +1210,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1230,7 +1230,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithNotifyProperyChanged()
                 .Cached()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1244,7 +1244,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -1256,7 +1256,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1278,7 +1278,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Cached()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1300,7 +1300,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1319,7 +1319,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithNotifyProperyChanged()
                 .WithGetterDispatcher()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1333,7 +1333,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -1345,7 +1345,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1365,7 +1365,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithNotifyProperyChanged()
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1387,7 +1387,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1406,7 +1406,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithNotifyProperyChanged()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1420,7 +1420,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -1432,7 +1432,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1453,7 +1453,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithNotifyProperyChanged()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1475,7 +1475,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1493,7 +1493,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithValueChanged()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1507,8 +1507,8 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
-            observes.Subscribe();
+            observes.Activate();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -1520,7 +1520,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1539,7 +1539,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithValueChanged()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1561,7 +1561,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1581,7 +1581,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithValueChanged()
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1603,7 +1603,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1622,7 +1622,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithValueChanged()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1636,7 +1636,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -1648,7 +1648,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1667,7 +1667,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
                 .WithValueChanged()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1681,7 +1681,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, observes.Value);
 
@@ -1693,7 +1693,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1713,7 +1713,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithValueChanged()
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             observes.PropertyChanged += (_, _) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1735,7 +1735,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, observes.Value);
 
@@ -1761,7 +1761,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .WithFallback(99)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
@@ -1777,7 +1777,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(-1, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -1787,7 +1787,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -1820,7 +1820,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithFallback(99)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
@@ -1841,7 +1841,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -1875,7 +1875,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithFallback(99)
                 .WithGetterDispatcher()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
@@ -1891,7 +1891,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(-1, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -1901,7 +1901,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -1935,7 +1935,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithFallback(99)
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
@@ -1956,7 +1956,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -1990,7 +1990,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithFallback(99)
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
@@ -2006,7 +2006,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(-1, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -2016,7 +2016,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2051,7 +2051,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithFallback(99)
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
@@ -2072,7 +2072,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2104,7 +2104,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2120,7 +2120,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(null, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -2130,7 +2130,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2162,7 +2162,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2183,7 +2183,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2216,7 +2216,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .WithGetterDispatcher()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2232,7 +2232,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(null, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -2242,7 +2242,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2275,7 +2275,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2296,7 +2296,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2329,7 +2329,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2345,7 +2345,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(null, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -2355,7 +2355,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2388,7 +2388,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2409,7 +2409,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2441,7 +2441,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2457,7 +2457,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(null, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -2467,7 +2467,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2500,7 +2500,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2521,7 +2521,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2554,7 +2554,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .WithGetterDispatcher()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2570,7 +2570,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(null, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -2580,7 +2580,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2614,7 +2614,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithGetterDispatcher()
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2635,7 +2635,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2668,7 +2668,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .WithGetterTaskScheduler(TaskScheduler.Current)
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2684,7 +2684,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(null, value);
             Assert.AreEqual(3, observes.Value);
 
-            observes.Subscribe();
+            observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(3, value);
             Assert.AreEqual(3, observes.Value);
@@ -2694,7 +2694,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
@@ -2729,7 +2729,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
-                .Create();
+                .Build();
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
@@ -2750,7 +2750,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);
 
-            observes.Unsubscribe();
+            observes.Deactivate();
             Assert.AreEqual(3, callCount);
             Assert.AreEqual(4, value);
             Assert.AreEqual(4, observes.Value);

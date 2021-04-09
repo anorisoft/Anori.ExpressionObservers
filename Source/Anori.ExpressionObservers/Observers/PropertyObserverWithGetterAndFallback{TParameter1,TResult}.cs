@@ -16,7 +16,7 @@ namespace Anori.ExpressionObservers.Observers
     using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-
+    using Anori.Extensions.Threading;
     using JetBrains.Annotations;
 
     /// <summary>

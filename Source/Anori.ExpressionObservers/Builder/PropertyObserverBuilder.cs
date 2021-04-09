@@ -11,11 +11,12 @@ namespace Anori.ExpressionObservers.Builder
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
     ///     The Property Observer Builder class.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBuilder" />
+    /// <seealso cref="IPropertyObserverBuilder" />
     public class PropertyObserverBuilder : IPropertyObserverBuilder
     {
         /// <summary>

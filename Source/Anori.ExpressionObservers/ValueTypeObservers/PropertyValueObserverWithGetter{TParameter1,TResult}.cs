@@ -13,9 +13,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 

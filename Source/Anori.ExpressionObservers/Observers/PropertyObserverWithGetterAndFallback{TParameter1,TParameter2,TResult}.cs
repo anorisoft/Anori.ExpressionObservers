@@ -16,7 +16,7 @@ namespace Anori.ExpressionObservers.Observers
     using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-
+    using Anori.Extensions.Threading;
     using JetBrains.Annotations;
 
     /// <summary>
@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <seealso
     ///     cref="PropertyObserverWithGetterAndFallback{TResult}" />
     /// <seealso cref="PropertyObserverBase" />
-    public sealed class PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult> :
+    internal sealed class PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult> :
         PropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>
             , TParameter1,
             TParameter2, TResult>,

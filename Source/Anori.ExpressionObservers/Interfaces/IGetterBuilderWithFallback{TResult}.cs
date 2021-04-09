@@ -9,15 +9,15 @@ namespace Anori.ExpressionObservers.Interfaces
     using System;
 
     /// <summary>
-    /// The Getter Builder With Fallback interface.
+    ///     The Getter Builder With Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IGetterBuilderWithFallback<out TResult>
     {
         /// <summary>
-        /// Creates this instance.
+        ///     Creates this instance.
         /// </summary>
         /// <returns>The Getter.</returns>
-        Func<TResult> Create();
+        Func<TResult> Build();
     }
 }

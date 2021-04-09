@@ -12,6 +12,7 @@ namespace Anori.ExpressionObservers.Builder
     using System.Threading;
 
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.ReferenceTypeObservers;
 
@@ -27,7 +28,7 @@ namespace Anori.ExpressionObservers.Builder
     ///     cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithActionOfTResult{TParameter1,  TParameter2, TResult}" />
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithAction{TParameter1,  TParameter2, TResult}" />
-    public sealed class PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult> :
+    internal sealed class PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult> :
         PropertyReferenceObserverBuilderBase<PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult>,
             TResult>
         where TParameter1 : INotifyPropertyChanged
@@ -114,7 +115,7 @@ namespace Anori.ExpressionObservers.Builder
 
             if (this.IsAutoActivate)
             {
-                observer.Subscribe(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
             return observer;
@@ -135,7 +136,7 @@ namespace Anori.ExpressionObservers.Builder
                 this.Action!);
             if (this.IsAutoActivate)
             {
-                observer.Subscribe(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
             return observer;
@@ -182,7 +183,7 @@ namespace Anori.ExpressionObservers.Builder
 
             if (this.IsAutoActivate)
             {
-                observer.Subscribe(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
             return observer;
@@ -226,7 +227,7 @@ namespace Anori.ExpressionObservers.Builder
 
             if (this.IsAutoActivate)
             {
-                observer.Subscribe(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
             return observer;
@@ -268,7 +269,7 @@ namespace Anori.ExpressionObservers.Builder
 
             if (this.IsAutoActivate)
             {
-                observer.Subscribe(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
             return observer;
@@ -316,7 +317,7 @@ namespace Anori.ExpressionObservers.Builder
 
             if (this.IsAutoActivate)
             {
-                observer.Subscribe(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
             return observer;
@@ -360,7 +361,7 @@ namespace Anori.ExpressionObservers.Builder
 
             if (this.IsAutoActivate)
             {
-                observer.Subscribe(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
             return observer;

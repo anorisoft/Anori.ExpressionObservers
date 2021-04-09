@@ -19,6 +19,6 @@ namespace Anori.ExpressionObservers.Interfaces
         /// Creates this instance.
         /// </summary>
         /// <returns>The Getter.</returns>
-        Func<TParameter1, TResult> Create();
+        Func<TParameter1, TResult> Build();
     }
 }

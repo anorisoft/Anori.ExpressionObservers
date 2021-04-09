@@ -10,7 +10,10 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.ValueTypeObservers;
+    using Anori.Extensions.Threading;
+
     using JetBrains.Annotations;
+
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
@@ -18,17 +21,19 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}, TParameter1, TParameter2, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}" />
     /// <seealso cref="PropertyReferenceObserverWithGetter{TResult}" />
     /// <seealso cref="PropertyObserverBase" />
-    internal sealed class PropertyReferenceObserverWithGetter<TParameter1, TParameter2, TResult> : PropertyObserverBase<
-        IPropertyReferenceObserverWithGetter<TResult>, TParameter1, TParameter2, TResult>, IPropertyReferenceObserverWithGetter<TResult>
+    internal sealed class PropertyReferenceObserverWithGetter<TParameter1, TParameter2, TResult> :
+        PropertyObserverBase<IPropertyReferenceObserverWithGetter<TResult>, TParameter1, TParameter2, TResult>,
+        IPropertyReferenceObserverWithGetter<TResult>
         where TResult : class
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
@@ -46,8 +51,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="PropertyReferenceObserverWithGetter{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverWithGetter{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -55,16 +60,18 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <exception cref="ArgumentNullException">actionis null.</exception>
-        /// <exception cref="PropertyValueObserverWithGetter{TParameter1,TResult}">action
-        /// or
-        /// propertyExpression is null.</exception>
+        /// <exception cref="PropertyValueObserverWithGetter{TParameter1,TResult}">
+        ///     action
+        ///     or
+        ///     propertyExpression is null.
+        /// </exception>
         internal PropertyReferenceObserverWithGetter(
-             [NotNull] TParameter1 parameter1,
-             [NotNull] TParameter2 parameter2,
-             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-             [NotNull] Action action,
-             [NotNull] TaskScheduler taskScheduler)
-             : base(parameter1, parameter2, propertyExpression)
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
+            [NotNull] TaskScheduler taskScheduler)
+            : base(parameter1, parameter2, propertyExpression)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
@@ -73,7 +80,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TParameter1, TParameter2, TResult}" />
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverWithGetter{TParameter1, TParameter2, TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -93,7 +101,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverWithGetter{TParameter1, TParameter2, TResult}" />
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverWithGetter{TParameter1, TParameter2, TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -115,15 +124,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             this.getter = () => synchronizationContext.Send(get);
         }
 
-        private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1,
-            TParameter2 parameter2) =>
-            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TParameter2, TResult>(
-                propertyExpression.Parameters,
-                tree)(parameter1, parameter2);
-
         /// <summary>
         ///     Gets the value.
         /// </summary>
@@ -134,5 +134,14 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1,
+            TParameter2 parameter2) =>
+            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TParameter2, TResult>(
+                propertyExpression.Parameters,
+                tree)(parameter1, parameter2);
     }
 }

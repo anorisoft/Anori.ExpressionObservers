@@ -10,8 +10,9 @@ namespace Anori.ExpressionObservers.Builder
 
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
 
-    public abstract partial class
+    internal abstract partial class
         PropertyReferenceObserverBuilderBase<TSelf, TResult> : IPropertyReferenceObserverBuilderWithValueChanged<TResult>
 
     {
@@ -58,7 +59,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     Property Value Observer On Notify Propery Changed.
         /// </returns>
-        IPropertyReferenceObserverOnValueChanged<TResult> IPropertyReferenceObserverBuilderWithValueChanged<TResult>.Create() =>
+        IPropertyReferenceObserverOnValueChanged<TResult> IPropertyReferenceObserverBuilderWithValueChanged<TResult>.Build() =>
             this.CreatePropertyReferenceObserverBuilderWithValueChanged();
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult> IGetterTaskScheduler<
+        IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult> IPropertyObserverGetterTaskScheduler<
             IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>>.WithGetterDispatcher()
         {
             this.IsDispached = true;
@@ -82,7 +83,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>
-            IGetterTaskScheduler<IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>>.
+            IPropertyObserverGetterTaskScheduler<IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>>.
             WithGetterTaskScheduler(TaskScheduler taskScheduler)
         {
             this.TaskScheduler = taskScheduler;

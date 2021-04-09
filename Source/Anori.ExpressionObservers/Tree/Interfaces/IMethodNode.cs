@@ -10,10 +10,8 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using Anori.ExpressionObservers.Interfaces;
-
     /// <summary>
-    /// The Method Node interface.
+    ///     The Method Node interface.
     /// </summary>
     public interface IMethodNode : IExpressionNode
     {

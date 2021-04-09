@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueGetterObserver{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserver{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,6 +15,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
@@ -60,7 +61,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1, TResult}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -81,7 +82,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1, TResult}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserver{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -101,7 +102,18 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         }
 
         /// <summary>
-        /// Getters the specified property expression.
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The result value.</returns>
+        public TResult? Value => this.getter();
+
+        /// <summary>
+        ///     On the action.
+        /// </summary>
+        protected override void OnAction() => this.action(this.getter());
+
+        /// <summary>
+        ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
@@ -113,16 +125,5 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             TParameter1 parameter1) =>
             () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
                 parameter1);
-
-        /// <summary>
-        ///     Gets the value.
-        /// </summary>
-        /// <returns>The result value.</returns>
-        public TResult? Value => this.getter();
-
-        /// <summary>
-        ///     On the action.
-        /// </summary>
-        protected override void OnAction() => this.action(this.getter());
     }
 }

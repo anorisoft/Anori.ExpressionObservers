@@ -8,8 +8,6 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
 {
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Interfaces;
-
     /// <summary>
     /// The Conditional Node interface.
     /// </summary>
@@ -30,7 +28,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
         /// <value>
         ///     The test.
         /// </value>
-        INodeCollection Test { get;  }
+        INodeCollection Test { get; }
 
         /// <summary>
         ///     Gets if true.
@@ -38,7 +36,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
         /// <value>
         ///     If true.
         /// </value>
-        INodeCollection IfTrue { get;  }
+        INodeCollection IfTrue { get; }
 
         /// <summary>
         ///     Gets if false.

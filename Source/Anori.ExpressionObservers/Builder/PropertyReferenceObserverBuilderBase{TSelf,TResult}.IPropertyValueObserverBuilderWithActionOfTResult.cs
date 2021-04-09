@@ -10,41 +10,42 @@ namespace Anori.ExpressionObservers.Builder
 
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
     ///     The Property Value Observer Builder With Action Of T Result interface.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithNotifyProperyChanged{TResult}" />
+    /// <seealso cref="IPropertyReferenceObserverBuilderWithNotifyProperyChanged{TResult}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler{TResult}" />
+    ///     cref="IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler{TResult}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler{TResult}" />
+    ///     cref="IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler{TResult}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback{TResult}" />
+    ///     cref="IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback{TResult}" />
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithAction{TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResult{TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetter{TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithValueChanged{TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler{TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilder{TResult}" />
+    /// <seealso cref="IPropertyReferenceObserverBuilderWithAction{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilderWithActionOfTResult{TResult}" />
-    public abstract partial class
+    /// <seealso cref="IPropertyReferenceObserverBuilderWithActionAndGetter{TResult}" />
+    /// <seealso cref="IPropertyReferenceObserverBuilderWithValueChanged{TResult}" />
+    /// <seealso
+    ///     cref="IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback{TResult}" />
+    /// <seealso
+    ///     cref="IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler{TResult}" />
+    /// <seealso
+    ///     cref="IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler{TResult}" />
+    /// <seealso
+    ///     cref="IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler{TResult}" />
+    /// <seealso
+    ///     cref="IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler{TResult}" />
+    /// <seealso
+    ///     cref="IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}" />
+    /// <seealso cref="IPropertyReferenceObserverBuilder{TResult}" />
+    /// <seealso cref="IPropertyReferenceObserverBuilderWithActionOfTResult{TResult}" />
+    internal abstract partial class
         PropertyReferenceObserverBuilderBase<TSelf, TResult> : IPropertyReferenceObserverBuilderWithActionOfTResult<TResult>
 
     {
@@ -80,7 +81,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult> IGetterTaskScheduler<
+        IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult> IPropertyObserverGetterTaskScheduler<
             IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.WithGetterDispatcher()
         {
             this.IsDispached = true;
@@ -95,7 +96,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
-            IGetterTaskScheduler<IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.
+            IPropertyObserverGetterTaskScheduler<IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.
             WithGetterTaskScheduler(TaskScheduler taskScheduler)
         {
             this.TaskScheduler = taskScheduler;

@@ -54,7 +54,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyObserver<TResult>(propertyExpression, action);
             if (autoSubscribe)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -81,7 +81,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback);
             if (autoSubscribe)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -125,7 +125,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyObserverWithFallback<TResult>(propertyExpression, action, fallback);
             if (autoSubscribe)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;

@@ -53,7 +53,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyReferenceObserver<TResult>(propertyExpression, action);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -91,7 +91,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyReferenceObserverWithGetter<TResult>(propertyExpression, action);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -181,7 +181,7 @@ namespace Anori.ExpressionObservers
                 safetyMode);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -212,7 +212,7 @@ namespace Anori.ExpressionObservers
                 safetyMode);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -236,7 +236,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyReferenceObserverOnNotifyProperyChanged<TResult>(propertyExpression);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -274,7 +274,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyReferenceObserverOnValueChanged<TResult>(propertyExpression);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;
@@ -316,7 +316,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyReferenceObserverOnValueChanged<TResult>(propertyExpression, taskScheduler);
             if (isAutoActivate)
             {
-                observer.Subscribe(true);
+                observer.Activate(true);
             }
 
             return observer;

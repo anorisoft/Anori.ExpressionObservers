@@ -6,30 +6,36 @@
 
 namespace Anori.ExpressionObservers.Base
 {
+    using System;
+
+    using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.Extensions;
 
     /// <summary>
     ///     Property Observer Base for flurnent.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    public abstract class PropertyObserverBase<TSelf> : PropertyObserverBase, IPropertyObserverBase<TSelf>
+    internal abstract class PropertyObserverBase<TSelf> : PropertyObserverBase, IPropertyObserverBase<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
+        private bool isActive;
+
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <returns>Self object.</returns>
-        public new TSelf Subscribe() => this.Subscribe(false);
+        public new TSelf Activate() => this.Activate(false);
 
         /// <summary>
         ///     Subscribes the specified silent.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>Self object.</returns>
-        public new TSelf Subscribe(bool silent)
+        public new TSelf Activate(bool silent)
         {
-            base.Subscribe(silent);
+            base.Activate(silent);
             return (TSelf)(IPropertyObserverBase<TSelf>)this;
         }
 
@@ -37,10 +43,12 @@ namespace Anori.ExpressionObservers.Base
         ///     Unsubscribes this instance.
         /// </summary>
         /// <returns>Self object.</returns>
-        public new TSelf Unsubscribe()
+        public new TSelf Deactivate()
         {
-            base.Unsubscribe();
+            base.Deactivate();
             return (TSelf)(IPropertyObserverBase<TSelf>)this;
         }
+
+      
     }
 }

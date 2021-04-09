@@ -26,7 +26,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             TestClass1 test = null;
             var expected = 10;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.intProperty).WithFallback(10).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.intProperty).WithFallback(10).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -38,7 +38,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             const int expected = 1;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.IntProperty)
-                .WithFallback(10).Create();
+                .WithFallback(10).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -51,7 +51,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testB = CreateTestInstanceB();
             var expected = true.ToString();
             var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter(
-                (TestClass1 a, TestStruct1 b) => (a.Test2.Test3.Property == b.Test2.Test3.Property).ToString()).Create();
+                (TestClass1 a, TestStruct1 b) => (a.Test2.Test3.Property == b.Test2.Test3.Property).ToString()).Build();
             var actual = getValue(testA, testB);
 
             Assert.AreEqual(expected, actual);
@@ -62,7 +62,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             object expected = null;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => (object)null).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => (object)null).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -73,7 +73,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3.Property;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.GetTest2().GetTest3().Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.GetTest2().GetTest3().Property).Build();
             var actual = getValue(test);
             Assert.NotNull(actual);
             Assert.AreEqual(expected, actual);
@@ -84,7 +84,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.GetTest2().GetTest3()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.GetTest2().GetTest3()).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -96,7 +96,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3.Property;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.GetTest2().test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.GetTest2().test3.Property).Build();
             var actual = getValue(test);
             Assert.NotNull(actual);
             Assert.AreEqual(expected, actual);
@@ -107,7 +107,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.GetTest2().test3).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.GetTest2().test3).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -119,7 +119,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t ?? test).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t ?? test).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -130,7 +130,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t ?? test).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t ?? test).Build();
             var actual = getValue(null);
 
             Assert.AreEqual(expected, actual);
@@ -141,7 +141,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = (string)null;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.NulableProperty.Value.ToString()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.NulableProperty.Value.ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -152,7 +152,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = 1.ToString();
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.IntProperty.ToString()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.IntProperty.ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -163,7 +163,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -174,7 +174,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3.Property;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.test2.GetTest3().Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.test2.GetTest3().Property).Build();
             var actual = getValue(test);
             Assert.NotNull(actual);
             Assert.AreEqual(expected, actual);
@@ -185,7 +185,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.GetTest3(1)).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.GetTest3(1)).Build();
             var actual = getValue(test);
             Assert.NotNull(actual);
             Assert.AreEqual(expected, actual);
@@ -197,7 +197,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             var test2 = new TestClass2();
             var expected = test.Test2;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2 ?? test2).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2 ?? test2).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -208,7 +208,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test2 = new TestClass2();
             var expected = test2;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2 ?? test2).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2 ?? test2).Build();
             var actual = getValue(null);
 
             Assert.AreEqual(expected, actual);
@@ -221,7 +221,7 @@ namespace Anori.ExpressionObservers.UnitTests
             TestClass2 test21 = null;
             var test22 = new TestClass2();
             var expected = test22;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2 ?? test21 ?? test22).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2 ?? test21 ?? test22).Build();
             var actual = getValue(null);
 
             Assert.AreEqual(expected, actual);
@@ -232,7 +232,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Property;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.test2.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.test2.Property).Build();
             var actual = getValue(test);
             Assert.NotNull(actual);
             Assert.AreEqual(expected, actual);
@@ -243,7 +243,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = 2.ToString();
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Property.ToString()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Property.ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -254,7 +254,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = (TestClass1)null;
             var expected = (string)null;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Property.ToString()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Property.ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -266,7 +266,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             const string expected = (string)null;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Property.ToString()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Property.ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -277,7 +277,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.test2).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.test2).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -289,7 +289,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -302,7 +302,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             var expected = test.Test2;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2).Build();
             var actual = getValue(test);
             Assert.Null(actual);
             Assert.AreEqual(expected, actual);
@@ -313,7 +313,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3.Property;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.test2.test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.test2.test3.Property).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -325,7 +325,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3.Property;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -337,7 +337,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = (TestClass1)null;
             int? expected = null;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3.Property.ToString()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3.Property.ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -349,7 +349,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             var expected = (string)null;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3.Property.ToString()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3.Property.ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -361,7 +361,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2.Test3 = null;
             var expected = (string)null;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3.Property.ToString()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3.Property.ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -372,7 +372,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.test2.test3).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.test2.test3).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -384,7 +384,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.test2.Test3).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.test2.Test3).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -396,7 +396,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.test3).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.test3).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -408,7 +408,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = test.Test2.Test3;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3).Build();
             var actual = getValue(test);
 
             Assert.NotNull(actual);
@@ -421,7 +421,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             var expected = (TestClass2)null;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3).Build();
             var actual = getValue(test);
 
             Assert.Null(actual);
@@ -434,7 +434,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2.Test3 = null;
             var expected = test.Test2.Test3;
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter((TestClass1 t) => t.Test2.Test3).Build();
             var actual = getValue(test);
             Assert.Null(actual);
             Assert.AreEqual(expected, actual);
@@ -445,7 +445,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => 1).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => 1).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -457,7 +457,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testA = CreateTestInstanceA();
             var testB = CreateTestInstanceB();
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 a, TestStruct1 b) => a.IntProperty).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 a, TestStruct1 b) => a.IntProperty).Build();
             var actual = getValue(testA, testB);
 
             Assert.AreEqual(expected, actual);
@@ -472,7 +472,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
                 // ReSharper disable once NegativeEqualityExpression
 #pragma warning disable S1940 // Boolean checks should not be inverted
-                (TestClass1 a, TestStruct1 b) => !(a.Test2.Test3.Property == b.Test2.Test3.Property)).Create();
+                (TestClass1 a, TestStruct1 b) => !(a.Test2.Test3.Property == b.Test2.Test3.Property)).Build();
 #pragma warning restore S1940 // Boolean checks should not be inverted
             var actual = getValue(testA, testB);
 
@@ -486,7 +486,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testB = CreateTestInstanceB();
             const bool expected = true;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a, TestStruct1 b) => a.Test2.Test3.Property == b.Test2.Test3.Property).Create();
+                (TestClass1 a, TestStruct1 b) => a.Test2.Test3.Property == b.Test2.Test3.Property).Build();
             var actual = getValue(testA, testB);
 
             Assert.AreEqual(expected, actual);
@@ -499,7 +499,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testB = CreateTestInstanceB();
             const bool expected = false;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a, TestStruct1 b) => (a.Test2.Test3.Property != b.Test2.Test3.Property)).Create();
+                (TestClass1 a, TestStruct1 b) => (a.Test2.Test3.Property != b.Test2.Test3.Property)).Build();
             var actual = getValue(testA, testB);
 
             Assert.AreEqual(expected, actual);
@@ -511,7 +511,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testA = CreateTestInstanceA();
             var testB = CreateTestInstanceB();
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 a, TestStruct1 b) => b.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 a, TestStruct1 b) => b.Property).Build();
             var actual = getValue(testA, testB);
 
             Assert.AreEqual(expected, actual);
@@ -524,7 +524,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testB = CreateTestInstanceB();
             const int expected = 2;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a, TestStruct1 b) => a.IntProperty + b.Property).Create();
+                (TestClass1 a, TestStruct1 b) => a.IntProperty + b.Property).Build();
             var actual = getValue(testA, testB);
 
             Assert.AreEqual(expected, actual);
@@ -535,7 +535,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => GetStaticValue()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => GetStaticValue()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -546,7 +546,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => GetStaticValue1Param(1)).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => GetStaticValue1Param(1)).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -557,7 +557,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => GetStaticValue1Param(t.IntProperty)).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => GetStaticValue1Param(t.IntProperty)).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -570,7 +570,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var expected = (int?)null;
             var getValue = ExpressionGetterBuilder.Builder
                 .ValueGetter((TestClass1 t) => GetStaticValue1Param(t.IntProperty))
-                .Create();
+                .Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -581,7 +581,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(1)).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(1)).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -592,7 +592,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(this.GetValue())).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(this.GetValue())).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -603,7 +603,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue()).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -614,7 +614,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(t.IntProperty)).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(t.IntProperty)).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -625,7 +625,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(t)).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(t)).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -640,7 +640,7 @@ namespace Anori.ExpressionObservers.UnitTests
             test.Test2.Test3 = null;
             string expected = null;
             var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter(
-                (TestClass1 t) => (t.BoolProperty ? t.Test2.Property : t.Test2.Test3.Property).ToString()).Create();
+                (TestClass1 t) => (t.BoolProperty ? t.Test2.Property : t.Test2.Test3.Property).ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -654,7 +654,7 @@ namespace Anori.ExpressionObservers.UnitTests
             test.BoolProperty = false;
             var expected = 3.ToString();
             var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter(
-                (TestClass1 t) => (t.BoolProperty ? t.Test2.Property : t.Test2.Test3.Property).ToString()).Create();
+                (TestClass1 t) => (t.BoolProperty ? t.Test2.Property : t.Test2.Test3.Property).ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -666,7 +666,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.BoolProperty = false;
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.BoolProperty ? 1 : 2).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.BoolProperty ? 1 : 2).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -678,7 +678,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             var expected = 2.ToString();
             var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter(
-                (TestClass1 t) => (t.BoolProperty ? 1 : 2).ToString()).Create();
+                (TestClass1 t) => (t.BoolProperty ? 1 : 2).ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -693,7 +693,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Expression<Func<TestClass1, bool>> propertyExpression = t => !t.BoolProperty;
             Assert.AreEqual(expected, propertyExpression.Compile()(test));
 
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter(propertyExpression).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter(propertyExpression).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -705,7 +705,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             var expected = true.ToString();
             Expression<Func<TestClass1, string>> propertyExpression = t => (!t.BoolProperty).ToString();
-            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter(propertyExpression).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter(propertyExpression).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -716,7 +716,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const bool expected = false;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.BoolProperty).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.BoolProperty).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -728,7 +728,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.BoolProperty = true;
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.BoolProperty ? 1 : 2).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.BoolProperty ? 1 : 2).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -743,7 +743,7 @@ namespace Anori.ExpressionObservers.UnitTests
             test.Test2.Test3 = null;
             var expected = 2.ToString();
             var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter(
-                (TestClass1 t) => (t.BoolProperty ? t.Test2.Property : t.Test2.Test3.Property).ToString()).Create();
+                (TestClass1 t) => (t.BoolProperty ? t.Test2.Property : t.Test2.Test3.Property).ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -757,7 +757,7 @@ namespace Anori.ExpressionObservers.UnitTests
             test.BoolProperty = true;
             var expected = 2.ToString();
             var getValue = ExpressionGetterBuilder.Builder.ReferenceGetter(
-                (TestClass1 t) => (t.BoolProperty ? t.Test2.Property : t.Test2.Test3.Property).ToString()).Create();
+                (TestClass1 t) => (t.BoolProperty ? t.Test2.Property : t.Test2.Test3.Property).ToString()).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -768,7 +768,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.intProperty).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.intProperty).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -780,7 +780,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.NulableProperty = 4;
             var expected = (int?)4;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.NulableProperty.Value).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.NulableProperty.Value).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -791,7 +791,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.NulableProperty.Value).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.NulableProperty.Value).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -802,7 +802,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 3;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List.ElementAtOrNull(2).Value).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List.ElementAtOrNull(2).Value).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -813,7 +813,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List.ElementAtOrNull(9).Value).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List.ElementAtOrNull(9).Value).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -824,7 +824,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 3;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -835,7 +835,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             TestClass1 test = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -847,7 +847,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             var expected = (int?)null;
             var actual = expected;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List[9]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.List[9]).Build();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => actual = getValue(test));
             Assert.AreEqual(expected, actual);
@@ -858,7 +858,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.IntProperty).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.IntProperty).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -869,7 +869,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = (TestClass1)null;
             int? expected = null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.IntProperty).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.IntProperty).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -880,7 +880,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             TestClass1 test = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List.ElementAtOrNull(2).Value).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List.ElementAtOrNull(2).Value).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -892,7 +892,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List.ElementAtOrNull(2).Value).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List.ElementAtOrNull(2).Value).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -903,7 +903,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 3;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -914,7 +914,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             TestClass1 test = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -926,7 +926,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -937,7 +937,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -948,7 +948,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = (TestClass1)null;
             int? expected = null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -960,7 +960,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             int? expected = null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -971,7 +971,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 3;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -982,7 +982,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             TestClass1 test = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -994,7 +994,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1006,7 +1006,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2.Test3 = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.List[2]).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.List[2]).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1018,7 +1018,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             const int expected1 = 3;
             const int expected2 = 4;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected1, actual);
@@ -1035,7 +1035,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             const int expected1 = 3;
             const int expected2 = 7;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected1, actual);
@@ -1052,7 +1052,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             const int expected1 = 3;
             const int expected2 = 6;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected1, actual);
@@ -1069,7 +1069,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             const int expected1 = 3;
             const int expected2 = 5;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected1, actual);
@@ -1086,7 +1086,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             const int expected = 3;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property)
-                .Create();
+                .Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1097,7 +1097,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = (TestClass1)null;
             int? expected = null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1109,7 +1109,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2 = null;
             int? expected = null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1121,7 +1121,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test.Test2.Test3 = null;
             int? expected = null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1133,7 +1133,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             var expected = (int?)null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 t) => t.Test2.Tests.ElementAtOrNull(2).Property).Create();
+                (TestClass1 t) => t.Test2.Tests.ElementAtOrNull(2).Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1144,7 +1144,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Tests[0].Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Tests[0].Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1155,7 +1155,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Tests[1].Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Tests[1].Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1166,7 +1166,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             TestClass1 test = null;
             var expected = (int?)null;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Tests[1].Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Tests[1].Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1179,7 +1179,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var expected = (int?)null;
             var actual = expected;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => t.Test2.Tests[2].Property)
-                .Create();
+                .Build();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => actual = getValue(test));
             Assert.AreEqual(expected, actual);
@@ -1190,7 +1190,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 3;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => test.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => test.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1204,7 +1204,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testA3 = CreateTestInstanceA();
             int? expected = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.IntProperty + a2.IntProperty + a3.IntProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.IntProperty + a2.IntProperty + a3.IntProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1218,7 +1218,7 @@ namespace Anori.ExpressionObservers.UnitTests
             TestClass1 testA3 = null;
             int? expected = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.IntProperty + a2.IntProperty + a3.IntProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.IntProperty + a2.IntProperty + a3.IntProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1232,7 +1232,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testA3 = CreateTestInstanceA();
             const int expected = 3;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.IntProperty + a2.IntProperty + a3.IntProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.IntProperty + a2.IntProperty + a3.IntProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1248,7 +1248,7 @@ namespace Anori.ExpressionObservers.UnitTests
             testA1.BoolProperty = true;
             bool? expected = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1263,7 +1263,7 @@ namespace Anori.ExpressionObservers.UnitTests
             testA1 = null;
             bool? expected = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1277,7 +1277,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testA3 = CreateTestInstanceA();
             bool? expected = false;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1291,7 +1291,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testA3 = CreateTestInstanceA();
             bool? expected = false;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1308,7 +1308,7 @@ namespace Anori.ExpressionObservers.UnitTests
             testA3.BoolProperty = true;
             bool? expected = true;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty && a2.BoolProperty && a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1324,7 +1324,7 @@ namespace Anori.ExpressionObservers.UnitTests
             testA1.BoolProperty = true;
             bool? expected = true;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty || a2.BoolProperty || a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty || a2.BoolProperty || a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1340,7 +1340,7 @@ namespace Anori.ExpressionObservers.UnitTests
             testA2.BoolProperty = true;
             bool? expected = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty || a2.BoolProperty || a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty || a2.BoolProperty || a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1356,7 +1356,7 @@ namespace Anori.ExpressionObservers.UnitTests
             testA2.BoolProperty = true;
             bool? expected = true;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty || a2.BoolProperty || a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty || a2.BoolProperty || a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1370,7 +1370,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var testA3 = CreateTestInstanceA();
             bool? expected = false;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty || a2.BoolProperty || a3.BoolProperty).Create();
+                (TestClass1 a1, TestClass1 a2, TestClass1 a3) => a1.BoolProperty || a2.BoolProperty || a3.BoolProperty).Build();
             var actual = getValue(testA1, testA2, testA3);
 
             Assert.AreEqual(expected, actual);
@@ -1382,7 +1382,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceB();
             const int expected = 3;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestStruct1 t) => t.Test2.Test3.Property)
-                .Create();
+                .Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1393,7 +1393,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceB();
             const int expected = 3;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestStruct1 t) => test.Test2.Test3.Property).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestStruct1 t) => test.Test2.Test3.Property).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1403,7 +1403,7 @@ namespace Anori.ExpressionObservers.UnitTests
         public void CreateValueGetter_int_1_Return1()
         {
             const int Expected = 1;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((int t) => t).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((int t) => t).Build();
             var actual = getValue(1);
 
             Assert.AreEqual(Expected, actual);
@@ -1416,7 +1416,7 @@ namespace Anori.ExpressionObservers.UnitTests
             test = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
                 (TestClass1 t) =>
-                    new TestClass1 { IntArrayProperty = { test.IntProperty, test.IntProperty } }.IntProperty).Create();
+                    new TestClass1 { IntArrayProperty = { test.IntProperty, test.IntProperty } }.IntProperty).Build();
             int? expected = null;
             var actual = getValue(test);
 
@@ -1429,7 +1429,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             test = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 t) => new TestClass1 { IntProperty = test.IntProperty }.IntProperty).Create();
+                (TestClass1 t) => new TestClass1 { IntProperty = test.IntProperty }.IntProperty).Build();
             int? expected = null;
             var actual = getValue(test);
 
@@ -1441,7 +1441,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 t) => new TestClass1 { Test2 = new TestClass2 { Property = 7 } }.Test2.Property).Create();
+                (TestClass1 t) => new TestClass1 { Test2 = new TestClass2 { Property = 7 } }.Test2.Property).Build();
             int? expected = 7;
             var actual = getValue(test);
 
@@ -1454,7 +1454,7 @@ namespace Anori.ExpressionObservers.UnitTests
             TestClass1 test2 = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
                 (TestClass1 t) =>
-                    new TestClass1 { Test2 = new TestClass2 { Property = t.Test2.Property } }.Test2.Property).Create();
+                    new TestClass1 { Test2 = new TestClass2 { Property = t.Test2.Property } }.Test2.Property).Build();
             int? expected = null;
             var actual = getValue(test2);
 
@@ -1467,7 +1467,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test1 = CreateTestInstanceA();
             test1.Test2.Property = 4;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 t) => new TestClass1 { Test2 = { Property = t.Test2.Property } }.Test2.Property).Create();
+                (TestClass1 t) => new TestClass1 { Test2 = { Property = t.Test2.Property } }.Test2.Property).Build();
             int? expected = 4;
             var actual = getValue(test1);
 
@@ -1484,7 +1484,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         test1.Test2.Property = 4;
                         var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
                             (TestClass1 t) =>
-                                new TestClass1 { Test2B = { Property = t.Test2.Property } }.Test2.Property).Create();
+                                new TestClass1 { Test2B = { Property = t.Test2.Property } }.Test2.Property).Build();
                         getValue(test1);
                     });
         }
@@ -1497,7 +1497,7 @@ namespace Anori.ExpressionObservers.UnitTests
             test1 = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
                 (TestClass1 t) => new TestClass1 { Test2 = new TestClass2 { Property = test1.Test2.Property } }.Test2
-                    .Property).Create();
+                    .Property).Build();
             int? expected = null;
             var actual = getValue(test2);
 
@@ -1511,7 +1511,7 @@ namespace Anori.ExpressionObservers.UnitTests
             TestClass1 test2 = null;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
                 (TestClass1 t) => new TestClass1 { Test2 = new TestClass2 { Property = test1.Test2.Property } }.Test2
-                    .Property).Create();
+                    .Property).Build();
             int? expected = 2;
             var actual = getValue(test2);
 
@@ -1524,7 +1524,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             const int expected = 1;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 t) => new TestClass1 { IntProperty = 1 }.IntProperty).Create();
+                (TestClass1 t) => new TestClass1 { IntProperty = 1 }.IntProperty).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1536,7 +1536,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
 
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter(
-                (TestClass1 t) => new TestClass1 { IntProperty = test.IntProperty }.IntProperty).Create();
+                (TestClass1 t) => new TestClass1 { IntProperty = test.IntProperty }.IntProperty).Build();
             test.IntProperty = 3;
             const int expected = 3;
             var actual = getValue(test);
@@ -1549,7 +1549,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 0;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => new TestClass1().IntProperty).Create();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => new TestClass1().IntProperty).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
