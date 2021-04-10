@@ -12,9 +12,11 @@ namespace Anori.ExpressionObservers.Observers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions.Threading;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -46,15 +48,26 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">action or propertyExpression is null.</exception>
         internal PropertyObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
-            TResult fallback)
-            : base(propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree, fallback);
+            var get = Getter(propertyExpression, this.Tree, fallback);
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () => this.IsActive ? get() : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = get;
+            }
+
         }
 
         /// <summary>
@@ -64,39 +77,56 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="fallback">The fallback.</param>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
             TaskScheduler taskScheduler,
-            TResult fallback)
-            : base(propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, fallback);
             var taskFactory = new TaskFactory(taskScheduler);
-            this.getter = () => taskFactory.StartNew(get).Result;
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () => this.IsActive ? taskFactory.StartNew(get).Result : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = () => taskFactory.StartNew(get).Result;
+            }
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyObserverWithFallback{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
             SynchronizationContext synchronizationContext,
-            TResult fallback)
-            : base(propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, fallback);
-            this.getter = () => synchronizationContext.Send(get);
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () => this.IsActive ? synchronizationContext.Send(get) : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = () => synchronizationContext.Send(get);
+            }
         }
 
         /// <summary>
@@ -122,7 +152,5 @@ namespace Anori.ExpressionObservers.Observers
             IExpressionTree tree,
             TResult fallback) =>
             ExpressionGetter.CreateGetter(propertyExpression.Parameters, tree, fallback);
-
-      
     }
 }

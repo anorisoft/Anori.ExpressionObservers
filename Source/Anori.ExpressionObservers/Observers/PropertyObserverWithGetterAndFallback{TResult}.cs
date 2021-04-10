@@ -12,6 +12,7 @@ namespace Anori.ExpressionObservers.Observers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions.Threading;
@@ -40,83 +41,110 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
+        /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">action
+        /// or
+        /// propertyExpression is null.</exception>
         internal PropertyObserverWithGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
-            TResult fallback)
-            : base(propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree, fallback);
+            var get = Getter(propertyExpression, this.Tree, fallback);
+
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () => this.IsActive ? get() : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = get;
+            }
+
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     parameter1
-        ///     or
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
+        /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">parameter1
+        /// or
+        /// action
+        /// or
+        /// propertyExpression is null.</exception>
         internal PropertyObserverWithGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             TaskScheduler taskScheduler,
-            TResult fallback)
-            : base(propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, fallback);
             var taskFactory = new TaskFactory(taskScheduler);
-            this.getter = () => taskFactory.StartNew(get).Result;
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () => this.IsActive ? taskFactory.StartNew(get).Result : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = () => taskFactory.StartNew(get).Result;
+            }
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserverWithGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     parameter1
-        ///     or
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
+        /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">parameter1
+        /// or
+        /// action
+        /// or
+        /// propertyExpression is null.</exception>
         internal PropertyObserverWithGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             SynchronizationContext synchronizationContext,
-            TResult fallback)
-            : base(propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, fallback);
-            this.getter = () => synchronizationContext.Send(get);
+
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () => this.IsActive ? synchronizationContext.Send(get) : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = () => synchronizationContext.Send(get);
+            }
         }
 
         /// <summary>
-        ///     Gets the value.
+        /// Gets the value.
         /// </summary>
-        /// <returns>The result value.</returns>
+        /// <value>
+        /// The value.
+        /// </value>
         public TResult Value => this.getter();
 
         /// <summary>

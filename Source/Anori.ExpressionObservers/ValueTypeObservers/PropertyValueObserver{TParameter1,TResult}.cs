@@ -53,8 +53,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         internal PropertyValueObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action)
-            : base(parameter1, propertyExpression)
+            [NotNull] Action<TResult?> action,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = Getter(propertyExpression, this.Tree, parameter1);
@@ -72,8 +73,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            TaskScheduler taskScheduler)
-            : base(parameter1, propertyExpression)
+            TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, parameter1);
@@ -88,13 +90,15 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">action</exception>
         internal PropertyValueObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            SynchronizationContext synchronizationContext)
-            : base(parameter1, propertyExpression)
+            SynchronizationContext synchronizationContext,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, parameter1);

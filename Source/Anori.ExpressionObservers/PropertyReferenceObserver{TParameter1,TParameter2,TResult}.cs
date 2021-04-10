@@ -47,7 +47,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
-                action);
+                action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -77,7 +77,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
-                action);
+                action, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -111,7 +111,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
-                action);
+                action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the and get.
@@ -141,7 +141,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
-                action);
+                action, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -174,7 +174,7 @@ namespace Anori.ExpressionObservers
             new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
-                propertyExpression);
+                propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -206,7 +206,7 @@ namespace Anori.ExpressionObservers
                 parameter2,
                 propertyExpression,
                 isCached,
-                safetyMode);
+                safetyMode, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -241,7 +241,7 @@ namespace Anori.ExpressionObservers
                 propertyExpression,
                 taskScheduler,
                 isCached,
-                safetyMode);
+                safetyMode, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -279,7 +279,7 @@ namespace Anori.ExpressionObservers
                 propertyExpression,
                 taskScheduler,
                 isCached,
-                safetyMode);
+                safetyMode, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -319,7 +319,7 @@ namespace Anori.ExpressionObservers
                 parameter2,
                 propertyExpression,
                 isCached,
-                safetyMode);
+                safetyMode, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -356,7 +356,7 @@ namespace Anori.ExpressionObservers
                 new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                     parameter1,
                     parameter2,
-                    propertyExpression);
+                    propertyExpression, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -389,7 +389,7 @@ namespace Anori.ExpressionObservers
             new PropertyReferenceObserverOnValueChanged<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
-                propertyExpression);
+                propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on value changed.
@@ -419,7 +419,7 @@ namespace Anori.ExpressionObservers
                 new PropertyReferenceObserverOnValueChanged<TParameter1, TParameter2, TResult>(
                     parameter1,
                     parameter2,
-                    propertyExpression);
+                    propertyExpression, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -453,7 +453,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
-                taskScheduler);
+                taskScheduler, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on value changed.
@@ -485,7 +485,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
-                taskScheduler);
+                taskScheduler, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);

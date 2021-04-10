@@ -56,11 +56,13 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChangedWithDefer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TaskScheduler? taskScheduler = null)
-            : base(propertyExpression)
+            TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);

@@ -43,7 +43,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 propertyExpression,
                 action,
-                fallback);
+                fallback, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -70,7 +70,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 propertyExpression,
                 action,
-                fallback);
+                fallback, PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -96,7 +96,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action)
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -124,7 +124,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 propertyExpression,
                 action,
-                fallback);
+                fallback, PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -156,7 +156,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 propertyExpression,
                 action,
-                fallback);
+                fallback, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -178,7 +178,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            var observer = new PropertyObserver<TParameter1, TResult>(parameter1, propertyExpression, action, PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);

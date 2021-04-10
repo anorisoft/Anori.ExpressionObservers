@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyGetterObserverWithFallback{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverWithFallback{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,6 +16,7 @@ namespace Anori.ExpressionObservers.Observers
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions.Threading;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -26,8 +27,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <seealso cref="PropertyGetterObserverWithFallback{TResult}" />
     /// <seealso cref="IPropertyObserverWithFallback{TResult}" />
     internal sealed class PropertyObserverWithFallback<TParameter1, TResult> :
-        PropertyObserverBase<IPropertyObserverWithFallback<TResult>
-            , TParameter1, TResult>,
+        PropertyObserverBase<IPropertyObserverWithFallback<TResult>, TParameter1, TResult>,
         IPropertyObserverWithFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
@@ -50,13 +50,15 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">action or propertyExpression is null.</exception>
         internal PropertyObserverWithFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
-            TResult fallback)
-            : base(parameter1, propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = Getter(propertyExpression, this.Tree, fallback, parameter1);
@@ -70,14 +72,16 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="fallback">The fallback.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">action</exception>
         internal PropertyObserverWithFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
             TaskScheduler taskScheduler,
-            TResult fallback)
-            : base(parameter1, propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, fallback, parameter1);
@@ -93,14 +97,16 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">action</exception>
         internal PropertyObserverWithFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
             SynchronizationContext synchronizationContext,
-            TResult fallback)
-            : base(parameter1, propertyExpression)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, fallback, parameter1);
@@ -133,7 +139,5 @@ namespace Anori.ExpressionObservers.Observers
             TParameter1 parameter1) =>
             () => ExpressionGetter.CreateGetter<TParameter1, TResult>(propertyExpression.Parameters, tree, fallback)(
                 parameter1);
-
-    
     }
 }

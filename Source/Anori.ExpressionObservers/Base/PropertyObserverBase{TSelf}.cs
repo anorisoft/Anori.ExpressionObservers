@@ -6,11 +6,8 @@
 
 namespace Anori.ExpressionObservers.Base
 {
-    using System;
-
-    using Anori.Common;
+    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.Extensions;
 
     /// <summary>
     ///     Property Observer Base for flurnent.
@@ -20,13 +17,26 @@ namespace Anori.ExpressionObservers.Base
     internal abstract class PropertyObserverBase<TSelf> : PropertyObserverBase, IPropertyObserverBase<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
-        private bool isActive;
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyObserverBase{TSelf}" /> class.
+        /// </summary>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        protected PropertyObserverBase(PropertyObserverFlag observerFlag)
+            : base(observerFlag)
+        {
+        }
 
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        /// <returns>Self object.</returns>
-        public new TSelf Activate() => this.Activate(false);
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        /// <exception cref="Anori.ExpressionObservers.Exceptions.AlreadyActivatedException"></exception>
+        public new TSelf Activate()
+        {
+            return this.Activate(false);
+        }
 
         /// <summary>
         ///     Subscribes the specified silent.
@@ -48,7 +58,5 @@ namespace Anori.ExpressionObservers.Base
             base.Deactivate();
             return (TSelf)(IPropertyObserverBase<TSelf>)this;
         }
-
-      
     }
 }

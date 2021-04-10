@@ -11,13 +11,14 @@ namespace Anori.ExpressionObservers.Base
     using System.Linq;
 
     using Anori.Common;
+    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.Tree.Nodes;
     using Anori.Extensions;
 
     /// <summary>
-    /// Property Observer Base.
+    ///     Property Observer Base.
     /// </summary>
     /// <seealso cref="System.IDisposable" />
     /// <seealso cref="System.Collections.Generic.IEqualityComparer{Anori.ExpressionObservers.Base.PropertyObserverBase}" />
@@ -28,11 +29,34 @@ namespace Anori.ExpressionObservers.Base
     /// <seealso cref="IDisposable" />
 #pragma warning disable S4035 // Classes implementing "IEquatable<T>" should be sealed
     internal abstract class PropertyObserverBase : IDisposable,
-                                                 IEqualityComparer<PropertyObserverBase>,
-                                                 IEquatable<PropertyObserverBase>, IActivatable
+                                                   IEqualityComparer<PropertyObserverBase>,
+                                                   IEquatable<PropertyObserverBase>,
+                                                   IActivatable
 #pragma warning restore S4035 // Classes implementing "IEquatable<T>" should be sealed
     {
         private bool isActive;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyObserverBase" /> class.
+        /// </summary>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        protected PropertyObserverBase(PropertyObserverFlag observerFlag)
+        {
+            this.ObserverFlag = observerFlag;
+        }
+
+        /// <summary>
+        ///     Occurs when [is active changed].
+        /// </summary>
+        public event EventHandler<EventArgs<bool>>? IsActiveChanged;
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is fail fast.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is fail fast; otherwise, <c>false</c>.
+        /// </value>
+        private protected PropertyObserverFlag ObserverFlag { get; }
 
         /// <summary>
         ///     Gets the expression string.
@@ -49,6 +73,62 @@ namespace Anori.ExpressionObservers.Base
         ///     The root nodes.
         /// </value>
         internal IList<RootPropertyObserverNode> RootNodes { get; } = new List<RootPropertyObserverNode>();
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is active; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsActive
+        {
+            get => this.isActive;
+            private set
+            {
+                if (this.isActive == value)
+                {
+                    return;
+                }
+
+                this.isActive = value;
+                this.IsActiveChanged.Raise(this, value);
+            }
+        }
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <summary>
+        ///     Subscribes this instance.
+        /// </summary>
+        public void Activate()
+        {
+            this.Activate(false);
+        }
+
+        /// <summary>
+        ///     Deactivates this instance.
+        /// </summary>
+        /// <exception cref="Anori.ExpressionObservers.Exceptions.AlreadyDeactivatedException">Already Deactivated.</exception>
+        public void Deactivate()
+        {
+            if (!this.IsActive)
+            {
+                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+                {
+                    throw new AlreadyDeactivatedException();
+                }
+
+                return;
+            }
+
+            this.IsActive = false;
+
+            foreach (var rootPropertyObserverNode in this.RootNodes)
+            {
+                rootPropertyObserverNode.UnsubscribeListener();
+            }
+        }
 
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -70,7 +150,17 @@ namespace Anori.ExpressionObservers.Base
         {
             if (disposing)
             {
-                this.Deactivate();
+                if (!this.IsActive)
+                {
+                    return;
+                }
+
+                this.IsActive = false;
+
+                foreach (var rootPropertyObserverNode in this.RootNodes)
+                {
+                    rootPropertyObserverNode.UnsubscribeListener();
+                }
             }
         }
 
@@ -198,6 +288,68 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
+        ///     Subscribes the specified silent.
+        /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        protected void Activate(bool silent)
+        {
+            if (this.IsActive)
+            {
+                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionIfAlreadyActivated))
+                {
+                    throw new AlreadyActivatedException();
+                }
+
+                return;
+            }
+
+            this.IsActive = true;
+            foreach (var rootPropertyObserverNode in this.RootNodes)
+            {
+                rootPropertyObserverNode.SubscribeListenerForRoot();
+            }
+
+            if (!silent)
+            {
+                this.OnAction();
+            }
+        }
+
+        /// <summary>
+        ///     The action.
+        /// </summary>
+        protected abstract void OnAction();
+
+        /// <summary>
+        ///     Looptrees the specified expression node.
+        /// </summary>
+        /// <param name="expressionNode">The expression node.</param>
+        /// <param name="observerNode">The observer node.</param>
+        internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
+        {
+            var previousNode = observerNode;
+            while (expressionNode.Next is PropertyNode property)
+            {
+                var currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
+
+                previousNode.Previous = currentNode;
+                previousNode = currentNode;
+                expressionNode = expressionNode.Next;
+            }
+        }
+
+        /// <summary>
+        ///     Determines whether the specified objects are equal.
+        /// </summary>
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        ///     true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y) =>
+            Equals(x, y);
+
+        /// <summary>
         ///     Implements the operator ==.
         /// </summary>
         /// <param name="a">a.</param>
@@ -245,117 +397,5 @@ namespace Anori.ExpressionObservers.Base
         {
             return !a.Equals(b);
         }
-
-        /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <summary>
-        ///     Subscribes this instance.
-        /// </summary>
-        public void Activate()
-        {
-            this.Activate(false);
-        }
-
-        /// <summary>
-        ///     Subscribes the specified silent.
-        /// </summary>
-        /// <param name="silent">if set to <c>true</c> [silent].</param>
-        protected void Activate(bool silent)
-        {
-            if (this.IsActive)
-            {
-                return;
-            }
-
-            this.IsActive = true;
-            foreach (var rootPropertyObserverNode in this.RootNodes)
-            {
-                rootPropertyObserverNode.SubscribeListenerForRoot();
-            }
-
-            if (!silent)
-            {
-                this.OnAction();
-            }
-        }
-
-
-        /// <summary>
-        /// Deactivates this instance.
-        /// </summary>
-        public void Deactivate()
-        {
-            if (!this.IsActive)
-            {
-                return;
-            }
-
-            this.IsActive = false;
-
-            foreach (var rootPropertyObserverNode in this.RootNodes)
-            {
-                rootPropertyObserverNode.UnsubscribeListener();
-            }
-        }
-
-        /// <summary>
-        ///     The action.
-        /// </summary>
-        protected abstract void OnAction();
-
-        /// <summary>
-        ///     Looptrees the specified expression node.
-        /// </summary>
-        /// <param name="expressionNode">The expression node.</param>
-        /// <param name="observerNode">The observer node.</param>
-        internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
-        {
-            var previousNode = observerNode;
-            while (expressionNode.Next is PropertyNode property)
-            {
-                var currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
-
-                previousNode.Previous = currentNode;
-                previousNode = currentNode;
-                expressionNode = expressionNode.Next;
-            }
-        }
-
-        /// <summary>
-        ///     Determines whether the specified objects are equal.
-        /// </summary>
-        /// <param name="x">The first object of type T to compare.</param>
-        /// <param name="y">The second object of type T to compare.</param>
-        /// <returns>
-        ///     true if the specified objects are equal; otherwise, false.
-        /// </returns>
-        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y) =>
-            Equals(x, y);
-        /// <summary>
-        /// Gets a value indicating whether this instance is active.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsActive
-        {
-            get => this.isActive;
-            private set
-            {
-                if (this.isActive == value)
-                {
-                    return;
-                }
-
-                this.isActive = value;
-                this.IsActiveChanged.Raise(this, value);
-            }
-        }
-
-        /// <summary>
-        /// Occurs when [is active changed].
-        /// </summary>
-        public event EventHandler<EventArgs<bool>> IsActiveChanged;
     }
 }

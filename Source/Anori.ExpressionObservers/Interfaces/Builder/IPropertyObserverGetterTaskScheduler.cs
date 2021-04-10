@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder
+namespace Anori.ExpressionObservers.Interfaces.Builder
 {
     using System.Threading.Tasks;
 

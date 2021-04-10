@@ -6,6 +6,11 @@
 
 namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions.Threading;
+    using JetBrains.Annotations;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -13,13 +18,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
-
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Reference Observer With Getter.
@@ -55,12 +53,14 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChanged(
-             [NotNull] TParameter1 parameter1,
-             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-             [NotNull] TaskScheduler taskScheduler)
-             : base(parameter1, propertyExpression)
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree, parameter1);
             var taskFactory = new TaskFactory(taskScheduler);
@@ -68,49 +68,40 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}"/> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" />
+        /// class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            [NotNull] SynchronizationContext synchronizationContext)
-            : base(parameter1, propertyExpression)
+            [NotNull] SynchronizationContext synchronizationContext,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree, parameter1);
             this.action = () => synchronizationContext.Send(() => this.Value = get());
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" />
+        /// class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
-            : base(parameter1, propertyExpression)
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree, parameter1);
             this.action = () => this.Value = get();
         }
-
-        /// <summary>
-        ///     Getters the specified property expression.
-        /// </summary>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="tree">The tree.</param>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <returns>Getter.</returns>
-        private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-            parameter1);
-
 
         /// <summary>
         ///     Occurs when a property value changes.
@@ -143,6 +134,20 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>Getter.</returns>
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1) =>
+            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
+                parameter1);
 
         /// <summary>
         ///     Called when [property changed].

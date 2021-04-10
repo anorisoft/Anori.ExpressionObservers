@@ -38,7 +38,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new PropertyReferenceObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+            new PropertyReferenceObserver<TParameter1, TResult>(parameter1, propertyExpression, action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -60,7 +60,7 @@ namespace Anori.ExpressionObservers
             where TResult : class
         {
             var observer =
-                new PropertyReferenceObserver<TParameter1, TResult>(parameter1, propertyExpression, action);
+                new PropertyReferenceObserver<TParameter1, TResult>(parameter1, propertyExpression, action, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -85,7 +85,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TResult : class
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyReferenceObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action);
+            new PropertyReferenceObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the and get.
@@ -107,7 +107,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
         {
             var observer =
-                new PropertyReferenceObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action);
+                new PropertyReferenceObserverWithGetter<TParameter1, TResult>(parameter1, propertyExpression, action, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -131,7 +131,7 @@ namespace Anori.ExpressionObservers
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(parameter1, propertyExpression);
+            new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(parameter1, propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -158,7 +158,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 propertyExpression,
                 isCached,
-                safetyMode);
+                safetyMode, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -188,7 +188,7 @@ namespace Anori.ExpressionObservers
                 propertyExpression,
                 taskScheduler,
                 isCached,
-                safetyMode);
+                safetyMode, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -221,7 +221,7 @@ namespace Anori.ExpressionObservers
                 propertyExpression,
                 taskScheduler,
                 isCached,
-                safetyMode);
+                safetyMode, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -258,7 +258,7 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 propertyExpression,
                 isCached,
-                safetyMode);
+                safetyMode, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -290,7 +290,7 @@ namespace Anori.ExpressionObservers
             var observer =
                 new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
                     parameter1,
-                    propertyExpression);
+                    propertyExpression, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -316,7 +316,7 @@ namespace Anori.ExpressionObservers
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression);
+            new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on value changed.
@@ -339,7 +339,7 @@ namespace Anori.ExpressionObservers
             where TResult : class
         {
             var observer =
-                new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression);
+                new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(parameter1, propertyExpression, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -370,7 +370,7 @@ namespace Anori.ExpressionObservers
             new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
-                taskScheduler);
+                taskScheduler, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on value changed.
@@ -397,7 +397,7 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
-                taskScheduler);
+                taskScheduler, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);

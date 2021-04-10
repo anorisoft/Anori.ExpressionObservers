@@ -6,18 +6,19 @@
 
 namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
-
-    using JetBrains.Annotations;
-
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Exceptions;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions.Threading;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Reference Getter Observer.
@@ -44,60 +45,67 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TParameter1,TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserver{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="System.ArgumentNullException">The action is null.</exception>
         internal PropertyReferenceObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action)
-            : base(parameter1, propertyExpression)
+            [NotNull] Action<TResult?> action,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree, parameter1);
+            this.getter = this.Getter(propertyExpression, this.Tree, parameter1);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TParameter1, TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserver{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">action</exception>
         internal PropertyReferenceObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            TaskScheduler taskScheduler)
-            : base(parameter1, propertyExpression)
+            TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = this.Getter(propertyExpression, this.Tree, parameter1);
             var taskFactory = new TaskFactory(taskScheduler);
             this.getter = () => taskFactory.StartNew(get).Result;
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserver{TParameter1, TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserver{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="propertyObserverFlagag">The property observerer flag.</param>
         /// <exception cref="ArgumentNullException">action</exception>
         internal PropertyReferenceObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            SynchronizationContext synchronizationContext)
-            : base(parameter1, propertyExpression)
+            SynchronizationContext synchronizationContext,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = this.Getter(propertyExpression, this.Tree, parameter1);
             this.getter = () => synchronizationContext.Send(get);
         }
 
@@ -112,11 +120,26 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         protected override void OnAction() => this.action(this.getter());
 
-        private static Func<TResult?> Getter(
+        /// <summary>
+        /// Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns></returns>
+        private Func<TResult?> Getter(
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
-            TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-                parameter1);
+            TParameter1 parameter1)
+        {
+            var get = ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree);
+
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionIfAlreadyActivated))
+            {
+                return () => this.IsActive ? get(parameter1) : throw new NotActivatedException();
+            }
+
+            return () => get(parameter1);
+        }
     }
 }

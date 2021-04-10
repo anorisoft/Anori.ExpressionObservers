@@ -62,8 +62,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action)
-            : base(parameter1, parameter2, propertyExpression)
+            [NotNull] Action<TResult?> action, PropertyObserverFlag observerFlag)
+            : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = Getter(propertyExpression, this.Tree, parameter1, parameter2);
@@ -83,8 +83,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            TaskScheduler taskScheduler)
-            : base(parameter1, parameter2, propertyExpression)
+            TaskScheduler taskScheduler, PropertyObserverFlag observerFlag)
+            : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
@@ -106,8 +106,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            SynchronizationContext synchronizationContext)
-            : base(parameter1, parameter2, propertyExpression)
+            SynchronizationContext synchronizationContext, PropertyObserverFlag observerFlag)
+            : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);

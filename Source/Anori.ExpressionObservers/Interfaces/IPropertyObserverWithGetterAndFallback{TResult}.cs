@@ -16,7 +16,7 @@ namespace Anori.ExpressionObservers.Interfaces
     {
         /// <summary>
         ///     Gets the value.
-        /// </summary>m 
+        /// </summary>
         /// <value>
         ///     The value.
         /// </value>

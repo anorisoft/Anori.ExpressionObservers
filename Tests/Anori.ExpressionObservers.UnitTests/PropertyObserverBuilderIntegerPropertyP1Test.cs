@@ -549,7 +549,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             var callCount = 0;
-            using var observes = new PropertyObserverBuilder(true)
+            using var observes = new PropertyObserverBuilder(autoActivate: true)
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
                 .WithNotifyProperyChanged()
                 .Build();

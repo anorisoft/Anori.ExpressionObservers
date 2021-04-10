@@ -55,13 +55,15 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] TaskScheduler taskScheduler)
-            : base(parameter1, parameter2, propertyExpression)
+            [NotNull] TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
             var taskFactory = new TaskFactory(taskScheduler);
@@ -76,29 +78,33 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] SynchronizationContext synchronizationContext)
-            : base(parameter1, parameter2, propertyExpression)
+            [NotNull] SynchronizationContext synchronizationContext,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
             this.action = () => synchronizationContext.Send(() => this.Value = get());
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnValueChanged{TParameter1,TParameter2,  TResult}" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="PropertyReferenceObserverOnValueChanged{TParameter1,TParameter2,  TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
-            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
-            : base(parameter1, parameter2, propertyExpression)
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
             this.action = () => this.Value = get();

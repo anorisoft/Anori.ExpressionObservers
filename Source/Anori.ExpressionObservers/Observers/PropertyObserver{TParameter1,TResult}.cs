@@ -33,24 +33,25 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Action action;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserver{TParameter1, TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserver{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
+        /// <param name="observerFlagag">The property observerer flag.</param>
+        /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="System.ArgumentNullException">The action is null.</exception>
         internal PropertyObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            [NotNull] Action action)
-            : base(parameter1, propertyExpression) =>
+            [NotNull] Action action,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag) =>
             this.action = action ?? throw new ArgumentNullException(nameof(action));
 
         /// <summary>
         ///     The action.
         /// </summary>
         protected override void OnAction() => this.action();
-
-       
     }
 }

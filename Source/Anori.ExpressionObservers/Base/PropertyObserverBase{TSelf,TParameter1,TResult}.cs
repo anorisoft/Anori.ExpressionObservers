@@ -36,18 +36,19 @@ namespace Anori.ExpressionObservers.Base
         private readonly Expression<Func<TParameter1, TResult>> propertyExpression;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverBase{TSelf, TParameter1, TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserverBase{TSelf, TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     propertyExpression
-        ///     or
-        ///     parameter1 is null.
-        /// </exception>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <exception cref="ArgumentNullException">propertyExpression
+        /// or
+        /// parameter1 is null.</exception>
         protected PropertyObserverBase(
             TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            PropertyObserverFlag observerFlag)
+            : base(observerFlag)
         {
             this.propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             this.Parameter1 = parameter1 ?? throw new ArgumentNullException(nameof(parameter1));

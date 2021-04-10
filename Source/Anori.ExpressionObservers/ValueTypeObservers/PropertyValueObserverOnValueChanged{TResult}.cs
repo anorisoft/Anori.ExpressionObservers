@@ -15,6 +15,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
@@ -42,66 +43,88 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Action action;
 
         /// <summary>
+        ///     The getter.
+        /// </summary>
+        private readonly Func<TResult?> getValue;
+
+        /// <summary>
         ///     The value.
         /// </summary>
         private TResult? value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyValueObserverOnValueChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] TaskScheduler taskScheduler)
-            : base(propertyExpression)
+            [NotNull] TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree);
             var taskFactory = new TaskFactory(taskScheduler);
             this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getValue = () => this.IsActive ? this.value : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getValue = () => this.value;
+            }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyValueObserverOnValueChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] SynchronizationContext synchronizationContext)
-            : base(propertyExpression)
+            [NotNull] SynchronizationContext synchronizationContext,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree);
             this.action = () => synchronizationContext.Send(() => this.Value = get());
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getValue = () => this.IsActive ? this.value : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getValue = () => this.value;
+            }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnValueChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyValueObserverOnValueChanged(
-            [NotNull] Expression<Func<TResult>> propertyExpression)
-            : base(propertyExpression)
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree);
             this.action = () => this.Value = get();
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getValue = () => this.IsActive ? this.value : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getValue = () => this.value;
+            }
         }
 
         /// <summary>
-        /// Getters the specified property expression.
-        /// </summary>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="tree">The tree.</param>
-        /// <returns>
-        /// Getter.
-        /// </returns>
-        private static Func<TResult?> Getter(
-            Expression<Func<TResult>> propertyExpression,
-            IExpressionTree tree) =>
-            ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
-
-        /// <summary>
-        /// Occurs when a property value changes.
+        ///     Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -114,7 +137,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </value>
         public TResult? Value
         {
-            get => this.value;
+            get => this.getValue();
             private set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))
@@ -131,6 +154,17 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <returns>
+        ///     Getter.
+        /// </returns>
+        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
+            ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
 
         /// <summary>
         ///     Called when [property changed].

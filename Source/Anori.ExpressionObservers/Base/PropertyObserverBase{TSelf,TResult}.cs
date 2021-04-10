@@ -38,7 +38,8 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        protected PropertyObserverBase([NotNull] Expression<Func<TResult>> propertyExpression)
+        protected PropertyObserverBase([NotNull] Expression<Func<TResult>> propertyExpression, PropertyObserverFlag observerFlag)
+            : base(observerFlag)
         {
             this.propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             (this.ExpressionString, this.Tree) = this.CreateChain();

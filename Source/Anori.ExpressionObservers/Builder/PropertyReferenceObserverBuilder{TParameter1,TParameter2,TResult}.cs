@@ -68,6 +68,8 @@ namespace Anori.ExpressionObservers.Builder
             this.propertyExpression = propertyExpression;
         }
 
+        public PropertyObserverFlag PropertyObserverFlag { get; set; }
+
         /// <summary>
         ///     Cacheds this instance.
         /// </summary>
@@ -91,7 +93,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     SynchronizationContext.Current,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.PropertyObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -101,7 +104,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     this.TaskScheduler,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.PropertyObserverFlag);
             }
             else
             {
@@ -110,7 +114,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter2,
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.PropertyObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -133,7 +138,8 @@ namespace Anori.ExpressionObservers.Builder
                 this.parameter1,
                 this.parameter2,
                 this.propertyExpression,
-                this.Action!);
+                this.Action!,
+                this.PropertyObserverFlag);
             if (this.IsAutoActivate)
             {
                 observer.Activate(this.IsSilentActivate);
@@ -159,7 +165,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.Action!,
                     SynchronizationContext.Current,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.PropertyObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -169,7 +176,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.Action!,
                     this.TaskScheduler,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.PropertyObserverFlag);
             }
             else
             {
@@ -178,7 +186,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter2,
                     this.propertyExpression,
                     this.Action!,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.PropertyObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -205,7 +214,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter2,
                     this.propertyExpression,
                     this.ActionOfTResult!,
-                    SynchronizationContext.Current);
+                    SynchronizationContext.Current,
+                    this.PropertyObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -214,7 +224,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter2,
                     this.propertyExpression,
                     this.ActionOfTResult!,
-                    this.TaskScheduler);
+                    this.TaskScheduler,
+                    this.PropertyObserverFlag);
             }
             else
             {
@@ -222,7 +233,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfTResult!);
+                    this.ActionOfTResult!,
+                    this.PropertyObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -249,7 +261,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    SynchronizationContext.Current);
+                    SynchronizationContext.Current,
+                    this.PropertyObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -257,14 +270,16 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.TaskScheduler);
+                    this.TaskScheduler,
+                    this.PropertyObserverFlag);
             }
             else
             {
                 observer = new PropertyReferenceObserverOnValueChanged<TParameter1, TParameter2, TResult>(
                     this.parameter1,
                     this.parameter2,
-                    this.propertyExpression);
+                    this.propertyExpression,
+                    this.PropertyObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -293,7 +308,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     SynchronizationContext.Current,
                     this.IsCached,
-                    this.SafetyMode);
+                    this.SafetyMode,
+                    this.PropertyObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -303,7 +319,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.TaskScheduler,
                     this.IsCached,
-                    this.SafetyMode);
+                    this.SafetyMode,
+                    this.PropertyObserverFlag);
             }
             else
             {
@@ -312,7 +329,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter2,
                     this.propertyExpression,
                     this.IsCached,
-                    this.SafetyMode);
+                    this.SafetyMode,
+                    this.PropertyObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -339,7 +357,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter2,
                     this.propertyExpression,
                     this.Action!,
-                    SynchronizationContext.Current);
+                    SynchronizationContext.Current,
+                    this.PropertyObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -348,7 +367,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter2,
                     this.propertyExpression,
                     this.Action!,
-                    this.TaskScheduler);
+                    this.TaskScheduler,
+                    this.PropertyObserverFlag);
             }
             else
             {
@@ -356,7 +376,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.Action!);
+                    this.Action!,
+                    this.PropertyObserverFlag);
             }
 
             if (this.IsAutoActivate)

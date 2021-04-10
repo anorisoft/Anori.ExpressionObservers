@@ -19,8 +19,7 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <seealso cref="System.IDisposable" />
     public interface IPropertyValueObserverOnValueChanged<TResult> :
         IPropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>>,
-        INotifyPropertyChanged,
-        IDisposable
+        INotifyPropertyChanged
         where TResult : struct
     {
         /// <summary>

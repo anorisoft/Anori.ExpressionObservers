@@ -16,7 +16,6 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public interface IPropertyReferenceObserverOnNotifyProperyChanged<out TResult> : IPropertyObserverBase<IPropertyReferenceObserverOnNotifyProperyChanged<TResult>>, INotifyPropertyChanged ,IDisposable
         where TResult : class
-
     {
         /// <summary>
         /// Gets the value.

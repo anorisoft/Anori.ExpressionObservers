@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.Builder
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.ReferenceTypeObservers;
-    using Anori.ExpressionObservers.ValueTypeObservers;
 
     /// <summary>
     ///     The Value Property Observer Builder class.
@@ -76,7 +75,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     SynchronizationContext.Current,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -85,7 +85,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     this.TaskScheduler,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.ObserverFlag);
             }
             else
             {
@@ -93,7 +94,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -115,7 +117,8 @@ namespace Anori.ExpressionObservers.Builder
             var observer = new PropertyObserver<TParameter1, TResult>(
                 this.parameter1,
                 this.propertyExpression,
-                this.Action!);
+                this.Action!,
+                this.ObserverFlag);
             if (this.IsAutoActivate)
             {
                 observer.Activate(this.IsSilentActivate);
@@ -140,7 +143,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.Action!,
                     SynchronizationContext.Current,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -149,7 +153,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.Action!,
                     this.TaskScheduler,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.ObserverFlag);
             }
             else
             {
@@ -157,7 +162,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
-                    this.Fallback!);
+                    this.Fallback!,
+                    this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -183,7 +189,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.propertyExpression,
                     this.ActionOfTResult!,
-                    SynchronizationContext.Current);
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -191,14 +198,16 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.propertyExpression,
                     this.ActionOfTResult!,
-                    this.TaskScheduler);
+                    this.TaskScheduler,
+                    this.ObserverFlag);
             }
             else
             {
                 observer = new PropertyReferenceObserver<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
-                    this.ActionOfTResult!);
+                    this.ActionOfTResult!,
+                    this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -224,20 +233,23 @@ namespace Anori.ExpressionObservers.Builder
                 observer = new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
-                    SynchronizationContext.Current);
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
                 observer = new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
-                    this.TaskScheduler);
+                    this.TaskScheduler,
+                    this.ObserverFlag);
             }
             else
             {
                 observer = new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
                     this.parameter1,
-                    this.propertyExpression);
+                    this.propertyExpression,
+                    this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -265,7 +277,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     SynchronizationContext.Current,
                     this.IsCached,
-                    this.SafetyMode);
+                    this.SafetyMode,
+                    this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -274,7 +287,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.propertyExpression,
                     this.TaskScheduler,
                     this.IsCached,
-                    this.SafetyMode);
+                    this.SafetyMode,
+                    this.ObserverFlag);
             }
             else
             {
@@ -282,7 +296,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.propertyExpression,
                     this.IsCached,
-                    this.SafetyMode);
+                    this.SafetyMode,
+                    this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -308,7 +323,8 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
-                    SynchronizationContext.Current);
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
@@ -316,14 +332,16 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
-                    this.TaskScheduler);
+                    this.TaskScheduler,
+                    this.ObserverFlag);
             }
             else
             {
                 observer = new PropertyReferenceObserverWithGetter<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
-                    this.Action!);
+                    this.Action!,
+                    this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)

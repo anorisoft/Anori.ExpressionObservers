@@ -32,13 +32,15 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Action action;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserver{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyObserver{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
+        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="System.ArgumentNullException">The action is null.</exception>
-        internal PropertyObserver([NotNull] Expression<Func<TResult>> propertyExpression, [NotNull] Action action)
-            : base(propertyExpression) =>
+        internal PropertyObserver([NotNull] Expression<Func<TResult>> propertyExpression, [NotNull] Action action, PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag) =>
             this.action = action ?? throw new ArgumentNullException(nameof(action));
 
         /// <summary>

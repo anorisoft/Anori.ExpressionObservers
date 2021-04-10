@@ -50,11 +50,13 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] TaskScheduler taskScheduler)
-            : base(propertyExpression)
+            [NotNull] TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree);
             var taskFactory = new TaskFactory(taskScheduler);
@@ -66,21 +68,26 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] SynchronizationContext synchronizationContext)
-            : base(propertyExpression)
+            [NotNull] SynchronizationContext synchronizationContext,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree);
             this.action = () => synchronizationContext.Send(() => this.Value = get());
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
-        internal PropertyReferenceObserverOnValueChanged([NotNull] Expression<Func<TResult>> propertyExpression)
-            : base(propertyExpression)
+        /// <param name="propertyObserverFlagag"></param>
+        internal PropertyReferenceObserverOnValueChanged(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             var get = Getter(propertyExpression, this.Tree);
             this.action = () => this.Value = get();

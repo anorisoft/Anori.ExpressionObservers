@@ -12,6 +12,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions.Threading;
@@ -23,8 +24,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase" />
-    internal sealed class PropertyValueObserver<TResult> : PropertyObserverBase<IPropertyValueObserver<TResult>, TResult>,
-                                                           IPropertyValueObserver<TResult>
+    internal sealed class
+        PropertyValueObserver<TResult> : PropertyObserverBase<IPropertyValueObserver<TResult>, TResult>,
+                                         IPropertyValueObserver<TResult>
         where TResult : struct
     {
         /// <summary>
@@ -40,59 +42,88 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyValueObserver{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyValueObserver{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
+        /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">action
+        /// or
+        /// propertyExpression is null.</exception>
         internal PropertyValueObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action)
-            : base(propertyExpression)
+            [NotNull] Action<TResult?> action,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree);
+            var get = Getter(propertyExpression, this.Tree);
+
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () => this.IsActive ? get() : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = get;
+            }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserver{ TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserver{ TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            TaskScheduler taskScheduler)
-            : base(propertyExpression)
+            TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree);
             var taskFactory = new TaskFactory(taskScheduler);
-            this.getter = () => taskFactory.StartNew(get).Result;
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () =>
+                    this.IsActive ? taskFactory.StartNew(get).Result : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = () => taskFactory.StartNew(get).Result;
+            }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserver{ TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserver{ TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            SynchronizationContext synchronizationContext)
-            : base(propertyExpression)
+            SynchronizationContext synchronizationContext,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             var get = Getter(propertyExpression, this.Tree);
-            this.getter = () => synchronizationContext.Send(get);
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                this.getter = () =>
+                    this.IsActive ? synchronizationContext.Send(get) : throw new NotActivatedException();
+            }
+            else
+            {
+                this.getter = () => synchronizationContext.Send(get);
+            }
         }
 
         /// <summary>
@@ -107,12 +138,12 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         protected override void OnAction() => this.action(this.getter());
 
         /// <summary>
-        /// Getters the specified property expression.
+        ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <returns>
-        /// Getter.
+        ///     Getter.
         /// </returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
             ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
