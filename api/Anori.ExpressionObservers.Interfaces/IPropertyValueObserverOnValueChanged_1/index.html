@@ -193,8 +193,8 @@
 									<ul class="list-unstyled">
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverBase_1">I<wbr>Property<wbr>Observer<wbr>Base</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverOnValueChanged_1">I<wbr>Property<wbr>Value<wbr>Observer<wbr>On<wbr>Value<wbr>Changed</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverOnValueChanged_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
 											<li>IActivatable<wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverOnValueChanged_1">I<wbr>Property<wbr>Value<wbr>Observer<wbr>On<wbr>Value<wbr>Changed</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverOnValueChanged_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
-											<li>I<wbr>Notify<wbr>Property<wbr>Changed</li>								
 											<li>IDisposable</li>								
+											<li>I<wbr>Notify<wbr>Property<wbr>Changed</li>								
 									</ul>
 								</dd>
 							
@@ -207,8 +207,8 @@
 							graph BT
 	Type-.-&gt;Interface0["IPropertyObserverBase&lt;IPropertyValueObserverOnValueChanged&lt;TResult&gt;&gt;"]
 	Type-.-&gt;Interface1["IActivatable&lt;IPropertyValueObserverOnValueChanged&lt;TResult&gt;&gt;"]
-	Type-.-&gt;Interface2["INotifyPropertyChanged"]
-	Type-.-&gt;Interface3["IDisposable"]
+	Type-.-&gt;Interface2["IDisposable"]
+	Type-.-&gt;Interface3["INotifyPropertyChanged"]
 	Type["IPropertyValueObserverOnValueChanged&lt;TResult&gt;"]
 class Type type-node
 
@@ -221,7 +221,7 @@ class Type type-node
 	<h1 id="Syntax">Syntax</h1>
 	<pre><code>public interface IPropertyValueObserverOnValueChanged&lt;TResult&gt; : 
     IPropertyObserverBase&lt;IPropertyValueObserverOnValueChanged&lt;TResult&gt;&gt;, 
-    IActivatable&lt;IPropertyValueObserverOnValueChanged&lt;TResult&gt;&gt;, INotifyPropertyChanged, IDisposable
+    IActivatable&lt;IPropertyValueObserverOnValueChanged&lt;TResult&gt;&gt;, IDisposable, INotifyPropertyChanged
     where TResult : struct</code></pre>
 
 
