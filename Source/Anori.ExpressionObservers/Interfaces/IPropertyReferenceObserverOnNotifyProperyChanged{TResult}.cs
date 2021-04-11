@@ -25,4 +25,15 @@ namespace Anori.ExpressionObservers.Interfaces
         /// </value>
         TResult? Value { get; }
     }
+
+    public interface IPropertyObserverOnNotifyProperyChanged<out TResult> : IPropertyObserverBase<IPropertyObserverOnNotifyProperyChanged<TResult>>, INotifyPropertyChanged, IDisposable
+    {
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <value>
+        /// The value.
+        /// </value>
+        TResult Value { get; }
+    }
 }

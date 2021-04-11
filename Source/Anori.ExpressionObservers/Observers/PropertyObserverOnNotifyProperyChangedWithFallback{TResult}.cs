@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverOnNotifyProperyChangedWithFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceTypeObservers
+namespace Anori.ExpressionObservers.Observers
 {
     using System;
     using System.ComponentModel;
@@ -16,7 +16,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions;
 
     using JetBrains.Annotations;
 
@@ -25,18 +24,14 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <summary>
     ///     Property Reference Observer With Getter.
     /// </summary>
-    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
-    /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverFundatinBase" />
-    internal sealed class PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult> :
-        PropertyObserverBase<IPropertyReferenceObserverOnNotifyProperyChanged<TResult>, TParameter1, TResult>,
-        IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
-        where TParameter1 : INotifyPropertyChanged
-        where TResult : class
+    internal sealed class PropertyObserverOnNotifyProperyChangedWithFallback<TResult> :
+        PropertyObserverBase<IPropertyObserverOnNotifyProperyChanged<TResult>, TResult>,
+        IPropertyObserverOnNotifyProperyChanged<TResult>
     {
         /// <summary>
         ///     The action.
@@ -48,141 +43,123 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult?> getter;
+        private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnNotifyProperyChangedWithFallback{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal PropertyReferenceObserverOnNotifyProperyChanged(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+        internal PropertyObserverOnNotifyProperyChangedWithFallback(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler taskScheduler,
+            TResult fallback,
             PropertyObserverFlag propertyObserverFlag)
-            : this(
-                parameter1,
-                propertyExpression,
-                taskScheduler,
-                false,
-                LazyThreadSafetyMode.None,
-                propertyObserverFlag)
+            : this(propertyExpression, taskScheduler, fallback, false, LazyThreadSafetyMode.None, propertyObserverFlag)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnNotifyProperyChangedWithFallback{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyReferenceObserverOnNotifyProperyChanged(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+        internal PropertyObserverOnNotifyProperyChangedWithFallback(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler taskScheduler,
+            TResult fallback,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
-                this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1), taskScheduler),
+            (this.action, this.getter) = this.CreateNullableCachedGetter(
+                this.CreateNullableGetter(Getter(propertyExpression, this.Tree, fallback), taskScheduler),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnNotifyProperyChangedWithFallback{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal PropertyReferenceObserverOnNotifyProperyChanged(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+        /// <param name="fallback">The fallback.</param>
+        /// <param name="observerFlag">The observer flag.</param>
+        internal PropertyObserverOnNotifyProperyChangedWithFallback(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
-            PropertyObserverFlag propertyObserverFlag)
-            : this(
-                parameter1,
-                propertyExpression,
-                synchronizationContext,
-                true,
-                LazyThreadSafetyMode.None,
-                propertyObserverFlag)
+            TResult fallback,
+            PropertyObserverFlag observerFlag)
+            : this(propertyExpression, synchronizationContext, fallback, false, LazyThreadSafetyMode.None, observerFlag)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnNotifyProperyChangedWithFallback{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal PropertyReferenceObserverOnNotifyProperyChanged(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+        internal PropertyObserverOnNotifyProperyChangedWithFallback(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
+            TResult fallback,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
-                this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1), synchronizationContext),
+            (this.action, this.getter) = this.CreateNullableCachedGetter(
+                this.CreateNullableGetter(Getter(propertyExpression, this.Tree, fallback), synchronizationContext),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnNotifyProperyChangedWithFallback{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal PropertyReferenceObserverOnNotifyProperyChanged(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+        internal PropertyObserverOnNotifyProperyChangedWithFallback(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            TResult fallback,
             PropertyObserverFlag propertyObserverFlag)
-            : this(parameter1, propertyExpression, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(propertyExpression, fallback, false, LazyThreadSafetyMode.None, propertyObserverFlag)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnNotifyProperyChangedWithFallback{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal PropertyReferenceObserverOnNotifyProperyChanged(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+        internal PropertyObserverOnNotifyProperyChangedWithFallback(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            TResult fallback,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
-                this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1)),
+            (this.action, this.getter) = this.CreateNullableCachedGetter(
+                this.CreateNullableGetter(Getter(propertyExpression, this.Tree, fallback)),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));
@@ -198,7 +175,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult? Value => this.getter();
+        public TResult Value => this.getter();
 
         /// <summary>
         ///     On the action.
@@ -210,14 +187,12 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <returns>The Getter.</returns>
-        private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
+        /// <returns>Getter.</returns>
+        private static Func<TResult> Getter(
+            Expression<Func<TResult>> propertyExpression,
             IExpressionTree tree,
-            TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-                parameter1);
+            TResult fallback) =>
+            ExpressionGetter.CreateGetter(propertyExpression.Parameters, tree, fallback);
 
         /// <summary>
         ///     Called when [property changed].
@@ -225,6 +200,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged.Raise(this, propertyName);
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

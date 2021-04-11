@@ -6,13 +6,11 @@
 
 namespace Anori.ExpressionObservers
 {
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using JetBrains.Annotations;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
-
-    using Anori.ExpressionObservers.Tree.Interfaces;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     ///     The Expression Getter class.
@@ -228,6 +226,35 @@ namespace Anori.ExpressionObservers
             var parameters = expression.Parameters;
             var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body, Fallback(fallback));
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TParameter3, TResult>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        /// Creates the getter.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="expressionTree">The expression tree.</param>
+        /// <returns>The Getter.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// parameters
+        /// or
+        /// expressionTree is null.
+        /// </exception>
+        public static Func<TResult> CreateGetter<TResult>(ReadOnlyCollection<ParameterExpression> parameters, IExpressionTree expressionTree)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            if (expressionTree == null)
+            {
+                throw new ArgumentNullException(nameof(expressionTree));
+            }
+
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree);
+            var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
             return lambda.Compile();
         }
     }
