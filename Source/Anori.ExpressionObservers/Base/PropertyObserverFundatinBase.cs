@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverBase.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverFundatinBase.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -25,22 +25,22 @@ namespace Anori.ExpressionObservers.Base
     /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Base.PropertyObserverBase}" />
     /// <seealso cref="IEqualityComparer{T}" />
     /// <seealso cref="IEquatable{T}" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     /// <seealso cref="IDisposable" />
 #pragma warning disable S4035 // Classes implementing "IEquatable<T>" should be sealed
-    internal abstract class PropertyObserverBase : IDisposable,
-                                                   IEqualityComparer<PropertyObserverBase>,
-                                                   IEquatable<PropertyObserverBase>,
-                                                   IActivatable
+    internal abstract class PropertyObserverFundatinBase : IDisposable,
+                                                           IEqualityComparer<PropertyObserverFundatinBase>,
+                                                           IEquatable<PropertyObserverFundatinBase>,
+                                                           IActivatable
 #pragma warning restore S4035 // Classes implementing "IEquatable<T>" should be sealed
     {
         private bool isActive;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverBase" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverFundatinBase" /> class.
         /// </summary>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
-        protected PropertyObserverBase(PropertyObserverFlag observerFlag)
+        /// <param name="observerFlag">The observer flag.</param>
+        protected PropertyObserverFundatinBase(PropertyObserverFlag observerFlag)
         {
             this.ObserverFlag = observerFlag;
         }
@@ -172,7 +172,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
-        public static bool Equals(PropertyObserverBase? x, PropertyObserverBase? y)
+        public static bool Equals(PropertyObserverFundatinBase? x, PropertyObserverFundatinBase? y)
         {
             if (ReferenceEquals(x, y))
             {
@@ -214,7 +214,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
         /// </returns>
-        public bool Equals(PropertyObserverBase? other)
+        public bool Equals(PropertyObserverFundatinBase? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -253,7 +253,7 @@ namespace Anori.ExpressionObservers.Base
                 return false;
             }
 
-            return this.Equals((PropertyObserverBase)obj);
+            return this.Equals((PropertyObserverFundatinBase)obj);
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public int GetHashCode(PropertyObserverBase obj)
+        public int GetHashCode(PropertyObserverFundatinBase obj)
         {
             unchecked
             {
@@ -321,7 +321,7 @@ namespace Anori.ExpressionObservers.Base
         protected abstract void OnAction();
 
         /// <summary>
-        ///     Looptrees the specified expression node.
+        /// Looptrees the specified expression node.
         /// </summary>
         /// <param name="expressionNode">The expression node.</param>
         /// <param name="observerNode">The observer node.</param>
@@ -346,7 +346,9 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
-        bool IEqualityComparer<PropertyObserverBase>.Equals(PropertyObserverBase? x, PropertyObserverBase? y) =>
+        bool IEqualityComparer<PropertyObserverFundatinBase>.Equals(
+            PropertyObserverFundatinBase? x,
+            PropertyObserverFundatinBase? y) =>
             Equals(x, y);
 
         /// <summary>
@@ -357,7 +359,8 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator ==(PropertyObserverBase? a, PropertyObserverBase? b) => Equals(a, b);
+        public static bool operator ==(PropertyObserverFundatinBase? a, PropertyObserverFundatinBase? b) =>
+            Equals(a, b);
 
         /// <summary>
         ///     Implements the operator ==.
@@ -367,7 +370,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator ==(PropertyObserverBase a, object b)
+        public static bool operator ==(PropertyObserverFundatinBase a, object b)
         {
             return Equals(a, b);
         }
@@ -380,7 +383,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator !=(PropertyObserverBase a, PropertyObserverBase b)
+        public static bool operator !=(PropertyObserverFundatinBase a, PropertyObserverFundatinBase b)
         {
             return !a.Equals(b);
         }
@@ -393,7 +396,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator !=(PropertyObserverBase a, object b)
+        public static bool operator !=(PropertyObserverFundatinBase a, object b)
         {
             return !a.Equals(b);
         }

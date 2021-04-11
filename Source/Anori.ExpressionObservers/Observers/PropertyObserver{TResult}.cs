@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Observers
     ///     Property Observer.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase{TSelf}" />
+    /// <seealso cref="PropertyObserverFundatinBase{TSelf}" />
     internal sealed class PropertyObserver<TResult> : PropertyObserverBase<IPropertyObserver<TResult>, TResult>,
                                                       IPropertyObserver<TResult>
     {
@@ -36,10 +36,12 @@ namespace Anori.ExpressionObservers.Observers
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
-        /// <exception cref="ArgumentNullException">action</exception>
-        /// <exception cref="System.ArgumentNullException">The action is null.</exception>
-        internal PropertyObserver([NotNull] Expression<Func<TResult>> propertyExpression, [NotNull] Action action, PropertyObserverFlag observerFlag)
+        /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">The action is null.</exception>
+        internal PropertyObserver(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action,
+            PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag) =>
             this.action = action ?? throw new ArgumentNullException(nameof(action));
 

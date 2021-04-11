@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
@@ -30,7 +29,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <seealso
     ///     cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyValueObserverOnValueChanged<TResult> :
         PropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>, TResult>,
         IPropertyValueObserverOnValueChanged<TResult>
@@ -64,17 +63,10 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree);
+            var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             var taskFactory = new TaskFactory(taskScheduler);
             this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
-            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-            {
-                this.getValue = () => this.IsActive ? this.value : throw new NotActivatedException();
-            }
-            else
-            {
-                this.getValue = () => this.value;
-            }
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
@@ -89,16 +81,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree);
+            var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.action = () => synchronizationContext.Send(() => this.Value = get());
-            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-            {
-                this.getValue = () => this.IsActive ? this.value : throw new NotActivatedException();
-            }
-            else
-            {
-                this.getValue = () => this.value;
-            }
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
@@ -111,16 +96,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree);
+            var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.action = () => this.Value = get();
-            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-            {
-                this.getValue = () => this.IsActive ? this.value : throw new NotActivatedException();
-            }
-            else
-            {
-                this.getValue = () => this.value;
-            }
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>

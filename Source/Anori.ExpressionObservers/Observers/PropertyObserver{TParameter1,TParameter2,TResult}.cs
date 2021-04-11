@@ -6,12 +6,14 @@
 
 namespace Anori.ExpressionObservers.Observers
 {
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Observer.
@@ -21,10 +23,8 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf,TParameter1,TResult}" />
     internal sealed class PropertyObserver<TParameter1, TParameter2, TResult> :
-        PropertyObserverBase<
-            IPropertyObserver<TResult>, TParameter1
-                                                                                  , TParameter2, TResult>,
-                                                                              IPropertyObserver<TResult>
+        PropertyObserverBase<IPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
+        IPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
     {
@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">The Action in null.</exception>
         internal PropertyObserver(
             [NotNull] TParameter1 parameter1,

@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <seealso
     ///     cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyReferenceObserverOnValueChangedWithDefer<TResult> :
         PropertyObserverBase<PropertyReferenceObserverOnValueChangedWithDefer<TResult>, TResult>,
         INotifyPropertyChanged
@@ -52,11 +52,11 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChangedWithDefer(
             [NotNull] Expression<Func<TResult>> propertyExpression,

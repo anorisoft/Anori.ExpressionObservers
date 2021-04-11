@@ -6,19 +6,19 @@
 
 namespace Anori.ExpressionObservers.ValueTypeObservers
 {
-    using Anori.Common;
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Exceptions;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+
+    using JetBrains.Annotations;
+
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
@@ -37,13 +37,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     The action.
         /// </summary>
         [NotNull]
-        private Action action;
+        private readonly Action action;
 
         /// <summary>
         ///     The getter.
         /// </summary>
         [NotNull]
-        private Func<TResult?> getter;
+        private readonly Func<TResult?> getter;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
@@ -77,10 +77,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            TResult? Get() =>
-                new TaskFactory<TResult?>(taskScheduler).StartNew(this.Getter(propertyExpression, this.Tree)).Result;
-
-            this.SetGetterFunctions(isCached, safetyMode, Get);
+            (this.action, this.getter) = this.CreateNullableValueCachedGetter(
+                this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree), taskScheduler),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
@@ -113,12 +114,15 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            TResult? Get() => synchronizationContext.Send(this.Getter(propertyExpression, this.Tree));
-            this.SetGetterFunctions(isCached, safetyMode, Get);
+            (this.action, this.getter) = this.CreateNullableValueCachedGetter(
+                this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree), synchronizationContext),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
@@ -130,7 +134,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
@@ -143,41 +147,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            Func<TResult?> get = this.Getter(propertyExpression, this.Tree);
-            this.SetGetterFunctions(isCached, safetyMode, get);
-        }
-
-        private void SetGetterFunctions(bool isCached, LazyThreadSafetyMode safetyMode, Func<TResult?> get)
-        {
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-                {
-                    this.getter = () => this.IsActive ? cache.Value : throw new NotActivatedException();
-                }
-                else
-                {
-                    this.getter = () => cache.Value;
-                }
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-                {
-                    this.getter = () => this.IsActive ? get() : throw new NotActivatedException();
-                }
-                else
-                {
-                    this.getter = get;
-                }
-            }
+            (this.action, this.getter) = this.CreateNullableValueCachedGetter(
+                this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree)),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
@@ -203,15 +177,10 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <returns>Getter.</returns>
-        private Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree)
+        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree)
         {
             var get = ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
-            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-            {
-                return () => this.IsActive ? get() : throw new NotActivatedException();
-            }
-
-            return get;
+            return () => get();
         }
 
         /// <summary>

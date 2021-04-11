@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Class1.cs" company="AnoriSoft">
+// <copyright file="PropertyObservererFlag.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace Anori.ExpressionObservers
     public enum PropertyObserverFlag
     {
         /// <summary>
-        /// The none.
+        ///     The none.
         /// </summary>
         None = 0,
 
@@ -35,9 +35,9 @@ namespace Anori.ExpressionObservers
         ThrowsExceptionOnGetIfDeactivated = 4,
 
         /// <summary>
-        /// The throws all.
+        ///     The throws all.
         /// </summary>
-        ThrowsAllExceptions = ThrowsExceptionIfAlreadyActivated | ThrowsExceptionIfAlreadyDeactivated | ThrowsExceptionOnGetIfDeactivated,
-
+        ThrowsAllExceptions = ThrowsExceptionIfAlreadyActivated | ThrowsExceptionIfAlreadyDeactivated
+                                                                | ThrowsExceptionOnGetIfDeactivated,
     }
 }

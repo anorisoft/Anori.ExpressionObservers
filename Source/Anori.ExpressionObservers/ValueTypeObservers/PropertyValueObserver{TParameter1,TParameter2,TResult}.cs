@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
@@ -27,8 +26,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverBase{TSelf,TParameter1,TResult}" />
     internal sealed class PropertyValueObserver<TParameter1, TParameter2, TResult> :
-        PropertyObserverBase<IPropertyValueObserver<TResult>, TParameter1, TParameter2, TResult
-        >,
+        PropertyObserverBase<IPropertyValueObserver<TResult>, TParameter1, TParameter2, TResult>,
         IPropertyValueObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
@@ -57,16 +55,18 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">The action is null.</exception>
         internal PropertyValueObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action, PropertyObserverFlag observerFlag)
+            [NotNull] Action<TResult?> action,
+            PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree, parameter1, parameter2);
+            this.getter = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
         }
 
         /// <summary>
@@ -77,19 +77,21 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            TaskScheduler taskScheduler, PropertyObserverFlag observerFlag)
+            TaskScheduler taskScheduler,
+            PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
-            var taskFactory = new TaskFactory(taskScheduler);
-            this.getter = () => taskFactory.StartNew(get).Result;
+            this.getter = this.CreateNullableValueGetter(
+                Getter(propertyExpression, this.Tree, parameter1, parameter2),
+                taskScheduler);
         }
 
         /// <summary>
@@ -100,18 +102,21 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            SynchronizationContext synchronizationContext, PropertyObserverFlag observerFlag)
+            SynchronizationContext synchronizationContext,
+            PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
-            this.getter = () => synchronizationContext.Send(get);
+            this.getter = this.CreateNullableValueGetter(
+                Getter(propertyExpression, this.Tree, parameter1, parameter2),
+                synchronizationContext);
         }
 
         /// <summary>

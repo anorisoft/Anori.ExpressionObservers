@@ -6,18 +6,20 @@
 
 namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
-    using Anori.Common;
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions;
+
+    using JetBrains.Annotations;
+
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
@@ -30,7 +32,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     ///     cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult> :
         PropertyObserverBase<IPropertyReferenceObserverOnNotifyProperyChanged<TResult>, TParameter1, TParameter2,
             TResult>,
@@ -52,7 +54,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -65,13 +68,20 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             PropertyObserverFlag propertyObserverFlag)
-            : this(parameter1, parameter2, propertyExpression, taskScheduler, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(
+                parameter1,
+                parameter2,
+                propertyExpression,
+                taskScheduler,
+                false,
+                LazyThreadSafetyMode.None,
+                propertyObserverFlag)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -91,30 +101,18 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
-            TResult? Get() =>
-                new TaskFactory<TResult?>(taskScheduler)
-                    .StartNew(Getter(propertyExpression, this.Tree, parameter1, parameter2))
-                    .Result;
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(Get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = Get;
-            }
+            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
+                this.CreateNullableReferenceGetter(
+                    Getter(propertyExpression, this.Tree, parameter1, parameter2),
+                    taskScheduler),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -127,13 +125,20 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
             PropertyObserverFlag propertyObserverFlag)
-            : this(parameter1, parameter2, propertyExpression, synchronizationContext, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(
+                parameter1,
+                parameter2,
+                propertyExpression,
+                synchronizationContext,
+                false,
+                LazyThreadSafetyMode.None,
+                propertyObserverFlag)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -143,37 +148,27 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
         internal PropertyReferenceObserverOnNotifyProperyChanged(
-        [NotNull] TParameter1 parameter1,
-        [NotNull] TParameter2 parameter2,
-        [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-        SynchronizationContext synchronizationContext,
-        bool isCached,
-        LazyThreadSafetyMode safetyMode,
-        PropertyObserverFlag observerFlag)
-        : base(parameter1, parameter2, propertyExpression, observerFlag)
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            SynchronizationContext synchronizationContext,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
-            TResult? Get() =>
-                synchronizationContext.Send(Getter(propertyExpression, this.Tree, parameter1, parameter2));
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(Get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = Get;
-            }
+            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
+                this.CreateNullableReferenceGetter(
+                    Getter(propertyExpression, this.Tree, parameter1, parameter2),
+                    synchronizationContext),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -189,9 +184,9 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" />
-        /// class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1, TParameter2, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -208,23 +203,11 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
-            Func<TResult?> get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = get;
-            }
+            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
+                this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2)),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
@@ -244,23 +227,32 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         protected override void OnAction() => this.action();
 
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <returns>The Getter.</returns>
         private static Func<TResult?> Getter(
             Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             IExpressionTree tree,
             TParameter1 parameter1,
-            TParameter2 parameter2) =>
-            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TParameter2, TResult>(
+            TParameter2 parameter2)
+        {
+            var get = ExpressionGetter.CreateReferenceGetter<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
-                tree)(parameter1, parameter2);
+                tree);
+            return () => get(parameter1, parameter2);
+        }
 
         /// <summary>
         ///     Called when [property changed].
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
+            this.PropertyChanged.Raise(this, propertyName);
     }
 }

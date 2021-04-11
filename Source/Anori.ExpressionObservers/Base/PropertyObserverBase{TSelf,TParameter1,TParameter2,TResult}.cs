@@ -25,9 +25,9 @@ namespace Anori.ExpressionObservers.Base
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase{TSelf}" />
-    /// <seealso cref="PropertyObserverBase" />
-    internal abstract class PropertyObserverBase<TSelf, TParameter1, TParameter2, TResult> : PropertyObserverBase<TSelf>
+    /// <seealso cref="PropertyObserverFundatinBase{TSelf}" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
+    internal abstract class PropertyObserverBase<TSelf, TParameter1, TParameter2, TResult> : PropertyObserverFundatinBase<TSelf>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
         where TSelf : IPropertyObserverBase<TSelf>
@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression or parameter1 or parameter2 is null.</exception>
         protected PropertyObserverBase(
             [NotNull] TParameter1 parameter1,

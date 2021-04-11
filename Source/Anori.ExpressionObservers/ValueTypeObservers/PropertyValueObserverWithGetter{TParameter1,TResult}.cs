@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
@@ -26,7 +25,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="PropertyValueObserverWithGetter{TResult}" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyValueObserverWithGetter<TParameter1, TResult> :
         PropertyObserverBase<IPropertyValueObserverWithGetter<TResult>, TParameter1, TResult>,
         IPropertyValueObserverWithGetter<TResult>
@@ -52,7 +51,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserverWithGetter(
             [NotNull] TParameter1 parameter1,
@@ -63,9 +62,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, parameter1);
-            var taskFactory = new TaskFactory(taskScheduler);
-            this.getter = () => taskFactory.StartNew(get).Result;
+            this.getter = this.CreateNullableValueGetter(
+                Getter(propertyExpression, this.Tree, parameter1),
+                taskScheduler);
         }
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserverWithGetter(
             [NotNull] TParameter1 parameter1,
@@ -84,7 +83,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree, parameter1);
+            this.getter = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1));
         }
 
         /// <summary>
@@ -94,7 +93,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyValueObserverWithGetter(
             [NotNull] TParameter1 parameter1,
@@ -105,8 +104,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, parameter1);
-            this.getter = () => synchronizationContext.Send(get);
+            this.getter = this.CreateNullableValueGetter(
+                Getter(propertyExpression, this.Tree, parameter1),
+                synchronizationContext);
         }
 
         /// <summary>

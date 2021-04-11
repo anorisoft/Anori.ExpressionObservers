@@ -38,9 +38,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <param name="observerFlagag">The property observerer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
-        /// <exception cref="System.ArgumentNullException">The action is null.</exception>
+        /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">The action is null.</exception>
         internal PropertyObserver(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,

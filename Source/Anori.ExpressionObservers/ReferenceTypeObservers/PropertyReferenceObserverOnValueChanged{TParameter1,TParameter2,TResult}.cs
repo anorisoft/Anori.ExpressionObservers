@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyReferenceObserverOnValueChanged<TParameter1, TParameter2, TResult> :
         PropertyObserverBase<IPropertyReferenceObserverOnValueChanged<TResult>, TParameter1, TParameter2, TResult>,
         IPropertyReferenceObserverOnValueChanged<TResult>
@@ -40,6 +40,11 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         [NotNull]
         private readonly Action action;
+
+        /// <summary>
+        ///     The getter.
+        /// </summary>
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     The value.
@@ -55,7 +60,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
@@ -65,9 +70,10 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
+            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
             var taskFactory = new TaskFactory(taskScheduler);
             this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
 
         /// <summary>
@@ -78,7 +84,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
@@ -87,18 +93,19 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
+            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
             this.action = () => synchronizationContext.Send(() => this.Value = get());
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="PropertyReferenceObserverOnValueChanged{TParameter1,TParameter2,  TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnValueChanged{TParameter1,TParameter2,  TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
@@ -106,8 +113,9 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1, parameter2);
+            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
             this.action = () => this.Value = get();
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
 
         /// <summary>
@@ -124,7 +132,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </value>
         public TResult? Value
         {
-            get => this.value;
+            get => this.getValue();
             private set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))

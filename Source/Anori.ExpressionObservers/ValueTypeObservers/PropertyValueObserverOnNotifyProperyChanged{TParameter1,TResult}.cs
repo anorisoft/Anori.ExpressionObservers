@@ -13,11 +13,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.Common;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
@@ -28,9 +26,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase{TSelf}" />
+    /// <seealso cref="PropertyObserverFundatinBase{TSelf}" />
     /// <seealso
-    ///     cref="PropertyObserverBase{TSelf}.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}}" />
+    ///     cref="PropertyObserverFundatinBase{TSelf}.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}}" />
     /// <seealso cref="INotifyPropertyChanged" />
     internal sealed class PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult> :
         PropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>, TParameter1, TResult>,
@@ -50,165 +48,144 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         [NotNull]
         private readonly Func<TResult?> getter;
 
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             PropertyObserverFlag propertyObserverFlag)
-            : this(parameter1, propertyExpression, taskScheduler, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(
+                parameter1,
+                propertyExpression,
+                taskScheduler,
+                false,
+                LazyThreadSafetyMode.None,
+                propertyObserverFlag)
         {
-
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
-        /// class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             bool isCached,
-            LazyThreadSafetyMode safetyMode, PropertyObserverFlag observerFlag)
+            LazyThreadSafetyMode safetyMode,
+            PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            TResult? Get() =>
-                new TaskFactory<TResult?>(taskScheduler).StartNew(Getter(propertyExpression, this.Tree, parameter1))
-                    .Result;
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(Get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = Get;
-            }
+            (this.action, this.getter) = this.CreateNullableValueCachedGetter(
+                this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1), taskScheduler),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
             PropertyObserverFlag propertyObserverFlag)
-            : this(parameter1, propertyExpression, synchronizationContext, false, LazyThreadSafetyMode.None,  propertyObserverFlag)
+            : this(
+                parameter1,
+                propertyExpression,
+                synchronizationContext,
+                false,
+                LazyThreadSafetyMode.None,
+                propertyObserverFlag)
         {
         }
 
         /// <summary>
-            /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
-            /// class.
-            /// </summary>
-            /// <param name="parameter1">The parameter1.</param>
-            /// <param name="propertyExpression">The property expression.</param>
-            /// <param name="synchronizationContext">The synchronization context.</param>
-            /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-            /// <param name="safetyMode">The safety mode.</param>
-            /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
-            internal PropertyValueObserverOnNotifyProperyChanged(
-            [NotNull] TParameter1 parameter1,
-            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            SynchronizationContext synchronizationContext,
-            bool isCached,
-            LazyThreadSafetyMode safetyMode, PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
-        {
-            TResult? Get() => synchronizationContext.Send(Getter(propertyExpression, this.Tree, parameter1));
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(Get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = Get;
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="observerFlag">The observer flag.</param>
+        internal PropertyValueObserverOnNotifyProperyChanged(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            SynchronizationContext synchronizationContext,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            PropertyObserverFlag observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
+        {
+            (this.action, this.getter) = this.CreateNullableValueCachedGetter(
+                this.CreateNullableValueGetter(
+                    Getter(propertyExpression, this.Tree, parameter1),
+                    synchronizationContext),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             PropertyObserverFlag propertyObserverFlag)
-            : this(parameter1, propertyExpression, false,LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(parameter1, propertyExpression, false, LazyThreadSafetyMode.None, propertyObserverFlag)
         {
         }
 
         /// <summary>
-            /// Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
-            /// class.
-            /// </summary>
-            /// <param name="parameter1">The parameter1.</param>
-            /// <param name="propertyExpression">The property expression.</param>
-            /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-            /// <param name="safetyMode">The safety mode.</param>
-            /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
-            internal PropertyValueObserverOnNotifyProperyChanged(
+        ///     Initializes a new instance of the <see cref="PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}" />
+        ///     class.
+        /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="observerFlag">The observer flag.</param>
+        internal PropertyValueObserverOnNotifyProperyChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isCached,
-            LazyThreadSafetyMode safetyMode, PropertyObserverFlag observerFlag)
+            LazyThreadSafetyMode safetyMode,
+            PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            Func<TResult?> get = Getter(propertyExpression, this.Tree, parameter1);
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = get;
-            }
+            (this.action, this.getter) = this.CreateNullableValueCachedGetter(
+                this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1)),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
@@ -238,9 +215,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private static Func<TResult?> Getter(
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
-            TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-                parameter1);
+            TParameter1 parameter1)
+        {
+            var get = ExpressionGetter.CreateValueGetter<TParameter1, TResult>(propertyExpression.Parameters, tree);
+            return () => get(parameter1);
+        }
 
         /// <summary>
         ///     Called when [property changed].

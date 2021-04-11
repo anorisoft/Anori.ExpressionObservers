@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     ///     cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyValueObserverOnValueChanged<TParameter1, TResult> :
         PropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>, TParameter1, TResult>,
         IPropertyValueObserverOnValueChanged<TResult>
@@ -44,6 +44,11 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private readonly Action action;
 
         /// <summary>
+        ///     The getter.
+        /// </summary>
+        private readonly Func<TResult?> getValue;
+
+        /// <summary>
         ///     The value.
         /// </summary>
         private TResult? value;
@@ -54,7 +59,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyValueObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
@@ -63,9 +68,10 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1));
             var taskFactory = new TaskFactory(taskScheduler);
             this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
@@ -74,7 +80,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyValueObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -82,8 +88,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1));
             this.action = () => synchronizationContext.Send(() => this.Value = get());
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
@@ -91,19 +98,20 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyValueObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1));
             this.action = () => this.Value = get();
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
-        ///     Occurs when a property value changes.
+        /// Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -116,7 +124,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </value>
         private TResult? Value
         {
-            get => this.value;
+            get => this.getValue();
             set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))

@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.Observers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
@@ -27,7 +26,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="PropertyObserverWithGetterAndFallback{TResult}" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyObserverWithGetterAndFallback<TParameter1, TParameter2, TResult> :
         PropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>, TParameter1, TParameter2, TResult>,
         IPropertyObserverWithGetterAndFallback<TResult>
@@ -56,7 +55,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">
         ///     parameter1
         ///     or
@@ -74,7 +73,7 @@ namespace Anori.ExpressionObservers.Observers
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2);
+            this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2));
         }
 
         /// <summary>
@@ -87,7 +86,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">
         ///     parameter1
         ///     or
@@ -106,9 +105,9 @@ namespace Anori.ExpressionObservers.Observers
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2);
-            var taskFactory = new TaskFactory(taskScheduler);
-            this.getter = () => taskFactory.StartNew(get).Result;
+            this.getter = this.CreateGetter(
+                Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2),
+                taskScheduler);
         }
 
         /// <summary>
@@ -121,7 +120,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">
         ///     parameter1
         ///     or
@@ -140,8 +139,9 @@ namespace Anori.ExpressionObservers.Observers
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2);
-            this.getter = () => synchronizationContext.Send(get);
+            this.getter = this.CreateGetter(
+                Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2),
+                synchronizationContext);
         }
 
         /// <summary>
@@ -170,10 +170,13 @@ namespace Anori.ExpressionObservers.Observers
             IExpressionTree tree,
             TResult fallback,
             TParameter1 parameter1,
-            TParameter2 parameter2) =>
-            () => ExpressionGetter.CreateGetter<TParameter1, TParameter2, TResult>(
+            TParameter2 parameter2)
+        {
+            var get = ExpressionGetter.CreateGetter<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree,
-                fallback)(parameter1, parameter2);
+                fallback);
+            return () => get(parameter1, parameter2);
+        }
     }
 }

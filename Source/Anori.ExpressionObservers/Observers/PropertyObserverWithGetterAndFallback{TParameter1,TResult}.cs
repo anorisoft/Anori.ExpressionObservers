@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.Observers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
@@ -24,7 +23,7 @@ namespace Anori.ExpressionObservers.Observers
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyObserverWithGetterAndFallback<TParameter1, TResult> :
         PropertyObserverBase<IPropertyObserverWithGetterAndFallback<TResult>, TParameter1, TResult>,
         IPropertyObserverWithGetterAndFallback<TResult>
@@ -51,7 +50,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">
         ///     parameter1
         ///     or
@@ -68,7 +67,7 @@ namespace Anori.ExpressionObservers.Observers
             : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = Getter(propertyExpression, this.Tree, fallback, parameter1);
+            this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
         }
 
         /// <summary>
@@ -79,7 +78,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">
         ///     parameter1
         ///     or
@@ -97,9 +96,7 @@ namespace Anori.ExpressionObservers.Observers
             : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, fallback, parameter1);
-            var taskFactory = new TaskFactory(taskScheduler);
-            this.getter = () => taskFactory.StartNew(get).Result;
+            this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1), taskScheduler);
         }
 
         /// <summary>
@@ -110,7 +107,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
-        /// <param name="observerFlagag">The property observerer flag.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">
         ///     parameter1
         ///     or
@@ -128,8 +125,9 @@ namespace Anori.ExpressionObservers.Observers
             : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            var get = Getter(propertyExpression, this.Tree, fallback, parameter1);
-            this.getter = () => synchronizationContext.Send(get);
+            this.getter = this.CreateGetter(
+                Getter(propertyExpression, this.Tree, fallback, parameter1),
+                synchronizationContext);
         }
 
         /// <summary>
@@ -157,8 +155,13 @@ namespace Anori.ExpressionObservers.Observers
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
             TResult fallback,
-            TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateGetter<TParameter1, TResult>(propertyExpression.Parameters, tree, fallback)(
-                parameter1);
+            TParameter1 parameter1)
+        {
+            var get = ExpressionGetter.CreateGetter<TParameter1, TResult>(
+                propertyExpression.Parameters,
+                tree,
+                fallback);
+            return () => get(parameter1);
+        }
     }
 }

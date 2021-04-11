@@ -19,14 +19,15 @@ namespace Anori.ExpressionObservers.Base
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Observer Base.
+    /// Property Observer Base.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase{TSelf}" />
-    /// <seealso cref="PropertyObserverBase" />
-    internal abstract class PropertyObserverBase<TSelf, TParameter1, TResult> : PropertyObserverBase<TSelf>
+    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverFundatinBase{TSelf, TResult}" />
+    /// <seealso cref="PropertyObserverFundatinBase{TSelf}" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
+    internal abstract class PropertyObserverBase<TSelf, TParameter1, TResult> : PropertyObserverFundatinBase<TSelf>
         where TParameter1 : INotifyPropertyChanged
         where TSelf : IPropertyObserverBase<TSelf>
     {
@@ -40,7 +41,7 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression
         /// or
         /// parameter1 is null.</exception>

@@ -23,26 +23,23 @@ namespace Anori.ExpressionObservers.Base
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="PropertyObserverBase{TSelf}" />
-    /// <seealso cref="PropertyObserverBase" />
-    internal abstract class PropertyObserverBase<TSelf, TResult> : PropertyObserverBase<TSelf>
+    /// <seealso cref="PropertyObserverFundatinBase{TSelf}" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
+    internal abstract class PropertyObserverBase<TSelf, TResult> : PropertyObserverFundatinBase<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
-        /// <summary>
-        ///     The property expression.
-        /// </summary>
-        private readonly Expression<Func<TResult>> propertyExpression;
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyObserverBase{TSelf, TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        protected PropertyObserverBase([NotNull] Expression<Func<TResult>> propertyExpression, PropertyObserverFlag observerFlag)
+        protected PropertyObserverBase(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            PropertyObserverFlag observerFlag)
             : base(observerFlag)
         {
-            this.propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            (this.ExpressionString, this.Tree) = this.CreateChain();
+            (this.ExpressionString, this.Tree) = this.CreateChain(propertyExpression);
         }
 
         /// <summary>
@@ -64,6 +61,7 @@ namespace Anori.ExpressionObservers.Base
         /// <summary>
         ///     Creates the chain.
         /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
         ///     The Expression String.
         /// </returns>
@@ -71,10 +69,10 @@ namespace Anori.ExpressionObservers.Base
         ///     Operation not supported for the given expression type {expression.Type}. "
         ///     + "Only MemberExpression and ConstantExpression are currently supported.
         /// </exception>
-        protected (string, IExpressionTree) CreateChain()
+        protected (string, IExpressionTree) CreateChain(Expression<Func<TResult>> propertyExpression)
         {
-            var tree = ExpressionTree.GetTree(this.propertyExpression.Body);
-            var expressionString = this.propertyExpression.ToString();
+            var tree = ExpressionTree.GetTree(propertyExpression.Body);
+            var expressionString = propertyExpression.ToString();
 
             this.CreateChain(tree);
 

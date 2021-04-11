@@ -6,11 +6,6 @@
 
 namespace Anori.ExpressionObservers.ReferenceTypeObservers
 {
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
-    using JetBrains.Annotations;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -18,6 +13,13 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions.Threading;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Reference Observer With Getter.
@@ -28,7 +30,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     ///     cref="PropertyReferenceObserverOnValueChanged{TResult}" />
     /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyReferenceObserverOnValueChanged<TParameter1, TResult> :
         PropertyObserverBase<IPropertyReferenceObserverOnValueChanged<TResult>, TParameter1, TResult>,
         IPropertyReferenceObserverOnValueChanged<TResult>
@@ -42,6 +44,11 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private readonly Action action;
 
         /// <summary>
+        ///     The getter.
+        /// </summary>
+        private readonly Func<TResult?> getValue;
+
+        /// <summary>
         ///     The value.
         /// </summary>
         private TResult? value;
@@ -53,7 +60,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
@@ -62,19 +69,20 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1));
             var taskFactory = new TaskFactory(taskScheduler);
             this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" />
-        /// class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -82,25 +90,27 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1));
             this.action = () => synchronizationContext.Send(() => this.Value = get());
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" />
-        /// class.
+        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChanged{TParameter1, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyReferenceObserverOnValueChanged(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = Getter(propertyExpression, this.Tree, parameter1);
+            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1));
             this.action = () => this.Value = get();
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
 
         /// <summary>
@@ -117,7 +127,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </value>
         public TResult? Value
         {
-            get => this.value;
+            get => this.getValue();
             private set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))

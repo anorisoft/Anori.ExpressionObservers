@@ -13,11 +13,9 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.Common;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
@@ -30,7 +28,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     /// <seealso
     ///     cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="PropertyObserverBase" />
+    /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyReferenceObserverOnNotifyProperyChanged<TResult> :
         PropertyObserverBase<IPropertyReferenceObserverOnNotifyProperyChanged<TResult>, TResult>,
         IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
@@ -53,7 +51,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal PropertyReferenceObserverOnNotifyProperyChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler taskScheduler,
@@ -69,7 +67,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnNotifyProperyChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
@@ -79,24 +77,11 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            TResult? Get() =>
-                new TaskFactory<TResult?>(taskScheduler).StartNew(Getter(propertyExpression, this.Tree)).Result;
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(Get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = Get;
-            }
+            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
+                this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree), taskScheduler),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
@@ -106,7 +91,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyReferenceObserverOnNotifyProperyChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
@@ -115,30 +100,18 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            TResult? Get() => synchronizationContext.Send(Getter(propertyExpression, this.Tree));
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(Get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = Get;
-            }
+            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
+                this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree), synchronizationContext),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="propertyObserverFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal PropertyReferenceObserverOnNotifyProperyChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             PropertyObserverFlag propertyObserverFlag)
@@ -152,7 +125,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="observerFlagag">if set to <c>true</c> [is fail fast].</param>
+        /// <param name="observerFlag">The observer flag.</param>
         internal PropertyReferenceObserverOnNotifyProperyChanged(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached,
@@ -160,23 +133,11 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            Func<TResult?> get = Getter(propertyExpression, this.Tree);
-
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult?>(get, safetyMode);
-                this.action = () =>
-                    {
-                        cache.Reset();
-                        this.OnPropertyChanged(nameof(this.Value));
-                    };
-                this.getter = () => cache.Value;
-            }
-            else
-            {
-                this.action = () => this.OnPropertyChanged(nameof(this.Value));
-                this.getter = get;
-            }
+            (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
+                this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree)),
+                isCached,
+                safetyMode,
+                () => this.OnPropertyChanged(nameof(this.Value)));
         }
 
         /// <summary>
