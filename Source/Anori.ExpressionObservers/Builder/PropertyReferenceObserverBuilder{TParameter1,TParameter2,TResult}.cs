@@ -6,15 +6,14 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using System;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
-    using System.Threading;
-
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.ReferenceTypeObservers;
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+    using System.Threading;
 
     /// <summary>
     ///     The Value Property Observer Builder class.
@@ -68,6 +67,12 @@ namespace Anori.ExpressionObservers.Builder
             this.propertyExpression = propertyExpression;
         }
 
+        /// <summary>
+        ///     Gets or sets the property observer flag.
+        /// </summary>
+        /// <value>
+        ///     The property observer flag.
+        /// </value>
         public PropertyObserverFlag PropertyObserverFlag { get; set; }
 
         /// <summary>
@@ -280,6 +285,51 @@ namespace Anori.ExpressionObservers.Builder
                     this.parameter2,
                     this.propertyExpression,
                     this.PropertyObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the property reference observer builder with value changed and deferrer.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
+        protected override IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult>
+            CreatePropertyReferenceObserverBuilderWithValueChangedAndDeferrer()
+        {
+            IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new PropertyReferenceObserverOnValueChangedWithDefer<TParameter1, TParameter2, TResult>(
+                    this.parameter1,
+                    this.parameter2,
+                    this.propertyExpression,
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new PropertyReferenceObserverOnValueChangedWithDefer<TParameter1, TParameter2, TResult>(
+                    this.parameter1,
+                    this.parameter2,
+                    this.propertyExpression,
+                    this.TaskScheduler,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new PropertyReferenceObserverOnValueChangedWithDefer<TParameter1, TParameter2, TResult>(
+                    this.parameter1,
+                    this.parameter2,
+                    this.propertyExpression,
+                    this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -544,9 +594,5 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>The Property Value Observer Builder.</returns>
         protected override PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult> WithValueChanged() =>
             this;
-        protected override IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult> CreatePropertyReferenceObserverBuilderWithValueChangedAndDeferrer()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

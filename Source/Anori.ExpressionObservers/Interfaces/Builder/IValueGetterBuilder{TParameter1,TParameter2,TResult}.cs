@@ -18,13 +18,13 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         where TResult : struct
     {
         /// <summary>
-        ///     Creates this instance.
+        ///     Creates this instance of a getter function.
         /// </summary>
-        /// <returns>The Getter.</returns>
+        /// <returns>The getter function.</returns>
         Func<TParameter1, TParameter2, TResult?> Build();
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Getter Builder with Fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>The Getter Builder With Fallback.</returns>

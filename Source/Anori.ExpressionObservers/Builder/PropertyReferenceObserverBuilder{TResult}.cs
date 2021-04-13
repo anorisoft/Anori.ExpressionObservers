@@ -234,10 +234,10 @@ namespace Anori.ExpressionObservers.Builder
         }
 
         /// <summary>
-        /// Creates the property reference observer builder with value changed and deferrer.
+        ///     Creates the property reference observer builder with value changed and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Value Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult>
             CreatePropertyReferenceObserverBuilderWithValueChangedAndDeferrer()

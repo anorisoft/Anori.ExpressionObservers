@@ -8,7 +8,6 @@ namespace Anori.ExpressionObservers.Builder
 {
     using System;
 
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
@@ -51,9 +50,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     Automatics the activate.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        IPropertyValueObserverBuilder<TResult> IPropertyObserverBuilderBase<IPropertyValueObserverBuilder<TResult>>
-            .AutoActivate() =>
-            AutoActivate();
+        IPropertyValueObserverBuilder<TResult> IPropertyObserverBuilderBase<IPropertyValueObserverBuilder<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
 
         /// <summary>
         ///     Withes the action.

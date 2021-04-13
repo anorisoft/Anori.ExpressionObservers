@@ -9,18 +9,26 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     using System;
 
     /// <summary>
-    /// The Reference Getter Builder interface.
+    ///     The Reference Getter Builder interface.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IReferenceGetterBuilder<in TParameter1, in TParameter2, out TResult>
+    public interface IReferenceGetterBuilder<in TParameter1, in TParameter2, TResult>
         where TResult : class
     {
         /// <summary>
-        /// Creates this instance.
+        ///     Creates this instance of a getter function.
         /// </summary>
-        /// <returns>The Getter.</returns>
+        /// <returns>The getter function.</returns>
         Func<TParameter1, TParameter2, TResult?> Build();
+
+        /// <summary>
+        ///     Getter Builder with Fallback.
+        /// </summary>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>The Getter Builder with Fallback.</returns>
+        IGetterBuilderWithFallback<TParameter1, TParameter2, TResult> WithFallback(TResult fallback);
+
     }
 }

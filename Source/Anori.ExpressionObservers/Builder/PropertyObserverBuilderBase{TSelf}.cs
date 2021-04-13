@@ -1,25 +1,26 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverBuilderBase{TSelf}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using Anori.Common;
-    using Anori.ExpressionObservers.Exceptions;
     using System;
     using System.Threading.Tasks;
 
+    using Anori.Common;
+    using Anori.ExpressionObservers.Exceptions;
+
     /// <summary>
-    /// The Property Observer Builder Base class.
+    ///     The Property Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     internal abstract class PropertyObserverBuilderBase<TSelf>
         where TSelf : PropertyObserverBuilderBase<TSelf>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverBuilderBase{TSelf}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverBuilderBase{TSelf}" /> class.
         /// </summary>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <param name="isSilentActivate">if set to <c>true</c> [is silent activate].</param>
@@ -30,44 +31,19 @@ namespace Anori.ExpressionObservers.Builder
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverBuilderBase{TSelf}"/> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverBuilderBase{TSelf}" /> class.
         /// </summary>
         protected PropertyObserverBuilderBase()
         {
         }
 
         /// <summary>
-        /// Gets or sets the observer flag.
+        ///     Gets or sets the observer flag.
         /// </summary>
         /// <value>
-        /// The observer flag.
+        ///     The observer flag.
         /// </value>
         public PropertyObserverFlag ObserverFlag { get; set; }
-
-        /// <summary>
-        ///     Cacheds this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract TSelf Cached();
-
-        /// <summary>
-        ///     Automatics the activate.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected TSelf AutoActivate()
-        {
-            if (this.IsAutoActivate)
-            {
-                throw new AutoActivateAlreadyActivatedException();
-            }
-
-            this.IsAutoActivate = true;
-            return (TSelf)this;
-        }
 
         /// <summary>
         ///     Gets a value indicating whether this instance is dispached.
@@ -124,5 +100,30 @@ namespace Anori.ExpressionObservers.Builder
         ///     The action.
         /// </value>
         private protected Action? Action { get; set; }
+
+        /// <summary>
+        ///     Automatics the activate.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        protected TSelf AutoActivate()
+        {
+            if (this.IsAutoActivate)
+            {
+                throw new AutoActivateAlreadyActivatedException();
+            }
+
+            this.IsAutoActivate = true;
+            return (TSelf)this;
+        }
+
+        /// <summary>
+        ///     Cacheds this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        protected abstract TSelf Cached();
     }
 }

@@ -558,12 +558,14 @@ namespace Anori.ExpressionObservers.UnitTests
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
+            Assert.IsFalse(observes.IsDeferred);
 
             using (var deferrer = observes.Defer())
             {
                 instance.Class2.StringProperty = "2";
                 Assert.AreEqual(1, callCount);
                 Assert.AreEqual("1", observes.Value);
+                Assert.IsTrue(observes.IsDeferred);
 
                 instance.Class2.StringProperty = "3";
                 Assert.AreEqual(1, callCount);
@@ -575,6 +577,7 @@ namespace Anori.ExpressionObservers.UnitTests
             }
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);
+            Assert.IsFalse(observes.IsDeferred);
 
             instance.Class2.StringProperty = "2";
             Assert.AreEqual(2, callCount);
@@ -612,22 +615,28 @@ namespace Anori.ExpressionObservers.UnitTests
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
+            Assert.IsFalse(observes.IsDeferred);
 
             var deferrer1 = observes.Defer();
             instance.Class2.StringProperty = "2";
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
+            Assert.IsTrue(observes.IsDeferred);
+
 
             instance.Class2.StringProperty = "3";
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
 
             var deferrer2 = observes.Defer();
+            Assert.IsTrue(observes.IsDeferred);
+
 
             instance.Class2.StringProperty = "2";
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", observes.Value);
             deferrer1.Dispose();
+            Assert.IsTrue(observes.IsDeferred);
 
             instance.Class2.StringProperty = "4";
             Assert.AreEqual(1, callCount);
@@ -638,6 +647,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("1", observes.Value);
 
             deferrer2.Dispose();
+            Assert.IsFalse(observes.IsDeferred);
 
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", observes.Value);

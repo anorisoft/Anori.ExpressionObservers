@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     using System;
 
     /// <summary>
-    ///     The I Value Getter Builder interface.
+    ///     The Value Getter Builder interface.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -19,16 +19,16 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         where TResult : struct
     {
         /// <summary>
-        ///     Creates this instance.
+        ///     Creates this instance of a getter function.
         /// </summary>
-        /// <returns>The Getter.</returns>
+        /// <returns>The getter function.</returns>
         Func<TParameter1, TParameter2, TParameter3, TResult?> Build();
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Getter Builder with Fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns>The Getter Builder With Fallback.</returns>
+        /// <returns>The Getter Builder with Fallback.</returns>
         IGetterBuilderWithFallback<TParameter1, TParameter2, TParameter3, TResult> WithFallback(TResult fallback);
     }
 }
