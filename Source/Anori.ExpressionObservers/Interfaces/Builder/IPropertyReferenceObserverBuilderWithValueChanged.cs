@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     using Anori.ExpressionObservers.Builder;
 
     /// <summary>
-    /// The I Property Value Observer Builder With Value Changed interface.
+    /// The Property Value Observer Builder With Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithValueChanged{TResult}}" />
@@ -37,12 +37,16 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// </returns>
         IPropertyReferenceObserverBuilderWithValueChanged<TResult> Cached();
 
+        /// <summary>
+        /// Defers this instance.
+        /// </summary>
+        /// <returns></returns>
+        IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer<TResult> Deferred();
 
         /// <summary>
         /// Creates this instance.
         /// </summary>
-        /// <returns>Property Value Observer On Notify Propery Changed,</returns>
+        /// <returns>Property Value Observer On Notify Propery Changed.</returns>
         IPropertyReferenceObserverOnValueChanged<TResult> Build();
-
     }
 }

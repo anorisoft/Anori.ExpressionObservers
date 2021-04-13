@@ -16,23 +16,25 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Reference Observer With Getter.
+    /// Property Reference Observer With Getter.
     /// </summary>
+    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChangedWithDeferrer{TResult}, TParameter1, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChangedWithDeferrer{TResult}" />
+    /// <seealso cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverFundatinBase" />
-    internal sealed class PropertyReferenceObserverOnValueChangedWithDefer<TResult> :
-        PropertyObserverBase<IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult>, TResult>,
+    internal sealed class PropertyReferenceObserverOnValueChangedWithDefer<TParameter1, TResult> :
+        PropertyObserverBase<IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult>, TParameter1, TResult>,
         IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult>
         where TResult : class
+        where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
         ///     The action.
@@ -51,15 +53,17 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChangedWithDefer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
@@ -68,17 +72,19 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChangedWithDefer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
@@ -88,17 +94,19 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyReferenceObserverOnValueChangedWithDefer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
@@ -167,6 +175,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged.Raise(this, propertyName);
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

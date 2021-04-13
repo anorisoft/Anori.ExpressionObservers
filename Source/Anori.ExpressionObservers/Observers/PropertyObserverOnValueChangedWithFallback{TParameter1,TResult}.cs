@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnValueChangedWithFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverOnValueChangedWithFallback{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -26,15 +26,18 @@ namespace Anori.ExpressionObservers.Observers
     /// <summary>
     ///     Property Reference Observer With Getter.
     /// </summary>
+    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChanged{TResult}, TParameter1, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChanged{TResult}" />
+    /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverFundatinBase" />
-    internal sealed class PropertyReferenceObserverOnValueChangedWithFallback<TResult> :
-        PropertyObserverBase<IPropertyReferenceObserverOnValueChanged<TResult>, TResult>,
-        IPropertyReferenceObserverOnValueChanged<TResult>
-        where TResult : class
+    internal sealed class PropertyObserverOnValueChangedWithFallback<TParameter1, TResult> :
+        PropertyObserverBase<IPropertyObserverOnValueChanged<TResult>, TParameter1, TResult>,
+        IPropertyObserverOnValueChanged<TResult>
+        where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
         ///     The action.
@@ -45,68 +48,80 @@ namespace Anori.ExpressionObservers.Observers
         /// <summary>
         ///     The getter.
         /// </summary>
-        private readonly Func<TResult?> getValue;
+        private readonly Func<TResult> getValue;
 
         /// <summary>
         ///     The value.
         /// </summary>
-        private TResult? value;
+        private TResult value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithFallback{TResult}" />
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TParameter1, TResult}" />
         ///     class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyReferenceObserverOnValueChangedWithFallback(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+        internal PropertyObserverOnValueChangedWithFallback(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TaskScheduler taskScheduler,
-            TResult fallback,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, fallback));
+            this.value = fallback;
+            var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
             var taskFactory = new TaskFactory(taskScheduler);
             this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
-            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.getValue = this.CreateGetProperty(() => this.value);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithFallback{TResult}" />
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TParameter1, TResult}" />
         ///     class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal PropertyReferenceObserverOnValueChangedWithFallback(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+        internal PropertyObserverOnValueChangedWithFallback(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] SynchronizationContext synchronizationContext,
-            TResult fallback,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, fallback));
+            this.value = fallback;
+            var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
             this.action = () => synchronizationContext.Send(() => this.Value = get());
-            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.getValue = this.CreateGetProperty(() => this.value);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithFallback{TResult}" />
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TParameter1, TResult}" />
         ///     class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal PropertyReferenceObserverOnValueChangedWithFallback(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            TResult fallback,
+        internal PropertyObserverOnValueChangedWithFallback(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
-            var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, fallback));
+            this.value = fallback;
+            var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
             this.action = () => this.Value = get();
-            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.getValue = this.CreateGetProperty(() => this.value);
         }
 
         /// <summary>
@@ -121,12 +136,12 @@ namespace Anori.ExpressionObservers.Observers
         /// <value>
         ///     The value.
         /// </value>
-        public TResult? Value
+        public TResult Value
         {
             get => this.getValue();
             private set
             {
-                if (EqualityComparer<TResult?>.Default.Equals(value, this.value))
+                if (EqualityComparer<TResult>.Default.Equals(value, this.value))
                 {
                     return;
                 }
@@ -149,8 +164,18 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     The Getter.
         /// </returns>
-        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree, TResult fallback) =>
-            ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree, fallback);
+        private static Func<TResult> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TResult fallback,
+            TParameter1 parameter1)
+        {
+            var get = ExpressionGetter.CreateGetter<TParameter1, TResult>(
+                propertyExpression.Parameters,
+                tree,
+                fallback);
+            return () => get(parameter1);
+        }
 
         /// <summary>
         ///     Called when [property changed].

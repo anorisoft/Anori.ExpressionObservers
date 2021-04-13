@@ -32,7 +32,12 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// </returns>
         IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult> Cached();
 
-
+        /// <summary>
+        /// Defers this instance.
+        /// </summary>
+        /// <returns></returns>
+        IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult> Deferred();
+        
         /// <summary>
         /// Creates this instance.
         /// </summary>

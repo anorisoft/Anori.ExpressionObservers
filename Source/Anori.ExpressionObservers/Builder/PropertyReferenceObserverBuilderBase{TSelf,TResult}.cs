@@ -7,15 +7,12 @@
 namespace Anori.ExpressionObservers.Builder
 {
     using System;
-    using System.Threading.Tasks;
 
-    using Anori.Common;
-    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    /// The Property Reference Observer Builder Base class.
+    ///     The Property Reference Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -36,7 +33,8 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilderWithValueChanged{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler{TResult}" />
-    internal abstract partial class PropertyReferenceObserverBuilderBase<TSelf, TResult> : PropertyObserverBuilderBase<TSelf>
+    internal abstract partial class
+        PropertyReferenceObserverBuilderBase<TSelf, TResult> : PropertyObserverBuilderBase<TSelf>
         where TSelf : PropertyReferenceObserverBuilderBase<TSelf, TResult>
         where TResult : class
     {
@@ -52,11 +50,12 @@ namespace Anori.ExpressionObservers.Builder
         /// </summary>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <param name="isSilentActivate">if set to <c>true</c> [is silent activate].</param>
-        protected PropertyReferenceObserverBuilderBase(bool isAutoActivate, bool isSilentActivate) : base(isAutoActivate, isSilentActivate)
+        protected PropertyReferenceObserverBuilderBase(bool isAutoActivate, bool isSilentActivate)
+            : base(isAutoActivate, isSilentActivate)
         {
         }
 
-      /// <summary>
+        /// <summary>
         ///     Gets the fallback.
         /// </summary>
         /// <value>
@@ -123,6 +122,15 @@ namespace Anori.ExpressionObservers.Builder
             CreatePropertyReferenceObserverBuilderWithValueChanged();
 
         /// <summary>
+        ///     Creates the property reference observer builder with value changed and deferrer.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
+        protected abstract IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult>
+            CreatePropertyReferenceObserverBuilderWithValueChangedAndDeferrer();
+
+        /// <summary>
         ///     Creates the property value observer on notify propery changed.
         /// </summary>
         /// <returns>
@@ -145,7 +153,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected abstract IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>
+        protected abstract
+            IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>
             PropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler();
 
         /// <summary>
@@ -182,7 +191,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected abstract IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>
+        protected abstract
+            IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>
             PropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler();
 
         /// <summary>

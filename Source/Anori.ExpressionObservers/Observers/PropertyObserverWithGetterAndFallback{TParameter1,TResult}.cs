@@ -62,7 +62,7 @@ namespace Anori.ExpressionObservers.Observers
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
-            TResult fallback,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
@@ -90,8 +90,8 @@ namespace Anori.ExpressionObservers.Observers
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
-            TaskScheduler taskScheduler,
-            TResult fallback,
+            [NotNull] TaskScheduler taskScheduler,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
@@ -119,8 +119,8 @@ namespace Anori.ExpressionObservers.Observers
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
-            SynchronizationContext synchronizationContext,
-            TResult fallback,
+            [NotNull] SynchronizationContext synchronizationContext,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {

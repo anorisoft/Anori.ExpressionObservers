@@ -16,6 +16,7 @@ namespace Anori.ExpressionObservers.Observers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions;
 
     using JetBrains.Annotations;
 
@@ -54,8 +55,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal PropertyObserverOnNotifyProperyChangedWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TaskScheduler taskScheduler,
-            TResult fallback,
+            [NotNull] TaskScheduler taskScheduler,
+            [NotNull] TResult fallback,
             PropertyObserverFlag propertyObserverFlag)
             : this(propertyExpression, taskScheduler, fallback, false, LazyThreadSafetyMode.None, propertyObserverFlag)
         {
@@ -73,8 +74,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
         internal PropertyObserverOnNotifyProperyChangedWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TaskScheduler taskScheduler,
-            TResult fallback,
+            [NotNull] TaskScheduler taskScheduler,
+            [NotNull] TResult fallback,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
@@ -96,8 +97,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="observerFlag">The observer flag.</param>
         internal PropertyObserverOnNotifyProperyChangedWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            SynchronizationContext synchronizationContext,
-            TResult fallback,
+            [NotNull] SynchronizationContext synchronizationContext,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : this(propertyExpression, synchronizationContext, fallback, false, LazyThreadSafetyMode.None, observerFlag)
         {
@@ -114,8 +115,8 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="observerFlag">The observer flag.</param>
         internal PropertyObserverOnNotifyProperyChangedWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            SynchronizationContext synchronizationContext,
-            TResult fallback,
+            [NotNull] SynchronizationContext synchronizationContext,
+            [NotNull] TResult fallback,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
@@ -136,7 +137,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal PropertyObserverOnNotifyProperyChangedWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TResult fallback,
+            [NotNull] TResult fallback,
             PropertyObserverFlag propertyObserverFlag)
             : this(propertyExpression, fallback, false, LazyThreadSafetyMode.None, propertyObserverFlag)
         {
@@ -152,7 +153,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="observerFlag">The observer flag.</param>
         internal PropertyObserverOnNotifyProperyChangedWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TResult fallback,
+            [NotNull] TResult fallback,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
@@ -200,6 +201,6 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged.Raise(this, propertyName);
     }
 }

@@ -38,6 +38,11 @@ namespace Anori.ExpressionObservers.Builder
             return this.Cached();
         }
 
+        public IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer<TResult> Deferred()
+        {
+            return this;
+        }
+
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>

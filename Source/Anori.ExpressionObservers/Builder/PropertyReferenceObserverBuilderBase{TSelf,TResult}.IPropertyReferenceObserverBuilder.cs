@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilder.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverBuilderBase{TSelf,TResult}.IPropertyReferenceObserverBuilder.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,7 +8,6 @@ namespace Anori.ExpressionObservers.Builder
 {
     using System;
 
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>

@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.UnitTests
     using NUnit.Framework;
     using System.Threading.Tasks;
 
-    public class PropertyObserverIntegerPropertyTest
+    public class PropertyObserverIntegerPropertyI1Test
     {
         [Test]
         public void PropertyObserver_Observes_instance_IntProperty()

@@ -105,6 +105,22 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
+        /// Creates the get property nullable value.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        protected Func<TValue> CreateGetProperty<TValue>(Func<TValue> value)
+        {
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                return () => this.IsActive ? value() : throw new NotActivatedException();
+            }
+
+            return value;
+        }
+
+        /// <summary>
         /// Creates the dispatcher getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>

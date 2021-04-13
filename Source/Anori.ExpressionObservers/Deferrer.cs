@@ -4,9 +4,11 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceTypeObservers
+namespace Anori.ExpressionObservers
 {
     using System;
+
+    using Anori.ExpressionObservers.ReferenceTypeObservers;
 
     /// <summary>
     ///     Deferrer.

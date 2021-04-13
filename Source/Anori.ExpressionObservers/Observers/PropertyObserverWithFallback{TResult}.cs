@@ -51,7 +51,7 @@ namespace Anori.ExpressionObservers.Observers
         internal PropertyObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
-            TResult fallback,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
@@ -71,8 +71,8 @@ namespace Anori.ExpressionObservers.Observers
         internal PropertyObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
-            TaskScheduler taskScheduler,
-            TResult fallback,
+            [NotNull] TaskScheduler taskScheduler,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
@@ -92,8 +92,8 @@ namespace Anori.ExpressionObservers.Observers
         internal PropertyObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
-            SynchronizationContext synchronizationContext,
-            TResult fallback,
+            [NotNull] SynchronizationContext synchronizationContext,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {

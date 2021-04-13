@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
 
     using JetBrains.Annotations;

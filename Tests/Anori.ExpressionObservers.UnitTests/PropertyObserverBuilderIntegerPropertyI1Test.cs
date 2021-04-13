@@ -344,6 +344,9 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(3, observes.Value);
         }
 
+      
+
+
         [Test]
         public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_AutoActivate()
         {

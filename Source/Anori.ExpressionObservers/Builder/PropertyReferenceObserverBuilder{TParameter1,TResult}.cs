@@ -500,5 +500,9 @@ namespace Anori.ExpressionObservers.Builder
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
         protected override PropertyReferenceObserverBuilder<TParameter1, TResult> WithValueChanged() => this;
+        protected override IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult> CreatePropertyReferenceObserverBuilderWithValueChangedAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
