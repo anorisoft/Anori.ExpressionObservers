@@ -17,6 +17,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -27,10 +28,8 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="PropertyValueObserverOnValueChanged{TResult}" />
-    /// <seealso cref="PropertyValueObserverOnValueChanged{TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="PropertyObserverFundatinBase" />
+    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverOnValueChanged{TResult}, TParameter1, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyValueObserverOnValueChanged{TResult}" />
     internal sealed class PropertyValueObserverOnValueChanged<TParameter1, TResult> :
         PropertyObserverBase<IPropertyValueObserverOnValueChanged<TResult>, TParameter1, TResult>,
         IPropertyValueObserverOnValueChanged<TResult>
@@ -111,13 +110,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         }
 
         /// <summary>
-        /// Occurs when a property value changes.
+        ///     Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        ///     Gets the value.
+        ///     Gets or sets the value.
         /// </summary>
         /// <value>
         ///     The value.
@@ -170,6 +169,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged.Raise(this, propertyName);
     }
 }

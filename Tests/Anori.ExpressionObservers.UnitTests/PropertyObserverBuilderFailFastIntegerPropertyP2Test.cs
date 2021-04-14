@@ -1601,20 +1601,21 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_ValueGetter_Fallback_Observes_instance_IntProperty()
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_IntProperty()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             var value = (int?)-1;
 
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
-                .ValueObserverBuilder(instance, instance, (i1,i2) => i1.Class2.IntProperty)
+                .ValueObserverBuilder(instance, instance, (i1, i2) => i1.Class2.IntProperty)
                 .WithAction(
                     (int v) =>
-                        {
-                            value = v;
-                            callCount++;
-                        })
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
                 .WithFallback(99)
                 .Build();
 
@@ -1656,19 +1657,20 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_ValueGetter_Fallback_Observes_instance_IntProperty_AutoActivateTrue()
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_IntProperty_AutoActivateTrue()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             var value = -1;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
-                .ValueObserverBuilder(instance, instance, (i1,i2) => i1.Class2.IntProperty)
+                .ValueObserverBuilder(instance, instance, (i1, i2) => i1.Class2.IntProperty)
                 .WithAction(
                     v =>
-                        {
-                            value = v;
-                            callCount++;
-                        })
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
                 .WithFallback(99)
                 .AutoActivate()
                 .Build();
@@ -1705,20 +1707,21 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_ValueGetter_Fallback_Observes_instance_IntProperty_Dispatcher()
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_IntProperty_Dispatcher()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             var value = (int?)-1;
 
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
-                .ValueObserverBuilder(instance, instance, (i1,i2) => i1.Class2.IntProperty)
+                .ValueObserverBuilder(instance, instance, (i1, i2) => i1.Class2.IntProperty)
                 .WithAction(
                     (int v) =>
-                        {
-                            value = v;
-                            callCount++;
-                        })
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
                 .WithFallback(99)
                 .WithGetterDispatcher()
                 .Build();
@@ -1761,19 +1764,20 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_ValueGetter_Fallback_Observes_instance_IntProperty_Dispatcher_AutoActivateTrue()
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_IntProperty_Dispatcher_AutoActivateTrue()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             var value = -1;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
-                .ValueObserverBuilder(instance, instance, (i1,i2) => i1.Class2.IntProperty)
+                .ValueObserverBuilder(instance, instance, (i1, i2) => i1.Class2.IntProperty)
                 .WithAction(
                     v =>
-                        {
-                            value = v;
-                            callCount++;
-                        })
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
                 .WithFallback(99)
                 .WithGetterDispatcher()
                 .AutoActivate()
@@ -1811,20 +1815,21 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_ValueGetter_Fallback_Observes_instance_IntProperty_TaskSchedulerCurrent()
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_IntProperty_TaskSchedulerCurrent()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             var value = (int?)-1;
 
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
-                .ValueObserverBuilder(instance, instance, (i1,i2) => i1.Class2.IntProperty)
+                .ValueObserverBuilder(instance, instance, (i1, i2) => i1.Class2.IntProperty)
                 .WithAction(
                     (int v) =>
-                        {
-                            value = v;
-                            callCount++;
-                        })
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
                 .WithFallback(99)
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .Build();
@@ -1868,19 +1873,20 @@ namespace Anori.ExpressionObservers.UnitTests
 
         [Test]
         public void
-            PropertyObserver_ValueGetter_Fallback_Observes_instance_IntProperty_TaskSchedulerCurrent_AutoActivateTrue()
+            PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_IntProperty_TaskSchedulerCurrent_AutoActivateTrue()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             var value = -1;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
-                .ValueObserverBuilder(instance, instance, (i1,i2) => i1.Class2.IntProperty)
+                .ValueObserverBuilder(instance, instance, (i1, i2) => i1.Class2.IntProperty)
                 .WithAction(
                     v =>
-                        {
-                            value = v;
-                            callCount++;
-                        })
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
                 .WithFallback(99)
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()
@@ -1916,6 +1922,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, value);
             Assert.Throws<NotActivatedException>(() => _ = observes.Value);
         }
+
 
         [Test]
         public void PropertyObserver_ValueGetter_Observes_instance_IntProperty()

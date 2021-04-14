@@ -108,15 +108,15 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        ///     Gets the value.
+        ///     Gets or sets the value.
         /// </summary>
         /// <value>
         ///     The value.
         /// </value>
-        public TResult? Value
+        private TResult? Value
         {
             get => this.getValue();
-            private set
+            set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))
                 {
@@ -127,6 +127,14 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
                 this.OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <value>
+        ///     The value.
+        /// </value>
+        TResult? IPropertyValueObserverOnValueChanged<TResult>.Value => this.Value;
 
         /// <summary>
         ///     On the action.

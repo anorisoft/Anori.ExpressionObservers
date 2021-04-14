@@ -78,7 +78,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action,
             [NotNull] TResult fallback)
         {
-            var observer = new PropertyObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
+            var observer = new PropertyObserverWithActionAndGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -102,7 +102,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TResult fallback) =>
-            new PropertyObserverWithGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
+            new PropertyObserverWithActionAndGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -116,13 +116,13 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyObserverWithFallback<TResult> Observes<TResult>(
+        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool autoSubscribe,
             [NotNull] Action<TResult> action,
             [NotNull] TResult fallback)
         {
-            var observer = new PropertyObserverWithFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
+            var observer = new PropertyObserverWithActionOfTResultAndGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -142,10 +142,10 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyObserverWithFallback<TResult> Observes<TResult>(
+        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
             [NotNull] TResult fallback) =>
-            new PropertyObserverWithFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
+            new PropertyObserverWithActionOfTResultAndGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
     }
 }

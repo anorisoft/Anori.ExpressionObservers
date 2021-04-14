@@ -15,12 +15,12 @@ namespace Anori.ExpressionObservers.Interfaces
     public interface
         IPropertyObserverWithFallback<out TResult> : IPropertyObserverBase<IPropertyObserverWithFallback<TResult>>
     {
-        /// <summary>
-        ///     Gets the value.
-        /// </summary>
-        /// <value>
-        ///     The value.
-        /// </value>
-        TResult Value { get; }
+        ///// <summary>
+        /////     Gets the value.
+        ///// </summary>
+        ///// <value>
+        /////     The value.
+        ///// </value>
+        //TResult Value { get; }
     }
 }

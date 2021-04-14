@@ -97,6 +97,7 @@ namespace Anori.ExpressionObservers.Builder
         /// </returns>
         protected abstract IPropertyObserverWithFallback<TResult> CreatePropertyGetterObserverWithFallback();
 
+      
         /// <summary>
         ///     Creates the property value observer builder with action.
         /// </summary>
@@ -158,106 +159,6 @@ namespace Anori.ExpressionObservers.Builder
         protected abstract IPropertyValueObserverWithGetter<TResult> CreatePropertyValueObserverWithGetter();
 
         /// <summary>
-        ///     Properties the value observer builder with action and getter and fallback and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler();
-
-        /// <summary>
-        ///     Properties the value observer builder with action and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterTaskScheduler();
-
-        /// <summary>
-        ///     Properties the value observer builder with action and getter task scheduler fallback.
-        /// </summary>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterTaskSchedulerFallback();
-
-        /// <summary>
-        ///     Withes the fallback.
-        /// </summary>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract TSelf PropertyValueObserverBuilderWithActionAndGetterWithFallback();
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result and fallback and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler();
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler();
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result and getter task scheduler fallback.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndGetterTaskSchedulerAndFallback();
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result nullable and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler();
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result with fallback.
-        /// </summary>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract TSelf PropertyValueObserverBuilderWithActionOfTResultWithFallback();
-
-        /// <summary>
-        ///     Properties the value observer builder with notify propery changed and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler();
-
-        /// <summary>
-        ///     Properties the value observer builder with value changed and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler();
-
-        /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <returns>
@@ -296,5 +197,10 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Property Value Observer Builder.
         /// </returns>
         protected abstract TSelf WithValueChanged();
+        /// <summary>
+        /// Creates the property observer with action of t result and getter and fallback.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract IPropertyObserverWithGetterAndFallback<TResult> CreatePropertyObserverWithActionOfTResultAndGetterAndFallback();
     }
 }

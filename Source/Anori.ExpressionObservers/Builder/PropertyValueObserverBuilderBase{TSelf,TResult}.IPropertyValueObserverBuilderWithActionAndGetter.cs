@@ -80,7 +80,7 @@ namespace Anori.ExpressionObservers.Builder
             }
 
             this.Fallback = fallback;
-            return this.PropertyValueObserverBuilderWithActionAndGetterWithFallback();
+            return this;
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Anori.ExpressionObservers.Builder
             WithGetterDispatcher()
         {
             this.IsDispached = true;
-            return this.PropertyValueObserverBuilderWithActionAndGetterTaskScheduler();
+            return this;
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Anori.ExpressionObservers.Builder
             WithGetterTaskScheduler(TaskScheduler taskScheduler)
         {
             this.TaskScheduler = taskScheduler;
-            return this.PropertyValueObserverBuilderWithActionAndGetterTaskScheduler();
+            return this;
         }
     }
 }

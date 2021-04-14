@@ -16,6 +16,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions;
 
     using JetBrains.Annotations;
 
@@ -28,7 +29,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverFundatinBase{TSelf}" />
     /// <seealso
-    ///     cref="PropertyObserverFundatinBase{TSelf}.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnNotifyProperyChanged{TParameter1, TResult}}" />
+    ///     cref="PropertyValueObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="INotifyPropertyChanged" />
     internal sealed class PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult> :
         PropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>, TParameter1, TResult>,
@@ -227,6 +228,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged.Raise(this, propertyName);
     }
 }

@@ -59,7 +59,7 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyObserverWithFallback<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new PropertyObserverWithFallback<TResult>(
+                observer = new PropertyObserverWithActionOfTResultAndFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     SynchronizationContext.Current,
@@ -68,7 +68,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new PropertyObserverWithFallback<TResult>(
+                observer = new PropertyObserverWithActionOfTResultAndFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     this.TaskScheduler,
@@ -77,7 +77,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else
             {
-                observer = new PropertyObserverWithFallback<TResult>(
+                observer = new PropertyObserverWithActionOfTResultAndFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTResultWithFallback!,
                     this.Fallback!.Value,
@@ -120,7 +120,7 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyObserverWithGetterAndFallback<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new PropertyObserverWithGetterAndFallback<TResult>(
+                observer = new PropertyObserverWithActionAndGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     SynchronizationContext.Current,
@@ -129,7 +129,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new PropertyObserverWithGetterAndFallback<TResult>(
+                observer = new PropertyObserverWithActionAndGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     this.TaskScheduler,
@@ -138,7 +138,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else
             {
-                observer = new PropertyObserverWithGetterAndFallback<TResult>(
+                observer = new PropertyObserverWithActionAndGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     this.Fallback!.Value,
@@ -357,118 +357,6 @@ namespace Anori.ExpressionObservers.Builder
         }
 
         /// <summary>
-        ///     Properties the value observer builder with action and getter and fallback and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with action and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterTaskScheduler() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with action and getter task scheduler fallback.
-        /// </summary>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterTaskSchedulerFallback() =>
-            this;
-
-        /// <summary>
-        ///     Withes the fallback.
-        /// </summary>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override PropertyValueObserverBuilder<TResult>
-            PropertyValueObserverBuilderWithActionAndGetterWithFallback() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result and fallback and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result and getter task scheduler fallback.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultAndGetterTaskSchedulerAndFallback() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result nullable and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with action of t result with fallback.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected override PropertyValueObserverBuilder<TResult>
-            PropertyValueObserverBuilderWithActionOfTResultWithFallback() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with notify propery changed and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler() =>
-            this;
-
-        /// <summary>
-        ///     Properties the value observer builder with value changed and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>
-            PropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler() =>
-            this;
-
-        /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
@@ -504,5 +392,47 @@ namespace Anori.ExpressionObservers.Builder
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
         protected override PropertyValueObserverBuilder<TResult> WithValueChanged() => this;
+
+        /// <summary>
+        /// Creates the property observer with action of t result and getter and fallback.
+        /// </summary>
+        /// <returns></returns>
+        protected override IPropertyObserverWithGetterAndFallback<TResult> CreatePropertyObserverWithActionOfTResultAndGetterAndFallback()
+        {
+            IPropertyObserverWithGetterAndFallback<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new PropertyObserverWithActionOfTResultAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTResultWithFallback!,
+                    SynchronizationContext.Current,
+                    this.Fallback!.Value,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new PropertyObserverWithActionOfTResultAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTResultWithFallback!,
+                    this.TaskScheduler,
+                    this.Fallback!.Value,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new PropertyObserverWithActionOfTResultAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTResultWithFallback!,
+                    this.Fallback!.Value,
+                    this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
     }
 }

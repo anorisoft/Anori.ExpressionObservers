@@ -16,6 +16,7 @@ namespace Anori.ExpressionObservers.Observers
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -26,7 +27,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyObserverOnValueChangedWithDeferrerAndFallback{TResult}, TParameter1, TResult}" />
+    ///     cref="IPropertyObserverOnValueChangedWithDeferrerAndFallback{TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverOnValueChangedWithDeferrerAndFallback{TResult}" />
     internal sealed class PropertyObserverOnValueChangedWithDeferWithFallback<TParameter1, TResult> :
         PropertyObserverBase<IPropertyObserverOnValueChangedWithDeferrerAndFallback<TResult>, TParameter1, TResult>,
@@ -185,6 +186,6 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged.Raise(this, propertyName);
     }
 }

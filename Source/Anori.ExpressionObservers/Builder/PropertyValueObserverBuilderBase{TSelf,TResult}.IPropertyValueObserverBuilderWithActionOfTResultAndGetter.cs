@@ -1,12 +1,11 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithValueChangedAndDefferer.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionOfTResultAndGetter.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
@@ -48,19 +47,24 @@ namespace Anori.ExpressionObservers.Builder
     ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler{TResult}" />
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithValueChangedAndDeferrer{TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndGetter{TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback{TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler{TResult}" />
     internal abstract partial class
-        PropertyValueObserverBuilderBase<TSelf, TResult> : IPropertyValueObserverBuilderWithValueChangedAndDeferrer<
+        PropertyValueObserverBuilderBase<TSelf, TResult> : IPropertyValueObserverBuilderWithActionOfTResultAndGetter<
             TResult>
-
     {
         /// <summary>
-        ///     Creates this instance.
+        ///     Withes the fallback.
         /// </summary>
-        /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
-        /// </returns>
-        public IPropertyValueObserverOnValueChangedWithDeferrer<TResult> Build() =>
-            this.CreatePropertyValueObserverBuilderWithValueChangedAndDeferrer();
+        /// <param name="fallback">The fallback.</param>
+        /// <returns></returns>
+        public IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult> WithFallback(
+            TResult fallback) =>
+            this;
 
         /// <summary>
         ///     Automatics the activate.
@@ -68,18 +72,9 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Observer Builder.
         /// </returns>
-        IPropertyValueObserverBuilderWithValueChangedAndDeferrer<TResult> IPropertyObserverBuilderBase<
-            IPropertyValueObserverBuilderWithValueChangedAndDeferrer<TResult>>.AutoActivate() =>
+        IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult>
+            IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult>>.
+            AutoActivate() =>
             this.AutoActivate();
-
-        /// <summary>
-        ///     Defers this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Property Observer Builder.
-        /// </returns>
-        IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>
-            IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>.Deferred() =>
-            this;
     }
 }

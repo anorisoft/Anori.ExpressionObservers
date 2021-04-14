@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.Builder
                 throw new FallbackActivatedException();
             }
             this.Fallback = fallback;
-            return this.PropertyValueObserverBuilderWithActionOfTResultAndGetterTaskSchedulerAndFallback();
+            return this;
         }
     }
 }

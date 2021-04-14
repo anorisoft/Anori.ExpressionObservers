@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,6 +16,7 @@ namespace Anori.ExpressionObservers.Observers
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -26,17 +27,10 @@ namespace Anori.ExpressionObservers.Observers
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.PropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChangedWithDeferrer{TResult}, TParameter1, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChangedWithDeferrer{TResult}" />
-    /// <seealso cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1,TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="PropertyObserverFundatinBase" />
-    internal sealed class PropertyReferenceObserverOnValueChangedWithDefer<TParameter1, TParameter2, TResult> :
-        PropertyObserverBase<IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult>, TParameter1, TParameter2,
+    internal sealed class PropertyObserverOnValueChangedWithDeferAndFallback<TParameter1, TParameter2, TResult> :
+        PropertyObserverBase<IPropertyObserverOnValueChangedWithDeferrerAndFallback<TResult>, TParameter1, TParameter2,
             TResult>,
-        IPropertyReferenceObserverOnValueChangedWithDeferrer<TResult>
-        where TResult : class
+        IPropertyObserverOnValueChangedWithDeferrerAndFallback<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
     {
@@ -54,50 +48,56 @@ namespace Anori.ExpressionObservers.Observers
         /// <summary>
         ///     The value.
         /// </summary>
-        private TResult? value;
+        private TResult value;
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TParameter2, TResult}" /> class.
+        ///     <see cref="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyReferenceObserverOnValueChangedWithDefer(
+        internal PropertyObserverOnValueChangedWithDeferAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
+            this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultibleDeferrer(() => this.Value = getter());
             this.action = () => this.deferrer.Update();
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TParameter2, TResult}" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyReferenceObserverOnValueChangedWithDefer(
+        internal PropertyObserverOnValueChangedWithDeferAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            TaskScheduler taskScheduler,
+            [NotNull] TResult fallback,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
+            this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
             this.action = () => this.deferrer.Update();
@@ -105,24 +105,27 @@ namespace Anori.ExpressionObservers.Observers
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TParameter2, TResult}" /> class.
+        ///     <see cref="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyReferenceObserverOnValueChangedWithDefer(
+        internal PropertyObserverOnValueChangedWithDeferAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            SynchronizationContext synchronizationContext,
+            [NotNull] TResult fallback,
+            [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
+            this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => synchronizationContext.Send(() => this.Value = getter()));
             this.action = () => this.deferrer.Update();
@@ -140,12 +143,12 @@ namespace Anori.ExpressionObservers.Observers
         /// <value>
         ///     The value.
         /// </value>
-        public TResult? Value
+        public TResult Value
         {
             get => this.value;
             private set
             {
-                if (EqualityComparer<TResult?>.Default.Equals(value, this.value))
+                if (EqualityComparer<TResult>.Default.Equals(value, this.value))
                 {
                     return;
                 }
@@ -188,6 +191,6 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged.Raise(this, propertyName);
     }
 }

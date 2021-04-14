@@ -2327,37 +2327,30 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("Fallback", observes.Value);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("1", observes.Value);
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("Fallback", observes.Value);
         }
 
         [Test]
@@ -2380,32 +2373,26 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("Fallback", observes.Value);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("Fallback", observes.Value);
         }
 
         [Test]
@@ -2429,37 +2416,30 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("Fallback", observes.Value);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("1", observes.Value);
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("Fallback", observes.Value);
         }
 
         [Test]
@@ -2484,32 +2464,26 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("Fallback", observes.Value);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("Fallback", observes.Value);
         }
 
         [Test]
@@ -2533,37 +2507,30 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("Fallback", observes.Value);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("1", observes.Value);
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("Fallback", observes.Value);
         }
 
         [Test]
@@ -2587,14 +2554,63 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("No Set", value);
-            Assert.AreEqual("Fallback", observes.Value);
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
 
             instance.Class2.StringProperty = "2" ;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+
+            observes.Deactivate();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+
+            instance.Class2.StringProperty = "3" ;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+
+            instance.Class2 = null;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+        }
+
+
+        [Test]
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_StringProperty()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            var value = "No Set";
+
+            using var observes = PropertyObserverBuilder.Builder
+                .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
+                .WithAction(
+                    (v) =>
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
+                .WithFallback("Fallback")
+                .Build();
+
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("Fallback", observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("1", observes.Value);
+
+            observes.Activate();
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", value);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.Class2.StringProperty = "2";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
@@ -2604,7 +2620,267 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual("2", value);
             Assert.AreEqual("2", observes.Value);
 
-            instance.Class2.StringProperty = "3" ;
+            instance.Class2.StringProperty = "3";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("3", observes.Value);
+
+            instance.Class2 = null;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("Fallback", observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_StringProperty_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            var value = "No Set";
+            using var observes = PropertyObserverBuilder.Builder
+                .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
+                .WithAction(
+                    v =>
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
+                .WithFallback("Fallback")
+                .AutoActivate()
+                .Build();
+
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("Fallback", observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", value);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.Class2.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            observes.Deactivate();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.Class2.StringProperty = "3";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("3", observes.Value);
+
+            instance.Class2 = null;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("Fallback", observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_StringProperty_TaskSchedulerCurrent()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            var value = "No Set";
+
+            using var observes = PropertyObserverBuilder.Builder
+                .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
+                .WithAction(
+                    (v) =>
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
+                .WithFallback("Fallback")
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .Build();
+
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("Fallback", observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("1", observes.Value);
+
+            observes.Activate();
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", value);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.Class2.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            observes.Deactivate();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.Class2.StringProperty = "3";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("3", observes.Value);
+
+            instance.Class2 = null;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("Fallback", observes.Value);
+        }
+
+        [Test]
+        public void
+            PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_StringProperty_TaskSchedulerCurrent_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            var value = "No Set";
+            using var observes = PropertyObserverBuilder.Builder
+                .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
+                .WithAction(
+                    v =>
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
+                .WithFallback("Fallback")
+                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .AutoActivate()
+                .Build();
+
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("Fallback", observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", value);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.Class2.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            observes.Deactivate();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.Class2.StringProperty = "3";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("3", observes.Value);
+
+            instance.Class2 = null;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("Fallback", observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_StringProperty_Dispatcher()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            var value = "No Set";
+
+            using var observes = PropertyObserverBuilder.Builder
+                .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
+                .WithAction(
+                    (v) =>
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
+                .WithFallback("Fallback")
+                .WithGetterDispatcher()
+                .Build();
+
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("Fallback", observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("1", observes.Value);
+
+            observes.Activate();
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", value);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.Class2.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            observes.Deactivate();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.Class2.StringProperty = "3";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("3", observes.Value);
+
+            instance.Class2 = null;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("Fallback", observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_ValueGetter_Fallback_Getter_Observes_instance_StringProperty_Dispatcher_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCount = 0;
+            var value = "No Set";
+            using var observes = PropertyObserverBuilder.Builder
+                .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
+                .WithAction(
+                    v =>
+                    {
+                        value = v;
+                        callCount++;
+                    })
+                .WithGetter()
+                .WithFallback("Fallback")
+                .WithGetterDispatcher()
+                .AutoActivate()
+                .Build();
+
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual("No Set", value);
+            Assert.AreEqual("Fallback", observes.Value);
+
+            instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", value);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.Class2.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            observes.Deactivate();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", value);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.Class2.StringProperty = "3";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
             Assert.AreEqual("3", observes.Value);

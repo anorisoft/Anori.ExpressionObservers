@@ -1760,6 +1760,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
+                .WithGetter()
                 .WithFallback(99)
                 .Build();
 
@@ -1818,6 +1819,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
+                .WithGetter()
                 .WithFallback(99)
                 .AutoActivate()
                 .Build();
@@ -1873,6 +1875,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
+                .WithGetter()
                 .WithFallback(99)
                 .WithGetterDispatcher()
                 .Build();
@@ -1932,6 +1935,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
+                .WithGetter()
                 .WithFallback(99)
                 .WithGetterDispatcher()
                 .AutoActivate()
@@ -1988,6 +1992,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
+                .WithGetter()
                 .WithFallback(99)
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .Build();
@@ -2048,6 +2053,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
+                .WithGetter()
                 .WithFallback(99)
                 .WithGetterTaskScheduler(TaskScheduler.Current)
                 .AutoActivate()

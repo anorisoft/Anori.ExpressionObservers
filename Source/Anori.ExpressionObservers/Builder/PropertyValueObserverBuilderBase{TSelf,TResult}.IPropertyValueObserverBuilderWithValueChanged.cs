@@ -72,7 +72,7 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>>.WithGetterDispatcher()
         {
             this.IsDispached = true;
-            return this.PropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler();
+            return this;
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Anori.ExpressionObservers.Builder
             WithGetterTaskScheduler(TaskScheduler taskScheduler)
         {
             this.TaskScheduler = taskScheduler;
-            return this.PropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler();
+            return this;
         }
     }
 }

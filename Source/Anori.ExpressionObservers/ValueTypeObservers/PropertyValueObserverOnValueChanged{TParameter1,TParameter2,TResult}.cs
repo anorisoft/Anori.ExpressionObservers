@@ -17,6 +17,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -28,7 +29,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="PropertyObserverFundatinBase{TSelf}.ExpressionObservers.ValueTypeObservers.PropertyValueObserverOnValueChanged{TParameter1, TParameter2, TResult}, TParameter1, TParameter2, TResult}" />
+    ///     cref="PropertyValueObserverOnValueChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="PropertyObserverFundatinBase" />
     internal sealed class PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult> :
@@ -127,15 +128,15 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        ///     Gets the value.
+        ///     Gets or sets the value.
         /// </summary>
         /// <value>
         ///     The value.
         /// </value>
-        public TResult? Value
+        private TResult? Value
         {
             get => this.getValue();
-            private set
+            set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))
                 {
@@ -146,6 +147,14 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
                 this.OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <value>
+        ///     The value.
+        /// </value>
+        TResult? IPropertyValueObserverOnValueChanged<TResult>.Value => this.Value;
 
         /// <summary>
         ///     On the action.
@@ -174,6 +183,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="propertyName">Name of the property.</param>
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged.Raise(this, propertyName);
     }
 }
