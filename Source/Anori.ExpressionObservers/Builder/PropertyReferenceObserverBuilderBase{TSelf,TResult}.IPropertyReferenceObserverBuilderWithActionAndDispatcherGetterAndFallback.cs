@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverBuilderBase{TSelf,TResult}.IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------

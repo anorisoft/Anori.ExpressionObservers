@@ -81,8 +81,8 @@ namespace Anori.ExpressionObservers.Observers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableCachedGetter(
-                this.CreateNullableGetter(Getter(propertyExpression, this.Tree, fallback), taskScheduler),
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(Getter(propertyExpression, this.Tree, fallback), taskScheduler),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));
@@ -122,8 +122,8 @@ namespace Anori.ExpressionObservers.Observers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableCachedGetter(
-                this.CreateNullableGetter(Getter(propertyExpression, this.Tree, fallback), synchronizationContext),
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(Getter(propertyExpression, this.Tree, fallback), synchronizationContext),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));
@@ -159,8 +159,8 @@ namespace Anori.ExpressionObservers.Observers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableCachedGetter(
-                this.CreateNullableGetter(Getter(propertyExpression, this.Tree, fallback)),
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(Getter(propertyExpression, this.Tree, fallback)),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));

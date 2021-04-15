@@ -6,10 +6,11 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using Anori.ExpressionObservers.Interfaces.Builder;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
     ///     The Property Observer Builder class.
@@ -28,14 +29,14 @@ namespace Anori.ExpressionObservers.Builder
         private readonly bool isSilentActivate;
 
         /// <summary>
-        /// The observer flag.
+        ///     The observer flag.
         /// </summary>
-        private PropertyObserverFlag observerFlag;
+        private readonly PropertyObserverFlag observerFlag;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyObserverBuilder" /> class.
         /// </summary>
-        /// <param name="propertyObserverFlag"></param>
+        /// <param name="propertyObserverFlag">The property observer flag.</param>
         /// <param name="autoActivate">if set to <c>true</c> [automatic activate].</param>
         /// <param name="silentActivate">if set to <c>true</c> [silent activate].</param>
         public PropertyObserverBuilder(
@@ -73,11 +74,11 @@ namespace Anori.ExpressionObservers.Builder
             where TResult : class
         {
             var builder = new PropertyReferenceObserverBuilder<TParameter1, TResult>(parameter1, propertyExpression)
-            {
-                ObserverFlag = observerFlag,
-                IsAutoActivate = this.isAutoActivate,
-                IsSilentActivate = this.isSilentActivate,
-            };
+                              {
+                                  ObserverFlag = this.observerFlag,
+                                  IsAutoActivate = this.isAutoActivate,
+                                  IsSilentActivate = this.isSilentActivate,
+                              };
             return builder;
         }
 
@@ -94,11 +95,11 @@ namespace Anori.ExpressionObservers.Builder
             where TResult : class
         {
             var builder = new PropertyReferenceObserverBuilder<TResult>(propertyExpression)
-            {
-                ObserverFlag = observerFlag,
-                IsAutoActivate = this.isAutoActivate,
-                IsSilentActivate = this.isSilentActivate,
-            };
+                              {
+                                  ObserverFlag = this.observerFlag,
+                                  IsAutoActivate = this.isAutoActivate,
+                                  IsSilentActivate = this.isSilentActivate,
+                              };
             return builder;
         }
 
@@ -127,11 +128,11 @@ namespace Anori.ExpressionObservers.Builder
                     parameter1,
                     parameter2,
                     propertyExpression)
-                {
-                    ObserverFlag = observerFlag,
-                    IsAutoActivate = this.isAutoActivate,
-                    IsSilentActivate = this.isSilentActivate,
-                };
+                    {
+                        ObserverFlag = this.observerFlag,
+                        IsAutoActivate = this.isAutoActivate,
+                        IsSilentActivate = this.isSilentActivate,
+                    };
             return builder;
         }
 
@@ -152,11 +153,11 @@ namespace Anori.ExpressionObservers.Builder
             where TResult : struct
         {
             var builder = new PropertyValueObserverBuilder<TParameter1, TResult>(parameter1, propertyExpression)
-            {
-                ObserverFlag = observerFlag,
-                IsAutoActivate = this.isAutoActivate,
-                IsSilentActivate = this.isSilentActivate,
-            };
+                              {
+                                  ObserverFlag = this.observerFlag,
+                                  IsAutoActivate = this.isAutoActivate,
+                                  IsSilentActivate = this.isSilentActivate,
+                              };
             return builder;
         }
 
@@ -185,11 +186,11 @@ namespace Anori.ExpressionObservers.Builder
                     parameter1,
                     parameter2,
                     propertyExpression)
-                {
-                    ObserverFlag = observerFlag,
-                    IsAutoActivate = this.isAutoActivate,
-                    IsSilentActivate = this.isSilentActivate,
-                };
+                    {
+                        ObserverFlag = this.observerFlag,
+                        IsAutoActivate = this.isAutoActivate,
+                        IsSilentActivate = this.isSilentActivate,
+                    };
             return builder;
         }
 
@@ -206,11 +207,11 @@ namespace Anori.ExpressionObservers.Builder
             where TResult : struct
         {
             var builder = new PropertyValueObserverBuilder<TResult>(propertyExpression)
-            {
-                ObserverFlag = observerFlag,
-                IsAutoActivate = this.isAutoActivate,
-                IsSilentActivate = this.isSilentActivate,
-            };
+                              {
+                                  ObserverFlag = this.observerFlag,
+                                  IsAutoActivate = this.isAutoActivate,
+                                  IsSilentActivate = this.isSilentActivate,
+                              };
             return builder;
         }
     }

@@ -28,6 +28,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <param name="fallback">The fallback.</param>
         /// <returns>The Getter Builder with Fallback.</returns>
         IGetterBuilderWithFallback<TParameter1, TResult> WithFallback(TResult fallback);
-
     }
 }

@@ -58,15 +58,6 @@ namespace Anori.ExpressionObservers.Builder
             TResult>
     {
         /// <summary>
-        ///     Withes the fallback.
-        /// </summary>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
-        public IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult> WithFallback(
-            TResult fallback) =>
-            this;
-
-        /// <summary>
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
@@ -76,5 +67,14 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
+
+        /// <summary>
+        ///     Withes the fallback.
+        /// </summary>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>The Property Observer Builder.</returns>
+        IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>
+            IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult>.WithFallback(TResult fallback) =>
+            this.WithFallback(fallback);
     }
 }

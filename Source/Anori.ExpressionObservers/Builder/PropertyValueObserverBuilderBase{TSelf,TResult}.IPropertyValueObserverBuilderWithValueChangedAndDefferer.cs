@@ -51,7 +51,6 @@ namespace Anori.ExpressionObservers.Builder
     internal abstract partial class
         PropertyValueObserverBuilderBase<TSelf, TResult> : IPropertyValueObserverBuilderWithValueChangedAndDeferrer<
             TResult>
-
     {
         /// <summary>
         ///     Creates this instance.

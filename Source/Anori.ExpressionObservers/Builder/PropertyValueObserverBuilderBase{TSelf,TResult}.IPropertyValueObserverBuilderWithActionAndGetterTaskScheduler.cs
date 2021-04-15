@@ -6,7 +6,6 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
@@ -74,14 +73,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>
-            IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>.WithFallback(TResult fallback)
-        {
-            if (this.Fallback.HasValue)
-            {
-                throw new FallbackActivatedException();
-            }
-            this.Fallback = fallback;
-            return this;
-        }
+            IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>.WithFallback(TResult fallback) =>
+            this.WithFallback(fallback);
     }
 }

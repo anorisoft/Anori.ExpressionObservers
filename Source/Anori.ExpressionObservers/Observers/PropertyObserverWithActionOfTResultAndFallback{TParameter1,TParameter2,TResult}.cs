@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverWithFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -46,7 +46,8 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TParameter2, TResult}" />
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TParameter2, TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -70,7 +71,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1, TParameter2, TResult}" />
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1, TParameter2, TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -98,7 +100,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TParameter2,  TResult}" />
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TParameter2,  TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -124,12 +127,6 @@ namespace Anori.ExpressionObservers.Observers
                 Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2),
                 synchronizationContext);
         }
-
-        ///// <summary>
-        /////     Gets the value.
-        ///// </summary>
-        ///// <returns>The result value.</returns>
-        //public TResult Value => this.getter();
 
         /// <summary>
         ///     On the action.

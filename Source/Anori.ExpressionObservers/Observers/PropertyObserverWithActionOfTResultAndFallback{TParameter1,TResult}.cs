@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverWithFallback{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -43,7 +43,8 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -64,7 +65,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -72,7 +74,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyObserverWithActionOfTResultAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -87,7 +89,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithActionOfTResultAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -95,7 +98,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal PropertyObserverWithActionOfTResultAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -110,12 +113,6 @@ namespace Anori.ExpressionObservers.Observers
                 Getter(propertyExpression, this.Tree, fallback, parameter1),
                 synchronizationContext);
         }
-
-        ///// <summary>
-        /////     Gets the value.
-        ///// </summary>
-        ///// <returns>The result value.</returns>
-        //public TResult Value => this.getter();
 
         /// <summary>
         ///     On the action.

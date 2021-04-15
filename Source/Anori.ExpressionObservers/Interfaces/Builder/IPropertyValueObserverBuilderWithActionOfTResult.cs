@@ -24,13 +24,13 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         ///     Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
+        /// <returns>The Property Value Observer Builder.</returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult> WithFallback(TResult fallback);
 
         /// <summary>
         ///     Withes the getter.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Property Value Observer Builder.</returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult> WithGetter();
     }
 }

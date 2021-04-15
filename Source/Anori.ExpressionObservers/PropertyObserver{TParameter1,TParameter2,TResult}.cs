@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers
     using System.ComponentModel;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers;
 
@@ -35,13 +34,12 @@ namespace Anori.ExpressionObservers
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        public static IPropertyObserverWithGetterAndFallback<TResult>
-            Observes<TParameter1, TParameter2, TResult>(
-                [NotNull] TParameter1 parameter1,
-                [NotNull] TParameter2 parameter2,
-                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-                [NotNull] Action action,
-                [NotNull] TResult fallback)
+        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
+            [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
             new PropertyObserverWithActionAndGetterAndFallback<TParameter1, TParameter2, TResult>(
@@ -67,14 +65,13 @@ namespace Anori.ExpressionObservers
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        public static IPropertyObserverWithGetterAndFallback<TResult>
-            Observes<TParameter1, TParameter2, TResult>(
-                [NotNull] TParameter1 parameter1,
-                [NotNull] TParameter2 parameter2,
-                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-                bool autoSubscribe,
-                [NotNull] Action action,
-                [NotNull] TResult fallback)
+        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            bool autoSubscribe,
+            [NotNull] Action action,
+            [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
@@ -83,7 +80,8 @@ namespace Anori.ExpressionObservers
                 parameter2,
                 propertyExpression,
                 action,
-                fallback, PropertyObserverFlag.None);
+                fallback,
+                PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -108,24 +106,24 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyObserverWithGetterAndFallback<TResult>
-            Observes<TParameter1, TParameter2, TResult>(
-                [NotNull] TParameter1 parameter1,
-                [NotNull] TParameter2 parameter2,
-                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-                bool autoSubscribe,
-                [NotNull] Action<TResult> action,
-                [NotNull] TResult fallback)
+        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            bool autoSubscribe,
+            [NotNull] Action<TResult> action,
+            [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer = new PropertyObserverWithActionOfTResultAndGetterAndFallback<TParameter1, TParameter2, TResult>(
-                parameter1,
-                parameter2,
-                propertyExpression,
-                action,
-                fallback, 
-                PropertyObserverFlag.None);
+            var observer =
+                new PropertyObserverWithActionOfTResultAndGetterAndFallback<TParameter1, TParameter2, TResult>(
+                    parameter1,
+                    parameter2,
+                    propertyExpression,
+                    action,
+                    fallback,
+                    PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -149,13 +147,12 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyObserverWithGetterAndFallback<TResult>
-            Observes<TParameter1, TParameter2, TResult>(
-                [NotNull] TParameter1 parameter1,
-                [NotNull] TParameter2 parameter2,
-                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-                [NotNull] Action<TResult> action,
-                [NotNull] TResult fallback)
+        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action<TResult> action,
+            [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
             new PropertyObserverWithActionOfTResultAndGetterAndFallback<TParameter1, TParameter2, TResult>(
@@ -163,7 +160,8 @@ namespace Anori.ExpressionObservers
                 parameter2,
                 propertyExpression,
                 action,
-                fallback, PropertyObserverFlag.None);
+                fallback,
+                PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified parameter1.
@@ -193,7 +191,8 @@ namespace Anori.ExpressionObservers
                 parameter1,
                 parameter2,
                 propertyExpression,
-                action, PropertyObserverFlag.None);
+                action,
+                PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -221,6 +220,11 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
-            new PropertyObserver<TParameter1, TParameter2, TResult>(parameter1, parameter2, propertyExpression, action, PropertyObserverFlag.None);
+            new PropertyObserver<TParameter1, TParameter2, TResult>(
+                parameter1,
+                parameter2,
+                propertyExpression,
+                action,
+                PropertyObserverFlag.None);
     }
 }

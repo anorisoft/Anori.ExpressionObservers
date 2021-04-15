@@ -59,32 +59,7 @@ namespace Anori.ExpressionObservers.Builder
     internal abstract partial class
         PropertyReferenceObserverBuilderBase<TSelf, TResult> :
             IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>
-
     {
-        /// <summary>
-        ///     Withes the getter dispatcher.
-        /// </summary>
-        /// <returns></returns>
-        public IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>
-            WithGetterDispatcher()
-        {
-            this.IsDispached = true;
-            return this;
-        }
-
-        /// <summary>
-        ///     Withes the getter task scheduler.
-        /// </summary>
-        /// <param name="taskScheduler">The task scheduler.</param>
-        /// <returns>
-        ///     The target object.
-        /// </returns>
-        public IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>
-            WithGetterTaskScheduler(TaskScheduler taskScheduler)
-        {
-            this.TaskScheduler = taskScheduler;
-            return this;
-        }
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
@@ -105,5 +80,28 @@ namespace Anori.ExpressionObservers.Builder
         IPropertyObserverWithGetterAndFallback<TResult>
             IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>.Build() =>
             this.CreatePropertyObserverWithActionOfTResultAndGetterAndFallback();
+
+        /// <summary>
+        ///     Withes the getter dispatcher.
+        /// </summary>
+        /// <returns>The Property Value Observer Builder.</returns>
+        IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>
+            IPropertyObserverGetterTaskScheduler<
+                IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>>
+            .WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
+
+        /// <summary>
+        ///     Withes the getter task scheduler.
+        /// </summary>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <returns>
+        ///     The target object.
+        /// </returns>
+        IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>
+            IPropertyObserverGetterTaskScheduler<
+                IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>>
+            .WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterTaskScheduler(taskScheduler);
     }
 }

@@ -8,8 +8,6 @@ namespace Anori.ExpressionObservers
 {
     using System;
 
-    using Anori.ExpressionObservers.ReferenceTypeObservers;
-
     /// <summary>
     ///     Deferrer.
     /// </summary>

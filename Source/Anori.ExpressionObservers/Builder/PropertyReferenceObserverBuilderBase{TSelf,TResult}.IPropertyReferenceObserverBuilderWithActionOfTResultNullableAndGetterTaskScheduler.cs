@@ -44,7 +44,6 @@ namespace Anori.ExpressionObservers.Builder
     internal abstract partial class
         PropertyReferenceObserverBuilderBase<TSelf, TResult> :
             IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>
-
     {
         /// <summary>
         ///     Automatics the activate.

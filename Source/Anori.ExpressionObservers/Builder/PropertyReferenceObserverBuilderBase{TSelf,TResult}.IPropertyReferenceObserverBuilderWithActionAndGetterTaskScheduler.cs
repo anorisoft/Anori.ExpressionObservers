@@ -6,7 +6,6 @@
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
@@ -43,8 +42,8 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilder{TResult}" />
     internal abstract partial class
-        PropertyReferenceObserverBuilderBase<TSelf, TResult> : IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler
-            <TResult>
+        PropertyReferenceObserverBuilderBase<TSelf, TResult> :
+            IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -62,8 +61,8 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IPropertyReferenceObserverWithGetter<TResult> IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler<TResult>
-            .Build() =>
+        IPropertyReferenceObserverWithGetter<TResult>
+            IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler<TResult>.Build() =>
             this.CreatePropertyReferenceObserverWithGetter();
 
         /// <summary>
@@ -74,14 +73,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>
-            IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler<TResult>.WithFallback(TResult fallback)
-        {
-            if (this.Fallback != null)
-            {
-                throw new FallbackActivatedException();
-            }
-            this.Fallback = fallback;
-            return this;
-        }
+            IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler<TResult>.WithFallback(TResult fallback) =>
+            this.WithFallback(fallback);
     }
 }

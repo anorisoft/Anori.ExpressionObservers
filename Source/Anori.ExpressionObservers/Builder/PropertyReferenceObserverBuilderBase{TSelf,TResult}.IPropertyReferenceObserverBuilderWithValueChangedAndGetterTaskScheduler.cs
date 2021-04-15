@@ -57,9 +57,7 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>.Cached(
                 LazyThreadSafetyMode safetyMode)
         {
-            this.IsCached = true;
-            this.SafetyMode = safetyMode;
-            return this.Cached();
+            return this.Cached(safetyMode);
         }
 
         /// <summary>
@@ -71,8 +69,6 @@ namespace Anori.ExpressionObservers.Builder
         IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>
             IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>.Cached()
         {
-            this.IsCached = true;
-            this.SafetyMode = LazyThreadSafetyMode.None;
             return this.Cached();
         }
 

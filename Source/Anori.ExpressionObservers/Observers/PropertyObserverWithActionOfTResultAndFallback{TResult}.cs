@@ -101,12 +101,6 @@ namespace Anori.ExpressionObservers.Observers
             this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback), synchronizationContext);
         }
 
-        ///// <summary>
-        /////     Gets the value.
-        ///// </summary>
-        ///// <returns>The result value.</returns>
-        //public TResult Value => this.getter();
-
         /// <summary>
         ///     On the action.
         /// </summary>

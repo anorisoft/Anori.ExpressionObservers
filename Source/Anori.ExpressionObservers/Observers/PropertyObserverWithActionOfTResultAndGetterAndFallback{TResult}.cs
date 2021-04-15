@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverWithActionOfTResultAndGetterAndFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -39,7 +39,8 @@ namespace Anori.ExpressionObservers.Observers
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionAndGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndGetterAndFallback{TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -62,7 +63,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionAndGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndGetterAndFallback{TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -89,7 +91,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionAndGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionOfTResultAndGetterAndFallback{TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -126,7 +129,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.action(getter());
+        protected override void OnAction() => this.action(this.getter());
 
         /// <summary>
         ///     Getters the specified property expression.

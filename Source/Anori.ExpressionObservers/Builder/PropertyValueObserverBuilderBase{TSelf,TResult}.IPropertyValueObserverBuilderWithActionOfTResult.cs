@@ -8,46 +8,38 @@ namespace Anori.ExpressionObservers.Builder
 {
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Exceptions;
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    ///     The Property Value Observer Builder With Action Of T Result interface.
+    /// The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyValueObserverBuilderWithNotifyProperyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithActionOfTResultAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
-    /// <seealso cref="IPropertyValueObserverBuilderWithAction{TResult}" />
-    /// <seealso cref="IPropertyValueObserverBuilderWithActionOfTResult{TResult}" />
-    /// <seealso cref="IPropertyValueObserverBuilderWithActionAndGetter{TResult}" />
-    /// <seealso cref="IPropertyValueObserverBuilderWithValueChanged{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler{TResult}" />
-    /// <seealso cref="IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}" />
-    /// <seealso cref="IPropertyValueObserverBuilder{TResult}" />
-    /// <seealso cref="IPropertyValueObserverBuilderWithActionOfTResult{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Builder.PropertyObserverBuilderBase{TSelf}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithNotifyProperyChanged{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithAction{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResult{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionAndGetter{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithValueChanged{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionAndGetterAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndGetter{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithValueChangedAndDeferrer{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilder{TResult}" />
     internal abstract partial class
         PropertyValueObserverBuilderBase<TSelf, TResult> : IPropertyValueObserverBuilderWithActionOfTResult<TResult>
-
     {
         /// <summary>
         ///     Automatics the activate.
@@ -65,23 +57,16 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndFallback<TResult>
-            IPropertyValueObserverBuilderWithActionOfTResult<TResult>.WithFallback(TResult fallback)
-        {
-            if (this.Fallback.HasValue)
-            {
-                throw new FallbackActivatedException();
-            }
-            this.Fallback = fallback;
-            return this;
-        }
+            IPropertyValueObserverBuilderWithActionOfTResult<TResult>.WithFallback(TResult fallback) =>
+            this.WithFallback(fallback);
+
         /// <summary>
-        /// Withes the getter.
+        ///     Withes the getter.
         /// </summary>
-        /// <returns></returns>
-        public IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult> WithGetter()
-        {
-            return this;
-        }
+        /// <returns>The Property Value Observer Builder.</returns>
+        IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult>
+            IPropertyValueObserverBuilderWithActionOfTResult<TResult>.WithGetter() =>
+            this;
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -89,12 +74,11 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult> IPropertyObserverGetterTaskScheduler<
-            IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.WithGetterDispatcher()
-        {
-            this.IsDispached = true;
-            return this;
-        }
+        IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
+            IPropertyObserverGetterTaskScheduler<
+                IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.
+            WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
 
         /// <summary>
         ///     Withes the getter task scheduler.
@@ -104,11 +88,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
-            IPropertyObserverGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.
-            WithGetterTaskScheduler(TaskScheduler taskScheduler)
-        {
-            this.TaskScheduler = taskScheduler;
-            return this;
-        }
+            IPropertyObserverGetterTaskScheduler<
+                IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.
+            WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterTaskScheduler(taskScheduler);
     }
 }

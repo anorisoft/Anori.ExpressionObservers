@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverOnValueChangedWithDeferrer.cs" company="AnoriSoft">
+// <copyright file="IPropertyObserverOnValueChangedWithDeferrerAndFallback.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -10,10 +10,11 @@ namespace Anori.ExpressionObservers.Interfaces
     using System.ComponentModel;
 
     /// <summary>
-    /// The Property Observer On Value Changed With Deferrer And Fallback interface.
+    ///     The Property Observer On Value Changed With Deferrer And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyObserverOnValueChangedWithDeferrerAndFallback{TResult}}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyObserverOnValueChangedWithDeferrerAndFallback{TResult}}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public interface IPropertyObserverOnValueChangedWithDeferrerAndFallback<out TResult> :
         IPropertyObserverBase<IPropertyObserverOnValueChangedWithDeferrerAndFallback<TResult>>,

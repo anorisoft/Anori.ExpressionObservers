@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnValueChangedWithDefer{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -22,7 +22,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -54,7 +54,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         private TResult? value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -73,7 +74,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -95,7 +97,8 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>

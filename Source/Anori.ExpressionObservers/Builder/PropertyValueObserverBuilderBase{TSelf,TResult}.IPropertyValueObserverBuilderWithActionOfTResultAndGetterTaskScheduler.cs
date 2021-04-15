@@ -7,11 +7,10 @@
 namespace Anori.ExpressionObservers.Builder
 {
     using Anori.ExpressionObservers.Exceptions;
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    /// The Property Value Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -43,8 +42,8 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Property Value Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
-            IPropertyObserverBuilderBase<
-                IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.AutoActivate() =>
+            IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
+            >.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -60,8 +59,9 @@ namespace Anori.ExpressionObservers.Builder
         {
             if (this.Fallback.HasValue)
             {
-                throw new FallbackActivatedException();
+                throw new FallbackAlreadyDefineException();
             }
+
             this.Fallback = fallback;
             return this;
         }

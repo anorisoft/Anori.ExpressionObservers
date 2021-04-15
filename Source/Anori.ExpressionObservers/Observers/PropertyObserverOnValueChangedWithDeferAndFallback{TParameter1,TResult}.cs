@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.Observers
     /// <seealso
     ///     cref="IPropertyObserverOnValueChangedWithDeferrerAndFallback{TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverOnValueChangedWithDeferrerAndFallback{TResult}" />
-    internal sealed class PropertyObserverOnValueChangedWithDeferWithFallback<TParameter1, TResult> :
+    internal sealed class PropertyObserverOnValueChangedWithDeferAndFallback<TParameter1, TResult> :
         PropertyObserverBase<IPropertyObserverOnValueChangedWithDeferrerAndFallback<TResult>, TParameter1, TResult>,
         IPropertyObserverOnValueChangedWithDeferrerAndFallback<TResult>
         where TResult : class
@@ -53,14 +53,14 @@ namespace Anori.ExpressionObservers.Observers
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="PropertyObserverOnValueChangedWithDeferWithFallback{TParameter1, TResult}" /> class.
+        ///     <see cref="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyObserverOnValueChangedWithDeferWithFallback(
+        internal PropertyObserverOnValueChangedWithDeferAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TResult fallback,
@@ -76,7 +76,7 @@ namespace Anori.ExpressionObservers.Observers
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="PropertyObserverOnValueChangedWithDeferWithFallback{TParameter1, TResult}" /> class.
+        ///     <see cref="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -84,7 +84,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyObserverOnValueChangedWithDeferWithFallback(
+        internal PropertyObserverOnValueChangedWithDeferAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TResult fallback,
@@ -102,7 +102,7 @@ namespace Anori.ExpressionObservers.Observers
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="PropertyObserverOnValueChangedWithDeferWithFallback{TParameter1, TResult}" /> class.
+        ///     <see cref="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -110,7 +110,7 @@ namespace Anori.ExpressionObservers.Observers
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal PropertyObserverOnValueChangedWithDeferWithFallback(
+        internal PropertyObserverOnValueChangedWithDeferAndFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TResult fallback,

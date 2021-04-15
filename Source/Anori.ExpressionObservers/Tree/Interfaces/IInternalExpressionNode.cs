@@ -23,6 +23,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
         /// </summary>
         /// <param name="node">The node.</param>
         void SetParent(IExpressionNode? node);
+
         /// <summary>
         ///     Sets the previous.
         /// </summary>

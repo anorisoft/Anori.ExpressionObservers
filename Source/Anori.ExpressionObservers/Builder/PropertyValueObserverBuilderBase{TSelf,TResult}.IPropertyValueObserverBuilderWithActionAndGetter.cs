@@ -8,7 +8,6 @@ namespace Anori.ExpressionObservers.Builder
 {
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
@@ -72,16 +71,8 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>
-            IPropertyValueObserverBuilderWithActionAndGetter<TResult>.WithFallback(TResult fallback)
-        {
-            if (this.Fallback.HasValue)
-            {
-                throw new FallbackActivatedException();
-            }
-
-            this.Fallback = fallback;
-            return this;
-        }
+            IPropertyValueObserverBuilderWithActionAndGetter<TResult>.WithFallback(TResult fallback) =>
+            this.WithFallback(fallback);
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -89,13 +80,9 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>
-            IPropertyObserverGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>>.
-            WithGetterDispatcher()
-        {
-            this.IsDispached = true;
-            return this;
-        }
+        IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult> IPropertyObserverGetterTaskScheduler<
+            IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>>.WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
 
         /// <summary>
         ///     Withes the getter task scheduler.
@@ -105,11 +92,8 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>
-            IPropertyObserverGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>>.
-            WithGetterTaskScheduler(TaskScheduler taskScheduler)
-        {
-            this.TaskScheduler = taskScheduler;
-            return this;
-        }
+            IPropertyObserverGetterTaskScheduler<IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>>
+            .WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterTaskScheduler(taskScheduler);
     }
 }

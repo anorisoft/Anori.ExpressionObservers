@@ -8,7 +8,6 @@ namespace Anori.ExpressionObservers.Builder
 {
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
@@ -48,15 +47,6 @@ namespace Anori.ExpressionObservers.Builder
             TResult>
     {
         /// <summary>
-        ///     Withes the getter.
-        /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
-        public IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter<TResult> WithGetter()
-        {
-            return this;
-        }
-
-        /// <summary>
         ///     Automatics the activate.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
@@ -72,16 +62,16 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback<TResult>
-            IPropertyReferenceObserverBuilderWithActionOfTResult<TResult>.WithFallback(TResult fallback)
-        {
-            if (this.Fallback != null)
-            {
-                throw new FallbackActivatedException();
-            }
+            IPropertyReferenceObserverBuilderWithActionOfTResult<TResult>.WithFallback(TResult fallback) =>
+            this.WithFallback(fallback);
 
-            this.Fallback = fallback;
-            return this;
-        }
+        /// <summary>
+        ///     Withes the getter.
+        /// </summary>
+        /// <returns>The Property Value Observer Builder.</returns>
+        IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter<TResult>
+            IPropertyReferenceObserverBuilderWithActionOfTResult<TResult>.WithGetter() =>
+            this;
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -92,11 +82,8 @@ namespace Anori.ExpressionObservers.Builder
         IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
             IPropertyObserverGetterTaskScheduler<
                 IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.
-            WithGetterDispatcher()
-        {
-            this.IsDispached = true;
-            return this;
-        }
+            WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
 
         /// <summary>
         ///     Withes the getter task scheduler.
@@ -108,10 +95,7 @@ namespace Anori.ExpressionObservers.Builder
         IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>
             IPropertyObserverGetterTaskScheduler<
                 IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>>.
-            WithGetterTaskScheduler(TaskScheduler taskScheduler)
-        {
-            this.TaskScheduler = taskScheduler;
-            return this;
-        }
+            WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterTaskScheduler(taskScheduler);
     }
 }

@@ -62,11 +62,8 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithAction<TResult> IPropertyValueObserverBuilder<TResult>.WithAction(
-            Action action)
-        {
-            this.Action = action;
-            return this.WithAction();
-        }
+            Action action) =>
+            this.WithAction(action);
 
         /// <summary>
         ///     Withes the action.
@@ -76,11 +73,8 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> IPropertyValueObserverBuilder<TResult>.
-            WithAction(Action<TResult?> action)
-        {
-            this.ActionOfTResult = action;
-            return this.WithActionOfTResult();
-        }
+            WithAction(Action<TResult?> action) =>
+            this.WithActionOfTResult(action);
 
         /// <summary>
         ///     Withes the action.
@@ -90,11 +84,8 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyValueObserverBuilderWithActionOfTResult<TResult> IPropertyValueObserverBuilder<TResult>.WithAction(
-            Action<TResult> action)
-        {
-            this.ActionOfTResultWithFallback = action;
-            return this.WithActionOfTResultWithFallback();
-        }
+            Action<TResult> action) =>
+            this.WithActionOfTResultWithFallback(action);
 
         /// <summary>
         ///     Withes the notify propery changed.

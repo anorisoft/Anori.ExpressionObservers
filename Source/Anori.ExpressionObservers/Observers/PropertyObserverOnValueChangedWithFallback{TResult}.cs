@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnValueChangedWithFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverOnValueChangedWithFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -52,8 +52,8 @@ namespace Anori.ExpressionObservers.Observers
         private TResult value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TResult}" />
-        /// class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
@@ -75,8 +75,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TResult}" />
-        /// class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
@@ -96,8 +96,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TResult}" />
-        /// class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverOnValueChangedWithFallback{TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="fallback">The fallback.</param>
@@ -128,7 +128,9 @@ namespace Anori.ExpressionObservers.Observers
         /// </value>
         public TResult Value
         {
+#pragma warning disable S4275 // Getters and setters should access the expected fields
             get => this.getValue();
+#pragma warning restore S4275 // Getters and setters should access the expected fields
             private set
             {
                 if (EqualityComparer<TResult>.Default.Equals(value, this.value))
@@ -154,8 +156,11 @@ namespace Anori.ExpressionObservers.Observers
         /// <returns>
         ///     The Getter.
         /// </returns>
-        private static Func<TResult> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree, TResult fallback) =>
-            ExpressionGetter.CreateGetter<TResult>(propertyExpression.Parameters, tree, fallback);
+        private static Func<TResult> Getter(
+            Expression<Func<TResult>> propertyExpression,
+            IExpressionTree tree,
+            TResult fallback) =>
+            ExpressionGetter.CreateGetter(propertyExpression.Parameters, tree, fallback);
 
         /// <summary>
         ///     Called when [property changed].

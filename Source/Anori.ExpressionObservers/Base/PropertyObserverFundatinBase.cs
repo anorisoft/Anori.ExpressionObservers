@@ -21,18 +21,16 @@ namespace Anori.ExpressionObservers.Base
     ///     Property Observer Base.
     /// </summary>
     /// <seealso cref="System.IDisposable" />
-    /// <seealso cref="System.Collections.Generic.IEqualityComparer{Anori.ExpressionObservers.Base.PropertyObserverBase}" />
-    /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Base.PropertyObserverBase}" />
-    /// <seealso cref="IEqualityComparer{T}" />
-    /// <seealso cref="IEquatable{T}" />
-    /// <seealso cref="PropertyObserverFundatinBase" />
-    /// <seealso cref="IDisposable" />
-#pragma warning disable S4035 // Classes implementing "IEquatable<T>" should be sealed
+    /// <seealso
+    ///     cref="System.Collections.Generic.IEqualityComparer{Anori.ExpressionObservers.Base.PropertyObserverFundatinBase}" />
+    /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Base.PropertyObserverFundatinBase}" />
+    /// <seealso cref="Anori.Common.IActivatable" />
+#pragma warning disable S3881 // "IDisposable" should be implemented correctly
     internal abstract class PropertyObserverFundatinBase : IDisposable,
                                                            IEqualityComparer<PropertyObserverFundatinBase>,
                                                            IEquatable<PropertyObserverFundatinBase>,
                                                            IActivatable
-#pragma warning restore S4035 // Classes implementing "IEquatable<T>" should be sealed
+#pragma warning restore S3881 // "IDisposable" should be implemented correctly
     {
         private bool isActive;
 
@@ -51,20 +49,20 @@ namespace Anori.ExpressionObservers.Base
         public event EventHandler<EventArgs<bool>>? IsActiveChanged;
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is fail fast.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is fail fast; otherwise, <c>false</c>.
-        /// </value>
-        private protected PropertyObserverFlag ObserverFlag { get; }
-
-        /// <summary>
         ///     Gets the expression string.
         /// </summary>
         /// <value>
         ///     The expression string.
         /// </value>
         public abstract string ExpressionString { get; }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is fail fast.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is fail fast; otherwise, <c>false</c>.
+        /// </value>
+        private protected PropertyObserverFlag ObserverFlag { get; }
 
         /// <summary>
         ///     Gets the root nodes.
@@ -101,10 +99,7 @@ namespace Anori.ExpressionObservers.Base
         /// <summary>
         ///     Subscribes this instance.
         /// </summary>
-        public void Activate()
-        {
-            this.Activate(false);
-        }
+        public void Activate() => this.Activate(false);
 
         /// <summary>
         ///     Deactivates this instance.
@@ -179,12 +174,12 @@ namespace Anori.ExpressionObservers.Base
                 return true;
             }
 
-            if (ReferenceEquals(x, null))
+            if (x is null)
             {
                 return false;
             }
 
-            if (ReferenceEquals(y, null))
+            if (y is null)
             {
                 return false;
             }
@@ -216,7 +211,7 @@ namespace Anori.ExpressionObservers.Base
         /// </returns>
         public bool Equals(PropertyObserverFundatinBase? other)
         {
-            if (ReferenceEquals(null, other))
+            if (other is null)
             {
                 return false;
             }
@@ -238,7 +233,7 @@ namespace Anori.ExpressionObservers.Base
         /// </returns>
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
             {
                 return false;
             }
@@ -321,7 +316,7 @@ namespace Anori.ExpressionObservers.Base
         protected abstract void OnAction();
 
         /// <summary>
-        /// Looptrees the specified expression node.
+        ///     Looptrees the specified expression node.
         /// </summary>
         /// <param name="expressionNode">The expression node.</param>
         /// <param name="observerNode">The observer node.</param>
@@ -370,10 +365,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator ==(PropertyObserverFundatinBase a, object b)
-        {
-            return Equals(a, b);
-        }
+        public static bool operator ==(PropertyObserverFundatinBase a, object b) => Equals(a, b);
 
         /// <summary>
         ///     Implements the operator !=.
@@ -383,10 +375,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator !=(PropertyObserverFundatinBase a, PropertyObserverFundatinBase b)
-        {
-            return !a.Equals(b);
-        }
+        public static bool operator !=(PropertyObserverFundatinBase a, PropertyObserverFundatinBase b) => !a.Equals(b);
 
         /// <summary>
         ///     Implements the operator !=.
@@ -396,9 +385,6 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator !=(PropertyObserverFundatinBase a, object b)
-        {
-            return !a.Equals(b);
-        }
+        public static bool operator !=(PropertyObserverFundatinBase a, object b) => !a.Equals(b);
     }
 }

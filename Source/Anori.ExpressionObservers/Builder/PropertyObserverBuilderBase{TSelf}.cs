@@ -51,7 +51,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <value>
         ///     <c>true</c> if this instance is dispached; otherwise, <c>false</c>.
         /// </value>
-        private protected bool IsDispached { get; set; }
+        private protected bool IsDispached { get; private set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is automatic activate.
@@ -75,7 +75,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <value>
         ///     The task scheduler.
         /// </value>
-        private protected TaskScheduler? TaskScheduler { get; set; }
+        private protected TaskScheduler? TaskScheduler { get; private set; }
 
         /// <summary>
         ///     Gets a value indicating whether this instance is cached.
@@ -83,7 +83,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <value>
         ///     <c>true</c> if this instance is cached; otherwise, <c>false</c>.
         /// </value>
-        private protected bool IsCached { get; set; }
+        private protected bool IsCached { get; private set; }
 
         /// <summary>
         ///     Gets the safety mode.
@@ -91,7 +91,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <value>
         ///     The safety mode.
         /// </value>
-        private protected LazyThreadSafetyMode SafetyMode { get; set; }
+        private protected LazyThreadSafetyMode SafetyMode { get; private set; }
 
         /// <summary>
         ///     Gets the action.
@@ -99,7 +99,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <value>
         ///     The action.
         /// </value>
-        private protected Action? Action { get; set; }
+        private protected Action? Action { get; private set; }
 
         /// <summary>
         ///     Automatics the activate.
@@ -124,6 +124,59 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected abstract TSelf Cached();
+        protected TSelf Cached()
+        {
+            this.IsCached = true;
+            this.SafetyMode = LazyThreadSafetyMode.None;
+            return (TSelf)this;
+        }
+
+        /// <summary>
+        ///     Cacheds the specified mode.
+        /// </summary>
+        /// <param name="mode">The mode.</param>
+        /// <returns>The Property Value Observer Builder.</returns>
+        protected TSelf Cached(LazyThreadSafetyMode mode)
+        {
+            this.IsCached = true;
+            this.SafetyMode = mode;
+            return (TSelf)this;
+        }
+
+        /// <summary>
+        ///     Withes the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        protected TSelf WithAction(Action action)
+        {
+            this.Action = action;
+            return (TSelf)this;
+        }
+
+        /// <summary>
+        ///     Withes the getter dispatcher.
+        /// </summary>
+        /// <returns>The Property Value Observer Builder.</returns>
+        protected TSelf WithGetterDispatcher()
+        {
+            this.IsDispached = true;
+            return (TSelf)this;
+        }
+
+        /// <summary>
+        ///     Withes the getter task scheduler.
+        /// </summary>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        protected TSelf WithGetterTaskScheduler(TaskScheduler taskScheduler)
+        {
+            this.TaskScheduler = taskScheduler;
+            return (TSelf)this;
+        }
     }
 }

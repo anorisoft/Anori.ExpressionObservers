@@ -41,10 +41,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     class.
         /// </summary>
         /// <param name="expression">The expression.</param>
-        public ExpressionValueGetterBuilder(Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression)
-        {
-            this.expression = expression;
-        }
+        public ExpressionValueGetterBuilder(Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression) => this.expression = expression;
 
         /// <summary>
         ///     Withes the fallback.

@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers
     using System.Threading.Tasks;
 
     using Anori.Common;
-    using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.ValueTypeObservers;
 
@@ -93,7 +92,10 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TResult : struct
         {
-            var observer = new PropertyValueObserverWithGetter<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            var observer = new PropertyValueObserverWithGetter<TResult>(
+                propertyExpression,
+                action,
+                PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -132,7 +134,11 @@ namespace Anori.ExpressionObservers
             bool isCached,
             LazyThreadSafetyMode safetyMode)
             where TResult : struct =>
-            new PropertyValueObserverOnNotifyProperyChanged<TResult>(propertyExpression, isCached, safetyMode, PropertyObserverFlag.None);
+            new PropertyValueObserverOnNotifyProperyChanged<TResult>(
+                propertyExpression,
+                isCached,
+                safetyMode,
+                PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -156,10 +162,11 @@ namespace Anori.ExpressionObservers
                 propertyExpression,
                 taskScheduler,
                 isCached,
-                safetyMode, PropertyObserverFlag.None);
+                safetyMode,
+                PropertyObserverFlag.None);
 
         /// <summary>
-        /// Observeses the on notify propery changed.
+        ///     Observeses the on notify propery changed.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -168,7 +175,7 @@ namespace Anori.ExpressionObservers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        /// The Property Value Observer.
+        ///     The Property Value Observer.
         /// </returns>
         [NotNull]
         public static IPropertyValueObserverOnNotifyProperyChanged<TResult> ObservesOnNotifyProperyChanged<TResult>(
@@ -183,7 +190,8 @@ namespace Anori.ExpressionObservers
                 propertyExpression,
                 taskScheduler,
                 isCached,
-                safetyMode, PropertyObserverFlag.None);
+                safetyMode,
+                PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -214,7 +222,8 @@ namespace Anori.ExpressionObservers
             var observer = new PropertyValueObserverOnNotifyProperyChanged<TResult>(
                 propertyExpression,
                 isCached,
-                safetyMode, PropertyObserverFlag.None);
+                safetyMode,
+                PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -238,7 +247,9 @@ namespace Anori.ExpressionObservers
             bool isAutoActivate)
             where TResult : struct
         {
-            var observer = new PropertyValueObserverOnNotifyProperyChanged<TResult>(propertyExpression, PropertyObserverFlag.None);
+            var observer = new PropertyValueObserverOnNotifyProperyChanged<TResult>(
+                propertyExpression,
+                PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -276,7 +287,9 @@ namespace Anori.ExpressionObservers
             bool isAutoActivate)
             where TResult : struct
         {
-            var observer = new PropertyValueObserverOnValueChanged<TResult>(propertyExpression, PropertyObserverFlag.None);
+            var observer = new PropertyValueObserverOnValueChanged<TResult>(
+                propertyExpression,
+                PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -299,7 +312,10 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] TaskScheduler taskScheduler)
             where TResult : struct =>
-            new PropertyValueObserverOnValueChanged<TResult>(propertyExpression, taskScheduler, PropertyObserverFlag.None);
+            new PropertyValueObserverOnValueChanged<TResult>(
+                propertyExpression,
+                taskScheduler,
+                PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -318,7 +334,10 @@ namespace Anori.ExpressionObservers
             bool isAutoActivate)
             where TResult : struct
         {
-            var observer = new PropertyValueObserverOnValueChanged<TResult>(propertyExpression, taskScheduler, PropertyObserverFlag.None);
+            var observer = new PropertyValueObserverOnValueChanged<TResult>(
+                propertyExpression,
+                taskScheduler,
+                PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);

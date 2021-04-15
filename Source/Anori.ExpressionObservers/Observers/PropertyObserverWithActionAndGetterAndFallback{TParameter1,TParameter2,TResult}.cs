@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverWithGetterAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------

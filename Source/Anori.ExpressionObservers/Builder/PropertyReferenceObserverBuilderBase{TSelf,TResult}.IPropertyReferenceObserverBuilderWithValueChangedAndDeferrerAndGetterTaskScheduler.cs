@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverBuilderBase{TSelf,TResult}.IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverBuilderBase{TSelf,TResult}.IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Builder
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    /// The Property Value Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -35,19 +35,25 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>
     {
         /// <summary>
-        /// Defers this instance.
+        ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        /// The Property Observer Builder.
+        ///     The Property Observer Builder.
         /// </returns>
-        IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult> IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>.Deferred() => this;
+        IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>
+            IPropertyObserverBuilderBase<
+                IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
 
         /// <summary>
-        /// Automatics the activate.
+        ///     Defers this instance.
         /// </summary>
         /// <returns>
-        /// The Property Observer Builder.
+        ///     The Property Observer Builder.
         /// </returns>
-        IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult> IPropertyObserverBuilderBase<IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>>.AutoActivate() => this.AutoActivate();
+        IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>
+            IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>.Deferred() =>
+            this;
     }
 }

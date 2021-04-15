@@ -8,6 +8,7 @@ namespace Anori.ExpressionObservers.Builder
 {
     using System;
 
+    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
@@ -97,7 +98,6 @@ namespace Anori.ExpressionObservers.Builder
         /// </returns>
         protected abstract IPropertyObserverWithFallback<TResult> CreatePropertyGetterObserverWithFallback();
 
-      
         /// <summary>
         ///     Creates the property value observer builder with action.
         /// </summary>
@@ -105,6 +105,15 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Property Value Observer.
         /// </returns>
         protected abstract IPropertyObserver<TResult> CreatePropertyObserver();
+
+        /// <summary>
+        ///     Creates the property observer with action of t result and getter and fallback.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
+        protected abstract IPropertyObserverWithGetterAndFallback<TResult>
+            CreatePropertyObserverWithActionOfTResultAndGetterAndFallback();
 
         /// <summary>
         ///     Creates the property value observer builder with action and getter and fallback.
@@ -159,28 +168,30 @@ namespace Anori.ExpressionObservers.Builder
         protected abstract IPropertyValueObserverWithGetter<TResult> CreatePropertyValueObserverWithGetter();
 
         /// <summary>
-        ///     Withes the action.
+        /// Withes the action of t result.
         /// </summary>
+        /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        /// The Property Value Observer Builder.
         /// </returns>
-        protected abstract TSelf WithAction();
-
-        /// <summary>
-        ///     Withes the action of t result.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        protected abstract TSelf WithActionOfTResult();
+        protected TSelf WithActionOfTResult(Action<TResult?> action)
+        {
+            this.ActionOfTResult = action;
+            return (TSelf)this;
+        }
 
         /// <summary>
         ///     Withes the action of t result with fallback.
         /// </summary>
+        /// <param name="action">The action.</param>
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected abstract TSelf WithActionOfTResultWithFallback();
+        protected TSelf WithActionOfTResultWithFallback(Action<TResult> action)
+        {
+            this.ActionOfTResultWithFallback = action;
+            return (TSelf)this;
+        }
 
         /// <summary>
         ///     Withes the notify propery changed.
@@ -188,7 +199,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected abstract TSelf WithNotifyProperyChanged();
+        protected TSelf WithNotifyProperyChanged() => (TSelf)this;
 
         /// <summary>
         ///     Withes the value changed.
@@ -196,11 +207,25 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected abstract TSelf WithValueChanged();
+        protected TSelf WithValueChanged() => (TSelf)this;
+
         /// <summary>
-        /// Creates the property observer with action of t result and getter and fallback.
+        /// Withes the fallback.
         /// </summary>
-        /// <returns></returns>
-        protected abstract IPropertyObserverWithGetterAndFallback<TResult> CreatePropertyObserverWithActionOfTResultAndGetterAndFallback();
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        /// <exception cref="Anori.ExpressionObservers.Exceptions.FallbackAlreadyDefineException">Fallback Already Define Exception.</exception>
+        private TSelf WithFallback(TResult fallback)
+        {
+            if (this.Fallback.HasValue)
+            {
+                throw new FallbackAlreadyDefineException();
+            }
+
+            this.Fallback = fallback;
+            return (TSelf)this;
+        }
     }
 }

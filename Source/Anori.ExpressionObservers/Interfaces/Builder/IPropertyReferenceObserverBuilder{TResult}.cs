@@ -36,6 +36,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// </summary>
         /// <returns>The Value Property Observer Builder.</returns>
         IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult> WithNotifyProperyChanged();
+
         /// <summary>
         ///     Withes the action.
         /// </summary>

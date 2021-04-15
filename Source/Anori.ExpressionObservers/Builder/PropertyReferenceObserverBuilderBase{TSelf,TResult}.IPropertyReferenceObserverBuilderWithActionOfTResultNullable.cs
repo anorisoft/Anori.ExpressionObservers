@@ -76,11 +76,8 @@ namespace Anori.ExpressionObservers.Builder
         IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>
             IPropertyObserverGetterTaskScheduler<
                 IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>.
-            WithGetterDispatcher()
-        {
-            this.IsDispached = true;
-            return this;
-        }
+            WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
 
         /// <summary>
         ///     Withes the getter task scheduler.
@@ -92,10 +89,7 @@ namespace Anori.ExpressionObservers.Builder
         IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>
             IPropertyObserverGetterTaskScheduler<
                 IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>.
-            WithGetterTaskScheduler(TaskScheduler taskScheduler)
-        {
-            this.TaskScheduler = taskScheduler;
-            return this;
-        }
+            WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterTaskScheduler(taskScheduler);
     }
 }

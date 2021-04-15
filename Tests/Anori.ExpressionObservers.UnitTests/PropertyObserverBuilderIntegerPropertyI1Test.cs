@@ -2400,8 +2400,8 @@ namespace Anori.ExpressionObservers.UnitTests
                         value = v;
                         callCount++;
                     })
-                .WithGetter()
                 .WithFallback(99)
+                .WithGetter()
                 .Build();
 
             Assert.AreEqual(0, callCount);

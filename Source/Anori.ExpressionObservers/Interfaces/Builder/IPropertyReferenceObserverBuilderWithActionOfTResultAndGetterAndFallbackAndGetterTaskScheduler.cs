@@ -18,7 +18,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <summary>
         /// Builds this instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
         IPropertyObserverWithGetterAndFallback<TResult> Build();
     }
 }

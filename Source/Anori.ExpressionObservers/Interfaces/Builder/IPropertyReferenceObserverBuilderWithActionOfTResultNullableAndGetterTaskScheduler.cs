@@ -7,12 +7,14 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
     /// <summary>
-    /// The I Property Value Observer Builder With Action Of T Result Nullable And Getter Task Scheduler interface.
+    ///     The I Property Value Observer Builder With Action Of T Result Nullable And Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler{TResult}}" />
+    /// <seealso
+    ///     cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler{TResult}}" />
     public interface IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult> :
-        IPropertyObserverBuilderBase<IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
+        IPropertyObserverBuilderBase<
+            IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -22,14 +24,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         ///     The Property Observer.
         /// </returns>
         IPropertyReferenceObserver<TResult> Build();
-
-        // ToDo Not FallBack
-        ///// <summary>
-        ///// Withes the fallback.
-        ///// </summary>
-        ///// <param name="fallback">The fallback.</param>
-        ///// <returns></returns>
-        //IPropertyReferenceObserverBuilderWithActionOfTResultNullable<TResult>
-        //    WithFallback(TResult fallback);
     }
 }

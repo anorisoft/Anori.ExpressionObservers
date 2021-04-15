@@ -123,7 +123,9 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// </value>
         private TResult? Value
         {
+#pragma warning disable S4275 // Getters and setters should access the expected fields
             get => this.getValue();
+#pragma warning restore S4275 // Getters and setters should access the expected fields
             set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))

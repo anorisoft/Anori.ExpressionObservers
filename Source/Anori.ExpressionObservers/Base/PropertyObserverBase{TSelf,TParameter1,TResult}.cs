@@ -95,7 +95,7 @@ namespace Anori.ExpressionObservers.Base
                 {
                     case ParameterNode parameterElement:
                         {
-                            if (!(parameterElement.Next is PropertyNode propertyElement))
+                            if (!(parameterElement is { Next: PropertyNode propertyElement }))
                             {
                                 continue;
                             }
@@ -111,7 +111,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
                         {
-                            if (!(fieldElement.Next is PropertyNode propertyElement))
+                            if (fieldElement.Next is not PropertyNode propertyElement)
                             {
                                 continue;
                             }
@@ -128,7 +128,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case ConstantNode constantElement:
                         {
-                            if (!(treeRoot.Next is PropertyNode propertyElement))
+                            if (treeRoot.Next is not PropertyNode propertyElement)
                             {
                                 continue;
                             }

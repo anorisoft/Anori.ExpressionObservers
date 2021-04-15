@@ -58,7 +58,6 @@ namespace Anori.ExpressionObservers.Builder
     ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler{TResult}" />
     internal abstract partial class PropertyReferenceObserverBuilderBase<TSelf, TResult> :
         IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>
-
     {
         /// <summary>
         ///     Automatics the activate.

@@ -27,7 +27,8 @@ namespace Anori.ExpressionObservers.Base
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="PropertyObserverFundatinBase{TSelf}" />
     /// <seealso cref="PropertyObserverFundatinBase" />
-    internal abstract class PropertyObserverBase<TSelf, TParameter1, TParameter2, TResult> : PropertyObserverFundatinBase<TSelf>
+    internal abstract class
+        PropertyObserverBase<TSelf, TParameter1, TParameter2, TResult> : PropertyObserverFundatinBase<TSelf>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
         where TSelf : IPropertyObserverBase<TSelf>
@@ -38,8 +39,8 @@ namespace Anori.ExpressionObservers.Base
         private readonly Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverBase{TSelf, TParameter1, TParameter2, TResult}" />
-        /// class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverBase{TSelf, TParameter1, TParameter2, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -128,7 +129,7 @@ namespace Anori.ExpressionObservers.Base
                 {
                     case ParameterNode parameterElement:
                         {
-                            if (!(parameterElement.Next is PropertyNode propertyElement))
+                            if (!(parameterElement is { Next: PropertyNode propertyElement }))
                             {
                                 continue;
                             }
@@ -148,7 +149,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
                         {
-                            if (!(fieldElement.Next is PropertyNode propertyElement))
+                            if (!(fieldElement is { Next: PropertyNode propertyElement }))
                             {
                                 continue;
                             }
@@ -165,7 +166,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case ConstantNode constantElement:
                         {
-                            if (!(treeRoot.Next is PropertyNode propertyElement))
+                            if (!(treeRoot is { Next: PropertyNode propertyElement }))
                             {
                                 continue;
                             }

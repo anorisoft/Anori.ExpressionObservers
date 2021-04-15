@@ -6,17 +6,18 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
-    using Anori.ExpressionObservers.Builder;
-
     /// <summary>
-    /// The I Property Value Observer Builder With Action Of T Result Nullable interface.
+    ///     The I Property Value Observer Builder With Action Of T Result Nullable interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
-    /// <seealso cref="IPropertyObserverGetterTaskScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
+    /// <seealso
+    ///     cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
+    /// <seealso
+    ///     cref="IPropertyObserverGetterTaskScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}}" />
     public interface IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult> :
         IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>>,
-        IPropertyObserverGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
+        IPropertyObserverGetterTaskScheduler<
+            IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -26,14 +27,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         ///     The Property Observer.
         /// </returns>
         IPropertyValueObserver<TResult> Build();
-
-        // ToDo Not FallBack
-        ///// <summary>
-        ///// Withes the fallback.
-        ///// </summary>
-        ///// <param name="fallback">The fallback.</param>
-        ///// <returns></returns>
-        //IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>
-        //    WithFallback(TResult fallback);
     }
 }

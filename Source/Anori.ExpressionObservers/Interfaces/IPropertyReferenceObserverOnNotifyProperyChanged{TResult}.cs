@@ -1,39 +1,31 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverOnNotifyProperyChanged.cs" company="AnoriSoft">
+// <copyright file="IPropertyReferenceObserverOnNotifyProperyChanged{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Interfaces
 {
-    using System;
     using System.ComponentModel;
 
     /// <summary>
-    /// The I Property Value Observer On Notify Propery Changed interface.
+    ///     The Property Value Observer On Notify Propery Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnNotifyProperyChanged{TResult}}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    public interface IPropertyReferenceObserverOnNotifyProperyChanged<out TResult> : IPropertyObserverBase<IPropertyReferenceObserverOnNotifyProperyChanged<TResult>>, INotifyPropertyChanged ,IDisposable
+    public interface IPropertyReferenceObserverOnNotifyProperyChanged<out TResult> :
+        IPropertyObserverBase<IPropertyReferenceObserverOnNotifyProperyChanged<TResult>>,
+        INotifyPropertyChanged
         where TResult : class
     {
         /// <summary>
-        /// Gets the value.
+        ///     Gets the value.
         /// </summary>
         /// <value>
-        /// The value.
+        ///     The value.
         /// </value>
         TResult? Value { get; }
-    }
-
-    public interface IPropertyObserverOnNotifyProperyChanged<out TResult> : IPropertyObserverBase<IPropertyObserverOnNotifyProperyChanged<TResult>>, INotifyPropertyChanged, IDisposable
-    {
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
-        TResult Value { get; }
     }
 }

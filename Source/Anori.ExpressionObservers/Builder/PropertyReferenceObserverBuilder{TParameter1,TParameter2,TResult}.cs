@@ -77,12 +77,6 @@ namespace Anori.ExpressionObservers.Builder
         public PropertyObserverFlag PropertyObserverFlag { get; set; }
 
         /// <summary>
-        ///     Cacheds this instance.
-        /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
-        protected override PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult> Cached() => this;
-
-        /// <summary>
         ///     Creates the property value observer builder with action of t result and fallback.
         /// </summary>
         /// <returns>
@@ -490,48 +484,5 @@ namespace Anori.ExpressionObservers.Builder
 
             return observer;
         }
-        
-        /// <summary>
-        ///     Withes the action.
-        /// </summary>
-        /// <param name="action">The action.</param>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult> WithAction() => this;
-
-        /// <summary>
-        ///     Withes the action.
-        /// </summary>
-        /// <param name="action">The action.</param>
-        /// <returns>The Value Property Observer Builder.</returns>
-        protected override PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult> WithActionOfTResult() =>
-            this;
-
-        /// <summary>
-        ///     Withes the action.
-        /// </summary>
-        /// <param name="action">The action.</param>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        protected override PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult>
-            WithActionOfTResultWithFallback() =>
-            this;
-
-        /// <summary>
-        ///     Withes the notify propery changed.
-        /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
-        protected override PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult>
-            WithNotifyProperyChanged() =>
-            this;
-
-        /// <summary>
-        ///     Withes the value changed.
-        /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
-        protected override PropertyReferenceObserverBuilder<TParameter1, TParameter2, TResult> WithValueChanged() =>
-            this;
     }
 }

@@ -19,7 +19,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Observer Builder.
+        /// </returns>
         IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback<TResult>
             WithFallback(TResult fallback);
     }

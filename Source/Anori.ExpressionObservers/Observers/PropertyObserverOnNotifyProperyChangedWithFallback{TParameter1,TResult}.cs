@@ -98,8 +98,8 @@ namespace Anori.ExpressionObservers.Observers
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableCachedGetter(
-                this.CreateNullableGetter(Getter(propertyExpression, this.Tree, fallback, parameter1), taskScheduler),
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1), taskScheduler),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));
@@ -152,8 +152,8 @@ namespace Anori.ExpressionObservers.Observers
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableCachedGetter(
-                this.CreateNullableGetter(
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(
                     Getter(propertyExpression, this.Tree, fallback, parameter1),
                     synchronizationContext),
                 isCached,
@@ -197,8 +197,8 @@ namespace Anori.ExpressionObservers.Observers
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            (this.action, this.getter) = this.CreateNullableCachedGetter(
-                this.CreateNullableGetter(Getter(propertyExpression, this.Tree, fallback, parameter1)),
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1)),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));

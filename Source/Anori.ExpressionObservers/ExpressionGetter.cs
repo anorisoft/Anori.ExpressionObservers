@@ -6,11 +6,13 @@
 
 namespace Anori.ExpressionObservers
 {
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using JetBrains.Annotations;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Tree.Interfaces;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     ///     The Expression Getter class.
@@ -230,18 +232,20 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        /// Creates the getter.
+        ///     Creates the getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
         /// <param name="expressionTree">The expression tree.</param>
         /// <returns>The Getter.</returns>
         /// <exception cref="ArgumentNullException">
-        /// parameters
-        /// or
-        /// expressionTree is null.
+        ///     parameters
+        ///     or
+        ///     expressionTree is null.
         /// </exception>
-        public static Func<TResult> CreateGetter<TResult>(ReadOnlyCollection<ParameterExpression> parameters, IExpressionTree expressionTree)
+        public static Func<TResult> CreateGetter<TResult>(
+            ReadOnlyCollection<ParameterExpression> parameters,
+            IExpressionTree expressionTree)
         {
             if (parameters == null)
             {

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverWithGetterAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserverWithActionAndGetterAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -71,7 +71,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionAndGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithActionAndGetterAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -100,7 +101,8 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyObserverWithActionAndGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="PropertyObserverWithActionAndGetterAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>

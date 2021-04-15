@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.Base
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyObserverFundatinBase{TSelf}" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverFundatinBase{TSelf}" /> class.
         /// </summary>
         /// <param name="observerFlag">PropertyObserverFlag.</param>
         protected PropertyObserverFundatinBase(PropertyObserverFlag observerFlag)
@@ -71,11 +71,79 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the get property nullable reference.
+        ///     Creates the nullable cached getter.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="get">The get.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="propertyChanged">The property changed.</param>
+        /// <returns>Valeu getter function.</returns>
+        protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
+            Func<TResult> get,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            Action propertyChanged)
+        {
+            Action action;
+            Func<TResult> getter;
+            if (isCached)
+            {
+                var cache = new ResetLazy<TResult>(get, safetyMode);
+                action = () =>
+                    {
+                        cache.Reset();
+                        propertyChanged.Raise();
+                    };
+                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+                {
+                    getter = () => this.IsActive ? cache.Value : throw new NotActivatedException();
+                }
+                else
+                {
+                    getter = () => cache.Value;
+                }
+            }
+            else
+            {
+                action = () => propertyChanged.Raise();
+                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+                {
+                    getter = () => this.IsActive ? get() : throw new NotActivatedException();
+                }
+                else
+                {
+                    getter = get;
+                }
+            }
+
+            return (action, getter);
+        }
+
+        /// <summary>
+        ///     Creates the get property nullable value.
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="value">The value.</param>
-        /// <returns></returns>
+        /// <returns>Valeu getter function.</returns>
+        protected Func<TValue> CreateGetProperty<TValue>(Func<TValue> value)
+        {
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                return () => this.IsActive ? value() : throw new NotActivatedException();
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        ///     Creates the get property nullable reference.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        ///     Valeu getter function.
+        /// </returns>
         protected Func<TValue?> CreateGetPropertyNullableReference<TValue>(Func<TValue?> value)
             where TValue : class
         {
@@ -88,12 +156,16 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the get property nullable value.
+        ///     Creates the get property nullable value.
         /// </summary>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="value">The value.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     Value getter function.
+        /// </returns>
+#pragma warning disable S4144 // Methods should not have identical implementations
         protected Func<TValue?> CreateGetPropertyNullableValue<TValue>(Func<TValue?> value)
+#pragma warning restore S4144 // Methods should not have identical implementations
             where TValue : struct
         {
             if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
@@ -105,30 +177,15 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the get property nullable value.
-        /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
-        /// <param name="value">The value.</param>
-        /// <returns></returns>
-        protected Func<TValue> CreateGetProperty<TValue>(Func<TValue> value)
-        {
-            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-            {
-                return () => this.IsActive ? value() : throw new NotActivatedException();
-            }
-
-            return value;
-        }
-
-        /// <summary>
-        /// Creates the dispatcher getter.
+        ///     Creates the dispatcher getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <returns>
-        /// The Getter.
+        ///     The Getter.
         /// </returns>
+        /// <returns>Valeu getter function.</returns>
         protected Func<TResult> CreateGetter<TResult>(Func<TResult> get, SynchronizationContext synchronizationContext)
         {
             if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
@@ -140,12 +197,12 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creaters the getter.
+        ///     Creaters the getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <returns>
-        /// The Getter.
+        ///     The Getter.
         /// </returns>
         protected Func<TResult> CreateGetter<TResult>(Func<TResult> get)
         {
@@ -158,13 +215,13 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the task factory getter.
+        ///     Creates the task factory getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        /// The Getter.
+        ///     The Getter.
         /// </returns>
         protected Func<TResult> CreateGetter<TResult>(Func<TResult> get, TaskScheduler taskScheduler)
         {
@@ -177,16 +234,15 @@ namespace Anori.ExpressionObservers.Base
             return () => taskFactory.StartNew(get).Result;
         }
 
-
         /// <summary>
-        /// Creates the nullable reference cached getter.
+        ///     Creates the nullable reference cached getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="propertyChanged">The property changed.</param>
-        /// <returns></returns>
+        /// <returns>Valeu getter function.</returns>
         protected (Action, Func<TResult?>) CreateNullableReferenceCachedGetter<TResult>(
             Func<TResult?> get,
             bool isCached,
@@ -230,57 +286,7 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the nullable cached getter.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="get">The get.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="propertyChanged">The property changed.</param>
-        /// <returns></returns>
-        protected (Action, Func<TResult>) CreateNullableCachedGetter<TResult>(
-            Func<TResult> get,
-            bool isCached,
-            LazyThreadSafetyMode safetyMode,
-            Action propertyChanged)
-        {
-            Action action;
-            Func<TResult> getter;
-            if (isCached)
-            {
-                var cache = new ResetLazy<TResult>(get, safetyMode);
-                action = () =>
-                    {
-                        cache.Reset();
-                        propertyChanged.Raise();
-                    };
-                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-                {
-                    getter = () => this.IsActive ? cache.Value : throw new NotActivatedException();
-                }
-                else
-                {
-                    getter = () => cache.Value;
-                }
-            }
-            else
-            {
-                action = () => propertyChanged.Raise();
-                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-                {
-                    getter = () => this.IsActive ? get() : throw new NotActivatedException();
-                }
-                else
-                {
-                    getter = get;
-                }
-            }
-
-            return (action, getter);
-        }
-
-        /// <summary>
-        /// Creates the nullable value getter.
+        ///     Creates the nullable value getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
@@ -299,26 +305,7 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the nullable getter.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="get">The get.</param>
-        /// <param name="taskScheduler">The task scheduler.</param>
-        /// <returns>The Getter.</returns>
-        protected Func<TResult> CreateNullableGetter<TResult>(Func<TResult> get, TaskScheduler taskScheduler)
-        {
-            var taskFactory = new TaskFactory(taskScheduler);
-            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-            {
-                return () => this.IsActive ? taskFactory.StartNew(get).Result : throw new NotActivatedException();
-            }
-
-            return () => taskFactory.StartNew(get).Result;
-        }
-
-
-        /// <summary>
-        /// Creates the nullable value getter.
+        ///     Creates the nullable value getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
@@ -338,28 +325,7 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the nullable getter.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="get">The get.</param>
-        /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <returns>
-        /// The Getter.
-        /// </returns>
-        protected Func<TResult> CreateNullableGetter<TResult>(
-            Func<TResult> get,
-            SynchronizationContext synchronizationContext)
-        {
-            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-            {
-                return () => this.IsActive ? synchronizationContext.Send(get) : throw new NotActivatedException();
-            }
-
-            return () => synchronizationContext.Send(get);
-        }
-
-        /// <summary>
-        /// Creates the nullable value getter.
+        ///     Creates the nullable value getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
@@ -376,35 +342,21 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the nullable getter.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="get">The get.</param>
-        /// <returns>The Getter.</returns>
-        protected Func<TResult> CreateNullableGetter<TResult>(Func<TResult> get)
-        {
-            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
-            {
-                return () => this.IsActive ? get() : throw new NotActivatedException();
-            }
-
-            return get;
-        }
-
-        /// <summary>
-        /// Creates the nullable value cached getter.
+        ///     Creates the nullable value cached getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="propertyChanged">The property changed.</param>
-        /// <returns></returns>
+        /// <returns>Valeu getter function.</returns>
+#pragma warning disable S4144 // Methods should not have identical implementations
         protected (Action, Func<TResult?>) CreateNullableValueCachedGetter<TResult>(
             Func<TResult?> get,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             Action propertyChanged)
+#pragma warning restore S4144 // Methods should not have identical implementations
             where TResult : struct
         {
             Action action;
@@ -443,13 +395,15 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the nullable value getter.
+        ///     Creates the nullable value getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <returns></returns>
+        /// <returns>Valeu getter function.</returns>
+#pragma warning disable S4144 // Methods should not have identical implementations
         protected Func<TResult?> CreateNullableValueGetter<TResult>(Func<TResult?> get, TaskScheduler taskScheduler)
+#pragma warning restore S4144 // Methods should not have identical implementations
             where TResult : struct
         {
             var taskFactory = new TaskFactory(taskScheduler);
@@ -462,15 +416,17 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the nullable value getter.
+        ///     Creates the nullable value getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <returns></returns>
+        /// <returns>Valeu getter function.</returns>
+#pragma warning disable S4144 // Methods should not have identical implementations
         protected Func<TResult?> CreateNullableValueGetter<TResult>(
             Func<TResult?> get,
             SynchronizationContext synchronizationContext)
+#pragma warning restore S4144 // Methods should not have identical implementations
             where TResult : struct
         {
             if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
@@ -482,12 +438,14 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the nullable value getter.
+        ///     Creates the nullable value getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
-        /// <returns></returns>
+        /// <returns>Valeu getter function.</returns>
+#pragma warning disable S4144 // Methods should not have identical implementations
         protected Func<TResult?> CreateNullableValueGetter<TResult>(Func<TResult?> get)
+#pragma warning restore S4144 // Methods should not have identical implementations
             where TResult : struct
         {
             if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))

@@ -8,20 +8,20 @@ namespace Anori.ExpressionObservers.UnitTests
 {
     public class ComplexType : TestPurposeBindableBase
     {
-        private ComplexType _innerComplexProperty;
+        private ComplexType innerComplexProperty;
 
-        private int _intProperty;
+        private int intProperty;
 
         public ComplexType InnerComplexProperty
         {
-            get => this._innerComplexProperty;
-            set => this.SetProperty(ref this._innerComplexProperty, value);
+            get => this.innerComplexProperty;
+            set => this.SetProperty(ref this.innerComplexProperty, value);
         }
 
         public int IntProperty
         {
-            get => this._intProperty;
-            set => this.SetProperty(ref this._intProperty, value);
+            get => this.intProperty;
+            set => this.SetProperty(ref this.intProperty, value);
         }
     }
 

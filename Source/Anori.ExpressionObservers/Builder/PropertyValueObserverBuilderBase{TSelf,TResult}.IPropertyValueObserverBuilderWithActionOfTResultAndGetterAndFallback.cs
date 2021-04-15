@@ -1,17 +1,18 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionOfTResultAndFallback.cs" company="AnoriSoft">
+// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Interfaces.Builder;
     using System.Threading.Tasks;
 
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
+
     /// <summary>
-    /// The Property Value Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -33,9 +34,20 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}" />
     /// <seealso cref="IPropertyValueObserverBuilder{TResult}" />
     internal abstract partial class
-        PropertyValueObserverBuilderBase<TSelf, TResult> : IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<
-            TResult>
+        PropertyValueObserverBuilderBase<TSelf, TResult> :
+            IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>
     {
+        /// <summary>
+        ///     Automatics the activate.
+        /// </summary>
+        /// <returns>
+        ///     The Property Observer Builder.
+        /// </returns>
+        IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>
+            IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
+
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -47,38 +59,28 @@ namespace Anori.ExpressionObservers.Builder
             this.CreatePropertyObserverWithActionOfTResultAndGetterAndFallback();
 
         /// <summary>
-        /// Withes the getter task scheduler.
+        ///     Withes the getter dispatcher.
+        /// </summary>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
+        IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>
+        IPropertyObserverGetterTaskScheduler<
+                IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>>.
+            WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
+
+        /// <summary>
+        ///     Withes the getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        /// The target object.
+        ///     The target object.
         /// </returns>
-        IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult> IPropertyObserverGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>>.WithGetterTaskScheduler(
-            TaskScheduler taskScheduler)
-        {
-            this.TaskScheduler = taskScheduler;
-            return this;
-        }
-
-        /// <summary>
-        /// Withes the getter dispatcher.
-        /// </summary>
-        /// <returns></returns>
-        IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult> IPropertyObserverGetterTaskScheduler<IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>>.WithGetterDispatcher()
-        {
-            this.IsDispached = true;
-            return this;
-        }
-
-        /// <summary>
-        /// Automatics the activate.
-        /// </summary>
-        /// <returns>
-        /// The Property Observer Builder.
-        /// </returns>
-        IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>
-            IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>>.
-            AutoActivate() =>
-            this.AutoActivate();
+        IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>
+            IPropertyObserverGetterTaskScheduler<
+                IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>>.
+            WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterTaskScheduler(taskScheduler);
     }
 }

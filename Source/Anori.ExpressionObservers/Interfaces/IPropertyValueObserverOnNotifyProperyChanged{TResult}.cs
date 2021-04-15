@@ -19,7 +19,6 @@ namespace Anori.ExpressionObservers.Interfaces
         IPropertyObserverBase<IPropertyValueObserverOnNotifyProperyChanged<TResult>>,
         INotifyPropertyChanged
         where TResult : struct
-
     {
         /// <summary>
         ///     Gets the value.

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TreeException.cs" company="AnoriSoft">
+// <copyright file="FallbackAlreadyDefineException.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,23 +12,23 @@ namespace Anori.ExpressionObservers.Exceptions
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The Tree Exception class.
+    ///     The Fallback Already Define Exception class.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Exceptions.ExpressionObserversException" />
     [Serializable]
-    public class TreeException : ExpressionObserversException
+    public class FallbackAlreadyDefineException : ExpressionObserversException
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TreeException" /> class.
+        ///     Initializes a new instance of the <see cref="FallbackAlreadyDefineException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public TreeException(string message)
-            : base(message)
+        public FallbackAlreadyDefineException()
+            : base("Fallback is already activated.")
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TreeException" /> class.
+        ///     Initializes a new instance of the <see cref="FallbackAlreadyDefineException" /> class.
         /// </summary>
         /// <param name="info">
         ///     The <see cref="T:System.Runtime.Serialization.SerializationInfo"></see> that holds the serialized
@@ -38,7 +38,7 @@ namespace Anori.ExpressionObservers.Exceptions
         ///     The <see cref="T:System.Runtime.Serialization.StreamingContext"></see> that contains contextual
         ///     information about the source or destination.
         /// </param>
-        public TreeException([NotNull] SerializationInfo info, StreamingContext context)
+        public FallbackAlreadyDefineException([NotNull] SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

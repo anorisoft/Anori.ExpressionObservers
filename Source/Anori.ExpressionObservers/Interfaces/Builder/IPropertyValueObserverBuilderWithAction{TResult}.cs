@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyValueObserverBuilderWithAction.cs" company="AnoriSoft">
+// <copyright file="IPropertyValueObserverBuilderWithAction{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,11 +7,14 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
     /// <summary>
-    /// The I Value Property Observer Builder With Action interface.
+    ///     The I Value Property Observer Builder With Action interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithAction{TResult}}" />
-    public interface IPropertyValueObserverBuilderWithAction<TResult> : IPropertyObserverBuilderBase<IPropertyValueObserverBuilderWithAction<TResult>>
+    /// <seealso
+    ///     cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithAction{TResult}}" />
+    public interface
+        IPropertyValueObserverBuilderWithAction<TResult> : IPropertyObserverBuilderBase<
+            IPropertyValueObserverBuilderWithAction<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -21,7 +24,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         IPropertyObserver<TResult> Build();
 
         /// <summary>
-        /// Withes the getter.
+        ///     Withes the getter.
         /// </summary>
         /// <returns>The Property Observer Builder.</returns>
         IPropertyValueObserverBuilderWithActionAndGetter<TResult> WithGetter();

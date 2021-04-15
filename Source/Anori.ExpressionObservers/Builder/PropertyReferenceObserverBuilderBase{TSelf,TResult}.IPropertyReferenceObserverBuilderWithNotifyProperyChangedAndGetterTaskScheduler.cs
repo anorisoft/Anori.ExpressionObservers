@@ -1,18 +1,16 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverBuilderBase{TSelf,TResult}.IPropertyReferenceObserverBuilder.cs" company="AnoriSoft">
+// <copyright file="PropertyReferenceObserverBuilderBase{TSelf,TResult}.IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Builder
 {
-    using System;
-
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    /// The Property Value Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -20,7 +18,8 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback{TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilderWithAction{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilderWithActionOfTResult{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilderWithActionAndGetter{TResult}" />
@@ -34,7 +33,8 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilder{TResult}" />
     internal abstract partial class
-        PropertyReferenceObserverBuilderBase<TSelf, TResult> : IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
+        PropertyReferenceObserverBuilderBase<TSelf, TResult> :
+            IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -44,7 +44,8 @@ namespace Anori.ExpressionObservers.Builder
         /// </returns>
         IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
             IPropertyObserverBuilderBase<
-                IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>.AutoActivate() =>
+                IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>.
+            AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>

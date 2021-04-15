@@ -31,6 +31,7 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler{TResult}" />
     /// <seealso cref="IPropertyValueObserverBuilderWithActionOfTResultNullable{TResult}" />
     /// <seealso cref="IPropertyValueObserverBuilder{TResult}" />
+    // ReSharper disable UnusedTypeParameter
     internal abstract partial class
         PropertyValueObserverBuilderBase<TSelf, TResult> :
             IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>

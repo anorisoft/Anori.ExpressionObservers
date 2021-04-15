@@ -21,12 +21,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <returns>The Property Observer.</returns>
         IPropertyReferenceObserverWithGetter<TResult> Build();
 
-
         /// <summary>
         /// Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
+        /// <returns>The Property Observer Builder.</returns>
         IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>
             WithFallback(TResult fallback);
     }

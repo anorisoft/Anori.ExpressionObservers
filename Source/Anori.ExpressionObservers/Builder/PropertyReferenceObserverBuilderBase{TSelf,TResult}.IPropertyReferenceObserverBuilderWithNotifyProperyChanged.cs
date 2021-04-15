@@ -45,9 +45,8 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}" />
     /// <seealso cref="IPropertyReferenceObserverBuilder{TResult}" />
     internal abstract partial class
-        PropertyReferenceObserverBuilderBase<TSelf, TResult> : IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult
-        >
-
+        PropertyReferenceObserverBuilderBase<TSelf, TResult> : IPropertyReferenceObserverBuilderWithNotifyProperyChanged
+            <TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -61,63 +60,6 @@ namespace Anori.ExpressionObservers.Builder
             this.AutoActivate();
 
         /// <summary>
-        ///     Cacheds this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>
-            IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>.Cached()
-        {
-            this.IsCached = true;
-            this.SafetyMode = LazyThreadSafetyMode.None;
-            return this.Cached();
-        }
-
-        /// <summary>
-        ///     Cacheds the specified safety mode.
-        /// </summary>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>
-            IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>.Cached(
-                LazyThreadSafetyMode safetyMode)
-        {
-            this.IsCached = true;
-            this.SafetyMode = safetyMode;
-            return this.Cached();
-        }
-
-        /// <summary>
-        ///     Cacheds this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>
-            IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>.Cached()
-        {
-            this.IsCached = true;
-            this.SafetyMode = LazyThreadSafetyMode.None;
-            return this.Cached();
-        }
-
-        /// <summary>
-        ///     Cacheds the specified safety mode.
-        /// </summary>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>The Property Value Observer Builder.</returns>
-        IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>
-            IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>.Cached(LazyThreadSafetyMode safetyMode)
-        {
-            this.IsCached = true;
-            this.SafetyMode = safetyMode;
-            return this.Cached();
-        }
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
@@ -128,17 +70,58 @@ namespace Anori.ExpressionObservers.Builder
             this.CreatePropertyReferenceObserverOnNotifyProperyChanged();
 
         /// <summary>
+        ///     Cacheds this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
+        IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>
+            IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>.Cached() =>
+            this.Cached();
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
+        IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>
+            IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>.Cached(
+                LazyThreadSafetyMode safetyMode) =>
+            this.Cached(safetyMode);
+
+        /// <summary>
+        ///     Cacheds this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Value Property Observer Builder.
+        /// </returns>
+        IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>
+            IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>.Cached() =>
+            this.Cached();
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>The Property Value Observer Builder.</returns>
+        IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>
+            IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>.
+            Cached(LazyThreadSafetyMode safetyMode) =>
+            this.Cached(safetyMode);
+
+        /// <summary>
         ///     Withes the getter dispatcher.
         /// </summary>
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult> IPropertyObserverGetterTaskScheduler<
-            IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>.WithGetterDispatcher()
-        {
-            this.IsDispached = true;
-            return this;
-        }
+        IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
+            IPropertyObserverGetterTaskScheduler<
+                IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>.
+            WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
 
         /// <summary>
         ///     Withes the getter task scheduler.
@@ -148,11 +131,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Value Property Observer Builder.
         /// </returns>
         IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>
-            IPropertyObserverGetterTaskScheduler<IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>.
-            WithGetterTaskScheduler(TaskScheduler taskScheduler)
-        {
-            this.TaskScheduler = taskScheduler;
-            return this;
-        }
+            IPropertyObserverGetterTaskScheduler<
+                IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>>.
+            WithGetterTaskScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterTaskScheduler(taskScheduler);
     }
 }
