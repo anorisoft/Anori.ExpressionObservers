@@ -201,7 +201,7 @@
 
 	<h1 id="Syntax">Syntax</h1>
 	<pre><code>[NotNull]
-public static IPropertyObserverWithFallback&lt;TResult&gt; Observes&lt;TParameter1, TParameter2, TResult&gt;(TParameter1 parameter1, TParameter2 parameter2, Expression&lt;Func&lt;TParameter1, TParameter2, TResult&gt;&gt; propertyExpression, bool autoSubscribe, Action&lt;TResult&gt; action, TResult fallback) 
+public static IPropertyObserverWithGetterAndFallback&lt;TResult&gt; Observes&lt;TParameter1, TParameter2, TResult&gt;(TParameter1 parameter1, TParameter2 parameter2, Expression&lt;Func&lt;TParameter1, TParameter2, TResult&gt;&gt; propertyExpression, bool autoSubscribe, Action&lt;TResult&gt; action, TResult fallback) 
     where TParameter1 : INotifyPropertyChanged where TParameter2 : INotifyPropertyChanged</code></pre>
 
 
@@ -306,7 +306,7 @@ public static IPropertyObserverWithFallback&lt;TResult&gt; Observes&lt;TParamete
 					</tr>
 				</thead>
 				<tbody><tr>
-					<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverWithFallback_1">I<wbr>Property<wbr>Observer<wbr>With<wbr>Fallback</a><wbr>&lt;TResult&gt;<wbr></td>
+					<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverWithGetterAndFallback_1">I<wbr>Property<wbr>Observer<wbr>With<wbr>Getter<wbr>And<wbr>Fallback</a><wbr>&lt;TResult&gt;<wbr></td>
 					<td>
         The Property Observer.
     </td>
