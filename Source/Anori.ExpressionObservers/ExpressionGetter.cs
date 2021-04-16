@@ -159,7 +159,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the expression getter by expression tree.
+        ///     Creates the expression getter by expression tree and fallback.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -194,7 +194,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the expression getter by expression tree.
+        ///     Creates the expression getter by expression tree with fallback.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -203,12 +203,10 @@ namespace Anori.ExpressionObservers
         /// <param name="expressionTree">The expression tree.</param>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The getter.
+        ///     The expression getter function.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///     parameters
-        ///     or
-        ///     expressionTree is null.
+        ///     The parameters or expressionTree is null.
         /// </exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TResult> CreateGetterByTree<TParameter1, TParameter2, TResult>(
@@ -239,9 +237,7 @@ namespace Anori.ExpressionObservers
         /// <param name="expressionTree">The expression tree.</param>
         /// <returns>The Getter.</returns>
         /// <exception cref="ArgumentNullException">
-        ///     parameters
-        ///     or
-        ///     expressionTree is null.
+        ///     The parameters or expressionTree is null.
         /// </exception>
         [NotNull]
         public static Func<TResult> CreateGetterByTree<TResult>(

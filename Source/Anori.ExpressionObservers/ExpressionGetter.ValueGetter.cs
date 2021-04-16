@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers
         /// <returns>
         ///     The getter.
         /// </returns>
-        /// <exception cref="ArgumentNullException">expression is null.</exception>
+        /// <exception cref="ArgumentNullException">The expression is null.</exception>
         [NotNull]
         public static Func<TResult?> CreateValueGetter<TResult>([NotNull] Expression<Func<TResult>> expression)
             where TResult : struct
@@ -49,8 +49,8 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TParameter">The type of the parameter.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
-        /// <returns>The getter.</returns>
-        /// <exception cref="ArgumentNullException">expression is null.</exception>
+        /// <returns>The getter function.</returns>
+        /// <exception cref="ArgumentNullException">The expression is null.</exception>
         [NotNull]
         public static Func<TParameter, TResult?> CreateValueGetter<TParameter, TResult>(
             [NotNull] Expression<Func<TParameter, TResult>> expression)
@@ -75,9 +75,9 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The getter.
+        ///     The getter function.
         /// </returns>
-        /// <exception cref="ArgumentNullException">expression is null.</exception>
+        /// <exception cref="ArgumentNullException">The expression is null.</exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TResult?> CreateValueGetter<TParameter1, TParameter2, TResult>(
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression)
@@ -103,9 +103,9 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The getter.
+        ///     The getter function.
         /// </returns>
-        /// <exception cref="ArgumentNullException">expression is null.</exception>
+        /// <exception cref="ArgumentNullException">The expression is null.</exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TParameter3, TResult?> CreateValueGetter<TParameter1, TParameter2,
             TParameter3, TResult>([NotNull] Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression)
@@ -129,12 +129,10 @@ namespace Anori.ExpressionObservers
         /// <param name="parameters">The parameters.</param>
         /// <param name="expressionTree">The tree.</param>
         /// <returns>
-        ///     The getter.
+        ///     The getter function.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///     parameters
-        ///     or
-        ///     tree is null.
+        ///     the parameters or tree is null.
         /// </exception>
         [NotNull]
         public static Func<TResult?> CreateValueGetterByTree<TResult>(
@@ -164,9 +162,9 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
         /// <param name="expressionTree">The expression tree.</param>
-        /// <returns>The Getter.</returns>
+        /// <returns>The getter function.</returns>
         /// <exception cref="ArgumentNullException">
-        ///     parameters or expressionTree is null.
+        ///     The parameters or expressionTree is null.
         /// </exception>
         [NotNull]
         public static Func<TParameter1, TResult?> CreateValueGetterByTree<TParameter1, TResult>(
@@ -197,11 +195,9 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
         /// <param name="expressionTree">The expression tree.</param>
-        /// <returns>The Getter.</returns>
+        /// <returns>The getter function.</returns>
         /// <exception cref="ArgumentNullException">
-        ///     parameters
-        ///     or
-        ///     expressionTree is null.
+        ///     The parameters or expressionTree is null.
         /// </exception>
         [NotNull]
         public static Func<TParameter1, TParameter2, TResult?>
