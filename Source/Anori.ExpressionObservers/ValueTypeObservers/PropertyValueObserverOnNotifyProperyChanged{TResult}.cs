@@ -180,7 +180,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <returns>Getter.</returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree)
         {
-            var get = ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
+            var get = ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, tree);
             return () => get();
         }
 

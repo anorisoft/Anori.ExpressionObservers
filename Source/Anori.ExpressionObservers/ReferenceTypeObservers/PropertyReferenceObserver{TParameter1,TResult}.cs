@@ -126,7 +126,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             IExpressionTree tree,
             TParameter1 parameter1)
         {
-            var get = ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree);
+            var get = ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree);
             return () => get(parameter1);
         }
     }

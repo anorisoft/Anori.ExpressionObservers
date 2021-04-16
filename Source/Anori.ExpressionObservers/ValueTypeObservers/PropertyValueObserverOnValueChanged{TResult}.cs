@@ -152,7 +152,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     Getter.
         /// </returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
-            ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
+            ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, tree);
 
         /// <summary>
         ///     Called when [property changed].

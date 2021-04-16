@@ -243,7 +243,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             TParameter1 parameter1,
             TParameter2 parameter2)
         {
-            var get = ExpressionGetter.CreateValueGetter<TParameter1, TParameter2, TResult>(
+            var get = ExpressionGetter.CreateValueGetterByTree<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree);
             return () => get(parameter1, parameter2);

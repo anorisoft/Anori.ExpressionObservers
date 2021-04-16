@@ -39,7 +39,7 @@ namespace Anori.ExpressionObservers.Base
             PropertyObserverFlag observerFlag)
             : base(observerFlag)
         {
-            (this.ExpressionString, this.Tree) = this.CreateChain(propertyExpression);
+            this.Tree = this.CreateObserverTree(propertyExpression);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Anori.ExpressionObservers.Base
         /// <value>
         ///     The expression string.
         /// </value>
-        public sealed override string ExpressionString { get; }
+        public sealed override string ExpressionString => this.Tree.ExpressionString;
 
         /// <summary>
         ///     Gets the tree.
@@ -69,14 +69,11 @@ namespace Anori.ExpressionObservers.Base
         ///     Operation not supported for the given expression type {expression.Type}. "
         ///     + "Only MemberExpression and ConstantExpression are currently supported.
         /// </exception>
-        protected (string, IExpressionTree) CreateChain(Expression<Func<TResult>> propertyExpression)
+        protected IExpressionTree CreateObserverTree(Expression<Func<TResult>> propertyExpression)
         {
-            var tree = ExpressionTree.GetTree(propertyExpression.Body);
-            var expressionString = propertyExpression.ToString();
-
-            this.CreateChain(tree);
-
-            return (expressionString, tree);
+            var tree = ExpressionTree.New(propertyExpression);
+            this.CreateObserverTree(tree);
+            return tree;
         }
 
         /// <summary>
@@ -84,7 +81,7 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         /// <param name="tree">The nodes.</param>
         /// <exception cref="System.NotSupportedException">Expression Tree Node not supported.</exception>
-        protected void CreateChain(IRootAware tree)
+        protected void CreateObserverTree(IRootAware tree)
         {
             foreach (var treeRoot in tree.Roots)
             {

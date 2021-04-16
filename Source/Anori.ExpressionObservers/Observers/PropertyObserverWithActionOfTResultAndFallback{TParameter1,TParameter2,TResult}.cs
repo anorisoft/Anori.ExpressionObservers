@@ -148,7 +148,7 @@ namespace Anori.ExpressionObservers.Observers
             TParameter1 parameter1,
             TParameter2 parameter2)
         {
-            var get = ExpressionGetter.CreateGetter<TParameter1, TParameter2, TResult>(
+            var get = ExpressionGetter.CreateGetterByTree<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree,
                 fallback);

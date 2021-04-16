@@ -118,7 +118,7 @@ namespace Anori.ExpressionObservers.Observers
             IExpressionTree tree,
             TResult fallback)
         {
-            var get = ExpressionGetter.CreateGetter(propertyExpression.Parameters, tree, fallback);
+            var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback);
             return () => get();
         }
     }

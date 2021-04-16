@@ -123,6 +123,6 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// <param name="tree">The tree.</param>
         /// <returns>The Getter.</returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
-            ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
+            ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
     }
 }

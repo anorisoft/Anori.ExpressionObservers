@@ -19,51 +19,10 @@ namespace Anori.ExpressionObservers
     /// </summary>
     public static partial class ExpressionGetter
     {
-        /// <summary>
-        ///     Creates the parameter getter.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter">The parameter.</param>
-        /// <param name="expression">The expression.</param>
-        /// <returns>
-        ///     The getter.
-        /// </returns>
-        [CanBeNull]
-        public static Func<TParameter1, TParameter2, object> CreateParameterGetter<TParameter1, TParameter2, TResult>(
-            IParameterNode parameter,
-            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression)
-        {
-            var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateParameterBody(parameter);
-            var lambda = Expression.Lambda<Func<TParameter1, TParameter2, object>>(body, parameters);
-            return lambda.Compile();
-        }
+        
 
         /// <summary>
-        ///     Creates the parameter getter.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter">The parameter.</param>
-        /// <param name="expression">The expression.</param>
-        /// <returns>
-        ///     The getter.
-        /// </returns>
-        [CanBeNull]
-        public static Func<TParameter1, object> CreateParameterGetter<TParameter1, TResult>(
-            IParameterNode parameter,
-            [NotNull] Expression<Func<TParameter1, TResult>> expression)
-        {
-            var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateParameterBody(parameter);
-            var lambda = Expression.Lambda<Func<TParameter1, object>>(body, parameters);
-            return lambda.Compile();
-        }
-
-        /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the nullable reference type expression getter by expression tree.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
@@ -77,7 +36,7 @@ namespace Anori.ExpressionObservers
         ///     expressionTree is null.
         /// </exception>
         [NotNull]
-        public static Func<TResult?> CreateReferenceGetter<TResult>(
+        public static Func<TResult?> CreateReferenceGetterByTree<TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
             [NotNull] IExpressionTree expressionTree)
             where TResult : class
@@ -98,7 +57,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the nullable reference type expression getter by expression tree.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -112,7 +71,7 @@ namespace Anori.ExpressionObservers
         ///     expressionTree is null.
         /// </exception>
         [NotNull]
-        public static Func<TParameter1, TParameter2, TResult?> CreateReferenceGetter<TParameter1, TParameter2, TResult>(
+        public static Func<TParameter1, TParameter2, TResult?> CreateReferenceGetterByTree<TParameter1, TParameter2, TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
             [NotNull] IExpressionTree expressionTree)
             where TResult : class
@@ -133,7 +92,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the nullable reference type expression getter by expression tree.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -146,7 +105,7 @@ namespace Anori.ExpressionObservers
         ///     expressionTree is null.
         /// </exception>
         [NotNull]
-        public static Func<TParameter1, TResult?> CreateReferenceGetter<TParameter1, TResult>(
+        public static Func<TParameter1, TResult?> CreateReferenceGetterByTree<TParameter1, TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
             [NotNull] IExpressionTree expressionTree)
             where TResult : class
@@ -167,7 +126,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the nullable reference type expression getter by expression tree with fallback.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
@@ -180,10 +139,10 @@ namespace Anori.ExpressionObservers
         ///     expressionTree is null.
         /// </exception>
         [NotNull]
-        public static Func<TResult?> CreateReferenceGetter<TResult>(
+        public static Func<TResult?> CreateReferenceGetterByTree<TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
             [NotNull] IExpressionTree expressionTree,
-            TResult fallback)
+            [NotNull] TResult fallback)
             where TResult : class
         {
             if (parameters == null)
@@ -202,7 +161,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the nullable reference type expression getter.
         /// </summary>
         /// <typeparam name="TParameter">The type of the parameter.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -222,13 +181,13 @@ namespace Anori.ExpressionObservers
             }
 
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body);
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression);
             var lambda = Expression.Lambda<Func<TParameter, TResult>>(body, parameters);
             return lambda.Compile();
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the nullable reference type expression getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
@@ -246,13 +205,13 @@ namespace Anori.ExpressionObservers
             }
 
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body);
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression);
             var lambda = Expression.Lambda<Func<TResult?>>(body, parameters);
             return lambda.Compile();
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the reference type expression getter with fallback.
         /// </summary>
         /// <typeparam name="TParameter">The type of the parameter.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -265,7 +224,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         public static Func<TParameter, TResult?> CreateReferenceGetter<TParameter, TResult>(
             [NotNull] Expression<Func<TParameter, TResult>> expression,
-            TResult fallback)
+            [NotNull] TResult fallback)
             where TResult : class
         {
             if (expression == null)
@@ -274,13 +233,13 @@ namespace Anori.ExpressionObservers
             }
 
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body, Fallback(fallback));
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
             var lambda = Expression.Lambda<Func<TParameter, TResult>>(body, parameters);
             return lambda.Compile();
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the nullable reference type expression getter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -299,13 +258,13 @@ namespace Anori.ExpressionObservers
             }
 
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body);
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression);
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult>>(body, parameters);
             return lambda.Compile();
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the nullable reference type expression getter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -322,13 +281,13 @@ namespace Anori.ExpressionObservers
             where TResult : class
         {
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body);
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression);
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TParameter3, TResult>>(body, parameters);
             return lambda.Compile();
         }
 
         /// <summary>
-        ///     Creates the reference getter.
+        ///     Creates the reference type expression getter with fallback.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -343,11 +302,11 @@ namespace Anori.ExpressionObservers
         public static Func<TParameter1, TParameter2, TParameter3, TResult?>
             CreateReferenceGetter<TParameter1, TParameter2, TParameter3, TResult>(
                 [NotNull] Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression,
-                TResult fallback)
+                [NotNull] TResult fallback)
             where TResult : class
         {
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body, Fallback(fallback));
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TParameter3, TResult>>(body, parameters);
             return lambda.Compile();
         }
@@ -361,7 +320,7 @@ namespace Anori.ExpressionObservers
         ///     The getter.
         /// </returns>
         [CanBeNull]
-        private static Expression Fallback<TFallback>(TFallback fallback) =>
+        private static Expression Fallback<TFallback>([NotNull] TFallback fallback) =>
             Expression.Constant(fallback, typeof(TFallback));
     }
 }

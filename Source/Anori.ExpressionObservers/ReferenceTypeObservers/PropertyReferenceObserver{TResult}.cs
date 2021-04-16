@@ -57,7 +57,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
+            this.getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         /// </returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree)
         {
-            var get = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
+            var get = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
             return () => get();
         }
     }

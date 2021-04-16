@@ -9,7 +9,6 @@ namespace Anori.ExpressionObservers.Builder
     using System;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
@@ -27,14 +26,14 @@ namespace Anori.ExpressionObservers.Builder
         public static IExpressionGetterBuilder Builder { get; } = new ExpressionGetterBuilder();
 
         /// <summary>
-        ///     Resources the getter.
+        /// Resources the getter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Reference Getter Builder.
+        /// The Reference Getter Builder.
         /// </returns>
         IReferenceGetterBuilder<TParameter1, TParameter2, TResult> IExpressionGetterBuilder.
             ReferenceGetter<TParameter1, TParameter2, TResult>(
@@ -43,12 +42,12 @@ namespace Anori.ExpressionObservers.Builder
             new ExpressionReferenceGetterBuilder<TParameter1, TParameter2, TResult>(expression);
 
         /// <summary>
-        ///     Resources the getter.
+        /// Resources the getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Reference Getter Builder.
+        /// The Reference Getter Builder.
         /// </returns>
         IReferenceGetterBuilder<TResult> IExpressionGetterBuilder.ReferenceGetter<TResult>(
             Expression<Func<TResult>> expression)

@@ -193,7 +193,7 @@ namespace Anori.ExpressionObservers.Observers
             Expression<Func<TResult>> propertyExpression,
             IExpressionTree tree,
             TResult fallback) =>
-            ExpressionGetter.CreateGetter(propertyExpression.Parameters, tree, fallback);
+            ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback);
 
         /// <summary>
         ///     Called when [property changed].

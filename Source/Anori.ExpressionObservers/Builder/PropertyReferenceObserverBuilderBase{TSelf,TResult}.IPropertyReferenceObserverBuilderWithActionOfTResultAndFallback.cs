@@ -45,6 +45,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The Property Observer.
         /// </returns>
         public IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult> WithGetter() => this;
+        
         /// <summary>
         ///     Automatics the activate.
         /// </summary>

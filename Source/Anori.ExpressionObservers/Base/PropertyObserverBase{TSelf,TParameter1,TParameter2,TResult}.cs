@@ -57,7 +57,7 @@ namespace Anori.ExpressionObservers.Base
             this.propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             this.Parameter1 = parameter1 ?? throw new ArgumentNullException(nameof(parameter1));
             this.Parameter2 = parameter2 ?? throw new ArgumentNullException(nameof(parameter2));
-            (this.ExpressionString, this.Tree) = this.CreateChain(parameter1, parameter2);
+            this.Tree = this.CreateObserverTree(parameter1, parameter2);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Anori.ExpressionObservers.Base
         /// <value>
         ///     The expression string.
         /// </value>
-        public sealed override string ExpressionString { get; }
+        public sealed override string ExpressionString => this.Tree.ExpressionString;
 
         /// <summary>
         ///     Gets the parameter1.
@@ -106,12 +106,11 @@ namespace Anori.ExpressionObservers.Base
         ///     Operation not supported for the given expression type {expression.Type}. "
         ///     + "Only MemberExpression and ConstantExpression are currently supported.
         /// </exception>
-        protected (string, IExpressionTree) CreateChain(TParameter1 parameter1, TParameter2 parameter2)
+        protected IExpressionTree CreateObserverTree(TParameter1 parameter1, TParameter2 parameter2)
         {
-            var tree = ExpressionTree.GetTree(this.propertyExpression.Body);
-            var expressionString = this.propertyExpression.ToString();
-            this.CreateChain(parameter1, parameter2, tree);
-            return (expressionString, tree);
+            var tree = ExpressionTree.New(this.propertyExpression);
+            this.CreateObserverTree(parameter1, parameter2, tree);
+            return tree;
         }
 
         /// <summary>
@@ -121,7 +120,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="nodes">The nodes.</param>
         /// <exception cref="NotSupportedException">Expression Tree Node not supported.</exception>
-        private void CreateChain(TParameter1 parameter1, TParameter2 parameter2, IRootAware nodes)
+        private void CreateObserverTree(TParameter1 parameter1, TParameter2 parameter2, IRootAware nodes)
         {
             foreach (var treeRoot in nodes.Roots)
             {
@@ -134,7 +133,7 @@ namespace Anori.ExpressionObservers.Base
                                 continue;
                             }
 
-                            var parameterGetter = ExpressionGetter.CreateParameterGetter(
+                            var parameterGetter = ExpressionGetter.GetParameterObjectFromExpression(
                                 parameterElement,
                                 this.propertyExpression);
                             var root = new RootPropertyObserverNode(

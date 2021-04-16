@@ -114,6 +114,6 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="tree">The tree.</param>
         /// <returns>The Getter.</returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
-            ExpressionGetter.CreateValueGetter<TResult>(propertyExpression.Parameters, tree);
+            ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, tree);
     }
 }

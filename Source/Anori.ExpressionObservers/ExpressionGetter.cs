@@ -20,7 +20,112 @@ namespace Anori.ExpressionObservers
     public static partial class ExpressionGetter
     {
         /// <summary>
-        ///     Creates the value getter.
+        ///     Creates the expression getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The getter.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">expression is null.</exception>
+        [NotNull]
+        public static Func<TParameter1, TResult> CreateGetter<TParameter1, TResult>(
+            [NotNull] Expression<Func<TParameter1, TResult>> expression,
+            [NotNull] TResult fallback)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var parameters = expression.Parameters;
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
+            var lambda = Expression.Lambda<Func<TParameter1, TResult>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        ///     Creates the expression getter.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The getter.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">expression is null.</exception>
+        [NotNull]
+        public static Func<TResult> CreateGetter<TResult>(
+            [NotNull] Expression<Func<TResult>> expression,
+            [NotNull] TResult fallback)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var parameters = expression.Parameters;
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
+            var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        ///     Creates the expression getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The getter.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">expression is null.</exception>
+        [NotNull]
+        public static Func<TParameter1, TParameter2, TResult> CreateGetter<TParameter1, TParameter2, TResult>(
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression,
+            [NotNull] TResult fallback)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var parameters = expression.Parameters;
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
+            var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        ///     Creates the expression getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TParameter3">The type of the parameter3.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The getter.
+        /// </returns>
+        [NotNull]
+        public static Func<TParameter1, TParameter2, TParameter3, TResult>
+            CreateGetter<TParameter1, TParameter2, TParameter3, TResult>(
+                [NotNull] Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression,
+                [NotNull] TResult fallback)
+        {
+            var parameters = expression.Parameters;
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
+            var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TParameter3, TResult>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        ///     Creates the expression getter by expression tree.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
@@ -33,10 +138,10 @@ namespace Anori.ExpressionObservers
         ///     expressionTree is null.
         /// </exception>
         [NotNull]
-        public static Func<TResult> CreateGetter<TResult>(
+        public static Func<TResult> CreateGetterByTree<TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
             [NotNull] IExpressionTree expressionTree,
-            TResult fallback)
+            [NotNull] TResult fallback)
         {
             if (parameters == null)
             {
@@ -54,7 +159,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the value getter.
+        ///     Creates the expression getter by expression tree.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -68,10 +173,10 @@ namespace Anori.ExpressionObservers
         ///     expressionTree is null.
         /// </exception>
         [NotNull]
-        public static Func<TParameter1, TResult> CreateGetter<TParameter1, TResult>(
+        public static Func<TParameter1, TResult> CreateGetterByTree<TParameter1, TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
             [NotNull] IExpressionTree expressionTree,
-            TResult fallback)
+            [NotNull] TResult fallback)
         {
             if (parameters == null)
             {
@@ -89,88 +194,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the value getter.
-        /// </summary>
-        /// <typeparam name="TParameter">The type of the parameter.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="expression">The expression.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The getter.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">expression is null.</exception>
-        [NotNull]
-        public static Func<TParameter, TResult> CreateGetter<TParameter, TResult>(
-            [NotNull] Expression<Func<TParameter, TResult>> expression,
-            TResult fallback)
-        {
-            if (expression == null)
-            {
-                throw new ArgumentNullException(nameof(expression));
-            }
-
-            var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body, Fallback(fallback));
-            var lambda = Expression.Lambda<Func<TParameter, TResult>>(body, parameters);
-            return lambda.Compile();
-        }
-
-        /// <summary>
-        ///     Creates the value getter.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="expression">The expression.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The getter.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">expression is null.</exception>
-        [NotNull]
-        public static Func<TResult> CreateGetter<TResult>(
-            [NotNull] Expression<Func<TResult>> expression,
-            TResult fallback)
-        {
-            if (expression == null)
-            {
-                throw new ArgumentNullException(nameof(expression));
-            }
-
-            var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body, Fallback(fallback));
-            var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
-            return lambda.Compile();
-        }
-
-        /// <summary>
-        ///     Creates the value getter.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="expression">The expression.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The getter.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">expression is null.</exception>
-        [NotNull]
-        public static Func<TParameter1, TParameter2, TResult> CreateGetter<TParameter1, TParameter2, TResult>(
-            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression,
-            TResult fallback)
-        {
-            if (expression == null)
-            {
-                throw new ArgumentNullException(nameof(expression));
-            }
-
-            var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body, Fallback(fallback));
-            var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult>>(body, parameters);
-            return lambda.Compile();
-        }
-
-        /// <summary>
-        ///     Creates the getter.
+        ///     Creates the expression getter by expression tree.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -187,10 +211,10 @@ namespace Anori.ExpressionObservers
         ///     expressionTree is null.
         /// </exception>
         [NotNull]
-        public static Func<TParameter1, TParameter2, TResult> CreateGetter<TParameter1, TParameter2, TResult>(
+        public static Func<TParameter1, TParameter2, TResult> CreateGetterByTree<TParameter1, TParameter2, TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
             [NotNull] IExpressionTree expressionTree,
-            TResult fallback)
+            [NotNull] TResult fallback)
         {
             if (parameters == null)
             {
@@ -208,31 +232,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Creates the value getter.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
-        /// <typeparam name="TParameter3">The type of the parameter3.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="expression">The expression.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>
-        ///     The getter.
-        /// </returns>
-        [NotNull]
-        public static Func<TParameter1, TParameter2, TParameter3, TResult>
-            CreateGetter<TParameter1, TParameter2, TParameter3, TResult>(
-                [NotNull] Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression,
-                TResult fallback)
-        {
-            var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression.Body, Fallback(fallback));
-            var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TParameter3, TResult>>(body, parameters);
-            return lambda.Compile();
-        }
-
-        /// <summary>
-        ///     Creates the getter.
+        ///     Creates the expression getter by expression tree.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameters">The parameters.</param>
@@ -243,9 +243,9 @@ namespace Anori.ExpressionObservers
         ///     or
         ///     expressionTree is null.
         /// </exception>
-        public static Func<TResult> CreateGetter<TResult>(
-            ReadOnlyCollection<ParameterExpression> parameters,
-            IExpressionTree expressionTree)
+        public static Func<TResult> CreateGetterByTree<TResult>(
+            [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
+            [NotNull] IExpressionTree expressionTree)
         {
             if (parameters == null)
             {
@@ -259,6 +259,50 @@ namespace Anori.ExpressionObservers
 
             var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree);
             var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        ///     Gets the parameter object from expression.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The parameter object.
+        /// </returns>
+        [CanBeNull]
+        public static Func<TParameter1, TParameter2, object>
+            GetParameterObjectFromExpression<TParameter1, TParameter2, TResult>(
+                [NotNull] IParameterNode parameter,
+                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> expression)
+        {
+            var parameters = expression.Parameters;
+            var body = ExpressionCreator.CreateParameterBody(parameter);
+            var lambda = Expression.Lambda<Func<TParameter1, TParameter2, object>>(body, parameters);
+            return lambda.Compile();
+        }
+
+        /// <summary>
+        ///     Gets the parameter object from expression.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     The parameter object.
+        /// </returns>
+        [CanBeNull]
+        public static Func<TParameter1, object> GetParameterObjectFromExpression<TParameter1, TResult>(
+            [NotNull] IParameterNode parameter,
+            [NotNull] Expression<Func<TParameter1, TResult>> expression)
+        {
+            var parameters = expression.Parameters;
+            var body = ExpressionCreator.CreateParameterBody(parameter);
+            var lambda = Expression.Lambda<Func<TParameter1, object>>(body, parameters);
             return lambda.Compile();
         }
     }

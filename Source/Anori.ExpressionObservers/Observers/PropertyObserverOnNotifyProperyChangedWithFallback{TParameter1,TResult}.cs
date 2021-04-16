@@ -233,7 +233,7 @@ namespace Anori.ExpressionObservers.Observers
             TResult fallback,
             TParameter1 parameter1)
         {
-            var get = ExpressionGetter.CreateGetter<TParameter1, TResult>(
+            var get = ExpressionGetter.CreateGetterByTree<TParameter1, TResult>(
                 propertyExpression.Parameters,
                 tree,
                 fallback);

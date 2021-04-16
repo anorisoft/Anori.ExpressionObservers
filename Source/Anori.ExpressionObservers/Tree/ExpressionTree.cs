@@ -13,7 +13,6 @@ namespace Anori.ExpressionObservers.Tree
     using System.Reflection;
 
     using Anori.ExpressionObservers.Exceptions;
-    using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.Tree.Nodes;
 
@@ -23,14 +22,17 @@ namespace Anori.ExpressionObservers.Tree
     ///     Expression Tree.
     /// </summary>
     /// <seealso cref="IRootAware" />
-    internal class ExpressionTree : IExpressionTree
+    public class ExpressionTree : IExpressionTree
     {
         /// <summary>
-        ///     Prevents a default instance of the <see cref="ExpressionTree" /> class from being created.
+        ///     Initializes a new instance of the <see cref="ExpressionTree" /> class.
         /// </summary>
-        private ExpressionTree()
+        /// <param name="expression">The expression.</param>
+        private ExpressionTree(LambdaExpression expression)
         {
-            this.Nodes = null!;
+            this.Nodes = GetBranches(expression.Body, this, null);
+            this.ExpressionString = expression.ToString();
+            this.Head = this.Nodes.First();
         }
 
         /// <summary>
@@ -50,16 +52,40 @@ namespace Anori.ExpressionObservers.Tree
         public INodeCollection Nodes { get; set; }
 
         /// <summary>
-        ///     Gets the tree.
+        ///     Gets the expression string.
         /// </summary>
+        /// <value>
+        ///     The expression string.
+        /// </value>
+        public string ExpressionString { get; }
+
+        /// <summary>
+        ///     Gets the head.
+        /// </summary>
+        /// <value>
+        ///     The head.
+        /// </value>
+        public IExpressionNode Head { get; }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ExpressionTree" /> with generic parameter class.
+        /// </summary>
+        /// <typeparam name="TFunc">The type of the function.</typeparam>
         /// <param name="expression">The expression.</param>
-        /// <returns>The expression tree.</returns>
-        public static IExpressionTree GetTree(Expression expression)
-        {
-            var tree = new ExpressionTree();
-            tree.Nodes = GetTree(expression, tree, null);
-            return tree;
-        }
+        /// <returns>
+        ///     A new instance of the <see cref="ExpressionTree" />.
+        /// </returns>
+        public static IExpressionTree New<TFunc>(Expression<TFunc> expression) => new ExpressionTree(expression);
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ExpressionTree" /> with generic parameter class.
+        /// </summary>
+        /// <typeparam name="TFunc">The type of the function.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///     A new instance of the <see cref="ExpressionTree" />.
+        /// </returns>
+        public static IExpressionTree New(LambdaExpression expression) => new ExpressionTree(expression);
 
         /// <summary>
         ///     Gets the tree.
@@ -92,7 +118,7 @@ namespace Anori.ExpressionObservers.Tree
         ///     or
         ///     Expression body is not a supportet Expression {expression} type {expression.Type}.
         /// </exception>
-        public static INodeCollection GetTree(
+        internal static INodeCollection GetBranches(
             [NotNull] Expression expression,
             [NotNull] IRootAware expressionTree,
             IExpressionNode? parent)
@@ -146,12 +172,12 @@ namespace Anori.ExpressionObservers.Tree
                         if (expression != null)
                         {
                             var element = new MethodNode(methodCallExpression);
-                            element.Object = GetTree(expression, nodeCollection, element);
+                            element.Object = GetBranches(expression, nodeCollection, element);
 
                             var arguments = new List<INodeCollection>();
                             foreach (var argument in methodCallExpression.Arguments)
                             {
-                                arguments.Add(GetTree(argument, nodeCollection, element));
+                                arguments.Add(GetBranches(argument, nodeCollection, element));
                             }
 
                             element.Arguments = arguments;
@@ -165,7 +191,7 @@ namespace Anori.ExpressionObservers.Tree
                             var parameters = new List<INodeCollection>();
                             foreach (var argument in methodCallExpression.Arguments)
                             {
-                                parameters.Add(GetTree(argument, nodeCollection, element));
+                                parameters.Add(GetBranches(argument, nodeCollection, element));
                             }
 
                             element.Parameters = parameters;
@@ -184,8 +210,8 @@ namespace Anori.ExpressionObservers.Tree
                     case BinaryExpression binaryExpression:
                         {
                             var element = new BinaryNode(binaryExpression);
-                            element.LeftNodes = GetTree(binaryExpression.Left, nodeCollection, element);
-                            element.RightNodes = GetTree(binaryExpression.Right, nodeCollection, element);
+                            element.LeftNodes = GetBranches(binaryExpression.Left, nodeCollection, element);
+                            element.RightNodes = GetBranches(binaryExpression.Right, nodeCollection, element);
                             nodeCollection.AddElement(element);
                             return nodeCollection;
                         }
@@ -193,7 +219,7 @@ namespace Anori.ExpressionObservers.Tree
                     case UnaryExpression unaryExpression:
                         {
                             var element = new UnaryNode(unaryExpression);
-                            element.Operand = GetTree(unaryExpression.Operand, nodeCollection, element);
+                            element.Operand = GetBranches(unaryExpression.Operand, nodeCollection, element);
                             nodeCollection.AddElement(element);
                             return nodeCollection;
                         }
@@ -201,9 +227,9 @@ namespace Anori.ExpressionObservers.Tree
                     case ConditionalExpression conditionalExpression:
                         {
                             var element = new ConditionalNode(conditionalExpression);
-                            element.Test = GetTree(conditionalExpression.Test, nodeCollection, element);
-                            element.IfTrue = GetTree(conditionalExpression.IfTrue, nodeCollection, element);
-                            element.IfFalse = GetTree(conditionalExpression.IfFalse, nodeCollection, element);
+                            element.Test = GetBranches(conditionalExpression.Test, nodeCollection, element);
+                            element.IfTrue = GetBranches(conditionalExpression.IfTrue, nodeCollection, element);
+                            element.IfFalse = GetBranches(conditionalExpression.IfFalse, nodeCollection, element);
 
                             nodeCollection.AddElement(element);
                             return nodeCollection;
@@ -215,7 +241,7 @@ namespace Anori.ExpressionObservers.Tree
                             var parameters = new List<INodeCollection>();
                             foreach (var argument in newExpression.Arguments)
                             {
-                                parameters.Add(GetTree(argument, nodeCollection, element));
+                                parameters.Add(GetBranches(argument, nodeCollection, element));
                             }
 
                             element.Parameters = parameters;
@@ -229,7 +255,7 @@ namespace Anori.ExpressionObservers.Tree
                             var parameters = new List<INodeCollection>();
                             foreach (var argument in memberInitExpression.NewExpression.Arguments)
                             {
-                                parameters.Add(GetTree(argument, nodeCollection, element));
+                                parameters.Add(GetBranches(argument, nodeCollection, element));
                             }
 
                             element.Parameters = parameters;
@@ -274,7 +300,7 @@ namespace Anori.ExpressionObservers.Tree
                             bindingtree.Add(
                                 new MemberAssignmentNode(
                                     memberAssignment,
-                                    GetTree(memberAssignment.Expression, expressionTree, node)));
+                                    GetBranches(memberAssignment.Expression, expressionTree, node)));
                             break;
                         }
 
@@ -293,7 +319,7 @@ namespace Anori.ExpressionObservers.Tree
                                 elementInits.Add(
                                     new ElementInitNode(
                                         i,
-                                        i.Arguments.Select(a => GetTree(a, expressionTree, node)).ToList()));
+                                        i.Arguments.Select(a => GetBranches(a, expressionTree, node)).ToList()));
                             }
 
                             bindingtree.Add(new MemberListBindingNode(memberListBinding, elementInits));

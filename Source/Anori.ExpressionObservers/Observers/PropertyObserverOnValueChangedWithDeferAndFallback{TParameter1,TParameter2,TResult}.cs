@@ -70,7 +70,7 @@ namespace Anori.ExpressionObservers.Observers
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
+            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultibleDeferrer(() => this.Value = getter());
             this.action = () => this.deferrer.Update();
         }
@@ -97,7 +97,7 @@ namespace Anori.ExpressionObservers.Observers
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
+            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
             this.action = () => this.deferrer.Update();
@@ -125,7 +125,7 @@ namespace Anori.ExpressionObservers.Observers
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateGetter(propertyExpression.Parameters, this.Tree, fallback);
+            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => synchronizationContext.Send(() => this.Value = getter()));
             this.action = () => this.deferrer.Update();

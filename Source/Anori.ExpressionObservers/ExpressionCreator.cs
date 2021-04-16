@@ -20,9 +20,9 @@ namespace Anori.ExpressionObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Expression Creator .
-    /// </summary>
-    internal static class ExpressionCreator
+        ///     Expression Creator .
+        /// </summary>
+        internal static class ExpressionCreator
     {
         /// <summary>
         ///     Gets the false constant expression.
@@ -66,11 +66,11 @@ namespace Anori.ExpressionObservers
         [NotNull]
         internal static BlockExpression CreateValueBody(
             [NotNull] Type resultType,
-            [NotNull] Expression expression,
+            [NotNull] LambdaExpression expression,
             [NotNull] Expression fallback)
         {
             var returnTarget = Expression.Label(resultType);
-            var tree = ExpressionTree.GetTree(expression);
+            var tree = ExpressionTree.New(expression);
             var body = CreateValueBlock(resultType, tree, returnTarget, fallback);
             return body;
         }
@@ -84,10 +84,10 @@ namespace Anori.ExpressionObservers
         ///     The block expression.
         /// </returns>
         [NotNull]
-        internal static BlockExpression CreateValueBody([NotNull] Type resultType, [NotNull] Expression expression)
+        internal static BlockExpression CreateValueBody([NotNull] Type resultType, [NotNull] LambdaExpression expression)
         {
             var returnTarget = Expression.Label(resultType);
-            var tree = ExpressionTree.GetTree(expression);
+            var tree = ExpressionTree.New(expression);
             var body = CreateValueBlock(resultType, tree, returnTarget);
             return body;
         }

@@ -175,7 +175,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
             IExpressionTree tree,
             TParameter1 parameter1,
             TParameter2 parameter2) =>
-            () => ExpressionGetter.CreateValueGetter<TParameter1, TParameter2, TResult>(
+            () => ExpressionGetter.CreateValueGetterByTree<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree)(parameter1, parameter2);
 

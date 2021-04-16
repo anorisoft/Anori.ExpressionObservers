@@ -147,7 +147,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             IExpressionTree tree,
             TParameter1 parameter1,
             TParameter2 parameter2) =>
-            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TParameter2, TResult>(
+            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree)(parameter1, parameter2);
     }

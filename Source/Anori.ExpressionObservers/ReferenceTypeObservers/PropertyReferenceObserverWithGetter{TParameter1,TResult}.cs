@@ -130,7 +130,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
             TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateReferenceGetter<TParameter1, TResult>(propertyExpression.Parameters, tree)(
+            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
                 parameter1);
     }
 }

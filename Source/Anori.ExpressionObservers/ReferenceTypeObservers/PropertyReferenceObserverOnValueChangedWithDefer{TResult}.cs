@@ -62,7 +62,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(() => this.Value = getter());
             this.action = () => this.deferrer.Update();
         }
@@ -81,7 +81,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
             this.action = () => this.deferrer.Update();
@@ -101,7 +101,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => synchronizationContext.Send(() => this.Value = getter()));
             this.action = () => this.deferrer.Update();

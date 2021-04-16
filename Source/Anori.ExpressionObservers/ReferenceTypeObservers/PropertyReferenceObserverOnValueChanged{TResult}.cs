@@ -145,7 +145,7 @@ namespace Anori.ExpressionObservers.ReferenceTypeObservers
         ///     The Getter.
         /// </returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
-            ExpressionGetter.CreateReferenceGetter<TResult>(propertyExpression.Parameters, tree);
+            ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
 
         /// <summary>
         ///     Called when [property changed].
