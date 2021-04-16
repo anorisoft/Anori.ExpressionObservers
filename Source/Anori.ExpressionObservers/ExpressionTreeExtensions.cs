@@ -16,7 +16,7 @@ namespace Anori.ExpressionObservers
     public static class ExpressionTreeExtensions
     {
         /// <summary>
-        /// Expressions the tree.
+        /// The Expression Tree by LambdaExpression.
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <returns>The Expression Tree.</returns>
@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers
             Anori.ExpressionObservers.Tree.ExpressionTree.New(expression);
 
         /// <summary>
-        /// Expressions the tree.
+        /// The Expression Tree by Expression{TFunc}.
         /// </summary>
         /// <typeparam name="TFunc">The type of the function.</typeparam>
         /// <param name="expression">The expression.</param>

@@ -243,6 +243,7 @@ namespace Anori.ExpressionObservers
         ///     or
         ///     expressionTree is null.
         /// </exception>
+        [NotNull]
         public static Func<TResult> CreateGetterByTree<TResult>(
             [NotNull] ReadOnlyCollection<ParameterExpression> parameters,
             [NotNull] IExpressionTree expressionTree)
