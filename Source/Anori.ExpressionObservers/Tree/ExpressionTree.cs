@@ -19,7 +19,9 @@ namespace Anori.ExpressionObservers.Tree
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Expression Tree.
+    ///     Expression Tree class.
+    ///     The Expression Tree class alyses a LambdaExpression and builds a tree of IExpressionNodes. The result of the
+    ///     expression is the head and divides into root elements.
     /// </summary>
     /// <seealso cref="IRootAware" />
     public class ExpressionTree : IExpressionTree
@@ -44,12 +46,12 @@ namespace Anori.ExpressionObservers.Tree
         public IList<IExpressionNode> Roots { get; } = new List<IExpressionNode>();
 
         /// <summary>
-        ///     Gets or sets the nodes.
+        ///     Gets the nodes.
         /// </summary>
         /// <value>
         ///     The nodes.
         /// </value>
-        public INodeCollection Nodes { get; set; }
+        public INodeCollection Nodes { get; }
 
         /// <summary>
         ///     Gets the expression string.
@@ -60,7 +62,7 @@ namespace Anori.ExpressionObservers.Tree
         public string ExpressionString { get; }
 
         /// <summary>
-        ///     Gets the head.
+        ///     Gets the head of the expression tree.
         /// </summary>
         /// <value>
         ///     The head.

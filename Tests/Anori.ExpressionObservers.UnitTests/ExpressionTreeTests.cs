@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="ExpressionGetterTests.cs" company="AnoriSoft">
+// <copyright file="ExpressionTreeTests.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,20 +11,34 @@
 
 namespace Anori.ExpressionObservers.UnitTests
 {
-    using Anori.ExpressionObservers.Builder;
-    using Anori.ExpressionObservers.UnitTests.TestClasses;
-    using Anori.Extensions;
-    using Anori.PropertyChain.UnitTest;
-    using NUnit.Framework;
     using System;
     using System.Linq;
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Tree;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.PropertyChain.UnitTest;
+
+    using NUnit.Framework;
 
     public class ExpressionTreeTests
     {
+        [Test]
+        public void CreateGetter_Fallback_A_t_Property_null_Return10()
+        {
+            var tree = ExpressionTree.New<Func<TestClass1, int>>(t => t.intProperty + 1);
+            var head = tree.Head;
+            Assert.IsInstanceOf<IBinaryNode>(head);
+            Assert.AreEqual(typeof(int), head.Type);
+            Assert.IsNull(head.Next);
+            Assert.IsNull(head.Previous);
+            Assert.IsNull(head.Parent);
+            var node = (IBinaryNode)head;
+            Assert.AreEqual(ExpressionType.Add, node.NodeType);
+            Assert.AreEqual(1, node.RightNodes.Count);
+            Assert.IsInstanceOf<IConstantNode>(node.RightNodes.First());
+            var right = node.RightNodes.First();
+        }
         [Test]
         public void ExpressionTree_Create_TestClass1_intProperty()
         {
@@ -38,24 +52,6 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(typeof(TestClass1), head.Previous.Type);
             Assert.IsNull(head.Parent);
         }
-
-        [Test]
-        public void CreateGetter_Fallback_A_t_Property_null_Return10()
-        {
-            var tree = ExpressionTree.New<Func<TestClass1, int>>((TestClass1 t) => t.intProperty + 1);
-            var head = tree.Head;
-            Assert.IsInstanceOf<IBinaryNode>(head);
-            Assert.AreEqual(typeof(int), head.Type);
-            Assert.IsNull(head.Next);
-            Assert.IsNull(head.Previous);
-            Assert.IsNull(head.Parent);
-            var node = (IBinaryNode)head;
-            Assert.AreEqual(ExpressionType.Add, node.NodeType);
-            Assert.AreEqual(1, node.RightNodes.Count);
-            Assert.IsInstanceOf<IConstantNode>(node.RightNodes.First());
-            var right = node.RightNodes.First();
-        }
-
 
         [Test]
         public void ExpressionTree2()
@@ -73,6 +69,5 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.IsInstanceOf<IConstantNode>(node.RightNodes.First());
             var right = node.RightNodes.First();
         }
-
     }
 }
