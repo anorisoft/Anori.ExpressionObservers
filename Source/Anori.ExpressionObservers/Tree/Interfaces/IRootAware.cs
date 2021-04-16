@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Collections.Generic;
 
     /// <summary>
-    ///     Expression Tree Interface.
+    ///     The Root Aware interface.
     /// </summary>
     public interface IRootAware
     {

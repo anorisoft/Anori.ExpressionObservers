@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Tree.Interfaces
 {
     /// <summary>
-    ///     Internal Expression Tree Node Interface.
+    ///     The Internal Expression Tree Node Interface.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     internal interface IInternalExpressionNode : IExpressionNode

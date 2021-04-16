@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Tree.Interfaces
 {
     /// <summary>
-    ///     Binding Node Interface.
+    ///     The Binding Node Interface.
     /// </summary>
     public interface IBindingNode
     {

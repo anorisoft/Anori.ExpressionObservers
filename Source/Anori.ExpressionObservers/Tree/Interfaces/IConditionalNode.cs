@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Linq.Expressions;
 
     /// <summary>
-    /// The Conditional Node interface.
+    ///     The Conditional Node interface.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IConditionalNode : IExpressionNode

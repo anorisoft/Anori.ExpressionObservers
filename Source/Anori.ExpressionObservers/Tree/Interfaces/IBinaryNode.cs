@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Linq.Expressions;
 
     /// <summary>
-    ///     Binary Node Interface.
+    ///     The Binary Node Interface.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IBinaryNode : IExpressionNode

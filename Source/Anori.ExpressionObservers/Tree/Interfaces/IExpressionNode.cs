@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Public Expresson Tree Node Interface.
+    ///     The Expresson Tree Node Interface.
     /// </summary>
     public interface IExpressionNode
     {

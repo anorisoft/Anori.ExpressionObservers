@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     using System.Reflection;
 
     /// <summary>
-    ///     The I Function Node interface.
+    ///     The Function Node interface.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IFunctionNode : IExpressionNode
