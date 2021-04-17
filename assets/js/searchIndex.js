@@ -39,76 +39,34 @@ var searchModule = function() {
     a(
         {
             id:0,
-            title:"IPropertyValueObserverBuilderWithValueChanged",
-            content:"IPropertyValueObserverBuilderWithValueChanged",
+            title:"IPropertyReferenceObserverWithGetter",
+            content:"IPropertyReferenceObserverWithGetter",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithValueChanged_1',
-            title:"IPropertyValueObserverBuilderWithValueChanged<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyReferenceObserverWithGetter_1',
+            title:"IPropertyReferenceObserverWithGetter<TResult>",
             description:""
         }
     );
     a(
         {
             id:1,
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler",
+            title:"IPropertyValueObserver",
+            content:"IPropertyValueObserver",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserver_1',
+            title:"IPropertyValueObserver<TResult>",
             description:""
         }
     );
     a(
         {
             id:2,
-            title:"IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:3,
-            title:"IPropertyValueObserverBuilderWithActionAndGetter",
-            content:"IPropertyValueObserverBuilderWithActionAndGetter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndGetter_1',
-            title:"IPropertyValueObserverBuilderWithActionAndGetter<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:4,
-            title:"ExpressionGetterBuilder",
-            content:"ExpressionGetterBuilder",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Builder/ExpressionGetterBuilder',
-            title:"ExpressionGetterBuilder",
-            description:""
-        }
-    );
-    a(
-        {
-            id:5,
             title:"IValueGetterBuilder",
             content:"IValueGetterBuilder",
             description:'',
@@ -122,119 +80,49 @@ var searchModule = function() {
     );
     a(
         {
+            id:3,
+            title:"PropertyReferenceObserver",
+            content:"PropertyReferenceObserver",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/PropertyReferenceObserver',
+            title:"PropertyReferenceObserver",
+            description:""
+        }
+    );
+    a(
+        {
+            id:4,
+            title:"IPropertyObserverOnValueChangedWithDeferrerAndFallback",
+            content:"IPropertyObserverOnValueChangedWithDeferrerAndFallback",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverOnValueChangedWithDeferrerAndFallback_1',
+            title:"IPropertyObserverOnValueChangedWithDeferrerAndFallback<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:5,
+            title:"ExpressionTree",
+            content:"ExpressionTree",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree/ExpressionTree',
+            title:"ExpressionTree",
+            description:""
+        }
+    );
+    a(
+        {
             id:6,
-            title:"IBindingNode",
-            content:"IBindingNode",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IBindingNode',
-            title:"IBindingNode",
-            description:""
-        }
-    );
-    a(
-        {
-            id:7,
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultNullable",
-            content:"IPropertyReferenceObserverBuilderWithActionOfTResultNullable",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultNullable_1',
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultNullable<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:8,
-            title:"IPropertyObserverBuilderBase",
-            content:"IPropertyObserverBuilderBase",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyObserverBuilderBase_1',
-            title:"IPropertyObserverBuilderBase<TSelf>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:9,
-            title:"IReferenceGetterBuilder",
-            content:"IReferenceGetterBuilder",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IReferenceGetterBuilder_1',
-            title:"IReferenceGetterBuilder<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:10,
-            title:"IPropertyObserverOnNotifyProperyChanged",
-            content:"IPropertyObserverOnNotifyProperyChanged",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverOnNotifyProperyChanged_1',
-            title:"IPropertyObserverOnNotifyProperyChanged<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:11,
-            title:"IPropertyReferenceObserverOnValueChanged",
-            content:"IPropertyReferenceObserverOnValueChanged",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyReferenceObserverOnValueChanged_1',
-            title:"IPropertyReferenceObserverOnValueChanged<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:12,
-            title:"FallbackAlreadyDefineException",
-            content:"FallbackAlreadyDefineException",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/FallbackAlreadyDefineException',
-            title:"FallbackAlreadyDefineException",
-            description:""
-        }
-    );
-    a(
-        {
-            id:13,
-            title:"IPropertyReferenceObserverBuilder",
-            content:"IPropertyReferenceObserverBuilder",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilder_1',
-            title:"IPropertyReferenceObserverBuilder<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:14,
             title:"IPropertyValueObserverBuilderWithActionOfTResultAndFallback",
             content:"IPropertyValueObserverBuilderWithActionOfTResultAndFallback",
             description:'',
@@ -248,35 +136,21 @@ var searchModule = function() {
     );
     a(
         {
-            id:15,
-            title:"Disposable",
-            content:"Disposable",
+            id:7,
+            title:"IPropertyValueObserverBuilderWithNotifyProperyChanged",
+            content:"IPropertyValueObserverBuilderWithNotifyProperyChanged",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/Disposable',
-            title:"Disposable",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithNotifyProperyChanged_1',
+            title:"IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>",
             description:""
         }
     );
     a(
         {
-            id:16,
-            title:"PropertyObserverBuilder",
-            content:"PropertyObserverBuilder",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Builder/PropertyObserverBuilder',
-            title:"PropertyObserverBuilder",
-            description:""
-        }
-    );
-    a(
-        {
-            id:17,
+            id:8,
             title:"IValueGetterBuilder",
             content:"IValueGetterBuilder",
             description:'',
@@ -290,63 +164,259 @@ var searchModule = function() {
     );
     a(
         {
-            id:18,
-            title:"IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback",
-            content:"IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback",
+            id:9,
+            title:"FallbackAlreadyDefineException",
+            content:"FallbackAlreadyDefineException",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback_1',
-            title:"IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/FallbackAlreadyDefineException',
+            title:"FallbackAlreadyDefineException",
+            description:""
+        }
+    );
+    a(
+        {
+            id:10,
+            title:"AutoActivateAlreadyActivatedException",
+            content:"AutoActivateAlreadyActivatedException",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/AutoActivateAlreadyActivatedException',
+            title:"AutoActivateAlreadyActivatedException",
+            description:""
+        }
+    );
+    a(
+        {
+            id:11,
+            title:"IMemberInitNode",
+            content:"IMemberInitNode",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMemberInitNode',
+            title:"IMemberInitNode",
+            description:""
+        }
+    );
+    a(
+        {
+            id:12,
+            title:"IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:13,
+            title:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler",
+            content:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler_1',
+            title:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:14,
+            title:"IExpressionNode",
+            content:"IExpressionNode",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IExpressionNode',
+            title:"IExpressionNode",
+            description:""
+        }
+    );
+    a(
+        {
+            id:15,
+            title:"ExpressionTreeExtensions",
+            content:"ExpressionTreeExtensions",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/ExpressionTreeExtensions',
+            title:"ExpressionTreeExtensions",
+            description:""
+        }
+    );
+    a(
+        {
+            id:16,
+            title:"IPropertyObserver",
+            content:"IPropertyObserver",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserver_1',
+            title:"IPropertyObserver<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:17,
+            title:"ReferenceGetter",
+            content:"ReferenceGetter",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/ReferenceGetter',
+            title:"ReferenceGetter",
+            description:""
+        }
+    );
+    a(
+        {
+            id:18,
+            title:"IPropertyValueObserverBuilder",
+            content:"IPropertyValueObserverBuilder",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilder_1',
+            title:"IPropertyValueObserverBuilder<TResult>",
             description:""
         }
     );
     a(
         {
             id:19,
-            title:"Deferrer",
-            content:"Deferrer",
+            title:"IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler",
+            content:"IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/Deferrer',
-            title:"Deferrer",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler_1',
+            title:"IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler<TResult>",
             description:""
         }
     );
     a(
         {
             id:20,
-            title:"IParameterNode",
-            content:"IParameterNode",
+            title:"IBindingNode",
+            content:"IBindingNode",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IParameterNode',
-            title:"IParameterNode",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IBindingNode',
+            title:"IBindingNode",
             description:""
         }
     );
     a(
         {
             id:21,
-            title:"PropertyValueObserver",
-            content:"PropertyValueObserver",
+            title:"IReferenceGetterBuilder",
+            content:"IReferenceGetterBuilder",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/PropertyValueObserver',
-            title:"PropertyValueObserver",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IReferenceGetterBuilder_2',
+            title:"IReferenceGetterBuilder<TParameter1, TResult>",
             description:""
         }
     );
     a(
         {
             id:22,
+            title:"IPropertyReferenceObserverBuilderWithActionAndGetter",
+            content:"IPropertyReferenceObserverBuilderWithActionAndGetter",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndGetter_1',
+            title:"IPropertyReferenceObserverBuilderWithActionAndGetter<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:23,
+            title:"IPropertyReferenceObserverBuilder",
+            content:"IPropertyReferenceObserverBuilder",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilder_1',
+            title:"IPropertyReferenceObserverBuilder<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:24,
+            title:"IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:25,
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback",
+            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback_1',
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:26,
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:27,
             title:"IMethodNode",
             content:"IMethodNode",
             description:'',
@@ -360,99 +430,29 @@ var searchModule = function() {
     );
     a(
         {
-            id:23,
-            title:"IPropertyValueObserverBuilderWithActionOfTResultNullable",
-            content:"IPropertyValueObserverBuilderWithActionOfTResultNullable",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultNullable_1',
-            title:"IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:24,
-            title:"IPropertyObserverBase",
-            content:"IPropertyObserverBase",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverBase_1',
-            title:"IPropertyObserverBase<TSelf>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:25,
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler",
-            content:"IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler_1',
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:26,
-            title:"MultibleDeferrer",
-            content:"MultibleDeferrer",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/MultibleDeferrer',
-            title:"MultibleDeferrer",
-            description:""
-        }
-    );
-    a(
-        {
-            id:27,
-            title:"IBinaryNode",
-            content:"IBinaryNode",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IBinaryNode',
-            title:"IBinaryNode",
-            description:""
-        }
-    );
-    a(
-        {
             id:28,
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler",
-            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler",
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetter",
+            content:"IPropertyValueObserverBuilderWithActionOfTResultAndGetter",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler_1',
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndGetter_1',
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult>",
             description:""
         }
     );
     a(
         {
             id:29,
-            title:"IPropertyObserver",
-            content:"IPropertyObserver",
+            title:"IExpressionTree",
+            content:"IExpressionTree",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserver_1',
-            title:"IPropertyObserver<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IExpressionTree',
+            title:"IExpressionTree",
             description:""
         }
     );
@@ -473,62 +473,6 @@ var searchModule = function() {
     a(
         {
             id:31,
-            title:"IConditionalNode",
-            content:"IConditionalNode",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConditionalNode',
-            title:"IConditionalNode",
-            description:""
-        }
-    );
-    a(
-        {
-            id:32,
-            title:"IPropertyObserverOnValueChanged",
-            content:"IPropertyObserverOnValueChanged",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverOnValueChanged_1',
-            title:"IPropertyObserverOnValueChanged<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:33,
-            title:"IPropertyNode",
-            content:"IPropertyNode",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IPropertyNode',
-            title:"IPropertyNode",
-            description:""
-        }
-    );
-    a(
-        {
-            id:34,
-            title:"IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:35,
             title:"IPropertyReferenceObserverOnValueChangedWithDeferrer",
             content:"IPropertyReferenceObserverOnValueChangedWithDeferrer",
             description:'',
@@ -542,133 +486,49 @@ var searchModule = function() {
     );
     a(
         {
-            id:36,
-            title:"INodeCollection",
-            content:"INodeCollection",
+            id:32,
+            title:"Disposable",
+            content:"Disposable",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/INodeCollection',
-            title:"INodeCollection",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/Disposable',
+            title:"Disposable",
             description:""
         }
     );
     a(
         {
-            id:37,
-            title:"IReferenceGetterBuilder",
-            content:"IReferenceGetterBuilder",
+            id:33,
+            title:"IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IReferenceGetterBuilder_3',
-            title:"IReferenceGetterBuilder<TParameter1, TParameter2, TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>",
             description:""
         }
     );
     a(
         {
-            id:38,
-            title:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer",
-            content:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer",
+            id:34,
+            title:"IPropertyReferenceObserverBuilderWithNotifyProperyChanged",
+            content:"IPropertyReferenceObserverBuilderWithNotifyProperyChanged",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer_1',
-            title:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithNotifyProperyChanged_1',
+            title:"IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>",
             description:""
         }
     );
     a(
         {
-            id:39,
-            title:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler",
-            content:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler_1',
-            title:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:40,
-            title:"IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback",
-            content:"IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback_1',
-            title:"IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:41,
-            title:"ExpressionTree",
-            content:"ExpressionTree",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree/ExpressionTree',
-            title:"ExpressionTree",
-            description:""
-        }
-    );
-    a(
-        {
-            id:42,
-            title:"PropertyReferenceObserver",
-            content:"PropertyReferenceObserver",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/PropertyReferenceObserver',
-            title:"PropertyReferenceObserver",
-            description:""
-        }
-    );
-    a(
-        {
-            id:43,
-            title:"IPropertyObserverWithGetterAndFallback",
-            content:"IPropertyObserverWithGetterAndFallback",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverWithGetterAndFallback_1',
-            title:"IPropertyObserverWithGetterAndFallback<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:44,
-            title:"IPropertyObserverBuilder",
-            content:"IPropertyObserverBuilder",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyObserverBuilder',
-            title:"IPropertyObserverBuilder",
-            description:""
-        }
-    );
-    a(
-        {
-            id:45,
+            id:35,
             title:"IPropertyReferenceObserverBuilderWithActionOfTResult",
             content:"IPropertyReferenceObserverBuilderWithActionOfTResult",
             description:'',
@@ -682,119 +542,91 @@ var searchModule = function() {
     );
     a(
         {
-            id:46,
-            title:"IMemberInitNode",
-            content:"IMemberInitNode",
+            id:36,
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMemberInitNode',
-            title:"IMemberInitNode",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>",
             description:""
         }
     );
     a(
         {
-            id:47,
-            title:"IPropertyValueObserverOnValueChanged",
-            content:"IPropertyValueObserverOnValueChanged",
+            id:37,
+            title:"INodeCollection",
+            content:"INodeCollection",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverOnValueChanged_1',
-            title:"IPropertyValueObserverOnValueChanged<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/INodeCollection',
+            title:"INodeCollection",
             description:""
         }
     );
     a(
         {
-            id:48,
-            title:"IFunctionNode",
-            content:"IFunctionNode",
+            id:38,
+            title:"IPropertyObserverOnValueChanged",
+            content:"IPropertyObserverOnValueChanged",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFunctionNode',
-            title:"IFunctionNode",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverOnValueChanged_1',
+            title:"IPropertyObserverOnValueChanged<TResult>",
             description:""
         }
     );
     a(
         {
-            id:49,
-            title:"PropertyObserverFlag",
-            content:"PropertyObserverFlag",
+            id:39,
+            title:"IReferenceGetterBuilder",
+            content:"IReferenceGetterBuilder",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/PropertyObserverFlag',
-            title:"PropertyObserverFlag",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IReferenceGetterBuilder_3',
+            title:"IReferenceGetterBuilder<TParameter1, TParameter2, TResult>",
             description:""
         }
     );
     a(
         {
-            id:50,
-            title:"ExpressionObserversException",
-            content:"ExpressionObserversException",
+            id:40,
+            title:"IPropertyReferenceObserverBuilderWithValueChanged",
+            content:"IPropertyReferenceObserverBuilderWithValueChanged",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/ExpressionObserversException',
-            title:"ExpressionObserversException",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithValueChanged_1',
+            title:"IPropertyReferenceObserverBuilderWithValueChanged<TResult>",
             description:""
         }
     );
     a(
         {
-            id:51,
-            title:"IPropertyValueObserverBuilder",
-            content:"IPropertyValueObserverBuilder",
+            id:41,
+            title:"IReferenceGetterBuilder",
+            content:"IReferenceGetterBuilder",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilder_1',
-            title:"IPropertyValueObserverBuilder<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IReferenceGetterBuilder_4',
+            title:"IReferenceGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>",
             description:""
         }
     );
     a(
         {
-            id:52,
-            title:"AutoActivateAlreadyActivatedException",
-            content:"AutoActivateAlreadyActivatedException",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/AutoActivateAlreadyActivatedException',
-            title:"AutoActivateAlreadyActivatedException",
-            description:""
-        }
-    );
-    a(
-        {
-            id:53,
-            title:"IPropertyReferenceObserverBuilderWithAction",
-            content:"IPropertyReferenceObserverBuilderWithAction",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithAction_1',
-            title:"IPropertyReferenceObserverBuilderWithAction<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:54,
+            id:42,
             title:"IGetterBuilderWithFallback",
             content:"IGetterBuilderWithFallback",
             description:'',
@@ -808,7 +640,7 @@ var searchModule = function() {
     );
     a(
         {
-            id:55,
+            id:43,
             title:"IPropertyValueObserverBuilderWithValueChangedAndDeferrer",
             content:"IPropertyValueObserverBuilderWithValueChangedAndDeferrer",
             description:'',
@@ -822,21 +654,21 @@ var searchModule = function() {
     );
     a(
         {
-            id:56,
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback",
-            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback",
+            id:44,
+            title:"IPropertyValueObserverBuilderWithAction",
+            content:"IPropertyValueObserverBuilderWithAction",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback_1',
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithAction_1',
+            title:"IPropertyValueObserverBuilderWithAction<TResult>",
             description:""
         }
     );
     a(
         {
-            id:57,
+            id:45,
             title:"IPropertyValueObserverOnNotifyProperyChanged",
             content:"IPropertyValueObserverOnNotifyProperyChanged",
             description:'',
@@ -850,147 +682,77 @@ var searchModule = function() {
     );
     a(
         {
-            id:58,
-            title:"IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler",
+            id:46,
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback",
+            content:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithActionAndGetterAndFallbackAndGetterTaskScheduler<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback_1',
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>",
             description:""
         }
     );
     a(
         {
-            id:59,
-            title:"NotActivatedException",
-            content:"NotActivatedException",
+            id:47,
+            title:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback",
+            content:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/NotActivatedException',
-            title:"NotActivatedException",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback_1',
+            title:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback<TResult>",
             description:""
         }
     );
     a(
         {
-            id:60,
-            title:"IValueGetterBuilder",
-            content:"IValueGetterBuilder",
+            id:48,
+            title:"IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback",
+            content:"IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IValueGetterBuilder_2',
-            title:"IValueGetterBuilder<TParameter1, TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback_1',
+            title:"IPropertyValueObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>",
             description:""
         }
     );
     a(
         {
-            id:61,
-            title:"IPropertyValueObserverBuilderWithNotifyProperyChanged",
-            content:"IPropertyValueObserverBuilderWithNotifyProperyChanged",
+            id:49,
+            title:"IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithNotifyProperyChanged_1',
-            title:"IPropertyValueObserverBuilderWithNotifyProperyChanged<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>",
             description:""
         }
     );
     a(
         {
-            id:62,
-            title:"IPropertyValueObserver",
-            content:"IPropertyValueObserver",
+            id:50,
+            title:"IPropertyObserverBuilderBase",
+            content:"IPropertyObserverBuilderBase",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserver_1',
-            title:"IPropertyValueObserver<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyObserverBuilderBase_1',
+            title:"IPropertyObserverBuilderBase<TSelf>",
             description:""
         }
     );
     a(
         {
-            id:63,
-            title:"IGetterBuilderWithFallback",
-            content:"IGetterBuilderWithFallback",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IGetterBuilderWithFallback_4',
-            title:"IGetterBuilderWithFallback<TParameter1, TParameter2, TParameter3, TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:64,
-            title:"IPropertyReferenceObserverWithGetter",
-            content:"IPropertyReferenceObserverWithGetter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyReferenceObserverWithGetter_1',
-            title:"IPropertyReferenceObserverWithGetter<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:65,
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter",
-            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter_1',
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:66,
-            title:"IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:67,
-            title:"IFieldNode",
-            content:"IFieldNode",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFieldNode',
-            title:"IFieldNode",
-            description:""
-        }
-    );
-    a(
-        {
-            id:68,
+            id:51,
             title:"AlreadyDeactivatedException",
             content:"AlreadyDeactivatedException",
             description:'',
@@ -1004,43 +766,281 @@ var searchModule = function() {
     );
     a(
         {
-            id:69,
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler",
+            id:52,
+            title:"PropertyObserverBuilder",
+            content:"PropertyObserverBuilder",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Builder/PropertyObserverBuilder',
+            title:"PropertyObserverBuilder",
+            description:""
+        }
+    );
+    a(
+        {
+            id:53,
+            title:"IPropertyObserverGetterTaskScheduler",
+            content:"IPropertyObserverGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyObserverGetterTaskScheduler_1',
+            title:"IPropertyObserverGetterTaskScheduler<TTarget>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:54,
+            title:"ExpressionObserversException",
+            content:"ExpressionObserversException",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/ExpressionObserversException',
+            title:"ExpressionObserversException",
+            description:""
+        }
+    );
+    a(
+        {
+            id:55,
+            title:"IValueGetterBuilder",
+            content:"IValueGetterBuilder",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IValueGetterBuilder_2',
+            title:"IValueGetterBuilder<TParameter1, TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:56,
+            title:"IReferenceGetterBuilder",
+            content:"IReferenceGetterBuilder",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IReferenceGetterBuilder_1',
+            title:"IReferenceGetterBuilder<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:57,
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler",
+            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler_1',
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:58,
+            title:"IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler",
+            content:"IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler_1',
+            title:"IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:59,
+            title:"IPropertyObserverBase",
+            content:"IPropertyObserverBase",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverBase_1',
+            title:"IPropertyObserverBase<TSelf>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:60,
+            title:"ValueGetter",
+            content:"ValueGetter",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/ValueGetter',
+            title:"ValueGetter",
+            description:""
+        }
+    );
+    a(
+        {
+            id:61,
+            title:"Deferrer",
+            content:"Deferrer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/Deferrer',
+            title:"Deferrer",
+            description:""
+        }
+    );
+    a(
+        {
+            id:62,
+            title:"IPropertyReferenceObserver",
+            content:"IPropertyReferenceObserver",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyReferenceObserver_1',
+            title:"IPropertyReferenceObserver<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:63,
+            title:"IFunctionNode",
+            content:"IFunctionNode",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFunctionNode',
+            title:"IFunctionNode",
+            description:""
+        }
+    );
+    a(
+        {
+            id:64,
+            title:"IPropertyValueObserverBuilderWithActionAndGetter",
+            content:"IPropertyValueObserverBuilderWithActionAndGetter",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndGetter_1',
+            title:"IPropertyValueObserverBuilderWithActionAndGetter<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:65,
+            title:"IFieldNode",
+            content:"IFieldNode",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFieldNode',
+            title:"IFieldNode",
+            description:""
+        }
+    );
+    a(
+        {
+            id:66,
+            title:"NotActivatedException",
+            content:"NotActivatedException",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/NotActivatedException',
+            title:"NotActivatedException",
+            description:""
+        }
+    );
+    a(
+        {
+            id:67,
+            title:"IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:68,
+            title:"ExpressionGetter",
+            content:"ExpressionGetter",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/ExpressionGetter',
+            title:"ExpressionGetter",
+            description:""
+        }
+    );
+    a(
+        {
+            id:69,
+            title:"IPropertyReferenceObserverOnNotifyProperyChanged",
+            content:"IPropertyReferenceObserverOnNotifyProperyChanged",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyReferenceObserverOnNotifyProperyChanged_1',
+            title:"IPropertyReferenceObserverOnNotifyProperyChanged<TResult>",
             description:""
         }
     );
     a(
         {
             id:70,
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback",
-            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback",
+            title:"IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback_1',
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>",
             description:""
         }
     );
     a(
         {
             id:71,
-            title:"IPropertyValueObserverOnValueChangedWithDeferrer",
-            content:"IPropertyValueObserverOnValueChangedWithDeferrer",
+            title:"IPropertyValueObserverWithGetter",
+            content:"IPropertyValueObserverWithGetter",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverOnValueChangedWithDeferrer_1',
-            title:"IPropertyValueObserverOnValueChangedWithDeferrer<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverWithGetter_1',
+            title:"IPropertyValueObserverWithGetter<TResult>",
             description:""
         }
     );
@@ -1061,160 +1061,6 @@ var searchModule = function() {
     a(
         {
             id:73,
-            title:"IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:74,
-            title:"IPropertyReferenceObserverBuilderWithActionAndGetter",
-            content:"IPropertyReferenceObserverBuilderWithActionAndGetter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndGetter_1',
-            title:"IPropertyReferenceObserverBuilderWithActionAndGetter<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:75,
-            title:"IPropertyValueObserverWithGetter",
-            content:"IPropertyValueObserverWithGetter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverWithGetter_1',
-            title:"IPropertyValueObserverWithGetter<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:76,
-            title:"IExpressionTree",
-            content:"IExpressionTree",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IExpressionTree',
-            title:"IExpressionTree",
-            description:""
-        }
-    );
-    a(
-        {
-            id:77,
-            title:"IPropertyReferenceObserverBuilderWithNotifyProperyChanged",
-            content:"IPropertyReferenceObserverBuilderWithNotifyProperyChanged",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithNotifyProperyChanged_1',
-            title:"IPropertyReferenceObserverBuilderWithNotifyProperyChanged<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:78,
-            title:"AlreadyActivatedException",
-            content:"AlreadyActivatedException",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/AlreadyActivatedException',
-            title:"AlreadyActivatedException",
-            description:""
-        }
-    );
-    a(
-        {
-            id:79,
-            title:"IPropertyReferenceObserverOnNotifyProperyChanged",
-            content:"IPropertyReferenceObserverOnNotifyProperyChanged",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyReferenceObserverOnNotifyProperyChanged_1',
-            title:"IPropertyReferenceObserverOnNotifyProperyChanged<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:80,
-            title:"IPropertyValueObserverBuilderWithActionOfTResult",
-            content:"IPropertyValueObserverBuilderWithActionOfTResult",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResult_1',
-            title:"IPropertyValueObserverBuilderWithActionOfTResult<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:81,
-            title:"IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler",
-            content:"IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler_1',
-            title:"IPropertyReferenceObserverBuilderWithNotifyProperyChangedAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:82,
-            title:"IReferenceGetterBuilder",
-            content:"IReferenceGetterBuilder",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IReferenceGetterBuilder_4',
-            title:"IReferenceGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:83,
-            title:"ValueGetter",
-            content:"ValueGetter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/ValueGetter',
-            title:"ValueGetter",
-            description:""
-        }
-    );
-    a(
-        {
-            id:84,
             title:"TreeException",
             content:"TreeException",
             description:'',
@@ -1228,161 +1074,217 @@ var searchModule = function() {
     );
     a(
         {
-            id:85,
-            title:"ReferenceGetter",
-            content:"ReferenceGetter",
+            id:74,
+            title:"IPropertyValueObserverBuilderWithValueChanged",
+            content:"IPropertyValueObserverBuilderWithValueChanged",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/ReferenceGetter',
-            title:"ReferenceGetter",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithValueChanged_1',
+            title:"IPropertyValueObserverBuilderWithValueChanged<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:75,
+            title:"IPropertyReferenceObserverBuilderWithAction",
+            content:"IPropertyReferenceObserverBuilderWithAction",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithAction_1',
+            title:"IPropertyReferenceObserverBuilderWithAction<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:76,
+            title:"IGetterBuilderWithFallback",
+            content:"IGetterBuilderWithFallback",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IGetterBuilderWithFallback_4',
+            title:"IGetterBuilderWithFallback<TParameter1, TParameter2, TParameter3, TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:77,
+            title:"AlreadyActivatedException",
+            content:"AlreadyActivatedException",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Exceptions/AlreadyActivatedException',
+            title:"AlreadyActivatedException",
+            description:""
+        }
+    );
+    a(
+        {
+            id:78,
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler",
+            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler_1',
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:79,
+            title:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler",
+            content:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler_1',
+            title:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:80,
+            title:"PropertyObserverFlag",
+            content:"PropertyObserverFlag",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/PropertyObserverFlag',
+            title:"PropertyObserverFlag",
+            description:""
+        }
+    );
+    a(
+        {
+            id:81,
+            title:"IPropertyObserverWithGetterAndFallback",
+            content:"IPropertyObserverWithGetterAndFallback",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverWithGetterAndFallback_1',
+            title:"IPropertyObserverWithGetterAndFallback<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:82,
+            title:"IConstructorNode",
+            content:"IConstructorNode",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstructorNode',
+            title:"IConstructorNode",
+            description:""
+        }
+    );
+    a(
+        {
+            id:83,
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler",
+            content:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler_1',
+            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:84,
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback",
+            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback_1',
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallback<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:85,
+            title:"IPropertyValueObserverOnValueChangedWithDeferrer",
+            content:"IPropertyValueObserverOnValueChangedWithDeferrer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverOnValueChangedWithDeferrer_1',
+            title:"IPropertyValueObserverOnValueChangedWithDeferrer<TResult>",
             description:""
         }
     );
     a(
         {
             id:86,
-            title:"IPropertyObserverOnValueChangedWithDeferrerAndFallback",
-            content:"IPropertyObserverOnValueChangedWithDeferrerAndFallback",
+            title:"IGetterBuilderWithFallback",
+            content:"IGetterBuilderWithFallback",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverOnValueChangedWithDeferrerAndFallback_1',
-            title:"IPropertyObserverOnValueChangedWithDeferrerAndFallback<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IGetterBuilderWithFallback_1',
+            title:"IGetterBuilderWithFallback<TResult>",
             description:""
         }
     );
     a(
         {
             id:87,
-            title:"IRootAware",
-            content:"IRootAware",
+            title:"IBinaryNode",
+            content:"IBinaryNode",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IRootAware',
-            title:"IRootAware",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IBinaryNode',
+            title:"IBinaryNode",
             description:""
         }
     );
     a(
         {
             id:88,
-            title:"IPropertyObserverWithFallback",
-            content:"IPropertyObserverWithFallback",
+            title:"IPropertyNode",
+            content:"IPropertyNode",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverWithFallback_1',
-            title:"IPropertyObserverWithFallback<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IPropertyNode',
+            title:"IPropertyNode",
             description:""
         }
     );
     a(
         {
             id:89,
-            title:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback",
-            content:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback_1',
-            title:"IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:90,
-            title:"PropertyObserver",
-            content:"PropertyObserver",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/PropertyObserver',
-            title:"PropertyObserver",
-            description:""
-        }
-    );
-    a(
-        {
-            id:91,
-            title:"IPropertyReferenceObserver",
-            content:"IPropertyReferenceObserver",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyReferenceObserver_1',
-            title:"IPropertyReferenceObserver<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:92,
-            title:"DeferState",
-            content:"DeferState",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/DeferState',
-            title:"DeferState",
-            description:""
-        }
-    );
-    a(
-        {
-            id:93,
-            title:"IConstantNode",
-            content:"IConstantNode",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstantNode',
-            title:"IConstantNode",
-            description:""
-        }
-    );
-    a(
-        {
-            id:94,
-            title:"ExpressionTreeExtensions",
-            content:"ExpressionTreeExtensions",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/ExpressionTreeExtensions',
-            title:"ExpressionTreeExtensions",
-            description:""
-        }
-    );
-    a(
-        {
-            id:95,
-            title:"IPropertyReferenceObserverBuilderWithValueChanged",
-            content:"IPropertyReferenceObserverBuilderWithValueChanged",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithValueChanged_1',
-            title:"IPropertyReferenceObserverBuilderWithValueChanged<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:96,
             title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler",
             content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler",
             description:'',
@@ -1391,6 +1293,104 @@ var searchModule = function() {
         {
             url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler_1',
             title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndFallbackAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:90,
+            title:"ExpressionGetterBuilder",
+            content:"ExpressionGetterBuilder",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Builder/ExpressionGetterBuilder',
+            title:"ExpressionGetterBuilder",
+            description:""
+        }
+    );
+    a(
+        {
+            id:91,
+            title:"IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler",
+            content:"IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler_1',
+            title:"IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:92,
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler",
+            content:"IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler_1',
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:93,
+            title:"IPropertyValueObserverOnValueChanged",
+            content:"IPropertyValueObserverOnValueChanged",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyValueObserverOnValueChanged_1',
+            title:"IPropertyValueObserverOnValueChanged<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:94,
+            title:"IPropertyValueObserverBuilderWithActionOfTResultNullable",
+            content:"IPropertyValueObserverBuilderWithActionOfTResultNullable",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultNullable_1',
+            title:"IPropertyValueObserverBuilderWithActionOfTResultNullable<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:95,
+            title:"IPropertyObserverOnNotifyProperyChanged",
+            content:"IPropertyObserverOnNotifyProperyChanged",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverOnNotifyProperyChanged_1',
+            title:"IPropertyObserverOnNotifyProperyChanged<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:96,
+            title:"IConstantNode",
+            content:"IConstantNode",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstantNode',
+            title:"IConstantNode",
             description:""
         }
     );
@@ -1411,202 +1411,6 @@ var searchModule = function() {
     a(
         {
             id:98,
-            title:"IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler",
-            content:"IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler_1',
-            title:"IPropertyReferenceObserverBuilderWithActionAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:99,
-            title:"IPropertyValueObserverBuilderWithActionAndGetterAndFallback",
-            content:"IPropertyValueObserverBuilderWithActionAndGetterAndFallback",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndGetterAndFallback_1',
-            title:"IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:100,
-            title:"IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler",
-            content:"IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler_1',
-            title:"IPropertyReferenceObserverBuilderWithValueChangedAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:101,
-            title:"IExpressionNode",
-            content:"IExpressionNode",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IExpressionNode',
-            title:"IExpressionNode",
-            description:""
-        }
-    );
-    a(
-        {
-            id:102,
-            title:"ExpressionGetter",
-            content:"ExpressionGetter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/ExpressionGetter',
-            title:"ExpressionGetter",
-            description:""
-        }
-    );
-    a(
-        {
-            id:103,
-            title:"IGetterBuilderWithFallback",
-            content:"IGetterBuilderWithFallback",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IGetterBuilderWithFallback_1',
-            title:"IGetterBuilderWithFallback<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:104,
-            title:"IConstructorNode",
-            content:"IConstructorNode",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstructorNode',
-            title:"IConstructorNode",
-            description:""
-        }
-    );
-    a(
-        {
-            id:105,
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler",
-            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler_1',
-            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:106,
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetter",
-            content:"IPropertyValueObserverBuilderWithActionOfTResultAndGetter",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndGetter_1',
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetter<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:107,
-            title:"IReferenceGetterBuilder",
-            content:"IReferenceGetterBuilder",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IReferenceGetterBuilder_2',
-            title:"IReferenceGetterBuilder<TParameter1, TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:108,
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback",
-            content:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback_1',
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallback<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:109,
-            title:"IPropertyObserverGetterTaskScheduler",
-            content:"IPropertyObserverGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyObserverGetterTaskScheduler_1',
-            title:"IPropertyObserverGetterTaskScheduler<TTarget>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:110,
-            title:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler",
-            content:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler_1',
-            title:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrerAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:111,
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler",
-            description:'',
-            tags:''
-        },
-        {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithActionOfTResultAndGetterAndFallbackAndGetterTaskScheduler<TResult>",
-            description:""
-        }
-    );
-    a(
-        {
-            id:112,
             title:"IGetterBuilderWithFallback",
             content:"IGetterBuilderWithFallback",
             description:'',
@@ -1620,29 +1424,225 @@ var searchModule = function() {
     );
     a(
         {
-            id:113,
-            title:"IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler",
-            content:"IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler",
+            id:99,
+            title:"IPropertyObserverBuilder",
+            content:"IPropertyObserverBuilder",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler_1',
-            title:"IPropertyValueObserverBuilderWithActionAndGetterTaskScheduler<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyObserverBuilder',
+            title:"IPropertyObserverBuilder",
+            description:""
+        }
+    );
+    a(
+        {
+            id:100,
+            title:"IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback",
+            content:"IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback_1',
+            title:"IPropertyReferenceObserverBuilderWithActionAndDispatcherGetterAndFallback<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:101,
+            title:"IParameterNode",
+            content:"IParameterNode",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IParameterNode',
+            title:"IParameterNode",
+            description:""
+        }
+    );
+    a(
+        {
+            id:102,
+            title:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer",
+            content:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer_1',
+            title:"IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:103,
+            title:"IPropertyValueObserverBuilderWithActionAndGetterAndFallback",
+            content:"IPropertyValueObserverBuilderWithActionAndGetterAndFallback",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionAndGetterAndFallback_1',
+            title:"IPropertyValueObserverBuilderWithActionAndGetterAndFallback<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:104,
+            title:"IConditionalNode",
+            content:"IConditionalNode",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConditionalNode',
+            title:"IConditionalNode",
+            description:""
+        }
+    );
+    a(
+        {
+            id:105,
+            title:"IPropertyReferenceObserverOnValueChanged",
+            content:"IPropertyReferenceObserverOnValueChanged",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyReferenceObserverOnValueChanged_1',
+            title:"IPropertyReferenceObserverOnValueChanged<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:106,
+            title:"IPropertyValueObserverBuilderWithActionOfTResult",
+            content:"IPropertyValueObserverBuilderWithActionOfTResult",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithActionOfTResult_1',
+            title:"IPropertyValueObserverBuilderWithActionOfTResult<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:107,
+            title:"IPropertyObserverWithFallback",
+            content:"IPropertyObserverWithFallback",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserverWithFallback_1',
+            title:"IPropertyObserverWithFallback<TResult>",
+            description:""
+        }
+    );
+    a(
+        {
+            id:108,
+            title:"PropertyValueObserver",
+            content:"PropertyValueObserver",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/PropertyValueObserver',
+            title:"PropertyValueObserver",
+            description:""
+        }
+    );
+    a(
+        {
+            id:109,
+            title:"PropertyObserver",
+            content:"PropertyObserver",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/PropertyObserver',
+            title:"PropertyObserver",
+            description:""
+        }
+    );
+    a(
+        {
+            id:110,
+            title:"MultibleDeferrer",
+            content:"MultibleDeferrer",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/MultibleDeferrer',
+            title:"MultibleDeferrer",
+            description:""
+        }
+    );
+    a(
+        {
+            id:111,
+            title:"DeferState",
+            content:"DeferState",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers/DeferState',
+            title:"DeferState",
+            description:""
+        }
+    );
+    a(
+        {
+            id:112,
+            title:"IRootAware",
+            content:"IRootAware",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IRootAware',
+            title:"IRootAware",
+            description:""
+        }
+    );
+    a(
+        {
+            id:113,
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultNullable",
+            content:"IPropertyReferenceObserverBuilderWithActionOfTResultNullable",
+            description:'',
+            tags:''
+        },
+        {
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultNullable_1',
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultNullable<TResult>",
             description:""
         }
     );
     a(
         {
             id:114,
-            title:"IPropertyValueObserverBuilderWithAction",
-            content:"IPropertyValueObserverBuilderWithAction",
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter",
+            content:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter",
             description:'',
             tags:''
         },
         {
-            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyValueObserverBuilderWithAction_1',
-            title:"IPropertyValueObserverBuilderWithAction<TResult>",
+            url:'/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter_1',
+            title:"IPropertyReferenceObserverBuilderWithActionOfTResultAndGetter<TResult>",
             description:""
         }
     );
