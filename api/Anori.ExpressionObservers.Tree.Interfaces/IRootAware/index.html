@@ -173,7 +173,7 @@
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-        Expression Tree Interface.
+        The Root Aware interface.
     </div>
 
 		<div class="panel panel-default">
@@ -191,9 +191,9 @@
 								<dt>Implementing Types</dt>
 								<dd>
 									<ul class="list-unstyled">
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/INodeCollection">INodeCollection</a></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IExpressionTree">IExpressionTree</a></li>								
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree/ExpressionTree">ExpressionTree</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IExpressionTree">IExpressionTree</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/INodeCollection">INodeCollection</a></li>								
 									</ul>
 								</dd>				
 						</dl>
@@ -203,12 +203,12 @@
 							graph BT
 	Type["IRootAware"]
 class Type type-node
-	Implementing0["INodeCollection"]-.-&gt;Type
-	click Implementing0 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/INodeCollection"
+	Implementing0["ExpressionTree"]-.-&gt;Type
+	click Implementing0 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree/ExpressionTree"
 	Implementing1["IExpressionTree"]-.-&gt;Type
 	click Implementing1 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IExpressionTree"
-	Implementing2["ExpressionTree"]-.-&gt;Type
-	click Implementing2 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree/ExpressionTree"
+	Implementing2["INodeCollection"]-.-&gt;Type
+	click Implementing2 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/INodeCollection"
 
 						</div>
 					</div>
