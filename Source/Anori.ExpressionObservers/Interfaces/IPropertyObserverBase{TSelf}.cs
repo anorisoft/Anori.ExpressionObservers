@@ -17,6 +17,14 @@ namespace Anori.ExpressionObservers.Interfaces
     public interface IPropertyObserverBase<out TSelf> : IActivatable<TSelf>, IDisposable
     {
         /// <summary>
+        ///     Gets the expression string.
+        /// </summary>
+        /// <value>
+        ///     The expression string.
+        /// </value>
+        string ExpressionString { get; }
+
+        /// <summary>
         ///     Subscribes the specified silent.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
