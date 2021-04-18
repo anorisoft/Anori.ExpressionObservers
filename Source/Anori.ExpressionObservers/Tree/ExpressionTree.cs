@@ -15,6 +15,7 @@ namespace Anori.ExpressionObservers.Tree
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.Tree.Nodes;
+    using Anori.Extensions;
 
     using JetBrains.Annotations;
 
@@ -33,7 +34,7 @@ namespace Anori.ExpressionObservers.Tree
         private ExpressionTree(LambdaExpression expression)
         {
             this.Nodes = GetBranches(expression.Body, this, null);
-            this.ExpressionString = expression.ToString();
+            this.ExpressionString = expression.ToAnonymousParametersString();
             this.Head = this.Nodes.First();
         }
 
