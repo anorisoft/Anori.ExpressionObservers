@@ -290,3 +290,4 @@ config.wyam.packages.xml
 /config.wyam.dll
 /config.wyam.hash
 /config.wyam.packages.xml
+/Source/Anori.Extensions/Anori.Extensions.xml

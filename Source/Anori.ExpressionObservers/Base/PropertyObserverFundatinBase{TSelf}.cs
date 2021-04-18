@@ -7,6 +7,7 @@
 namespace Anori.ExpressionObservers.Base
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -24,7 +25,9 @@ namespace Anori.ExpressionObservers.Base
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <seealso cref="PropertyObserverFundatinBase" />
     internal abstract class PropertyObserverFundatinBase<TSelf> : PropertyObserverFundatinBase,
-                                                                  IPropertyObserverBase<TSelf>
+                                                                  IPropertyObserverBase<TSelf>,
+                                                                  IEqualityComparer<TSelf>
+
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
@@ -454,6 +457,15 @@ namespace Anori.ExpressionObservers.Base
             }
 
             return get;
+        }
+        public bool Equals(TSelf x, TSelf y)
+        {
+            return Equals((PropertyObserverFundatinBase)(IPropertyObserverBase<TSelf>)x, (PropertyObserverFundatinBase)(IPropertyObserverBase<TSelf>)y);
+        }
+
+        public int GetHashCode(TSelf obj)
+        {
+            return GetHashCode((PropertyObserverFundatinBase)(IPropertyObserverBase<TSelf>)obj);
         }
     }
 }

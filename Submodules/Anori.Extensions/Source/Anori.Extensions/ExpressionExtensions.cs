@@ -177,9 +177,13 @@ namespace Anori.Extensions
                 if (start > 0)
                 {
                     var arg = $"arg{i}";
-                    var a = innerExpression.IndexOf(").", start);
-                    var end = innerExpression.IndexOfAnyChar(new[] { '.', ')' }, a + 2).index;
-                    var str = innerExpression.Substring(start, end - start);
+                    var end = innerExpression.IndexOf(")", start);
+                    if (end < 0)
+                    {
+                        break;
+                    }
+
+                    var str = innerExpression.Substring(start, end - start + 1);
                     Debug.WriteLine($"Str: {str}");
                     Debug.WriteLine($"InnerExpression: {innerExpression}");
                     innerExpression = innerExpression.Replace(str, $"{arg}");

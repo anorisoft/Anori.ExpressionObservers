@@ -24,7 +24,7 @@ namespace Anori.Extensions.UnitTests
         {
             Expression<Func<int>> expression = () => this.Class1.IntProperty;
             var actual = expression.ToAnonymousParametersString();
-            var expected = "(arg1) => arg1.IntProperty";
+            var expected = "(arg1) => arg1.Class1.IntProperty";
             TestContext.Out.WriteLine(actual);
             Assert.AreEqual(expected, actual);
         }
@@ -36,7 +36,7 @@ namespace Anori.Extensions.UnitTests
 
             Expression<Func<int>> expression = () => (class1.IntProperty);
             var actual = expression.ToAnonymousParametersString();
-            var expected = "(arg1) => arg1.IntProperty";
+            var expected = "(arg1) => arg1.class1.IntProperty";
             TestContext.Out.WriteLine(actual);
             Assert.AreEqual(expected, actual);
         }

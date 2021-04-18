@@ -22,6 +22,7 @@ namespace Anori.ExpressionObservers.Observers
     internal sealed class PropertyObserver<TResult> : PropertyObserverBase<IPropertyObserver<TResult>, TResult>,
                                                       IPropertyObserver<TResult>
     {
+
         /// <summary>
         ///     Gets the action.
         /// </summary>

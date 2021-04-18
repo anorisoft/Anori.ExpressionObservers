@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Compile Remove="PropertyObserverEqualTests.cs" />
-    <Compile Remove="PropertyObserverTests.cs" />
     <Compile Remove="PropertyReferenceObserverTests.cs" />
     <Compile Remove="PropertyValueObserverTests.cs" />
   </ItemGroup>
