@@ -253,12 +253,12 @@
         </member>
         <member name="T:Anori.Extensions.ExpressionExtensions">
             <summary>
-                Expression Extensions.
+            The Expression Extensions class.
             </summary>
         </member>
         <member name="M:Anori.Extensions.ExpressionExtensions.ToAnonymousParametersString(System.Linq.Expressions.LambdaExpression)">
             <summary>
-            Converts to anonymousparametersstring.
+                Converts to anonymousparametersstring.
             </summary>
             <param name="expression">The expression.</param>
             <returns>
@@ -445,6 +445,28 @@
             <returns>
                 Result of CurrentFromEnumerator as Nullable&lt;TSource&gt;.
             </returns>
+        </member>
+        <member name="T:Anori.Extensions.StringExtensions">
+            <summary>
+            The String Extensions class.
+            </summary>
+        </member>
+        <member name="M:Anori.Extensions.StringExtensions.IndexOfAnyChar(System.String,System.Char[])">
+            <summary>
+            Indexes the of any character.
+            </summary>
+            <param name="s">The s.</param>
+            <param name="toFind">To find.</param>
+            <returns>Index and Char.</returns>
+        </member>
+        <member name="M:Anori.Extensions.StringExtensions.IndexOfAnyChar(System.String,System.Char[],System.Int32)">
+            <summary>
+                Indexes the of any character.
+            </summary>
+            <param name="s">The s.</param>
+            <param name="toFind">To find.</param>
+            <param name="startIndex">The start index.</param>
+            <returns>Index and Char.</returns>
         </member>
         <member name="T:Anori.Extensions.TaskExtensions">
             <summary>
