@@ -9,7 +9,6 @@ namespace Anori.ExpressionObservers.Builder
     using System;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
@@ -40,25 +39,14 @@ namespace Anori.ExpressionObservers.Builder
         ///     class.
         /// </summary>
         /// <param name="expression">The expression.</param>
-        public ExpressionValueGetterBuilder(Expression<Func<TParameter1, TParameter2, TResult>> expression) => this.expression = expression;
-
-        /// <summary>
-        ///     Withes the fallback.
-        /// </summary>
-        /// <param name="fallback">The fallback.</param>
-        /// <returns>The Getter Builder With Fallback.</returns>
-        IGetterBuilderWithFallback<TParameter1, TParameter2, TResult> IValueGetterBuilder<TParameter1, TParameter2, TResult>.WithFallback(TResult fallback)
-        {
-            this.fallbackResult = fallback;
-            return this;
-        }
+        public ExpressionValueGetterBuilder(Expression<Func<TParameter1, TParameter2, TResult>> expression) =>
+            this.expression = expression;
 
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>The getter.</returns>
-        Func<TParameter1, TParameter2, TResult> IGetterBuilderWithFallback<TParameter1, TParameter2, TResult>.
-            Build() =>
+        Func<TParameter1, TParameter2, TResult> IGetterBuilderWithFallback<TParameter1, TParameter2, TResult>.Build() =>
             ExpressionGetter.CreateGetter(this.expression, this.fallbackResult);
 
         /// <summary>
@@ -67,5 +55,17 @@ namespace Anori.ExpressionObservers.Builder
         /// <returns>The getter.</returns>
         Func<TParameter1, TParameter2, TResult?> IValueGetterBuilder<TParameter1, TParameter2, TResult>.Build() =>
             ExpressionGetter.CreateValueGetter(this.expression);
+
+        /// <summary>
+        ///     Withes the fallback.
+        /// </summary>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>The Getter Builder With Fallback.</returns>
+        IGetterBuilderWithFallback<TParameter1, TParameter2, TResult>
+            IValueGetterBuilder<TParameter1, TParameter2, TResult>.WithFallback(TResult fallback)
+        {
+            this.fallbackResult = fallback;
+            return this;
+        }
     }
 }

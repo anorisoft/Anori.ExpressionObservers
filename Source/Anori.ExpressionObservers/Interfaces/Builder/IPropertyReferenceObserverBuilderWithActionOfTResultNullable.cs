@@ -6,17 +6,18 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
-    using Anori.ExpressionObservers.Builder;
-
     /// <summary>
-    /// The I Property Value Observer Builder With Action Of T Result Nullable interface.
+    ///     The I Property Value Observer Builder With Action Of T Result Nullable interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}}" />
-    /// <seealso cref="IPropertyObserverGetterTaskScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}}" />
+    /// <seealso
+    ///     cref="IPropertyObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}}" />
+    /// <seealso
+    ///     cref="IPropertyObserverGetterTaskScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfTResultNullable{TResult}}" />
     public interface IPropertyReferenceObserverBuilderWithActionOfTResultNullable<TResult> :
         IPropertyObserverBuilderBase<IPropertyReferenceObserverBuilderWithActionOfTResultNullable<TResult>>,
-        IPropertyObserverGetterTaskScheduler<IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
+        IPropertyObserverGetterTaskScheduler<
+            IPropertyReferenceObserverBuilderWithActionOfTResultNullableAndGetterTaskScheduler<TResult>>
         where TResult : class
     {
         /// <summary>

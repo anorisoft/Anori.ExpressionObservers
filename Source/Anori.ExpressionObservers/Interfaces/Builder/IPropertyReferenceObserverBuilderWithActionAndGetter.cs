@@ -6,8 +6,6 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
-    using Anori.ExpressionObservers.Builder;
-
     /// <summary>
     ///     The Property Value Observer Builder With Action And Getter interface.
     /// </summary>
@@ -31,7 +29,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         ///     Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns></returns>
+        /// <returns>The Property Observer Builder.</returns>
         IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback<TResult> WithFallback(TResult fallback);
     }
 }

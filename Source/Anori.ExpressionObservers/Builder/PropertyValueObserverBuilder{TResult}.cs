@@ -15,13 +15,10 @@ namespace Anori.ExpressionObservers.Builder
     using Anori.ExpressionObservers.ValueTypeObservers;
 
     /// <summary>
-    ///     The Value Property Observer Builder class.
+    /// The Value Property Observer Builder class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyValueObserverBuilder{TParameter1,TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithActionOfTResult{TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithAction{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Builder.PropertyValueObserverBuilderBase{Anori.ExpressionObservers.Builder.PropertyValueObserverBuilder{TResult}, TResult}" />
     internal sealed class PropertyValueObserverBuilder<TResult> : PropertyValueObserverBuilderBase<
         PropertyValueObserverBuilder<TResult>, TResult>
         where TResult : struct

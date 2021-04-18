@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers
     using System.Linq;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.Tree.Nodes;
@@ -20,9 +19,9 @@ namespace Anori.ExpressionObservers
     using JetBrains.Annotations;
 
     /// <summary>
-        ///     Expression Creator .
-        /// </summary>
-        internal static class ExpressionCreator
+    ///     Expression Creator .
+    /// </summary>
+    internal static class ExpressionCreator
     {
         /// <summary>
         ///     Gets the false constant expression.
@@ -84,7 +83,9 @@ namespace Anori.ExpressionObservers
         ///     The block expression.
         /// </returns>
         [NotNull]
-        internal static BlockExpression CreateValueBody([NotNull] Type resultType, [NotNull] LambdaExpression expression)
+        internal static BlockExpression CreateValueBody(
+            [NotNull] Type resultType,
+            [NotNull] LambdaExpression expression)
         {
             var returnTarget = Expression.Label(resultType);
             var tree = ExpressionTree.New(expression);

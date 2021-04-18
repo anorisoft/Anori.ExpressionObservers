@@ -12,10 +12,11 @@ namespace Anori.ExpressionObservers.Builder
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    ///     The Expression Reference Getter Builder class.
+    /// The Expression Reference Getter Builder class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IReferenceGetterBuilder{TParameter1,TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IReferenceGetterBuilder{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IGetterBuilderWithFallback{TResult}" />
     internal class ExpressionReferenceGetterBuilder<TResult> : IReferenceGetterBuilder<TResult>,
                                                                IGetterBuilderWithFallback<TResult>
         where TResult : class

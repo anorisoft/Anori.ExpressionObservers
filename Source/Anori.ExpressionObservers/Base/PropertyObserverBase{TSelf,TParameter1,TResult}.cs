@@ -48,7 +48,7 @@ namespace Anori.ExpressionObservers.Base
         ///     parameter1 is null.
         /// </exception>
         protected PropertyObserverBase(
-            TParameter1 parameter1,
+            [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             PropertyObserverFlag observerFlag)
             : base(observerFlag)

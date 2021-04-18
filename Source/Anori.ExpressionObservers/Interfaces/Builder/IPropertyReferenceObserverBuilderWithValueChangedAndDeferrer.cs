@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     /// The Property Reference Observer Builder With Value Changed And Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer<TResult> :
+    public interface IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer<out TResult> :
     IPropertyObserverBuilderBase<IPropertyReferenceObserverBuilderWithValueChangedAndDeferrer<TResult>>
         where TResult : class
     {

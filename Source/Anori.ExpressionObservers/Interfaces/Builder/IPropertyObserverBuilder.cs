@@ -6,11 +6,10 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
+    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     ///     The I Property Observer Builder interface.
