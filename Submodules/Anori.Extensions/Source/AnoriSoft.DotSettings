@@ -14,9 +14,6 @@
 	<s:Boolean x:Key="/Default/CodeInspection/CodeAnnotations/NamespacesWithAnnotations/=BachgrounfNotifyPropertyChanged_002EAnnotations/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/CodeAnnotations/NamespacesWithAnnotations/=Bfa_002EPi_002ECommon_002ECustomControls_002EUpDownCustomControl_002EAnnotations/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/CodeAnnotations/NamespacesWithAnnotations/=Infinity_002EPrototype_002EPage1_002ETestGUI_002EAnnotations/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/CodeInspection/GeneratedCode/GeneratedFileMasks/=_002A_002Ecsproj/@EntryIndexedValue">*.csproj</s:String>
-	
-	
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceDoWhileStatementBraces/@EntryIndexedValue">WARNING</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceFixedStatementBraces/@EntryIndexedValue">WARNING</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceForeachStatementBraces/@EntryIndexedValue">WARNING</s:String>
@@ -266,13 +263,7 @@
         &lt;/Or&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
     &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="All other members"&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Kind Is="Member" /&gt;&#xD;
-        &lt;Access /&gt;&#xD;
-        &lt;Name /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
+    &lt;Entry DisplayName="All other members" /&gt;&#xD;
     &lt;Entry DisplayName="Nested Types"&gt;&#xD;
       &lt;Entry.Match&gt;&#xD;
         &lt;Kind Is="Type" /&gt;&#xD;
@@ -802,10 +793,6 @@ Copyright (c) AnoriSoft. All rights reserved.&#xD;
 	<s:String x:Key="/Default/Environment/UnitTesting/JavaScriptUnitTestProviders/TestHarnessLocation/@EntryValue">RelativeToProject</s:String>
 	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">05/03/2019 08:31:36</s:String>
 	<s:String x:Key="/Default/Environment/UserInterface/ShortcutSchemeName/@EntryValue">VS</s:String>
-	<s:Boolean x:Key="/Default/Housekeeping/ExcludedProjects/ProjectMasksToIgnore/=_002A_002A_005C_002ATests/@EntryIndexedValue">True</s:Boolean>
-	
-	
-	
 	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=AutoStackTraceExplorerExplainer/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=GotoSuggester/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=ReSharperCppFeatureSuggester/@EntryIndexedValue">True</s:Boolean>
