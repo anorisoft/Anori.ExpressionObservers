@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces
 {
     using System;
-
+    using System.Collections.Generic;
     using Anori.Common;
 
     /// <summary>

@@ -6,16 +6,15 @@
 
 namespace Anori.ExpressionObservers.Base
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     using Anori.Common;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.Tree.Nodes;
     using Anori.Extensions;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     ///     Property Observer Base.
@@ -26,6 +25,7 @@ namespace Anori.ExpressionObservers.Base
     /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Base.PropertyObserverFundatinBase}" />
     /// <seealso cref="Anori.Common.IActivatable" />
 #pragma warning disable S3881 // "IDisposable" should be implemented correctly
+
     internal abstract class PropertyObserverFundatinBase : IDisposable,
                                                            IEqualityComparer<PropertyObserverFundatinBase>,
                                                            IEquatable<PropertyObserverFundatinBase>,
@@ -221,7 +221,17 @@ namespace Anori.ExpressionObservers.Base
                 return true;
             }
 
-            return this.RootNodes.SequenceEqual(other.RootNodes) && this.ExpressionString == other.ExpressionString;
+            if (!this.RootNodes.SequenceEqual(other.RootNodes))
+            {
+                return false;
+            }
+
+            if (this.ExpressionString != other.ExpressionString)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -243,12 +253,12 @@ namespace Anori.ExpressionObservers.Base
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
+            if (obj is not PropertyObserverFundatinBase propertyObserver)
             {
                 return false;
             }
 
-            return this.Equals((PropertyObserverFundatinBase)obj);
+            return this.Equals(propertyObserver);
         }
 
         /// <summary>

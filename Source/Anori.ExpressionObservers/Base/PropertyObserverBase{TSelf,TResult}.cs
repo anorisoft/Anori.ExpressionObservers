@@ -42,6 +42,12 @@ namespace Anori.ExpressionObservers.Base
             this.Tree = this.CreateObserverTree(propertyExpression);
         }
 
+        public static bool operator ==(PropertyObserverBase<TSelf, TResult>? a, PropertyObserverBase<TSelf, TResult>? b) =>
+Equals(a, b);
+
+        public static bool operator !=(PropertyObserverBase<TSelf, TResult>? a, PropertyObserverBase<TSelf, TResult>? b) =>
+    !Equals(a, b);
+
         /// <summary>
         ///     Gets the expression string.
         /// </summary>
