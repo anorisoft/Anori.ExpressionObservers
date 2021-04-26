@@ -16,6 +16,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.IValueObserverBuilder.cs" />
+    <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilder.cs" />
+    <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithDeferrerAndScheduler.cs" />
+    <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithDefferer.cs" />
+    <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IBuilderWithActionAndGetterAndFallback2.cs" />
+    <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfNullableT.cs" />
+    <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfT.cs" />
+    <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfTAndFallback.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilder.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderOnProperyChangedAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndDispatcherGetterAndFallback.cs" />
+    <Compile Remove="Interfaces\IPropertyObserverOnNotifyProperyChangedWithFallback{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyObserverOnNotifyProperyChangedWithGetterAndFallback{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyObserverOnValueChangedWithFallback{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyReferenceObserverOnNotifyProperyChanged{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyReferenceObserverWithGetter{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyValueObserverWithGetter{TResult}.cs" />
     <Compile Remove="Observers\PropertyObserverWithActionAndFallback{TResult}.cs" />
   </ItemGroup>
 
@@ -44,6 +61,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Builder\ReferenceObserver\OnValueChanged\" />
   </ItemGroup>
 
 </Project>

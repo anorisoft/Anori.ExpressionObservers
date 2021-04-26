@@ -14,7 +14,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     /// <summary>
     ///     The I Property Observer Builder interface.
     /// </summary>
-    public interface IPropertyObserverBuilder
+    public interface IObserverBuilder
     {
         /// <summary>
         ///     References the observer builder.
@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Reference Property Observer Builder.</returns>
-        IPropertyReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TParameter1, TResult>(
+        IReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TParameter1, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
@@ -36,7 +36,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Reference Property Observer Builder.</returns>
-        IPropertyReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TResult>(
+        IReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression)
             where TResult : class;
 
@@ -50,7 +50,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Reference Property Observer Builder.</returns>
-        IPropertyReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TParameter1, TParameter2, TResult>(
+        IReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
@@ -66,7 +66,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Value Property Observer Builder.</returns>
-        IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
+        IBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
@@ -78,7 +78,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Value Property Observer Builder.</returns>
-        IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TResult>(
+        IBuilder<TResult> ValueObserverBuilder<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression)
             where TResult : struct;
 
@@ -92,7 +92,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Value Property Observer Builder.</returns>
-        IPropertyValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
+        IBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)

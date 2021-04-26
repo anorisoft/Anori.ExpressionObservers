@@ -28,6 +28,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
+                .OnValueChanged()
                 .WithAction(() => callCount++)
                 .Build();
 
@@ -82,7 +83,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
+                .OnValueChanged()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -122,7 +123,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
+                .OnValueChanged()
                 .AutoActivate()
                 .Build();
 
@@ -158,8 +159,8 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .OnValueChanged()
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -198,8 +199,8 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .OnValueChanged()
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
@@ -235,8 +236,8 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .OnValueChanged()
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -275,7 +276,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
+                .OnValueChanged()
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
@@ -312,7 +313,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -351,7 +352,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .AutoActivate()
                 .Build();
 
@@ -387,8 +388,8 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .OnNotifyProperyChanged()
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -428,8 +429,8 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .OnNotifyProperyChanged()
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
@@ -465,7 +466,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .WithGetterDispatcher()
                 .Build();
 
@@ -505,7 +506,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
@@ -542,7 +543,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
+                .OnValueChanged()
                 .Deferred()
                 .Build();
 
@@ -599,7 +600,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
+                .OnValueChanged()
                 .Deferred()
                 .Build();
 
@@ -672,8 +673,8 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithValueChanged()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .OnValueChanged()
+                .WithScheduler(TaskScheduler.Current)
                 .Deferred()
                 .AutoActivate()
                 .Build();
@@ -736,7 +737,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(autoActivate: true)
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -771,7 +772,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached()
                 .Build();
 
@@ -811,7 +812,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached()
                 .AutoActivate()
                 .Build();
@@ -848,7 +849,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
                 .Build();
 
@@ -888,7 +889,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
                 .AutoActivate()
                 .Build();
@@ -925,9 +926,9 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -967,9 +968,9 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
@@ -1006,9 +1007,9 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -1048,9 +1049,9 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
@@ -1086,7 +1087,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached()
                 .WithGetterDispatcher()
                 .Build();
@@ -1128,7 +1129,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached()
                 .WithGetterDispatcher()
                 .AutoActivate()
@@ -1166,7 +1167,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .Build();
@@ -1208,7 +1209,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
-                .WithNotifyProperyChanged()
+                .OnNotifyProperyChanged()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .AutoActivate()
@@ -1325,7 +1326,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .WithFallback("Fallback")
                 .Build();
 
@@ -1365,7 +1366,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .WithFallback("Fallback")
                 .AutoActivate()
                 .Build();
@@ -1556,7 +1557,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -1596,7 +1597,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
@@ -1671,6 +1672,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
+                .OnNotifyProperyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
                 .WithGetterDispatcher()
@@ -1816,7 +1818,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -1870,7 +1872,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
@@ -2120,7 +2122,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -2172,7 +2174,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
@@ -2411,7 +2413,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .WithFallback("Fallback")
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -2458,7 +2460,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .WithFallback("Fallback")
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
@@ -2697,7 +2699,7 @@ namespace Anori.ExpressionObservers.UnitTests
                     })
                 .WithGetter()
                 .WithFallback("Fallback")
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -2752,7 +2754,7 @@ namespace Anori.ExpressionObservers.UnitTests
                     })
                 .WithGetter()
                 .WithFallback("Fallback")
-                .WithGetterTaskScheduler(TaskScheduler.Current)
+                .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 

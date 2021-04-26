@@ -13,6 +13,8 @@ namespace Anori.ExpressionObservers
 
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.ValueObservers.OnPropertyChanged;
+    using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
     using Anori.ExpressionObservers.ValueTypeObservers;
 
     using JetBrains.Annotations;
@@ -34,13 +36,13 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserver<TResult> Observes<TParameter1, TResult>(
+        public static IGetterValuePropertyObserver<TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueObserver<TParameter1, TResult>(
+            new ValueObservers.OnPropertyChanged.Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -59,7 +61,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserver<TResult> Observes<TParameter1, TResult>(
+        public static IGetterValuePropertyObserver<TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate,
@@ -67,7 +69,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct
         {
-            var observer = new PropertyValueObserver<TParameter1, TResult>(
+            var observer = new ValueObservers.OnPropertyChanged.Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -90,13 +92,13 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Value Observer.</returns>
         [NotNull]
-        public static IPropertyValueObserverWithGetter<TResult> ObservesAndGet<TParameter1, TResult>(
+        public static IGetterValuePropertyObserver<TResult> ObservesAndGet<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action)
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyValueObserverWithGetter<TParameter1, TResult>(
+            new ObserverWithGetter<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -115,7 +117,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverWithGetter<TResult> ObservesAndGet<TParameter1, TResult>(
+        public static IGetterValuePropertyObserver<TResult> ObservesAndGet<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate,
@@ -123,7 +125,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyValueObserverWithGetter<TParameter1, TResult>(
+            var observer = new ObserverWithGetter<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -151,7 +153,7 @@ namespace Anori.ExpressionObservers
                 [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            new ValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 PropertyObserverFlag.None);
@@ -177,7 +179,7 @@ namespace Anori.ExpressionObservers
                 LazyThreadSafetyMode safetyMode)
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            new ValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 isCached,
@@ -207,7 +209,7 @@ namespace Anori.ExpressionObservers
                 TaskScheduler taskScheduler)
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            new ValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler,
@@ -241,7 +243,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            var observer = new ValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler,
@@ -280,7 +282,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            var observer = new ValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 isCached,
@@ -314,7 +316,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
+            var observer = new ValueObserverOnNotifyProperyChanged<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 PropertyObserverFlag.None);
@@ -342,7 +344,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueObserverOnValueChanged<TParameter1, TResult>(
+            new ValueTypeObservers.Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 PropertyObserverFlag.None);
@@ -366,7 +368,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct
         {
-            var observer = new PropertyValueObserverOnValueChanged<TParameter1, TResult>(
+            var observer = new ValueTypeObservers.Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 PropertyObserverFlag.None);
@@ -396,7 +398,7 @@ namespace Anori.ExpressionObservers
             [NotNull] TaskScheduler taskScheduler)
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueObserverOnValueChanged<TParameter1, TResult>(
+            new ValueTypeObservers.Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler,
@@ -423,7 +425,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct
         {
-            var observer = new PropertyValueObserverOnValueChanged<TParameter1, TResult>(
+            var observer = new ValueTypeObservers.Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler,

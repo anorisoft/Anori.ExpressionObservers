@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyObserverGetterTaskScheduler.cs" company="AnoriSoft">
+// <copyright file="IPropertyObserverScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     ///     The I Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TTarget">The type of the self.</typeparam>
-    public interface IPropertyObserverGetterTaskScheduler<out TTarget>
+    public interface IPropertyObserverScheduler<out TTarget>
     {
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -25,6 +25,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>The target object.</returns>
-        TTarget WithGetterTaskScheduler(TaskScheduler taskScheduler);
+        TTarget WithScheduler(TaskScheduler taskScheduler);
     }
 }
