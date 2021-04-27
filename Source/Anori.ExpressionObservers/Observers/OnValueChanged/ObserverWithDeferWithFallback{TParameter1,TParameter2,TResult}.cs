@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDeferWithFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -28,8 +28,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithDeferWithFallback<TParameter1, TParameter2, TResult> :
-        ObserverBase<INotifyPropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2,
-            TResult>,
+        ObserverBase<INotifyPropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2, TResult>,
         INotifyPropertyObserverWithDeferrer<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
@@ -52,7 +51,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDeferWithFallbackWithFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDeferWithFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -76,8 +75,8 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="ObserverWithDeferWithFallbackWithFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithDeferWithFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -105,7 +104,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDeferWithFallbackWithFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDeferWithFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>

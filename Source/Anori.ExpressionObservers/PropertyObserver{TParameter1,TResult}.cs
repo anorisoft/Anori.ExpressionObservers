@@ -39,7 +39,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action,
             [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged =>
-            new GetterObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
+            new ObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -67,7 +67,7 @@ namespace Anori.ExpressionObservers
             [NotNull] TResult fallback)
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new GetterObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
+            var observer = new ObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,

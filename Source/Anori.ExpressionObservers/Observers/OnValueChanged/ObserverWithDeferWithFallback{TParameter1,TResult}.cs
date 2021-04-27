@@ -1,11 +1,16 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverOnValueChangedWithDeferAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDeferWithFallback{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Observers
+namespace Anori.ExpressionObservers.Observers.OnValueChanged
 {
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.Extensions;
+    using Anori.Extensions.Threading;
+    using JetBrains.Annotations;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -13,13 +18,6 @@ namespace Anori.ExpressionObservers.Observers
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
-
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.Extensions;
-    using Anori.Extensions.Threading;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Reference Observer With Getter.
@@ -63,7 +61,7 @@ namespace Anori.ExpressionObservers.Observers
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TResult fallback,
-            [NotNull] PropertyObserverFlag observerFlag)
+            PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
             this.value = fallback;

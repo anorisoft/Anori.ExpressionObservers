@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithGetter{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndGetter{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -25,9 +25,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="ObserverWithGetter{TResult}" />
+    ///     cref="ObserverWithActionAndGetter{TResult}" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class ObserverWithGetter<TParameter1, TResult> :
+    internal sealed class ObserverWithActionAndGetter<TParameter1, TResult> :
         ObserverBase<IGetterReferencePropertyObserver<TResult>, TParameter1, TResult>,
         IGetterReferencePropertyObserver<TResult>
         where TResult : class
@@ -46,20 +46,20 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The parameter1.</param>
         /// <param name="action">The property expression.</param>
         /// <param name="taskScheduler">The action.</param>
         /// <param name="observerFlag">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithGetter{TParameter1,TResult}">actionis null.</exception>
-        /// <exception cref="ObserverWithGetter{TResult}">
+        /// <exception cref="ObserverWithActionAndGetter{TParameter1,TResult}">actionis null.</exception>
+        /// <exception cref="ObserverWithActionAndGetter{TResult}">
         ///     action
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal ObserverWithGetter(
+        internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
@@ -74,14 +74,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The parameter1.</param>
         /// <param name="action">The property expression.</param>
         /// <param name="observerFlag">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithGetter{TResult}">action is null.</exception>
-        internal ObserverWithGetter(
+        /// <exception cref="ObserverWithActionAndGetter{TResult}">action is null.</exception>
+        internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
@@ -93,15 +93,15 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The parameter1.</param>
         /// <param name="action">The property expression.</param>
         /// <param name="synchronizationContext">The action.</param>
         /// <param name="observerFlag">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithGetter{TResult}">action is null.</exception>
-        internal ObserverWithGetter(
+        /// <exception cref="ObserverWithActionAndGetter{TResult}">action is null.</exception>
+        internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,

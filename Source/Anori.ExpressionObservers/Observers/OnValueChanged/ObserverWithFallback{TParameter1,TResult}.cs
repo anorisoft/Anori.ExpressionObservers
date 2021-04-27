@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChanged{TResult}, TParameter1, TResult}" />
     /// <seealso cref="INotifyReferencePropertyObserver{TResult}" />
-    /// <seealso cref="CachedObserver{TResult}" />
+    /// <seealso cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
     internal sealed class NotifyObserverWithFallback<TParameter1, TResult> :
@@ -57,7 +57,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         private TResult value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithFallback{TParameter1,TResult}" />
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -82,7 +82,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithFallback{TParameter1,TResult}" />
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -105,7 +105,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithFallback{TParameter1,TResult}" />
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>

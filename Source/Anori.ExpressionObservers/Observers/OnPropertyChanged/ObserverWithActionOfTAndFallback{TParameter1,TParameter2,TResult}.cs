@@ -151,7 +151,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             var get = ExpressionGetter.CreateGetterByTree<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree,
-                fallback);
+                fallback!);
             return () => get(parameter1, parameter2);
         }
     }

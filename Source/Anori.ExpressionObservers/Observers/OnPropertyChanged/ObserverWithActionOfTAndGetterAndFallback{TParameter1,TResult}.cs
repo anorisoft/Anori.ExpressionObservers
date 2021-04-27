@@ -133,10 +133,10 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Gets the value.
+        /// Gets the value.
         /// </summary>
         /// <returns>
-        ///     The result value.
+        /// The value.
         /// </returns>
         public TResult GetValue() => this.getter();
 

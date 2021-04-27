@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverOnValueChangedWithDeferAndFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDeferWithFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Observers
+namespace Anori.ExpressionObservers.Observers.OnValueChanged
 {
     using System;
     using System.Collections.Generic;
@@ -49,12 +49,12 @@ namespace Anori.ExpressionObservers.Observers
         private TResult value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDeferWithFallback{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDeferWithFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression if null.</exception>
         internal ObserverWithDeferWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] TResult fallback,
@@ -69,7 +69,7 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDeferWithFallback{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDeferWithFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="fallback">The fallback.</param>
@@ -92,7 +92,7 @@ namespace Anori.ExpressionObservers.Observers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDeferWithFallback{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDeferWithFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="fallback">The fallback.</param>

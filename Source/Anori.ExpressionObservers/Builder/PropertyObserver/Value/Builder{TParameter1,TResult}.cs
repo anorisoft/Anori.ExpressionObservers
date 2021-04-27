@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.Observers.OnPropertyChanged;
+    using Anori.ExpressionObservers.Observers.OnValueChanged;
     using Anori.ExpressionObservers.ValueObservers.OnPropertyChanged;
     using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
     using Anori.ExpressionObservers.ValueTypeObservers;
@@ -182,7 +183,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             IPropertyObserverWithGetterAndFallback<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -192,7 +193,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -202,7 +203,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,

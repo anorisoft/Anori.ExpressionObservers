@@ -35,7 +35,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
             where TResult : class =>
-            new ReferenceObservers.OnPropertyChanged.Observer<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(propertyExpression, action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -52,7 +52,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action<TResult?> action)
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnPropertyChanged.Observer<TResult>(
+            var observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                 propertyExpression,
                 action,
                 PropertyObserverFlag.None);
@@ -76,7 +76,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action)
             where TResult : class =>
-            new ObserverWithGetter<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            new ObserverWithActionAndGetter<TResult>(propertyExpression, action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the and get.
@@ -93,7 +93,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TResult : class
         {
-            var observer = new ObserverWithGetter<TResult>(
+            var observer = new ObserverWithActionAndGetter<TResult>(
                 propertyExpression,
                 action,
                 PropertyObserverFlag.None);

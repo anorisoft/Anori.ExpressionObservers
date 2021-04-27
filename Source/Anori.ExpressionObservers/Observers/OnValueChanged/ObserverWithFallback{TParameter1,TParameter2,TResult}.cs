@@ -55,7 +55,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithFallback{TParameter1,TParameter2,TResult}" />
+        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TParameter2,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -83,7 +83,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithFallback{TParameter1,TParameter2,TResult}" />
+        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TParameter2,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -109,7 +109,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithFallback{TParameter1,TParameter2,TResult}" />
+        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TParameter2,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>

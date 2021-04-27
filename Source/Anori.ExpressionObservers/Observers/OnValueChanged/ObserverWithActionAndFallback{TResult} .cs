@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="CachedObserver{TResult}" />
+    ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="ObserverFundatinBase" />
     internal sealed class ObserverWithActionAndFallback<TResult> :
         ObserverBase<INotifyPropertyObserver<TResult>, TResult>,

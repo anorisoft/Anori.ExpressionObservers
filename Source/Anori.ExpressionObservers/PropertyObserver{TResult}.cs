@@ -78,7 +78,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action,
             [NotNull] TResult fallback)
         {
-            var observer = new GetterObserverWithActionAndGetterAndFallback<TResult>(
+            var observer = new ObserverWithActionAndGetterAndFallback<TResult>(
                 propertyExpression,
                 action,
                 fallback,
@@ -106,7 +106,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TResult fallback) =>
-            new GetterObserverWithActionAndGetterAndFallback<TResult>(
+            new ObserverWithActionAndGetterAndFallback<TResult>(
                 propertyExpression,
                 action,
                 fallback,

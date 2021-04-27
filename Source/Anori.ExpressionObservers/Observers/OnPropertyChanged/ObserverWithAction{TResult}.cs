@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Observer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithAction{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -22,7 +22,6 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     internal sealed class ObserverWithAction<TResult> : ObserverBase<IPropertyObserver<TResult>, TResult>,
                                                         IPropertyObserver<TResult>
     {
-
         /// <summary>
         ///     Gets the action.
         /// </summary>
@@ -33,12 +32,12 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         private readonly Action action;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">The action is null.</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithAction(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,

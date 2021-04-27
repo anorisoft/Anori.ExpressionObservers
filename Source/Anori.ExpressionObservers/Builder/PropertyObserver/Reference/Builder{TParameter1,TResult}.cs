@@ -109,7 +109,7 @@ namespace Anori.ExpressionObservers.Builder
         /// </returns>
         protected override IPropertyObserver<TResult> CreatePropertyObserver()
         {
-            var observer = new ReferenceObservers.OnPropertyChanged.Observer<TParameter1, TResult>(
+            var observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TResult>(
                 this.parameter1,
                 this.propertyExpression,
                 this.Action!,
@@ -179,7 +179,7 @@ namespace Anori.ExpressionObservers.Builder
             IPropertyObserverWithGetterAndFallback<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -189,7 +189,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -199,7 +199,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -226,7 +226,7 @@ namespace Anori.ExpressionObservers.Builder
             IGetterReferencePropertyObserver<TResult> propertyObserver;
             if (this.IsDispached)
             {
-                propertyObserver = new ReferenceObservers.OnPropertyChanged.Observer<TParameter1, TResult>(
+                propertyObserver = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.ActionOfT!,
@@ -235,7 +235,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else if (this.TaskScheduler != null)
             {
-                propertyObserver = new ReferenceObservers.OnPropertyChanged.Observer<TParameter1, TResult>(
+                propertyObserver = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.ActionOfT!,
@@ -244,7 +244,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else
             {
-                propertyObserver = new ReferenceObservers.OnPropertyChanged.Observer<TParameter1, TResult>(
+                propertyObserver = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.ActionOfT!,
@@ -402,7 +402,7 @@ namespace Anori.ExpressionObservers.Builder
             IGetterReferencePropertyObserver<TResult> propertyObserver;
             if (this.IsDispached)
             {
-                propertyObserver = new ObserverWithGetter<TParameter1, TResult>(
+                propertyObserver = new ObserverWithActionAndGetter<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -411,7 +411,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else if (this.TaskScheduler != null)
             {
-                propertyObserver = new ObserverWithGetter<TParameter1, TResult>(
+                propertyObserver = new ObserverWithActionAndGetter<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -420,7 +420,7 @@ namespace Anori.ExpressionObservers.Builder
             }
             else
             {
-                propertyObserver = new ObserverWithGetter<TParameter1, TResult>(
+                propertyObserver = new ObserverWithActionAndGetter<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,

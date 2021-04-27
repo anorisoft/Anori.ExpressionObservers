@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserver{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndGetter{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,15 +14,19 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.ExpressionObservers.ValueTypeObservers;
 
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Reference Getter Observer.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso
+    ///     cref="ObserverFundatinBase.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class Observer<TResult> :
+    internal sealed class ObserverWithActionAndGetter<TResult> :
         ObserverBase<IGetterReferencePropertyObserver<TResult>, TResult>,
         IGetterReferencePropertyObserver<TResult>
         where TResult : class
@@ -31,7 +35,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         ///     The action.
         /// </summary>
         [NotNull]
-        private readonly Action<TResult?> action;
+        private readonly Action action;
 
         /// <summary>
         ///     The getter.
@@ -40,62 +44,65 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
-        /// </summary>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
-        internal Observer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action,
-            PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
-        {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal Observer(
+        /// <exception cref="ObserverWithActionAndGetter{TResult}">
+        ///     action
+        ///     or
+        ///     propertyExpression is null.
+        /// </exception>
+        internal ObserverWithActionAndGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action,
+            [NotNull] Action action,
             TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler);
+            this.getter = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree), taskScheduler);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
+        internal ObserverWithActionAndGetter(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.getter = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal Observer(
+        internal ObserverWithActionAndGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action,
+            [NotNull] Action action,
             SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext);
+            this.getter = this.CreateNullableReferenceGetter(
+                Getter(propertyExpression, this.Tree),
+                synchronizationContext);
         }
 
         /// <summary>
@@ -107,20 +114,15 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.action(this.getter());
+        protected override void OnAction() => this.action();
 
         /// <summary>
         ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
-        /// <returns>
-        ///     Getter.
-        /// </returns>
-        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree)
-        {
-            var get = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
-            return () => get();
-        }
+        /// <returns>The Getter.</returns>
+        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
+            ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
     }
 }

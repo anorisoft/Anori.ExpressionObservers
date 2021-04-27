@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="CachedObserver{TResult}" />
+    ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
     internal sealed class NotifyObserverWithFallback<TResult> :
@@ -53,7 +53,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         private TResult value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithFallback{TResult}" />
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -76,7 +76,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithFallback{TResult}" />
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -97,7 +97,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithFallback{TResult}" />
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>

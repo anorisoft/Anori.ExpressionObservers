@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="ObserverWithActionAndGetterAndFallback{TResult}" />
+    ///     cref="ObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="ObserverFundatinBase" />
     internal sealed class ObserverWithActionOfTAndGetterAndFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
@@ -145,10 +145,10 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Gets the value.
+        /// Gets the value.
         /// </summary>
         /// <returns>
-        ///     The result value.
+        /// The value.
         /// </returns>
         public TResult GetValue() => this.getter();
 

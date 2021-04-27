@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverWithActionAndGetterAndFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndGetterAndFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -21,8 +21,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     ///     Property Value Observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class GetterObserverWithActionAndGetterAndFallback<TResult> :
+    internal sealed class ObserverWithActionAndGetterAndFallback<TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TResult>,
         IGetterPropertyObserver<TResult>
     {
@@ -39,7 +38,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -50,7 +50,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal GetterObserverWithActionAndGetterAndFallback(
+        internal ObserverWithActionAndGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TResult fallback,
@@ -61,22 +61,17 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
         }
 
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndFallback{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndFallback{TResult}"/> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     parameter1
-        ///     or
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
-        internal GetterObserverWithActionAndGetterAndFallback(
+        /// <exception cref="ArgumentNullException">parameter1 or action or propertyExpression is null.</exception>
+        internal ObserverWithActionAndGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TaskScheduler taskScheduler,
@@ -89,7 +84,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -103,7 +99,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal GetterObserverWithActionAndGetterAndFallback(
+        internal ObserverWithActionAndGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] SynchronizationContext synchronizationContext,
@@ -118,13 +114,11 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <summary>
         ///     Gets the value.
         /// </summary>
-        /// <value>
-        ///     The value.
-        /// </value>
+        /// <returns>The result.</returns>
         public TResult GetValue() => this.getter();
 
         /// <summary>
-        ///     On the action.
+        ///     The action.
         /// </summary>
         protected override void OnAction() => this.action();
 
@@ -135,7 +129,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <param name="tree">The tree.</param>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     Getter.
+        ///     The getter.
         /// </returns>
         private static Func<TResult> Getter(
             Expression<Func<TResult>> propertyExpression,

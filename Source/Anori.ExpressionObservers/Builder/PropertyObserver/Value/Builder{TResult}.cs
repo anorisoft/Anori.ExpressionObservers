@@ -13,6 +13,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.Observers.OnPropertyChanged;
+    using Anori.ExpressionObservers.Observers.OnValueChanged;
     using Anori.ExpressionObservers.ValueObservers.OnPropertyChanged;
     using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
     using Anori.ExpressionObservers.ValueTypeObservers;
@@ -49,7 +50,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             IPropertyObserver<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ObserverWithActionOfTAndFallback<TResult>(
+                observer = new Observers.OnPropertyChanged.ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTWithFallback!,
                     SynchronizationContext.Current,
@@ -58,7 +59,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithActionOfTAndFallback<TResult>(
+                observer = new Observers.OnPropertyChanged.ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTWithFallback!,
                     this.TaskScheduler,
@@ -67,7 +68,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else
             {
-                observer = new ObserverWithActionOfTAndFallback<TResult>(
+                observer = new Observers.OnPropertyChanged.ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
                     this.ActionOfTWithFallback!,
                     this.Fallback!.Value,
@@ -152,6 +153,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.Action!,
                     this.ObserverFlag);
             }
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
         }
         protected override IGetterValuePropertyObserver<TResult>
             CreateGetterValuePropertyObserverWithActionAndGetterAndScheduler()
@@ -276,7 +283,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             IGetterPropertyObserver<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     SynchronizationContext.Current,
@@ -285,7 +292,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     this.TaskScheduler,
@@ -294,7 +301,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TResult>(
+                observer = new ObserverWithActionAndGetterAndFallback<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     this.Fallback!.Value,

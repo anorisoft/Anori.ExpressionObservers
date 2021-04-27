@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="ObserverWithActionAndGetterAndFallback{TResult}" />
+    ///     cref="ObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="ObserverFundatinBase" />
     internal sealed class ObserverWithActionAndGetterAndFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,

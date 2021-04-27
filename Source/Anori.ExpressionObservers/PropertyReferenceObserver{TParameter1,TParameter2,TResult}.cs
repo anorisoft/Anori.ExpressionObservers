@@ -43,7 +43,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : class =>
-            new ReferenceObservers.OnPropertyChanged.Observer<TParameter1, TParameter2, TResult>(
+            new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -73,7 +73,7 @@ namespace Anori.ExpressionObservers
             where TParameter2 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnPropertyChanged.Observer<TParameter1, TParameter2, TResult>(
+            var observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -107,7 +107,7 @@ namespace Anori.ExpressionObservers
             where TResult : class
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
-            new ObserverWithGetter<TParameter1, TParameter2, TResult>(
+            new ObserverWithActionAndGetter<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -137,7 +137,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer = new ObserverWithGetter<TParameter1, TParameter2, TResult>(
+            var observer = new ObserverWithActionAndGetter<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,

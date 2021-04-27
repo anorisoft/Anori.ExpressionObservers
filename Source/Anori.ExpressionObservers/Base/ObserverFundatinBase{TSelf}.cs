@@ -6,17 +6,15 @@
 
 namespace Anori.ExpressionObservers.Base
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
-
     using Anori.Common;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
-
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
@@ -25,9 +23,8 @@ namespace Anori.ExpressionObservers.Base
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <seealso cref="ObserverFundatinBase" />
     internal abstract class ObserverFundatinBase<TSelf> : ObserverFundatinBase,
-                                                                  IPropertyObserverBase<TSelf>,
-                                                                  IEqualityComparer<TSelf>
-
+                                                          IPropertyObserverBase<TSelf>,
+                                                          IEqualityComparer<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
@@ -71,29 +68,56 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
+        ///     Determines whether the specified objects are equal.
+        /// </summary>
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        ///     true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        public bool Equals(TSelf x, TSelf y)
+        {
+            return Equals(
+                (ObserverFundatinBase)(IPropertyObserverBase<TSelf>)x,
+                (ObserverFundatinBase)(IPropertyObserverBase<TSelf>)y);
+        }
+
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>
+        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public int GetHashCode(TSelf obj)
+        {
+            return this.GetHashCode((ObserverFundatinBase)(IPropertyObserverBase<TSelf>)obj);
+        }
+
+        /// <summary>
         ///     Creates the nullable cached getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="propertyChanged">The property changed.</param>
-        /// <returns>Valeu getter function.</returns>
+        /// <param name="action">The action.</param>
+        /// <returns>Value getter function.</returns>
         protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
             Func<TResult> get,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
-            Action propertyChanged)
+            Action action)
         {
-            Action action;
+            Action returnAction;
             Func<TResult> getter;
             if (isCached)
             {
                 var cache = new ResetLazy<TResult>(get, safetyMode);
-                action = () =>
+                returnAction = () =>
                     {
                         cache.Reset();
-                        propertyChanged.Raise();
+                        action.Raise();
                     };
                 if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
                 {
@@ -106,7 +130,7 @@ namespace Anori.ExpressionObservers.Base
             }
             else
             {
-                action = () => propertyChanged.Raise();
+                returnAction = () => action.Raise();
                 if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
                 {
                     getter = () => this.IsActive ? get() : throw new NotActivatedException();
@@ -117,7 +141,60 @@ namespace Anori.ExpressionObservers.Base
                 }
             }
 
-            return (action, getter);
+            return (returnAction, getter);
+        }
+
+        /// <summary>
+        /// Creates the cached getter.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="get">The get.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="action">The action.</param>
+        /// <returns>Value getter function.</returns>
+        protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
+            Func<TResult> get,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            Action<TResult> action)
+        {
+            Action returnAction;
+            Func<TResult> getter;
+            if (isCached)
+            {
+                var cache = new ResetLazy<TResult>(get, safetyMode);
+
+                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+                {
+                    getter = () => this.IsActive ? cache.Value : throw new NotActivatedException();
+                }
+                else
+                {
+                    getter = () => cache.Value;
+                }
+
+                returnAction = () =>
+                    {
+                        cache.Reset();
+                        action.Raise(getter());
+                    };
+            }
+            else
+            {
+                if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+                {
+                    getter = () => this.IsActive ? get() : throw new NotActivatedException();
+                }
+                else
+                {
+                    getter = get;
+                }
+
+                returnAction = () => action.Raise(getter());
+            }
+
+            return (returnAction, getter);
         }
 
         protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
@@ -130,10 +207,7 @@ namespace Anori.ExpressionObservers.Base
             if (isCached)
             {
                 var cache = new ResetLazy<TResult>(get, safetyMode);
-                action = () =>
-                    {
-                        cache.Reset();
-                    };
+                action = () => { cache.Reset(); };
                 if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
                 {
                     getter = () => this.IsActive ? cache.Value : throw new NotActivatedException();
@@ -145,7 +219,7 @@ namespace Anori.ExpressionObservers.Base
             }
             else
             {
-                action = () => {};
+                action = () => { };
                 if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
                 {
                     getter = () => this.IsActive ? get() : throw new NotActivatedException();
@@ -203,6 +277,7 @@ namespace Anori.ExpressionObservers.Base
         ///     Value getter function.
         /// </returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
+
         protected Func<TValue?> CreateGetPropertyNullableValue<TValue>(Func<TValue?> value)
 #pragma warning restore S4144 // Methods should not have identical implementations
             where TValue : struct
@@ -236,12 +311,31 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Creaters the getter.
+        /// Creaters the getter.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="get">The get.</param>
+        /// <returns>
+        /// The Getter.
+        /// </returns>
+        protected Func<TParameter1, TResult> CreateGetter<TParameter1, TResult>(Func<TParameter1, TResult> get)
+        {
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                return (p1) => this.IsActive ? get(p1) : throw new NotActivatedException();
+            }
+
+            return get;
+        }
+
+        /// <summary>
+        /// Creates the getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <returns>
-        ///     The Getter.
+        /// The Getter.
         /// </returns>
         protected Func<TResult> CreateGetter<TResult>(Func<TResult> get)
         {
@@ -324,7 +418,14 @@ namespace Anori.ExpressionObservers.Base
             return (action, getter);
         }
 
-
+        /// <summary>
+        /// Creates the nullable reference cached getter.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="get">The get.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns></returns>
         protected (Action, Func<TResult?>) CreateNullableReferenceCachedGetter<TResult>(
             Func<TResult?> get,
             bool isCached,
@@ -336,10 +437,7 @@ namespace Anori.ExpressionObservers.Base
             if (isCached)
             {
                 var cache = new ResetLazy<TResult?>(get, safetyMode);
-                action = () =>
-                    {
-                        cache.Reset();
-                    };
+                action = () => { cache.Reset(); };
                 if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
                 {
                     getter = () => this.IsActive ? cache.Value : throw new NotActivatedException();
@@ -351,7 +449,7 @@ namespace Anori.ExpressionObservers.Base
             }
             else
             {
-                action = () => {};
+                action = () => { };
                 if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
                 {
                     getter = () => this.IsActive ? get() : throw new NotActivatedException();
@@ -431,6 +529,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="propertyChanged">The property changed.</param>
         /// <returns>Valeu getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
+
         protected (Action, Func<TResult?>) CreateNullableValueCachedGetter<TResult>(
             Func<TResult?> get,
             bool isCached,
@@ -482,6 +581,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>Valeu getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
+
         protected Func<TResult?> CreateNullableValueGetter<TResult>(Func<TResult?> get, TaskScheduler taskScheduler)
 #pragma warning restore S4144 // Methods should not have identical implementations
             where TResult : struct
@@ -503,6 +603,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <returns>Valeu getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
+
         protected Func<TResult?> CreateNullableValueGetter<TResult>(
             Func<TResult?> get,
             SynchronizationContext synchronizationContext)
@@ -524,6 +625,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="get">The get.</param>
         /// <returns>Valeu getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
+
         protected Func<TResult?> CreateNullableValueGetter<TResult>(Func<TResult?> get)
 #pragma warning restore S4144 // Methods should not have identical implementations
             where TResult : struct
@@ -534,30 +636,6 @@ namespace Anori.ExpressionObservers.Base
             }
 
             return get;
-        }
-        /// <summary>
-        /// Determines whether the specified objects are equal.
-        /// </summary>
-        /// <param name="x">The first object of type T to compare.</param>
-        /// <param name="y">The second object of type T to compare.</param>
-        /// <returns>
-        /// true if the specified objects are equal; otherwise, false.
-        /// </returns>
-        public bool Equals(TSelf x, TSelf y)
-        {
-            return Equals((ObserverFundatinBase)(IPropertyObserverBase<TSelf>)x, (ObserverFundatinBase)(IPropertyObserverBase<TSelf>)y);
-        }
-
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-        /// </returns>
-        public int GetHashCode(TSelf obj)
-        {
-            return GetHashCode((ObserverFundatinBase)(IPropertyObserverBase<TSelf>)obj);
         }
     }
 }

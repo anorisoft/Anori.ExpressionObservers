@@ -121,9 +121,9 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <summary>
         ///     Gets the value.
         /// </summary>
-        /// <value>
+        /// <returns>
         ///     The value.
-        /// </value>
+        /// </returns>
         public TResult GetValue() => this.getter();
 
         /// <summary>
