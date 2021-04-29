@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     using Anori.Common;
 
     /// <summary>
-    /// The I Property Reference Observer Builder On Value Changed interface.
+    /// The I Property Reference Observer Builder On Value2 Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />

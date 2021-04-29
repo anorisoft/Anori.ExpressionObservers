@@ -37,7 +37,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Withes the getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value2 Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndScheduler<TResult> IPropertyObserverScheduler<
             IBuilderWithActionOfTAndGetterAndScheduler<TResult>>.WithGetterDispatcher() =>
@@ -48,7 +48,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value2 Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndScheduler<TResult>
             IPropertyObserverScheduler<IBuilderWithActionOfTAndGetterAndScheduler<TResult>>.WithScheduler(

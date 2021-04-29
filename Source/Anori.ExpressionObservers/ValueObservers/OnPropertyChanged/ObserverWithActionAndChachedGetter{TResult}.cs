@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
+namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
 {
     using System;
     using System.Linq.Expressions;
@@ -24,10 +24,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="CachedObserver{TResult}" />
+    ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class CachedObserver<TResult> : ObserverBase<IGetterReferencePropertyObserver<TResult>, TResult>,
+    internal sealed class ObserverWithActionAndChachedGetter<TResult> : ObserverBase<IGetterReferencePropertyObserver<TResult>, TResult>,
                                                     IGetterReferencePropertyObserver<TResult>
         where TResult : class
     {
@@ -44,12 +44,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CachedObserver{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal CachedObserver(
+        internal ObserverWithActionAndChachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             PropertyObserverFlag propertyObserverFlag)
@@ -58,7 +58,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CachedObserver{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
@@ -66,7 +66,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
-        internal CachedObserver(
+        internal ObserverWithActionAndChachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             bool isCached,
@@ -81,14 +81,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CachedObserver{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal CachedObserver(
+        internal ObserverWithActionAndChachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
             bool isCached,
@@ -103,11 +103,11 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CachedObserver{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal CachedObserver(
+        internal ObserverWithActionAndChachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             PropertyObserverFlag propertyObserverFlag)
             : this(propertyExpression, false, LazyThreadSafetyMode.None, propertyObserverFlag)
@@ -115,13 +115,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CachedObserver{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal CachedObserver(
+        internal ObserverWithActionAndChachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached,
             LazyThreadSafetyMode safetyMode,

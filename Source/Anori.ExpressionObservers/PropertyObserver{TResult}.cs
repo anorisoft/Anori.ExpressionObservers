@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers
         public static IPropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action) =>
-            new Observer<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            new ObserverWithAction<TResult>(propertyExpression, action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -51,7 +51,7 @@ namespace Anori.ExpressionObservers
             bool autoSubscribe,
             [NotNull] Action action)
         {
-            var observer = new Observer<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            var observer = new ObserverWithAction<TResult>(propertyExpression, action, PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);

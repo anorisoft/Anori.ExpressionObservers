@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueTypeObservers
+namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
 {
     using System;
     using System.Collections.Generic;
@@ -53,13 +53,13 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        /// Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
+        /// <exception cref="Observer{TParameter1,TParameter2,TResult}">propertyExpression is null.</exception>
         internal Observer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -74,7 +74,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>

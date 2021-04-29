@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
     /// <summary>
-    ///     The Property Value Observer Builder With Action And Getter And Fallback interface.
+    ///     The Property Value2 Observer Builder With Action And Getter And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionAndFallback<out TResult> :

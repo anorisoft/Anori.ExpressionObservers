@@ -188,12 +188,12 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer = new Observer<TParameter1, TParameter2, TResult>(
-                parameter1,
-                parameter2,
-                propertyExpression,
-                action,
-                PropertyObserverFlag.None);
+            var observer = new ObserverWithAction<TParameter1, TParameter2, TResult>(
+                                                                                                                    parameter1,
+                                                                                                                    parameter2,
+                                                                                                                    propertyExpression,
+                                                                                                                    action,
+                                                                                                                    PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -221,7 +221,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
-            new Observer<TParameter1, TParameter2, TResult>(
+            new ObserverWithAction<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,

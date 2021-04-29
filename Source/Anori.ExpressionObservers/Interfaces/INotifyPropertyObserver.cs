@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces
     using System.ComponentModel;
 
     /// <summary>
-    ///     The I Property Observer On Value Changed interface.
+    ///     The I Property Observer On Value2 Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso

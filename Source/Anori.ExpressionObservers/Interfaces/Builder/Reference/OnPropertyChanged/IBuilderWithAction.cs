@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverBuilderOnNotifyProperyChangedWithAction.cs" company="AnoriSoft">
+// <copyright file="IPropertyReferenceObserverBuilderOnProperyChangedWithAction.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,17 +7,15 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
     /// <summary>
-    ///     The I Value Property Observer Builder With Action interface.
+    ///     The I Value2 Property Observer Builder With Action interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnNotifyProperyChangedWithAction{TResult}}" />
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnProperyChangedWithAction{TResult}}" />
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnNotifyProperyChangedWithAction{TResult}}" />
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnProperyChangedWithAction{TResult}}" />
     public interface IBuilderWithAction<TResult> :
-        IObserverBuilderBase<IBuilderWithAction<TResult>>,
-    IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>
-
+        IObserverBuilderBase<IBuilderWithAction<TResult>>
         where TResult : class
     {
         /// <summary>

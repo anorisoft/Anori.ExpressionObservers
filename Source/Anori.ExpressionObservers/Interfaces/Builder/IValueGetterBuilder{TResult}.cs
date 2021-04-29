@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     using System;
 
     /// <summary>
-    ///     The Value Getter Builder interface.
+    ///     The Value2 Getter Builder interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IValueGetterBuilder<TResult>

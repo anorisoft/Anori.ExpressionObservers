@@ -16,7 +16,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallbackAndScheduler<TResult>
             IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndFallbackAndScheduler<TResult>>.AutoActivate() =>
@@ -29,6 +29,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Property Observer With Getter And Fallback.
         /// </returns>
         IGetterPropertyObserver<TResult> IBuilderWithActionOfTAndGetterAndFallbackAndScheduler<TResult>.Build() =>
-            this.CreateOnPropertyChangedWithActionOfTAndGetterAndFallbackAndScheduler();
+            this.CreateGetterPropertyObserverWithActionOfTAndFallback();
     }
 }

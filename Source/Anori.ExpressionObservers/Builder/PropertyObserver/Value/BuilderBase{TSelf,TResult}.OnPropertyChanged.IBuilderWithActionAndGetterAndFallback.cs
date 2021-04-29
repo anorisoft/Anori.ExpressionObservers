@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The Property Value2 Observer Builder.</returns>
         IBuilderWithActionAndGetterAndFallback<TResult>
             IObserverBuilderBase<IBuilderWithActionAndGetterAndFallback<TResult>>.
             AutoActivate() =>
@@ -38,7 +38,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Withes the getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>
             IPropertyObserverScheduler<IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>>.
@@ -50,7 +50,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value2 Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>
             IPropertyObserverScheduler<

@@ -17,7 +17,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     public interface IBuilderWithActionOfTAndGetter<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndGetter<TResult>>,
         IPropertyObserverScheduler<
-            IBuilderWithActionOfTAndScheduler<TResult>>
+            IBuilderWithActionOfTAndGetterAndScheduler<TResult>>
         where TResult : class
     {
         /// <summary>

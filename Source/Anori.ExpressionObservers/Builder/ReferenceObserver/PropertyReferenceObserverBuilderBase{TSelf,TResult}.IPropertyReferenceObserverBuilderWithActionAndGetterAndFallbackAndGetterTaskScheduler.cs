@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers.Builder
         ///// </returns>
         //IPropertyObserverWithGetterAndFallback<TResult>
         //    IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>.Build() =>
-        //    this.GetterPropertyObserverWithActionAndGetterAndFallback();
+        //    this.CreateGetterPropertyObserverWithActionAndGetterAndFallback();
         IGetterPropertyObserver<TResult> IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>.Build()
         {
             return this.CreatePropertyObserverWithGetterAndFallback();

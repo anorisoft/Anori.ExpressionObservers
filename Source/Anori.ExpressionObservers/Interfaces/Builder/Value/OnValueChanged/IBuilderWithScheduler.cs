@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     using Anori.Common;
 
     /// <summary>
-    ///     The I Property Value Observer Builder With Value Changed And Getter Task Scheduler interface.
+    ///     The I Property Value2 Observer Builder With Value2 Changed And Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
@@ -21,14 +21,14 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>Property Value Observer On Notify Propery Changed,</returns>
+        /// <returns>Property Value2 Observer On Notify Propery Changed,</returns>
         INotifyValuePropertyObserver<TResult> Build();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The Property Value2 Observer Builder.</returns>
         IBuilderWithScheduler<TResult> Cached(
             LazyThreadSafetyMode safetyMode);
 
@@ -36,7 +36,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithScheduler<TResult> Cached();
 
@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithDeferrerAndScheduler<TResult> Deferred();
     }

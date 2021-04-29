@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallback{TResult}}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallbackAndScheduler{TResult}}" />
-    public interface IBuilderWithActionOfTAndFallback<out TResult> :
+    public interface IBuilderWithActionOfTAndFallback<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallback<TResult>>,
         IPropertyObserverScheduler<
             IBuilderWithActionOfTAndFallbackAndScheduler<TResult>>
@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IGetterPropertyObserver<TResult> Build();
+        IPropertyObserver<TResult> Build();
 
         /// <summary>
         ///     Withes the getter.

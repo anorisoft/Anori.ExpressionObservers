@@ -22,7 +22,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Value Observer With Getter.
+    /// Property Value2 Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverOnValueChangedWithDeferrer{TResult}, TResult}" />

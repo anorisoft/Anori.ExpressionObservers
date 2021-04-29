@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
     /// <summary>
-    ///     The I Property Value Observer Builder With Value Changed And Deferrer And Getter Task Scheduler interface.
+    ///     The I Property Value2 Observer Builder With Value2 Changed And Deferrer And Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value2 Observer On Notify Propery Changed.
         /// </returns>
         INotifyPropertyObserverWithDeferrer<TResult> Build();
     }

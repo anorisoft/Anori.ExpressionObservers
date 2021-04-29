@@ -6,15 +6,16 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     ///     The I Property Observer Builder interface.
     /// </summary>
-    public interface IObserverBuilder
+    public interface IPropertyObserverBuilder
     {
         /// <summary>
         ///     References the observer builder.
@@ -65,8 +66,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>The Value Property Observer Builder.</returns>
-        IBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
+        /// <returns>The Value2 Property Observer Builder.</returns>
+        IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
@@ -77,8 +78,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>The Value Property Observer Builder.</returns>
-        IBuilder<TResult> ValueObserverBuilder<TResult>(
+        /// <returns>The Value2 Property Observer Builder.</returns>
+        IValueObserverBuilder<TResult> ValueObserverBuilder<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression)
             where TResult : struct;
 
@@ -91,8 +92,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>The Value Property Observer Builder.</returns>
-        IBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
+        /// <returns>The Value2 Property Observer Builder.</returns>
+        IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)

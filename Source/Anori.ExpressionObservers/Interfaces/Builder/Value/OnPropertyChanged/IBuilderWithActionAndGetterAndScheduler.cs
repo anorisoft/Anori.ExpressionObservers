@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Value Property Observer.
+        ///     The Value2 Property Observer.
         /// </returns>
         IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult> WithFallback(TResult fallback);
     }

@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces
 {
     /// <summary>
-    /// The I Getter Value Property Observer interface.
+    /// The I Getter Value2 Property Observer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IGetterValuePropertyObserver{TResult}}" />
@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.Interfaces
         /// <summary>
         /// Gets the value.
         /// </summary>
-        /// <returns>The Value.</returns>
+        /// <returns>The Value2.</returns>
         TResult? GetValue();
     }
 }

@@ -70,7 +70,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <typeparam name="TParameter1">The type of the parameter.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
-        /// <returns>The Value Getter Builder.</returns>
+        /// <returns>The Value2 Getter Builder.</returns>
         IValueGetterBuilder<TParameter1, TResult> ValueGetter<TParameter1, TResult>(
             Expression<Func<TParameter1, TResult>> expression)
             where TResult : struct;
@@ -83,7 +83,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Value Getter Builder.
+        ///     The Value2 Getter Builder.
         /// </returns>
         IValueGetterBuilder<TParameter1, TParameter2, TResult> ValueGetter<TParameter1, TParameter2, TResult>(
             Expression<Func<TParameter1, TParameter2, TResult>> expression)
@@ -98,7 +98,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Value Getter Builder.
+        ///     The Value2 Getter Builder.
         /// </returns>
         IValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>
             ValueGetter<TParameter1, TParameter2, TParameter3, TResult>(
@@ -111,7 +111,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Value Getter Builder.
+        ///     The Value2 Getter Builder.
         /// </returns>
         IValueGetterBuilder<TResult> ValueGetter<TResult>(Expression<Func<TResult>> expression)
             where TResult : struct;

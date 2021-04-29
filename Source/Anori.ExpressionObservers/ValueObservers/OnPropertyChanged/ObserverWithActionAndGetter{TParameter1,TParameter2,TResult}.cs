@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Observer With Getter.
+    ///     Property Value2 Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     /// <seealso
     ///     cref="ObserverWithActionAndGetter{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class ObserverWithGetter<TParameter1, TParameter2, TResult> :
+    internal sealed class ObserverWithActionAndGetter<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterValuePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         IGetterValuePropertyObserver<TResult>
         where TResult : struct
@@ -57,7 +57,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithGetter(
+        internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -82,7 +82,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithGetter(
+        internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -105,7 +105,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithGetter(
+        internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -124,7 +124,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         ///     Gets the value.
         /// </summary>
         /// <returns>
-        ///     The Value.
+        ///     The Value2.
         /// </returns>
         public TResult? GetValue() => this.getter();
 

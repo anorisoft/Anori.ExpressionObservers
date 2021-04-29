@@ -8,6 +8,7 @@ namespace Anori.ExpressionObservers.UnitTests
 {
     using Anori.Common;
     using Anori.ExpressionObservers.Builder;
+    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
     using NUnit.Framework;
     using System.Threading.Tasks;
@@ -292,7 +293,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -328,7 +329,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_AutoActivateFalse()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_AutoActivateFalse()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -364,7 +365,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_AutoActivateTrue()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_AutoActivateTrue()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -396,7 +397,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_Cashed()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -432,7 +433,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_Cashed_AutoActivateFalse()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_AutoActivateFalse()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -468,7 +469,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_Cashed_AutoActivateTrue()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_AutoActivateTrue()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -500,7 +501,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -536,7 +537,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent_AutoActivateFalse()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent_AutoActivateFalse()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -572,7 +573,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent_AutoActivateTrue()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent_AutoActivateTrue()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
@@ -610,31 +611,31 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserver.Observes(() => instance.StringProperty, () => callCount++, "Fallback");
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
         }
 
         [Test]
@@ -644,31 +645,31 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserver.Observes(() => instance.StringProperty, false, () => callCount++, "Fallback");
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
         }
 
         [Test]
@@ -678,27 +679,27 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserver.Observes(() => instance.StringProperty, true, () => callCount++, "Fallback");
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
         }
 
         [Test]
@@ -742,31 +743,31 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyReferenceObserver.ObservesAndGet(() => instance.StringProperty, false, () => callCount++);
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
         }
 
         [Test]
@@ -776,27 +777,27 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyReferenceObserver.ObservesAndGet(() => instance.StringProperty, true, () => callCount++);
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
         }
 
         [Test]
@@ -813,37 +814,37 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
         }
 
         [Test]
@@ -860,37 +861,37 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
         }
 
         [Test]
@@ -907,32 +908,32 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
         }
 
         [Test]
@@ -949,37 +950,37 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
         }
 
         [Test]
@@ -996,37 +997,37 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
         }
 
         [Test]
@@ -1043,32 +1044,32 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual("Nil", value);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
 
             instance.StringProperty = "1";
             Assert.AreEqual(1, callCount);
             Assert.AreEqual("1", value);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.StringProperty = "2";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.StringProperty = "3";
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("3", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
 
             instance.StringProperty = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual("2", value);
-            Assert.AreEqual("Fallback", observes.Value);
+            Assert.AreEqual("Fallback", observes.GetValue());
         }
     }
 
@@ -1082,7 +1083,7 @@ namespace Anori.ExpressionObservers.UnitTests
             
             using var observes = PropertyObserverBuilder.Builder
               .ReferenceObserverBuilder(() => (instance.IntProperty > 2).ToString())
-              .OnNotifyProperyChanged()
+              .OnProperyChanged()
               .WithAction(()=> callCount++)
               .WithGetter()
               .AutoActivate()
@@ -1119,35 +1120,36 @@ namespace Anori.ExpressionObservers.UnitTests
               .ReferenceObserverBuilder(() => (instance.IntProperty > 3).ToString())
               .OnValueChanged()
               .WithAction(() => callCount++)
+              .WithGetter()
               .Build()
               .Activate(true);
 
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.IntProperty = 1;
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("False", observes.Value);
+            Assert.AreEqual("False", observes.GetValue());
 
             instance.IntProperty = 2;
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("False", observes.Value);
+            Assert.AreEqual("False", observes.GetValue());
 
             instance.IntProperty = 3;
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("False", observes.Value);
+            Assert.AreEqual("False", observes.GetValue());
 
             instance.IntProperty = 4;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("True", observes.Value);
+            Assert.AreEqual("True", observes.GetValue());
 
             instance.IntProperty = 5;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("True", observes.Value);
+            Assert.AreEqual("True", observes.GetValue());
 
             instance.IntProperty = 6;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("True", observes.Value);
+            Assert.AreEqual("True", observes.GetValue());
         }
 
 

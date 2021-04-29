@@ -6,8 +6,10 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
+    using Anori.Common;
+
     /// <summary>
-    ///     The Property Value Observer Builder With Action And Getter interface.
+    ///     The Property Value2 Observer Builder With Action And Getter interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
@@ -30,8 +32,26 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value2 Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndFallback<TResult> WithFallback(TResult fallback);
+
+        /// <summary>
+        /// Cacheds the specified safety mode.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The Value2 Property Observer Builder.
+        /// 
+        /// </returns>
+        IBuilderWithActionAndGetterAndFallback<TResult> Cached(LazyThreadSafetyMode safetyMode);
+
+        /// <summary>
+        /// Cacheds this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Value2 Property Observer Builder.
+        /// </returns>
+        IBuilderWithActionAndGetterAndFallback<TResult> Cached();
     }
 }

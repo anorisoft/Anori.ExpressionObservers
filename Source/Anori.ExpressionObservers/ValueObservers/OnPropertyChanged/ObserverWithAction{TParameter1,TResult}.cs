@@ -19,12 +19,12 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Getter Observer.
+    ///     Property Value2 Getter Observer.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="ObserverBase{TSelf,TResult}" />
-    internal sealed class Observer<TParameter1, TResult> :
+    internal sealed class ObserverWithAction<TParameter1, TResult> :
         ObserverBase<IGetterValuePropertyObserver<TResult>, TParameter1, TResult>,
         IGetterValuePropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
@@ -43,14 +43,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">The action is null.</exception>
-        internal Observer(
+        internal ObserverWithAction(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
@@ -62,7 +62,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -70,7 +70,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal Observer(
+        internal ObserverWithAction(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
@@ -85,7 +85,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -93,7 +93,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action</exception>
-        internal Observer(
+        internal ObserverWithAction(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,

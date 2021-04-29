@@ -6,26 +6,41 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
+    using System;
+
     using Anori.Common;
 
     /// <summary>
-    ///     The I Property Value Observer Builder With Notify Propery Changed interface.
+    ///     The I Property Value2 Observer Builder With Notify Propery Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnNotifyProperyChanged{TResult}}" />
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnProperyChanged{TResult}}" />
     /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnNotifyProperyChanged{TResult}}" />
-    /// <seealso cref="IBuilderOnNotifyProperyChanged{TResult}" />
-    public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
-                                                         IPropertyObserverScheduler<
-                                                             IBuilderWithScheduler<TResult>>
+    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnProperyChanged{TResult}}" />
+    /// <seealso cref="IBuilderOnProperyChanged{TResult}" />
+    public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>
         where TResult : struct
     {
         /// <summary>
-        ///     Creates this instance.
+        ///     Withes the action.
         /// </summary>
-        /// <returns>Property Value Observer On Notify Propery Changed.</returns>
-        IPropertyObserver<TResult> Build();
+        /// <param name="action">The action.</param>
+        /// <returns>The Value2 Property Observer Builder.</returns>
+        IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?> action);
+
+        /// <summary>
+        ///     Withes the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>The Value2 Property Observer Builder.</returns>
+        IBuilderWithActionOfT<TResult> WithAction(Action<TResult> action);
+
+        /// <summary>
+        ///     Withes the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>The Value2 Property Observer Builder.</returns>
+        IBuilderWithAction<TResult> WithAction(Action action);
     }
 }

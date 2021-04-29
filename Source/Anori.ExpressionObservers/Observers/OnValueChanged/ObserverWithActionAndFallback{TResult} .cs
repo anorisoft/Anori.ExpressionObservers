@@ -59,7 +59,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndFallback{TResult}" />
+        ///     <see cref="ObserverWithActionAndFallback{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -86,7 +86,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndFallback{TResult}" />
+        ///     <see cref="ObserverWithActionAndFallback{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -112,7 +112,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndFallback{TResult}" />
+        ///     <see cref="ObserverWithActionAndFallback{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>

@@ -16,23 +16,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.IValueObserverBuilder.cs" />
-    <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilder.cs" />
+    <Compile Remove="Builder\ReferenceObserver\**" />
+    <EmbeddedResource Remove="Builder\ReferenceObserver\**" />
+    <None Remove="Builder\ReferenceObserver\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithDeferrerAndScheduler.cs" />
     <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithDefferer.cs" />
     <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IBuilderWithActionAndGetterAndFallback2.cs" />
     <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfNullableT.cs" />
     <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfT.cs" />
     <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfTAndFallback.cs" />
-    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilder.cs" />
     <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderOnProperyChangedAndScheduler.cs" />
     <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndDispatcherGetterAndFallback.cs" />
-    <Compile Remove="Interfaces\IPropertyObserverOnNotifyProperyChangedWithFallback{TResult}.cs" />
-    <Compile Remove="Interfaces\IPropertyObserverOnNotifyProperyChangedWithGetterAndFallback{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyObserverOnProperyChangedWithFallback{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyObserverOnProperyChangedWithGetterAndFallback{TResult}.cs" />
     <Compile Remove="Interfaces\IPropertyObserverOnValueChangedWithFallback{TResult}.cs" />
-    <Compile Remove="Interfaces\IPropertyReferenceObserverOnNotifyProperyChanged{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyReferenceObserverOnProperyChanged{TResult}.cs" />
     <Compile Remove="Interfaces\IPropertyReferenceObserverWithGetter{TResult}.cs" />
     <Compile Remove="Interfaces\IPropertyValueObserverWithGetter{TResult}.cs" />
+    <Compile Remove="Observers\OnValueChanged\ObserverWithActionOfTAndFallback{TParameter1,TParameter2,TResult}.cs" />
+    <Compile Remove="Observers\OnValueChanged\ObserverWithActionOfTAndFallback{TParameter1,TResult}.cs" />
+    <Compile Remove="Observers\OnValueChanged\ObserverWithActionOfTAndFallback{TResult}.cs" />
     <Compile Remove="Observers\PropertyObserverWithActionAndFallback{TResult}.cs" />
   </ItemGroup>
 
@@ -61,10 +67,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Builder\ReferenceObserver\OnValueChanged\" />
   </ItemGroup>
 
 </Project>

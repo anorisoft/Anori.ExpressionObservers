@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionAndGetter.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionAndGetter.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,6 +8,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
     using System.Threading.Tasks;
 
+    using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
@@ -17,7 +18,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The Property Value2 Observer Builder.</returns>
         IBuilderWithActionAndGetter<TResult> IObserverBuilderBase<IBuilderWithActionAndGetter<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
@@ -32,11 +33,30 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.CreateGetterValuePropertyObserver();
 
         /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The Value2 Property Observer Builder.
+        /// </returns>
+        IBuilderWithActionAndGetterAndFallback<TResult> IBuilderWithActionAndGetter<TResult>.Cached(
+            LazyThreadSafetyMode safetyMode) =>
+            this.Cached(safetyMode);
+
+        /// <summary>
+        ///     Cacheds this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Value2 Property Observer Builder.
+        /// </returns>
+        IBuilderWithActionAndGetterAndFallback<TResult> IBuilderWithActionAndGetter<TResult>.Cached() => this.Cached();
+
+        /// <summary>
         ///     Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value2 Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndFallback<TResult> IBuilderWithActionAndGetter<TResult>.WithFallback(
             TResult fallback) =>
@@ -46,10 +66,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Withes the getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetterAndScheduler<TResult> IPropertyObserverScheduler<
-            IBuilderWithActionAndGetterAndScheduler<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionAndGetterAndScheduler<TResult>
+            IPropertyObserverScheduler<IBuilderWithActionAndGetterAndScheduler<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -57,11 +77,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value2 Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndScheduler<TResult>
-            IPropertyObserverScheduler<IBuilderWithActionAndGetterAndScheduler<TResult>>.
-            WithScheduler(TaskScheduler taskScheduler) =>
+            IPropertyObserverScheduler<IBuilderWithActionAndGetterAndScheduler<TResult>>.WithScheduler(
+                TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }
 }

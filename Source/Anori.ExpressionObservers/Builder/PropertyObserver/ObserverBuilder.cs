@@ -10,15 +10,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
     using System.ComponentModel;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Builder.PropertyObserver.Reference;
-    using Anori.ExpressionObservers.Builder.PropertyObserver.Value;
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
     ///     The Property Observer Builder class.
     /// </summary>
-    /// <seealso cref="IObserverBuilder" />
-    public class ObserverBuilder : IObserverBuilder
+    /// <seealso cref="IPropertyObserverBuilder" />
+    public class PropertyObserverBuilder : IPropertyObserverBuilder
     {
         /// <summary>
         ///     The is automatic activate.
@@ -36,12 +34,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         private readonly PropertyObserverFlag observerFlag;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverBuilder" /> class.
+        ///     Initializes a new instance of the <see cref="PropertyObserverBuilder" /> class.
         /// </summary>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
         /// <param name="autoActivate">if set to <c>true</c> [automatic activate].</param>
         /// <param name="silentActivate">if set to <c>true</c> [silent activate].</param>
-        public ObserverBuilder(
+        public PropertyObserverBuilder(
             PropertyObserverFlag propertyObserverFlag = PropertyObserverFlag.None,
             bool autoActivate = false,
             bool silentActivate = true)
@@ -57,7 +55,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <value>
         ///     The builder.
         /// </value>
-        public static IObserverBuilder Builder { get; } = new ObserverBuilder();
+        public static IPropertyObserverBuilder Builder { get; } = new PropertyObserverBuilder();
 
         /// <summary>
         ///     References the observer builder.
@@ -75,7 +73,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
             where TParameter1 : INotifyPropertyChanged
             where TResult : class
         {
-            var builder = new Builder.Builder<TParameter1, TResult>(parameter1, propertyExpression)
+            var builder = new Reference.Builder<TParameter1, TResult>(parameter1, propertyExpression)
                               {
                                   ObserverFlag = this.observerFlag,
                                   IsAutoActivate = this.isAutoActivate,
@@ -126,7 +124,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
             where TResult : class
         {
             var builder =
-                new Builder.Builder<TParameter1, TParameter2, TResult>(
+                new Reference.Builder<TParameter1, TParameter2, TResult>(
                     parameter1,
                     parameter2,
                     propertyExpression)
@@ -146,15 +144,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value Property Observer Builder.
+        ///     Value2 Property Observer Builder.
         /// </returns>
-        public IBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
+        public IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
             TParameter1 parameter1,
             Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : struct
         {
-            var builder = new Builder<TParameter1, TResult>(parameter1, propertyExpression)
+            var builder = new Value.Builder<TParameter1, TResult>(parameter1, propertyExpression)
                               {
                                   ObserverFlag = this.observerFlag,
                                   IsAutoActivate = this.isAutoActivate,
@@ -173,9 +171,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value Property Observer Builder.
+        ///     Value2 Property Observer Builder.
         /// </returns>
-        public IBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
+        public IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
             TParameter1 parameter1,
             TParameter2 parameter2,
             Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
@@ -184,7 +182,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
             where TResult : struct
         {
             var builder =
-                new Builder<TParameter1, TParameter2, TResult>(
+                new Value.Builder<TParameter1, TParameter2, TResult>(
                     parameter1,
                     parameter2,
                     propertyExpression)
@@ -202,13 +200,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value Property Observer Builder.
+        ///     Value2 Property Observer Builder.
         /// </returns>
-        public IBuilder<TResult> ValueObserverBuilder<TResult>(
+        public IValueObserverBuilder<TResult> ValueObserverBuilder<TResult>(
             Expression<Func<TResult>> propertyExpression)
             where TResult : struct
         {
-            var builder = new Value.Builder<TResult>(propertyExpression)
+            var builder = new PropertyObserver.Value.Builder<TResult>(propertyExpression)
                               {
                                   ObserverFlag = this.observerFlag,
                                   IsAutoActivate = this.isAutoActivate,

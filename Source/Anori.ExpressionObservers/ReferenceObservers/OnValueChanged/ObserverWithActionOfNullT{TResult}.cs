@@ -4,19 +4,22 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Observers
+namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 {
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions;
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.Extensions;
+
+    using JetBrains.Annotations;
+
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
@@ -83,7 +86,7 @@ namespace Anori.ExpressionObservers.Observers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.action = this.action ?? throw new ArgumentNullException(nameof(this.action));
             this.getter = this.CreateNullableReferenceGetter(
                  this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext));
         }
@@ -104,7 +107,7 @@ namespace Anori.ExpressionObservers.Observers
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.action = this.action ?? throw new ArgumentNullException(nameof(this.action));
             this.getter = this.CreateNullableReferenceGetter(this.CreateGetter(Getter(propertyExpression, this.Tree)));
         }
 

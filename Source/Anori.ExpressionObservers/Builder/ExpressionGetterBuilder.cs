@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Value Getter Builder.
+        ///     The Value2 Getter Builder.
         /// </returns>
         IReferenceGetterBuilder<TParameter1, TParameter2, TParameter3, TResult> IExpressionGetterBuilder.
             ReferenceGetter<TParameter1, TParameter2, TParameter3, TResult>(
@@ -92,7 +92,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Value Getter Builder.
+        ///     The Value2 Getter Builder.
         /// </returns>
         IValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult> IExpressionGetterBuilder.
             ValueGetter<TParameter1, TParameter2, TParameter3, TResult>(
@@ -105,7 +105,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Value Getter Builder.
+        ///     The Value2 Getter Builder.
         /// </returns>
         IValueGetterBuilder<TResult> IExpressionGetterBuilder.
             ValueGetter<TResult>(Expression<Func<TResult>> expression) =>
@@ -118,7 +118,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Value Getter Builder.
+        ///     The Value2 Getter Builder.
         /// </returns>
         IValueGetterBuilder<TParameter1, TResult> IExpressionGetterBuilder.ValueGetter<TParameter1, TResult>(
             Expression<Func<TParameter1, TResult>> expression)
@@ -133,7 +133,7 @@ namespace Anori.ExpressionObservers.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
-        ///     The Value Getter Builder.
+        ///     The Value2 Getter Builder.
         /// </returns>
         IValueGetterBuilder<TParameter1, TParameter2, TResult> IExpressionGetterBuilder.
             ValueGetter<TParameter1, TParameter2, TResult>(

@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IGetterPropertyObserver<TResult>
+        IPropertyObserver<TResult>
             IBuilderWithActionOfTAndFallback<TResult>.Build() =>
             this.CreatePropertyObserverWithActionOfTAndFallback();
 

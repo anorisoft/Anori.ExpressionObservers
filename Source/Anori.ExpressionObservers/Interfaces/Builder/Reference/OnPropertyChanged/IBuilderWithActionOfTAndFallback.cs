@@ -7,14 +7,14 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
     /// <summary>
-    ///     The I Property Value Observer Builder With Action Of T Result And Fallback interface.
+    ///     The I Property Value2 Observer Builder With Action Of T Result And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnNotifyProperyChangedWithActionOfTAndFallback{TResult}}" />
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnProperyChangedWithActionOfTAndFallback{TResult}}" />
     /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnNotifyProperyChangedWithActionOfTAndFallback{TResult}}" />
-    public interface IBuilderWithActionOfTAndFallback<out TResult> :
+    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnProperyChangedWithActionOfTAndFallback{TResult}}" />
+    public interface IBuilderWithActionOfTAndFallback<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallback<TResult>>,
         IPropertyObserverScheduler<
             IBuilderWithActionOfTAndFallbackAndScheduler<TResult>>
@@ -26,7 +26,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IGetterPropertyObserver<TResult> Build();
+        IPropertyObserver<TResult> Build();
 
         /// <summary>
         ///     Withes the getter.

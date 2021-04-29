@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueTypeObservers
+namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
 {
     using System;
     using System.Collections.Generic;
@@ -49,7 +49,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         ///     The value changed action.
         /// </summary>
         [NotNull]
-        private readonly Action valueChangedAction;
+        private readonly Action<TResult?> valueChangedAction;
 
         /// <summary>
         ///     The value.
@@ -65,7 +65,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <param name="observerFlag">The observer flag.</param>
         internal ObserverWithAction(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
+            [NotNull] Action<TResult?> action,
             [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
@@ -87,7 +87,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <exception cref="ArgumentNullException">action</exception>
         internal ObserverWithAction(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
+            [NotNull] Action<TResult?> action,
             [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
@@ -107,7 +107,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
         /// <exception cref="ArgumentNullException">action</exception>
         internal ObserverWithAction(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
+            [NotNull] Action<TResult?> action,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
@@ -142,7 +142,7 @@ namespace Anori.ExpressionObservers.ValueTypeObservers
                 }
 
                 this.value = value;
-                this.valueChangedAction.Raise();
+                this.valueChangedAction.Raise(value);
                 this.OnPropertyChanged();
             }
         }

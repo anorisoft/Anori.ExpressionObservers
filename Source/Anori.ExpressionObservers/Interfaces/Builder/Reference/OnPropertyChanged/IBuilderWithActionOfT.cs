@@ -15,9 +15,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     /// <seealso
     ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndScheduler{TResult}}" />
     public interface IBuilderWithActionOfT<TResult> :
-        IObserverBuilderBase<IBuilderWithActionOfT<TResult>>,
-        IPropertyObserverScheduler<
-            IBuilderWithActionOfTAndScheduler<TResult>>
+        IObserverBuilderBase<IBuilderWithActionOfT<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -25,7 +23,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndFallback<TResult> WithFallback(TResult fallback);
 
@@ -33,7 +31,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         ///     Withes the getter.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndGetter<TResult> WithGetter();
     }

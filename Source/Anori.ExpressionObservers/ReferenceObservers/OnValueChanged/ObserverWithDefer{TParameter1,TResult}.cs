@@ -74,8 +74,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDefer{TParameter1,TParameter2,TResult}" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="ObserverWithDefer{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -98,7 +98,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDefer{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDefer{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>

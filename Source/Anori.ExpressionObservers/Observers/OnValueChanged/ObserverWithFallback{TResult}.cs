@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class NotifyObserverWithFallback<TResult> :
+    internal sealed class ObserverWithFallback<TResult> :
         ObserverBase<INotifyPropertyObserver<TResult>, TResult>,
         INotifyPropertyObserver<TResult>
     {
@@ -61,7 +61,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal NotifyObserverWithFallback(
+        internal ObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] TaskScheduler taskScheduler,
             [NotNull] TResult fallback,
@@ -83,7 +83,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal NotifyObserverWithFallback(
+        internal ObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] SynchronizationContext synchronizationContext,
             [NotNull] TResult fallback,
@@ -103,7 +103,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal NotifyObserverWithFallback(
+        internal ObserverWithFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)

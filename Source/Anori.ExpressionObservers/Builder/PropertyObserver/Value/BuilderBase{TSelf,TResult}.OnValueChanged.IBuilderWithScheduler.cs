@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
 
     /// <summary>
-    ///     The Property Value Observer Builder Base class.
+    ///     The Property Value2 Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithScheduler<TResult> IObserverBuilderBase<
             IBuilderWithScheduler<TResult>>.AutoActivate() =>
@@ -51,18 +51,18 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value2 Observer On Notify Propery Changed.
         /// </returns>
         INotifyValuePropertyObserver<TResult>
             IBuilderWithScheduler<TResult>.Build() =>
-            this.CreateNotifyValuePropertyObserverWithScheduler();
+            this.CreateNotifyValuePropertyObserverWithAction();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithScheduler<TResult>
             IBuilderWithScheduler<TResult>.Cached(
@@ -75,7 +75,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithScheduler<TResult>
             IBuilderWithScheduler<TResult>.Cached()

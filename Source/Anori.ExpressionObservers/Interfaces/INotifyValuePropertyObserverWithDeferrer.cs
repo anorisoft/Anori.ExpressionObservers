@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers.Interfaces
     using System.ComponentModel;
 
     /// <summary>
-    /// The Property Value Observer On Value Changed With Deferrer interface.
+    /// The Property Value2 Observer On Value2 Changed With Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverOnValueChangedWithDeferrer{TResult}}" />

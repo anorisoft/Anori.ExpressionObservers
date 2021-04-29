@@ -11,15 +11,18 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using System.Threading;
 
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Observers;
+    using Anori.ExpressionObservers.Observers.OnPropertyChanged;
+    using Anori.ExpressionObservers.Observers.OnValueChanged;
+    using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
+    using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
 
     /// <summary>
-    ///     The Value Property Observer Builder class.
+    ///     The Value2 Property Observer Builder class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="Builder.PropertyObserver.Reference.BuilderBase{TSelf,TResult}.ExpressionObservers.Builder.PropertyReferenceObserverBuilder{TResult}, TResult}" />
-    internal sealed class Builder<TResult> : PropertyObserver.Reference.BuilderBase<
+    internal sealed class Builder<TResult> : BuilderBase<
         Builder<TResult>, TResult>
         where TResult : class
     {
@@ -29,61 +32,422 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         private readonly Expression<Func<TResult>> propertyExpression;
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see
-        ///         cref="PropertyReferenceObserverBuilderOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChangedOnNotifyProperyChanged{TResult}" />
-        ///     class.
+        ///     Initializes a new instance of the <see cref="Builder{TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        public Builder(Expression<Func<TResult>> propertyExpression) =>
-            this.propertyExpression = propertyExpression;
+        public Builder(Expression<Func<TResult>> propertyExpression) => this.propertyExpression = propertyExpression;
 
         /// <summary>
-        ///     Creates the property value observer builder with action of t result and fallback.
+        ///     Creates the property observer with action of T result and getter and fallback.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Property Value2 Observer.
         /// </returns>
-        protected override IGetterPropertyObserver<TResult> CreatePropertyGetterObserverWithFallback()
+        protected override IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithActionOfTAndFallback()
         {
-            IGetterPropertyObserver<TResult> getterPropertyObserver;
-            
-                if (this.IsDispached)
-                {
-                    getterPropertyObserver = new Observers.OnPropertyChanged.ObserverWithActionOfTAndFallback<TResult>(
-                        this.propertyExpression,
-                        this.ActionOfTWithFallback!,
-                        SynchronizationContext.Current,
-                        this.Fallback!,
-                        this.ObserverFlag);
-                }
-                else if (this.TaskScheduler != null)
-                {
-                    getterPropertyObserver = new Observers.OnPropertyChanged.ObserverWithActionOfTAndFallback<TResult>(
-                        this.propertyExpression,
-                        this.ActionOfTWithFallback!,
-                        this.TaskScheduler,
-                        this.Fallback!,
-                        this.ObserverFlag);
-                }
-                else
-                {
-                    getterPropertyObserver = new Observers.OnPropertyChanged.ObserverWithActionOfTAndFallback<TResult>(
-                        this.propertyExpression,
-                        this.ActionOfTWithFallback!,
-                        this.Fallback!,
-                        this.ObserverFlag);
-                }
+            IGetterPropertyObserver<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTWithFallback!,
+                    SynchronizationContext.Current,
+                    this.Fallback!,
+                    this.ObserverFlag);
             }
-         
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTWithFallback!,
+                    this.TaskScheduler,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTWithFallback!,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
 
             if (this.IsAutoActivate)
             {
-                getterPropertyObserver.Activate(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
-            return getterPropertyObserver;
+            return observer;
+        }
+
+        /// <summary>
+        /// Creates the getter property observer with fallback.
+        /// </summary>
+        /// <returns>
+        /// The Property Value2 Observer.
+        /// </returns>
+        protected override IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithFallback()
+        {
+            IGetterPropertyObserver<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithActionAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.Action!,
+                    SynchronizationContext.Current,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithActionAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.Action!,
+                    this.TaskScheduler,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithActionAndGetterAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.Action!,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the property value observer builder with action and getter.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value2 Observer.
+        /// </returns>
+        protected override IGetterReferencePropertyObserver<TResult> CreateGetterReferencePropertyObserver()
+        {
+            IGetterReferencePropertyObserver<TResult> observer;
+
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithActionAndGetter<TResult>(
+                    this.propertyExpression,
+                    this.Action!,
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithActionAndGetter<TResult>(
+                    this.propertyExpression,
+                    this.Action!,
+                    this.TaskScheduler,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithActionAndGetter<TResult>(this.propertyExpression, this.Action!, this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the notify property observer.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value2 Observer.
+        /// </returns>
+        protected override INotifyReferencePropertyObserver<TResult> CreateNotifyPropertyObserver()
+        {
+            INotifyReferencePropertyObserver<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new Observer<TResult>(
+                    this.propertyExpression,
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new Observer<TResult>(
+                    this.propertyExpression,
+                    this.TaskScheduler,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new Observer<TResult>(this.propertyExpression, this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the notify property observer with action and fallback.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value2 Observer.
+        /// </returns>
+        protected override INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionAndFallback()
+        {
+            INotifyPropertyObserver<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithActionAndFallback<TResult>(
+                    this.propertyExpression,
+                    _ => this.Action!(),
+                    SynchronizationContext.Current,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithActionAndFallback<TResult>(
+                    this.propertyExpression,
+                    _ => this.Action!(),
+                    this.TaskScheduler,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithActionAndFallback<TResult>(
+                    this.propertyExpression,
+                    _ => this.Action!(),
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the notify property observer with action of T and fallback.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value2 Observer.
+        /// </returns>
+        protected override INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallback()
+        {
+            INotifyPropertyObserver<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithActionAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTWithFallback!,
+                    SynchronizationContext.Current,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithActionAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTWithFallback!,
+                    this.TaskScheduler,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithActionAndFallback<TResult>(
+                    this.propertyExpression,
+                    this.ActionOfTWithFallback!,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the notify property observer with fallback.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value2 Observer.
+        /// </returns>
+        protected override INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithFallback()
+        {
+            INotifyPropertyObserver<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithFallback<TResult>(
+                    this.propertyExpression,
+                    SynchronizationContext.Current,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithFallback<TResult>(
+                    this.propertyExpression,
+                    this.TaskScheduler,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithFallback<TResult>(
+                    this.propertyExpression,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the property value observer builder with value changed and fallback and deferrer.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value2 Observer.
+        /// </returns>
+        protected override INotifyPropertyObserverWithDeferrer<TResult>
+            CreateNotifyPropertyObserverWithFallbackAndDeferrer()
+        {
+            INotifyPropertyObserverWithDeferrer<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithDeferWithFallback<TResult>(
+                    this.propertyExpression,
+                    this.Fallback!,
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithDeferWithFallback<TResult>(
+                    this.propertyExpression,
+                    this.Fallback!,
+                    this.TaskScheduler,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithDeferWithFallback<TResult>(
+                    this.propertyExpression,
+                    this.Fallback!,
+                    this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the notify value property observer with action.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value2 Observer.
+        /// </returns>
+        protected override INotifyReferencePropertyObserver<TResult> CreateNotifyReferencePropertyObserverWithAction()
+        {
+            INotifyReferencePropertyObserver<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new ReferenceObservers.OnValueChanged.ObserverWithAction<TResult>(
+                    this.propertyExpression,
+                    () => this.Action!(),
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ReferenceObservers.OnValueChanged.ObserverWithAction<TResult>(
+                    this.propertyExpression,
+                    () => this.Action!(),
+                    this.TaskScheduler,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ReferenceObservers.OnValueChanged.ObserverWithAction<TResult>(
+                    this.propertyExpression,
+                    () => this.Action!(),
+                    this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Creates the property value observer builder with value changed and deferrer.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value2 Observer.
+        /// </returns>
+        protected override INotifyReferencePropertyObserverWithDeferrer<TResult>
+            CreateNotifyReferencePropertyObserverWithDeferrer()
+        {
+            INotifyReferencePropertyObserverWithDeferrer<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithDefer<TResult>(
+                    this.propertyExpression,
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithDefer<TResult>(
+                    this.propertyExpression,
+                    this.TaskScheduler,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithDefer<TResult>(this.propertyExpression, this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
         }
 
         /// <summary>
@@ -92,9 +456,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        protected override IPropertyObserver<TResult> CreatePropertyObserver()
+        protected override IPropertyObserver<TResult> CreatePropertyObserverWithAction()
         {
-            var observer = new Observer<TResult>(this.propertyExpression, this.Action!, this.ObserverFlag);
+            var observer = new Observers.OnPropertyChanged.ObserverWithAction<TResult>(
+                this.propertyExpression,
+                this.Action!,
+                this.ObserverFlag);
             if (this.IsAutoActivate)
             {
                 observer.Activate(this.IsSilentActivate);
@@ -104,80 +471,37 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        ///     Creates the property observer with action of t result and getter and fallback.
-        /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
-        protected override IPropertyObserverWithGetterAndFallback<TResult>
-            CreatePropertyObserverWithActionOfTAndGetterAndFallback()
-        {
-            IPropertyObserverWithGetterAndFallback<TResult> observer;
-            if (this.IsDispached)
-            {
-                observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
-                    this.propertyExpression,
-                    this.ActionOfTWithFallback!,
-                    SynchronizationContext.Current,
-                    this.Fallback!,
-                    this.ObserverFlag);
-            }
-            else if (this.TaskScheduler != null)
-            {
-                observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
-                    this.propertyExpression,
-                    this.ActionOfTWithFallback!,
-                    this.TaskScheduler,
-                    this.Fallback!,
-                    this.ObserverFlag);
-            }
-            else
-            {
-                observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
-                    this.propertyExpression,
-                    this.ActionOfTWithFallback!,
-                    this.Fallback!,
-                    this.ObserverFlag);
-            }
-
-            if (this.IsAutoActivate)
-            {
-                observer.Activate(this.IsSilentActivate);
-            }
-
-            return observer;
-        }
-
-        /// <summary>
-        ///     Creates the property value observer builder with action and dispatcher getter and fallback.
+        ///     Creates the getter property observer with action of T and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The Property Value2 Observer.
         /// </returns>
-        protected override IPropertyObserverWithGetterAndFallback<TResult> CreatePropertyObserverWithGetterAndFallback()
+        protected override IPropertyObserver<TResult> CreatePropertyObserverWithActionOfTAndFallback()
         {
-            IPropertyObserverWithGetterAndFallback<TResult> observer;
+            IPropertyObserver<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TResult>(
+                observer = new ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
-                    this.Action!,
+                    this.ActionOfTWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TResult>(
+                observer = new ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
-                    this.Action!,
+                    this.ActionOfTWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
             }
             else
             {
-                observer = new GetterObserverWithActionAndGetterAndFallback<TResult>(
+                observer = new ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
-                    this.Action!,
+                    this.ActionOfTWithFallback!,
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -194,14 +518,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the property value observer.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value2 Property Observer Builder.
         /// </returns>
         protected override IGetterReferencePropertyObserver<TResult> CreatePropertyReferenceObserver()
         {
-            IGetterReferencePropertyObserver<TResult> propertyObserver;
+            IGetterReferencePropertyObserver<TResult> observer;
             if (this.IsDispached)
             {
-                propertyObserver = new GetterReferenceObserver<TResult>(
+                observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
                     this.ActionOfT!,
                     SynchronizationContext.Current,
@@ -209,7 +533,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else if (this.TaskScheduler != null)
             {
-                propertyObserver = new GetterReferenceObserver<TResult>(
+                observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
                     this.ActionOfT!,
                     this.TaskScheduler,
@@ -217,7 +541,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else
             {
-                propertyObserver = new GetterReferenceObserver<TResult>(
+                observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
                     this.ActionOfT!,
                     this.ObserverFlag);
@@ -225,203 +549,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 
             if (this.IsAutoActivate)
             {
-                propertyObserver.Activate(this.IsSilentActivate);
+                observer.Activate(this.IsSilentActivate);
             }
 
-            return propertyObserver;
-        }
-
-        /// <summary>
-        ///     Creates the property value observer builder with value changed and getter task scheduler.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer.
-        /// </returns>
-        protected override INotifyReferencePropertyObserver<TResult>
-            CreatePropertyReferenceObserverBuilderOnValueChanged()
-        {
-            INotifyReferencePropertyObserver<TResult> propertyObserver;
-            if (this.IsDispached)
-            {
-                propertyObserver = new NotifyReferenceObserver<TResult>(
-                    this.propertyExpression,
-                    SynchronizationContext.Current,
-                    this.ObserverFlag);
-            }
-            else if (this.TaskScheduler != null)
-            {
-                propertyObserver = new NotifyReferenceObserver<TResult>(
-                    this.propertyExpression,
-                    this.TaskScheduler,
-                    this.ObserverFlag);
-            }
-            else
-            {
-                propertyObserver = new NotifyReferenceObserver<TResult>(
-                    this.propertyExpression,
-                    this.ObserverFlag);
-            }
-
-            if (this.IsAutoActivate)
-            {
-                propertyObserver.Activate(this.IsSilentActivate);
-            }
-
-            return propertyObserver;
-        }
-
-        /// <summary>
-        ///     Creates the property reference observer builder with value changed and deferrer.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer.
-        /// </returns>
-        protected override INotifyReferencePropertyObserverWithDeferrer<TResult>
-            CreatePropertyReferenceObserverBuilderOnValueChangedAndDeferrer()
-        {
-            INotifyReferencePropertyObserverWithDeferrer<TResult> propertyObserver;
-            if (this.IsDispached)
-            {
-                propertyObserver = new NotifyReferenceObserverWithDefer<TResult>(
-                    this.propertyExpression,
-                    SynchronizationContext.Current,
-                    this.ObserverFlag);
-            }
-            else if (this.TaskScheduler != null)
-            {
-                propertyObserver = new NotifyReferenceObserverWithDefer<TResult>(
-                    this.propertyExpression,
-                    this.TaskScheduler,
-                    this.ObserverFlag);
-            }
-            else
-            {
-                propertyObserver = new NotifyReferenceObserverWithDefer<TResult>(
-                    this.propertyExpression,
-                    this.ObserverFlag);
-            }
-
-            if (this.IsAutoActivate)
-            {
-                propertyObserver.Activate(this.IsSilentActivate);
-            }
-
-            return propertyObserver;
-        }
-
-        /// <summary>
-        ///     Creates the property value observer on notify propery changed.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer.
-        /// </returns>
-        protected override INotifyReferencePropertyObserver<TResult>
-            CreatePropertyReferenceObserverOnNotifyProperyChanged()
-        {
-            INotifyReferencePropertyObserver<TResult> propertyObserver;
-            if (this.IsDispached)
-            {
-                propertyObserver = new NotifyReferenceObserverOnNotifyProperyChanged<TResult>(
-                    this.propertyExpression,
-                    SynchronizationContext.Current,
-                    this.IsCached,
-                    this.SafetyMode,
-                    this.ObserverFlag);
-            }
-            else if (this.TaskScheduler != null)
-            {
-                propertyObserver = new NotifyReferenceObserverOnNotifyProperyChanged<TResult>(
-                    this.propertyExpression,
-                    this.TaskScheduler,
-                    this.IsCached,
-                    this.SafetyMode,
-                    this.ObserverFlag);
-            }
-            else
-            {
-                propertyObserver = new NotifyReferenceObserverOnNotifyProperyChanged<TResult>(
-                    this.propertyExpression,
-                    this.IsCached,
-                    this.SafetyMode,
-                    this.ObserverFlag);
-            }
-
-            if (this.IsAutoActivate)
-            {
-                propertyObserver.Activate(this.IsSilentActivate);
-            }
-
-            return propertyObserver;
-        }
-
-        /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Property Observer.
-        /// </returns>
-        protected override IGetterReferencePropertyObserver<TResult> CreatePropertyReferenceObserverWithGetter()
-        {
-            IGetterReferencePropertyObserver<TResult> propertyObserver;
-            if (this.ObserverMode == ObserverMode.Default || this.ObserverMode == ObserverMode.OnNotifyPropertyChanged)
-            {
-                if (this.IsDispached)
-                {
-                    propertyObserver = new GetterReferenceObserverWithGetter<TResult>(
-                        this.propertyExpression,
-                        this.Action!,
-                        SynchronizationContext.Current,
-                        this.ObserverFlag);
-                }
-                else if (this.TaskScheduler != null)
-                {
-                    propertyObserver = new GetterReferenceObserverWithGetter<TResult>(
-                        this.propertyExpression,
-                        this.Action!,
-                        this.TaskScheduler,
-                        this.ObserverFlag);
-                }
-                else
-                {
-                    propertyObserver = new GetterReferenceObserverWithGetter<TResult>(
-                        this.propertyExpression,
-                        this.Action!,
-                        this.ObserverFlag);
-                }
-            }
-            else
-            {
-                if (this.IsDispached)
-                {
-                    propertyObserver = new NotifyReferenceObserverWithAction<TResult>(
-                                                                                                     this.propertyExpression,
-                                                                                                     this.Action!,
-                                                                                                     SynchronizationContext.Current,
-                                                                                                     this.ObserverFlag);
-                }
-                else if (this.TaskScheduler != null)
-                {
-                    propertyObserver = new NotifyReferenceObserverWithAction<TResult>(
-                        this.propertyExpression,
-                        this.Action!,
-                        this.TaskScheduler,
-                        this.ObserverFlag);
-                }
-                else
-                {
-                    propertyObserver = new NotifyReferenceObserverWithAction<TResult>(
-                        this.propertyExpression,
-                        this.Action!,
-                        this.ObserverFlag);
-                }
-            }
-
-            if (this.IsAutoActivate)
-            {
-                propertyObserver.Activate(this.IsSilentActivate);
-            }
-
-            return propertyObserver;
+            return observer;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
 
     /// <summary>
-    /// The Property Value Observer Builder Base class.
+    /// The Property Value2 Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -46,7 +46,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The Property Value2 Observer Builder.</returns>
         IBuilderWithAction<TResult> IObserverBuilderBase<
             IBuilderWithAction<TResult>>.AutoActivate() =>
             this.AutoActivate();
@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Withes the getter.
         /// </summary>
-        /// <returns>The Value Property Observer Builder.</returns>
+        /// <returns>The Value2 Property Observer Builder.</returns>
         IBuilderWithActionAndGetter<TResult> IBuilderWithAction<TResult>.
             WithGetter() =>
             this;

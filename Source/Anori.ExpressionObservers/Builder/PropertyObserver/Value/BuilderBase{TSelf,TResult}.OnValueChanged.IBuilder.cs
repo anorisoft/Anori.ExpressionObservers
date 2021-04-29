@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The Property Value2 Observer Builder.</returns>
         IBuilder<TResult> IObserverBuilderBase<IBuilder<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
@@ -28,16 +28,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value2 Observer On Notify Propery Changed.
         /// </returns>
-        INotifyPropertyObserver<TResult> IBuilder<TResult>.Build() =>
+        INotifyValuePropertyObserver<TResult> IBuilder<TResult>.Build() =>
             this.CreateNotifyPropertyObserver();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilder<TResult> IBuilder<TResult>.
             Cached() =>
@@ -48,7 +48,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilder<TResult> IBuilder<TResult>.
             Cached(LazyThreadSafetyMode safetyMode) =>
@@ -58,7 +58,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithDeferrer<TResult> IBuilder<TResult>.Deferred() =>
             this;
@@ -104,7 +104,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Withes the getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithScheduler<TResult>
             IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>.WithGetterDispatcher() =>
@@ -115,7 +115,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value2 Property Observer Builder.
         /// </returns>
         IBuilderWithScheduler<TResult>
             IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>.WithScheduler(

@@ -7,10 +7,9 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
 {
     using Anori.Common;
-    using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
 
     /// <summary>
-    ///     The I Property Value Observer Builder With Value Changed interface.
+    ///     The I Property Value2 Observer Builder With Value2 Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
@@ -24,26 +23,26 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     public interface IBuilderWithFallback<TResult> :
         IObserverBuilderBase<IBuilderWithFallback<TResult>>,
         IPropertyObserverScheduler<IBuilderWithFallbackAndScheduler<TResult>>
-        where TResult : struct
+        where TResult : class
     {
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>Property Value Observer On Notify Propery Changed.</returns>
-        INotifyValuePropertyObserver<TResult> Build();
+        /// <returns>Property Value2 Observer On Notify Propery Changed.</returns>
+        INotifyPropertyObserver<TResult> Build();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The Property Value2 Observer Builder.</returns>
         IBuilderWithFallback<TResult> Cached(LazyThreadSafetyMode safetyMode);
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithFallback<TResult> Cached();
 
@@ -51,7 +50,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The Property Value2 Observer Builder.
         /// </returns>
         IBuilderWithFallbackAndDeferrer<TResult> Deferred();
     }

@@ -31,5 +31,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         IBuilderWithActionOfTAndFallback<TResult>
             IBuilderWithActionOfT<TResult>.WithFallback(TResult fallback) =>
             this.WithFallback(fallback);
+
+        /// <summary>
+        /// Withes the getter.
+        /// </summary>
+        /// <returns>The Property Observer Builder.</returns>
+        public IBuilderWithActionOfTAndGetter<TResult> WithGetter() => this.WithGetter();
     }
 }

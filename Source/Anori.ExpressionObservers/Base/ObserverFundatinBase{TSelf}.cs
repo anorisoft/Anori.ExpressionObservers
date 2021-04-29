@@ -102,7 +102,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="action">The action.</param>
-        /// <returns>Value getter function.</returns>
+        /// <returns>Value2 getter function.</returns>
         protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
             Func<TResult> get,
             bool isCached,
@@ -152,7 +152,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="action">The action.</param>
-        /// <returns>Value getter function.</returns>
+        /// <returns>Value2 getter function.</returns>
         protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
             Func<TResult> get,
             bool isCached,
@@ -274,7 +274,7 @@ namespace Anori.ExpressionObservers.Base
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>
-        ///     Value getter function.
+        ///     Value2 getter function.
         /// </returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
 

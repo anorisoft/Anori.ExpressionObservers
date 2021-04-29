@@ -98,7 +98,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action)
             where TParameter1 : INotifyPropertyChanged =>
-            new Observer<TParameter1, TResult>(
+            new ObserverWithAction<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -186,7 +186,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new Observer<TParameter1, TResult>(
+            var observer = new ObserverWithAction<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,

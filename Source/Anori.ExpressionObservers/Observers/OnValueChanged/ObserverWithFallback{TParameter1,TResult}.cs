@@ -35,7 +35,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// <seealso cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class NotifyObserverWithFallback<TParameter1, TResult> :
+    internal sealed class ObserverWithFallback<TParameter1, TResult> :
         ObserverBase<INotifyPropertyObserver<TResult>, TParameter1, TResult>,
         INotifyPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
@@ -66,7 +66,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal NotifyObserverWithFallback(
+        internal ObserverWithFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TaskScheduler taskScheduler,
@@ -90,7 +90,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal NotifyObserverWithFallback(
+        internal ObserverWithFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] SynchronizationContext synchronizationContext,
@@ -112,7 +112,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal NotifyObserverWithFallback(
+        internal ObserverWithFallback(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TResult fallback,

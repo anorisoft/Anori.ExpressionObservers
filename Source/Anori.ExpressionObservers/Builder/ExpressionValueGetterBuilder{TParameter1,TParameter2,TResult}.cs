@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Builder
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    ///     The Expression Value Getter Builder class.
+    ///     The Expression Value2 Getter Builder class.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>

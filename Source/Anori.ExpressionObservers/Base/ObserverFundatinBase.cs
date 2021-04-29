@@ -252,12 +252,12 @@ namespace Anori.ExpressionObservers.Base
                 return true;
             }
 
-            if (obj is not PropertyObserverFundatinBase propertyObserver)
+            if (obj is not ObserverFundatinBase propertyObserver)
             {
                 return false;
             }
 
-            return this.Equals((PropertyObserverFundatinBase)obj);
+            return this.Equals(propertyObserver);
         }
 
         /// <summary>

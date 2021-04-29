@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionOfTAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndFallback{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Getter Observer.
+    ///     Property Value2 Getter Observer.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -143,7 +143,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         {
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
-            var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback,parameter1, parameter2));
+            var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2));
             this.notifyPropertyChangedAction = () => synchronizationContext.Send(() => this.Value = get());
             this.getValue = this.CreateGetProperty(() => this.value);
         }
@@ -182,7 +182,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.notifyPropertyChangedAction();
-
 
         /// <summary>
         ///     Getters the specified property expression.

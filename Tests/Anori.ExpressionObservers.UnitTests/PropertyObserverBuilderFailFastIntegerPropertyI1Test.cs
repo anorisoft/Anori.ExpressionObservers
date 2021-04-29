@@ -10,6 +10,7 @@ namespace Anori.ExpressionObservers.UnitTests
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Builder;
+    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
 
@@ -38,33 +39,33 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -84,28 +85,28 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
 
-            Assert.AreEqual(99, observes.Value);
+            Assert.AreEqual(99, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -122,33 +123,33 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -166,28 +167,28 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
             Assert.AreEqual(0, callCount);
 
-            Assert.AreEqual(99, observes.Value);
+            Assert.AreEqual(99, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -204,32 +205,32 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -247,28 +248,28 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
             Assert.AreEqual(0, callCount);
 
-            Assert.AreEqual(99, observes.Value);
+            Assert.AreEqual(99, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -283,33 +284,33 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -325,28 +326,28 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -362,33 +363,33 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -405,28 +406,28 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -442,33 +443,33 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -485,28 +486,28 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build();
 
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -567,771 +568,790 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_AutoActivate()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Builder_AutoActivate()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Builder_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions, true)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_AutoActivate()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Dispatcher()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_Dispatcher()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .WithGetterDispatcher()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
         public void
-            PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Dispatcher_AutoActivate()
+            PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_Dispatcher_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_Full()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full_AutoActivate()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_Full_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full_Dispatcher()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_Full_Dispatcher()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
         public void
-            PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full_Dispatcher_AutoActivate()
+            PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_Full_Dispatcher_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
         public void
-            PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full_TaskSchedulerCurrent()
+            PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_Full_TaskSchedulerCurrent()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
         public void
-            PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_Full_TaskSchedulerCurrent_AutoActivate()
+            PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_Full_TaskSchedulerCurrent_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_TaskSchedulerCurrent()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_TaskSchedulerCurrent()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
         public void
-            PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Cashed_TaskSchedulerCurrent_AutoActivate()
+            PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Cashed_TaskSchedulerCurrent_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Dispatcher()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Dispatcher()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .WithGetterDispatcher()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_Dispatcher_AutoActivate()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_Dispatcher_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
-        public void PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_TaskSchedulerCurrent()
+        public void PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_TaskSchedulerCurrent()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
         public void
-            PropertyObserver_OnNotifyProperyChanged_Observes_instance_IntProperty_TaskSchedulerCurrent_AutoActivate()
+            PropertyObserver_OnProperyChanged_Observes_instance_IntProperty_TaskSchedulerCurrent_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
-                .OnNotifyProperyChanged()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -1621,39 +1641,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -1677,33 +1697,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.AreEqual(99, observes.Value);
+            Assert.AreEqual(99, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -1728,39 +1748,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -1785,33 +1805,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.AreEqual(99, observes.Value);
+            Assert.AreEqual(99, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -1836,39 +1856,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -1894,33 +1914,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(-1, value);
-            Assert.AreEqual(99, observes.Value);
+            Assert.AreEqual(99, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -1942,39 +1962,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -1996,33 +2016,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2045,39 +2065,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2100,33 +2120,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2149,39 +2169,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2204,33 +2224,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2252,39 +2272,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2307,33 +2327,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2356,39 +2376,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2412,33 +2432,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2461,39 +2481,39 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             observes.Activate();
             Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
         [Test]
@@ -2518,33 +2538,33 @@ namespace Anori.ExpressionObservers.UnitTests
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, value);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, value);
-            Assert.AreEqual(1, observes.Value);
+            Assert.AreEqual(1, observes.GetValue());
 
             instance.Class2.IntProperty = 2;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(2, observes.GetValue());
 
             observes.Deactivate();
             Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2.IntProperty = 3;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
 
             instance.Class2 = null;
             Assert.AreEqual(2, callCount);
             Assert.AreEqual(2, value);
-            Assert.Throws<NotActivatedException>(() => _ = observes.Value);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
     }
 }
