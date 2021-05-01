@@ -9,3 +9,9 @@
 	path = Submodules/Source
 	url = https://github.com/anorisoft/Anori.Extensions
 	branch = master
+[submodule "Anori.Common"]
+	path = Anori.Common
+	url = https://github.com/anorisoft/Anori.Common
+[submodule "Submodules/Anori.Common"]
+	path = Submodules/Anori.Common
+	url = https://github.com/anorisoft/Anori.Common
