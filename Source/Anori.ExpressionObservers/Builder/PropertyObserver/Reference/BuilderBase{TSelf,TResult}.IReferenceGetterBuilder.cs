@@ -84,7 +84,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Withes the notify propery changed.
         /// </summary>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
         IBuilder<TResult> IReferenceObserverBuilder<TResult>.OnProperyChanged() => this.OnProperyChanged();
 
@@ -92,9 +92,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Withes the value changed.
         /// </summary>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilder<TResult> IReferenceObserverBuilder<TResult>.OnValueChanged() => this.OnValueChanged();
+        Interfaces.Builder.Reference.OnValueChanged.IBuilder<TResult> IReferenceObserverBuilder<TResult>.
+            OnValueChanged() =>
+            this.OnValueChanged();
 
         /// <summary>
         ///     Withes the action.
@@ -111,7 +113,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithAction<TResult> IReferenceObserverBuilder<TResult>.WithAction(Action action) =>
             this.WithAction(action);
@@ -121,7 +123,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IReferenceObserverBuilder<TResult>.WithNullableAction(
             Action<TResult?> action) =>

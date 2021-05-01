@@ -20,21 +20,19 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
         /// </value>
         INodeCollection Nodes { get; }
 
-
         /// <summary>
-        /// Gets the expression string.
+        ///     Gets the expression string.
         /// </summary>
         /// <value>
-        /// The expression string.
+        ///     The expression string.
         /// </value>
         string ExpressionString { get; }
 
-
         /// <summary>
-        /// Gets the head.
+        ///     Gets the head.
         /// </summary>
         /// <value>
-        /// The head.
+        ///     The head.
         /// </value>
         IExpressionNode Head { get; }
     }

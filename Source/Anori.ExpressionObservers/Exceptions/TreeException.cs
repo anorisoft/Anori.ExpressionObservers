@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Exceptions
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The Tree Exception class.
+    ///     The Tree Exception class.
     /// </summary>
     /// <seealso cref="Anori.ExpressionObservers.Exceptions.ExpressionObserversException" />
     [Serializable]

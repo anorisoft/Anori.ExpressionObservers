@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Observer{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserver{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.Observers.OnPropertyChanged;
 
     using JetBrains.Annotations;

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallback.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionOfTAndFallback.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,8 +16,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallbackAndScheduler{TResult}}" />
     public interface IBuilderWithActionOfTAndFallback<out TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallback<TResult>>,
-        IPropertyObserverScheduler<
-            IBuilderWithActionOfTAndFallbackAndScheduler<TResult>>
+        IPropertyObserverScheduler<IBuilderWithActionOfTAndFallbackAndScheduler<TResult>>
     {
         /// <summary>
         ///     Creates this instance.

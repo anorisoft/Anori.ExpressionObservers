@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value2 Observer With Getter And Fallback.
+    ///     Property Value Observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionAndGetterAndFallback<TResult> :
@@ -38,8 +38,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -61,9 +60,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
         }
 
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndFallback{TResult}"/> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -84,8 +82,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>

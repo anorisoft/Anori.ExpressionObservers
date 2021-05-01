@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="CachedObserver{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndChachedGetter{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -27,8 +27,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class ObserverWithActionAndChachedGetter<TResult> : ObserverBase<IGetterReferencePropertyObserver<TResult>, TResult>,
-                                                    IGetterReferencePropertyObserver<TResult>
+    internal sealed class ObserverWithActionAndChachedGetter<TResult> :
+        ObserverBase<IGetterReferencePropertyObserver<TResult>, TResult>,
+        IGetterReferencePropertyObserver<TResult>
         where TResult : class
     {
         /// <summary>

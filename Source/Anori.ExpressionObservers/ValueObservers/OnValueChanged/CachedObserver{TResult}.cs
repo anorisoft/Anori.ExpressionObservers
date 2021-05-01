@@ -27,9 +27,11 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="CachedObserver{TResult}" />
+    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyValuePropertyObserver{TResult}, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyValuePropertyObserver{TResult}" />
+    /// <seealso cref="CachedObserver{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    internal sealed class ValueObserverOnNotifyProperyChanged<TResult> :
+    internal sealed class CachedObserver<TResult> :
         ObserverBase<INotifyValuePropertyObserver<TResult>, TResult>,
         INotifyValuePropertyObserver<TResult>
         where TResult : struct
@@ -52,7 +54,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ValueObserverOnNotifyProperyChanged(
+        internal CachedObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             PropertyObserverFlag propertyObserverFlag)
@@ -61,8 +63,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CachedObserver{TResult}" />
-        ///     class.
+        ///     Initializes a new instance of the <see cref="CachedObserver{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
@@ -70,7 +71,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ValueObserverOnNotifyProperyChanged(
+        internal CachedObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             bool isCached,
@@ -91,7 +92,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ValueObserverOnNotifyProperyChanged(
+        internal CachedObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
             PropertyObserverFlag propertyObserverFlag)
@@ -107,7 +108,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ValueObserverOnNotifyProperyChanged(
+        internal CachedObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
             bool isCached,
@@ -127,7 +128,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ValueObserverOnNotifyProperyChanged(
+        internal CachedObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             PropertyObserverFlag propertyObserverFlag)
             : this(propertyExpression, false, LazyThreadSafetyMode.None, propertyObserverFlag)
@@ -141,7 +142,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ValueObserverOnNotifyProperyChanged(
+        internal CachedObserver(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached,
             LazyThreadSafetyMode safetyMode,

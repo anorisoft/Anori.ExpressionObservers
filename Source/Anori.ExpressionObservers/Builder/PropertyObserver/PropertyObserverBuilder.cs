@@ -124,10 +124,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
             where TResult : class
         {
             var builder =
-                new Reference.Builder<TParameter1, TParameter2, TResult>(
-                    parameter1,
-                    parameter2,
-                    propertyExpression)
+                new Reference.Builder<TParameter1, TParameter2, TResult>(parameter1, parameter2, propertyExpression)
                     {
                         ObserverFlag = this.observerFlag,
                         IsAutoActivate = this.isAutoActivate,
@@ -144,7 +141,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value2 Property Observer Builder.
+        ///     Value Property Observer Builder.
         /// </returns>
         public IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
             TParameter1 parameter1,
@@ -171,7 +168,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value2 Property Observer Builder.
+        ///     Value Property Observer Builder.
         /// </returns>
         public IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
             TParameter1 parameter1,
@@ -182,10 +179,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
             where TResult : struct
         {
             var builder =
-                new Value.Builder<TParameter1, TParameter2, TResult>(
-                    parameter1,
-                    parameter2,
-                    propertyExpression)
+                new Value.Builder<TParameter1, TParameter2, TResult>(parameter1, parameter2, propertyExpression)
                     {
                         ObserverFlag = this.observerFlag,
                         IsAutoActivate = this.isAutoActivate,
@@ -200,13 +194,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value2 Property Observer Builder.
+        ///     Value Property Observer Builder.
         /// </returns>
         public IValueObserverBuilder<TResult> ValueObserverBuilder<TResult>(
             Expression<Func<TResult>> propertyExpression)
             where TResult : struct
         {
-            var builder = new PropertyObserver.Value.Builder<TResult>(propertyExpression)
+            var builder = new Value.Builder<TResult>(propertyExpression)
                               {
                                   ObserverFlag = this.observerFlag,
                                   IsAutoActivate = this.isAutoActivate,

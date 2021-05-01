@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         private readonly Func<TResult> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -57,12 +57,19 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             [NotNull] TaskScheduler taskScheduler,
             [NotNull] TResult fallback,
             PropertyObserverFlag propertyObserverFlag)
-            : this(propertyExpression, action, taskScheduler, fallback, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(
+                propertyExpression,
+                action,
+                taskScheduler,
+                fallback,
+                false,
+                LazyThreadSafetyMode.None,
+                propertyObserverFlag)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -90,7 +97,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -103,12 +110,19 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             [NotNull] SynchronizationContext synchronizationContext,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : this(propertyExpression, action, synchronizationContext, fallback, false, LazyThreadSafetyMode.None, observerFlag)
+            : this(
+                propertyExpression,
+                action,
+                synchronizationContext,
+                fallback,
+                false,
+                LazyThreadSafetyMode.None,
+                observerFlag)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -135,7 +149,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -151,7 +165,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>

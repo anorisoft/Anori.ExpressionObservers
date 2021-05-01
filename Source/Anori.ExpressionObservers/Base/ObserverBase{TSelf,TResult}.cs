@@ -19,12 +19,11 @@ namespace Anori.ExpressionObservers.Base
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Observer Base.
+    /// The Observer Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverFundatinBase" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="Anori.ExpressionObservers.Base.ObserverFundatinBase{TSelf}" />
     internal abstract class ObserverBase<TSelf, TResult> : ObserverFundatinBase<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
@@ -39,12 +38,6 @@ namespace Anori.ExpressionObservers.Base
             PropertyObserverFlag observerFlag)
             : base(observerFlag) =>
             this.Tree = this.CreateObserverTree(propertyExpression);
-
-        public static bool operator ==(ObserverBase<TSelf, TResult>? a, ObserverBase<TSelf, TResult>? b) =>
-Equals(a, b);
-
-        public static bool operator !=(ObserverBase<TSelf, TResult>? a, ObserverBase<TSelf, TResult>? b) =>
-    !Equals(a, b);
 
         /// <summary>
         ///     Gets the expression string.
@@ -131,5 +124,27 @@ Equals(a, b);
                 }
             }
         }
+
+        /// <summary>
+        ///     Implements the operator op_Equality.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator ==(ObserverBase<TSelf, TResult>? a, ObserverBase<TSelf, TResult>? b) =>
+            Equals(a, b);
+
+        /// <summary>
+        ///     Implements the operator op_Inequality.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator !=(ObserverBase<TSelf, TResult>? a, ObserverBase<TSelf, TResult>? b) =>
+            !Equals(a, b);
     }
 }

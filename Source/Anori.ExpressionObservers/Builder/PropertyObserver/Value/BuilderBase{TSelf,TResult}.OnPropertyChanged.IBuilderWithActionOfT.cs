@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionOfTAndGetter.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionOfT.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -9,8 +9,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
 
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> : IBuilderWithActionOfT<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfT<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -18,9 +17,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Observer Builder.
         /// </returns>
-        IBuilderWithActionOfT<TResult>
-            IObserverBuilderBase<IBuilderWithActionOfT<TResult>>.
-            AutoActivate() =>
+        IBuilderWithActionOfT<TResult> IObserverBuilderBase<IBuilderWithActionOfT<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -28,14 +25,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>The Property Observer Builder.</returns>
-        IBuilderWithActionOfTAndFallback<TResult>
-            IBuilderWithActionOfT<TResult>.WithFallback(TResult fallback) =>
+        IBuilderWithActionOfTAndFallback<TResult> IBuilderWithActionOfT<TResult>.WithFallback(TResult fallback) =>
             this.WithFallback(fallback);
 
         /// <summary>
-        /// Withes the getter.
+        ///     Withes the getter.
         /// </summary>
         /// <returns>The Property Observer Builder.</returns>
-        public IBuilderWithActionOfTAndGetter<TResult> WithGetter() => this.WithGetter();
+        IBuilderWithActionOfTAndGetter<TResult> IBuilderWithActionOfT<TResult>.WithGetter() => this;
     }
 }

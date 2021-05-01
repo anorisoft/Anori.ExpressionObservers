@@ -12,7 +12,6 @@ namespace Anori.ExpressionObservers
 
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.ReferenceObservers;
     using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
     using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
 
@@ -35,7 +34,10 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
             where TResult : class =>
-            new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(
+                propertyExpression,
+                action,
+                PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -135,11 +137,7 @@ namespace Anori.ExpressionObservers
             bool isCached,
             LazyThreadSafetyMode safetyMode)
             where TResult : class =>
-            new CachedObserver<TResult>(
-                propertyExpression,
-                isCached,
-                safetyMode,
-                PropertyObserverFlag.None);
+            new CachedObserver<TResult>(propertyExpression, isCached, safetyMode, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -248,9 +246,7 @@ namespace Anori.ExpressionObservers
             bool isAutoActivate)
             where TResult : class
         {
-            var observer = new CachedObserver<TResult>(
-                propertyExpression,
-                PropertyObserverFlag.None);
+            var observer = new CachedObserver<TResult>(propertyExpression, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -271,7 +267,7 @@ namespace Anori.ExpressionObservers
         public static INotifyReferencePropertyObserver<TResult> ObservesOnValueChanged<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression)
             where TResult : class =>
-            new ReferenceObservers.OnValueChanged.Observer<TResult>(propertyExpression, PropertyObserverFlag.None);
+            new Observer<TResult>(propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on value changed.
@@ -288,9 +284,7 @@ namespace Anori.ExpressionObservers
             bool isAutoActivate)
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnValueChanged.Observer<TResult>(
-                propertyExpression,
-                PropertyObserverFlag.None);
+            var observer = new Observer<TResult>(propertyExpression, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -313,10 +307,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] TaskScheduler taskScheduler)
             where TResult : class =>
-            new ReferenceObservers.OnValueChanged.Observer<TResult>(
-                propertyExpression,
-                taskScheduler,
-                PropertyObserverFlag.None);
+            new Observer<TResult>(propertyExpression, taskScheduler, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -335,10 +326,7 @@ namespace Anori.ExpressionObservers
             bool isAutoActivate)
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnValueChanged.Observer<TResult>(
-                propertyExpression,
-                taskScheduler,
-                PropertyObserverFlag.None);
+            var observer = new Observer<TResult>(propertyExpression, taskScheduler, PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);

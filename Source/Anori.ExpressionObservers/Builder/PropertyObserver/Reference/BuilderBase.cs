@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverBuilderBase.cs" company="AnoriSoft">
+// <copyright file="BuilderBase.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,10 +11,52 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
 
-    internal abstract partial class
-      BuilderBase<TSelf, TResult> : BuilderBase<TSelf>
-      where TSelf : BuilderBase<TSelf, TResult>
-      where TResult : class
+    /// <summary>
+    /// The Builder Base class.
+    /// </summary>
+    /// <typeparam name="TSelf">The type of the self.</typeparam>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <seealso cref="Anori.ExpressionObservers.Builder.PropertyObserver.BuilderBase{TSelf}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfT{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionOfTAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithFallbackAndDeferrerAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithAction{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithAction{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndGetterAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionOfT{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithDeferrerAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndGetterAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionOfNullT{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithDeferrerAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionOfNullTAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfNullTAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IReferenceObserverBuilder{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithFallbackAndDeferrer{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfTAndGetter{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilder{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfTAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndGetter{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfNullT{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionAndFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilder{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithDeferrer{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionOfTAndFallback{TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithDeferrer{TResult}" />
+    internal abstract partial class BuilderBase<TSelf, TResult> : BuilderBase<TSelf>
+        where TSelf : BuilderBase<TSelf, TResult>
+        where TResult : class
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="Reference.BuilderBase{TSelf,TResult}" /> class.
@@ -61,7 +103,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the property observer with action of t result and getter and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithActionOfTAndFallback();
 
@@ -69,7 +111,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the getter property observer with fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithFallback();
 
@@ -77,23 +119,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the property value observer builder with action and getter.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract IGetterReferencePropertyObserver<TResult> CreateGetterReferencePropertyObserver();
-
-        /// <summary>
-        ///     Creates the notify property observer.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value2 Observer.
-        /// </returns>
-        protected abstract INotifyReferencePropertyObserver<TResult> CreateNotifyPropertyObserver();
 
         /// <summary>
         ///     Creates the notify property observer with action and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionAndFallback();
 
@@ -101,24 +135,40 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the notify property observer with action of T and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallback();
+
+        /// <summary>
+        ///     Creates the notify value property observer with fallback.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
+        protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithFallback();
 
         /// <summary>
         ///     Creates the notify property observer with fallback and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithFallbackAndDeferrer();
 
         /// <summary>
+        ///     Creates the notify property observer.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
+        protected abstract INotifyReferencePropertyObserver<TResult> CreateNotifyReferencePropertyObserver();
+
+        /// <summary>
         ///     Creates the notify value property observer with action.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract INotifyReferencePropertyObserver<TResult> CreateNotifyReferencePropertyObserverWithAction();
 
@@ -126,7 +176,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the property value observer builder with value changed and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract INotifyReferencePropertyObserverWithDeferrer<TResult>
             CreateNotifyReferencePropertyObserverWithDeferrer();
@@ -135,7 +185,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the property value observer builder with action.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract IPropertyObserver<TResult> CreatePropertyObserverWithAction();
 
@@ -143,7 +193,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the getter property observer with action of T and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract IPropertyObserver<TResult> CreatePropertyObserverWithActionOfTAndFallback();
 
@@ -151,23 +201,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the property value observer.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected abstract IGetterReferencePropertyObserver<TResult> CreatePropertyReferenceObserver();
-
-        /// <summary>
-        ///     Creates the notify value property observer with fallback.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value2 Observer.
-        /// </returns>
-        protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithFallback();
 
         /// <summary>
         ///     Withes the notify propery changed.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         protected TSelf OnProperyChanged() => (TSelf)this;
 
@@ -175,29 +217,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Withes the value changed.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         protected TSelf OnValueChanged() => (TSelf)this;
-
-        /// <summary>
-        ///     Withes the action of t result.
-        /// </summary>
-        /// <param name="action">The action.</param>
-        /// <returns>
-        ///     The Property Value2 Observer Builder.
-        /// </returns>
-        protected TSelf WithNullableAction(Action<TResult?> action)
-        {
-            this.ActionOfT = action;
-            return (TSelf)this;
-        }
 
         /// <summary>
         ///     Withes the action of t result with fallback.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         protected TSelf WithActionOfTWithFallback(Action<TResult> action)
         {
@@ -206,11 +235,24 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
+        ///     Withes the action of t result.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        protected TSelf WithNullableAction(Action<TResult?> action)
+        {
+            this.ActionOfT = action;
+            return (TSelf)this;
+        }
+
+        /// <summary>
         ///     Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         /// <exception cref="Anori.ExpressionObservers.Exceptions.FallbackAlreadyDefineException">
         ///     Fallback Already Define

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Observer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="PropertyObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Observers;
     using Anori.ExpressionObservers.Observers.OnPropertyChanged;
 
     using JetBrains.Annotations;
@@ -117,14 +116,13 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer =
-                new ObserverWithActionOfTAndGetterAndFallback<TParameter1, TParameter2, TResult>(
-                    parameter1,
-                    parameter2,
-                    propertyExpression,
-                    action,
-                    fallback,
-                    PropertyObserverFlag.None);
+            var observer = new ObserverWithActionOfTAndGetterAndFallback<TParameter1, TParameter2, TResult>(
+                parameter1,
+                parameter2,
+                propertyExpression,
+                action,
+                fallback,
+                PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -189,11 +187,11 @@ namespace Anori.ExpressionObservers
             where TParameter2 : INotifyPropertyChanged
         {
             var observer = new ObserverWithAction<TParameter1, TParameter2, TResult>(
-                                                                                                                    parameter1,
-                                                                                                                    parameter2,
-                                                                                                                    propertyExpression,
-                                                                                                                    action,
-                                                                                                                    PropertyObserverFlag.None);
+                parameter1,
+                parameter2,
+                propertyExpression,
+                action,
+                PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);

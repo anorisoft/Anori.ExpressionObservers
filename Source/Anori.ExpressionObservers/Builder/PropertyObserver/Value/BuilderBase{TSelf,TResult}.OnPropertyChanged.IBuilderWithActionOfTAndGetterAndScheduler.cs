@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionOfTAndGetter.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,10 +8,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
-    using System.Threading.Tasks;
 
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndScheduler<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndScheduler<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -20,8 +18,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndScheduler<TResult>
-            IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndScheduler<TResult>>.
-            AutoActivate() =>
+            IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndScheduler<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>

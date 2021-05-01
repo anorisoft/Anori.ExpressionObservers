@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverOnValueChangedWithFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,7 +16,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.ReferenceObservers;
     using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
@@ -32,9 +31,8 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class ObserverWithFallback<TResult> :
-        ObserverBase<INotifyPropertyObserver<TResult>, TResult>,
-        INotifyPropertyObserver<TResult>
+    internal sealed class ObserverWithFallback<TResult> : ObserverBase<INotifyPropertyObserver<TResult>, TResult>,
+                                                          INotifyPropertyObserver<TResult>
     {
         /// <summary>
         ///     The action.

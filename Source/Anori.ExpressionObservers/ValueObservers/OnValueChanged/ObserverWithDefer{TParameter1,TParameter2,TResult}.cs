@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverOnValueChangedWithDefer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDefer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -31,8 +31,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     ///     cref="INotifyValuePropertyObserverWithDeferrer{TResult}" />
     /// <seealso cref="INotifyValuePropertyObserverWithDeferrer{TResult}" />
     internal sealed class ObserverWithDefer<TParameter1, TParameter2, TResult> :
-        ObserverBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2,
-            TResult>,
+        ObserverBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2, TResult>,
         INotifyValuePropertyObserverWithDeferrer<TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
@@ -55,14 +54,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
-        /// <param name="parameter2">The parameter1.</param>
-        /// <param name="propertyExpression">The parameter2.</param>
-        /// <param name="observerFlag">The property expression.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithDefer{TResult}">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithDefer(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
@@ -77,15 +75,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
-        /// <param name="parameter2">The parameter1.</param>
-        /// <param name="propertyExpression">The parameter2.</param>
-        /// <param name="taskScheduler">The property expression.</param>
-        /// <param name="observerFlag">The task scheduler.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithDefer{TResult}">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithDefer(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
@@ -102,15 +99,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDefer{TResult}" /> class.
+        /// Initializes a new instance of the <see cref="ObserverWithDefer{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
-        /// <param name="parameter2">The parameter1.</param>
-        /// <param name="propertyExpression">The parameter2.</param>
-        /// <param name="synchronizationContext">The property expression.</param>
-        /// <param name="observerFlag">The synchronization context.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithDefer{TResult}">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithDefer(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,

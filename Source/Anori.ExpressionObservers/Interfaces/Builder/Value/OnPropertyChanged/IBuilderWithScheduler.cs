@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyValueObserverBuilderOnNotifyProperyChangedAndScheduler.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -9,16 +9,22 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     using Anori.Common;
 
     /// <summary>
-    /// The I Property Value Observer Builder With Notify Propery Changed And Getter Task Scheduler interface.
+    ///     The I Property Value Observer Builder With Notify Propery Changed And Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnNotifyProperyChangedAndScheduler{TResult}}" />
-    public interface IBuilderWithScheduler<TResult> :
-        IObserverBuilderBase<IBuilderWithScheduler<TResult>>
+    /// <seealso
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnProperyChangedWithScheduler{TResult}}" />
+    public interface IBuilderWithScheduler<TResult> : IObserverBuilderBase<IBuilderWithScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>
-        /// Cacheds the specified safety mode.
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>Property Value Observer On Notify Propery Changed.</returns>
+        IGetterValuePropertyObserver<TResult> Build();
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
@@ -27,7 +33,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         IBuilderWithScheduler<TResult> Cached(LazyThreadSafetyMode safetyMode);
 
         /// <summary>
-        /// Cacheds this instance.
+        ///     Cacheds this instance.
         /// </summary>
         /// <returns>
         ///     The Value Property Observer Builder.
@@ -35,11 +41,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         IBuilderWithScheduler<TResult> Cached();
 
         /// <summary>
-        /// Builds this instance.
+        ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer.
+        ///     The Property Value Observer Builder.
         /// </returns>
-        IGetterValuePropertyObserver<TResult> Build();
+        IBuilderWithDeferrer<TResult> Deferred();
     }
 }

@@ -45,6 +45,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         [NotNull]
         private readonly Action propertyChangedAction;
 
+        private readonly Action silentAction;
+
         /// <summary>
         ///     The value changed action.
         /// </summary>
@@ -74,6 +76,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             var taskFactory = new TaskFactory(taskScheduler);
             this.propertyChangedAction = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
@@ -84,7 +87,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithAction(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
@@ -95,6 +98,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.propertyChangedAction = () => synchronizationContext.Send(() => this.Value = get());
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
@@ -104,7 +108,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithAction(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
@@ -114,6 +118,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.propertyChangedAction = () => this.Value = get();
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
@@ -159,6 +164,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.propertyChangedAction();
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate()
+        {
+            this.silentAction.Raise();
+        }
 
         /// <summary>
         ///     Getters the specified property expression.

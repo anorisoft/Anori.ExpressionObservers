@@ -31,7 +31,6 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TResult>,
         IGetterPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
-
     {
         /// <summary>
         ///     The action.

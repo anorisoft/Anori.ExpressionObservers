@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndScheduler.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionAndGetterAndFallbackAndScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,10 +7,11 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
     /// <summary>
-    /// The I Property Value2 Observer Builder With Action And Getter And Fallback And Getter Task Scheduler interface.
+    ///     The I Property Value Observer Builder With Action And Getter And Fallback And Getter Task Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}}" />
+    /// <seealso
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}}" />
     public interface IBuilderWithActionAndGetterAndFallbackAndScheduler<out TResult> :
         IObserverBuilderBase<IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>>
         where TResult : class

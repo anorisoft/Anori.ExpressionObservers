@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserver{TResult}.cs" company="AnoriSoft">
+// <copyright file="IGetterReferencePropertyObserver.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,11 +16,10 @@ namespace Anori.ExpressionObservers.Interfaces
         IGetterReferencePropertyObserver<TResult>>
         where TResult : class
     {
-
         /// <summary>
-        /// Gets the value.
+        ///     Gets the value.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The value.</returns>
         TResult? GetValue();
     }
 }

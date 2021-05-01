@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnValueChanged{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="Observer{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,7 +16,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
@@ -160,8 +159,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
             TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-                parameter1);
+            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(
+                propertyExpression.Parameters,
+                tree)(parameter1);
 
         /// <summary>
         ///     Called when [property changed].

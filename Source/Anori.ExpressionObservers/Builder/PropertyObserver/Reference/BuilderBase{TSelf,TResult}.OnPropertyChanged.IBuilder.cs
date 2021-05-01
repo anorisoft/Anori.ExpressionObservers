@@ -6,13 +6,16 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
-    using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
     using System;
+    using System.Threading.Tasks;
 
+    using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
+    using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
 
     /// <summary>
-    ///     The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -46,11 +49,53 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilder<TResult>
     {
         /// <summary>
+        ///     Automatics the activate.
+        /// </summary>
+        /// <returns>
+        ///     The Property Observer Builder.
+        /// </returns>
+        IBuilder<TResult> IObserverBuilderBase<IBuilder<TResult>>.AutoActivate() => this.AutoActivate();
+
+        /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
+        INotifyReferencePropertyObserver<TResult> IBuilder<TResult>.Build() =>
+            this.CreateNotifyReferencePropertyObserver();
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        IBuilder<TResult> IBuilder<TResult>.Cached() => this.Cached();
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        IBuilder<TResult> IBuilder<TResult>.Cached(LazyThreadSafetyMode safetyMode) => this.Cached(safetyMode);
+
+        /// <summary>
+        ///     Defers this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        IBuilderWithDeferrer<TResult> IBuilder<TResult>.Deferred() => this;
+
+        /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithAction<TResult> IBuilder<TResult>.WithAction(Action action) => this.WithAction(action);
 
@@ -59,28 +104,40 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action) =>
             this.WithActionOfTWithFallback(action);
+
+        /// <summary>
+        ///     Withes the getter dispatcher.
+        /// </summary>
+        /// <returns>
+        ///     The target object.
+        /// </returns>
+        IBuilderWithScheduler<TResult> IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>.
+            WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
 
         /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithNullableAction(Action<TResult?> action) =>
             this.WithNullableAction(action);
 
         /// <summary>
-        /// Creates this instance.
+        ///     Withes the getter task scheduler.
         /// </summary>
+        /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        /// The Property Observer.
+        ///     The target object.
         /// </returns>
-        public INotifyReferencePropertyObserver<TResult> Build() =>
-            this.CreateNotifyPropertyObserver();
+        IBuilderWithScheduler<TResult> IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>.WithScheduler(
+            TaskScheduler taskScheduler) =>
+            this.WithScheduler(taskScheduler);
     }
 }

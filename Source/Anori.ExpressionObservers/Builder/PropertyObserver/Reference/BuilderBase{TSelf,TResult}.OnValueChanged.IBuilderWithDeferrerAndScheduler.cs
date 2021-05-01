@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged;
 
     /// <summary>
-    ///     The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -39,7 +39,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         IBuilderWithDeferrerAndScheduler<TResult> IObserverBuilderBase<IBuilderWithDeferrerAndScheduler<TResult>>.
             AutoActivate() =>
@@ -49,7 +49,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value2 Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Propery Changed.
         /// </returns>
         INotifyReferencePropertyObserverWithDeferrer<TResult> IBuilderWithDeferrerAndScheduler<TResult>.Build() =>
             this.CreateNotifyReferencePropertyObserverWithDeferrer();

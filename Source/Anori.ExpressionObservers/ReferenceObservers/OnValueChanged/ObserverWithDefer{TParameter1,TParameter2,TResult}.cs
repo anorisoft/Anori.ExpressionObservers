@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnValueChangedWithDefer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDefer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -34,8 +34,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
     internal sealed class ObserverWithDefer<TParameter1, TParameter2, TResult> :
-        ObserverBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2,
-            TResult>,
+        ObserverBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2, TResult>,
         INotifyReferencePropertyObserverWithDeferrer<TResult>
         where TResult : class
         where TParameter1 : INotifyPropertyChanged
@@ -74,7 +73,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(() => this.Value = getter());
             this.action = () => this.deferrer.Update();
         }
@@ -98,7 +99,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
             this.action = () => this.deferrer.Update();
@@ -123,7 +126,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => synchronizationContext.Send(() => this.Value = getter()));
             this.action = () => this.deferrer.Update();

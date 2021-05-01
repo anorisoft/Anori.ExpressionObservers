@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyValueObserverBuilderWithActionAndGetterAndFallback.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionAndGetterAndFallback.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,13 +7,12 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
     /// <summary>
-    ///     The Property Value2 Observer Builder With Action And Getter And Fallback interface.
+    ///     The Property Value Observer Builder With Action And Getter And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionAndGetterAndFallback<out TResult> :
         IObserverBuilderBase<IBuilderWithActionAndGetterAndFallback<TResult>>,
-        IPropertyObserverScheduler<
-            IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>>
+        IPropertyObserverScheduler<IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>

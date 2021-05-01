@@ -45,18 +45,17 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TParameter1, TResult}" /> class.
         /// </summary>
-        /// <param name="propertyExpression">The parameter1.</param>
-        /// <param name="action">The property expression.</param>
-        /// <param name="taskScheduler">The action.</param>
-        /// <param name="observerFlag">The task scheduler.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithActionAndGetter{TParameter1,TResult}">actionis null.</exception>
-        /// <exception cref="ObserverWithActionAndGetter{TResult}">
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
+        /// <exception cref="ArgumentNullException">action is null.</exception>
+        /// action
+        /// or
+        /// propertyExpression is null.
         /// </exception>
         internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
@@ -73,13 +72,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TParameter1, TResult}" /> class.
         /// </summary>
-        /// <param name="propertyExpression">The parameter1.</param>
-        /// <param name="action">The property expression.</param>
-        /// <param name="observerFlag">The action.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithActionAndGetter{TResult}">action is null.</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -92,14 +91,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TParameter1, TResult}" /> class.
         /// </summary>
-        /// <param name="propertyExpression">The parameter1.</param>
-        /// <param name="action">The property expression.</param>
-        /// <param name="synchronizationContext">The action.</param>
-        /// <param name="observerFlag">The synchronization context.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithActionAndGetter{TResult}">action is null.</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,

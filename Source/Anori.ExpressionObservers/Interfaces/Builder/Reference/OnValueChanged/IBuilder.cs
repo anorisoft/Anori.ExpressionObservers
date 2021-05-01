@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverBuilderOnValueChanged.cs" company="AnoriSoft">
+// <copyright file="IBuilder.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,15 +11,15 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     using Anori.Common;
 
     /// <summary>
-    /// The I Property Reference Observer Builder On Value2 Changed interface.
+    ///     The I Property Reference Observer Builder On Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChangedAndScheduler{TResult}}" />
-    public interface IBuilder<TResult> :
-        IObserverBuilderBase<IBuilder<TResult>>,
-        IPropertyObserverScheduler<
-            IBuilderWithScheduler<TResult>>
+    /// <seealso
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChangedAndScheduler{TResult}}" />
+    public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
+                                         IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -78,6 +78,4 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// </returns>
         IBuilderWithActionOfNullT<TResult> WithNullableAction(Action<TResult?> action);
     }
-
-   
 }

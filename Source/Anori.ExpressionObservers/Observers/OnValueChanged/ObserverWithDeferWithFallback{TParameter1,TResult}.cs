@@ -6,11 +6,6 @@
 
 namespace Anori.ExpressionObservers.Observers.OnValueChanged
 {
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.Extensions;
-    using Anori.Extensions.Threading;
-    using JetBrains.Annotations;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -18,6 +13,13 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.Extensions;
+    using Anori.Extensions.Threading;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     ///     Property Reference Observer With Getter.

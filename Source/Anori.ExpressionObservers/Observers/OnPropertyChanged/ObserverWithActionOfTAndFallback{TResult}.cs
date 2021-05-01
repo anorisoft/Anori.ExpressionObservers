@@ -18,15 +18,14 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value2 Getter Observer.
+    ///     Property Value Getter Observer.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="PropertyGetterObserverWithFallback{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class ObserverWithActionOfTAndFallback<TResult> :
-        ObserverBase<IPropertyObserver<TResult>, TResult>,
-        IPropertyObserver<TResult>
+    internal sealed class ObserverWithActionOfTAndFallback<TResult> : ObserverBase<IPropertyObserver<TResult>, TResult>,
+                                                                      IPropertyObserver<TResult>
     {
         /// <summary>
         ///     The action.
@@ -121,6 +120,5 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback);
             return () => get();
         }
-       
     }
 }

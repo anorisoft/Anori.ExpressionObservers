@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverBuilderWithActionOfT.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionOfT.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,8 +14,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfT{TResult}}" />
     /// <seealso
     ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndScheduler{TResult}}" />
-    public interface IBuilderWithActionOfT<TResult> :
-        IObserverBuilderBase<IBuilderWithActionOfT<TResult>>
+    public interface IBuilderWithActionOfT<TResult> : IObserverBuilderBase<IBuilderWithActionOfT<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -23,7 +22,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndFallback<TResult> WithFallback(TResult fallback);
 
@@ -31,7 +30,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         ///     Withes the getter.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndGetter<TResult> WithGetter();
     }

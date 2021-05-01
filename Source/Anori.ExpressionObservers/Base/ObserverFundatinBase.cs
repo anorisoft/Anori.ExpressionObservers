@@ -6,15 +6,16 @@
 
 namespace Anori.ExpressionObservers.Base
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Anori.Common;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.ExpressionObservers.Tree.Nodes;
     using Anori.Extensions;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     ///     Property Observer Base.
@@ -26,9 +27,9 @@ namespace Anori.ExpressionObservers.Base
     /// <seealso cref="Anori.Common.IActivatable" />
 #pragma warning disable S3881 // "IDisposable" should be implemented correctly
     internal abstract class ObserverFundatinBase : IDisposable,
-                                                           IEqualityComparer<ObserverFundatinBase>,
-                                                           IEquatable<ObserverFundatinBase>,
-                                                           IActivatable
+                                                   IEqualityComparer<ObserverFundatinBase>,
+                                                   IEquatable<ObserverFundatinBase>,
+                                                   IActivatable
 #pragma warning restore S3881 // "IDisposable" should be implemented correctly
     {
         private bool isActive;
@@ -37,10 +38,7 @@ namespace Anori.ExpressionObservers.Base
         ///     Initializes a new instance of the <see cref="ObserverFundatinBase" /> class.
         /// </summary>
         /// <param name="observerFlag">The observer flag.</param>
-        protected ObserverFundatinBase(PropertyObserverFlag observerFlag)
-        {
-            this.ObserverFlag = observerFlag;
-        }
+        protected ObserverFundatinBase(PropertyObserverFlag observerFlag) => this.ObserverFlag = observerFlag;
 
         /// <summary>
         ///     Occurs when [is active changed].
@@ -315,7 +313,11 @@ namespace Anori.ExpressionObservers.Base
 
             if (!silent)
             {
-                this.OnAction();
+                this.OnActivate();
+            }
+            else
+            {
+                this.OnSilentActivate();
             }
         }
 
@@ -323,6 +325,21 @@ namespace Anori.ExpressionObservers.Base
         ///     The action.
         /// </summary>
         protected abstract void OnAction();
+
+        /// <summary>
+        ///     Called when [activate].
+        /// </summary>
+        protected virtual void OnActivate()
+        {
+            this.OnAction();
+        }
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected virtual void OnSilentActivate()
+        {
+        }
 
         /// <summary>
         ///     Looptrees the specified expression node.
@@ -350,9 +367,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
-        bool IEqualityComparer<ObserverFundatinBase>.Equals(
-            ObserverFundatinBase? x,
-            ObserverFundatinBase? y) =>
+        bool IEqualityComparer<ObserverFundatinBase>.Equals(ObserverFundatinBase? x, ObserverFundatinBase? y) =>
             Equals(x, y);
 
         /// <summary>
@@ -363,8 +378,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator ==(ObserverFundatinBase? a, ObserverFundatinBase? b) =>
-            Equals(a, b);
+        public static bool operator ==(ObserverFundatinBase? a, ObserverFundatinBase? b) => Equals(a, b);
 
         /// <summary>
         ///     Implements the operator ==.

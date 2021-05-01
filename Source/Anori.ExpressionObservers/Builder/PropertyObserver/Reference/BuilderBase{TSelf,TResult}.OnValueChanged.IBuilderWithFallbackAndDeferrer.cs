@@ -1,18 +1,17 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderOnValueChangedAndDefferer.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnValueChanged.IBuilderWithFallbackAndDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
-    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged;
 
     /// <summary>
-    ///     The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -50,29 +49,25 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     ///     cref="IBuilderOnValueChangedAndDeferrerAndScheduler{TResult}" />
     /// <seealso
     ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> : IBuilderWithFallbackAndDeferrer<
-            TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithFallbackAndDeferrer<TResult>
     {
-       /// <summary>
+        /// <summary>
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
         ///     The Property Observer Builder.
         /// </returns>
-        IBuilderWithFallbackAndDeferrer<TResult> IObserverBuilderBase<
-           IBuilderWithFallbackAndDeferrer<TResult>>.AutoActivate() =>
+        IBuilderWithFallbackAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithFallbackAndDeferrer<TResult>>.
+            AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
-        /// Creates this instance.
+        ///     Creates this instance.
         /// </summary>
         /// <returns>
-        /// Property Value2 Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Propery Changed.
         /// </returns>
-        INotifyPropertyObserverWithDeferrer<TResult>
-            IBuilderWithFallbackAndDeferrer<TResult>.Build() =>
+        INotifyPropertyObserverWithDeferrer<TResult> IBuilderWithFallbackAndDeferrer<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithFallbackAndDeferrer();
-      
     }
 }

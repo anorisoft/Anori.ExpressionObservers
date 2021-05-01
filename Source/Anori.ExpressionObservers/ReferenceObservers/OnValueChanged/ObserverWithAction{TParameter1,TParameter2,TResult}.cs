@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithAction{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithAction{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -24,12 +24,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}, TParameter1, TParameter2, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}" />
     /// <seealso cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
@@ -40,7 +41,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         where TResult : class
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
-
     {
         /// <summary>
         ///     The getter.
@@ -65,7 +65,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -91,7 +91,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -116,7 +116,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -181,7 +181,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <returns>
         ///     The Getter.
         /// </returns>
-        private static Func<TResult?> Getter(Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression, IExpressionTree tree) =>
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            IExpressionTree tree) =>
             ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
 
         /// <summary>

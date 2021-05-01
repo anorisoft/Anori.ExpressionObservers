@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="CachedObserver{TResult}" />
+    ///     cref="CachedObserver{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="INotifyPropertyChanged" />
     internal sealed class CachedObserver<TParameter1, TParameter2, TResult> :

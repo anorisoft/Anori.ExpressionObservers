@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value2 Observer With Getter And Fallback.
+    ///     Property Value Observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -133,10 +133,10 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Gets the value.
+        ///     Gets the value.
         /// </summary>
         /// <returns>
-        /// The value.
+        ///     The value.
         /// </returns>
         public TResult GetValue() => this.getter();
 

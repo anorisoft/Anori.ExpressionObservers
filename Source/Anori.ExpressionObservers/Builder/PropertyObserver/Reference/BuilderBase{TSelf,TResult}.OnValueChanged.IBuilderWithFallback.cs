@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderOnValueChanged.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnValueChanged.IBuilderWithFallback.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -9,13 +9,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using System.Threading.Tasks;
 
     using Anori.Common;
-    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged;
 
     /// <summary>
-    ///     The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -59,79 +58,69 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso
     ///     cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> : IBuilderWithFallback<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithFallback<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value2 Observer Builder.</returns>
-        IBuilderWithFallback<TResult> IObserverBuilderBase<
-            IBuilderWithFallback<TResult>>.AutoActivate() =>
+        /// <returns>The Property Value Observer Builder.</returns>
+        IBuilderWithFallback<TResult> IObserverBuilderBase<IBuilderWithFallback<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value2 Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Propery Changed.
         /// </returns>
         INotifyPropertyObserver<TResult> IBuilderWithFallback<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithFallback();
-
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithFallback<TResult> IBuilderWithFallback<TResult>.
-            Cached() =>
-            this.Cached();
+        IBuilderWithFallback<TResult> IBuilderWithFallback<TResult>.Cached() => this.Cached();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithFallback<TResult> IBuilderWithFallback<TResult>.
-            Cached(LazyThreadSafetyMode safetyMode) =>
+        IBuilderWithFallback<TResult> IBuilderWithFallback<TResult>.Cached(LazyThreadSafetyMode safetyMode) =>
             this.Cached(safetyMode);
 
         /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithFallbackAndDeferrer<TResult>
-            IBuilderWithFallback<TResult>.Deferred() =>
-            this;
+        IBuilderWithFallbackAndDeferrer<TResult> IBuilderWithFallback<TResult>.Deferred() => this;
 
         /// <summary>
-        /// Withes the getter task scheduler.
+        ///     Withes the getter dispatcher.
+        /// </summary>
+        /// <returns>
+        ///     The target object.
+        /// </returns>
+        IBuilderWithFallbackAndScheduler<TResult> IPropertyObserverScheduler<IBuilderWithFallbackAndScheduler<TResult>>.
+            WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
+
+        /// <summary>
+        ///     Withes the getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        /// The target object.
+        ///     The target object.
         /// </returns>
-        IBuilderWithFallbackAndScheduler<TResult> IPropertyObserverScheduler<IBuilderWithFallbackAndScheduler<TResult>>.WithScheduler(
-            TaskScheduler taskScheduler)
-        => this.WithScheduler(taskScheduler);
-
-
-        /// <summary>
-        /// Withes the getter dispatcher.
-        /// </summary>
-        /// <returns>
-        /// The target object.
-        /// </returns>
-        IBuilderWithFallbackAndScheduler<TResult> IPropertyObserverScheduler<IBuilderWithFallbackAndScheduler<TResult>>.WithGetterDispatcher()
-            => this.WithGetterDispatcher();
-
-       
+        IBuilderWithFallbackAndScheduler<TResult> IPropertyObserverScheduler<IBuilderWithFallbackAndScheduler<TResult>>.
+            WithScheduler(TaskScheduler taskScheduler) =>
+            this.WithScheduler(taskScheduler);
     }
 }

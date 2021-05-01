@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverOnValueChanged{TResult}.cs" company="AnoriSoft">
+// <copyright file="Observer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -30,9 +30,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     ///     cref="Observer{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class Observer<TResult> :
-        ObserverBase<INotifyValuePropertyObserver<TResult>, TResult>,
-        INotifyValuePropertyObserver<TResult>
+    internal sealed class Observer<TResult> : ObserverBase<INotifyValuePropertyObserver<TResult>, TResult>,
+                                              INotifyValuePropertyObserver<TResult>
         where TResult : struct
     {
         /// <summary>
@@ -52,7 +51,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
@@ -70,7 +69,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
@@ -87,13 +86,11 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal Observer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            PropertyObserverFlag observerFlag)
+        internal Observer([NotNull] Expression<Func<TResult>> propertyExpression, PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));

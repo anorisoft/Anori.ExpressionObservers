@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="CachedObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -34,8 +34,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <seealso cref="System" />
     /// <seealso cref="CachedObserver{TResult}" />
     internal sealed class CachedObserver<TParameter1, TParameter2, TResult> :
-        ObserverBase<INotifyReferencePropertyObserver<TResult>, TParameter1, TParameter2,
-            TResult>,
+        ObserverBase<INotifyReferencePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         INotifyReferencePropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged

@@ -7,7 +7,6 @@
 namespace Anori.ExpressionObservers.UnitTests
 {
     using Anori.Common;
-    using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
     using NUnit.Framework;
@@ -1074,17 +1073,17 @@ namespace Anori.ExpressionObservers.UnitTests
     }
 
     public class PropertyObserverBuilderCountTests
-    {       
+    {
         [Test]
         public void PropertyObserver_Count_OnNotify()
         {
             var instance = new NotifyPropertyChangedClass1() { StringProperty = null };
             var callCount = 0;
-            
+
             using var observes = PropertyObserverBuilder.Builder
               .ReferenceObserverBuilder(() => (instance.IntProperty > 2).ToString())
               .OnProperyChanged()
-              .WithAction(()=> callCount++)
+              .WithAction(() => callCount++)
               .WithGetter()
               .AutoActivate()
               .Build();
@@ -1107,7 +1106,6 @@ namespace Anori.ExpressionObservers.UnitTests
             instance.IntProperty = 4;
             Assert.AreEqual(4, callCount);
             Assert.AreEqual("True", observes.GetValue());
-
         }
 
         [Test]
@@ -1120,85 +1118,580 @@ namespace Anori.ExpressionObservers.UnitTests
               .ReferenceObserverBuilder(() => (instance.IntProperty > 3).ToString())
               .OnValueChanged()
               .WithAction(() => callCount++)
-              .WithGetter()
-              .Build()
-              .Activate(true);
-
-            Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.GetValue());
-
-            instance.IntProperty = 1;
-            Assert.AreEqual(1, callCount);
-            Assert.AreEqual("False", observes.GetValue());
-
-            instance.IntProperty = 2;
-            Assert.AreEqual(1, callCount);
-            Assert.AreEqual("False", observes.GetValue());
-
-            instance.IntProperty = 3;
-            Assert.AreEqual(1, callCount);
-            Assert.AreEqual("False", observes.GetValue());
-
-            instance.IntProperty = 4;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual("True", observes.GetValue());
-
-            instance.IntProperty = 5;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual("True", observes.GetValue());
-
-            instance.IntProperty = 6;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual("True", observes.GetValue());
-        }
-
-
-
-        [Test]
-        public void PropertyValueObserver_Count_OnValue()
-        {
-            var instance1 = new NotifyPropertyChangedClass1() { IntProperty = 1 };
-            var instance2 = new NotifyPropertyChangedClass1() { IntProperty = 2 };
-            var instance3 = new NotifyPropertyChangedClass1() { IntProperty = 3 };
-            var instance4 = new NotifyPropertyChangedClass1() { IntProperty = 4 };
-            var callCount = 0;
-
-
-            var a = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => instance1.IntProperty + instance2.IntProperty).OnValueChanged().WithAction(() => callCount++).WithFallback(0).Build();
-            var b = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => instance3.IntProperty + instance4.IntProperty).OnValueChanged().WithAction(() => callCount++).WithFallback(0).Build();
-             using var observes = PropertyObserverBuilder.Builder
-              .ValueObserverBuilder(() => a.Value + b.Value)
-              .OnValueChanged()
-              .WithAction(() => callCount++)
               .Build()
               .Activate(true);
 
             Assert.AreEqual(0, callCount);
             Assert.AreEqual(null, observes.Value);
 
+            instance.IntProperty = 1;
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("False", observes.Value);
+
+            instance.IntProperty = 2;
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("False", observes.Value);
+
+            instance.IntProperty = 3;
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("False", observes.Value);
+
+            instance.IntProperty = 4;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("True", observes.Value);
+
+            instance.IntProperty = 5;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("True", observes.Value);
+
+            instance.IntProperty = 6;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("True", observes.Value);
+        }
+
+        [Test]
+        public void PropertyValueObserver_Count_OnValue_ABC_Silent_Fallback()
+        {
+            var instance1 = new NotifyPropertyChangedClass1() { IntProperty = 0 };
+            var instance21 = new NotifyPropertyChangedClass1() { IntProperty = 1 };
+            var instance22 = new NotifyPropertyChangedClass1() { IntProperty = 2 };
+            var instance31 = new NotifyPropertyChangedClass1() { IntProperty = 3 };
+            var instance32 = new NotifyPropertyChangedClass1() { IntProperty = 4 };
+            var instance33 = new NotifyPropertyChangedClass1() { IntProperty = 5 };
+            var callCountABC = 0;
+            var callCountA = 0;
+            var callCountB = 0;
+            var callCountC = 0;
+            var callCountAB = 0;
+
+            using var a = PropertyObserverBuilder.Builder
+              .ValueObserverBuilder(() => instance1.IntProperty)
+              .OnValueChanged()
+              .WithAction(() => callCountA++)
+              .WithFallback(0)
+              .Build()
+              .Activate(true);
+
+            using var b = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(() => instance21.IntProperty + instance22.IntProperty)
+                .OnValueChanged()
+                .WithAction(() => callCountB++)
+                .WithFallback(0)
+                .Build()
+              .Activate(true);
+
+            using var c = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => instance31.IntProperty + instance32.IntProperty + instance33.IntProperty)
+                .OnValueChanged()
+                .WithAction(() => callCountC++)
+                .WithFallback(0)
+                .Build()
+              .Activate(true);
+
+            using var ab = PropertyObserverBuilder.Builder
+             .ValueObserverBuilder(() => a.Value + b.Value)
+             .OnValueChanged()
+             .WithAction(() => callCountAB++).WithFallback(0)
+             .Build()
+                 .Activate(true);
+
+            using var observes = PropertyObserverBuilder.Builder
+             .ValueObserverBuilder(() => ab.Value + c.Value)
+             .OnValueChanged()
+             .WithAction(() => callCountABC++)
+             .Build()
+              .Activate(true);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(15, observes.Value);
+
             instance1.IntProperty = 1;
-            Assert.AreEqual(1, callCount);
-            Assert.AreEqual(false, observes.Value);
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(1, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(16, observes.Value);
 
-            instance1.IntProperty = 2;
-            Assert.AreEqual(1, callCount);
-            Assert.AreEqual(false, observes.Value);
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            instance21.IntProperty = 2;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(1, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(17, observes.Value);
 
-            instance1.IntProperty = 3;
-            Assert.AreEqual(1, callCount);
-            Assert.AreEqual(false, observes.Value);
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance22.IntProperty = 3;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(1, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(18, observes.Value);
 
-            instance1.IntProperty = 4;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(true, observes.Value);
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance31.IntProperty = 4;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(19, observes.Value);
 
-            instance1.IntProperty = 5;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(true, observes.Value);
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance32.IntProperty = 5;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(20, observes.Value);
 
-            instance1.IntProperty = 6;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(true, observes.Value);
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance33.IntProperty = 6;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(21, observes.Value);
+        }
+
+        [Test]
+        public void PropertyValueObserver_Count_OnValue_ABC_Fallback()
+        {
+            var instance1 = new NotifyPropertyChangedClass1() { IntProperty = 0 };
+            var instance21 = new NotifyPropertyChangedClass1() { IntProperty = 1 };
+            var instance22 = new NotifyPropertyChangedClass1() { IntProperty = 2 };
+            var instance31 = new NotifyPropertyChangedClass1() { IntProperty = 3 };
+            var instance32 = new NotifyPropertyChangedClass1() { IntProperty = 4 };
+            var instance33 = new NotifyPropertyChangedClass1() { IntProperty = 5 };
+            var callCountABC = 0;
+            var callCountA = 0;
+            var callCountB = 0;
+            var callCountC = 0;
+            var callCountAB = 0;
+
+            using var a = PropertyObserverBuilder.Builder
+              .ValueObserverBuilder(() => instance1.IntProperty)
+              .OnValueChanged()
+              .WithAction(() => callCountA++)
+              .WithFallback(0)
+              .Build()
+              .Activate();
+
+            using var b = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(() => instance21.IntProperty + instance22.IntProperty)
+                .OnValueChanged()
+                .WithAction(() => callCountB++)
+                .WithFallback(0)
+                .Build()
+              .Activate();
+
+            using var c = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => instance31.IntProperty + instance32.IntProperty + instance33.IntProperty)
+                .OnValueChanged()
+                .WithAction(() => callCountC++)
+                .WithFallback(0)
+                .Build()
+              .Activate();
+
+            using var ab = PropertyObserverBuilder.Builder
+             .ValueObserverBuilder(() => a.Value + b.Value)
+             .OnValueChanged()
+             .WithAction(() => callCountAB++).WithFallback(0)
+             .Build()
+                 .Activate();
+
+            using var observes = PropertyObserverBuilder.Builder
+             .ValueObserverBuilder(() => ab.Value + c.Value)
+             .OnValueChanged()
+             .WithAction(() => callCountABC++)
+             .Build()
+              .Activate();
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(15, observes.Value);
+
+            instance1.IntProperty = 1;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(1, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(16, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            instance21.IntProperty = 2;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(1, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(17, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance22.IntProperty = 3;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(1, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(18, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance31.IntProperty = 4;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(19, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance32.IntProperty = 5;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(20, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance33.IntProperty = 6;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(21, observes.Value);
+        }
+
+        [Test]
+        public void PropertyValueObserver_Count_OnValue_ABC()
+        {
+            var instance1 = new NotifyPropertyChangedClass1() { IntProperty = 0 };
+            var instance21 = new NotifyPropertyChangedClass1() { IntProperty = 1 };
+            var instance22 = new NotifyPropertyChangedClass1() { IntProperty = 2 };
+            var instance31 = new NotifyPropertyChangedClass1() { IntProperty = 3 };
+            var instance32 = new NotifyPropertyChangedClass1() { IntProperty = 4 };
+            var instance33 = new NotifyPropertyChangedClass1() { IntProperty = 5 };
+            var callCountABC = 0;
+            var callCountA = 0;
+            var callCountB = 0;
+            var callCountC = 0;
+            var callCountAB = 0;
+
+            using var a = PropertyObserverBuilder.Builder
+              .ValueObserverBuilder(() => instance1.IntProperty)
+              .OnValueChanged()
+              .WithAction(() => callCountA++)
+              .Build()
+              .Activate();
+
+            using var b = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(() => instance21.IntProperty + instance22.IntProperty)
+                .OnValueChanged()
+                .WithAction(() => callCountB++)
+                .Build()
+              .Activate();
+
+            using var c = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => instance31.IntProperty + instance32.IntProperty + instance33.IntProperty)
+                .OnValueChanged()
+                .WithAction(() => callCountC++)
+                .Build()
+              .Activate();
+
+            using var ab = PropertyObserverBuilder.Builder
+             .ValueObserverBuilder(() => a.Value.Value + b.Value.Value)
+             .OnValueChanged()
+             .WithAction(() => callCountAB++)
+             .Build()
+                 .Activate();
+
+            using var observes = PropertyObserverBuilder.Builder
+             .ValueObserverBuilder(() => ab.Value.Value + c.Value.Value)
+             .OnValueChanged()
+             .WithAction(() => callCountABC++)
+             .Build()
+              .Activate();
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(15, observes.Value);
+
+            instance1.IntProperty = 1;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(1, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(16, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            instance21.IntProperty = 2;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(1, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(17, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance22.IntProperty = 3;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(1, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(18, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance31.IntProperty = 4;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(19, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance32.IntProperty = 5;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(20, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; instance33.IntProperty = 6;
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(21, observes.Value);
+        }
+
+        [Test]
+        public void PropertyValueObserver_Count_OnValue_ABC_Null()
+        {
+            var instance1 = new NotifyPropertyChangedClass1() { Class2 = null };
+            var instance21 = new NotifyPropertyChangedClass1() { Class2 = null };
+            var instance22 = new NotifyPropertyChangedClass1() { Class2 = null };
+            var instance31 = new NotifyPropertyChangedClass1() { Class2 = null };
+            var instance32 = new NotifyPropertyChangedClass1() { Class2 = null };
+            var instance33 = new NotifyPropertyChangedClass1() { Class2 = null };
+            var callCountABC = 0;
+            var callCountA = 0;
+            var callCountB = 0;
+            var callCountC = 0;
+            var callCountAB = 0;
+
+            using var a = PropertyObserverBuilder.Builder
+              .ValueObserverBuilder(() => instance1.Class2.IntProperty)
+              .OnValueChanged()
+              .WithAction(() => callCountA++)
+              .Build()
+              .Activate();
+
+            using var b = PropertyObserverBuilder.Builder
+                .ValueObserverBuilder(() => instance21.Class2.IntProperty + instance22.Class2.IntProperty)
+                .OnValueChanged()
+                .WithAction(() => callCountB++)
+                .Build()
+              .Activate();
+
+            using var c = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => instance31.Class2.IntProperty + instance32.Class2.IntProperty + instance33.Class2.IntProperty)
+                .OnValueChanged()
+                .WithAction(() => callCountC++)
+                .Build()
+              .Activate();
+
+            using var ab = PropertyObserverBuilder.Builder
+             .ValueObserverBuilder(() => a.Value.Value + b.Value.Value)
+             .OnValueChanged()
+             .WithAction(() => callCountAB++)
+             .Build()
+               .Activate();
+
+            using var observes = PropertyObserverBuilder.Builder
+             .ValueObserverBuilder(() => ab.Value.Value + c.Value.Value)
+             .OnValueChanged()
+             .WithAction(() => callCountABC++)
+             .Build()
+              .Activate();
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(null, observes.Value);
+
+            instance1.Class2 = new() { IntProperty = 1 };
+            Assert.AreEqual(1, a.Value);
+            
+            Assert.AreEqual(0, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(1, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(null, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            instance21.Class2 = new() { IntProperty = 2 };
+            Assert.AreEqual(null, b.Value);
+
+            Assert.AreEqual(0, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(null, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; 
+            instance22.Class2 = new() { IntProperty = 3 };
+            Assert.AreEqual(5, b.Value);
+
+            Assert.AreEqual(0, callCountABC);
+            Assert.AreEqual(1, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(1, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(null, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; 
+            instance31.Class2 = new() { IntProperty = 4 };
+
+            Assert.AreEqual(null, c.Value);
+
+            Assert.AreEqual(0, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(null, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0;
+            instance32.Class2 = new() { IntProperty = 5 };
+
+            Assert.AreEqual(null, c.Value);
+
+            Assert.AreEqual(0, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(0, callCountC);
+            Assert.AreEqual(null, observes.Value);
+
+            callCountABC = 0;
+            callCountA = 0;
+            callCountB = 0;
+            callCountC = 0;
+            callCountAB = 0; 
+            instance33.Class2 = new() { IntProperty = 6 };
+
+            Assert.AreEqual(15, c.Value);
+
+            Assert.AreEqual(1, callCountABC);
+            Assert.AreEqual(0, callCountAB);
+            Assert.AreEqual(0, callCountA);
+            Assert.AreEqual(0, callCountB);
+            Assert.AreEqual(1, callCountC);
+            Assert.AreEqual(21, observes.Value);
         }
     }
 }

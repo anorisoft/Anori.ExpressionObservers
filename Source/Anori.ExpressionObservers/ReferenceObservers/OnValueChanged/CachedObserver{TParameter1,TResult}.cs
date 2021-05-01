@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnNotifyProperyChanged{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="CachedObserver{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -143,7 +143,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(parameter1, propertyExpression, observerFlag)
         {
             (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
-                this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1), synchronizationContext),
+                this.CreateNullableReferenceGetter(
+                    Getter(propertyExpression, this.Tree, parameter1),
+                    synchronizationContext),
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));
@@ -216,8 +218,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
             TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-                parameter1);
+            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(
+                propertyExpression.Parameters,
+                tree)(parameter1);
 
         /// <summary>
         ///     Called when [property changed].

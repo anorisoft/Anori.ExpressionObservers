@@ -17,7 +17,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
 
     /// <summary>
-    ///     The Value2 Property Observer Builder class.
+    ///     The Value Property Observer Builder class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property observer with action of T result and getter and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithActionOfTAndFallback()
         {
@@ -82,10 +82,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         }
 
         /// <summary>
-        /// Creates the getter property observer with fallback.
+        ///     Creates the getter property observer with fallback.
         /// </summary>
         /// <returns>
-        /// The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithFallback()
         {
@@ -129,7 +129,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property value observer builder with action and getter.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override IGetterValuePropertyObserver<TResult> CreateGetterValuePropertyObserver()
         {
@@ -137,7 +137,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 
             if (this.IsDispached)
             {
-                observer = new ObserverWithGetter<TResult>(
+                observer = new ObserverWithActionAndGetter<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     SynchronizationContext.Current,
@@ -145,7 +145,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithGetter<TResult>(
+                observer = new ObserverWithActionAndGetter<TResult>(
                     this.propertyExpression,
                     this.Action!,
                     this.TaskScheduler,
@@ -153,7 +153,55 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else
             {
-                observer = new ObserverWithGetter<TResult>(this.propertyExpression, this.Action!, this.ObserverFlag);
+                observer = new ObserverWithActionAndGetter<TResult>(this.propertyExpression, this.Action!, this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        /// Creates the getter value property observer cached.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
+        protected override IGetterValuePropertyObserver<TResult> CreateGetterValuePropertyObserverCached()
+        {
+            IGetterValuePropertyObserver<TResult> observer;
+
+            if (this.IsDispached)
+            {
+                observer = new ObserverWithActionAndChachedGetter<TResult>(
+                    this.propertyExpression,
+                    this.Action!,
+                    SynchronizationContext.Current,
+                    this.IsCached,
+                    this.SafetyMode,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new ObserverWithActionAndChachedGetter<TResult>(
+                    this.propertyExpression,
+                    this.Action!,
+                    this.TaskScheduler,
+                    this.IsCached,
+                    this.SafetyMode,
+                    this.ObserverFlag);
+            }
+            else
+            {
+                observer = new ObserverWithActionAndChachedGetter<TResult>(
+                    this.propertyExpression,
+                    this.Action!,
+                    this.IsCached,
+                    this.SafetyMode,
+                    this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -168,7 +216,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override INotifyValuePropertyObserver<TResult> CreateNotifyPropertyObserver()
         {
@@ -182,10 +230,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new Observer<TResult>(
-                    this.propertyExpression,
-                    this.TaskScheduler,
-                    this.ObserverFlag);
+                observer = new Observer<TResult>(this.propertyExpression, this.TaskScheduler, this.ObserverFlag);
             }
             else
             {
@@ -204,7 +249,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with action and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionAndFallback()
         {
@@ -248,7 +293,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with action of T and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallback()
         {
@@ -292,7 +337,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithFallback()
         {
@@ -333,7 +378,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property value observer builder with value changed and fallback and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithFallbackAndDeferrer()
@@ -372,10 +417,43 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         }
 
         /// <summary>
+        /// Creates the notify value property observer.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer.
+        /// </returns>
+        protected override INotifyValuePropertyObserver<TResult> CreateNotifyValuePropertyObserver()
+        {
+            INotifyValuePropertyObserver<TResult> observer;
+            if (this.IsDispached)
+            {
+                observer = new Observer<TResult>(
+                    this.propertyExpression,
+                    SynchronizationContext.Current,
+                    this.ObserverFlag);
+            }
+            else if (this.TaskScheduler != null)
+            {
+                observer = new Observer<TResult>(this.propertyExpression, this.TaskScheduler, this.ObserverFlag);
+            }
+            else
+            {
+                observer = new Observer<TResult>(this.propertyExpression, this.ObserverFlag);
+            }
+
+            if (this.IsAutoActivate)
+            {
+                observer.Activate(this.IsSilentActivate);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
         ///     Creates the notify value property observer with action.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override INotifyValuePropertyObserver<TResult> CreateNotifyValuePropertyObserverWithAction()
         {
@@ -416,7 +494,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property value observer builder with value changed and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override INotifyValuePropertyObserverWithDeferrer<TResult>
             CreateNotifyValuePropertyObserverWithDeferrer()
@@ -473,7 +551,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the getter property observer with action of T and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer.
+        ///     The Property Value Observer.
         /// </returns>
         protected override IPropertyObserver<TResult> CreatePropertyObserverWithActionOfTAndFallback()
         {
@@ -517,7 +595,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property value observer.
         /// </summary>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
         protected override IGetterValuePropertyObserver<TResult> CreatePropertyValueObserver()
         {

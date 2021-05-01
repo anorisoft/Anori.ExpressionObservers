@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Builder
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    /// The Expression Reference Getter Builder class.
+    ///     The Expression Reference Getter Builder class.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -48,7 +48,7 @@ namespace Anori.ExpressionObservers.Builder
         ///     The getter function.
         /// </returns>
         Func<TParameter1, TResult?> IReferenceGetterBuilder<TParameter1, TResult>.Build() =>
-        ExpressionGetter.CreateReferenceGetter(this.expression);
+            ExpressionGetter.CreateReferenceGetter(this.expression);
 
         /// <summary>
         ///     Creates this instance of a getter function.

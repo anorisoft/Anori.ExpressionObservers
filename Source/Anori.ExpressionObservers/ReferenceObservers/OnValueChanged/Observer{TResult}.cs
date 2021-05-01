@@ -16,7 +16,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
@@ -31,9 +30,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     ///     cref="CachedObserver{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class Observer<TResult> :
-        ObserverBase<INotifyReferencePropertyObserver<TResult>, TResult>,
-        INotifyReferencePropertyObserver<TResult>
+    internal sealed class Observer<TResult> : ObserverBase<INotifyReferencePropertyObserver<TResult>, TResult>,
+                                              INotifyReferencePropertyObserver<TResult>
         where TResult : class
     {
         /// <summary>
@@ -93,9 +91,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal Observer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            PropertyObserverFlag observerFlag)
+        internal Observer([NotNull] Expression<Func<TResult>> propertyExpression, PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));

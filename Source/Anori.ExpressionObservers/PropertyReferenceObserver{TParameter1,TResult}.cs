@@ -140,16 +140,12 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new CachedObserver<TParameter1, TResult>(
-                parameter1,
-                propertyExpression,
-                PropertyObserverFlag.None);
+            new CachedObserver<TParameter1, TResult>(parameter1, propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on notify propery changed.
@@ -164,12 +160,11 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isCached,
-                LazyThreadSafetyMode safetyMode)
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode)
             where TResult : class
             where TParameter1 : INotifyPropertyChanged =>
             new CachedObserver<TParameter1, TResult>(
@@ -193,13 +188,12 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isCached,
-                LazyThreadSafetyMode safetyMode,
-                TaskScheduler taskScheduler)
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            TaskScheduler taskScheduler)
             where TResult : class
             where TParameter1 : INotifyPropertyChanged =>
             new CachedObserver<TParameter1, TResult>(
@@ -225,14 +219,13 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isCached,
-                LazyThreadSafetyMode safetyMode,
-                TaskScheduler taskScheduler,
-                bool isAutoActivate)
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            TaskScheduler taskScheduler,
+            bool isAutoActivate)
             where TResult : class
             where TParameter1 : INotifyPropertyChanged
         {
@@ -265,13 +258,12 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isCached,
-                LazyThreadSafetyMode safetyMode,
-                bool isAutoActivate)
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            bool isAutoActivate)
             where TResult : class
             where TParameter1 : INotifyPropertyChanged
         {
@@ -301,11 +293,10 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isAutoActivate)
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isAutoActivate)
             where TResult : class
             where TParameter1 : INotifyPropertyChanged
         {
@@ -337,10 +328,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new ReferenceObservers.OnValueChanged.Observer<TParameter1, TResult>(
-                parameter1,
-                propertyExpression,
-                PropertyObserverFlag.None);
+            new Observer<TParameter1, TResult>(parameter1, propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on value changed.
@@ -361,7 +349,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnValueChanged.Observer<TParameter1, TResult>(
+            var observer = new Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 PropertyObserverFlag.None);
@@ -391,7 +379,7 @@ namespace Anori.ExpressionObservers
             [NotNull] TaskScheduler taskScheduler)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new ReferenceObservers.OnValueChanged.Observer<TParameter1, TResult>(
+            new Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler,
@@ -418,7 +406,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnValueChanged.Observer<TParameter1, TResult>(
+            var observer = new Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler,

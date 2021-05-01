@@ -1,15 +1,14 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyValueObserverBuilderWithActionOfNullT.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionOfNullT.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
-     public interface IBuilderWithActionOfNullT<TResult> :
-        IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>,
-        IPropertyObserverScheduler<
-            IBuilderWithActionOfNullTAndScheduler<TResult>>
+    public interface IBuilderWithActionOfNullT<TResult> : IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>,
+                                                          IPropertyObserverScheduler<
+                                                              IBuilderWithActionOfNullTAndScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>

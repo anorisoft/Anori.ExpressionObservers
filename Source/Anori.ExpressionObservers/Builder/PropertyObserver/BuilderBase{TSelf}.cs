@@ -113,7 +113,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         protected TSelf AutoActivate()
         {
@@ -130,7 +130,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         ///     Cacheds this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         protected TSelf Cached()
         {
@@ -143,7 +143,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         ///     Cacheds the specified mode.
         /// </summary>
         /// <param name="mode">The mode.</param>
-        /// <returns>The Property Value2 Observer Builder.</returns>
+        /// <returns>The Property Value Observer Builder.</returns>
         protected TSelf Cached(LazyThreadSafetyMode mode)
         {
             this.IsCached = true;
@@ -156,18 +156,18 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         protected TSelf WithAction(Action action)
         {
             this.Action = action;
             return (TSelf)this;
         }
-        
+
         /// <summary>
         ///     Withes the getter dispatcher.
         /// </summary>
-        /// <returns>The Property Value2 Observer Builder.</returns>
+        /// <returns>The Property Value Observer Builder.</returns>
         protected TSelf WithGetterDispatcher()
         {
             this.IsDispached = true;
@@ -179,7 +179,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         protected TSelf WithScheduler(TaskScheduler taskScheduler)
         {

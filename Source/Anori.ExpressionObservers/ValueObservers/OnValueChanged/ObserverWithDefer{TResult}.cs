@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverOnValueChangedWithDefer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDefer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -22,10 +22,11 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Value2 Observer With Getter.
+    ///     Property Value Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverOnValueChangedWithDeferrer{TResult}, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyValueObserverOnValueChangedWithDeferrer{TResult}, TResult}" />
     /// <seealso cref="INotifyValuePropertyObserverWithDeferrer{TResult}" />
     internal sealed class ObserverWithDefer<TResult> :
         ObserverBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TResult>,

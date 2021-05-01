@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers
     using System.Linq.Expressions;
 
     /// <summary>
-    ///     Value2 Getter.
+    ///     Value Getter.
     /// </summary>
     public static class ValueGetter
     {
@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TParameter">The type of the parameter.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>Value2 Getter.</returns>
+        /// <returns>Value Getter.</returns>
         public static Func<TParameter, TResult?> CreateGetter<TParameter, TResult>(
             Expression<Func<TParameter, TResult>> propertyExpression)
             where TResult : struct

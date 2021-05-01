@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithAction{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithAction{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -25,13 +25,17 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// <summary>
     ///     Property Reference Observer With Getter.
     /// </summary>
+    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Observer{TParameter1,TParameter2,TResult}" />
+    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyValuePropertyObserver{TResult}, TParameter1, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyValuePropertyObserver{TResult}" />
+    /// <seealso cref="Observer{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
-    internal sealed class ObserverWithAction<TParameter1, TResult> : ObserverBase<INotifyValuePropertyObserver<TResult>, TParameter1, TResult>,
-                                                                     INotifyValuePropertyObserver<TResult>
+    internal sealed class ObserverWithAction<TParameter1, TResult> :
+        ObserverBase<INotifyValuePropertyObserver<TResult>, TParameter1, TResult>,
+        INotifyValuePropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : struct
     {
@@ -47,6 +51,11 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private readonly Action propertyChangedAction;
 
         /// <summary>
+        ///     The silent action.
+        /// </summary>
+        private readonly Action silentAction;
+
+        /// <summary>
         ///     The value changed action.
         /// </summary>
         [NotNull]
@@ -58,12 +67,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1, TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithAction(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -76,17 +87,19 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1));
             var taskFactory = new TaskFactory(taskScheduler);
             this.propertyChangedAction = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1, TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithAction(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -98,16 +111,18 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1));
             this.propertyChangedAction = () => synchronizationContext.Send(() => this.Value = get());
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1, TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithAction(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -118,6 +133,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree, parameter1));
             this.propertyChangedAction = () => this.Value = get();
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
@@ -165,6 +181,11 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         protected override void OnAction() => this.propertyChangedAction();
 
         /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.silentAction.Raise();
+
+        /// <summary>
         ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -172,8 +193,12 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <returns>
         ///     Getter.
         /// </returns>
-        private static Func<TResult?> Getter(Expression<Func<TParameter1, TResult>> propertyExpression, IExpressionTree tree, TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateValueGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(parameter1);
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1) =>
+            () => ExpressionGetter.CreateValueGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
+                parameter1);
 
         /// <summary>
         ///     Called when [property changed].

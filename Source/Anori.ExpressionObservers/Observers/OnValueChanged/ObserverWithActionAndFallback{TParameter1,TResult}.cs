@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value2 Getter Observer.
+    ///     Property Value Getter Observer.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -46,6 +46,11 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         private readonly Action notifyPropertyChangedAction;
 
         /// <summary>
+        ///     The silent action.
+        /// </summary>
+        private readonly Action silentAction;
+
+        /// <summary>
         ///     The action.
         /// </summary>
         [NotNull]
@@ -58,7 +63,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndFallback{TParameter1,TResult}" />
+        ///     <see cref="ObserverWithActionAndFallback{TParameter1,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -79,12 +84,13 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
             this.notifyPropertyChangedAction = () => this.Value = get();
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndFallback{TParameter1,TResult}" />
+        ///     <see cref="ObserverWithActionAndFallback{TParameter1,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -108,12 +114,13 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
             var taskFactory = new TaskFactory(taskScheduler);
             this.notifyPropertyChangedAction = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndFallback{TParameter1,TResult}" />
+        ///     <see cref="ObserverWithActionAndFallback{TParameter1,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -136,6 +143,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
             this.notifyPropertyChangedAction = () => synchronizationContext.Send(() => this.Value = get());
+            this.silentAction = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
         }
 
@@ -173,6 +181,14 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.notifyPropertyChangedAction();
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate()
+        {
+            this.silentAction.Raise();
+        }
 
         /// <summary>
         ///     Getters the specified property expression.

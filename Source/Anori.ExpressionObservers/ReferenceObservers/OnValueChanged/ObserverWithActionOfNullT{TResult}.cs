@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyObserverOnNotifyProperyChangedWithFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionOfNullT{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     internal sealed class ObserverWithActionOfNullT<TResult> :
         ObserverBase<INotifyReferencePropertyObserver<TResult>, TResult>,
         INotifyReferencePropertyObserver<TResult>
-    where TResult : class
+        where TResult : class
     {
         /// <summary>
         ///     The action.
@@ -67,8 +67,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateGetter(
-               this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler));
+            this.getter = this.CreateGetter(this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler));
         }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         {
             this.action = this.action ?? throw new ArgumentNullException(nameof(this.action));
             this.getter = this.CreateNullableReferenceGetter(
-                 this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext));
+                this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext));
         }
 
         /// <summary>
@@ -118,10 +117,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        /// Gets the value.
+        ///     Gets the value.
         /// </summary>
         /// <value>
-        /// The value.
+        ///     The value.
         /// </value>
         public TResult? Value => this.getter();
 
@@ -136,9 +135,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <returns>Getter.</returns>
-        private static Func<TResult?> Getter(
-            Expression<Func<TResult>> propertyExpression,
-            IExpressionTree tree) =>
+        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
             ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
 
         /// <summary>

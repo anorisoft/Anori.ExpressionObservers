@@ -73,12 +73,13 @@ namespace Anori.ExpressionObservers
             where TParameter2 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TParameter2, TResult>(
-                parameter1,
-                parameter2,
-                propertyExpression,
-                action,
-                PropertyObserverFlag.None);
+            var observer =
+                new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TParameter2, TResult>(
+                    parameter1,
+                    parameter2,
+                    propertyExpression,
+                    action,
+                    PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -392,7 +393,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : class =>
-            new ReferenceObservers.OnValueChanged.Observer<TParameter1, TParameter2, TResult>(
+            new Observer<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -422,7 +423,7 @@ namespace Anori.ExpressionObservers
             where TParameter2 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnValueChanged.Observer<TParameter1, TParameter2, TResult>(
+            var observer = new Observer<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -456,7 +457,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : class =>
-            new ReferenceObservers.OnValueChanged.Observer<TParameter1, TParameter2, TResult>(
+            new Observer<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -489,7 +490,7 @@ namespace Anori.ExpressionObservers
             where TParameter2 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new ReferenceObservers.OnValueChanged.Observer<TParameter1, TParameter2, TResult>(
+            var observer = new Observer<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,

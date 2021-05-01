@@ -1,12 +1,11 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderOnValueChangedAndDefferer.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithDefferer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
-    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
@@ -50,9 +49,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     ///     cref="IBuilderOnValueChangedAndDeferrerAndScheduler{TResult}" />
     /// <seealso
     ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> : IBuilderWithDeferrer<
-            TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithDeferrer<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -60,17 +57,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Observer Builder.
         /// </returns>
-        IBuilderWithDeferrer<TResult> IObserverBuilderBase<
-            IBuilderWithDeferrer<TResult>>.AutoActivate() =>
+        IBuilderWithDeferrer<TResult> IObserverBuilderBase<IBuilderWithDeferrer<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
-        /// Creates this instance.
+        ///     Creates this instance.
         /// </summary>
         /// <returns>
-        /// Property Value Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Propery Changed.
         /// </returns>
-        INotifyValuePropertyObserverWithDeferrer<TResult> IBuilderWithDeferrer<TResult>.Build()
-         => this.CreatePropertyValueObserverBuilderOnValueChangedAndDeferrer();
+        INotifyValuePropertyObserverWithDeferrer<TResult> IBuilderWithDeferrer<TResult>.Build() =>
+            this.CreateNotifyValuePropertyObserverWithDeferrer();
     }
 }

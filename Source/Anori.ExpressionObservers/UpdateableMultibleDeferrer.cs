@@ -39,10 +39,10 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is defer.
+        ///     Gets a value indicating whether this instance is defer.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if this instance is defer; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
         /// </value>
         public bool IsDeferred => this.state != DeferState.NotDeferred;
 

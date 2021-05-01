@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyObserverOnValueChangedWithDeferrerAndFallback.cs" company="AnoriSoft">
+// <copyright file="INotifyPropertyObserverWithDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers.Interfaces
     using System.ComponentModel;
 
     /// <summary>
-    ///     The Property Observer On Value2 Changed With Deferrer And Fallback interface.
+    ///     The Property Observer On Value Changed With Deferrer And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso

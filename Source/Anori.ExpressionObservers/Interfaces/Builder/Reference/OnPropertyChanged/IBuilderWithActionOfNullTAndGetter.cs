@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverBuilderWithActionOfNullableTAndGetter.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionOfNullTAndGetter.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,8 +16,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndScheduler{TResult}}" />
     public interface IBuilderWithActionOfNullTAndGetter<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfNullTAndGetter<TResult>>,
-        IPropertyObserverScheduler<
-            IBuilderWithActionOfNullTAndGetterAndScheduler<TResult>>
+        IPropertyObserverScheduler<IBuilderWithActionOfNullTAndGetterAndScheduler<TResult>>
         where TResult : class
     {
         /// <summary>

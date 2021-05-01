@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserverOnValueChangedWithDefer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDefer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -62,7 +62,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(() => this.Value = getter());
             this.action = () => this.deferrer.Update();
         }
@@ -81,7 +83,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
             this.action = () => this.deferrer.Update();
@@ -101,7 +105,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
             this.deferrer = new UpdateableMultibleDeferrer(
                 () => synchronizationContext.Send(() => this.Value = getter()));
             this.action = () => this.deferrer.Update();

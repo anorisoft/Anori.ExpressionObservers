@@ -6,15 +6,17 @@
 
 namespace Anori.ExpressionObservers.Base
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     using Anori.Common;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
+
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
@@ -28,9 +30,9 @@ namespace Anori.ExpressionObservers.Base
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverFundatinBase" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverFundatinBase{TSelf}" /> class.
         /// </summary>
-        /// <param name="observerFlag">PropertyObserverFlag.</param>
+        /// <param name="observerFlag">The observer flag.</param>
         protected ObserverFundatinBase(PropertyObserverFlag observerFlag)
             : base(observerFlag)
         {
@@ -102,7 +104,7 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="action">The action.</param>
-        /// <returns>Value2 getter function.</returns>
+        /// <returns>Value getter function.</returns>
         protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
             Func<TResult> get,
             bool isCached,
@@ -145,14 +147,14 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the cached getter.
+        ///     Creates the cached getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="action">The action.</param>
-        /// <returns>Value2 getter function.</returns>
+        /// <returns>Value getter function.</returns>
         protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
             Func<TResult> get,
             bool isCached,
@@ -197,6 +199,14 @@ namespace Anori.ExpressionObservers.Base
             return (returnAction, getter);
         }
 
+        /// <summary>
+        ///     Creates the cached getter.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="get">The get.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>Value getter function.</returns>
         protected (Action, Func<TResult>) CreateCachedGetter<TResult>(
             Func<TResult> get,
             bool isCached,
@@ -274,10 +284,9 @@ namespace Anori.ExpressionObservers.Base
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>
-        ///     Value2 getter function.
+        ///     Value getter function.
         /// </returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
-
         protected Func<TValue?> CreateGetPropertyNullableValue<TValue>(Func<TValue?> value)
 #pragma warning restore S4144 // Methods should not have identical implementations
             where TValue : struct
@@ -311,31 +320,31 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creaters the getter.
+        ///     Creaters the getter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <returns>
-        /// The Getter.
+        ///     The Getter.
         /// </returns>
         protected Func<TParameter1, TResult> CreateGetter<TParameter1, TResult>(Func<TParameter1, TResult> get)
         {
             if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
             {
-                return (p1) => this.IsActive ? get(p1) : throw new NotActivatedException();
+                return p1 => this.IsActive ? get(p1) : throw new NotActivatedException();
             }
 
             return get;
         }
 
         /// <summary>
-        /// Creates the getter.
+        ///     Creates the getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <returns>
-        /// The Getter.
+        ///     The Getter.
         /// </returns>
         protected Func<TResult> CreateGetter<TResult>(Func<TResult> get)
         {
@@ -419,13 +428,13 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the nullable reference cached getter.
+        ///     Creates the nullable reference cached getter.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <returns></returns>
+        /// <returns>Valeu getter function.</returns>
         protected (Action, Func<TResult?>) CreateNullableReferenceCachedGetter<TResult>(
             Func<TResult?> get,
             bool isCached,
@@ -529,7 +538,6 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="propertyChanged">The property changed.</param>
         /// <returns>Valeu getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
-
         protected (Action, Func<TResult?>) CreateNullableValueCachedGetter<TResult>(
             Func<TResult?> get,
             bool isCached,
@@ -581,7 +589,6 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>Valeu getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
-
         protected Func<TResult?> CreateNullableValueGetter<TResult>(Func<TResult?> get, TaskScheduler taskScheduler)
 #pragma warning restore S4144 // Methods should not have identical implementations
             where TResult : struct
@@ -603,7 +610,6 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <returns>Valeu getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
-
         protected Func<TResult?> CreateNullableValueGetter<TResult>(
             Func<TResult?> get,
             SynchronizationContext synchronizationContext)
@@ -625,7 +631,6 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="get">The get.</param>
         /// <returns>Valeu getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
-
         protected Func<TResult?> CreateNullableValueGetter<TResult>(Func<TResult?> get)
 #pragma warning restore S4144 // Methods should not have identical implementations
             where TResult : struct

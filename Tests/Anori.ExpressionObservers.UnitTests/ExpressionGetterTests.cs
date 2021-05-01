@@ -593,7 +593,7 @@ namespace Anori.ExpressionObservers.UnitTests
         {
             var test = CreateTestInstanceA();
             const int expected = 2;
-            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(this.GetValue())).Build();
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue1Param(GetValue())).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -605,6 +605,17 @@ namespace Anori.ExpressionObservers.UnitTests
             var test = CreateTestInstanceA();
             const int expected = 1;
             var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.GetValue()).Build();
+            var actual = getValue(test);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void CreateValueGetter_A_Value_Return1()
+        {
+            var test = CreateTestInstanceA();
+            const int expected = 1;
+            var getValue = ExpressionGetterBuilder.Builder.ValueGetter((TestClass1 t) => this.Value).Build();
             var actual = getValue(test);
 
             Assert.AreEqual(expected, actual);
@@ -1585,6 +1596,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         private int GetValue() => 1;
+        private int Value => 1;
 
         private int GetValue1Param(int parameter1) => 1 + parameter1;
 

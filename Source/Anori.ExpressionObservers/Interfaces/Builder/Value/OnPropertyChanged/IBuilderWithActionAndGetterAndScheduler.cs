@@ -7,13 +7,14 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
     /// <summary>
-    /// The I Builder With Action And Getter And Scheduler interface.
+    ///     The I Builder With Action And Getter And Scheduler interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionAndGetterAndScheduler{TResult}}" />
-    public interface IBuilderWithActionAndGetterAndScheduler<TResult>
-        :
-            IObserverBuilderBase<IBuilderWithActionAndGetterAndScheduler<TResult>>
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionAndGetterAndScheduler{TResult}}" />
+    public interface
+        IBuilderWithActionAndGetterAndScheduler<TResult> : IObserverBuilderBase<
+            IBuilderWithActionAndGetterAndScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -27,7 +28,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Value2 Property Observer.
+        ///     The Value Property Observer.
         /// </returns>
         IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult> WithFallback(TResult fallback);
     }

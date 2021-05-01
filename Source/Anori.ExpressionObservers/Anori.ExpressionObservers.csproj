@@ -22,8 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithDeferrerAndScheduler.cs" />
-    <Compile Remove="Builder\PropertyObserver\Value\BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithDefferer.cs" />
     <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IBuilderWithActionAndGetterAndFallback2.cs" />
     <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfNullableT.cs" />
     <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfT.cs" />

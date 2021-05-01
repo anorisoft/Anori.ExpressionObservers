@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverBuilderWithActionOfTAndGetter.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionOfT.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,9 +14,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetter{TResult}}" />
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndScheduler{TResult}}" />
-    public interface IBuilderWithActionOfT<TResult> :
-        IObserverBuilderBase<IBuilderWithActionOfT<TResult>>,
-        IPropertyObserverScheduler<IBuilderWithActionOfTAndScheduler<TResult>>
+    public interface IBuilderWithActionOfT<TResult> : IObserverBuilderBase<IBuilderWithActionOfT<TResult>>,
+                                                      IPropertyObserverScheduler<
+                                                          IBuilderWithActionOfTAndScheduler<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -26,7 +26,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IBuilderWithActionOfTAndFallback<TResult>
-            WithFallback(TResult fallback);
+        IBuilderWithActionOfTAndFallback<TResult> WithFallback(TResult fallback);
     }
 }

@@ -779,7 +779,9 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCount = 0;
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(instance1, instance2, (i1, i2) => i1.Class2.IntProperty + i2.Class2.IntProperty)
-                .OnProperyChanged().WithAction(() => callCount++).WithGetter()
+                .OnProperyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .Build();
 

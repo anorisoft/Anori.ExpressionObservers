@@ -10,7 +10,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
 
     /// <summary>
-    ///     The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -31,14 +31,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <seealso cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
     /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndScheduler<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndScheduler<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndScheduler<TResult>
             Interfaces.Builder.IObserverBuilderBase<IBuilderWithActionOfTAndScheduler<TResult>>.AutoActivate() =>
@@ -49,7 +48,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Value2 Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfTAndFallbackAndScheduler<TResult> IBuilderWithActionOfTAndScheduler<TResult>.WithFallback(
             TResult fallback)

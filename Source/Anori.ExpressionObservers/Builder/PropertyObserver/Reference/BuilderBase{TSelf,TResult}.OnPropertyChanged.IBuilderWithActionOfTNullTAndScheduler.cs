@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionOfNullTAndScheduler.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionOfTNullTAndScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
 
     /// <summary>
-    ///     The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -42,20 +42,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     ///     cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
     /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> :
-            IBuilderWithActionOfNullTAndScheduler<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullTAndScheduler<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullTAndScheduler<TResult>
-            IObserverBuilderBase<
-                IBuilderWithActionOfNullTAndScheduler<TResult>>.
-            AutoActivate() =>
+            IObserverBuilderBase<IBuilderWithActionOfNullTAndScheduler<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -64,8 +60,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IGetterReferencePropertyObserver<TResult>
-            IBuilderWithActionOfNullTAndScheduler<TResult>.Build() =>
+        IGetterReferencePropertyObserver<TResult> IBuilderWithActionOfNullTAndScheduler<TResult>.Build() =>
             this.CreatePropertyReferenceObserver();
     }
 }

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverOnValueChangedWithDefer{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDefer{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -22,11 +22,10 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="INotifyValuePropertyObserverWithDeferrer{TResult}" />
     /// <seealso cref="INotifyValuePropertyObserverWithDeferrer{TResult}" />
     internal sealed class ObserverWithDefer<TParameter1, TResult> :
         ObserverBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
@@ -51,13 +50,12 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" />
-        ///     class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
-        /// <param name="propertyExpression">The parameter1.</param>
-        /// <param name="observerFlag">The property expression.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithDefer{TResult}">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithDefer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -71,14 +69,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" />
-        ///     class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
-        /// <param name="propertyExpression">The parameter1.</param>
-        /// <param name="taskScheduler">The property expression.</param>
-        /// <param name="observerFlag">The task scheduler.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithDefer{TResult}">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithDefer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -94,14 +91,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" />
-        ///     class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TParameter1, TResult}" /> class.
         /// </summary>
-        /// <param name="propertyExpression">The parameter1.</param>
-        /// <param name="synchronizationContext">The property expression.</param>
-        /// <param name="observerFlag">The synchronization context.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ObserverWithDefer{TResult}">propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithDefer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,

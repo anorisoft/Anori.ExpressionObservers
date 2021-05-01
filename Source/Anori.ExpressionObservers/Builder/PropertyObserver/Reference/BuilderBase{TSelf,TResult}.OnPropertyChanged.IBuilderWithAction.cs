@@ -1,21 +1,17 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithAction.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithAction.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
-    using System;
-    using System.Threading.Tasks;
-
-    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
 
     /// <summary>
-    /// The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -43,15 +39,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
     // ReSharper disable UnusedTypeParameter
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> : IBuilderWithAction<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithAction<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value2 Observer Builder.</returns>
-        IBuilderWithAction<TResult> IObserverBuilderBase<
-            IBuilderWithAction<TResult>>.AutoActivate() =>
+        /// <returns>The Property Value Observer Builder.</returns>
+        IBuilderWithAction<TResult> IObserverBuilderBase<IBuilderWithAction<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -60,15 +54,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IPropertyObserver<TResult> IBuilderWithAction<TResult>.Build() =>
-            this.CreatePropertyObserverWithAction();
+        IPropertyObserver<TResult> IBuilderWithAction<TResult>.Build() => this.CreatePropertyObserverWithAction();
 
         /// <summary>
         ///     Withes the getter.
         /// </summary>
-        /// <returns>The Value2 Property Observer Builder.</returns>
-        IBuilderWithActionAndGetter<TResult> IBuilderWithAction<TResult>.
-            WithGetter() =>
-            this;
+        /// <returns>The Value Property Observer Builder.</returns>
+        IBuilderWithActionAndGetter<TResult> IBuilderWithAction<TResult>.WithGetter() => this;
     }
 }

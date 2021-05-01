@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderOnValueChangedAndScheduler.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnValueChanged.IBuilderWithScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged;
 
     /// <summary>
-    ///     The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -20,7 +20,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso cref="IBuilderWithScheduler{TResult}" />
     /// <seealso cref="IBuilderOnNotifyProperyChangedAndScheduler{TResult}" />
     /// <seealso cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
+    /// <seealso
+    ///     cref="Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
     /// <seealso cref="IBuilderWithAction{TResult}" />
     /// <seealso cref="IBuilderWithActionOfT{TResult}" />
     /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
@@ -33,55 +34,50 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
     /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> :
-            IBuilderWithScheduler<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithScheduler<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithScheduler<TResult> IObserverBuilderBase<
-            IBuilderWithScheduler<TResult>>.AutoActivate() =>
+        IBuilderWithScheduler<TResult> IObserverBuilderBase<IBuilderWithScheduler<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value2 Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Propery Changed.
         /// </returns>
-        INotifyReferencePropertyObserver<TResult>
-            IBuilderWithScheduler<TResult>.Build() =>
-            this.CreateNotifyReferencePropertyObserverWithAction();
+        INotifyReferencePropertyObserver<TResult> IBuilderWithScheduler<TResult>.Build() =>
+            this.CreateNotifyReferencePropertyObserver();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithScheduler<TResult>
-            IBuilderWithScheduler<TResult>.Cached(
-                LazyThreadSafetyMode safetyMode)
-        {
-            return this.Cached(safetyMode);
-        }
+        IBuilderWithScheduler<TResult> IBuilderWithScheduler<TResult>.Cached(LazyThreadSafetyMode safetyMode) =>
+            this.Cached(safetyMode);
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithScheduler<TResult>
-            IBuilderWithScheduler<TResult>.Cached()
-        {
-            return this.Cached();
-        }
+        IBuilderWithScheduler<TResult> IBuilderWithScheduler<TResult>.Cached() => this.Cached();
+
+        /// <summary>
+        ///     Defers this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
         IBuilderWithDeferrerAndScheduler<TResult> IBuilderWithScheduler<TResult>.Deferred() => this;
     }
 }

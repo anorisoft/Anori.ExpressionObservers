@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyValueObserverBuilderBase{TSelf,TResult}.IPropertyValueObserverBuilderWithActionOfTAndFallbackAndScheduler.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnValueChanged.IBuilderWithActionAndFallbackAndScheduler.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
 
     /// <summary>
-    /// The Property Value2 Observer Builder Base class.
+    ///     The Property Value Observer Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -32,20 +32,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <seealso cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
     /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
-    internal abstract partial class
-        BuilderBase<TSelf, TResult> :
-            IBuilderWithActionAndFallbackAndScheduler<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndFallbackAndScheduler<TResult>
     {
         /// <summary>
-        /// Automatics the activate.
+        ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        /// The Property Value2 Observer Builder.
+        ///     The Property Value Observer Builder.
         /// </returns>
         IBuilderWithActionAndFallbackAndScheduler<TResult>
-            IObserverBuilderBase<
-                IBuilderWithActionAndFallbackAndScheduler<TResult>>.
-            AutoActivate() =>
+            IObserverBuilderBase<IBuilderWithActionAndFallbackAndScheduler<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -54,8 +50,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        INotifyPropertyObserver<TResult>
-            IBuilderWithActionAndFallbackAndScheduler<TResult>.Build() =>
+        INotifyPropertyObserver<TResult> IBuilderWithActionAndFallbackAndScheduler<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithFallback();
     }
 }

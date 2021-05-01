@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="PropertyReferenceObserver{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithAction{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref=Observer"ObserverBase{TSelf,TParameter1,TResult}" />
+    /// <seealso cref= Observer"ObserverBase{TSelf,TParameter1,TResult}" />
     internal sealed class ObserverWithAction<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterReferencePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         IGetterReferencePropertyObserver<TResult>
