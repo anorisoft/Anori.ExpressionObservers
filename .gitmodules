@@ -1,17 +1,7 @@
-[submodule "Externals"]
-	path = Externals
-	url = https://github.com/anorisoft/Anori.Extensions
 [submodule "Submodules/Anori.Extensions"]
 	path = Submodules/Anori.Extensions
 	url = https://github.com/anorisoft/Anori.Extensions
 	branch = master
-[submodule "Submodules/Source"]
-	path = Submodules/Source
-	url = https://github.com/anorisoft/Anori.Extensions
-	branch = master
-[submodule "Anori.Common"]
-	path = Anori.Common
-	url = https://github.com/anorisoft/Anori.Common
 [submodule "Submodules/Anori.Common"]
 	path = Submodules/Anori.Common
 	url = https://github.com/anorisoft/Anori.Common
