@@ -74,10 +74,10 @@ namespace Anori.ExpressionObservers.Tree.Nodes
         public IExpressionNode? Previous { get; private set; }
 
         /// <summary>
-        /// Gets the next.
+        ///     Gets the next.
         /// </summary>
         /// <value>
-        /// The next.
+        ///     The next.
         /// </value>
         public IExpressionNode? Next { get; private set; }
 

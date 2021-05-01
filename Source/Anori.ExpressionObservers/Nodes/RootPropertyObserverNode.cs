@@ -36,17 +36,6 @@ namespace Anori.ExpressionObservers.Nodes
         public object? Parameter { get; }
 
         /// <summary>
-        ///     Subscribes the listener for parameter.
-        /// </summary>
-        public void SubscribeListenerForRoot()
-        {
-            if (this.Parameter is INotifyPropertyChanged notifyPropertyChanged)
-            {
-                this.SubscribeListenerFor(notifyPropertyChanged);
-            }
-        }
-
-        /// <summary>
         ///     Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
@@ -102,5 +91,16 @@ namespace Anori.ExpressionObservers.Nodes
         ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode() => this.Parameter != null ? this.Parameter.GetHashCode() : 0;
+
+        /// <summary>
+        ///     Subscribes the listener for parameter.
+        /// </summary>
+        public void SubscribeListenerForRoot()
+        {
+            if (this.Parameter is INotifyPropertyChanged notifyPropertyChanged)
+            {
+                this.SubscribeListenerFor(notifyPropertyChanged);
+            }
+        }
     }
 }

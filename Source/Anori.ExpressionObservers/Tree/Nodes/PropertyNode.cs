@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Tree.Nodes
     /// <seealso cref="IInternalExpressionNode" />
     internal struct PropertyNode : IInternalExpressionNode, IPropertyNode
     {
-        private static readonly IEnumerable<Expression> NullArgs = new Expression[0];
+        private static readonly IEnumerable<Expression> NullArgs = Array.Empty<Expression>();
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyNode" /> struct.
@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers.Tree.Nodes
             this.MemberExpression = memberExpression;
             this.PropertyInfo = propertyInfo;
             this.Type = memberExpression.Type;
-            this.MethodInfo = propertyInfo.GetGetMethod();
+            this.MethodInfo = propertyInfo.GetMethod;
             this.Args = NullArgs;
             this.Previous = null;
             this.Next = null;

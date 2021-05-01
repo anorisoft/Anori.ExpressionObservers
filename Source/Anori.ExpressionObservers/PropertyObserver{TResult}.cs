@@ -9,9 +9,8 @@ namespace Anori.ExpressionObservers
     using System;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Observers;
+    using Anori.ExpressionObservers.Observers.OnPropertyChanged;
 
     using JetBrains.Annotations;
 
@@ -33,7 +32,7 @@ namespace Anori.ExpressionObservers
         public static IPropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action) =>
-            new PropertyObserver<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            new ObserverWithAction<TResult>(propertyExpression, action, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -51,7 +50,7 @@ namespace Anori.ExpressionObservers
             bool autoSubscribe,
             [NotNull] Action action)
         {
-            var observer = new PropertyObserver<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            var observer = new ObserverWithAction<TResult>(propertyExpression, action, PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -72,13 +71,17 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TResult>(
+        public static IGetterPropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool autoSubscribe,
             [NotNull] Action action,
             [NotNull] TResult fallback)
         {
-            var observer = new PropertyObserverWithActionAndGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
+            var observer = new ObserverWithActionAndGetterAndFallback<TResult>(
+                propertyExpression,
+                action,
+                fallback,
+                PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -98,11 +101,15 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TResult>(
+        public static IGetterPropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TResult fallback) =>
-            new PropertyObserverWithActionAndGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
+            new ObserverWithActionAndGetterAndFallback<TResult>(
+                propertyExpression,
+                action,
+                fallback,
+                PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the specified property expression.
@@ -116,13 +123,17 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TResult>(
+        public static IGetterPropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool autoSubscribe,
             [NotNull] Action<TResult> action,
             [NotNull] TResult fallback)
         {
-            var observer = new PropertyObserverWithActionOfTResultAndGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
+            var observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
+                propertyExpression,
+                action,
+                fallback,
+                PropertyObserverFlag.None);
             if (autoSubscribe)
             {
                 observer.Activate(true);
@@ -142,10 +153,14 @@ namespace Anori.ExpressionObservers
         ///     The Property Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyObserverWithGetterAndFallback<TResult> Observes<TResult>(
+        public static IGetterPropertyObserver<TResult> Observes<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
             [NotNull] TResult fallback) =>
-            new PropertyObserverWithActionOfTResultAndGetterAndFallback<TResult>(propertyExpression, action, fallback, PropertyObserverFlag.None);
+            new ObserverWithActionOfTAndGetterAndFallback<TResult>(
+                propertyExpression,
+                action,
+                fallback,
+                PropertyObserverFlag.None);
     }
 }

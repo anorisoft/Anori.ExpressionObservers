@@ -13,7 +13,8 @@ namespace Anori.ExpressionObservers
 
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.ReferenceTypeObservers;
+    using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
+    using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
 
     using JetBrains.Annotations;
 
@@ -32,13 +33,13 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static IPropertyReferenceObserver<TResult> Observes<TParameter1, TResult>(
+        public static IGetterReferencePropertyObserver<TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new PropertyReferenceObserver<TParameter1, TResult>(
+            new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -55,7 +56,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static IPropertyReferenceObserver<TResult> Observes<TParameter1, TResult>(
+        public static IGetterReferencePropertyObserver<TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate,
@@ -63,7 +64,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new PropertyReferenceObserver<TParameter1, TResult>(
+            var observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -86,13 +87,13 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static IPropertyReferenceObserverWithGetter<TResult> ObservesAndGet<TParameter1, TResult>(
+        public static IGetterReferencePropertyObserver<TResult> ObservesAndGet<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action)
             where TResult : class
             where TParameter1 : INotifyPropertyChanged =>
-            new PropertyReferenceObserverWithGetter<TParameter1, TResult>(
+            new ObserverWithActionAndGetter<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -109,7 +110,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static IPropertyReferenceObserverWithGetter<TResult> ObservesAndGet<TParameter1, TResult>(
+        public static IGetterReferencePropertyObserver<TResult> ObservesAndGet<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate,
@@ -117,7 +118,7 @@ namespace Anori.ExpressionObservers
             where TResult : class
             where TParameter1 : INotifyPropertyChanged
         {
-            var observer = new PropertyReferenceObserverWithGetter<TParameter1, TResult>(
+            var observer = new ObserverWithActionAndGetter<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 action,
@@ -139,207 +140,195 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
-            where TParameter1 : INotifyPropertyChanged
-            where TResult : class =>
-            new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
-                parameter1,
-                propertyExpression,
-                PropertyObserverFlag.None);
-
-        /// <summary>
-        ///     Observeses the on notify propery changed.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        [NotNull]
-        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isCached,
-                LazyThreadSafetyMode safetyMode)
-            where TResult : class
-            where TParameter1 : INotifyPropertyChanged =>
-            new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
-                parameter1,
-                propertyExpression,
-                isCached,
-                safetyMode,
-                PropertyObserverFlag.None);
-
-        /// <summary>
-        ///     Observeses the on notify propery changed.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="taskScheduler">The task scheduler.</param>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        [NotNull]
-        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isCached,
-                LazyThreadSafetyMode safetyMode,
-                TaskScheduler taskScheduler)
-            where TResult : class
-            where TParameter1 : INotifyPropertyChanged =>
-            new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
-                parameter1,
-                propertyExpression,
-                taskScheduler,
-                isCached,
-                safetyMode,
-                PropertyObserverFlag.None);
-
-        /// <summary>
-        ///     Observeses the on notify propery changed.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        [NotNull]
-        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isCached,
-                LazyThreadSafetyMode safetyMode,
-                TaskScheduler taskScheduler,
-                bool isAutoActivate)
-            where TResult : class
-            where TParameter1 : INotifyPropertyChanged
-        {
-            var observer = new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
-                parameter1,
-                propertyExpression,
-                taskScheduler,
-                isCached,
-                safetyMode,
-                PropertyObserverFlag.None);
-            if (isAutoActivate)
-            {
-                observer.Activate(true);
-            }
-
-            return observer;
-        }
-
-        /// <summary>
-        ///     Observeses the on notify propery changed.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        [NotNull]
-        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isCached,
-                LazyThreadSafetyMode safetyMode,
-                bool isAutoActivate)
-            where TResult : class
-            where TParameter1 : INotifyPropertyChanged
-        {
-            var observer = new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
-                parameter1,
-                propertyExpression,
-                isCached,
-                safetyMode,
-                PropertyObserverFlag.None);
-            if (isAutoActivate)
-            {
-                observer.Activate(true);
-            }
-
-            return observer;
-        }
-
-        /// <summary>
-        ///     Observeses the on notify propery changed.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        [NotNull]
-        public static IPropertyReferenceObserverOnNotifyProperyChanged<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TResult>(
-                [NotNull] this TParameter1 parameter1,
-                [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-                bool isAutoActivate)
-            where TResult : class
-            where TParameter1 : INotifyPropertyChanged
-        {
-            var observer = new PropertyReferenceObserverOnNotifyProperyChanged<TParameter1, TResult>(
-                parameter1,
-                propertyExpression,
-                PropertyObserverFlag.None);
-            if (isAutoActivate)
-            {
-                observer.Activate(true);
-            }
-
-            return observer;
-        }
-
-        /// <summary>
-        ///     Observeses the on value changed.
-        /// </summary>
-        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="parameter1">The parameter1.</param>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        [NotNull]
-        public static IPropertyReferenceObserverOnValueChanged<TResult> ObservesOnValueChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
+            new CachedObserver<TParameter1, TResult>(parameter1, propertyExpression, PropertyObserverFlag.None);
+
+        /// <summary>
+        ///     Observeses the on notify propery changed.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode)
+            where TResult : class
+            where TParameter1 : INotifyPropertyChanged =>
+            new CachedObserver<TParameter1, TResult>(
+                parameter1,
+                propertyExpression,
+                isCached,
+                safetyMode,
+                PropertyObserverFlag.None);
+
+        /// <summary>
+        ///     Observeses the on notify propery changed.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            TaskScheduler taskScheduler)
+            where TResult : class
+            where TParameter1 : INotifyPropertyChanged =>
+            new CachedObserver<TParameter1, TResult>(
+                parameter1,
+                propertyExpression,
+                taskScheduler,
+                isCached,
+                safetyMode,
+                PropertyObserverFlag.None);
+
+        /// <summary>
+        ///     Observeses the on notify propery changed.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            TaskScheduler taskScheduler,
+            bool isAutoActivate)
+            where TResult : class
+            where TParameter1 : INotifyPropertyChanged
+        {
+            var observer = new CachedObserver<TParameter1, TResult>(
+                parameter1,
+                propertyExpression,
+                taskScheduler,
+                isCached,
+                safetyMode,
+                PropertyObserverFlag.None);
+            if (isAutoActivate)
+            {
+                observer.Activate(true);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Observeses the on notify propery changed.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            bool isAutoActivate)
+            where TResult : class
+            where TParameter1 : INotifyPropertyChanged
+        {
+            var observer = new CachedObserver<TParameter1, TResult>(
+                parameter1,
+                propertyExpression,
+                isCached,
+                safetyMode,
+                PropertyObserverFlag.None);
+            if (isAutoActivate)
+            {
+                observer.Activate(true);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Observeses the on notify propery changed.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            bool isAutoActivate)
+            where TResult : class
+            where TParameter1 : INotifyPropertyChanged
+        {
+            var observer = new CachedObserver<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 PropertyObserverFlag.None);
+            if (isAutoActivate)
+            {
+                observer.Activate(true);
+            }
+
+            return observer;
+        }
+
+        /// <summary>
+        ///     Observeses the on value changed.
+        /// </summary>
+        /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <returns>
+        ///     The Property Reference Observer.
+        /// </returns>
+        [NotNull]
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TResult>(
+            [NotNull] this TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
+            where TParameter1 : INotifyPropertyChanged
+            where TResult : class =>
+            new Observer<TParameter1, TResult>(parameter1, propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
         ///     Observeses the on value changed.
@@ -353,14 +342,14 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyReferenceObserverOnValueChanged<TResult> ObservesOnValueChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
+            var observer = new Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 PropertyObserverFlag.None);
@@ -384,13 +373,13 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyReferenceObserverOnValueChanged<TResult> ObservesOnValueChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TaskScheduler taskScheduler)
             where TParameter1 : INotifyPropertyChanged
             where TResult : class =>
-            new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
+            new Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler,
@@ -409,7 +398,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyReferenceObserverOnValueChanged<TResult> ObservesOnValueChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TaskScheduler taskScheduler,
@@ -417,7 +406,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TResult : class
         {
-            var observer = new PropertyReferenceObserverOnValueChanged<TParameter1, TResult>(
+            var observer = new Observer<TParameter1, TResult>(
                 parameter1,
                 propertyExpression,
                 taskScheduler,

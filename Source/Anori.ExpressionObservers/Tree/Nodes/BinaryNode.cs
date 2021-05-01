@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.Tree.Nodes
     internal struct BinaryNode : IInternalExpressionNode, IBinaryNode
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinaryNode" /> struct.
+        ///     Initializes a new instance of the <see cref="BinaryNode" /> struct.
         /// </summary>
         /// <param name="binaryExpression">The binary expression.</param>
         public BinaryNode([NotNull] BinaryExpression binaryExpression)

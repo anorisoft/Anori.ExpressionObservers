@@ -83,10 +83,10 @@ namespace Anori.ExpressionObservers.Tree.Nodes
         public IExpressionNode? Parent { get; private set; }
 
         /// <summary>
-        /// Gets or sets the parameters.
+        ///     Gets or sets the parameters.
         /// </summary>
         /// <value>
-        /// The parameters.
+        ///     The parameters.
         /// </value>
         public IList<INodeCollection> Parameters { get; internal set; }
 

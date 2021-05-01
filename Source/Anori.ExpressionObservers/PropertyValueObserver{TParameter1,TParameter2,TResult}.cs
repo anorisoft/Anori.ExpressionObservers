@@ -13,7 +13,8 @@ namespace Anori.ExpressionObservers
 
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.ValueTypeObservers;
+    using Anori.ExpressionObservers.ValueObservers.OnPropertyChanged;
+    using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
 
     using JetBrains.Annotations;
 
@@ -34,7 +35,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <returns>The Property Value Observer.</returns>
         [NotNull]
-        public static IPropertyValueObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
+        public static IGetterValuePropertyObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -42,7 +43,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueObserver<TParameter1, TParameter2, TResult>(
+            new ValueObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -64,7 +65,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
+        public static IGetterValuePropertyObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -74,7 +75,7 @@ namespace Anori.ExpressionObservers
             where TParameter2 : INotifyPropertyChanged
             where TResult : struct
         {
-            var observer = new PropertyValueObserver<TParameter1, TParameter2, TResult>(
+            var observer = new ValueObservers.OnPropertyChanged.ObserverWithAction<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -102,7 +103,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverWithGetter<TResult> Observes<TParameter1, TParameter2, TResult>(
+        public static IGetterValuePropertyObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -110,7 +111,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
-            new PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult>(
+            new ObserverWithActionAndGetter<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -131,7 +132,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverWithGetter<TResult> ObservesAndGet<TParameter1, TParameter2, TResult>(
+        public static IGetterValuePropertyObserver<TResult> ObservesAndGet<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -139,7 +140,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
-            new PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult>(
+            new ObserverWithActionAndGetter<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -161,7 +162,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverWithGetter<TResult> ObservesAndGet<TParameter1, TParameter2, TResult>(
+        public static IGetterValuePropertyObserver<TResult> ObservesAndGet<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -171,7 +172,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer = new PropertyValueObserverWithGetter<TParameter1, TParameter2, TResult>(
+            var observer = new ObserverWithActionAndGetter<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -198,7 +199,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnNotifyProperyChanged<TResult>
+        public static INotifyValuePropertyObserver<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -206,7 +207,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            new CachedObserver<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -227,7 +228,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnNotifyProperyChanged<TResult>
+        public static INotifyValuePropertyObserver<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -237,7 +238,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
-            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            new CachedObserver<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -261,7 +262,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnNotifyProperyChanged<TResult>
+        public static INotifyValuePropertyObserver<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -272,7 +273,7 @@ namespace Anori.ExpressionObservers
             where TResult : struct
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged =>
-            new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            new CachedObserver<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -298,7 +299,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnNotifyProperyChanged<TResult>
+        public static INotifyValuePropertyObserver<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -311,7 +312,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            var observer = new CachedObserver<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -343,7 +344,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnNotifyProperyChanged<TResult>
+        public static INotifyValuePropertyObserver<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -355,7 +356,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            var observer = new CachedObserver<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -384,7 +385,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnNotifyProperyChanged<TResult>
+        public static INotifyValuePropertyObserver<TResult>
             ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
@@ -394,7 +395,7 @@ namespace Anori.ExpressionObservers
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
         {
-            var observer = new PropertyValueObserverOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            var observer = new CachedObserver<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -420,15 +421,14 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnValueChanged<TResult>
-            ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
-                [NotNull] TParameter1 parameter1,
-                [NotNull] TParameter2 parameter2,
-                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
+        public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>(
+            new Observer<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -448,17 +448,16 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnValueChanged<TResult>
-            ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
-                [NotNull] TParameter1 parameter1,
-                [NotNull] TParameter2 parameter2,
-                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-                bool isAutoActivate)
+        public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            bool isAutoActivate)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : struct
         {
-            var observer = new PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>(
+            var observer = new Observer<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -485,16 +484,15 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnValueChanged<TResult>
-            ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
-                [NotNull] TParameter1 parameter1,
-                [NotNull] TParameter2 parameter2,
-                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-                [NotNull] TaskScheduler taskScheduler)
+        public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] TaskScheduler taskScheduler)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : struct =>
-            new PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>(
+            new Observer<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,
@@ -516,18 +514,17 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static IPropertyValueObserverOnValueChanged<TResult>
-            ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
-                [NotNull] TParameter1 parameter1,
-                [NotNull] TParameter2 parameter2,
-                [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-                [NotNull] TaskScheduler taskScheduler,
-                bool isAutoActivate)
+        public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
+            [NotNull] TParameter1 parameter1,
+            [NotNull] TParameter2 parameter2,
+            [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] TaskScheduler taskScheduler,
+            bool isAutoActivate)
             where TParameter1 : INotifyPropertyChanged
             where TParameter2 : INotifyPropertyChanged
             where TResult : struct
         {
-            var observer = new PropertyValueObserverOnValueChanged<TParameter1, TParameter2, TResult>(
+            var observer = new Observer<TParameter1, TParameter2, TResult>(
                 parameter1,
                 parameter2,
                 propertyExpression,

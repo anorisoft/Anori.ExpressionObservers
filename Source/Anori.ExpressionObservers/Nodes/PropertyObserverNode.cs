@@ -109,8 +109,17 @@ namespace Anori.ExpressionObservers.Nodes
                 return;
             }
 
-            if (!(nextProperty is INotifyPropertyChanged propertyChanged))
+            if (nextProperty is not INotifyPropertyChanged propertyChanged)
             {
+                if (nextProperty.IsNullableTypeAssignableFrom<INotifyPropertyChanged>())
+                {
+                    this.Previous?.SubscribeListenerFor(
+                        (INotifyPropertyChanged)Nullable.GetUnderlyingType(nextProperty.GetType())
+                            .GetProperty("Value")
+                            .GetValue(nextProperty));
+                }
+
+                return;
                 throw new InvalidOperationException(
                     "Trying to subscribe PropertyChanged listener in object that "
                     + $"owns '{this.Previous?.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.");

@@ -18,8 +18,10 @@ namespace Anori.ExpressionObservers.Builder
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TParameter3">The type of the parameter3.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IValueGetterBuilder{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="IGetterBuilderWithFallback{TParameter1,TParameter2,TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IValueGetterBuilder{TParameter1, TParameter2, TParameter3, TResult}" />
+    /// <seealso
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IGetterBuilderWithFallback{TParameter1, TParameter2, TParameter3, TResult}" />
     internal class ExpressionValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult> :
         IValueGetterBuilder<TParameter1, TParameter2, TParameter3, TResult>,
         IGetterBuilderWithFallback<TParameter1, TParameter2, TParameter3, TResult>
@@ -41,7 +43,9 @@ namespace Anori.ExpressionObservers.Builder
         ///     class.
         /// </summary>
         /// <param name="expression">The expression.</param>
-        public ExpressionValueGetterBuilder(Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression) => this.expression = expression;
+        public ExpressionValueGetterBuilder(
+            Expression<Func<TParameter1, TParameter2, TParameter3, TResult>> expression) =>
+            this.expression = expression;
 
         /// <summary>
         ///     Withes the fallback.
