@@ -192,16 +192,16 @@
 								<dt>Implementing Types</dt>
 								<dd>
 									<ul class="list-unstyled">
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFunctionNode">IFunctionNode</a></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IBinaryNode">IBinaryNode</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMethodNode">IMethodNode</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFieldNode">IFieldNode</a></li>								
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IPropertyNode">IPropertyNode</a></li>								
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstructorNode">IConstructorNode</a></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConditionalNode">IConditionalNode</a></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IParameterNode">IParameterNode</a></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFieldNode">IFieldNode</a></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMemberInitNode">IMemberInitNode</a></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMethodNode">IMethodNode</a></li>								
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstantNode">IConstantNode</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConditionalNode">IConditionalNode</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFunctionNode">IFunctionNode</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IParameterNode">IParameterNode</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMemberInitNode">IMemberInitNode</a></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IBinaryNode">IBinaryNode</a></li>								
 									</ul>
 								</dd>				
 						</dl>
@@ -211,26 +211,26 @@
 							graph BT
 	Type["IExpressionNode"]
 class Type type-node
-	Implementing0["IFunctionNode"]-.-&gt;Type
-	click Implementing0 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFunctionNode"
-	Implementing1["IBinaryNode"]-.-&gt;Type
-	click Implementing1 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IBinaryNode"
+	Implementing0["IMethodNode"]-.-&gt;Type
+	click Implementing0 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMethodNode"
+	Implementing1["IFieldNode"]-.-&gt;Type
+	click Implementing1 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFieldNode"
 	Implementing2["IPropertyNode"]-.-&gt;Type
 	click Implementing2 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IPropertyNode"
 	Implementing3["IConstructorNode"]-.-&gt;Type
 	click Implementing3 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstructorNode"
-	Implementing4["IConditionalNode"]-.-&gt;Type
-	click Implementing4 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConditionalNode"
-	Implementing5["IParameterNode"]-.-&gt;Type
-	click Implementing5 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IParameterNode"
-	Implementing6["IFieldNode"]-.-&gt;Type
-	click Implementing6 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFieldNode"
-	Implementing7["IMemberInitNode"]-.-&gt;Type
-	click Implementing7 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMemberInitNode"
-	Implementing8["IMethodNode"]-.-&gt;Type
-	click Implementing8 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMethodNode"
-	Implementing9["IConstantNode"]-.-&gt;Type
-	click Implementing9 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstantNode"
+	Implementing4["IConstantNode"]-.-&gt;Type
+	click Implementing4 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConstantNode"
+	Implementing5["IConditionalNode"]-.-&gt;Type
+	click Implementing5 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IConditionalNode"
+	Implementing6["IFunctionNode"]-.-&gt;Type
+	click Implementing6 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IFunctionNode"
+	Implementing7["IParameterNode"]-.-&gt;Type
+	click Implementing7 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IParameterNode"
+	Implementing8["IMemberInitNode"]-.-&gt;Type
+	click Implementing8 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IMemberInitNode"
+	Implementing9["IBinaryNode"]-.-&gt;Type
+	click Implementing9 "/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Tree.Interfaces/IBinaryNode"
 
 						</div>
 					</div>
