@@ -1,0 +1,51 @@
+@startuml
+
+title "Participants - Sequence Diagram"
+actor Client
+participant Expression
+participant ExpressionGetter
+participant Class1
+participant Class2
+participant Class3
+
+== Getter ==
+
+Expression <- Client: Get Value
+Class1 <- Expression: Get Value
+Class2 <- Class1: Get Value
+Class3 <- Class2: Get Value
+Class3 --> Client: Value
+
+== Exception ==
+
+Expression <- Client: Get Value
+Class1 <- Expression: Get Value
+Class2 <- Class1: Get Value
+Class2 --> Client: <font color=red><b>Exception
+
+== Safe Gette ==
+
+ExpressionGetter <- Client: Get Value
+Class1 <- ExpressionGetter: <font color=red>Get Value
+ExpressionGetter <-- Class1: <font color=red>Value
+ExpressionGetter -> ExpressionGetter: <font color=red>Is Not Null
+Class2 <- ExpressionGetter: <font color=red>Get Value
+ExpressionGetter <-- Class2: <font color=red>Value
+ExpressionGetter -> ExpressionGetter: <font color=red>Is Not Null
+Class3 <- ExpressionGetter: <font color=red>Get Value
+ExpressionGetter <-- Class3: <font color=red>Value
+ExpressionGetter->ExpressionGetter: <font color=red>Is Not Null
+ExpressionGetter --> Client: Value
+
+== Safe Gette Null ==
+
+ExpressionGetter <- Client: Get Value
+Class1 <- ExpressionGetter: <font color=red>Get Value
+ExpressionGetter <-- Class1: <font color=red>Value
+ExpressionGetter -> ExpressionGetter: <font color=red>Is Not Null
+Class2 <- ExpressionGetter: <font color=red>Get Value
+ExpressionGetter <-- Class2: <font color=red>Value
+ExpressionGetter -> ExpressionGetter: <font color=red>Is Null
+ExpressionGetter --> Client: <font color=green><b>Null
+
+@enduml
