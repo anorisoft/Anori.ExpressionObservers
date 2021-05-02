@@ -216,7 +216,13 @@
 							<tbody><tr>
 								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Builder/ExpressionGetterBuilder">Expression<wbr>Getter<wbr>Builder</a></td>
 									<td>
-        The Expression Getter Builder class.
+        The expression getter builder class.
+        The builder creates a function of <code class="cs"><a href="/Anori.ExpressionObservers">Func&lt;TResult&gt;</a></code>, which allow a safe access to the value of an
+        expression. The execution doesn't throw a NullReferenceException, it retuns null or a predefined fallback. The
+        throwing
+        of an exception is very expensive, the ExpressenGetter creates an alternative express where possible null values
+        are
+        checked.
     </td>
 							</tr>
 					</tbody></table>
