@@ -45,7 +45,10 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         [NotNull]
         private readonly Action propertyChangedAction;
 
-        private readonly Action silentAction;
+        /// <summary>
+        /// The silent action.
+        /// </summary>
+        [NotNull] private readonly Action silentAction;
 
         /// <summary>
         ///     The value changed action.
@@ -163,15 +166,12 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.propertyChangedAction();
+        protected override void OnAction() => this.propertyChangedAction.Raise();
 
         /// <summary>
         ///     Called when [silent activate].
         /// </summary>
-        protected override void OnSilentActivate()
-        {
-            this.silentAction.Raise();
-        }
+        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     Getters the specified property expression.

@@ -19,6 +19,7 @@ namespace Anori.ExpressionObservers.UnitTests
     using System;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionObservers.Builder.ExpressionGetter;
 
     public class ExpressionGetterBuilderTests
     {

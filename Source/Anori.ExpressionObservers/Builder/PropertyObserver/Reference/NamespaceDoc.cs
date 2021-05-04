@@ -1,20 +1,15 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TypeExtensions.cs" company="AnoriSoft">
+// <copyright file="NamespaceDoc.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers
+namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
-    using System;
-
-    using JetBrains.Annotations;
-
     /// <summary>
-    ///     Type Extensions.
+    ///     The namespace Anori.ExpressionObservers.Bulider is a collection of observer builder classes.
     /// </summary>
-    public static class TypeExtensions
+    internal class NamespaceDoc
     {
-      
     }
 }

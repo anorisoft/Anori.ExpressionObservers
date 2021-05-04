@@ -1,6 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=9C8675FA0BB4364CA89C05C44B837F16/AbsolutePath/@EntryValue">D:\Git\Anori.ExpressionObservers\Source\AnoriSoft.DotSettings</s:String>
-	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=9C8675FA0BB4364CA89C05C44B837F16/RelativePath/@EntryValue">..\AnoriSoft.DotSettings</s:String>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=9C8675FA0BB4364CA89C05C44B837F16/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File9C8675FA0BB4364CA89C05C44B837F16/@KeyIndexDefined">True</s:Boolean>
-	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File9C8675FA0BB4364CA89C05C44B837F16/RelativePriority/@EntryValue">1</s:Double></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=B596F94B6CDCB9458A15C140C4B763DF/AbsolutePath/@EntryValue">D:\Git\Anori.ExpressionObservers\Source\AnoriSoft.DotSettings</s:String>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=B596F94B6CDCB9458A15C140C4B763DF/RelativePath/@EntryValue">..\AnoriSoft.DotSettings</s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=B596F94B6CDCB9458A15C140C4B763DF/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileB596F94B6CDCB9458A15C140C4B763DF/@KeyIndexDefined">True</s:Boolean>
+	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileB596F94B6CDCB9458A15C140C4B763DF/RelativePriority/@EntryValue">1</s:Double></wpf:ResourceDictionary>

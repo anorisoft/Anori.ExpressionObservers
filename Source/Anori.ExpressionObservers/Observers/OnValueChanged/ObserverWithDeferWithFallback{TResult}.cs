@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.Extensions;
@@ -33,15 +34,20 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         INotifyPropertyObserverWithDeferrer<TResult>
     {
         /// <summary>
-        ///     The action.
-        /// </summary>
-        [NotNull]
-        private readonly Action action;
-
-        /// <summary>
         ///     The deferrer.
         /// </summary>
-        private readonly UpdateableMultibleDeferrer deferrer;
+        private readonly UpdateableMultipleDeferrer deferrer;
+
+        /// <summary>
+        ///     The propertyChangedAction.
+        /// </summary>
+        [NotNull]
+        private readonly Action propertyChangedAction;
+
+        /// <summary>
+        ///     The silent action.
+        /// </summary>
+        private readonly Action silentAction;
 
         /// <summary>
         ///     The value.
@@ -64,8 +70,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
-            this.deferrer = new UpdateableMultibleDeferrer(() => this.Value = getter());
-            this.action = () => this.deferrer.Update();
+            this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = getter());
+            this.propertyChangedAction = () => this.deferrer.Update();
+            this.silentAction = () => this.value = getter();
         }
 
         /// <summary>
@@ -86,9 +93,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
-            this.deferrer = new UpdateableMultibleDeferrer(
+            this.deferrer = new UpdateableMultipleDeferrer(
                 () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
-            this.action = () => this.deferrer.Update();
+            this.propertyChangedAction = () => this.deferrer.Update();
+            this.silentAction = () => this.value = getter();
         }
 
         /// <summary>
@@ -109,10 +117,19 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
-            this.deferrer = new UpdateableMultibleDeferrer(
+            this.deferrer = new UpdateableMultipleDeferrer(
                 () => synchronizationContext.Send(() => this.Value = getter()));
-            this.action = () => this.deferrer.Update();
+            this.propertyChangedAction = () => this.deferrer.Update();
+            this.silentAction = () => this.value = getter();
         }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is defer.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDefer => this.deferrer.IsDeferred;
 
         /// <summary>
         ///     Occurs when a property value changes.
@@ -150,23 +167,20 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is defer.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDefer => this.deferrer.IsDeferred;
-
-        /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>The deferrer.</returns>
         public IDisposable Defer() => this.deferrer.Create();
 
         /// <summary>
-        ///     On the action.
+        ///     On the propertyChangedAction.
         /// </summary>
-        protected override void OnAction() => this.action();
+        protected override void OnAction() => this.propertyChangedAction.Raise();
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     Called when [property changed].

@@ -18,14 +18,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
 
     /// <summary>
-    ///     The Value Property Observer Builder class.
+    /// The Builder class.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyReferenceObserverBuilder{TParameter1,TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithActionOfT{TParameter1, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithAction{TParameter1, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Builder.PropertyObserver.Reference.BuilderBase{Anori.ExpressionObservers.Builder.PropertyObserver.Reference.Builder{TParameter1, TResult}, TResult}" />
     internal sealed class Builder<TParameter1, TResult> : BuilderBase<Builder<TParameter1, TResult>, TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : class

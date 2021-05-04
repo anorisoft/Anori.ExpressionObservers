@@ -23,11 +23,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Reference Observer With Getter.
+    /// The Observer With Action And Fallback class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}, TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}" />
     internal sealed class ObserverWithActionAndFallback<TResult> :
         ObserverBase<INotifyPropertyObserver<TResult>, TResult>,
@@ -173,15 +172,12 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.notifyPropertyChangedAction();
+        protected override void OnAction() => this.notifyPropertyChangedAction.Raise();
 
         /// <summary>
         ///     Called when [silent activate].
         /// </summary>
-        protected override void OnSilentActivate()
-        {
-            this.silentAction.Raise();
-        }
+        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     Getters the specified property expression.

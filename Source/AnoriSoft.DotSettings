@@ -96,193 +96,7 @@
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/JavaScriptCodeFormatting/FUNCTION_BRACES/@EntryValue">NEXT_LINE</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/JavaScriptCodeFormatting/FUNCTION_IN_INVOCATION_BRACES/@EntryValue">NEXT_LINE</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/JavaScriptCodeFormatting/TYPES_BRACES/@EntryValue">NEXT_LINE</s:String>
-	<s:String x:Key="/Default/CodeStyle/CSharpFileLayoutPatterns/Pattern/@EntryValue">&lt;?xml version="1.0" encoding="utf-16"?&gt;&#xD;
-&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;&#xD;
-  &lt;TypePattern DisplayName="Non-reorderable types"&gt;&#xD;
-    &lt;TypePattern.Match&gt;&#xD;
-      &lt;Or&gt;&#xD;
-        &lt;And&gt;&#xD;
-          &lt;Kind Is="Interface" /&gt;&#xD;
-          &lt;Or&gt;&#xD;
-            &lt;HasAttribute Name="System.Runtime.InteropServices.InterfaceTypeAttribute" /&gt;&#xD;
-            &lt;HasAttribute Name="System.Runtime.InteropServices.ComImport" /&gt;&#xD;
-          &lt;/Or&gt;&#xD;
-        &lt;/And&gt;&#xD;
-        &lt;Kind Is="Struct" /&gt;&#xD;
-        &lt;HasAttribute Name="JetBrains.Annotations.NoReorderAttribute" /&gt;&#xD;
-        &lt;HasAttribute Name="JetBrains.Annotations.NoReorder" /&gt;&#xD;
-      &lt;/Or&gt;&#xD;
-    &lt;/TypePattern.Match&gt;&#xD;
-  &lt;/TypePattern&gt;&#xD;
-  &lt;TypePattern DisplayName="xUnit.net Test Classes" RemoveRegions="All"&gt;&#xD;
-    &lt;TypePattern.Match&gt;&#xD;
-      &lt;And&gt;&#xD;
-        &lt;Kind Is="Class" /&gt;&#xD;
-        &lt;HasMember&gt;&#xD;
-          &lt;And&gt;&#xD;
-            &lt;Kind Is="Method" /&gt;&#xD;
-            &lt;HasAttribute Name="Xunit.FactAttribute" Inherited="True" /&gt;&#xD;
-          &lt;/And&gt;&#xD;
-        &lt;/HasMember&gt;&#xD;
-      &lt;/And&gt;&#xD;
-    &lt;/TypePattern.Match&gt;&#xD;
-    &lt;Entry DisplayName="Setup/Teardown Methods"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;Or&gt;&#xD;
-          &lt;Kind Is="Constructor" /&gt;&#xD;
-          &lt;And&gt;&#xD;
-            &lt;Kind Is="Method" /&gt;&#xD;
-            &lt;ImplementsInterface Name="System.IDisposable" /&gt;&#xD;
-          &lt;/And&gt;&#xD;
-        &lt;/Or&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Kind Order="Constructor" /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="All other members" /&gt;&#xD;
-    &lt;Entry DisplayName="Test Methods" Priority="100"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;And&gt;&#xD;
-          &lt;Kind Is="Method" /&gt;&#xD;
-          &lt;HasAttribute Name="Xunit.FactAttribute" /&gt;&#xD;
-        &lt;/And&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Name /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-  &lt;/TypePattern&gt;&#xD;
-  &lt;TypePattern DisplayName="NUnit Test Fixtures" RemoveRegions="All"&gt;&#xD;
-    &lt;TypePattern.Match&gt;&#xD;
-      &lt;And&gt;&#xD;
-        &lt;Kind Is="Class" /&gt;&#xD;
-        &lt;HasAttribute Name="NUnit.Framework.TestFixtureAttribute" Inherited="True" /&gt;&#xD;
-      &lt;/And&gt;&#xD;
-    &lt;/TypePattern.Match&gt;&#xD;
-    &lt;Entry DisplayName="Setup/Teardown Methods"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;And&gt;&#xD;
-          &lt;Kind Is="Method" /&gt;&#xD;
-          &lt;Or&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.SetUpAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.TearDownAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.FixtureSetUpAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.FixtureTearDownAttribute" Inherited="True" /&gt;&#xD;
-          &lt;/Or&gt;&#xD;
-        &lt;/And&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Test Methods" Priority="100"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;And&gt;&#xD;
-          &lt;Kind Is="Method" /&gt;&#xD;
-          &lt;HasAttribute Name="NUnit.Framework.TestAttribute" /&gt;&#xD;
-        &lt;/And&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Name /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="All other members" /&gt;&#xD;
-  &lt;/TypePattern&gt;&#xD;
-  &lt;TypePattern DisplayName="Default Pattern"&gt;&#xD;
-    &lt;Entry DisplayName="Public Delegates" Priority="100"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;And&gt;&#xD;
-          &lt;Access Is="Public" /&gt;&#xD;
-          &lt;Kind Is="Delegate" /&gt;&#xD;
-        &lt;/And&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Name /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Public Enums" Priority="100"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;And&gt;&#xD;
-          &lt;Access Is="Public" /&gt;&#xD;
-          &lt;Kind Is="Enum" /&gt;&#xD;
-        &lt;/And&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Name /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Static Fields and Constants"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;Or&gt;&#xD;
-          &lt;Kind Is="Constant" /&gt;&#xD;
-          &lt;And&gt;&#xD;
-            &lt;Kind Is="Field" /&gt;&#xD;
-            &lt;Static /&gt;&#xD;
-          &lt;/And&gt;&#xD;
-        &lt;/Or&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Kind Order="Constant Field" /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Fields"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;And&gt;&#xD;
-          &lt;Kind Is="Field" /&gt;&#xD;
-          &lt;Not&gt;&#xD;
-            &lt;Static /&gt;&#xD;
-          &lt;/Not&gt;&#xD;
-        &lt;/And&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Readonly /&gt;&#xD;
-        &lt;Name /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Constructors"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;Kind Is="Constructor" /&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Static /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Destructor"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;Kind Is="Destructor" /&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Event"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;And&gt;&#xD;
-          &lt;Kind Is="Event" /&gt;&#xD;
-          &lt;Or&gt;&#xD;
-            &lt;Access Is="Public" /&gt;&#xD;
-            &lt;Access Is="Any" /&gt;&#xD;
-          &lt;/Or&gt;&#xD;
-        &lt;/And&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Properties, Indexers"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;Or&gt;&#xD;
-          &lt;Kind Is="Property" /&gt;&#xD;
-          &lt;Kind Is="Indexer" /&gt;&#xD;
-        &lt;/Or&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="All other members"&gt;&#xD;
-      &lt;Entry.SortBy&gt;&#xD;
-        &lt;Kind Is="Member" /&gt;&#xD;
-        &lt;Access /&gt;&#xD;
-        &lt;Name /&gt;&#xD;
-      &lt;/Entry.SortBy&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-    &lt;Entry DisplayName="Nested Types"&gt;&#xD;
-      &lt;Entry.Match&gt;&#xD;
-        &lt;Kind Is="Type" /&gt;&#xD;
-      &lt;/Entry.Match&gt;&#xD;
-    &lt;/Entry&gt;&#xD;
-  &lt;/TypePattern&gt;&#xD;
-&lt;/Patterns&gt;</s:String>
+	
 	<s:String x:Key="/Default/CodeStyle/CSharpMemberOrderPattern/CustomPattern/@EntryValue">&lt;?xml version="1.0" encoding="utf-8"?&gt;&#xD;
 &lt;!-- Last updated 15.05.2012 --&gt;&#xD;
 &lt;Patterns xmlns="urn:shemas-jetbrains-com:member-reordering-patterns"&gt;&#xD;
@@ -670,21 +484,21 @@ Copyright (c) AnoriSoft. All rights reserved.&#xD;
 	<s:Boolean x:Key="/Default/CodeStyle/Generate/=RelationalMembers/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/Generate/=RelationalMembers/Options/=ImplementIComparable/@EntryIndexedValue">False</s:String>
 	<s:String x:Key="/Default/CodeStyle/Generate/=RelationalMembers/Options/=RelationalOperators/@EntryIndexedValue">False</s:String>
-	<s:Int64 x:Key="/Default/CodeStyle/Naming/CSharpAutoNaming/AutoNamingCompletedVersion/@EntryValue">2</s:Int64>
+	
 	<s:Boolean x:Key="/Default/CodeStyle/Naming/CSharpAutoNaming/IsNotificationDisabled/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=Constants/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=EnumMember/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=Event/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=Interfaces/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="I" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=Locals/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=Method/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=Parameters/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=PrivateInstanceFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=PrivateStaticReadonly/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=Property/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=PublicFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=StaticReadonly/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/AutoDetectedNamingRules/=TypesAndNamespaces/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/EventHandlerPatternLong/@EntryValue">$object$_On$event$</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=Constants/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=EnumMember/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
@@ -743,71 +557,14 @@ Copyright (c) AnoriSoft. All rights reserved.&#xD;
 	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=NAMESPACE_005FALIAS/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=XAML_005FFIELD/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=XAML_005FRESOURCE/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
-	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
-  &lt;Assembly Path="C:\Projects\Pi.Infinity\Implementation\packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\Microsoft.Expression.Interactions.dll" /&gt;&#xD;
-  &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\System.Windows.dll" /&gt;&#xD;
-  &lt;Assembly Path="C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorlib.dll" /&gt;&#xD;
-  &lt;Assembly Path="C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.dll" /&gt;&#xD;
-  &lt;Assembly Path="C:\Projects\Pi.Infinity\Implementation\packages\Prism.Wpf.7.1.0.431\lib\net45\System.Windows.Interactivity.dll" /&gt;&#xD;
-  &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\System.dll" /&gt;&#xD;
-&lt;/AssemblyExplorer&gt;</s:String>
-	<s:Boolean x:Key="/Default/Environment/ExternalSources/Decompiler/DecompileMethodBodies/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/ExternalSources/Decompiler/DecompilerLegalNoticeAccepted/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/ExternalSources/FirstTimeFormShown/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/ExternalSources/NavigationMode/@EntryValue">Disabled</s:String>
-	<s:Boolean x:Key="/Default/Environment/Feedback/SendActivityLogs/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/Feedback/ShouldPrompt/@EntryValue">False</s:Boolean>
-	<s:String x:Key="/Default/Environment/Hierarchy/PsiConfigurationSettingsKey/CustomLocation/@EntryValue">C:\Users\Martin Egli\AppData\Local\JetBrains\Transient\ReSharperPlatformVs15\v11_648cba8e\SolutionCaches</s:String>
-	<s:Boolean x:Key="/Default/Environment/MemoryUsageIndicator/IsVisible/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=Antivirus/@EntryIndexedValue">DO_NOTHING</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=AutoRecoverer/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=Format/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=Roslyn_002Dswea/@EntryIndexedValue">DO_NOTHING</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=ShowAnnotations/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=SolExp_002DTrack/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=StartPage_002DIsDownloadRefreshEnabled/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=StartPage_002DOnEnvironmentStatup/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=SyncSettings/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=TextEditor_002DCodeLens/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=TextEditor_002DTrackChanges_002D2/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=VCS/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=VsBulb/@EntryIndexedValue">DO_NOTHING</s:String>
-	<s:String x:Key="/Default/Environment/PerformanceGuide/SwitchBehaviour/=XAML_0020Designer/@EntryIndexedValue">LIVE_MONITOR</s:String>
-	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EPsiFeatures_002EUIInteractive_002ERefactorings_002ECommonUI_002ECommonControls_002EUsagesDescriptor/@EntryIndexedValue">12</s:Int64>
-	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EPsiFeatures_002EUIInteractive_002ERefactorings_002ECommonUI_002ERefactoringWindows_002EWinFormsControls_002EUsagesDescriptor/@EntryIndexedValue">12</s:Int64>
-	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EFeature_002EServices_002ENavigation_002EDescriptors_002ESearchUsagesDescriptor/@EntryIndexedValue">12</s:Int64>
-	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EFeatures_002EInspections_002EAnalyzeReferences_002EAnalyzeReferencesDescriptor/@EntryIndexedValue">2</s:Int64>
-	<s:Int64 x:Key="/Default/Environment/SearchAndNavigation/DefaultOccurrencesGroupingIndices/=JetBrains_002EReSharper_002EFeatures_002EInspections_002EAnalyzeReferences_002ERemoveUnused_002EUnusedReferencesDescriptor/@EntryIndexedValue">0</s:Int64>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EFeatures_002EReSpeller_002ESettings_002EReSpellerSettingsMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpAttributeForSingleLineMethodUpgrade/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpFileLayoutPatternsUpgrade/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpPlaceEmbeddedOnSameLineMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpRenamePlacementToArrangementMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpUseContinuousIndentInsideBracesMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAddAccessorOwnerDeclarationBracesMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAlwaysTreatStructAsNotReorderableMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002ECSharpPlaceAttributeOnSameLineMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateThisQualifierSettings/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002EJavaScript_002ECodeStyle_002ESettingsUpgrade_002EJsParsFormattingSettingsUpgrader/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002EJavaScript_002ECodeStyle_002ESettingsUpgrade_002EJsWrapperSettingsUpgrader/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EUnitTestFramework_002EMigrations_002EEnableDisabledProvidersMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EUnitTestFramework_002ESettings_002EMigrations_002ERemoveBuildPolicyAlwaysMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EUnitTestProvider_002EJavaScript_002EJavaScriptUnitTestProvidersSettingsMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/TextControl/HighlightCurrentLine/@EntryValue">True</s:Boolean>
-	
-	<s:String x:Key="/Default/Environment/UnitTesting/JavaScriptUnitTestProviders/BrowserId/@EntryValue">google-chrome</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/JavaScriptUnitTestProviders/BrowserLocation/@EntryValue">C:\Program Files (x86)\Google\Chrome\Application\chrome.exe</s:String>
-	<s:Boolean x:Key="/Default/Environment/UnitTesting/JavaScriptUnitTestProviders/CustomTestHarnessEnabled/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/UnitTesting/JavaScriptUnitTestProviders/QUnitJsVersion/@EntryValue">1.x</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/JavaScriptUnitTestProviders/TestHarnessFilename/@EntryValue">../BachmanWeb/Skripts</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/JavaScriptUnitTestProviders/TestHarnessLocation/@EntryValue">RelativeToProject</s:String>
-	<s:String x:Key="/Default/Environment/UpdatesManger/LastUpdateCheck/@EntryValue">05/03/2019 08:31:36</s:String>
-	<s:String x:Key="/Default/Environment/UserInterface/ShortcutSchemeName/@EntryValue">VS</s:String>
-	
-	<s:Boolean x:Key="/Default/Housekeeping/ExcludedProjects/ProjectMasksToIgnore/=_002A_002A_005C_002AAnori_002ECommon_002Ecsproj/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Housekeeping/ExcludedProjects/ProjectMasksToIgnore/=_002A_002A_005C_002AAnori_002EExtensions_002Ecsproj/@EntryIndexedValue">True</s:Boolean>
 	
 	
 	
@@ -816,31 +573,98 @@ Copyright (c) AnoriSoft. All rights reserved.&#xD;
 	
 	
 	
-	<s:Boolean x:Key="/Default/Housekeeping/ExcludedProjects/ProjectMasksToIgnore/=_002A_002A_005C_002ATests_002Ecsproj/@EntryIndexedValue">True</s:Boolean>
 	
 	
 	
 	
 	
 	
-	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=AutoStackTraceExplorerExplainer/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=GotoSuggester/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=ReSharperCppFeatureSuggester/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=TabNavigationExplainer/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/Housekeeping/FeedbackReport/SelectedUserIdentificator/@EntryValue">anonymous</s:String>
-	<s:Boolean x:Key="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Housekeeping/IntellisenseHousekeeping/HintUsed/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialogView/Position/@EntryValue">[364,-11](1024,768)</s:String>
-	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/RefactoringWizardWindow/Location/@EntryValue">-140,-383</s:String>
-	<s:Boolean x:Key="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue">CsharpFileLayout</s:String>
-	<s:Boolean x:Key="/Default/Housekeeping/RefactoringsMru/UseInline/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/Housekeeping/TreeModelBrowserPanelPersistence/IsPreviewVisible/=InspectionResultDescriptor/@EntryIndexedValue">True</s:Boolean>
-	<s:Double x:Key="/Default/Housekeeping/TreeModelBrowserPanelPersistence/PreviewSplitterHorizontalProportion/=InspectionResultDescriptor/@EntryIndexedValue">1.0000000000000002</s:Double>
-	<s:Double x:Key="/Default/Housekeeping/TreeModelBrowserPanelPersistence/PreviewSplitterVerticalProportion/=InspectionResultDescriptor/@EntryIndexedValue">1</s:Double>
-	<s:Double x:Key="/Default/Housekeeping/TreeModelBrowserPanelPersistence/PreviewSplitterVerticalProportion/=UnitTestSessionDescriptor/@EntryIndexedValue">1</s:Double>
-	<s:Int64 x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionDefault/GroupingIndex/@EntryValue">6</s:Int64>
-	<s:Boolean x:Key="/Default/Housekeeping/UpgradeFromExceptionReport/UpgradePerformed/@EntryValue">True</s:Boolean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=07143625BF7675428B51C89F5690CD54/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=07143625BF7675428B51C89F5690CD54/IsReplacePattern/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=07143625BF7675428B51C89F5690CD54/LanguageName/@EntryValue">CSHARP</s:String>
@@ -848,12 +672,14 @@ Copyright (c) AnoriSoft. All rights reserved.&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=07143625BF7675428B51C89F5690CD54/SearchPattern/@EntryValue">1234</s:String>
 	<s:Boolean x:Key="/Default/ReSpeller/UserDictionaries/=en_005Fus/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ReSpeller/UserDictionaries/=en_005Fus/Words/=Egli/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/StyleCopOptions/InsertToDoText/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/StyleCopOptions/UseSingleLineDeclarationComments/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=acf/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=acknowledgeable/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=Acknowledgements/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Egli/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=ipcs/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=sspi/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=telerik/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</wpf:ResourceDictionary>

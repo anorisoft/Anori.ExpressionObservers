@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.Extensions;
@@ -43,7 +44,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
-        private readonly UpdateableMultibleDeferrer deferrer;
+        private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
         ///     The value.
@@ -65,7 +66,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
                 propertyExpression.Parameters,
                 this.Tree);
-            this.deferrer = new UpdateableMultibleDeferrer(() => this.Value = getter());
+            this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = getter());
             this.action = () => this.deferrer.Update();
         }
 
@@ -86,7 +87,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
                 propertyExpression.Parameters,
                 this.Tree);
-            this.deferrer = new UpdateableMultibleDeferrer(
+            this.deferrer = new UpdateableMultipleDeferrer(
                 () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
             this.action = () => this.deferrer.Update();
         }
@@ -108,7 +109,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
                 propertyExpression.Parameters,
                 this.Tree);
-            this.deferrer = new UpdateableMultibleDeferrer(
+            this.deferrer = new UpdateableMultipleDeferrer(
                 () => synchronizationContext.Send(() => this.Value = getter()));
             this.action = () => this.deferrer.Update();
         }
@@ -166,6 +167,16 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        /// The silent action.
+        /// </summary>
+        [NotNull] private readonly Action silentAction;
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     Called when [property changed].

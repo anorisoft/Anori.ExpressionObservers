@@ -34,19 +34,23 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     internal sealed class ObserverWithFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<INotifyPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         INotifyPropertyObserver<TResult>
-        where TParameter1 : INotifyPropertyChanged
-        where TParameter2 : INotifyPropertyChanged
+        where TParameter1 : INotifyPropertyChanged where TParameter2 : INotifyPropertyChanged
     {
-        /// <summary>
-        ///     The action.
-        /// </summary>
-        [NotNull]
-        private readonly Action action;
-
         /// <summary>
         ///     The getter.
         /// </summary>
         private readonly Func<TResult> getValue;
+
+        /// <summary>
+        ///     The propertyChangedAction.
+        /// </summary>
+        [NotNull]
+        private readonly Action propertyChangedAction;
+
+        /// <summary>
+        ///     The silent action.
+        /// </summary>
+        private readonly Action silentAction;
 
         /// <summary>
         ///     The value.
@@ -55,7 +59,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TParameter2,TResult}" />
+        ///     <see cref="ObserverWithFallback{TParameter1,TParameter2,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -77,13 +81,14 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2));
             var taskFactory = new TaskFactory(taskScheduler);
-            this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.propertyChangedAction = () => taskFactory.StartNew(() => this.Value = get()).Wait();
             this.getValue = this.CreateGetProperty(() => this.value);
+            this.silentAction = () => this.value = get();
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TParameter2,TResult}" />
+        ///     <see cref="ObserverWithFallback{TParameter1,TParameter2,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -103,13 +108,14 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         {
             this.value = fallback;
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2));
-            this.action = () => synchronizationContext.Send(() => this.Value = get());
+            this.propertyChangedAction = () => synchronizationContext.Send(() => this.Value = get());
             this.getValue = this.CreateGetProperty(() => this.value);
+            this.silentAction = () => this.value = get();
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TParameter2,TResult}" />
+        ///     <see cref="ObserverWithFallback{TParameter1,TParameter2,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -127,8 +133,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         {
             this.value = fallback;
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1, parameter2));
-            this.action = () => this.Value = get();
+            this.propertyChangedAction = () => this.Value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
+            this.silentAction = () => this.value = get();
         }
 
         /// <summary>
@@ -161,9 +168,14 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        ///     On the action.
+        ///     On the propertyChangedAction.
         /// </summary>
-        protected override void OnAction() => this.action();
+        protected override void OnAction() => this.propertyChangedAction.Raise();
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     Getters the specified property expression.
@@ -186,7 +198,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             var get = ExpressionGetter.CreateGetterByTree<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree,
-                fallback);
+                fallback!);
             return () => get(parameter1, parameter2);
         }
 

@@ -31,7 +31,6 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyValuePropertyObserver{TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyValuePropertyObserver{TResult}" />
-    /// <seealso cref="Observer{TParameter1, TParameter2, TParameter2,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFundatinBase" />
     internal sealed class ObserverWithAction<TParameter1, TParameter2, TResult> :
@@ -186,7 +185,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.propertyChangedAction();
+        protected override void OnAction() => this.propertyChangedAction.Raise();
 
         /// <summary>
         ///     Called when [silent activate].
@@ -197,12 +196,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Getters the specified property expression.
+        /// Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <param name="parameter2">The parameter2.</param>
         /// <returns>
-        ///     Getter.
+        /// Getter.
         /// </returns>
         private static Func<TResult?> Getter(
             Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,

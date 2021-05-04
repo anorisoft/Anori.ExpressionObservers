@@ -47,6 +47,16 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
+        /// The silent action.
+        /// </summary>
+        [NotNull] private readonly Action silentAction;
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.silentAction.Raise();
+
+        /// <summary>
         ///     Initializes a new instance of the <see cref="CachedObserver{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>

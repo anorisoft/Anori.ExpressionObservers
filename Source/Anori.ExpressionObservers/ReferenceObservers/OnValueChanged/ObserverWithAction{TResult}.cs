@@ -48,6 +48,16 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         private readonly Action propertyChangedAction;
 
         /// <summary>
+        /// The silent action.
+        /// </summary>
+        [NotNull] private readonly Action silentAction;
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.silentAction.Raise();
+
+        /// <summary>
         ///     The value changed action.
         /// </summary>
         [NotNull]

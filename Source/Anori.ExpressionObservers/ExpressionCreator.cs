@@ -4,22 +4,22 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Anori.ExpressionObservers.Tree;
+using Anori.ExpressionObservers.Tree.Interfaces;
+using Anori.ExpressionObservers.Tree.Nodes;
+using Anori.Extensions;
+
+using JetBrains.Annotations;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+
 namespace Anori.ExpressionObservers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Linq.Expressions;
-
-    using Anori.ExpressionObservers.Tree;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.ExpressionObservers.Tree.Nodes;
-    using Anori.Extensions;
-
-    using JetBrains.Annotations;
-
     /// <summary>
-    ///     Expression Creator .
+    ///     Expression Creator.
     /// </summary>
     internal static class ExpressionCreator
     {

@@ -108,7 +108,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         IBuilderWithAction<TResult> IBuilder<TResult>.WithAction(Action action)
         {
-            this.ObserverMode = ObserverMode.OnValueCahnged;
+            this.ObserverMode = ObserverMode.OnValueChanged;
             return this.WithAction(action);
         }
 
@@ -121,7 +121,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action)
         {
-            this.ObserverMode = ObserverMode.OnValueCahnged;
+            this.ObserverMode = ObserverMode.OnValueChanged;
             return this.WithActionOfTWithFallback(action);
         }
 
@@ -144,7 +144,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithNullableAction(Action<TResult?> action)
         {
-            this.ObserverMode = ObserverMode.OnValueCahnged;
+            this.ObserverMode = ObserverMode.OnValueChanged;
             return this.WithNullableAction(action);
         }
 

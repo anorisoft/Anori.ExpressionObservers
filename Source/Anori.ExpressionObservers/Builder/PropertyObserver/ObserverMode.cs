@@ -22,8 +22,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         OnNotifyPropertyChanged,
 
         /// <summary>
-        ///     The on value cahnged.
+        ///     The on value changed.
         /// </summary>
-        OnValueCahnged,
+        OnValueChanged,
     }
 }

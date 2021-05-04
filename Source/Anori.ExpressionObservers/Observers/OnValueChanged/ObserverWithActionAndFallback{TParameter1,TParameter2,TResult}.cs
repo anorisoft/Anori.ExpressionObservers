@@ -28,8 +28,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyObserverWithFallback{TResult}" />
-    /// <seealso cref="PropertyGetterObserverWithFallback{TParameter1,TParameter2,TResult}" />
+    /// <seealso cref="ObserverWithActionAndFallback{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="ObserverFundatinBase" />
     internal sealed class ObserverWithActionAndFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<INotifyPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
@@ -189,7 +188,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.notifyPropertyChangedAction();
+        protected override void OnAction() => this.notifyPropertyChangedAction.Raise();
 
         /// <summary>
         ///     Called when [silent activate].

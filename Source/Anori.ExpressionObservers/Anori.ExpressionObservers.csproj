@@ -22,25 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IBuilderWithActionAndGetterAndFallback2.cs" />
-    <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfNullableT.cs" />
-    <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfT.cs" />
-    <Compile Remove="Interfaces\Builder\Reference\OnValueChanged\IPropertyReferenceObserverBuilderWithActionOfTAndFallback.cs" />
-    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderOnProperyChangedAndScheduler.cs" />
-    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndDispatcherGetterAndFallback.cs" />
-    <Compile Remove="Interfaces\IPropertyObserverOnProperyChangedWithFallback{TResult}.cs" />
-    <Compile Remove="Interfaces\IPropertyObserverOnProperyChangedWithGetterAndFallback{TResult}.cs" />
-    <Compile Remove="Interfaces\IPropertyObserverOnValueChangedWithFallback{TResult}.cs" />
-    <Compile Remove="Interfaces\IPropertyReferenceObserverOnProperyChanged{TResult}.cs" />
-    <Compile Remove="Interfaces\IPropertyReferenceObserverWithGetter{TResult}.cs" />
-    <Compile Remove="Interfaces\IPropertyValueObserverWithGetter{TResult}.cs" />
-    <Compile Remove="Observers\OnValueChanged\ObserverWithActionOfTAndFallback{TParameter1,TParameter2,TResult}.cs" />
-    <Compile Remove="Observers\OnValueChanged\ObserverWithActionOfTAndFallback{TParameter1,TResult}.cs" />
-    <Compile Remove="Observers\OnValueChanged\ObserverWithActionOfTAndFallback{TResult}.cs" />
-    <Compile Remove="Observers\PropertyObserverWithActionAndFallback{TResult}.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
@@ -51,8 +32,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
-    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0018" />
-    <PackageReference Include="Anori.Common" Version="1.0.0-alpha0009" />
+    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0019" />
+    <PackageReference Include="Anori.Common" Version="1.0.0-alpha0017" />
   </ItemGroup>
 
   <ItemGroup Condition="($(Configuration.Contains('Submodules')))">

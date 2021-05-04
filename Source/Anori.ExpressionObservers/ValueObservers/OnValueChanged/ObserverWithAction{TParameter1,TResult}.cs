@@ -178,7 +178,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.propertyChangedAction();
+        protected override void OnAction() => this.propertyChangedAction.Raise();
 
         /// <summary>
         ///     Called when [silent activate].
