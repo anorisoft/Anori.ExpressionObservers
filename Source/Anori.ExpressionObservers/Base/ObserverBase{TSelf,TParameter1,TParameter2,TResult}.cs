@@ -25,8 +25,8 @@ namespace Anori.ExpressionObservers.Base
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverFundatinBase" />
-    internal abstract class ObserverBase<TSelf, TParameter1, TParameter2, TResult> : ObserverFundatinBase<TSelf>
+    /// <seealso cref="ObserverFoundationBase" />
+    internal abstract class ObserverBase<TSelf, TParameter1, TParameter2, TResult> : ObserverFoundationBase<TSelf>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
         where TSelf : IPropertyObserverBase<TSelf>

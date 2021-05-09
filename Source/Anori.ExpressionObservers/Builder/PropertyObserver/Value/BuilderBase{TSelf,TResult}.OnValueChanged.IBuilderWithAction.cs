@@ -80,6 +80,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </returns>
         IBuilderWithActionAndFallback<TResult> IBuilderWithAction<TResult>.WithFallback(TResult fallback) =>
             this.WithFallback(fallback);
+        /// <summary>
+        /// Defers this instance.
+        /// </summary>
+        /// <returns>
+        /// The Property Value Observer Builder.
+        /// </returns>
+        public IBuilderWithActionAndDeferrer<TResult> Deferred() => this;
 
         /// <summary>
         ///     Withes the getter dispatcher.

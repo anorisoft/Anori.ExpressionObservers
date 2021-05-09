@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     ///     Property Value Observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionOfTAndGetterAndFallback<TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TResult>,
         IGetterPropertyObserver<TResult>

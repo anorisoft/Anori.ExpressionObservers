@@ -14,14 +14,15 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderOnValueChangedAndDeferrerAndScheduler{TResult}}" />
     public interface IBuilderWithDeferrerAndScheduler<TResult> :
-        IObserverBuilderBase<IBuilderWithDeferrerAndScheduler<TResult>>
+        IObserverBuilderBase<IBuilderWithDeferrerAndScheduler<TResult>>,
+        IPropertyObserverScheduler<IBuilderWithDeferrerAndScheduler<TResult>>
         where TResult : struct
     {
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Property Changed.
         /// </returns>
         INotifyValuePropertyObserverWithDeferrer<TResult> Build();
     }

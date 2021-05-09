@@ -23,13 +23,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
-    ///     Property Reference Observer With Getter.
+    ///     The Observer With Action Of Null T class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFundatinBase" />
+    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}, TResult}" />
+    /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}" />
     internal sealed class ObserverWithActionOfNullT<TResult> :
         ObserverBase<INotifyReferencePropertyObserver<TResult>, TResult>,
         INotifyReferencePropertyObserver<TResult>
@@ -41,17 +40,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         [NotNull]
         private readonly Action<TResult?> action;
 
-
-        /// <summary>
-        /// The silent action.
-        /// </summary>
-        [NotNull] private readonly Action silentAction;
-
-        /// <summary>
-        ///     Called when [silent activate].
-        /// </summary>
-        protected override void OnSilentActivate() => this.silentAction.Raise();
-
         /// <summary>
         ///     The getter.
         /// </summary>
@@ -59,14 +47,21 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
+        ///     The silent action.
+        /// </summary>
+        [NotNull]
+        private readonly Action silentAction;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="fallback">The fallback.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithActionOfNullT(
             [NotNull] Expression<Func<TResult>> propertyExpression,
@@ -79,6 +74,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateGetter(this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler));
+
         }
 
         /// <summary>
@@ -134,6 +130,11 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     The value.
         /// </value>
         public TResult? Value => this.getter();
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     On the action.

@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterPropertyObserver{TResult}" />
     /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithChachedGetterAndFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         IGetterPropertyObserver<TResult>

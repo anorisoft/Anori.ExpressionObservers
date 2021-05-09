@@ -237,6 +237,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .OnValueChanged()
+                .WithAction((int? i) => { })
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 

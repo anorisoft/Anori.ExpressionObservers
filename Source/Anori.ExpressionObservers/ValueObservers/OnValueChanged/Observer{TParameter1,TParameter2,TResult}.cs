@@ -31,7 +31,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// <seealso
     ///     cref="Observer{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class Observer<TParameter1, TParameter2, TResult> :
         ObserverBase<INotifyValuePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         INotifyValuePropertyObserver<TResult>

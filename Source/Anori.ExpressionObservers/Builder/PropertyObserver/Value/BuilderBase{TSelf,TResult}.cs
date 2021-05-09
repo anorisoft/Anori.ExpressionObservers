@@ -278,5 +278,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.Fallback = fallback;
             return (TSelf)this;
         }
+        protected abstract INotifyPropertyObserver<TResult> CreateNotifyValuePropertyObserverWithActionAndFallbackAndDeferrerAndScheduler();
+       protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionAndDeferrer();
+       protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfNullT();
     }
 }

@@ -25,10 +25,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="ObserverFundatinBase.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}, TParameter1, TParameter2, TResult}" />
+    ///     cref="ObserverFoundationBase.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}" />
     /// <seealso cref="ObserverWithActionAndGetter{TResult}" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndGetter<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterReferencePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         IGetterReferencePropertyObserver<TResult>

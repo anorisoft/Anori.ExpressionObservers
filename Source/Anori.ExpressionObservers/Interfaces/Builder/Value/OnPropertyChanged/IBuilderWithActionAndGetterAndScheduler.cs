@@ -31,5 +31,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         ///     The Value Property Observer.
         /// </returns>
         IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult> WithFallback(TResult fallback);
+
+        /// <summary>
+        /// Deferreds this instance.
+        /// </summary>
+        IBuilderWithActionAndGetterAndDeferrerAndScheduler<TResult> Deferred();
+
     }
 }

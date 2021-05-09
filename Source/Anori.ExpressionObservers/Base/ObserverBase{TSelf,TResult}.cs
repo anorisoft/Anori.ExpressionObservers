@@ -23,8 +23,7 @@ namespace Anori.ExpressionObservers.Base
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.ObserverFundatinBase{TSelf}" />
-    internal abstract class ObserverBase<TSelf, TResult> : ObserverFundatinBase<TSelf>
+    internal abstract class ObserverBase<TSelf, TResult> : ObserverFoundationBase<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>

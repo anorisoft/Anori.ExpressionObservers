@@ -151,7 +151,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult?> action)
+        IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?> action)
         {
             this.ObserverMode = ObserverMode.OnValueChanged;
             return this.WithActionOfT(action);

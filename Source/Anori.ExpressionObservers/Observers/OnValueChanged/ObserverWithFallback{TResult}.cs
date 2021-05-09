@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// <seealso
     ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithFallback<TResult> : ObserverBase<INotifyPropertyObserver<TResult>, TResult>,
                                                           INotifyPropertyObserver<TResult>
     {

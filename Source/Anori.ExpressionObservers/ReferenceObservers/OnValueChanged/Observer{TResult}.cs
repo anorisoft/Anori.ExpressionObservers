@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <seealso
     ///     cref="CachedObserver{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class Observer<TResult> : ObserverBase<INotifyReferencePropertyObserver<TResult>, TResult>,
                                               INotifyReferencePropertyObserver<TResult>
         where TResult : class

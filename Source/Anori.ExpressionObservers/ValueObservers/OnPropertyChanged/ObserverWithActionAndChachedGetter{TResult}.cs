@@ -26,7 +26,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     /// <seealso
     ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndChachedGetter<TResult> :
         ObserverBase<IGetterValuePropertyObserver<TResult>, TResult>,
         IGetterValuePropertyObserver<TResult>

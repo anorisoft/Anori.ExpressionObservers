@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="PropertyGetterObserverWithFallback{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionOfTAndFallback<TResult> : ObserverBase<IPropertyObserver<TResult>, TResult>,
                                                                       IPropertyObserver<TResult>
     {

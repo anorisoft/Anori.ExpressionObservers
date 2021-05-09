@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverFundatinBase.cs" company="AnoriSoft">
+// <copyright file="ObserverFoundationBase.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -26,19 +26,19 @@ namespace Anori.ExpressionObservers.Base
     /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Base.PropertyObserverFundatinBase}" />
     /// <seealso cref="Anori.Common.IActivatable" />
 #pragma warning disable S3881 // "IDisposable" should be implemented correctly
-    internal abstract class ObserverFundatinBase : IDisposable,
-                                                   IEqualityComparer<ObserverFundatinBase>,
-                                                   IEquatable<ObserverFundatinBase>,
+    internal abstract class ObserverFoundationBase : IDisposable,
+                                                   IEqualityComparer<ObserverFoundationBase>,
+                                                   IEquatable<ObserverFoundationBase>,
                                                    IActivatable
 #pragma warning restore S3881 // "IDisposable" should be implemented correctly
     {
         private bool isActive;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverFundatinBase" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverFoundationBase" /> class.
         /// </summary>
         /// <param name="observerFlag">The observer flag.</param>
-        protected ObserverFundatinBase(PropertyObserverFlag observerFlag) => this.ObserverFlag = observerFlag;
+        protected ObserverFoundationBase(PropertyObserverFlag observerFlag) => this.ObserverFlag = observerFlag;
 
         /// <summary>
         ///     Occurs when [is active changed].
@@ -164,7 +164,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
-        public static bool Equals(ObserverFundatinBase? x, ObserverFundatinBase? y)
+        public static bool Equals(ObserverFoundationBase? x, ObserverFoundationBase? y)
         {
             if (ReferenceEquals(x, y))
             {
@@ -206,7 +206,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
         /// </returns>
-        public bool Equals(ObserverFundatinBase? other)
+        public bool Equals(ObserverFoundationBase? other)
         {
             if (other is null)
             {
@@ -250,7 +250,7 @@ namespace Anori.ExpressionObservers.Base
                 return true;
             }
 
-            if (obj is not ObserverFundatinBase propertyObserver)
+            if (obj is not ObserverFoundationBase propertyObserver)
             {
                 return false;
             }
@@ -280,7 +280,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
-        public int GetHashCode(ObserverFundatinBase obj)
+        public int GetHashCode(ObserverFoundationBase obj)
         {
             unchecked
             {
@@ -367,7 +367,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
-        bool IEqualityComparer<ObserverFundatinBase>.Equals(ObserverFundatinBase? x, ObserverFundatinBase? y) =>
+        bool IEqualityComparer<ObserverFoundationBase>.Equals(ObserverFoundationBase? x, ObserverFoundationBase? y) =>
             Equals(x, y);
 
         /// <summary>
@@ -378,7 +378,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator ==(ObserverFundatinBase? a, ObserverFundatinBase? b) => Equals(a, b);
+        public static bool operator ==(ObserverFoundationBase? a, ObserverFoundationBase? b) => Equals(a, b);
 
         /// <summary>
         ///     Implements the operator ==.
@@ -388,7 +388,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator ==(ObserverFundatinBase a, object b) => Equals(a, b);
+        public static bool operator ==(ObserverFoundationBase a, object b) => Equals(a, b);
 
         /// <summary>
         ///     Implements the operator !=.
@@ -398,7 +398,7 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator !=(ObserverFundatinBase a, ObserverFundatinBase b) => !a.Equals(b);
+        public static bool operator !=(ObserverFoundationBase a, ObserverFoundationBase b) => !a.Equals(b);
 
         /// <summary>
         ///     Implements the operator !=.
@@ -408,6 +408,6 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static bool operator !=(ObserverFundatinBase a, object b) => !a.Equals(b);
+        public static bool operator !=(ObserverFoundationBase a, object b) => !a.Equals(b);
     }
 }

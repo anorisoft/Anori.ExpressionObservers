@@ -22,6 +22,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\Builder\IPropertyObserverScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndDeferrerAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndGetterAndDeferrerAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndGetterAndFallbackAndDeferrerAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndGetterAndFallbackAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndGetterAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfNullTAndDeferrerAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfNullTAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfTAndDeferrerAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfTAndFallbackAndDeferrerAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfTAndFallbackAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfTAndGetterAndDeferrerAndFallbackAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfTAndGetterAndFallbackAndDeferrerAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfTAndGetterAndFallbackAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfTAndGetterAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithActionOfTAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithDeferrerAndScheduler.cs" />
+    <Compile Remove="Interfaces\Builder\Value\OnPropertyChanged\IBuilderWithScheduler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>

@@ -80,6 +80,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        IBuilderWithActionOfT<TResult> WithAction(Action<TResult?> action);
+        IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?> action);
     }
 }

@@ -31,7 +31,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <seealso cref="INotifyReferencePropertyObserverWithDeferrer{TResult}" />
     /// <seealso cref="ObserverWithDefer{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithDefer<TParameter1, TResult> :
         ObserverBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         INotifyReferencePropertyObserverWithDeferrer<TResult>

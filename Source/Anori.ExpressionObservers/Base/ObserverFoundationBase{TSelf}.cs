@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverFundatinBase{TSelf}.cs" company="AnoriSoft">
+// <copyright file="ObserverFoundationBase{TSelf}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -23,17 +23,17 @@ namespace Anori.ExpressionObservers.Base
     ///     Property Observer Base for flurnent.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
-    /// <seealso cref="ObserverFundatinBase" />
-    internal abstract class ObserverFundatinBase<TSelf> : ObserverFundatinBase,
+    /// <seealso cref="ObserverFoundationBase" />
+    internal abstract class ObserverFoundationBase<TSelf> : ObserverFoundationBase,
                                                           IPropertyObserverBase<TSelf>,
                                                           IEqualityComparer<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverFundatinBase{TSelf}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverFoundationBase{TSelf}" /> class.
         /// </summary>
         /// <param name="observerFlag">The observer flag.</param>
-        protected ObserverFundatinBase(PropertyObserverFlag observerFlag)
+        protected ObserverFoundationBase(PropertyObserverFlag observerFlag)
             : base(observerFlag)
         {
         }
@@ -80,8 +80,8 @@ namespace Anori.ExpressionObservers.Base
         public bool Equals(TSelf x, TSelf y)
         {
             return Equals(
-                (ObserverFundatinBase)(IPropertyObserverBase<TSelf>)x,
-                (ObserverFundatinBase)(IPropertyObserverBase<TSelf>)y);
+                (ObserverFoundationBase)(IPropertyObserverBase<TSelf>)x,
+                (ObserverFoundationBase)(IPropertyObserverBase<TSelf>)y);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Anori.ExpressionObservers.Base
         /// </returns>
         public int GetHashCode(TSelf obj)
         {
-            return this.GetHashCode((ObserverFundatinBase)(IPropertyObserverBase<TSelf>)obj);
+            return this.GetHashCode((ObserverFoundationBase)(IPropertyObserverBase<TSelf>)obj);
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="ObserverWithActionAndGetter{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndGetter<TParameter1, TResult> :
         ObserverBase<IGetterValuePropertyObserver<TResult>, TParameter1, TResult>,
         IGetterValuePropertyObserver<TResult>

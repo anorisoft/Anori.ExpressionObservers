@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Interfaces
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IGetterValuePropertyObserver{TResult}}" />
+    ///     cref="IGetterValuePropertyObserver{TResult}" />
     public interface IGetterValuePropertyObserver<TResult> :
         IPropertyObserverBase<IGetterValuePropertyObserver<TResult>>
         where TResult : struct

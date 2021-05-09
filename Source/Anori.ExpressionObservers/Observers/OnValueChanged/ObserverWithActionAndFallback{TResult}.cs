@@ -26,8 +26,8 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// The Observer With Action And Fallback class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}" />
+    /// <seealso cref="ObserverBase{INotifyPropertyObserver{TResult}, TResult}" />
+    /// <seealso cref="INotifyPropertyObserver{TResult}" />
     internal sealed class ObserverWithActionAndFallback<TResult> :
         ObserverBase<INotifyPropertyObserver<TResult>, TResult>,
         INotifyPropertyObserver<TResult>
@@ -180,19 +180,20 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
-        ///     Getters the specified property expression.
+        /// Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Getter.
+        /// The Getter.
         /// </returns>
         private static Func<TResult> Getter(
             Expression<Func<TResult>> propertyExpression,
             IExpressionTree tree,
             TResult fallback)
         {
-            var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback);
+            var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback!);
             return () => get();
         }
 

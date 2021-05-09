@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="ObserverWithActionAndFallback{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<INotifyPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         INotifyPropertyObserver<TResult>

@@ -27,10 +27,10 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyValuePropertyObserver{TResult}, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyValuePropertyObserver{TResult}" />
+    ///     cref="ObserverBase{INotifyValuePropertyObserver{TResult},TResult}" />
+    /// <seealso cref="INotifyValuePropertyObserver{TResult}" />
     /// <seealso cref="CachedObserver{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
+    /// <seealso cref="INotifyPropertyChanged" />
     internal sealed class CachedObserver<TResult> :
         ObserverBase<INotifyValuePropertyObserver<TResult>, TResult>,
         INotifyValuePropertyObserver<TResult>

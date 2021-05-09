@@ -6,6 +6,8 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
+    using System.Threading.Tasks;
+
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
@@ -53,5 +55,26 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </returns>
         INotifyValuePropertyObserverWithDeferrer<TResult> IBuilderWithDeferrerAndScheduler<TResult>.Build() =>
             this.CreateNotifyValuePropertyObserverWithDeferrer();
+
+        /// <summary>
+        ///     Withes the getter dispatcher.
+        /// </summary>
+        /// <returns>
+        ///     The target object.
+        /// </returns>
+        IBuilderWithDeferrerAndScheduler<TResult> IPropertyObserverScheduler<IBuilderWithDeferrerAndScheduler<TResult>>.
+            WithGetterDispatcher() =>
+            this.WithGetterDispatcher();
+
+        /// <summary>
+        ///     Withes the getter task scheduler.
+        /// </summary>
+        /// <param name="taskScheduler">The task scheduler.</param>
+        /// <returns>
+        ///     The target object.
+        /// </returns>
+        IBuilderWithDeferrerAndScheduler<TResult> IPropertyObserverScheduler<IBuilderWithDeferrerAndScheduler<TResult>>.
+            WithScheduler(TaskScheduler taskScheduler) =>
+            this.WithGetterDispatcher();
     }
 }

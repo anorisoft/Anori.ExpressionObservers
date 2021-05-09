@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverFundatinBase" />
+    /// <seealso cref="ObserverFoundationBase" />
     /// <seealso
     ///     cref="CachedObserver{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="INotifyPropertyChanged" />
