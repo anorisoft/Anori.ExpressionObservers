@@ -6,6 +6,8 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
+    using System.Threading.Tasks;
+
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged;
@@ -19,7 +21,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso
     ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionAndScheduler{TResult}" />
+    ///     cref="IBuilderWithAction{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfNullT{TResult}" />
@@ -27,26 +29,26 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
     /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithScheduler{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChangedAndScheduler{TResult}" />
+    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfT{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfNullTAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilderOnValueChanged{TResult}" />
     /// <seealso cref="IBuilderWithAction{TResult}" />
     /// <seealso cref="IBuilderWithActionOfT{TResult}" />
     /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrerAndScheduler{TResult}" />
+    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     /// <seealso
     ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithDeferrer<TResult>
@@ -59,6 +61,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         IBuilderWithDeferrer<TResult> IObserverBuilderBase<IBuilderWithDeferrer<TResult>>.AutoActivate() =>
             this.AutoActivate();
+        
+        IBuilderWithDeferrer<TResult> IObserverBuilderSchedulerBase<IBuilderWithDeferrer<TResult>>.WithGetterDispatcher()
+        {
+            throw new System.NotImplementedException();
+        }
+        IBuilderWithDeferrer<TResult> IObserverBuilderSchedulerBase<IBuilderWithDeferrer<TResult>>.WithScheduler(TaskScheduler taskScheduler)
+        {
+            throw new System.NotImplementedException();
+        }
+       
 
         /// <summary>
         ///     Creates this instance.

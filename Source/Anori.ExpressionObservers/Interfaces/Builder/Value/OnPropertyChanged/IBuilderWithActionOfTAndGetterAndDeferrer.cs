@@ -8,7 +8,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
     public interface IBuilderWithActionOfTAndGetterAndDeferrer<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndDeferrer<TResult>>,
-        IPropertyObserverScheduler<IBuilderWithActionOfTAndGetterAndDeferrerAndScheduler<TResult>>
+    IObserverBuilderSchedulerBase<IBuilderWithActionOfTAndGetterAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -18,6 +18,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionOfTAndGetterAndDeferrerAndFallback<TResult> WithFallback(TResult fallback);
+        IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult> WithFallback(TResult fallback);
     }
 }

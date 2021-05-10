@@ -11,16 +11,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     using Anori.Common;
 
     /// <summary>
-    ///     The I Property Value Observer Builder With Notify Propery Changed interface.
+    ///     The Property Value Observer Builder With Notify Propery Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnProperyChanged{TResult}}" />
-    /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnProperyChanged{TResult}}" />
-    /// <seealso cref="IBuilderOnProperyChanged{TResult}" />
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
-                                         IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>
+                                         IObserverBuilderSchedulerBase<IBuilder<TResult>>
         where TResult : struct
     {
         /// <summary>

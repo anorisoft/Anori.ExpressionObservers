@@ -19,33 +19,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IBuilderOnProperyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnProperyChangedAndScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
-    /// <seealso cref="IBuilderWithAction{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
-    /// <seealso cref="IBuilderOnValueChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfNullTAndScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso cref="IBuilder{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilder<TResult>
     {
         /// <summary>
@@ -115,7 +88,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilderWithScheduler<TResult> IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>.
+        IBuilder<TResult> IObserverBuilderSchedulerBase<IBuilder<TResult>>.
             WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
@@ -136,7 +109,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilderWithScheduler<TResult> IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>.WithScheduler(
+        IBuilder<TResult> IObserverBuilderSchedulerBase<IBuilder<TResult>>.WithScheduler(
             TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

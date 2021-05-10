@@ -13,10 +13,10 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallback{TResult}}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallbackAndScheduler{TResult}}" />
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallback{TResult}}" />
     public interface IBuilderWithActionOfTAndGetterAndFallback<out TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>,
-        IPropertyObserverScheduler<IBuilderWithActionOfTAndGetterAndFallbackAndScheduler<TResult>>
+    IObserverBuilderSchedulerBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>
         where TResult : class
     {
         /// <summary>

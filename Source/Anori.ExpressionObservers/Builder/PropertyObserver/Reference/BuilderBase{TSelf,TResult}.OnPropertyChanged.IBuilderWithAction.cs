@@ -18,8 +18,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso cref="BuilderBase{TSelf}" />
     /// <seealso cref="IBuilderOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="IBuilderWithScheduler{TResult}" />
-    /// <seealso cref="IBuilderOnValueChangedAndDeferrerAndScheduler{TResult}" />
-    /// <seealso cref="IBuilderOnNotifyProperyChangedAndScheduler{TResult}" />
+    /// <seealso cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
+    /// <seealso cref="IBuilderOnNotifyProperyChanged{TResult}" />
     /// <seealso cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso cref="IBuilderWithActionOfTAndGetterAndFallback{TResult}" />
     /// <seealso cref="IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
@@ -28,14 +28,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
     /// <seealso cref="IBuilderOnValueChanged{TResult}" />
     /// <seealso cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso cref="IBuilderWithActionAndScheduler{TResult}" />
+    /// <seealso cref="IBuilderWithAction{TResult}" />
     /// <seealso cref="IBuilderWithActionOfTAndGetter{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfTAndScheduler{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfNullTAndScheduler{TResult}" />
+    /// <seealso cref="IBuilderWithActionOfT{TResult}" />
+    /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfTAndGetterAndFallbackAndScheduler{TResult}" />
-    /// <seealso cref="IBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    /// <seealso cref="IBuilderWithActionOfTAndGetterAndFallback{TResult}" />
+    /// <seealso cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
+    /// <seealso cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
     // ReSharper disable UnusedTypeParameter

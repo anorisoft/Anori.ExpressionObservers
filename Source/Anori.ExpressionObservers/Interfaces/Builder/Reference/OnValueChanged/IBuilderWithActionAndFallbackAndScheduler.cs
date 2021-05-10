@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IBuilderWithActionAndFallbackAndScheduler.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionAndFallback.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,9 +11,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}}" />
-    public interface IBuilderWithActionAndFallbackAndScheduler<out TResult> :
-        IObserverBuilderBase<IBuilderWithActionAndFallbackAndScheduler<TResult>>
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetterAndFallback{TResult}}" />
+    public interface IBuilderWithActionAndFallback<out TResult> :
+        IObserverBuilderBase<IBuilderWithActionAndFallback<TResult>>
     {
         /// <summary>
         ///     Creates this instance.

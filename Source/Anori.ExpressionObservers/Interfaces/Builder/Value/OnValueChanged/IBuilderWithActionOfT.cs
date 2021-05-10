@@ -6,17 +6,15 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
+    using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
+
     /// <summary>
     ///     The I Builder With Action Of T interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilder{TResult}}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithScheduler{TResult}}" />
-    public interface IBuilderWithActionOfT<TResult> : IObserverBuilderBase<IBuilderWithActionOfT<TResult>>,
-                                                      IPropertyObserverScheduler<
-                                                          IBuilderWithActionOfTAndScheduler<TResult>>
+    public interface IBuilderWithActionOfT<TResult> :
+        IObserverBuilderBase<IBuilderWithActionOfT<TResult>>,
+    IObserverBuilderSchedulerBase<IBuilderWithActionOfT<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -25,5 +23,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// <param name="fallback">The fallback.</param>
         /// <returns></returns>
         IBuilderWithActionOfTAndFallback<TResult> WithFallback(TResult fallback);
+
+        IBuilderWithActionOfTAndDeferrer<TResult> Deferred();
+
     }
 }

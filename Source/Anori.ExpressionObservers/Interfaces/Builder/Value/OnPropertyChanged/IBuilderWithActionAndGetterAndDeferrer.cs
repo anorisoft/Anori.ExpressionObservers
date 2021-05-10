@@ -15,8 +15,10 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionAndGetter{TResult}}" />
     /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionAndScheduler{TResult}}" />
-    public interface IBuilderWithActionAndGetterAndDeferrer<TResult> : IObserverBuilderBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>
+    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithAction{TResult}}" />
+    public interface IBuilderWithActionAndGetterAndDeferrer<TResult> :
+        IObserverBuilderBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>,
+        IObserverBuilderSchedulerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>
 
         where TResult : struct
     {
@@ -33,7 +35,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult> Cached(LazyThreadSafetyMode safetyMode);
+        IBuilderWithActionAndGetterAndDeferrer<TResult> Cached(LazyThreadSafetyMode safetyMode);
 
         /// <summary>
         ///     Cacheds this instance.
@@ -41,7 +43,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult> Cached();
+        IBuilderWithActionAndGetterAndDeferrer<TResult> Cached();
 
         /// <summary>
         ///     Withes the fallback.

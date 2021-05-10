@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnValueChangedAndScheduler{TResult}}" />
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />
     public interface IBuilderWithScheduler<out TResult> : IObserverBuilderBase<IBuilderWithScheduler<TResult>>
         where TResult : class
     {
@@ -44,6 +44,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithDeferrerAndScheduler<TResult> Deferred();
+        IBuilderWithDeferrer<TResult> Deferred();
     }
 }

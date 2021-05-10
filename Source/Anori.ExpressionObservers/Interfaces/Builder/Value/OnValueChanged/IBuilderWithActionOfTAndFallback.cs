@@ -7,16 +7,18 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
     /// <summary>
-    ///     The I Property Reference Observer Builder With Action Of T Result And Getter And Fallback interface.
+    ///     The Property Reference Observer Builder With Action Of T Result And Getter And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallback{TResult}}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallbackAndScheduler{TResult}}" />
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallback{TResult}}" />
     public interface IBuilderWithActionOfTAndFallback<out TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallback<TResult>>,
-        IPropertyObserverScheduler<IBuilderWithActionOfTAndFallbackAndScheduler<TResult>>
+        IObserverBuilderSchedulerBase<IBuilderWithActionOfTAndFallback<TResult>>
+        where TResult : struct
+
     {
         /// <summary>
         ///     Creates this instance.
@@ -25,5 +27,13 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     The Property Observer.
         /// </returns>
         INotifyPropertyObserver<TResult> Build();
+
+        /// <summary>
+        ///     Deferreds this instance.
+        /// </summary>
+        /// <returns>
+        ///     The Property Observer Builder.
+        /// </returns>
+        IBuilderWithActionOfTAndFallbackAndDeferrer<TResult> Deferred();
     }
 }

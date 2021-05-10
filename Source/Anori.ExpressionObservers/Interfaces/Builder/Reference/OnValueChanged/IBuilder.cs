@@ -17,9 +17,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChangedAndScheduler{TResult}}" />
-    public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
-                                         IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />
+    public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>, IObserverBuilderSchedulerBase<IBuilder<TResult>>
         where TResult : class
     {
         /// <summary>

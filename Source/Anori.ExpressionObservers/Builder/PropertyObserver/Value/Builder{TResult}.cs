@@ -636,7 +636,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         }
 
         protected override INotifyPropertyObserver<TResult>
-            CreateNotifyValuePropertyObserverWithActionAndFallbackAndDeferrerAndScheduler()
+            CreateNotifyValuePropertyObserverWithActionAndFallbackAndDeferrer()
         {
             throw new NotImplementedException();
         }

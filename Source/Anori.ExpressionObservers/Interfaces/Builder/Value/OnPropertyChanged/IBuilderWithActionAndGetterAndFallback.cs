@@ -11,8 +11,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionAndGetterAndFallback<out TResult> :
-        IObserverBuilderBase<IBuilderWithActionAndGetterAndFallback<TResult>>,
-        IPropertyObserverScheduler<IBuilderWithActionAndGetterAndFallbackAndScheduler<TResult>>
+        IObserverBuilderBase<IBuilderWithActionAndGetterAndFallback<TResult>>, 
+    IObserverBuilderSchedulerBase<IBuilderWithActionAndGetterAndFallback<TResult>>
         where TResult : struct
     {
         /// <summary>

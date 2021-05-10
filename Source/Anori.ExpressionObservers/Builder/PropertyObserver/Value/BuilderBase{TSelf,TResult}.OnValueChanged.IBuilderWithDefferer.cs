@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <seealso
     ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionAndScheduler{TResult}" />
+    ///     cref="IBuilderWithAction{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfNullT{TResult}" />
@@ -27,26 +27,26 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
     /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithScheduler{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChangedAndScheduler{TResult}" />
+    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfT{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfNullTAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilderOnValueChanged{TResult}" />
     /// <seealso cref="IBuilderWithAction{TResult}" />
     /// <seealso cref="IBuilderWithActionOfT{TResult}" />
     /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrerAndScheduler{TResult}" />
+    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     /// <seealso
     ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithDeferrer<TResult>

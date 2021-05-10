@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IBuilderWithActionOfNullTAndScheduler.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionOfNullT.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,9 +11,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfNullTAndScheduler{TResult}}" />
-    public interface IBuilderWithActionOfNullTAndScheduler<TResult> :
-        IObserverBuilderBase<IBuilderWithActionOfNullTAndScheduler<TResult>>
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionOfNullT{TResult}}" />
+    public interface IBuilderWithActionOfNullT<TResult> :
+        IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>
         where TResult : class
     {
         /// <summary>

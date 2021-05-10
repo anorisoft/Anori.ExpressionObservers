@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IBuilderWithDeferrerAndScheduler.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,11 +11,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChangedAndDeferrerAndScheduler{TResult}}" />
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChangedAndDeferrer{TResult}}" />
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnValueChangedAndScheduler{TResult}}" />
-    public interface IBuilderWithDeferrerAndScheduler<out TResult> :
-        IObserverBuilderBase<IBuilderWithDeferrerAndScheduler<TResult>>
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />
+    public interface IBuilderWithDeferrer<out TResult> :
+        IObserverBuilderBase<IBuilderWithDeferrer<TResult>>
         where TResult : class
     {
         /// <summary>

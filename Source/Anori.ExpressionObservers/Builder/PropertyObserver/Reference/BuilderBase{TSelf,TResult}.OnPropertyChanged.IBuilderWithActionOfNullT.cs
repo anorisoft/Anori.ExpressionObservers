@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso
     ///     cref="IBuilderWithScheduler{TResult}" />
     /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChangedAndScheduler{TResult}" />
+    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso
@@ -32,15 +32,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <seealso
     ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionAndScheduler{TResult}" />
+    ///     cref="IBuilderWithAction{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfT{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfNullTAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullT<TResult>
@@ -70,8 +70,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionOfNullTAndScheduler<TResult> Interfaces.Builder.IPropertyObserverScheduler<
-            IBuilderWithActionOfNullTAndScheduler<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionOfNullT<TResult> Interfaces.Builder.IObserverBuilderSchedulerBase<IBuilderWithActionOfNullT<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -81,8 +80,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionOfNullTAndScheduler<TResult>
-            Interfaces.Builder.IPropertyObserverScheduler<IBuilderWithActionOfNullTAndScheduler<TResult>>.WithScheduler(
+        IBuilderWithActionOfNullT<TResult> Interfaces.Builder.IObserverBuilderSchedulerBase<IBuilderWithActionOfNullT<TResult>>.WithScheduler(
                 TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

@@ -15,10 +15,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionAndGetter{TResult}}" />
     /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithActionAndScheduler{TResult}}" />
+    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithAction{TResult}}" />
     public interface IBuilderWithActionAndGetter<TResult> : IObserverBuilderBase<IBuilderWithActionAndGetter<TResult>>,
-                                                            IPropertyObserverScheduler<
-                                                                IBuilderWithActionAndGetterAndScheduler<TResult>>
+                                                            IObserverBuilderSchedulerBase<IBuilderWithActionAndGetter<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -54,14 +53,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         IBuilderWithActionAndGetterAndFallback<TResult> WithFallback(TResult fallback);
 
         /// <summary>
-        /// Deferreds this instance.
+        ///     Deferreds this instance.
         /// </summary>
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndDeferrer<TResult> Deferred();
-
     }
-
-
 }

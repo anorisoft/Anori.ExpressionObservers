@@ -13,9 +13,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithAction{TResult}}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionAndScheduler{TResult}}" />
-    public interface IBuilderWithAction<TResult> : IObserverBuilderBase<IBuilderWithAction<TResult>>,
-                                                   IPropertyObserverScheduler<IBuilderWithActionAndScheduler<TResult>>
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithAction{TResult}}" />
+    public interface IBuilderWithAction<TResult> : IObserverBuilderBase<IBuilderWithAction<TResult>>, IObserverBuilderSchedulerBase<IBuilderWithAction<TResult>>
         where TResult : struct
     {
         /// <summary>

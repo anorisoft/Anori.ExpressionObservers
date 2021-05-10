@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IBuilderWithActionOfTAndGetterAndScheduler.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionOfTAndGetter.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,9 +11,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndScheduler{TResult}}" />
-    public interface IBuilderWithActionOfTAndGetterAndScheduler<TResult> :
-        IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndScheduler<TResult>>
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndGetter{TResult}}" />
+    public interface IBuilderWithActionOfTAndGetter<TResult> :
+        IObserverBuilderBase<IBuilderWithActionOfTAndGetter<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -23,6 +23,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionOfTAndGetterAndFallbackAndScheduler<TResult> WithFallback(TResult fallback);
+        IBuilderWithActionOfTAndGetterAndFallback<TResult> WithFallback(TResult fallback);
     }
 }

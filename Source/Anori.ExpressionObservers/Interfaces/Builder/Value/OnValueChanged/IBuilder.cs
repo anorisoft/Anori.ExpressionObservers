@@ -14,16 +14,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     ///     The I Property Value Observer Builder With Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnValueChanged{TResult}}" />
-    /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnValueChanged{TResult}}" />
-    /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnValueChanged{TParameter1, TResult}}" />
-    /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnValueChanged{TParameter1, TResult}}" />
-    public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
-                                         IPropertyObserverScheduler<IBuilderWithScheduler<TResult>>
+     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>, IObserverBuilderSchedulerBase<IBuilder<TResult>>
         where TResult : struct
     {
         /// <summary>

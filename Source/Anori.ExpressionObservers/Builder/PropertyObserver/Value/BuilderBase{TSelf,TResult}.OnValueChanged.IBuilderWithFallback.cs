@@ -24,9 +24,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <seealso
     ///     cref="IBuilderWithScheduler{TResult}" />
     /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrerAndScheduler{TResult}" />
+    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChangedAndScheduler{TResult}" />
+    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso
@@ -40,21 +40,21 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <seealso
     ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionAndScheduler{TResult}" />
+    ///     cref="IBuilderWithAction{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfTAndGetter{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfT{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfNullTAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso
     ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndGetterAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfTAndGetterAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
     /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="IBuilder{TResult}" />
@@ -108,7 +108,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilderWithFallbackAndScheduler<TResult> IPropertyObserverScheduler<IBuilderWithFallbackAndScheduler<TResult>>.
+        IBuilderWithFallback<TResult> IObserverBuilderSchedulerBase<IBuilderWithFallback<TResult>>.
             WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
@@ -119,7 +119,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilderWithFallbackAndScheduler<TResult> IPropertyObserverScheduler<IBuilderWithFallbackAndScheduler<TResult>>.
+        IBuilderWithFallback<TResult> IObserverBuilderSchedulerBase<IBuilderWithFallback<TResult>>.
             WithScheduler(TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

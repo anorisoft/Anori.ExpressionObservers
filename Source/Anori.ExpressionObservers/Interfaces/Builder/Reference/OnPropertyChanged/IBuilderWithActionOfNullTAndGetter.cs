@@ -13,10 +13,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfT{TResult}}" />
     /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndScheduler{TResult}}" />
+    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfT{TResult}}" />
     public interface IBuilderWithActionOfNullTAndGetter<TResult> :
-        IObserverBuilderBase<IBuilderWithActionOfNullTAndGetter<TResult>>,
-        IPropertyObserverScheduler<IBuilderWithActionOfNullTAndGetterAndScheduler<TResult>>
+        IObserverBuilderBase<IBuilderWithActionOfNullTAndGetter<TResult>>
         where TResult : class
     {
         /// <summary>

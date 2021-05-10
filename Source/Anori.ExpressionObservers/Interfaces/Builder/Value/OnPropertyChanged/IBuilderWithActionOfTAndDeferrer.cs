@@ -6,8 +6,7 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
-    public interface IBuilderWithActionOfTAndDeferrer<TResult> : IObserverBuilderBase<IBuilderWithActionOfTAndDeferrer<TResult>>,
-                                                                 IPropertyObserverScheduler<IBuilderWithActionOfTAndDeferrerAndScheduler<TResult>>
+    public interface IBuilderWithActionOfTAndDeferrer<TResult> : IObserverBuilderBase<IBuilderWithActionOfTAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -22,13 +21,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// </summary>
         /// <returns>The getter.</returns>
         IBuilderWithActionOfTAndGetterAndDeferrer<TResult> WithGetter();
-
-
-        /// <summary>
-        /// Deferreds this instance.
-        /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
-        IBuilderWithActionOfTAndDeferrer<TResult> Deferred();
-
     }
 }

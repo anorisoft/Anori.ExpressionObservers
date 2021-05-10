@@ -17,37 +17,37 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="BuilderBase{TSelf}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndGetter{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithScheduler{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfNullTAndScheduler{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionAndGetterAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionAndGetter{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionAndGetter{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfT{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfT{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndFallback{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithAction{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfTAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfT{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithDeferrer{TResult}" />
     /// <seealso
-    ///     cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndFallbackAndScheduler{TResult}" />
+    ///     cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndFallback{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfNullT{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfTAndFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithAction{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithAction{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionAndFallback{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionAndFallbackAndScheduler{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithDeferrerAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionAndFallback{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithDeferrer{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndGetter{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithFallbackAndDeferrer{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithFallback{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionAndGetterAndFallbackAndScheduler{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithFallbackAndDeferrerAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionAndGetterAndFallback{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithFallbackAndDeferrer{TResult}" />
     /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilder{TResult}" />
-    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithFallbackAndScheduler{TResult}" />
+    /// <seealso cref="Interfaces.Builder.Value.OnValueChanged.IBuilderWithFallback{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : BuilderBase<TSelf>
         where TResult : struct
         where TSelf : BuilderBase<TSelf, TResult>
@@ -278,8 +278,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.Fallback = fallback;
             return (TSelf)this;
         }
-        protected abstract INotifyPropertyObserver<TResult> CreateNotifyValuePropertyObserverWithActionAndFallbackAndDeferrerAndScheduler();
+        protected abstract INotifyPropertyObserver<TResult> CreateNotifyValuePropertyObserverWithActionAndFallbackAndDeferrer();
        protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionAndDeferrer();
        protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfNullT();
+       protected abstract IGetterPropertyObserverAndDeferrer<TResult> CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer();
+       protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionAndDeferrer();
+       protected abstract IPropertyObserverOnNotifyPropertyChangedWithDeferrer<TResult> CreatePropertyObserverOnNotifyPropertyChangedWithDeferrer();
+       protected abstract IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionOfTAndFallbackWithDeferrer();
+       protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionOfNullTAndDefferer();
+       protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrrer();
     }
 }

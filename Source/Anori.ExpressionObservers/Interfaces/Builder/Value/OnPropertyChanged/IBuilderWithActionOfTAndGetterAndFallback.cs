@@ -13,10 +13,10 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTAndGetterAndFallback{TResult}}" />
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTAndGetterAndFallbackAndScheduler{TResult}}" />
+    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfTAndGetterAndFallback{TResult}}" />
     public interface IBuilderWithActionOfTAndGetterAndFallback<out TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>,
-        IPropertyObserverScheduler<IBuilderWithActionOfTAndGetterAndFallbackAndScheduler<TResult>>
+        IObserverBuilderSchedulerBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// <summary>
         /// Deferreds this instance.
         /// </summary>
-        IBuilderWithActionOfTAndGetterAndDeferrerAndFallback<TResult> Deferred();
-
+        /// <returns></returns>
+        IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult> Deferred();
     }
 }

@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderOnValueChangedAndDeferrer{TResult}}" />
-    public interface IBuilderWithFallbackAndDeferrer<TResult> :
+    public interface IBuilderWithFallbackAndDeferrer<out TResult> :
         IObserverBuilderBase<IBuilderWithFallbackAndDeferrer<TResult>>
         where TResult : struct
     {

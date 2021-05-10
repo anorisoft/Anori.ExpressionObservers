@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IBuilderWithFallbackAndScheduler.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithFallback.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -13,9 +13,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnValueChangedAndScheduler{TResult}}" />
-    public interface IBuilderWithFallbackAndScheduler<TResult> :
-        IObserverBuilderBase<IBuilderWithFallbackAndScheduler<TResult>>
+    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderOnValueChanged{TResult}}" />
+    public interface IBuilderWithFallback<TResult> :
+        IObserverBuilderBase<IBuilderWithFallback<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>The Property Value Observer Builder.</returns>
-        IBuilderWithFallbackAndScheduler<TResult> Cached(LazyThreadSafetyMode safetyMode);
+        IBuilderWithFallback<TResult> Cached(LazyThreadSafetyMode safetyMode);
 
         /// <summary>
         ///     Cacheds the specified safety mode.
@@ -37,7 +37,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithFallbackAndScheduler<TResult> Cached();
+        IBuilderWithFallback<TResult> Cached();
 
         /// <summary>
         ///     Defers this instance.
@@ -45,6 +45,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithFallbackAndDeferrerAndScheduler<TResult> Deferred();
+        IBuilderWithFallbackAndDeferrer<TResult> Deferred();
     }
 }
