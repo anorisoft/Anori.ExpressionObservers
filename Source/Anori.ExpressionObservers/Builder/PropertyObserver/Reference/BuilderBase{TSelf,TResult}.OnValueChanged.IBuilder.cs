@@ -69,7 +69,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Property Changed.
         /// </returns>
         INotifyReferencePropertyObserver<TResult> IBuilder<TResult>.Build() =>
             this.CreateNotifyReferencePropertyObserver();

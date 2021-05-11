@@ -216,12 +216,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         protected abstract IGetterValuePropertyObserver<TResult> CreatePropertyValueObserver();
 
         /// <summary>
-        ///     Withes the notify propery changed.
+        ///     Withes the notify Property changed.
         /// </summary>
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected TSelf OnProperyChanged() => (TSelf)this;
+        protected TSelf OnPropertyChanged() => (TSelf)this;
 
         /// <summary>
         ///     Withes the value changed.
@@ -278,12 +278,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.Fallback = fallback;
             return (TSelf)this;
         }
-        protected abstract INotifyPropertyObserver<TResult> CreateNotifyValuePropertyObserverWithActionAndFallbackAndDeferrer();
        protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionAndDeferrer();
        protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfNullT();
-       protected abstract IGetterPropertyObserverAndDeferrer<TResult> CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer();
+       protected abstract IGetterPropertyObserverWithDeferrer<TResult> CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer();
        protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionAndDeferrer();
-       protected abstract IPropertyObserverOnNotifyPropertyChangedWithDeferrer<TResult> CreatePropertyObserverOnNotifyPropertyChangedWithDeferrer();
+       protected abstract IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverOnNotifyPropertyChangedWithDeferrer();
        protected abstract IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionOfTAndFallbackWithDeferrer();
        protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionOfNullTAndDefferer();
        protected abstract INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrrer();

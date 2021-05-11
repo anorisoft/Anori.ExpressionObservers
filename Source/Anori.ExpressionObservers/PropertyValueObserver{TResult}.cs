@@ -109,7 +109,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -117,13 +117,13 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TResult>(
+        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression)
             where TResult : struct =>
             new CachedObserver<TResult>(propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -133,7 +133,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TResult>(
+        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached,
             LazyThreadSafetyMode safetyMode)
@@ -145,7 +145,7 @@ namespace Anori.ExpressionObservers
                 PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -156,7 +156,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TResult>(
+        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
@@ -170,7 +170,7 @@ namespace Anori.ExpressionObservers
                 PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -182,7 +182,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TResult>(
+        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
@@ -205,7 +205,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -216,7 +216,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TResult>(
+        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
@@ -237,7 +237,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -246,7 +246,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Value Observer.
         /// </returns>
         [NotNull]
-        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TResult>(
+        public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             bool isAutoActivate)
             where TResult : struct

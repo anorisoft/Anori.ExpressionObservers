@@ -21,13 +21,13 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
-    ///     The Property Observer On Notify Propery Changed With Fallback class.
+    ///     The Property Observer On Notify Property Changed With Fallback class.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyObserverOnNotifyProperyChanged{TResult}, TParameter1, TParameter2, TResult}" />
+    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyObserverOnNotifyPropertyChanged{TResult}, TParameter1, TParameter2, TResult}" />
     /// <seealso cref="IGetterPropertyObserver{TResult}" />
     internal sealed class ObserverWithActionAndChachedGetterAndFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,

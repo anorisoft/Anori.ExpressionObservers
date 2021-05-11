@@ -15,40 +15,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="BuilderBase{TSelf}" />
-    /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithAction{TResult}" />
-    /// <seealso cref="IBuilder{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso cref="IBuilderOnValueChanged{TResult}" />
-    /// <seealso cref="IBuilderWithAction{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithDeferrer<TResult>
     {
         /// <summary>
@@ -64,7 +30,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Property Changed.
         /// </returns>
         INotifyValuePropertyObserverWithDeferrer<TResult> IBuilderWithDeferrer<TResult>.Build() =>
             this.CreateNotifyValuePropertyObserverWithDeferrer();

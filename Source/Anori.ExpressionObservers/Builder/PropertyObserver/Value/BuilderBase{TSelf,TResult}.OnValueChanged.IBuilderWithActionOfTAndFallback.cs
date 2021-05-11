@@ -17,7 +17,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndFallback<TResult>
     {
         /// <summary>
@@ -38,6 +37,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </returns>
         INotifyPropertyObserver<TResult> IBuilderWithActionOfTAndFallback<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithActionOfTAndFallback();
+       
         /// <summary>
         /// Deferreds this instance.
         /// </summary>

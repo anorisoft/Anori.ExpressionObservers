@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     using Anori.Common;
 
     /// <summary>
-    ///     The I Property Value Observer Builder With Notify Propery Changed interface.
+    ///     The I Property Value Observer Builder With Notify Property Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,

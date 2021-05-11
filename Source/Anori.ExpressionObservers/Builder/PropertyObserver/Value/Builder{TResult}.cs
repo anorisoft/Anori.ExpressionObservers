@@ -33,7 +33,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Initializes a new instance of the <see cref="Builder{TResult}" /> class.
         /// </summary>
-        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         public Builder(Expression<Func<TResult>> propertyExpression) => this.propertyExpression = propertyExpression;
 
@@ -635,21 +634,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             return observer;
         }
 
-        protected override INotifyPropertyObserver<TResult>
-            CreateNotifyValuePropertyObserverWithActionAndFallbackAndDeferrer()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override INotifyPropertyObserverWithDeferrer<TResult>
-            CreateNotifyPropertyObserverWithActionAndDeferrer()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfNullT()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

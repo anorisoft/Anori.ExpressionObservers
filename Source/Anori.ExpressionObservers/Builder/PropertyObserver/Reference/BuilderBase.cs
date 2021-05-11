@@ -168,12 +168,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         protected abstract IGetterReferencePropertyObserver<TResult> CreatePropertyReferenceObserver();
 
         /// <summary>
-        ///     Withes the notify propery changed.
+        ///     Withes the notify Property changed.
         /// </summary>
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        protected TSelf OnProperyChanged() => (TSelf)this;
+        protected TSelf OnPropertyChanged() => (TSelf)this;
 
         /// <summary>
         ///     Withes the value changed.
@@ -230,5 +230,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.Fallback = fallback;
             return (TSelf)this;
         }
+        protected abstract IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionAndDeferrer();
+        protected abstract IGetterReferencePropertyObserverWithDeferrer<TResult> CreateGetterReferencePropertyObserverAndDeferrer();
+        protected abstract IGetterPropertyObserverWithDeferrer<TResult> CreateGetterPropertyObserverWithFallbackAndDeferrer();
+        protected abstract IGetterReferencePropertyObserverWithDeferrer<TResult> CreatePropertyReferenceObserverWithDeferrer();
+        protected abstract IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionOfTAndFallbackAndDeferrer();
+        protected abstract IGetterPropertyObserverWithDeferrer<TResult> CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer();
+        protected abstract INotifyReferencePropertyObserverWithDeferrer<TResult> CreateNotifyReferencePropertyObserverWithActionAndDeferrer();
     }
 }

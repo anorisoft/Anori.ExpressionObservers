@@ -14,17 +14,13 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     ///     The I Property Reference Observer Builder On Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderOnValueChanged{TResult}}" />
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>, IObserverBuilderSchedulerBase<IBuilder<TResult>>
         where TResult : class
     {
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>Property Reference Observer On Notify Propery Changed.</returns>
+        /// <returns>Property Reference Observer On Notify Property Changed.</returns>
         INotifyReferencePropertyObserver<TResult> Build();
 
         /// <summary>

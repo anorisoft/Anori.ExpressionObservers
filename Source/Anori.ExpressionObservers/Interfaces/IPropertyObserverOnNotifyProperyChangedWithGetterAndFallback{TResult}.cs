@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyObserverOnNotifyProperyChangedWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="IPropertyObserverOnNotifyPropertyChangedWithGetterAndFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -10,8 +10,8 @@ namespace Anori.ExpressionObservers.Interfaces
     ///     The I Property Observer With Getter And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IPropertyObserverOnNotifyProperyChangedWithGetterAndFallback<out TResult> : IPropertyObserverBase<
-        IPropertyObserverOnNotifyProperyChangedWithGetterAndFallback<TResult>>
+    public interface IPropertyObserverOnNotifyPropertyChangedWithGetterAndFallback<out TResult> : IPropertyObserverBase<
+        IPropertyObserverOnNotifyPropertyChangedWithGetterAndFallback<TResult>>
     {
         /// <summary>
         ///     Gets the value.

@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IGetterPropertyObserver{TResult}, TParameter1, TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterPropertyObserver{TResult}" />
-    /// <seealso cref="PropertyReferenceObserverOnNotifyProperyChanged{TResult}" />
+    /// <seealso cref="PropertyReferenceObserverOnNotifyPropertyChanged{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithChachedGetterAndFallback<TParameter1, TResult> :

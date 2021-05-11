@@ -132,7 +132,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -140,7 +140,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>The Property Reference Observer.</returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
             where TParameter1 : INotifyPropertyChanged
@@ -148,7 +148,7 @@ namespace Anori.ExpressionObservers
             new CachedObserver<TParameter1, TResult>(parameter1, propertyExpression, PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -160,7 +160,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isCached,
@@ -175,7 +175,7 @@ namespace Anori.ExpressionObservers
                 PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -188,7 +188,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isCached,
@@ -205,7 +205,7 @@ namespace Anori.ExpressionObservers
                 PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -219,7 +219,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isCached,
@@ -245,7 +245,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -258,7 +258,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isCached,
@@ -282,7 +282,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -293,7 +293,7 @@ namespace Anori.ExpressionObservers
         ///     The Property Reference Observer.
         /// </returns>
         [NotNull]
-        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyProperyChanged<TParameter1, TResult>(
+        public static INotifyReferencePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             bool isAutoActivate)

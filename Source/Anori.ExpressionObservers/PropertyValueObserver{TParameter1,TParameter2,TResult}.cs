@@ -187,7 +187,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -200,7 +200,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            ObservesOnNotifyPropertyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
                 [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression)
@@ -214,7 +214,7 @@ namespace Anori.ExpressionObservers
                 PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -229,7 +229,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            ObservesOnNotifyPropertyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
                 [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -247,7 +247,7 @@ namespace Anori.ExpressionObservers
                 PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -263,7 +263,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            ObservesOnNotifyPropertyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
                 [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -283,7 +283,7 @@ namespace Anori.ExpressionObservers
                 PropertyObserverFlag.None);
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -300,7 +300,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            ObservesOnNotifyPropertyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
                 [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -329,7 +329,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -345,7 +345,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            ObservesOnNotifyPropertyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
                 [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -372,7 +372,7 @@ namespace Anori.ExpressionObservers
         }
 
         /// <summary>
-        ///     Observeses the on notify propery changed.
+        ///     Observeses the on notify Property changed.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -386,7 +386,7 @@ namespace Anori.ExpressionObservers
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult>
-            ObservesOnNotifyProperyChanged<TParameter1, TParameter2, TResult>(
+            ObservesOnNotifyPropertyChanged<TParameter1, TParameter2, TResult>(
                 [NotNull] TParameter1 parameter1,
                 [NotNull] TParameter2 parameter2,
                 [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,

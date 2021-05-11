@@ -16,33 +16,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IBuilderOnNotifyProperyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
-    /// <seealso cref="IBuilderWithAction{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
-    /// <seealso cref="IBuilderOnValueChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithAction{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso cref="IBuilder{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullT<TResult>
     {
         /// <summary>
@@ -63,6 +36,20 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         IGetterReferencePropertyObserver<TResult> IBuilderWithActionOfNullT<TResult>.Build() =>
             this.CreatePropertyReferenceObserver();
+
+        /// <summary>
+        /// Deferreds this instance.
+        /// </summary>
+        /// <returns></returns>
+        IBuilderWithActionOfNullTAndDeferrer<TResult> IBuilderWithActionOfNullT<TResult>.Deferred() => this;
+
+        /// <summary>
+        /// Withes the getter.
+        /// </summary>
+        /// <returns>
+        /// The Property Value Observer Builder.
+        /// </returns>
+        IBuilderWithActionOfNullTAndGetter<TResult> IBuilderWithActionOfNullT<TResult>.WithGetter() => this;
 
         /// <summary>
         ///     Withes the getter dispatcher.

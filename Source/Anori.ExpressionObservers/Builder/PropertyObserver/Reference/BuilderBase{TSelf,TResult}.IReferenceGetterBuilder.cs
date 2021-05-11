@@ -81,12 +81,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IReferenceObserverBuilder<TResult>
     {
         /// <summary>
-        ///     Withes the notify propery changed.
+        ///     Withes the notify Property changed.
         /// </summary>
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilder<TResult> IReferenceObserverBuilder<TResult>.OnProperyChanged() => this.OnProperyChanged();
+        IBuilder<TResult> IReferenceObserverBuilder<TResult>.OnPropertyChanged() => this.OnPropertyChanged();
 
         /// <summary>
         ///     Withes the value changed.

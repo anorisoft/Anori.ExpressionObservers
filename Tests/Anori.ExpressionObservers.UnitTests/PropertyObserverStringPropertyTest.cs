@@ -292,11 +292,11 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty);
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -328,11 +328,11 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_AutoActivateFalse()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty_AutoActivateFalse()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, false);
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty, false);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -364,11 +364,11 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_AutoActivateTrue()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty_AutoActivateTrue()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, true);
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty, true);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -396,11 +396,11 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty_Cashed()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None);
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -432,11 +432,11 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_AutoActivateFalse()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty_Cashed_AutoActivateFalse()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, false);
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, false);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -468,11 +468,11 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_AutoActivateTrue()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty_Cashed_AutoActivateTrue()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, true);
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, true);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -500,47 +500,11 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, TaskScheduler.Current);
-
-            observes.PropertyChanged += (sender, args) => callCount++;
-            Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
-
-            instance.StringProperty = "1";
-            Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
-
-            observes.Activate();
-            Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
-
-            instance.StringProperty = "2";
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
-
-            instance.StringProperty = "2";
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
-
-            observes.Deactivate();
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
-
-            instance.StringProperty = "3";
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
-        }
-
-        [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent_AutoActivateFalse()
-        {
-            var instance = new NotifyPropertyChangedClass1();
-            var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, TaskScheduler.Current, false);
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, TaskScheduler.Current);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -572,11 +536,47 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void PropertyObserver_OnProperyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent_AutoActivateTrue()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent_AutoActivateFalse()
         {
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
-            using var observes = PropertyReferenceObserver.ObservesOnNotifyProperyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, TaskScheduler.Current, true);
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, TaskScheduler.Current, false);
+
+            observes.PropertyChanged += (sender, args) => callCount++;
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            instance.StringProperty = "1";
+            Assert.AreEqual(0, callCount);
+            Assert.AreEqual(null, observes.Value);
+
+            observes.Activate();
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual("1", observes.Value);
+
+            instance.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.StringProperty = "2";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+
+            observes.Deactivate();
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+
+            instance.StringProperty = "3";
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual("2", observes.Value);
+        }
+
+        [Test]
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_StringProperty_Cashed_TaskSchedulerCurrent_AutoActivateTrue()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var callCount = 0;
+            using var observes = PropertyReferenceObserver.ObservesOnNotifyPropertyChanged(() => instance.StringProperty, true, LazyThreadSafetyMode.None, TaskScheduler.Current, true);
 
             observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
@@ -1082,7 +1082,7 @@ namespace Anori.ExpressionObservers.UnitTests
 
             using var observes = PropertyObserverBuilder.Builder
               .ReferenceObserverBuilder(() => (instance.IntProperty > 2).ToString())
-              .OnProperyChanged()
+              .OnPropertyChanged()
               .WithAction(() => callCount++)
               .WithGetter()
               .AutoActivate()

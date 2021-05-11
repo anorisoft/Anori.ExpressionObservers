@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IPropertyReferenceObserverOnNotifyProperyChanged{TResult}.cs" company="AnoriSoft">
+// <copyright file="IPropertyReferenceObserverOnNotifyPropertyChanged{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -9,14 +9,14 @@ namespace Anori.ExpressionObservers.Interfaces
     using System.ComponentModel;
 
     /// <summary>
-    ///     The Property Value Observer On Notify Propery Changed interface.
+    ///     The Property Value Observer On Notify Property Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnNotifyProperyChanged{TResult}}" />
+    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnNotifyPropertyChanged{TResult}}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    public interface IPropertyReferenceObserverOnNotifyProperyChanged<out TResult> :
-        IPropertyObserverBase<IPropertyReferenceObserverOnNotifyProperyChanged<TResult>>,
+    public interface IPropertyReferenceObserverOnNotifyPropertyChanged<out TResult> :
+        IPropertyObserverBase<IPropertyReferenceObserverOnNotifyPropertyChanged<TResult>>,
         INotifyPropertyChanged
         where TResult : class
     {

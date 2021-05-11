@@ -20,13 +20,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="BuilderBase{TSelf}" />
     /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
+    ///     cref="IBuilderOnNotifyPropertyChanged{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithScheduler{TResult}" />
     /// <seealso
     ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     /// <seealso
-    ///     cref="IBuilderOnNotifyProperyChanged{TResult}" />
+    ///     cref="IBuilderOnNotifyPropertyChanged{TResult}" />
     /// <seealso
     ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
     /// <seealso
@@ -71,7 +71,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Property Changed.
         /// </returns>
         INotifyPropertyObserver<TResult> IBuilderWithFallback<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithFallback();

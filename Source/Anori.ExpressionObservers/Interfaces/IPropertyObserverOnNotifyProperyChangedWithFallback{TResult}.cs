@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces
 {
     /// <summary>
-    ///     The I Property Observer On Notify Propery Changed With Fallback interface.
+    ///     The I Property Observer On Notify Property Changed With Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso

@@ -114,6 +114,9 @@
     <Compile Remove="Interfaces\Builder\Value\OnValueChanged\IBuilderWithFallbackAndDeferrerAndScheduler.cs" />
     <Compile Remove="Interfaces\Builder\Value\OnValueChanged\IBuilderWithFallbackAndScheduler.cs" />
     <Compile Remove="Interfaces\Builder\Value\OnValueChanged\IBuilderWithScheduler.cs" />
+    <Compile Remove="Interfaces\IPropertyObserverOnNotifyProperyChangedWithFallback{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyObserverOnNotifyProperyChangedWithGetterAndFallback{TResult}.cs" />
+    <Compile Remove="Interfaces\IPropertyReferenceObserverOnNotifyProperyChanged{TResult}.cs" />
   </ItemGroup>
 
   <ItemGroup>

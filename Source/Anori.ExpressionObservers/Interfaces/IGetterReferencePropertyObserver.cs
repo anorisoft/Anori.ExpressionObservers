@@ -7,11 +7,9 @@
 namespace Anori.ExpressionObservers.Interfaces
 {
     /// <summary>
-    ///     The I Property Reference Observer interface.
+    ///     The Property Reference Observer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserver{TResult}}" />
     public interface IGetterReferencePropertyObserver<out TResult> : IPropertyObserverBase<
         IGetterReferencePropertyObserver<TResult>>
         where TResult : class

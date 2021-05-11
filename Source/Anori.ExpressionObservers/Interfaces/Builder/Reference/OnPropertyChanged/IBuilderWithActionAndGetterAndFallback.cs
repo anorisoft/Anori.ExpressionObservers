@@ -20,5 +20,12 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <returns>Property Observer With Getter And Fallback.</returns>
         IGetterPropertyObserver<TResult> Build();
+
+        /// <summary>
+        /// Deferreds this instance.
+        /// </summary>
+        /// <returns>The Property Observer Builder.</returns>
+        IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult> Deferred();
+
     }
 }

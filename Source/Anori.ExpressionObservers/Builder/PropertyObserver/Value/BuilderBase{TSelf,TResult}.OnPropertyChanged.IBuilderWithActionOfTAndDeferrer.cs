@@ -9,6 +9,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
 
+    /// <summary>
+    /// The Builder Base class.
+    /// </summary>
+    /// <typeparam name="TSelf">The type of the self.</typeparam>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndDeferrer<TResult>
     {
         /// <summary>
@@ -33,6 +38,5 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <returns>The Property Observer Builder.</returns>
         IBuilderWithActionOfTAndGetterAndDeferrer<TResult> IBuilderWithActionOfTAndDeferrer<TResult>.WithGetter() => this;
-       
     }
 }

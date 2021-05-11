@@ -6,20 +6,19 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
-    using System;
-    using System.Threading.Tasks;
-
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
+    using System;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     The Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-  internal abstract partial class BuilderBase<TSelf, TResult> : IBuilder<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilder<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -31,7 +30,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Property Changed.
         /// </returns>
         INotifyValuePropertyObserver<TResult> IBuilder<TResult>.Build() => this.CreateNotifyPropertyObserver();
 

@@ -10,10 +10,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     ///     The Property Value Observer Builder With Action And Getter interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithActionAndGetter{TResult}}" />
-    /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderWithAction{TResult}}" />
     public interface IBuilderWithAction<TResult> :
         IObserverBuilderBase<IBuilderWithAction<TResult>>, 
     IObserverBuilderSchedulerBase<IBuilderWithAction<TResult>>
@@ -31,5 +27,12 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// <param name="fallback">The fallback.</param>
         /// <returns>The Property Observer Builder.</returns>
         IBuilderWithActionAndFallback<TResult> WithFallback(TResult fallback);
+
+        /// <summary>
+        /// Deferreds this instance.
+        /// </summary>
+        /// <returns></returns>
+        IBuilderWithActionAndDeferrer<TResult> Deferred();
+
     }
 }

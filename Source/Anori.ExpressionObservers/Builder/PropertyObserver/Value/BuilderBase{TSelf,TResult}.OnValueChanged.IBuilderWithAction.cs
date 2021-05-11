@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Propery Changed.
+        ///     Property Value Observer On Notify Property Changed.
         /// </returns>
         INotifyValuePropertyObserver<TResult> IBuilderWithAction<TResult>.Build() =>
             this.CreateNotifyValuePropertyObserverWithAction();

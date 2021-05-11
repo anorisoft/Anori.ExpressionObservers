@@ -6,17 +6,16 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
-    using System.Threading.Tasks;
-
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     The Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    
+
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndDeferrer<TResult>
     {
         /// <summary>

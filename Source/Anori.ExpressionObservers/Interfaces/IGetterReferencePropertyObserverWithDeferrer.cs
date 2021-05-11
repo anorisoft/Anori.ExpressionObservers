@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IGetterPropertyObserverAndDeferrer.cs" company="AnoriSoft">
+// <copyright file="IGetterReferencePropertyObserverWithDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,8 +8,21 @@ namespace Anori.ExpressionObservers.Interfaces
 {
     using System;
 
-    public interface IGetterPropertyObserverAndDeferrer<out TResult> : IGetterPropertyObserver<IGetterPropertyObserverAndDeferrer<TResult>>
+    /// <summary>
+    /// The Getter Reference Property Observer With Deferrer interface.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    public interface
+        IGetterReferencePropertyObserverWithDeferrer<out TResult> : IPropertyObserverBase<
+            IGetterReferencePropertyObserverWithDeferrer<TResult>>
     {
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The GetValue().</returns>
+        TResult? GetValue();
+
         /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
         /// </summary>

@@ -18,10 +18,10 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         where TResult : class
     {
         /// <summary>
-        ///     Withes the notify propery changed.
+        ///     Withes the notify Property changed.
         /// </summary>
         /// <returns>The Value Property Observer Builder.</returns>
-        IBuilder<TResult> OnProperyChanged();
+        IBuilder<TResult> OnPropertyChanged();
 
         /// <summary>
         ///     Withes the value changed.

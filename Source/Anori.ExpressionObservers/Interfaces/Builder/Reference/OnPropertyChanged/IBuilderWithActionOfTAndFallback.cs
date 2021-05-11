@@ -7,13 +7,9 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
     /// <summary>
-    ///     The I Property Value Observer Builder With Action Of T Result And Fallback interface.
+    ///     The Property Value Observer Builder With Action Of T Result And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnProperyChangedWithActionOfTAndFallback{TResult}}" />
-    /// <seealso
-    ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnProperyChangedWithActionOfTAndFallback{TResult}}" />
     public interface IBuilderWithActionOfTAndFallback<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallback<TResult>>,
         IObserverBuilderSchedulerBase<IBuilderWithActionOfTAndFallback<TResult>>
@@ -34,5 +30,12 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         ///     The Property Observer.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallback<TResult> WithGetter();
+
+
+        /// <summary>
+        ///     Deferreds this instance.
+        /// </summary>
+        /// <returns></returns>
+        IBuilderWithActionOfTAndFallbackAndDeferrer<TResult> Deferred();
     }
 }
