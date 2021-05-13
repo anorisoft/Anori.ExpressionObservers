@@ -28,12 +28,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="INotifyReferencePropertyObserverWithDeferrer{TResult}" />
-    /// <seealso cref="INotifyReferencePropertyObserverWithDeferrer{TResult}" />
-    /// <seealso cref="ObserverWithDefer{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithDefer<TParameter1, TParameter2, TResult> :
         ObserverBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2, TResult>,
         INotifyReferencePropertyObserverWithDeferrer<TResult>
@@ -136,20 +130,18 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
+        ///     Gets a value indicating whether this instance is defer.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDefer => this.deferrer.IsDeferred;
+
+        /// <summary>
         ///     Occurs when a property value changes.
         /// </summary>
         /// <returns></returns>
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
-        /// The silent action.
-        /// </summary>
-        [NotNull] private readonly Action silentAction;
-
-        /// <summary>
-        ///     Called when [silent activate].
-        /// </summary>
-        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     Gets the value.
@@ -181,14 +173,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is defer.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDefer => this.deferrer.IsDeferred;
-
-        /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>The deferrer.</returns>
@@ -198,6 +182,20 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action();
+
+        /// <summary>
+        /// Called when [activate].
+        /// </summary>
+        /// <param name="silent">Is silent.</param>
+        protected override void OnActivate(bool silent)
+        {
+            if (silent)
+            {
+                return;
+            }
+
+            this.OnAction();
+        }
 
         /// <summary>
         ///     Called when [property changed].

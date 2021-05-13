@@ -23,6 +23,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// <returns>§
         ///     The Property Observer.
         /// </returns>
-        INotifyPropertyObserverWithDeferrer<TResult> Build();
+        INotifyValuePropertyObserverWithDeferrer<TResult> Build();
     }
 }

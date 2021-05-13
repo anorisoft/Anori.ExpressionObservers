@@ -63,6 +63,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> WithAction(Action<TResult> action);
+        IBuilderWithActionOfT<TResult> WithAction(Action<TResult, TResult> action);
 
         /// <summary>
         ///     Withes the nullable action.
@@ -72,5 +73,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?> action);
+        IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?, TResult?> action);
     }
 }

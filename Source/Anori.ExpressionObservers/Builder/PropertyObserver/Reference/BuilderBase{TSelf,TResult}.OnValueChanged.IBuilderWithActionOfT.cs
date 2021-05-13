@@ -55,5 +55,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IBuilderWithActionOfT<TResult> IObserverBuilderSchedulerBase<IBuilderWithActionOfT<TResult>>.WithScheduler(
             TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
+
+        /// <summary>
+        /// Deferreds this instance.
+        /// </summary>
+        /// <returns></returns>
+        IBuilderWithActionOfTAndDeferrer<TResult> IBuilderWithActionOfT<TResult>.Deferred() => this;
+
     }
 }

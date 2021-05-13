@@ -117,6 +117,7 @@
     <Compile Remove="Interfaces\IPropertyObserverOnNotifyProperyChangedWithFallback{TResult}.cs" />
     <Compile Remove="Interfaces\IPropertyObserverOnNotifyProperyChangedWithGetterAndFallback{TResult}.cs" />
     <Compile Remove="Interfaces\IPropertyReferenceObserverOnNotifyProperyChanged{TResult}.cs" />
+    <Compile Remove="ValueObservers\OnValueChanged\ObserverWithActionOfNullT{TResult}.cs" />
   </ItemGroup>
 
   <ItemGroup>

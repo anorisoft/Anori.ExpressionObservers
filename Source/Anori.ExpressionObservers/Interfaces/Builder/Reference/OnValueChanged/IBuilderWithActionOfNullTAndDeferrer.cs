@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfNullTAndDeferrer{TResult}}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderSchedulerBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfNullTAndDeferrer{TResult}}" />
-    public interface IBuilderWithActionOfNullTAndDeferrer<TResult> :
+    public interface IBuilderWithActionOfNullTAndDeferrer<out TResult> :
         IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>,
         IObserverBuilderSchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
         where TResult : class
@@ -23,6 +23,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// <returns>§
         ///     The Property Observer.
         /// </returns>
-        INotifyPropertyObserverWithDeferrer<TResult> Build();
+        INotifyReferencePropertyObserverWithDeferrer<TResult> Build();
     }
 }

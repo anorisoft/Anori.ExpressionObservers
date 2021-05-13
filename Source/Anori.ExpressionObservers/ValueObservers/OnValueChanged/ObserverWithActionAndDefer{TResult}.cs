@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionAndDefer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndDeferrer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -29,9 +29,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     ///     cref="Observer{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class ObserverWithActionAndDefer<TResult> :
-        ObserverOnValueChangedBase<INotifyValuePropertyObserver<TResult>, TResult>,
-        INotifyValuePropertyObserver<TResult>
+    internal sealed class ObserverWithActionAndDeferrer<TResult> :
+        ObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TResult>,
+        INotifyValuePropertyObserverWithDeferrer<TResult>
         where TResult : struct
     {
         /// <summary>
@@ -56,14 +56,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrerrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithActionAndDefer(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?, TResult?> action,
             [NotNull] TaskScheduler taskScheduler,
@@ -80,14 +80,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrerrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithActionAndDefer(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?, TResult?> action,
             [NotNull] SynchronizationContext synchronizationContext,
@@ -103,13 +103,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrerrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithActionAndDefer(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?, TResult?> action,
             PropertyObserverFlag observerFlag)
@@ -129,7 +129,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <value>
         ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
         /// </value>
-        public bool IsDefer => this.deferrer.IsDeferred;
+        public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
         ///     Gets the value.
@@ -155,6 +155,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
                 this.OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        ///     Defers this instance.
+        /// </summary>
+        /// <returns>
+        ///     Disposable deferrer.
+        /// </returns>
+        public IDisposable Defer() => this.deferrer.Create();
 
         /// <summary>
         ///     Getters the specified property expression.

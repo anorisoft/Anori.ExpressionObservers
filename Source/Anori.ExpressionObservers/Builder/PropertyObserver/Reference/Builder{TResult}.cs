@@ -80,6 +80,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 
             return observer;
         }
+        protected override IGetterPropertyObserverWithDeferrer<TResult> CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the getter property observer with fallback.
@@ -124,6 +128,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 
             return observer;
         }
+        protected override IGetterPropertyObserverWithDeferrer<TResult> CreateGetterPropertyObserverWithFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the property value observer builder with action and getter.
@@ -166,6 +174,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 
             return observer;
         }
+        protected override IGetterReferencePropertyObserverWithDeferrer<TResult> CreateGetterReferencePropertyObserverAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the notify property observer with action and fallback.
@@ -180,7 +192,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    _ => this.Action!(),
+                    (_, _) => this.Action!(),
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -189,7 +201,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    _ => this.Action!(),
+                    (_, _) => this.Action!(),
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -198,7 +210,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    _ => this.Action!(),
+                    (_, _) => this.Action!(),
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -209,6 +221,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
 
             return observer;
+        }
+        protected override INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionAndFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -224,7 +240,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionOfTTWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -233,7 +249,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionOfTTWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -242,7 +258,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionOfTTWithFallback!,
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -253,6 +269,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
 
             return observer;
+        }
+        protected override INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -411,6 +431,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 
             return observer;
         }
+        protected override INotifyReferencePropertyObserverWithDeferrer<TResult> CreateNotifyReferencePropertyObserverWithActionAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the property value observer builder with value changed and deferrer.
@@ -468,6 +492,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 
             return observer;
         }
+        protected override IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the getter property observer with action of T and fallback.
@@ -512,6 +540,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 
             return observer;
         }
+        protected override IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionOfTAndFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the property value observer.
@@ -552,6 +584,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
 
             return observer;
+        }
+        protected override IGetterReferencePropertyObserverWithDeferrer<TResult> CreatePropertyReferenceObserverWithDeferrer()
+        {
+            throw new NotImplementedException();
+        }
+        protected override INotifyReferencePropertyObserverWithDeferrer<TResult> CreateReferencePropertyObserverWithDeferrer()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,8 +13,10 @@ namespace Anori.ExpressionObservers.Interfaces
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface
-        IGetterValuePropertyObserverWithDeferrer<out TResult> : IPropertyObserverBase<
+        IGetterValuePropertyObserverWithDeferrer<TResult> : IPropertyObserverBase<
             IGetterValuePropertyObserverWithDeferrer<TResult>>
+        where TResult : struct
+
     {
         /// <summary>
         ///     Gets a value indicating whether this instance is deferred.

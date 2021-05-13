@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     Creates this instance.
         /// </summary>
         /// <returns>The Property Observer.</returns>
-        INotifyValuePropertyObserver<TResult> Build();
+        INotifyValuePropertyObserverWithDeferrer<TResult> Build();
 
         /// <summary>
         ///     Withes the fallback.

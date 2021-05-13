@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Property Value Observer On Notify Property Changed.
         /// </returns>
         INotifyValuePropertyObserver<TResult> IBuilderWithAction<TResult>.Build() =>
-            this.CreateNotifyValuePropertyObserverWithAction();
+            this.CreateNotifyPropertyObserverWithAction();
 
         /// <summary>
         ///     Withes the fallback.

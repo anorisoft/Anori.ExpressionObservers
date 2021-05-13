@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionAndFallback{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndFallbackAndDeferrer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
@@ -26,12 +27,17 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     ///     The Observer With Action And Fallback class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverBase{INotifyPropertyObserver{TResult}, TResult}" />
+    /// <seealso cref="ObserverBase{ObserverWithActionAndFallbackAndDeferrer{TResult}, TResult}" />
     /// <seealso cref="INotifyPropertyObserver{TResult}" />
-    internal sealed class ObserverWithActionAndFallback<TResult> :
-        ObserverBase<INotifyPropertyObserver<TResult>, TResult>,
-        INotifyPropertyObserver<TResult>
+    internal sealed class ObserverWithActionAndFallbackAndDeferrer<TResult> :
+        ObserverBase<INotifyPropertyObserverWithDeferrer<TResult>, TResult>,
+        INotifyPropertyObserverWithDeferrer<TResult>
     {
+        /// <summary>
+        ///     The deferrer.
+        /// </summary>
+        private readonly UpdateableMultipleDeferrer deferrer;
+
         /// <summary>
         ///     The getter.
         /// </summary>
@@ -66,7 +72,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndFallback{TResult}" />
+        ///     <see cref="ObserverWithActionAndFallbackAndDeferrer{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -75,7 +81,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithActionAndFallback(
+        internal ObserverWithActionAndFallbackAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult, TResult> action,
             [NotNull] TaskScheduler taskScheduler,
@@ -87,7 +93,8 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
             var taskFactory = new TaskFactory(taskScheduler);
-            this.updateValueProperty = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.deferrer = new UpdateableMultipleDeferrer(() => taskFactory.StartNew(() => this.Value = get()).Wait());
+            this.updateValueProperty = () => this.deferrer.Update();
             this.updateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
             this.resetValueProperty = () => this.Value = fallback;
@@ -95,7 +102,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndFallback{TResult}" />
+        ///     <see cref="ObserverWithActionAndFallbackAndDeferrer{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -104,7 +111,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithActionAndFallback(
+        internal ObserverWithActionAndFallbackAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult, TResult> action,
             [NotNull] SynchronizationContext synchronizationContext,
@@ -115,7 +122,8 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
-            this.updateValueProperty = () => synchronizationContext.Send(() => this.Value = get());
+            this.deferrer = new UpdateableMultipleDeferrer(() => synchronizationContext.Send(() => this.Value = get()));
+            this.updateValueProperty = () => this.deferrer.Update();
             this.updateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
             this.resetValueProperty = () => this.Value = fallback;
@@ -123,7 +131,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndFallback{TResult}" />
+        ///     <see cref="ObserverWithActionAndFallbackAndDeferrer{TResult}" />
         ///     class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -131,7 +139,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithActionAndFallback(
+        internal ObserverWithActionAndFallbackAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult, TResult> action,
             [NotNull] TResult fallback,
@@ -141,11 +149,28 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
-            this.updateValueProperty = () => this.Value = get();
+            this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = get());
+            this.updateValueProperty = () => this.deferrer.Update();
             this.updateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
             this.resetValueProperty = () => this.Value = fallback;
         }
+
+        /// <summary>
+        ///     Defers this instance.
+        /// </summary>
+        /// <returns>
+        ///     Disposable deferrer.
+        /// </returns>
+        public IDisposable Defer() => this.deferrer.Create();
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is deferred.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
         ///     Occurs when a property value changes.
@@ -194,7 +219,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <summary>
         ///     Called when [activate].
         /// </summary>
-        /// <param name="silent">Is silent activate.</param>
+        /// <param name="silent"></param>
         protected override void OnActivate(bool silent)
         {
             if (!silent)

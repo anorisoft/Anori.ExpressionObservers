@@ -26,5 +26,12 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         ///     The Property Observer.
         /// </returns>
         INotifyPropertyObserver<TResult> Build();
+
+        /// <summary>
+        /// Deferreds this instance.
+        /// </summary>
+        /// <returns></returns>
+        IBuilderWithActionOfTAndFallbackAndDeferrer<TResult> Deferred();
+
     }
 }

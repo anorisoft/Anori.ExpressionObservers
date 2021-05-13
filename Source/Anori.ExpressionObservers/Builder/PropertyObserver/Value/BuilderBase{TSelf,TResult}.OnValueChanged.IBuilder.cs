@@ -6,12 +6,13 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
+    using System;
+    using System.Threading.Tasks;
+
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
-    using System;
-    using System.Threading.Tasks;
 
     /// <summary>
     ///     The Builder Base class.
@@ -82,7 +83,20 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action)
         {
             this.ObserverMode = ObserverMode.OnValueChanged;
-            return this.WithActionOfTWithFallback(action);
+            return this.WithActionOfTTWithFallback((_, obj) => action(obj));
+        }
+
+        /// <summary>
+        ///     Withes the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>
+        ///     The Property Reference Observer Builder.
+        /// </returns>
+        IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult, TResult> action)
+        {
+            this.ObserverMode = ObserverMode.OnValueChanged;
+            return this.WithActionOfTTWithFallback(action);
         }
 
         /// <summary>
@@ -95,7 +109,20 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?> action)
         {
             this.ObserverMode = ObserverMode.OnValueChanged;
-            return this.WithActionOfT(action);
+            return this.WithActionOfTT((_, obj) => action(obj));
+        }
+
+        /// <summary>
+        ///     Withes the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>
+        ///     The Property Reference Observer Builder.
+        /// </returns>
+        IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?, TResult?> action)
+        {
+            this.ObserverMode = ObserverMode.OnValueChanged;
+            return this.WithActionOfTT(action);
         }
 
         /// <summary>
@@ -104,8 +131,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilder<TResult> IObserverBuilderSchedulerBase<IBuilder<TResult>>.
-             WithGetterDispatcher() =>
+        IBuilder<TResult> IObserverBuilderSchedulerBase<IBuilder<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -115,8 +141,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilder<TResult> IObserverBuilderSchedulerBase<IBuilder<TResult>>.WithScheduler(
-            TaskScheduler taskScheduler) =>
+        IBuilder<TResult> IObserverBuilderSchedulerBase<IBuilder<TResult>>.WithScheduler(TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }
 }

@@ -53,7 +53,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        INotifyPropertyObserver<TResult> IBuilderWithActionOfNullT<TResult>.Build() =>
+        INotifyValuePropertyObserver<TResult> IBuilderWithActionOfNullT<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithActionOfNullT();
 
         /// <summary>

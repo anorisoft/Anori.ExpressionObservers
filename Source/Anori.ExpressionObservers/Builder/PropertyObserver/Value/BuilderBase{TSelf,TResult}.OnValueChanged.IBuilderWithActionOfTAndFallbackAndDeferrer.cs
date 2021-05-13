@@ -36,7 +36,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Property Observer.
         /// </returns>
         INotifyPropertyObserverWithDeferrer<TResult> IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>.Build() =>
-            this.CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrrer();
+            this.CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrer();
 
         /// <summary>
         ///     Withes the getter dispatcher.

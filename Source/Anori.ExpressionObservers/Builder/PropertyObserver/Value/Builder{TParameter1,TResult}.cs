@@ -22,10 +22,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyValueObserverBuilder{TParameter1,TResult}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithActionOfT{TParameter1, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IValuePropertyObserverBuilderWithAction{TParameter1, TResult}" />
     internal sealed class Builder<TParameter1, TResult> : BuilderBase<Builder<TParameter1, TResult>, TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : struct
@@ -96,6 +92,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
 
             return observer;
+        }
+        protected override IGetterPropertyObserverWithDeferrer<TResult> CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -281,6 +281,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 
             return observer;
         }
+        protected override INotifyValuePropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the notify property observer with action and fallback.
@@ -328,6 +332,18 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 
             return observer;
         }
+        protected override INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionAndFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
+        protected override INotifyValuePropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfNullT()
+        {
+            throw new NotImplementedException();
+        }
+        protected override INotifyValuePropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionOfNullTAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the notify property observer with action of T and fallback.
@@ -374,6 +390,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
 
             return observer;
+        }
+        protected override INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -465,46 +485,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             return observer;
         }
 
-        /// <summary>
-        ///     Creates the notify value property observer.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer.
-        /// </returns>
-        protected override INotifyValuePropertyObserver<TResult> CreateNotifyValuePropertyObserver()
-        {
-            INotifyValuePropertyObserver<TResult> observer;
-            if (this.IsDispached)
-            {
-                observer = new Observer<TParameter1, TResult>(
-                    this.parameter1,
-                    this.propertyExpression,
-                    SynchronizationContext.Current,
-                    this.ObserverFlag);
-            }
-            else if (this.TaskScheduler != null)
-            {
-                observer = new Observer<TParameter1, TResult>(
-                    this.parameter1,
-                    this.propertyExpression,
-                    this.TaskScheduler,
-                    this.ObserverFlag);
-            }
-            else
-            {
-                observer = new Observer<TParameter1, TResult>(
-                    this.parameter1,
-                    this.propertyExpression,
-                    this.ObserverFlag);
-            }
-
-            if (this.IsAutoActivate)
-            {
-                observer.Activate(this.IsSilentActivate);
-            }
-
-            return observer;
-        }
+     
 
         /// <summary>
         ///     Creates the notify value property observer with action.
@@ -512,7 +493,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Value Observer.
         /// </returns>
-        protected override INotifyValuePropertyObserver<TResult> CreateNotifyValuePropertyObserverWithAction()
+        protected override INotifyValuePropertyObserver<TResult> CreateNotifyPropertyObserverWithAction()
         {
             INotifyValuePropertyObserver<TResult> observer;
             if (this.IsDispached)
@@ -557,7 +538,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Property Value Observer.
         /// </returns>
         protected override INotifyValuePropertyObserverWithDeferrer<TResult>
-            CreateNotifyValuePropertyObserverWithDeferrer()
+            CreateNotifyPropertyObserverWithDeferrer()
         {
             INotifyValuePropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
@@ -591,6 +572,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 
             return observer;
         }
+        protected override IGetterValuePropertyObserverWithDeferrer<TResult> CreatePropertyValueObserverWithDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates this instance.
@@ -611,6 +596,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
 
             return observer;
+        }
+        protected override IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionAndDeferrer()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -659,6 +648,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 
             return observer;
         }
+        protected override IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionOfTAndFallbackWithDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the property value observer.
@@ -702,18 +695,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
 
             return observer;
-        }
-        protected override INotifyPropertyObserver<TResult> CreateNotifyValuePropertyObserverWithActionAndFallbackAndDeferrer()
-        {
-            throw new NotImplementedException();
-        }
-        protected override INotifyPropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionAndDeferrer()
-        {
-            throw new NotImplementedException();
-        }
-        protected override INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfNullT()
-        {
-            throw new NotImplementedException();
         }
     }
 }

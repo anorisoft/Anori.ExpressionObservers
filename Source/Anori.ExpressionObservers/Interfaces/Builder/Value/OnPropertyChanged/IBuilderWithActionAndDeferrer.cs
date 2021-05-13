@@ -6,21 +6,24 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
-    public interface IBuilderWithActionAndDeferrer<TResult> : IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>
+    /// <summary>
+    ///     The Builder With Action And Deferrer interface.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    public interface
+        IBuilderWithActionAndDeferrer<TResult> : IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>The Property Observer.</returns>
-        INotifyPropertyObserverWithDeferrer<TResult> Build();
+        IPropertyObserverWithDeferrer<TResult> Build();
 
         /// <summary>
         ///     Withes the getter.
         /// </summary>
         /// <returns>The Property Observer Builder.</returns>
         IBuilderWithActionAndGetter<TResult> WithGetter();
-
-
     }
 }
