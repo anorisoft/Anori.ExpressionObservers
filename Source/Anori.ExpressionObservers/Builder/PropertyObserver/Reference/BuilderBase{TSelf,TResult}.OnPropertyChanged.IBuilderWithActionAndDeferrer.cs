@@ -6,6 +6,7 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
+    using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
@@ -38,5 +39,27 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <returns>The Value Property Observer Builder.</returns>
         IBuilderWithActionAndGetterAndDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.WithGetter() => this;
+
+
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderCacheBase<IBuilderWithActionAndDeferrer<TResult>>.Cached(
+            LazyThreadSafetyMode safetyMode) =>
+            this.Cached(safetyMode);
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderCacheBase<IBuilderWithActionAndDeferrer<TResult>>.Cached() => this.Cached();
+
     }
 }

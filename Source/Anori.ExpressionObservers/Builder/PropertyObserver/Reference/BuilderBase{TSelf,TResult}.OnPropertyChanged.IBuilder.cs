@@ -30,21 +30,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IBuilder<TResult> IObserverBuilderBase<IBuilder<TResult>>.AutoActivate() => this.AutoActivate();
 
         /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Property Observer.
-        /// </returns>
-        INotifyReferencePropertyObserver<TResult> IBuilder<TResult>.Build() =>
-            this.CreateNotifyReferencePropertyObserver();
-
-        /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilder<TResult> IBuilder<TResult>.Cached() => this.Cached();
+        IBuilder<TResult> IObserverBuilderCacheBase<IBuilder<TResult>>.Cached() => this.Cached();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
@@ -53,15 +44,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilder<TResult> IBuilder<TResult>.Cached(LazyThreadSafetyMode safetyMode) => this.Cached(safetyMode);
-
-        /// <summary>
-        ///     Defers this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Property Value Observer Builder.
-        /// </returns>
-        IBuilderWithDeferrer<TResult> IBuilder<TResult>.Deferred() => this;
+        IBuilder<TResult> IObserverBuilderCacheBase<IBuilder<TResult>>.Cached(LazyThreadSafetyMode safetyMode) => this.Cached(safetyMode);
 
         /// <summary>
         ///     Withes the action.

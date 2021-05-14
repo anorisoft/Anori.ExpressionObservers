@@ -6,12 +6,15 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
+    using Anori.Common;
+
     /// <summary>
     ///     The Builder With Action And Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface
-        IBuilderWithActionAndDeferrer<TResult> : IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>
+        IBuilderWithActionAndDeferrer<TResult> : IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>,
+                                                 IObserverBuilderCacheBase<IBuilderWithActionAndDeferrer<TResult>>
         where TResult : class
     {
         /// <summary>

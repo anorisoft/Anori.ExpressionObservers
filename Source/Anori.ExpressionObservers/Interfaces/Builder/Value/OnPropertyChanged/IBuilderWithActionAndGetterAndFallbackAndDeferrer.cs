@@ -15,6 +15,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         ///     Creates this instance.
         /// </summary>
         /// <returns>Property Observer With Getter And Fallback.</returns>
-        IGetterPropertyObserver<TResult> Build();
+        IGetterPropertyObserverWithDeferrer<TResult> Build();
     }
 }

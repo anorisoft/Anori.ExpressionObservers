@@ -1,23 +1,19 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithDefer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithFallbackAndDeferrer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
+namespace Anori.ExpressionObservers.Observers.OnValueChanged
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -27,98 +23,103 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="ObserverWithDefer{TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class ObserverWithDefer<TResult> :
-        ObserverBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TResult>,
-        INotifyReferencePropertyObserverWithDeferrer<TResult>
-        where TResult : class
+    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChangedWithDeferrer{TResult}, TResult}" />
+    /// <seealso cref="INotifyReferencePropertyObserverWithDeferrer{TResult}" />
+    internal sealed class ObserverWithFallbackAndDeferrer<TResult> :
+        ObserverOnValueChangedBase<INotifyPropertyObserverWithDeferrer<TResult>, TResult>,
+        INotifyPropertyObserverWithDeferrer<TResult>
     {
-        /// <summary>
-        ///     The action.
-        /// </summary>
-        [NotNull]
-        private readonly Action action;
-
         /// <summary>
         ///     The deferrer.
         /// </summary>
+        [NotNull]
         private readonly UpdateableMultipleDeferrer deferrer;
+
+        /// <summary>
+        ///     The get value.
+        /// </summary>
+        [NotNull]
+        private readonly Func<TResult> getValue;
 
         /// <summary>
         ///     The value.
         /// </summary>
-        private TResult? value;
+        private TResult value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithFallbackAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        /// <exception cref="ArgumentNullException">propertyExpression if null.</exception>
+        internal ObserverWithFallbackAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
+            this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
-                propertyExpression.Parameters,
-                this.Tree);
+            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = getter());
-            this.action = () => this.deferrer.Update();
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => this.value = getter();
+            this.getValue = this.CreateGetProperty(() => this.value);
+            this.ResetValueProperty = () => this.Value = fallback;
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithFallbackAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        internal ObserverWithFallbackAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TaskScheduler taskScheduler,
+            [NotNull] TResult fallback,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
+            this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
-                propertyExpression.Parameters,
-                this.Tree);
+            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultipleDeferrer(
                 () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
-            this.action = () => this.deferrer.Update();
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => this.value = getter();
+            this.getValue = this.CreateGetProperty(() => this.value);
+            this.ResetValueProperty = () => this.Value = fallback;
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithFallbackAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        internal ObserverWithFallbackAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            SynchronizationContext synchronizationContext,
+            [NotNull] TResult fallback,
+            [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
+            this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
-                propertyExpression.Parameters,
-                this.Tree);
+            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
             this.deferrer = new UpdateableMultipleDeferrer(
                 () => synchronizationContext.Send(() => this.Value = getter()));
-            this.action = () => this.deferrer.Update();
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => this.value = getter();
+            this.getValue = this.CreateGetProperty(() => this.value);
+            this.ResetValueProperty = () => this.Value = fallback;
         }
-
-        /// <summary>
-        ///     Occurs when a property value changes.
-        /// </summary>
-        /// <returns></returns>
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets the value.
@@ -126,12 +127,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <value>
         ///     The value.
         /// </value>
-        public TResult? Value
+        public TResult Value
         {
-            get => this.value;
+#pragma warning disable S4275 // Getters and setters should access the expected fields
+            get => this.getValue();
+#pragma warning restore S4275 // Getters and setters should access the expected fields
             private set
             {
-                if (EqualityComparer<TResult?>.Default.Equals(value, this.value))
+                if (EqualityComparer<TResult>.Default.Equals(value, this.value))
                 {
                     return;
                 }
@@ -150,40 +153,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is defer.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDefer => this.deferrer.IsDeferred;
-
-        /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>The deferrer.</returns>
         public IDisposable Defer() => this.deferrer.Create();
-
-        /// <summary>
-        ///     On the action.
-        /// </summary>
-        protected override void OnAction() => this.action();
-
-        /// <summary>
-        /// The silent action.
-        /// </summary>
-        [NotNull] private readonly Action silentAction;
-
-        /// <summary>
-        ///     Called when [silent activate].
-        /// </summary>
-        protected override void OnSilentActivate() => this.silentAction.Raise();
-
-        /// <summary>
-        ///     Called when [property changed].
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged.Raise(this, propertyName);
     }
 }

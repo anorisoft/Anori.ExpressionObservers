@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithDefer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDeferrer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
+namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 {
     using System;
     using System.Collections.Generic;
@@ -20,25 +20,29 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Property Value Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverOnValueChangedBase{INotifyValuePropertyObserverWithDeferrer{TResult}, TResult}" />
-    /// <seealso cref="INotifyValuePropertyObserverWithDeferrer{TResult}" />
-    internal sealed class ObserverWithDefer<TResult> :
-        ObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TResult>,
-        INotifyValuePropertyObserverWithDeferrer<TResult>
-        where TResult : struct
+    /// <seealso
+    ///     cref="ObserverWithDeferrer{TResult}" />
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
+    /// <seealso cref="ObserverFoundationBase" />
+    internal sealed class ObserverWithDeferrer<TResult> :
+        ObserverOnValueChangedBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TResult>,
+        INotifyReferencePropertyObserverWithDeferrer<TResult>
+        where TResult : class
     {
         /// <summary>
         ///     The deferrer.
         /// </summary>
+        [NotNull]
         private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
-        ///     The getter.
+        ///     The get value.
         /// </summary>
-        private readonly Func<TResult?> getter;
+        [NotNull]
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     The value.
@@ -46,75 +50,73 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        internal ObserverWithDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var get = ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
-            this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = get());
-            this.UpdateValueAction = () => this.deferrer.Update();
-            this.SilentUpdateValueAction = () => this.value = get();
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
+            this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = getter());
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => this.value = getter();
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        internal ObserverWithDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var get = ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
-            var taskFactory = new TaskFactory(taskScheduler);
-            this.deferrer = new UpdateableMultipleDeferrer(() => taskFactory.StartNew(() => this.Value = get()).Wait());
-            this.UpdateValueAction = () => this.deferrer.Update();
-            this.SilentUpdateValueAction = () => taskFactory.StartNew(() => this.value = get()).Wait();
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
+            this.deferrer = new UpdateableMultipleDeferrer(
+                () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => this.value = getter();
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithDefer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        internal ObserverWithDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var get = ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
-            this.deferrer = new UpdateableMultipleDeferrer(() => synchronizationContext.Send(() => this.Value = get()));
-            this.UpdateValueAction = () => this.deferrer.Update();
-            this.SilentUpdateValueAction = () => synchronizationContext.Send(() => this.value = get());
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
+                propertyExpression.Parameters,
+                this.Tree);
+            this.deferrer = new UpdateableMultipleDeferrer(
+                () => synchronizationContext.Send(() => this.Value = getter()));
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => this.value = getter();
+            this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
         }
-
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is defer.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is defer; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDefer => this.deferrer.IsDeferred;
 
         /// <summary>
         ///     Gets the value.
@@ -124,7 +126,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// </value>
         public TResult? Value
         {
-            get => this.getter();
+#pragma warning disable S4275 // Getters and setters should access the expected fields
+            get => this.getValue();
+#pragma warning restore S4275 // Getters and setters should access the expected fields
             private set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))

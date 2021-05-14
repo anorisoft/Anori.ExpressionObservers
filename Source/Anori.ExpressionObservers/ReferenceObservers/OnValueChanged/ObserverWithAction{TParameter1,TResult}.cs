@@ -31,7 +31,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <seealso
     ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}, TParameter1, TResult}" />
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}" />
-    /// <seealso cref="ObserverWithActionAndChachedGetter{TResult}" />
+    /// <seealso cref="ObserverWithActionAndCachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithAction<TParameter1, TResult> :

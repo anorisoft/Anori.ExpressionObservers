@@ -40,9 +40,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
-        ///     The getter.
+        ///     The getValue.
         /// </summary>
-        private readonly Func<TResult?> getter;
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     The value changed action.
@@ -56,7 +56,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrerrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -74,13 +74,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             var taskFactory = new TaskFactory(taskScheduler);
             this.deferrer = new UpdateableMultipleDeferrer(() => taskFactory.StartNew(() => this.Value = get()).Wait());
-            this.UpdateValueAction = () => this.deferrer.Update();
-            this.SilentUpdateValueAction = () => taskFactory.StartNew(() => this.Value = get()).Wait();
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrerrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -97,13 +97,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.deferrer = new UpdateableMultipleDeferrer(() => synchronizationContext.Send(() => this.Value = get()));
-            this.UpdateValueAction = () => this.deferrer.Update();
-            this.SilentUpdateValueAction = () => synchronizationContext.Send(() => this.value = get());
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => synchronizationContext.Send(() => this.value = get());
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrerrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -118,9 +118,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = get());
-            this.UpdateValueAction = () => this.deferrer.Update();
-            this.SilentUpdateValueAction = () => this.value = get();
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => this.value = get();
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         public TResult? Value
         {
 #pragma warning disable S4275 // Getters and setters should access the expected fields
-            get => this.getter();
+            get => this.getValue();
 #pragma warning restore S4275 // Getters and setters should access the expected fields
             private set
             {

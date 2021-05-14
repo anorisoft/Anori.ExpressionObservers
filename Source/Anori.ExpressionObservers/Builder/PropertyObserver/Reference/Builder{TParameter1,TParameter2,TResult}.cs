@@ -219,6 +219,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         {
             throw new NotImplementedException();
         }
+        protected override IGetterReferencePropertyObserver<TResult> CreateGetterReferencePropertyObserverCached()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the notify property observer with action and fallback.

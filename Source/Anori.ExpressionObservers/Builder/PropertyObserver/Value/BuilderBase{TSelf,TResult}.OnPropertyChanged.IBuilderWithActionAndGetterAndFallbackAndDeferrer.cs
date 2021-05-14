@@ -34,8 +34,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     Property Observer With Getter And Fallback.
         /// </returns>
-        IGetterPropertyObserver<TResult> IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>.Build() =>
-            this.CreateGetterPropertyObserverWithFallback();
+        IGetterPropertyObserverWithDeferrer<TResult> IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>.Build() =>
+            this.CreateGetterPropertyObserverWithFallbackAndDeferrer();
 
         /// <summary>
         ///     Withes the getter dispatcher.

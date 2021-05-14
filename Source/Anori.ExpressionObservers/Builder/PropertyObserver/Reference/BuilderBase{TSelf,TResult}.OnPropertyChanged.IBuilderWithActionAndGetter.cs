@@ -8,6 +8,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
     using System.Threading.Tasks;
 
+    using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
@@ -33,8 +34,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IGetterReferencePropertyObserver<TResult> IBuilderWithActionAndGetter<TResult>.Build() =>
-            this.CreateGetterReferencePropertyObserver();
+        IGetterReferencePropertyObserver<TResult> IBuilderWithActionAndGetter<TResult>.Build()
+        {
+            if (this.IsCached)
+            {
+                return this.CreateGetterReferencePropertyObserverCached();
+
+            }
+            return this.CreateGetterReferencePropertyObserver();
+        }
 
         /// <summary>
         ///     Withes the fallback.
@@ -75,5 +83,26 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// The Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndDeferrer<TResult> IBuilderWithActionAndGetter<TResult>.Deferred() => this;
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        IBuilderWithActionAndGetter<TResult> IObserverBuilderCacheBase<IBuilderWithActionAndGetter<TResult>>.Cached(
+            LazyThreadSafetyMode safetyMode) =>
+            this.Cached(safetyMode);
+
+        /// <summary>
+        ///     Cacheds the specified safety mode.
+        /// </summary>
+        /// <returns>
+        ///     The Property Value Observer Builder.
+        /// </returns>
+        IBuilderWithActionAndGetter<TResult> IObserverBuilderCacheBase<IBuilderWithActionAndGetter<TResult>>.Cached() => this.Cached();
+
+
     }
 }

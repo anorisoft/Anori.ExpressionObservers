@@ -26,7 +26,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         ///     Creates this instance.
         /// </summary>
         /// <returns>The Property Observer.</returns>
-        IGetterValuePropertyObserver<TResult> Build();
+        IGetterValuePropertyObserverWithDeferrer<TResult> Build();
 
         /// <summary>
         ///     Cacheds the specified safety mode.

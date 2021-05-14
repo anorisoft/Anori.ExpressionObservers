@@ -20,15 +20,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
     using JetBrains.Annotations;
 
-    using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
-
     /// <summary>
     ///     The Observer With Action Of Null T class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}" />
     internal sealed class ObserverWithActionOfNullT<TResult> :
         ObserverBase<INotifyReferencePropertyObserver<TResult>, TResult>,
         INotifyReferencePropertyObserver<TResult>
@@ -53,13 +48,11 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         private readonly Action silentAction;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action</exception>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
@@ -67,32 +60,29 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             [NotNull] TaskScheduler taskScheduler,
-            bool isCached,
-            LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateGetter(this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler));
-
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">action</exception>
         internal ObserverWithActionOfNullT(
             [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action<TResult?> action,
             [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.action = this.action ?? throw new ArgumentNullException(nameof(this.action));
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateNullableReferenceGetter(
                 this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext));
         }
@@ -101,19 +91,16 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="fallback">The fallback.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
+        /// <exception cref="ArgumentNullException">action</exception>
         internal ObserverWithActionOfNullT(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] TResult fallback,
-            bool isCached,
-            LazyThreadSafetyMode safetyMode,
+            [NotNull] Action<TResult?> action,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.action = this.action ?? throw new ArgumentNullException(nameof(this.action));
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateNullableReferenceGetter(this.CreateGetter(Getter(propertyExpression, this.Tree)));
         }
 
@@ -132,14 +119,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         public TResult? Value => this.getter();
 
         /// <summary>
-        ///     Called when [silent activate].
-        /// </summary>
-        protected override void OnSilentActivate() => this.silentAction.Raise();
-
-        /// <summary>
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action(this.getter());
+
+        /// <summary>
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     Getters the specified property expression.

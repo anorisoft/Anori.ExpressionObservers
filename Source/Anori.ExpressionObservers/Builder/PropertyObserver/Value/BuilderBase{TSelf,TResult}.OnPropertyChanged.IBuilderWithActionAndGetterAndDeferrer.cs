@@ -34,14 +34,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IGetterValuePropertyObserver<TResult> IBuilderWithActionAndGetterAndDeferrer<TResult>.Build()
+        IGetterValuePropertyObserverWithDeferrer<TResult> IBuilderWithActionAndGetterAndDeferrer<TResult>.Build()
         {
             if (this.IsCached)
             {
-                return this.CreateGetterValuePropertyObserverCached();
+                return this.CreateGetterValuePropertyObserverCachedAndDeferrer();
             }
 
-            return this.CreateGetterValuePropertyObserver();
+            return this.CreateGetterValuePropertyObserverAndDeferrer();
         }
 
         /// <summary>

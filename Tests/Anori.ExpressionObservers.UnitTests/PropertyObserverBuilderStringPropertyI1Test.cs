@@ -315,35 +315,36 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
         }
 
         [Test]
@@ -354,32 +355,33 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
         }
 
         [Test]
@@ -390,36 +392,37 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
         }
 
         [Test]
@@ -431,33 +434,34 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
         }
 
         [Test]
@@ -468,36 +472,37 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .WithGetterDispatcher()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
         }
 
         [Test]
@@ -508,33 +513,34 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
         }
 
         [Test]
@@ -739,31 +745,32 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = new PropertyObserverBuilder(autoActivate: true)
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("3", observes.GetValue());
         }
 
         [Test]
@@ -774,36 +781,37 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -814,33 +822,34 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -851,36 +860,37 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -891,33 +901,34 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -928,37 +939,38 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -970,34 +982,35 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -1009,37 +1022,38 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -1051,34 +1065,35 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -1089,37 +1104,38 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .WithGetterDispatcher()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -1131,34 +1147,35 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached()
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -1169,37 +1186,38 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             observes.Activate();
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]
@@ -1211,34 +1229,35 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ReferenceObserverBuilder(() => instance.Class2.StringProperty)
                 .OnPropertyChanged()
+                .WithAction(() => callCount++)
+                .WithGetter()
                 .Cached(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
 
-            observes.PropertyChanged += (sender, args) => callCount++;
             Assert.AreEqual(0, callCount);
-            Assert.AreEqual(null, observes.Value);
+            Assert.AreEqual(null, observes.GetValue());
 
             instance.Class2 = new NotifyPropertyChangedClass2 { StringProperty = "1" };
             Assert.AreEqual(1, callCount);
-            Assert.AreEqual("1", observes.Value);
+            Assert.AreEqual("1", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "2" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             observes.Deactivate();
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
 
             instance.Class2.StringProperty = "3" ;
             Assert.AreEqual(2, callCount);
-            Assert.AreEqual("2", observes.Value);
+            Assert.AreEqual("2", observes.GetValue());
         }
 
         [Test]

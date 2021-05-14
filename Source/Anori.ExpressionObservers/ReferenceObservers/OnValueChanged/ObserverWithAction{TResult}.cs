@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
+    ///     cref="ObserverWithActionAndCachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithAction<TResult> :

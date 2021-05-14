@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionAndChachedGetter{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndCachedGetter{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -24,10 +24,10 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
-    ///     cref="ObserverWithActionAndChachedGetter{TResult}" />
+    ///     cref="ObserverWithActionAndCachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class ObserverWithActionAndChachedGetter<TResult> :
+    internal sealed class ObserverWithActionAndCachedGetter<TResult> :
         ObserverBase<IGetterValuePropertyObserver<TResult>, TResult>,
         IGetterValuePropertyObserver<TResult>
         where TResult : struct
@@ -45,13 +45,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ObserverWithActionAndChachedGetter(
+        internal ObserverWithActionAndCachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             TaskScheduler taskScheduler,
@@ -61,7 +61,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -70,10 +70,10 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithActionAndChachedGetter(
+        internal ObserverWithActionAndCachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
@@ -87,7 +87,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -95,10 +95,10 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ObserverWithActionAndChachedGetter(
+        internal ObserverWithActionAndCachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
-            SynchronizationContext synchronizationContext,
+            [NotNull] SynchronizationContext synchronizationContext,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
@@ -112,12 +112,12 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ObserverWithActionAndChachedGetter(
+        internal ObserverWithActionAndCachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             PropertyObserverFlag propertyObserverFlag)
@@ -126,14 +126,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndChachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ObserverWithActionAndChachedGetter(
+        internal ObserverWithActionAndCachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             bool isCached,

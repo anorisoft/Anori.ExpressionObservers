@@ -4,14 +4,14 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
+namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
     /// <summary>
     ///     The Property Reference Observer Builder With Value Changed And Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IBuilderWithDeferrer<TResult> : IObserverBuilderBase<IBuilderWithDeferrer<TResult>>
-        where TResult : struct
+    public interface IBuilderWithGetterAndDeferrer<out TResult> : IObserverBuilderBase<IBuilderWithGetterAndDeferrer<TResult>>
+        where TResult : class
     {
         /// <summary>
         ///     Builds this instance.
@@ -19,6 +19,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// <returns>
         ///     The Property Value Observer.
         /// </returns>
-        INotifyValuePropertyObserverWithDeferrer<TResult> Build();
+        INotifyReferencePropertyObserverWithDeferrer<TResult> Build();
     }
 }

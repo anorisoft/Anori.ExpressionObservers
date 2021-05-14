@@ -144,6 +144,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 
             return observer;
         }
+        protected override IGetterPropertyObserverWithDeferrer<TResult> CreateGetterPropertyObserverWithFallbackAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Creates the property value observer builder with action and getter.
@@ -202,7 +206,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 
             if (this.IsDispached)
             {
-                observer = new ObserverWithActionAndChachedGetter<TParameter1, TResult>(
+                observer = new ObserverWithActionAndCachedGetter<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -213,7 +217,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithActionAndChachedGetter<TParameter1, TResult>(
+                observer = new ObserverWithActionAndCachedGetter<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -224,7 +228,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else
             {
-                observer = new ObserverWithActionAndChachedGetter<TParameter1, TResult>(
+                observer = new ObserverWithActionAndCachedGetter<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Action!,
@@ -573,6 +577,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             return observer;
         }
         protected override IGetterValuePropertyObserverWithDeferrer<TResult> CreatePropertyValueObserverWithDeferrer()
+        {
+            throw new NotImplementedException();
+        }
+        protected override IGetterValuePropertyObserverWithDeferrer<TResult> CreateGetterValuePropertyObserverAndDeferrer()
+        {
+            throw new NotImplementedException();
+        }
+        protected override IGetterValuePropertyObserverWithDeferrer<TResult> CreateGetterValuePropertyObserverCachedAndDeferrer()
         {
             throw new NotImplementedException();
         }

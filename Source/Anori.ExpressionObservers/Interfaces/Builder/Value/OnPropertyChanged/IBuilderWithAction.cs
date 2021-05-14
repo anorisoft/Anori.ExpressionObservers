@@ -12,7 +12,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso
     ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithAction{TResult}}" />
-    public interface IBuilderWithAction<TResult> : IObserverBuilderBase<IBuilderWithAction<TResult>>
+    public interface IBuilderWithAction<TResult> : IObserverBuilderBase<IBuilderWithAction<TResult>>,
+                                                   IObserverBuilderCacheBase<IBuilderWithAction<TResult>>
         where TResult : struct
     {
         /// <summary>

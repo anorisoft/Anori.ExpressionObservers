@@ -67,8 +67,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             var taskFactory = new TaskFactory(taskScheduler);
-            this.UpdateValueAction = () => taskFactory.StartNew(() => this.Value = get()).Wait();
-            this.SilentUpdateValueAction = () => taskFactory.StartNew(() => this.value = get()).Wait();
+            this.UpdateValueProperty = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.UpdateValueField = () => taskFactory.StartNew(() => this.value = get()).Wait();
             this.getter = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
@@ -89,8 +89,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         {
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
-            this.UpdateValueAction = () => synchronizationContext.Send(() => this.Value = get());
-            this.SilentUpdateValueAction = () => synchronizationContext.Send(() => this.value = get());
+            this.UpdateValueProperty = () => synchronizationContext.Send(() => this.Value = get());
+            this.UpdateValueField = () => synchronizationContext.Send(() => this.value = get());
             this.getter = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
@@ -109,8 +109,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         {
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
-            this.UpdateValueAction = () => this.Value = get();
-            this.SilentUpdateValueAction = () => this.value = get();
+            this.UpdateValueProperty = () => this.Value = get();
+            this.UpdateValueField = () => this.value = get();
             this.getter = this.CreateGetPropertyNullableValue(() => this.value);
         }
 

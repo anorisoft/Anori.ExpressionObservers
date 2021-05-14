@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
+namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 {
     using System;
     using System.ComponentModel;

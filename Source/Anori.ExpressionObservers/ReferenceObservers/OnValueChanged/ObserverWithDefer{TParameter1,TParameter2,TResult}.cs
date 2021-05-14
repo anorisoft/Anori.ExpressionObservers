@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithDefer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithDeferrer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -53,7 +53,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDefer{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDeferrer{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -77,7 +77,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDefer{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDeferrer{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -104,7 +104,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDefer{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDeferrer{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
