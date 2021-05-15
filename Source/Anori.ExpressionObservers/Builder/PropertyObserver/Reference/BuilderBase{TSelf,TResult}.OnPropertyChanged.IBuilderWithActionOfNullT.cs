@@ -6,10 +6,10 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
-    using System.Threading.Tasks;
-
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
+    using System.Threading.Tasks;
 
     /// <summary>
     ///     The Property Value Observer Builder Base class.
@@ -40,8 +40,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <summary>
         /// Deferreds this instance.
         /// </summary>
-        /// <returns></returns>
-        IBuilderWithActionOfNullTAndDeferrer<TResult> IBuilderWithActionOfNullT<TResult>.Deferred() => this;
+        /// <returns>
+        /// The Property Value Observer Builder.
+        /// </returns>
+        IBuilderWithActionOfNullTAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.Deferred() => this;
 
         /// <summary>
         /// Withes the getter.
@@ -57,7 +59,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionOfNullT<TResult> Interfaces.Builder.IObserverBuilderSchedulerBase<IBuilderWithActionOfNullT<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionOfNullT<TResult> Interfaces.Builder.ISchedulerBase<IBuilderWithActionOfNullT<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionOfNullT<TResult> Interfaces.Builder.IObserverBuilderSchedulerBase<IBuilderWithActionOfNullT<TResult>>.WithScheduler(
+        IBuilderWithActionOfNullT<TResult> Interfaces.Builder.ISchedulerBase<IBuilderWithActionOfNullT<TResult>>.WithScheduler(
                 TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

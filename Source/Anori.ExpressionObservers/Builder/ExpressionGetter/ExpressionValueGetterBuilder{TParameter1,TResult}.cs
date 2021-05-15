@@ -16,8 +16,6 @@ namespace Anori.ExpressionObservers.Builder.ExpressionGetter
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IValueGetterBuilder{TParameter1,TResult}" />
-    /// <seealso cref="IGetterBuilderWithFallback{TParameter1,TResult}" />
     internal class ExpressionValueGetterBuilder<TParameter1, TResult> : IValueGetterBuilder<TParameter1, TResult>,
                                                                         IGetterBuilderWithFallback<TParameter1, TResult>
         where TResult : struct

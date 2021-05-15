@@ -47,7 +47,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         ///     The update value action.
         /// </value>
         [NotNull]
-        private protected Action UpdateValueProperty { get; set; }
+        private protected Action UpdateValueProperty { get; set; } = null!;
 
         /// <summary>
         ///     Gets or sets the silent update value action.
@@ -56,7 +56,16 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         ///     The silent update value action.
         /// </value>
         [NotNull]
-        private protected Action UpdateValueField { get; set; }
+        private protected Action UpdateValueField { get; set; } = null!;
+
+
+        /// <summary>
+        ///     Gets or sets the reset value property.
+        /// </summary>
+        /// <value>
+        ///     The reset value property.
+        /// </value>
+        private protected Action ResetValueProperty { get; set; } = null!;
 
         /// <summary>
         ///     Occurs when a property value changes.
@@ -74,6 +83,11 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// The action.
         /// </summary>
         protected override void OnAction() => this.UpdateValueProperty.Raise();
+
+        /// <summary>
+        /// Called when [deactivate].
+        /// </summary>
+        protected override void OnDeactivate() => this.ResetValueProperty.Raise();
 
         /// <summary>
         ///     Called when [property changed].

@@ -14,7 +14,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     ///     The I Property Reference Observer Builder On Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>, IObserverBuilderSchedulerBase<IBuilder<TResult>>
+    public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>, ISchedulerBase<IBuilder<TResult>>
         where TResult : class
     {
         /// <summary>

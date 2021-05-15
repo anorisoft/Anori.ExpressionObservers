@@ -11,10 +11,10 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfNullT{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderSchedulerBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfNullT{TResult}}" />
+    /// <seealso cref="ISchedulerBase{TSelf}.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfNullT{TResult}}" />
     public interface IBuilderWithActionOfNullT<TResult> : IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>,
-                                                          IObserverBuilderSchedulerBase<
-                                                              IBuilderWithActionOfNullT<TResult>>
+                                                          ISchedulerBase<IBuilderWithActionOfNullT<TResult>>,
+                                                          IDeferBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -24,11 +24,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     The Property Observer.
         /// </returns>
         INotifyValuePropertyObserver<TResult> Build();
-
-        /// <summary>
-        ///     Deferreds this instance.
-        /// </summary>
-        /// <returns></returns>
-        IBuilderWithActionOfNullTAndDeferrer<TResult> Deferred();
     }
 }

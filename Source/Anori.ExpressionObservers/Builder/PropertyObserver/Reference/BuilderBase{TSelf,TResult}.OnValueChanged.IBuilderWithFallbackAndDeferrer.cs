@@ -15,40 +15,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="BuilderBase{TSelf}" />
-    /// <seealso
-    ///     cref="IBuilderOnNotifyPropertyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithAction{TResult}" />
-    /// <seealso cref="IBuilder{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnNotifyPropertyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso cref="IBuilderOnValueChanged{TResult}" />
-    /// <seealso cref="IBuilderWithAction{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithFallbackAndDeferrer<TResult>
     {
         /// <summary>

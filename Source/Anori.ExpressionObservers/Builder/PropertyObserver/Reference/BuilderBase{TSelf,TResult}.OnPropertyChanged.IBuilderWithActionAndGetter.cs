@@ -61,7 +61,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult> IObserverBuilderSchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult> IObserverBuilderSchedulerBase<IBuilderWithActionAndGetter<TResult>>.
+        IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.
             WithScheduler(
                 TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
@@ -82,7 +82,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         /// The Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IBuilderWithActionAndGetter<TResult>.Deferred() => this;
+        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.Deferred() => this;
 
         /// <summary>
         ///     Cacheds the specified safety mode.
@@ -91,7 +91,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult> IObserverBuilderCacheBase<IBuilderWithActionAndGetter<TResult>>.Cached(
+        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.Cached(
             LazyThreadSafetyMode safetyMode) =>
             this.Cached(safetyMode);
 
@@ -101,7 +101,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult> IObserverBuilderCacheBase<IBuilderWithActionAndGetter<TResult>>.Cached() => this.Cached();
+        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.Cached() => this.Cached();
 
 
     }

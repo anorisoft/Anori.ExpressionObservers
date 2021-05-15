@@ -25,15 +25,15 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionOfNullT<TResult> :
-        ObserverBase<INotifyReferencePropertyObserver<TResult>, TResult>,
+        ObserverOnValueChangedBase<INotifyReferencePropertyObserver<TResult>, TResult>,
         INotifyReferencePropertyObserver<TResult>
         where TResult : class
     {
         /// <summary>
-        ///     The action.
+        ///     The valueChangedAction.
         /// </summary>
         [NotNull]
-        private readonly Action<TResult?> action;
+        private readonly Action<TResult?, TResult?> valueChangedAction;
 
         /// <summary>
         ///     The getter.
@@ -42,7 +42,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     The silent action.
+        ///     The silent valueChangedAction.
         /// </summary>
         [NotNull]
         private readonly Action silentAction;
@@ -51,19 +51,19 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
+        /// <param name="action">The valueChangedAction.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">valueChangedAction</exception>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithActionOfNullT(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action,
+            [NotNull] Action<TResult?, TResult?> action,
             [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateGetter(this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler));
         }
 
@@ -71,10 +71,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
+        /// <param name="action">The valueChangedAction.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">valueChangedAction</exception>
         internal ObserverWithActionOfNullT(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
@@ -82,7 +82,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateNullableReferenceGetter(
                 this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext));
         }
@@ -91,24 +91,18 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     Initializes a new instance of the <see cref="ObserverWithActionOfNullT{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
+        /// <param name="action">The valueChangedAction.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action</exception>
+        /// <exception cref="ArgumentNullException">valueChangedAction</exception>
         internal ObserverWithActionOfNullT(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
+            this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateNullableReferenceGetter(this.CreateGetter(Getter(propertyExpression, this.Tree)));
         }
-
-        /// <summary>
-        ///     Occurs when a property value changes.
-        /// </summary>
-        /// <returns></returns>
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets the value.
@@ -119,9 +113,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         public TResult? Value => this.getter();
 
         /// <summary>
-        ///     On the action.
+        ///     On the valueChangedAction.
         /// </summary>
-        protected override void OnAction() => this.action(this.getter());
+        protected override void OnAction() => this.valueChangedAction(this.getter());
 
         /// <summary>
         ///     Called when [silent activate].
@@ -137,12 +131,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
             ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
 
-        /// <summary>
-        ///     Called when [property changed].
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged.Raise(this, propertyName);
+      
     }
 }

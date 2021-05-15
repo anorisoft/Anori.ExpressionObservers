@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IObserverBuilderCacheBase.cs" company="AnoriSoft">
+// <copyright file="ICacheBase.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,7 +8,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
 {
     using Anori.Common;
 
-    public interface IObserverBuilderCacheBase<out TSelf>
+    /// <summary>
+    /// The Cache Base interface.
+    /// </summary>
+    /// <typeparam name="TSelf">The type of the self.</typeparam>
+    public interface ICacheBase<out TSelf>
     {
         /// <summary>
         ///     Cacheds the specified safety mode.
@@ -24,6 +28,14 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         ///     The Property Value Observer Builder.
         /// </returns>
         TSelf Cached();
-       
+    }
+
+
+    public interface IDeferBase<out TTarget>
+    {
+        /// <summary>
+        /// Deferreds this instance.
+        /// </summary>
+        TTarget Deferred();
     }
 }

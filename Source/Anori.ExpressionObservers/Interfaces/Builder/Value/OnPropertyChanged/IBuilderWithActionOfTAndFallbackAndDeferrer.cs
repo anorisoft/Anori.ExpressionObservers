@@ -11,11 +11,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallbackAndDeferrer{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderSchedulerBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallbackAndDeferrer{TResult}}" />
+    /// <seealso cref="ISchedulerBase{TSelf}.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallbackAndDeferrer{TResult}}" />
     public interface IBuilderWithActionOfTAndFallbackAndDeferrer<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>,
 
-        IObserverBuilderSchedulerBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>
+        ISchedulerBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>

@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         /// The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionOfTAndDeferrer<TResult> IBuilderWithActionOfT<TResult>.Deferred()
+        IBuilderWithActionOfTAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfTAndDeferrer<TResult>>.Deferred()
             => this;
     }
 }

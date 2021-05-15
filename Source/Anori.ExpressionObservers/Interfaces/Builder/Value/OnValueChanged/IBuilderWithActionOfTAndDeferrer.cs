@@ -8,7 +8,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
     public interface IBuilderWithActionOfTAndDeferrer<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndDeferrer<TResult>>,
-        IObserverBuilderSchedulerBase<IBuilderWithActionOfTAndDeferrer<TResult>>
+        ISchedulerBase<IBuilderWithActionOfTAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>

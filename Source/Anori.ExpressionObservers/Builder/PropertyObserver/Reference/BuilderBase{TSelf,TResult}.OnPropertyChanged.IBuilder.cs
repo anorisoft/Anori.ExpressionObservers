@@ -35,7 +35,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilder<TResult> IObserverBuilderCacheBase<IBuilder<TResult>>.Cached() => this.Cached();
+        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached() => this.Cached();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilder<TResult> IObserverBuilderCacheBase<IBuilder<TResult>>.Cached(LazyThreadSafetyMode safetyMode) => this.Cached(safetyMode);
+        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached(LazyThreadSafetyMode safetyMode) => this.Cached(safetyMode);
 
         /// <summary>
         ///     Withes the action.
@@ -71,7 +71,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilder<TResult> IObserverBuilderSchedulerBase<IBuilder<TResult>>.
+        IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.
             WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
@@ -92,7 +92,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilder<TResult> IObserverBuilderSchedulerBase<IBuilder<TResult>>.WithScheduler(
+        IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.WithScheduler(
             TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

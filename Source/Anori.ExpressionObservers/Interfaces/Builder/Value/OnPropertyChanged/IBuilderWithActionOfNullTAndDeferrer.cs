@@ -10,11 +10,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// The Builder With Action Of Null T And Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfNullTAndDeferrer{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfNullTAndDeferrer{TResult}}" />
     public interface IBuilderWithActionOfNullTAndDeferrer<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>,
-        IObserverBuilderSchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
+        ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>

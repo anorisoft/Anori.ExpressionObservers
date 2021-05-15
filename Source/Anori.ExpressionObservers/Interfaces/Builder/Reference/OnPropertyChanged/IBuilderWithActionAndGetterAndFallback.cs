@@ -12,7 +12,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionAndGetterAndFallback<out TResult> :
         IObserverBuilderBase<IBuilderWithActionAndGetterAndFallback<TResult>>,
-        IObserverBuilderSchedulerBase<IBuilderWithActionAndGetterAndFallback<TResult>>
+        ISchedulerBase<IBuilderWithActionAndGetterAndFallback<TResult>>,
+        IDeferBase<IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -20,12 +21,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <returns>Property Observer With Getter And Fallback.</returns>
         IGetterPropertyObserver<TResult> Build();
-
-        /// <summary>
-        /// Deferreds this instance.
-        /// </summary>
-        /// <returns>The Property Observer Builder.</returns>
-        IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult> Deferred();
-
     }
 }

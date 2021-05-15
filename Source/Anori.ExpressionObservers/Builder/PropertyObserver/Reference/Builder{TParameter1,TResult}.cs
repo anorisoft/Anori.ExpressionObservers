@@ -648,7 +648,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         {
             throw new NotImplementedException();
         }
-        protected override INotifyReferencePropertyObserverWithDeferrer<TResult> CreateReferencePropertyObserverWithDeferrer()
+        protected override INotifyReferencePropertyObserverWithDeferrer<TResult> CreateNotifyPropertyObserverWithActionOfTNullAndDeferrer()
         {
             throw new NotImplementedException();
         }

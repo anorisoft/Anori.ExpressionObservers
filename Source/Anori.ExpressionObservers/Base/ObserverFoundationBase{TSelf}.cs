@@ -642,5 +642,15 @@ namespace Anori.ExpressionObservers.Base
 
             return get;
         }
+
+        protected Action CreateValueResetter(Action action)
+        {
+            if (this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated))
+            {
+                return () => { };
+            }
+
+            return action;
+        }
     }
 }

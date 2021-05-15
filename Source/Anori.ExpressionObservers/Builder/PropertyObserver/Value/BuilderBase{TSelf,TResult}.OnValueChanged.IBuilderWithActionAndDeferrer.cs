@@ -34,7 +34,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Property Value Observer On Notify Property Changed.
         /// </returns>
         INotifyValuePropertyObserverWithDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.Build() =>
-            this.CreateNotifyPropertyObserverWithActionAndDeferrer();
+            this.CreateNotifyValuePropertyObserverWithActionAndDeferrer();
 
         /// <summary>
         ///     Withes the fallback.
@@ -53,7 +53,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderSchedulerBase<IBuilderWithActionAndDeferrer<TResult>>.
+        IBuilderWithActionAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionAndDeferrer<TResult>>.
             WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
@@ -64,7 +64,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderSchedulerBase<IBuilderWithActionAndDeferrer<TResult>>.
+        IBuilderWithActionAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionAndDeferrer<TResult>>.
             WithScheduler(TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

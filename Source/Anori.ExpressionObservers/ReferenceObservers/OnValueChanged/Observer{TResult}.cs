@@ -8,16 +8,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -30,19 +27,15 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     ///     cref="CachedObserver{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class Observer<TResult> : ObserverBase<INotifyReferencePropertyObserver<TResult>, TResult>,
-                                              INotifyReferencePropertyObserver<TResult>
+    internal sealed class Observer<TResult> :
+        ObserverOnValueChangedBase<INotifyReferencePropertyObserver<TResult>, TResult>,
+        INotifyReferencePropertyObserver<TResult>
         where TResult : class
     {
         /// <summary>
-        ///     The action.
-        /// </summary>
-        [NotNull]
-        private readonly Action action;
-
-        /// <summary>
         ///     The getter.
         /// </summary>
+        [NotNull]
         private readonly Func<TResult?> getValue;
 
         /// <summary>
@@ -50,19 +43,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// </summary>
         private TResult? value;
 
-
         /// <summary>
-        /// The silent action.
-        /// </summary>
-        [NotNull] private readonly Action silentAction;
-
-        /// <summary>
-        ///     Called when [silent activate].
-        /// </summary>
-        protected override void OnSilentActivate() => this.silentAction.Raise();
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
@@ -76,12 +58,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         {
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
             var taskFactory = new TaskFactory(taskScheduler);
-            this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.UpdateValueProperty = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
@@ -93,12 +77,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(propertyExpression, observerFlag)
         {
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
-            this.action = () => synchronizationContext.Send(() => this.Value = get());
+            this.UpdateValueProperty = () => synchronizationContext.Send(() => this.Value = get());
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Observer{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="Observer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
@@ -106,15 +92,11 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(propertyExpression, observerFlag)
         {
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
-            this.action = () => this.Value = get();
+            this.UpdateValueProperty = () => this.Value = get();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
-
-        /// <summary>
-        ///     Occurs when a property value changes.
-        /// </summary>
-        /// <returns></returns>
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets the value.
@@ -140,11 +122,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     On the action.
-        /// </summary>
-        protected override void OnAction() => this.action();
-
-        /// <summary>
         ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -154,13 +131,5 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// </returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
             ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
-
-        /// <summary>
-        ///     Called when [property changed].
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged.Raise(this, propertyName);
     }
 }

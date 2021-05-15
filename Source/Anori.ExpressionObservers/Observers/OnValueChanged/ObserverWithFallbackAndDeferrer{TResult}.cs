@@ -66,7 +66,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetProperty(() => this.value);
-            this.ResetValueProperty = () => this.Value = fallback;
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetProperty(() => this.value);
-            this.ResetValueProperty = () => this.Value = fallback;
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetProperty(() => this.value);
-            this.ResetValueProperty = () => this.Value = fallback;
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
 
         /// <summary>

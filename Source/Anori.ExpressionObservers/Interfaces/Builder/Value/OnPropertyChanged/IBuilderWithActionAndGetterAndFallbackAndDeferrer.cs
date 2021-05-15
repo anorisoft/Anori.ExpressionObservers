@@ -6,9 +6,13 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
+    /// <summary>
+    ///     The Builder With Action And Getter And Fallback And Deferrer interface.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionAndGetterAndFallbackAndDeferrer<out TResult> :
         IObserverBuilderBase<IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>>,
-    IObserverBuilderSchedulerBase<IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>>
+        ISchedulerBase<IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>

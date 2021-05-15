@@ -33,10 +33,11 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         INotifyValuePropertyObserver<TResult>
         where TResult : struct
     {
+
         /// <summary>
-        ///     The getter.
+        /// The get value.
         /// </summary>
-        private readonly Func<TResult?> getter;
+        [NotNull] private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     The value changed action.
@@ -69,7 +70,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             var taskFactory = new TaskFactory(taskScheduler);
             this.UpdateValueProperty = () => taskFactory.StartNew(() => this.Value = get()).Wait();
             this.UpdateValueField = () => taskFactory.StartNew(() => this.value = get()).Wait();
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.UpdateValueProperty = () => synchronizationContext.Send(() => this.Value = get());
             this.UpdateValueField = () => synchronizationContext.Send(() => this.value = get());
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
@@ -111,7 +112,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.UpdateValueProperty = () => this.Value = get();
             this.UpdateValueField = () => this.value = get();
-            this.getter = this.CreateGetPropertyNullableValue(() => this.value);
+            this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
         }
 
         /// <summary>
@@ -123,7 +124,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         public TResult? Value
         {
 #pragma warning disable S4275 // Getters and setters should access the expected fields
-            get => this.getter();
+            get => this.getValue();
 #pragma warning restore S4275 // Getters and setters should access the expected fields
             private set
             {

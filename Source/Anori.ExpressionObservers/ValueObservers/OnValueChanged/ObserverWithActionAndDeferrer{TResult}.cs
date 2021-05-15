@@ -37,12 +37,12 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
-        private readonly UpdateableMultipleDeferrer deferrer;
+        [NotNull] private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
         ///     The getValue.
         /// </summary>
-        private readonly Func<TResult?> getValue;
+        [NotNull] private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     The value changed action.

@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionOfNullTAndGetterAndDeferrer<out TResult> :
         IObserverBuilderBase<IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>>,
-    IObserverBuilderSchedulerBase<IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>>
+    ISchedulerBase<IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>>
         where TResult : class
     {
         /// <summary>

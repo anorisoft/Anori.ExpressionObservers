@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionAndGetter.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionAndGetterAndDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,7 +14,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
 
     /// <summary>
-    /// The Builder Base class.
+    ///     The Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -24,8 +24,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Automatics the activate.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
-            AutoActivate() =>
+        IBuilderWithActionAndGetterAndDeferrer<TResult>
+            IObserverBuilderBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -36,12 +36,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </returns>
         IGetterValuePropertyObserverWithDeferrer<TResult> IBuilderWithActionAndGetterAndDeferrer<TResult>.Build()
         {
-            if (this.IsCached)
-            {
-                return this.CreateGetterValuePropertyObserverCachedAndDeferrer();
-            }
-
-            return this.CreateGetterValuePropertyObserverAndDeferrer();
+            return this.IsCached
+                       ? this.CreateGetterValuePropertyObserverCachedAndDeferrer()
+                       : this.CreateGetterValuePropertyObserverAndDeferrer();
         }
 
         /// <summary>
@@ -51,7 +48,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IBuilderWithActionAndGetterAndDeferrer<TResult>.Cached(
+        IBuilderWithActionAndGetterAndDeferrer<TResult> ICacheBase< IBuilderWithActionAndGetterAndDeferrer<TResult>>.Cached(
             LazyThreadSafetyMode safetyMode) =>
             this.Cached(safetyMode);
 
@@ -61,7 +58,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IBuilderWithActionAndGetterAndDeferrer<TResult>.Cached() => this.Cached();
+        IBuilderWithActionAndGetterAndDeferrer<TResult> ICacheBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.Cached() =>
+            this.Cached();
 
         /// <summary>
         ///     Withes the fallback.
@@ -81,7 +79,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Property Value Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndDeferrer<TResult>
-            IObserverBuilderSchedulerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.WithGetterDispatcher() =>
+            ISchedulerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -92,7 +90,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndDeferrer<TResult>
-            IObserverBuilderSchedulerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.WithScheduler(
+            ISchedulerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.WithScheduler(
                 TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

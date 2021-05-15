@@ -6,14 +6,12 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
-    using Anori.Common;
-
     /// <summary>
     ///     The Value Property Observer Builder With Action interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithAction<TResult> : IObserverBuilderBase<IBuilderWithAction<TResult>>,
-                                                   IObserverBuilderCacheBase<IBuilderWithAction<TResult>>
+                                                   ICacheBase<IBuilderWithAction<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -21,7 +19,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <returns>The Property Observer.</returns>
         IPropertyObserver<TResult> Build();
-        
+
         /// <summary>
         ///     Deferreds this instance.
         /// </summary>

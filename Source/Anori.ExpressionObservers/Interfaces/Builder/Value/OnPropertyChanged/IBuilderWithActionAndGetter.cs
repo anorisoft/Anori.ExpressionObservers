@@ -6,8 +6,6 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
-    using Anori.Common;
-
     /// <summary>
     ///     The Property Value Observer Builder With Action And Getter interface.
     /// </summary>
@@ -17,7 +15,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// <seealso
     ///     cref="IPropertyObserverScheduler{TTarget}.ExpressionObservers.Interfaces.IPropertyValueObserverBuilderWithAction{TResult}}" />
     public interface IBuilderWithActionAndGetter<TResult> : IObserverBuilderBase<IBuilderWithActionAndGetter<TResult>>,
-                                                            IObserverBuilderSchedulerBase<IBuilderWithActionAndGetter<TResult>>
+                                                            ISchedulerBase<IBuilderWithActionAndGetter<TResult>>,
+                                                            ICacheBase<IBuilderWithActionAndGetter<TResult>>,
+                                                            IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -27,23 +27,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         IGetterValuePropertyObserver<TResult> Build();
 
         /// <summary>
-        ///     Cacheds the specified safety mode.
-        /// </summary>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        IBuilderWithActionAndGetter<TResult> Cached(LazyThreadSafetyMode safetyMode);
-
-        /// <summary>
-        ///     Cacheds this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        IBuilderWithActionAndGetter<TResult> Cached();
-
-        /// <summary>
         ///     Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
@@ -51,13 +34,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetterAndFallback<TResult> WithFallback(TResult fallback);
-
-        /// <summary>
-        ///     Deferreds this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Value Property Observer Builder.
-        /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> Deferred();
     }
 }

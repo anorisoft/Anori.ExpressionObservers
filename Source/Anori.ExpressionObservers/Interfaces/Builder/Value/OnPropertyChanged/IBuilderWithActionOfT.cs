@@ -10,11 +10,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     ///     The I Property Value Observer Builder With Action Of T Result interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfT{TResult}}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyValueObserverBuilderWithActionOfT{TResult}}" />
-    public interface IBuilderWithActionOfT<TResult> : IObserverBuilderBase<IBuilderWithActionOfT<TResult>>
+    public interface IBuilderWithActionOfT<TResult> : IObserverBuilderBase<IBuilderWithActionOfT<TResult>>,
+                                                      IDeferBase<IBuilderWithActionOfTAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>
@@ -29,11 +26,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// </summary>
         /// <returns>The getter.</returns>
         IBuilderWithActionOfTAndGetter<TResult> WithGetter();
-
-        /// <summary>
-        ///     Deferreds this instance.
-        /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
-        IBuilderWithActionOfTAndDeferrer<TResult> Deferred();
     }
 }

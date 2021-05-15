@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionOfTAndFallback<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallback<TResult>>,
-        IObserverBuilderSchedulerBase<IBuilderWithActionOfTAndFallback<TResult>>
+        ISchedulerBase<IBuilderWithActionOfTAndFallback<TResult>>
         where TResult : class
     {
         /// <summary>

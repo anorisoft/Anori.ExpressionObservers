@@ -17,7 +17,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullTAndGetter<TResult>
+    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullTAndGetter<TResult> 
     {
         /// <summary>
         ///     Automatics the activate.
@@ -42,7 +42,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// Deferreds this instance.
         /// </summary>
         /// <returns></returns>
-        IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult> IBuilderWithActionOfNullTAndGetter<TResult>.Deferred() => this;
+        IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>>.Deferred() => this;
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -50,7 +50,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionOfNullTAndGetter<TResult> IObserverBuilderSchedulerBase<IBuilderWithActionOfNullTAndGetter<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionOfNullTAndGetter<TResult> ISchedulerBase<IBuilderWithActionOfNullTAndGetter<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionOfNullTAndGetter<TResult> IObserverBuilderSchedulerBase<IBuilderWithActionOfNullTAndGetter<TResult>>.WithScheduler(
+        IBuilderWithActionOfNullTAndGetter<TResult> ISchedulerBase<IBuilderWithActionOfNullTAndGetter<TResult>>.WithScheduler(
                 TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

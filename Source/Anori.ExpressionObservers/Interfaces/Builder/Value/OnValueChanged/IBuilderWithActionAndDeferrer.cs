@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IBuilderWithAction.cs" company="AnoriSoft">
+// <copyright file="IBuilderWithActionAndDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,14 +7,12 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
     /// <summary>
-    /// The Property Value Observer Builder With Action And Getter interface.
+    ///     The Property Value Observer Builder With Action And Getter interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithAction{TResult}}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithAction{TResult}}" />
     public interface IBuilderWithActionAndDeferrer<TResult> :
         IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>,
-    IObserverBuilderSchedulerBase<IBuilderWithActionAndDeferrer<TResult>>
+        ISchedulerBase<IBuilderWithActionAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>

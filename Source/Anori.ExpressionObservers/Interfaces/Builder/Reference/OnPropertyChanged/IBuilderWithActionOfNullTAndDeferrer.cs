@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
     public interface IBuilderWithActionOfNullTAndDeferrer<out TResult> : IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>,
-                                                                          IObserverBuilderSchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
+                                                                          ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
 
         where TResult : class
     {

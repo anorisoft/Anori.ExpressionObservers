@@ -18,46 +18,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="BuilderBase{TSelf}" />
-    /// <seealso
-    ///     cref="IBuilderOnNotifyPropertyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithScheduler{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnNotifyPropertyChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="Interfaces.Builder.Reference.OnPropertyChanged.IBuilderWithActionAndDispatcherGetterAndFallback{TResult}" />
-    /// <seealso cref="IBuilderWithAction{TResult}" />
-    /// <seealso cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso cref="IBuilderWithActionAndGetter{TResult}" />
-    /// <seealso cref="IBuilderOnValueChanged{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithAction{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndGetter{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderOnValueChangedAndDeferrer{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionAndGetterAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfTAndFallback{TResult}" />
-    /// <seealso
-    ///     cref="IBuilderWithActionOfNullT{TResult}" />
-    /// <seealso cref="IBuilder{TResult}" />
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithFallback<TResult>
     {
         /// <summary>
@@ -108,7 +68,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilderWithFallback<TResult> IObserverBuilderSchedulerBase<IBuilderWithFallback<TResult>>.
+        IBuilderWithFallback<TResult> ISchedulerBase<IBuilderWithFallback<TResult>>.
             WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
@@ -119,7 +79,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilderWithFallback<TResult> IObserverBuilderSchedulerBase<IBuilderWithFallback<TResult>>.
+        IBuilderWithFallback<TResult> ISchedulerBase<IBuilderWithFallback<TResult>>.
             WithScheduler(TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }

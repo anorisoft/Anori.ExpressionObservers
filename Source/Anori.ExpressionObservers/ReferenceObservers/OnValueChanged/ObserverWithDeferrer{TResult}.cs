@@ -68,6 +68,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
+
         }
 
         /// <summary>
@@ -92,6 +94,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
+
         }
 
         /// <summary>
@@ -116,6 +120,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
+
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithAction{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndDeferrer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,6 +12,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
@@ -29,13 +30,19 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     ///     cref="ObserverWithActionAndCachedGetter{TResult}" />
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class ObserverWithAction<TResult> :
-        ObserverOnValueChangedBase<INotifyReferencePropertyObserver<TResult>, TResult>,
-        INotifyReferencePropertyObserver<TResult>
+    internal sealed class ObserverWithActionAndDeferrer<TResult> :
+        ObserverOnValueChangedBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TResult>,
+        INotifyReferencePropertyObserverWithDeferrer<TResult>
         where TResult : class
     {
         /// <summary>
-        ///     The get value.
+        ///     The deferrer.
+        /// </summary>
+        [NotNull]
+        private readonly UpdateableMultipleDeferrer deferrer;
+
+        /// <summary>
+        ///     The getter.
         /// </summary>
         [NotNull]
         private readonly Func<TResult?> getValue;
@@ -52,14 +59,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         private TResult? value;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithAction(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?, TResult?> action,
             [NotNull] TaskScheduler taskScheduler,
@@ -69,21 +76,22 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
             var taskFactory = new TaskFactory(taskScheduler);
-            this.UpdateValueProperty = () => taskFactory.StartNew(() => this.Value = get()).Wait();
-            this.UpdateValueField = () => taskFactory.StartNew(() => this.value = get()).Wait();
+            this.deferrer = new UpdateableMultipleDeferrer(() => taskFactory.StartNew(() => this.Value = get()).Wait());
+            this.UpdateValueProperty = () => this.deferrer.Update();
+            this.UpdateValueField = () => taskFactory.StartNew(() => this.Value = get()).Wait();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithAction(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?, TResult?> action,
             [NotNull] SynchronizationContext synchronizationContext,
@@ -92,20 +100,21 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         {
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
-            this.UpdateValueProperty = () => synchronizationContext.Send(() => this.Value = get());
+            this.deferrer = new UpdateableMultipleDeferrer(() => synchronizationContext.Send(() => this.Value = get()));
+            this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => synchronizationContext.Send(() => this.value = get());
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithAction(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?, TResult?> action,
             PropertyObserverFlag observerFlag)
@@ -113,11 +122,20 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         {
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
-            this.UpdateValueProperty = () => this.Value = get();
+            this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = get());
+            this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is defer.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is defer; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
         ///     Gets the value.
@@ -145,6 +163,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
+        ///     Defers this instance.
+        /// </summary>
+        /// <returns>
+        ///     Disposable deferrer.
+        /// </returns>
+        public IDisposable Defer() => this.deferrer.Create();
+
+        /// <summary>
         ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -152,10 +178,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <returns>
         ///     The Getter.
         /// </returns>
-        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree)
-        {
-            var get = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
-            return () => get();
-        }
+        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
+            ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
     }
 }

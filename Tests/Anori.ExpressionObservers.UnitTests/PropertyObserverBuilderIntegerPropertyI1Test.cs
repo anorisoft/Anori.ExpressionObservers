@@ -138,12 +138,12 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, observes.Value);
 
             observes.Deactivate();
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
 
             instance.Class2.IntProperty = 3;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
         }
 
         [Test]
@@ -215,12 +215,12 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, observes.Value);
 
             observes.Deactivate();
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
 
             instance.Class2.IntProperty = 3;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
         }
 
         [Test]
@@ -255,12 +255,12 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, observes.Value);
 
             observes.Deactivate();
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
 
             instance.Class2.IntProperty = 3;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
         }
 
         [Test]
@@ -292,12 +292,12 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, observes.Value);
 
             observes.Deactivate();
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
 
             instance.Class2.IntProperty = 3;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
         }
 
         [Test]
@@ -370,12 +370,12 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(2, observes.Value);
 
             observes.Deactivate();
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
 
             instance.Class2.IntProperty = 3;
-            Assert.AreEqual(2, callCount);
-            Assert.AreEqual(2, observes.Value);
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(null, observes.Value);
         }
 
         [Test]

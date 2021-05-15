@@ -17,8 +17,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : BuilderBase<TSelf>
-        where TSelf : BuilderBase<TSelf, TResult>
-        where TResult : class
+        where TSelf : BuilderBase<TSelf, TResult> where TResult : class
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="Reference.BuilderBase{TSelf,TResult}" /> class.
@@ -128,7 +127,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         protected abstract IGetterReferencePropertyObserverWithDeferrer<TResult>
             CreateGetterReferencePropertyObserverAndDeferrer();
 
-
         /// <summary>
         ///     Creates the getter value property observer cached.
         /// </summary>
@@ -136,8 +134,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Property Value Observer.
         /// </returns>
         protected abstract IGetterReferencePropertyObserver<TResult> CreateGetterReferencePropertyObserverCached();
-
-
 
         /// <summary>
         ///     Creates the notify property observer with action and fallback.
@@ -172,6 +168,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         protected abstract INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrer();
+
+        /// <summary>
+        ///     Creates the notify property observer with action of t null and deferrer.
+        /// </summary>
+        /// <returns>
+        ///     The Property Reference Observer Builder.
+        /// </returns>
+        protected abstract INotifyReferencePropertyObserverWithDeferrer<TResult>
+            CreateNotifyPropertyObserverWithActionOfTNullAndDeferrer();
 
         /// <summary>
         ///     Creates the notify value property observer with fallback.
@@ -273,15 +278,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         protected abstract IGetterReferencePropertyObserverWithDeferrer<TResult>
             CreatePropertyReferenceObserverWithDeferrer();
-
-        /// <summary>
-        ///     Creates the reference property observer with deferrer.
-        /// </summary>
-        /// <returns>
-        ///     The Property Reference Observer.
-        /// </returns>
-        protected abstract INotifyReferencePropertyObserverWithDeferrer<TResult>
-            CreateReferencePropertyObserverWithDeferrer();
 
         /// <summary>
         ///     Withes the notify Property changed.

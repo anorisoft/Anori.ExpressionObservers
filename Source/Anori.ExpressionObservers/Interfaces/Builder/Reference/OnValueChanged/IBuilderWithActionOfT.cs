@@ -11,7 +11,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionOfT<TResult> : IObserverBuilderBase<IBuilderWithActionOfT<TResult>>,
-                                                      IObserverBuilderSchedulerBase<IBuilderWithActionOfT<TResult>>
+                                                      ISchedulerBase<IBuilderWithActionOfT<TResult>>
         where TResult : class
     {
         /// <summary>
