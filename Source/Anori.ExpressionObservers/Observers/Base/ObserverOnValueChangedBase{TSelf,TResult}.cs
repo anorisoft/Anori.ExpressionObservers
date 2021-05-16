@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Observers.OnValueChanged
+namespace Anori.ExpressionObservers.Observers.Base
 {
     using System;
     using System.ComponentModel;
@@ -41,18 +41,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        ///     Gets or sets the reset value property.
+        ///     Gets or sets the update value action.
         /// </summary>
         /// <value>
-        ///     The reset value property.
-        /// </value>
-        private protected Action ResetValueProperty { get; set; } = null!;
-
-        /// <summary>
-        ///     Gets or sets the update value property.
-        /// </summary>
-        /// <value>
-        ///     The update value property.
+        ///     The update value action.
         /// </value>
         [NotNull]
         private protected Action UpdateValueProperty { get; set; } = null!;
@@ -66,6 +58,15 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         [NotNull]
         private protected Action UpdateValueField { get; set; } = null!;
 
+
+        /// <summary>
+        ///     Gets or sets the reset value property.
+        /// </summary>
+        /// <value>
+        ///     The reset value property.
+        /// </value>
+        private protected Action ResetValueProperty { get; set; } = null!;
+
         /// <summary>
         ///     Occurs when a property value changes.
         /// </summary>
@@ -73,19 +74,20 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        ///     The action.
+        ///     Called when [silent activate].
+        /// </summary>
+        protected override void OnSilentActivate() => this.UpdateValueField.Raise();
+
+
+        /// <summary>
+        /// The action.
         /// </summary>
         protected override void OnAction() => this.UpdateValueProperty.Raise();
 
         /// <summary>
-        ///     Called when [deactivate].
+        /// Called when [deactivate].
         /// </summary>
         protected override void OnDeactivate() => this.ResetValueProperty.Raise();
-
-        /// <summary>
-        ///     Called when [silent activate].
-        /// </summary>
-        protected override void OnSilentActivate() => this.UpdateValueField.Raise();
 
         /// <summary>
         ///     Called when [property changed].

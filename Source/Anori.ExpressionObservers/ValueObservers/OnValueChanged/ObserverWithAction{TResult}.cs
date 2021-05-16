@@ -12,8 +12,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
@@ -24,20 +24,16 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Observer{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithAction<TResult> :
         ObserverOnValueChangedBase<INotifyValuePropertyObserver<TResult>, TResult>,
         INotifyValuePropertyObserver<TResult>
         where TResult : struct
     {
-
         /// <summary>
-        /// The get value.
+        ///     The get value.
         /// </summary>
-        [NotNull] private readonly Func<TResult?> getValue;
+        [NotNull]
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     The value changed action.
@@ -75,7 +71,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -151,7 +147,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <returns>
         ///     Getter.
         /// </returns>
-        private static Func<TResult?> Getter([NotNull] Expression<Func<TResult>> propertyExpression, [NotNull] IExpressionTree tree) =>
+        private static Func<TResult?> Getter(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree) =>
             ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, tree);
     }
 }

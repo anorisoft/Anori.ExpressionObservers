@@ -15,6 +15,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
 
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -24,7 +25,6 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="INotifyValuePropertyObserverWithDeferrer{TResult}" />
     internal sealed class ObserverWithDeferrer<TParameter1, TResult> :
         ObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         INotifyValuePropertyObserverWithDeferrer<TResult>
@@ -34,6 +34,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
+        [NotNull]
         private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
@@ -86,8 +87,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         {
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var get = ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
-            this.deferrer = new UpdateableMultipleDeferrer(
-                () => new TaskFactory(taskScheduler).StartNew(() => this.Value = get()).Wait());
+            var taskFactory = new TaskFactory(taskScheduler);
+            this.deferrer = new UpdateableMultipleDeferrer(() => taskFactory.StartNew(() => this.Value = get()).Wait());
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);

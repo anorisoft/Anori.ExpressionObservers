@@ -10,14 +10,13 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions;
+    using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -27,29 +26,16 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}, TParameter1, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}" />
     internal sealed class ObserverWithActionAndFallback<TParameter1, TResult> :
-        ObserverBase<INotifyPropertyObserver<TResult>, TParameter1, TResult>,
+        ObserverOnValueChangedBase<INotifyPropertyObserver<TResult>, TParameter1, TResult>,
         INotifyPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
         /// <summary>
         ///     The getter.
         /// </summary>
-        private readonly Func<TResult> getValue;
-
-        /// <summary>
-        ///     The action.
-        /// </summary>
         [NotNull]
-        private readonly Action notifyPropertyChangedAction;
-
-        /// <summary>
-        ///     The silent action.
-        /// </summary>
-        private readonly Action silentAction;
+        private readonly Func<TResult> getValue;
 
         /// <summary>
         ///     The action.
@@ -84,9 +70,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
-            this.notifyPropertyChangedAction = () => this.Value = get();
-            this.silentAction = () => this.value = get();
+            this.UpdateValueProperty = () => this.Value = get();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
 
         /// <summary>
@@ -114,9 +101,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
             var taskFactory = new TaskFactory(taskScheduler);
-            this.notifyPropertyChangedAction = () => taskFactory.StartNew(() => this.Value = get()).Wait();
-            this.silentAction = () => this.value = get();
+            this.UpdateValueProperty = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
 
         /// <summary>
@@ -143,16 +131,11 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
-            this.notifyPropertyChangedAction = () => synchronizationContext.Send(() => this.Value = get());
-            this.silentAction = () => this.value = get();
+            this.UpdateValueProperty = () => synchronizationContext.Send(() => this.Value = get());
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
-
-        /// <summary>
-        ///     Occurs when a property value changes.
-        /// </summary>
-        /// <returns></returns>
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets the value.
@@ -179,16 +162,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        ///     On the action.
-        /// </summary>
-        protected override void OnAction() => this.notifyPropertyChangedAction.Raise();
-
-        /// <summary>
-        ///     Called when [silent activate].
-        /// </summary>
-        protected override void OnSilentActivate() => this.silentAction.Raise();
-
-        /// <summary>
         ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -205,16 +178,8 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             var get = ExpressionGetter.CreateGetterByTree<TParameter1, TResult>(
                 propertyExpression.Parameters,
                 tree,
-                fallback);
+                fallback!);
             return () => get(parameter1);
         }
-
-        /// <summary>
-        ///     Called when [property changed].
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged.Raise(this, propertyName);
     }
 }

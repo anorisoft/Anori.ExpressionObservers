@@ -12,10 +12,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Observers.OnPropertyChanged;
-    using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
+    using Anori.ExpressionObservers.Observers.Base;
+    using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions.Threading;
 
@@ -25,10 +24,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="ObserverWithActionAndCachedGetter{TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithFallback<TResult> :
         ObserverOnValueChangedBase<INotifyPropertyObserver<TResult>, TResult>,
         INotifyPropertyObserver<TResult>

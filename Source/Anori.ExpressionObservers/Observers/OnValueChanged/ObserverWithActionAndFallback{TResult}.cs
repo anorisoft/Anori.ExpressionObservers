@@ -13,8 +13,8 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -30,6 +30,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <summary>
         ///     The getter.
         /// </summary>
+        [NotNull]
         private readonly Func<TResult> getValue;
 
         /// <summary>
@@ -149,19 +150,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
                 this.valueChangedAction(old, value);
                 this.OnPropertyChanged();
             }
-        }
-
-        /// <summary>
-        ///     On the action.
-        /// </summary>
-        protected override void OnAction()
-        {
-            if (!this.IsActive)
-            {
-                return;
-            }
-
-            this.UpdateValueProperty.Raise();
         }
 
         /// <summary>

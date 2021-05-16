@@ -14,7 +14,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Observers.OnPropertyChanged;
+    using Anori.ExpressionObservers.Observers.Base;
+    using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
+    using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -23,9 +25,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverOnValueChangedWithDeferrer{TResult}, TResult}" />
-    /// <seealso cref="INotifyReferencePropertyObserverWithDeferrer{TResult}" />
     internal sealed class ObserverWithFallbackAndDeferrer<TResult> :
         ObserverOnValueChangedBase<INotifyPropertyObserverWithDeferrer<TResult>, TResult>,
         INotifyPropertyObserverWithDeferrer<TResult>
@@ -62,10 +61,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
-            this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = getter());
+            var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
+            this.deferrer = new UpdateableMultipleDeferrer(() => this.Value = get());
             this.UpdateValueProperty = () => this.deferrer.Update();
-            this.UpdateValueField = () => this.value = getter();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
@@ -87,11 +86,11 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
+            var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
             this.deferrer = new UpdateableMultipleDeferrer(
-                () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
+                () => new TaskFactory(taskScheduler).StartNew(() => this.Value = get()).Wait());
             this.UpdateValueProperty = () => this.deferrer.Update();
-            this.UpdateValueField = () => this.value = getter();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
@@ -113,11 +112,11 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
-            var getter = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, this.Tree, fallback);
+            var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
             this.deferrer = new UpdateableMultipleDeferrer(
-                () => synchronizationContext.Send(() => this.Value = getter()));
+                () => synchronizationContext.Send(() => this.Value = get()));
             this.UpdateValueProperty = () => this.deferrer.Update();
-            this.UpdateValueField = () => this.value = getter();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
         }
@@ -158,5 +157,24 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// </summary>
         /// <returns>The deferrer.</returns>
         public IDisposable Defer() => this.deferrer.Create();
+
+
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        ///     The Getter.
+        /// </returns>
+        private static Func<TResult> Getter(
+            Expression<Func<TResult>> propertyExpression,
+            IExpressionTree tree,
+            TResult fallback)
+        {
+            var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback!);
+            return () => get();
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
+    using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
@@ -31,12 +33,12 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
-        private readonly UpdateableMultipleDeferrer deferrer;
+        [NotNull] private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
         ///     The getter.
         /// </summary>
-        private readonly Func<TResult> getValue;
+        [NotNull] private readonly Func<TResult> getValue;
 
         /// <summary>
         ///     The action.

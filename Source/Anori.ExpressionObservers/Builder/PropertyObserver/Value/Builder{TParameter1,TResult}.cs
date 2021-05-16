@@ -456,7 +456,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             INotifyPropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Fallback!.Value,
@@ -465,7 +465,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Fallback!.Value,
@@ -474,7 +474,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Fallback!.Value,

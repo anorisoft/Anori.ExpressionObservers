@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    internal sealed class ObserverWithDefer<TParameter1, TParameter2, TResult> :
+    internal sealed class ObserverWithDeferrer<TParameter1, TParameter2, TResult> :
         ObserverBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2, TResult>,
         INotifyReferencePropertyObserverWithDeferrer<TResult>
         where TResult : class
@@ -53,14 +53,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDeferrer{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        internal ObserverWithDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -77,7 +77,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDeferrer{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -85,7 +85,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        internal ObserverWithDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
@@ -104,7 +104,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithDeferrer{TParameter1,TParameter2,TResult}" /> class.
+        ///     <see cref="ObserverWithDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -112,7 +112,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithDefer(
+        internal ObserverWithDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,

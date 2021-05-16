@@ -391,7 +391,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             INotifyPropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TParameter2, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TParameter2, TResult>(
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
@@ -401,7 +401,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TParameter2, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TParameter2, TResult>(
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
@@ -411,7 +411,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TParameter2, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TParameter2, TResult>(
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
@@ -534,7 +534,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             INotifyReferencePropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ObserverWithDefer<TParameter1, TParameter2, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TParameter2, TResult>(
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
@@ -543,7 +543,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithDefer<TParameter1, TParameter2, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TParameter2, TResult>(
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
@@ -552,7 +552,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else
             {
-                observer = new ObserverWithDefer<TParameter1, TParameter2, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TParameter2, TResult>(
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,

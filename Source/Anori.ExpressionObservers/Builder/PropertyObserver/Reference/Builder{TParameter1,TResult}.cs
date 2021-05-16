@@ -361,7 +361,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             INotifyPropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Fallback!,
@@ -370,7 +370,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Fallback!,
@@ -379,7 +379,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else
             {
-                observer = new ObserverWithDeferWithFallback<TParameter1, TResult>(
+                observer = new ObserverWithFallbackAndDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.Fallback!,
@@ -495,7 +495,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             INotifyReferencePropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ObserverWithDefer<TParameter1, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     SynchronizationContext.Current,
@@ -503,7 +503,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithDefer<TParameter1, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.TaskScheduler,
@@ -511,7 +511,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             }
             else
             {
-                observer = new ObserverWithDefer<TParameter1, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.ObserverFlag);

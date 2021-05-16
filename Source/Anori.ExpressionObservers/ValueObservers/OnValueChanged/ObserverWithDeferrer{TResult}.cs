@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
 
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -22,9 +23,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     ///     Property Value Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverOnValueChangedBase{INotifyValuePropertyObserverWithDeferrer{TResult}, TResult}" />
-    /// <seealso cref="INotifyValuePropertyObserverWithDeferrer{TResult}" />
-    internal sealed class ObserverWithDeferrer<TResult> :
+     internal sealed class ObserverWithDeferrer<TResult> :
         ObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TResult>,
         INotifyValuePropertyObserverWithDeferrer<TResult>
         where TResult : struct
