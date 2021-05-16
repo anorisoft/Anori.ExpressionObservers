@@ -50,7 +50,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached(LazyThreadSafetyMode safetyMode) => this.Cached(safetyMode);
+        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached(LazyThreadSafetyMode safetyMode) =>
+            this.Cached(safetyMode);
 
         /// <summary>
         ///     Defers this instance.
@@ -69,7 +70,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </returns>
         IBuilderWithAction<TResult> IBuilder<TResult>.WithAction(Action action)
         {
-            this.ObserverMode = ObserverMode.OnValueChanged;
             return this.WithAction(action);
         }
 
@@ -80,11 +80,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action)
-        {
-            this.ObserverMode = ObserverMode.OnValueChanged;
-            return this.WithActionOfTTWithFallback((_, obj) => action(obj));
-        }
+        IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action) =>
+            this.WithActionOfTTWithFallback((_, obj) => action(obj));
 
         /// <summary>
         ///     Withes the action.
@@ -93,11 +90,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult, TResult> action)
-        {
-            this.ObserverMode = ObserverMode.OnValueChanged;
-            return this.WithActionOfTTWithFallback(action);
-        }
+        IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult, TResult> action) =>
+            this.WithActionOfTTWithFallback(action);
 
         /// <summary>
         ///     Withes the nullable action.
@@ -106,11 +100,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?> action)
-        {
-            this.ObserverMode = ObserverMode.OnValueChanged;
-            return this.WithActionOfTT((_, obj) => action(obj));
-        }
+        IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?> action) =>
+            this.WithActionOfTT((_, obj) => action(obj));
 
         /// <summary>
         ///     Withes the action.
@@ -119,11 +110,17 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?, TResult?> action)
-        {
-            this.ObserverMode = ObserverMode.OnValueChanged;
-            return this.WithActionOfTT(action);
-        }
+        IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?, TResult?> action) =>
+            this.WithActionOfTT(action);
+
+        /// <summary>
+        /// Withes the fallback.
+        /// </summary>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        /// The Property Observer Builder.
+        /// </returns>
+        IBuilderWithFallback<TResult> IBuilder<TResult>.WithFallback(TResult fallback) => WithFallback(fallback);
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -131,8 +128,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.WithGetterDispatcher() =>
-            this.WithGetterDispatcher();
+        IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.WithGetterDispatcher() => this.WithGetterDispatcher();
 
         /// <summary>
         ///     Withes the getter task scheduler.

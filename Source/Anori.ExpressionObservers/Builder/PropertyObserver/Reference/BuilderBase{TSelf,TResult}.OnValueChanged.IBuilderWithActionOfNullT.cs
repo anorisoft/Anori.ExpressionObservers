@@ -60,6 +60,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Deferreds this instance.
         /// </summary>
         /// <returns></returns>
-        IBuilderWithActionOfNullTAndDeferrer<TResult> IBuilderWithActionOfNullT<TResult>.Deferred() => this;
+        IBuilderWithActionOfNullTAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.Deferred() => this;
     }
 }

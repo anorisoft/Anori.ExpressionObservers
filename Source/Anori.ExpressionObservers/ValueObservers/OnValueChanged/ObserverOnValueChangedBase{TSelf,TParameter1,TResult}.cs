@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverOnValueChangedBase.cs" company="AnoriSoft">
+// <copyright file="ObserverOnValueChangedBase - Copy.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
+namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
 {
     using System;
     using System.ComponentModel;
@@ -18,25 +18,28 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     The Observer On Value Changed Base class.
+    /// The Observer On Value Changed Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
+    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.ObserverBase{TSelf, TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    internal abstract class ObserverOnValueChangedBase<TSelf, TResult> : ObserverBase<TSelf, TResult>,
-                                                                         INotifyPropertyChanged
+    internal abstract class
+        ObserverOnValueChangedBase<TSelf, TParameter1, TResult> : ObserverBase<TSelf, TParameter1, TResult>,
+                                                                  INotifyPropertyChanged
+        where TParameter1 : INotifyPropertyChanged
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverOnValueChangedBase{TSelf, TResult}" /> class.
+        /// Initializes a new instance of the <see cref="ObserverOnValueChangedBase{TSelf, TParameter1,TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="observerFlag">The observer flag.</param>
         protected ObserverOnValueChangedBase(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
         }
 

@@ -547,7 +547,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             INotifyValuePropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ObserverWithDefer<TParameter1, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     SynchronizationContext.Current,
@@ -555,7 +555,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithDefer<TParameter1, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.TaskScheduler,
@@ -563,7 +563,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else
             {
-                observer = new ObserverWithDefer<TParameter1, TResult>(
+                observer = new ObserverWithDeferrer<TParameter1, TResult>(
                     this.parameter1,
                     this.propertyExpression,
                     this.ObserverFlag);

@@ -77,7 +77,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = fallback);
-
         }
 
         /// <summary>

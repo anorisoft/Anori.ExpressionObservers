@@ -10,9 +10,9 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     ///     The I Property Reference Observer Builder With Action Of T Result interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-   public interface IBuilderWithActionOfNullT<TResult> :
-        IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>,
-    ISchedulerBase<IBuilderWithActionOfNullT<TResult>>
+    public interface IBuilderWithActionOfNullT<out TResult> : IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>,
+                                                              ISchedulerBase<IBuilderWithActionOfNullT<TResult>>,
+                                                              IDeferBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -22,12 +22,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         ///     The Property Observer.
         /// </returns>
         INotifyReferencePropertyObserver<TResult> Build();
-
-        /// <summary>
-        /// Deferreds this instance.
-        /// </summary>
-        /// <returns></returns>
-        IBuilderWithActionOfNullTAndDeferrer<TResult> Deferred();
-
     }
 }

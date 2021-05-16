@@ -8,13 +8,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
@@ -23,11 +20,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The Observer With Action And Fallback class.
+    ///     The Observer With Action And Fallback class.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Observers.OnValueChanged.ObserverOnValueChangedBase{Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.INotifyPropertyObserver{TResult}" />
     internal sealed class ObserverWithActionAndFallback<TResult> :
         ObserverOnValueChangedBase<INotifyPropertyObserver<TResult>, TResult>,
         INotifyPropertyObserver<TResult>
@@ -36,7 +31,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         ///     The getter.
         /// </summary>
         private readonly Func<TResult> getValue;
-        
+
         /// <summary>
         ///     The action.
         /// </summary>
@@ -168,7 +163,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
             this.UpdateValueProperty.Raise();
         }
-        
+
         /// <summary>
         ///     Getters the specified property expression.
         /// </summary>

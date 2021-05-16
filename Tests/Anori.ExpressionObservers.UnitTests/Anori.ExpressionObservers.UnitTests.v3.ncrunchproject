@@ -1,3 +1,16 @@
 ﻿<ProjectConfiguration>
-  <Settings />
+  <Settings>
+    <HiddenComponentWarnings />
+    <IgnoredTests>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.ExpressionGetterBuilderTests</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.ExpressionGetterTests</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.ExpressionTreeTests</FixtureName>
+      </FixtureTestSelector>
+    </IgnoredTests>
+  </Settings>
 </ProjectConfiguration>

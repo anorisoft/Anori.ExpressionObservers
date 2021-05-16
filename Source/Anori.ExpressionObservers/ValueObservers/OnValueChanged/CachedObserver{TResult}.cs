@@ -84,6 +84,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
                 isCached,
                 safetyMode,
                 () => this.OnPropertyChanged(nameof(this.Value)));
+            throw new Exception("dsfdsf");
         }
 
         /// <summary>

@@ -63,6 +63,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -83,8 +84,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             var taskFactory = new TaskFactory(taskScheduler);
             this.deferrer = new UpdateableMultipleDeferrer(() => taskFactory.StartNew(() => this.Value = get()).Wait());
             this.UpdateValueProperty = () => this.deferrer.Update();
-            this.UpdateValueField = () => taskFactory.StartNew(() => this.value = get()).Wait();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -106,6 +108,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => synchronizationContext.Send(() => this.value = get());
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -116,7 +119,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// </value>
         public TResult? Value
         {
+#pragma warning disable S4275 // Getters and setters should access the expected fields
             get => this.getValue();
+#pragma warning restore S4275 // Getters and setters should access the expected fields
             private set
             {
                 if (EqualityComparer<TResult?>.Default.Equals(value, this.value))

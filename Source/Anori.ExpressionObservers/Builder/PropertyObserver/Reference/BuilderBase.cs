@@ -309,15 +309,37 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
+        /// Withes the action of tt with fallback.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns></returns>
+        protected TSelf WithActionOfTTWithFallback(Action<TResult, TResult> action)
+        {
+            this.ActionOfTTWithFallback = action;
+            return (TSelf)this;
+        }
+
+        /// <summary>
         ///     Withes the action of t result.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        protected TSelf WithNullableAction(Action<TResult?> action)
+        protected TSelf WithNullableActionOfT(Action<TResult?> action)
         {
             this.ActionOfT = action;
+            return (TSelf)this;
+        }
+
+        /// <summary>
+        /// Withes the nullable action of tt.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns></returns>
+        protected TSelf WithNullableActionOfTT(Action<TResult?, TResult?> action)
+        {
+            this.ActionOfTT = action;
             return (TSelf)this;
         }
 

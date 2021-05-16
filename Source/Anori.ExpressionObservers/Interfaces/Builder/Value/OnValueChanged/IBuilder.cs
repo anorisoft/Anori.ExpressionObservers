@@ -68,5 +68,12 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?, TResult?> action);
+
+        /// <summary>
+        ///     Withes the fallback.
+        /// </summary>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>The Property Observer Builder.</returns>
+        IBuilderWithFallback<TResult> WithFallback(TResult fallback);
     }
 }

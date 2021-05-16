@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.OnPropertyChanged;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;

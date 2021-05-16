@@ -119,6 +119,9 @@
     <Compile Remove="Interfaces\IPropertyReferenceObserverOnNotifyProperyChanged{TResult}.cs" />
     <Compile Remove="ReferenceObservers\OnValueChanged\ObserverWithActionOfNullTAndDeferrer{TResult}.cs" />
     <Compile Remove="ReferenceObservers\OnValueChanged\ObserverWithActionOfNullT{TResult}.cs" />
+    <Compile Remove="ValueObservers\OnValueChanged\CachedObserver{TParameter1,TParameter2,TResult}.cs" />
+    <Compile Remove="ValueObservers\OnValueChanged\CachedObserver{TParameter1,TResult}.cs" />
+    <Compile Remove="ValueObservers\OnValueChanged\CachedObserver{TResult}.cs" />
     <Compile Remove="ValueObservers\OnValueChanged\ObserverWithActionOfNullT{TResult}.cs" />
   </ItemGroup>
 

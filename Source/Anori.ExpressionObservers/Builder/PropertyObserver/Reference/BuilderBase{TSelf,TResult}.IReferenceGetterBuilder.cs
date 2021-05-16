@@ -65,6 +65,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IReferenceObserverBuilder<TResult>.WithNullableAction(
             Action<TResult?> action) =>
-            this.WithNullableAction(action);
+            this.WithNullableActionOfT(action);
     }
 }

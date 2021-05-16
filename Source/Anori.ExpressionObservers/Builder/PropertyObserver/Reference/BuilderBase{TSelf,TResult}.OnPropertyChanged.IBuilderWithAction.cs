@@ -40,7 +40,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         /// The Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndDeferrer<TResult> IBuilderWithAction<TResult>.Deferred() => this;
+        IBuilderWithActionAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndDeferrer<TResult>>.Deferred() => this;
 
         /// <summary>
         ///     Withes the getter.

@@ -83,7 +83,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithNullableAction(Action<TResult?> action) =>
-            this.WithNullableAction(action);
+            this.WithNullableActionOfT(action);
 
         /// <summary>
         ///     Withes the getter task scheduler.

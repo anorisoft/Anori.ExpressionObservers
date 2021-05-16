@@ -77,6 +77,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => taskFactory.StartNew(() => this.Value = get()).Wait();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -100,6 +101,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => synchronizationContext.Send(() => this.value = get());
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -121,6 +123,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -173,6 +176,6 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         ///     Getter.
         /// </returns>
         private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
-            ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, tree);
+            () => ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, tree)();
     }
 }

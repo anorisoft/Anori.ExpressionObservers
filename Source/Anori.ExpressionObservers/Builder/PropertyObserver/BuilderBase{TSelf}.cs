@@ -38,14 +38,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         }
 
         /// <summary>
-        ///     Gets or sets the observer mode.
-        /// </summary>
-        /// <value>
-        ///     The observer mode.
-        /// </value>
-        private protected ObserverMode ObserverMode { get; set; } = ObserverMode.Default;
-
-        /// <summary>
         ///     Gets or sets the observer flag.
         /// </summary>
         /// <value>

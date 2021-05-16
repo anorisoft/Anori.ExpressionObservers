@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// Deferreds this instance.
         /// </summary>
         /// <returns></returns>
-        IBuilderWithActionAndFallbackAndDeferrer<TResult> IBuilderWithActionAndFallback<TResult>.Deferred() => this;
+        IBuilderWithActionAndFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndFallbackAndDeferrer<TResult>>.Deferred() => this;
 
         /// <summary>
         ///     Withes the getter dispatcher.

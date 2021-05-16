@@ -71,6 +71,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.UpdateValueProperty = () => taskFactory.StartNew(() => this.Value = get()).Wait();
             this.UpdateValueField = () => taskFactory.StartNew(() => this.value = get()).Wait();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -93,6 +94,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.UpdateValueProperty = () => synchronizationContext.Send(() => this.Value = get());
             this.UpdateValueField = () => synchronizationContext.Send(() => this.value = get());
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -113,6 +115,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             this.UpdateValueProperty = () => this.Value = get();
             this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableValue(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>

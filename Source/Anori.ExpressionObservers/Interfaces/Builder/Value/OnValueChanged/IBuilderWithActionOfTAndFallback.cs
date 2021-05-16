@@ -10,10 +10,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     ///     The Property Reference Observer Builder With Action Of T Result And Getter And Fallback interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="IObserverBuilderBase{TSelf}.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallback{TResult}}" />
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IPropertyObserverScheduler{Anori.ExpressionObservers.Interfaces.Builder.IPropertyReferenceObserverBuilderWithActionOfTAndGetterAndFallback{TResult}}" />
     public interface IBuilderWithActionOfTAndFallback<out TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallback<TResult>>,
         ISchedulerBase<IBuilderWithActionOfTAndFallback<TResult>>,

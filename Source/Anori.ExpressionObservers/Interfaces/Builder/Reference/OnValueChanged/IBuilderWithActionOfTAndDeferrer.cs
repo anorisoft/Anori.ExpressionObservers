@@ -10,8 +10,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// The I Builder With Action Of T And Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionOfTAndDeferrer{TResult}}" />
-    /// <seealso cref="ISchedulerBase{TSelf}.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged.IBuilderWithActionOfTAndDeferrer{TResult}}" />
     public interface IBuilderWithActionOfTAndDeferrer<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndDeferrer<TResult>>,
         ISchedulerBase<IBuilderWithActionOfTAndDeferrer<TResult>>

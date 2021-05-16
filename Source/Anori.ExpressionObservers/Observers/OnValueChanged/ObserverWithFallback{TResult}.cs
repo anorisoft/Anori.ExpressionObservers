@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.OnPropertyChanged;
     using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions.Threading;
