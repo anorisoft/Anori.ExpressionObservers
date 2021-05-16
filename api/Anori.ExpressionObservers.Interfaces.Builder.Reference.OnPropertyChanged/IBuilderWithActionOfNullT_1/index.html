@@ -180,10 +180,10 @@
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-        The I Property Value Observer Builder With Action Of T Result Nullable And Getter Task Scheduler interface.
+        The Builder With Action Of Null T interface.
     
 
-        The Builder With Action Of Null T interface.
+        The I Property Value Observer Builder With Action Of T Result Nullable And Getter Task Scheduler interface.
     </div>
 
 		<div class="panel panel-default">
@@ -224,10 +224,10 @@ class Type type-node
 		</div>
 
 	<h1 id="Syntax">Syntax</h1>
-	<pre><code>public interface IBuilderWithActionOfNullT&lt;TResult&gt; : 
-    IObserverBuilderBase&lt;IBuilderWithActionOfNullT&lt;TResult&gt;&gt;, 
-    ISchedulerBase&lt;IBuilderWithActionOfNullT&lt;TResult&gt;&gt;, 
-    IDeferBase&lt;IBuilderWithActionOfNullTAndDeferrer&lt;TResult&gt;&gt;
+	<pre><code>public interface IBuilderWithActionOfNullT&lt;out TResult&gt; : 
+    IObserverBuilderBase&lt;IBuilderWithActionOfNullT&lt;out TResult&gt;&gt;, 
+    ISchedulerBase&lt;IBuilderWithActionOfNullT&lt;out TResult&gt;&gt;, 
+    IDeferBase&lt;IBuilderWithActionOfNullTAndDeferrer&lt;out TResult&gt;&gt;
     where TResult : class</code></pre>
 
 
