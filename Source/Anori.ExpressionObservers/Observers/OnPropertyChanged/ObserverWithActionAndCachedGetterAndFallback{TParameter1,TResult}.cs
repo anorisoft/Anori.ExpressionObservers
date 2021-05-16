@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -50,7 +50,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -76,7 +76,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -104,7 +104,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -130,7 +130,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -157,7 +157,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -174,7 +174,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndChachedGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>

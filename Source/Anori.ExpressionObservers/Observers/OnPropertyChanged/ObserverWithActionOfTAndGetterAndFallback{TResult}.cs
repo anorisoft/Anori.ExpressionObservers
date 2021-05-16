@@ -145,7 +145,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             IExpressionTree tree,
             TResult fallback)
         {
-            var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback);
+            var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback!);
             return () => get();
         }
     }

@@ -158,13 +158,16 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         protected override void OnAction() => this.action(this.getter());
 
         /// <summary>
-        ///     Getters the specified property expression.
+        /// Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="parameter1">The parameter1.</param>
-        /// <returns>Getter.</returns>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <returns>
+        /// Getter.
+        /// </returns>
         private static Func<TResult> Getter(
             Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             IExpressionTree tree,
@@ -175,7 +178,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             var get = ExpressionGetter.CreateGetterByTree<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree,
-                fallback);
+                fallback!);
             return () => get(parameter1, parameter2);
         }
     }

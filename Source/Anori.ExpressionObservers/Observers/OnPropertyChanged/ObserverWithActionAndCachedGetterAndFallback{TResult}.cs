@@ -1,17 +1,16 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionAndCachedGetterAndDeferrer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndCachedGetterAndFallback{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
+namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 {
     using System;
     using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
@@ -24,10 +23,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    internal sealed class ObserverWithActionAndCachedGetterAndDeferrer<TResult> :
-        ObserverBase<IGetterValuePropertyObserverWithDeferrer<TResult>, TResult>,
-        IGetterValuePropertyObserverWithDeferrer<TResult>
-        where TResult : struct
+    /// <seealso
+    ///     cref="PropertyReferenceObserverOnNotifyPropertyChanged{TResult}" />
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
+    /// <seealso cref="ObserverFoundationBase" />
+    internal sealed class ObserverWithActionAndChachedGetterAndFallback<TResult> :
+        ObserverBase<IGetterPropertyObserver<TResult>, TResult>,
+        IGetterPropertyObserver<TResult>
     {
         /// <summary>
         ///     The action.
@@ -36,150 +38,162 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         private readonly Action action;
 
         /// <summary>
-        ///     The deferrer.
-        /// </summary>
-        private readonly UpdateableMultipleDeferrer deferrer;
-
-        /// <summary>
-        ///     The getValue.
+        ///     The getter.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult?> getValue;
+        private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ObserverWithActionAndCachedGetterAndDeferrer(
+        internal ObserverWithActionAndChachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
+            [NotNull] TResult fallback,
             PropertyObserverFlag propertyObserverFlag)
-            : this(propertyExpression, action, taskScheduler, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(
+                propertyExpression,
+                action,
+                taskScheduler,
+                fallback,
+                false,
+                LazyThreadSafetyMode.None,
+                propertyObserverFlag)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithActionAndCachedGetterAndDeferrer(
+        internal ObserverWithActionAndChachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TaskScheduler taskScheduler,
+            [NotNull] TResult fallback,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            Action updateAction;
-            (updateAction, this.getValue) = this.CreateNullableValueCachedGetter(
-                this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree), taskScheduler),
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(Getter(propertyExpression, this.Tree, fallback), taskScheduler),
                 isCached,
                 safetyMode,
                 action);
-            this.deferrer = new UpdateableMultipleDeferrer(updateAction);
-            this.action = () => this.deferrer.Update();
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ObserverWithActionAndCachedGetterAndDeferrer(
+        internal ObserverWithActionAndChachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] SynchronizationContext synchronizationContext,
-            bool isCached,
-            LazyThreadSafetyMode safetyMode,
+            [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
-        {
-            Action updateAction;
-            (updateAction, this.getValue) = this.CreateNullableValueCachedGetter(
-                this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree), synchronizationContext),
-                isCached,
-                safetyMode,
-                action);
-            this.deferrer = new UpdateableMultipleDeferrer(updateAction);
-            this.action = () => this.deferrer.Update();
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndDeferrer{TResult}" /> class.
-        /// </summary>
-        /// <param name="propertyExpression">The property expression.</param>
-        /// <param name="action">The action.</param>
-        /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ObserverWithActionAndCachedGetterAndDeferrer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
-            [NotNull] Action action,
-            PropertyObserverFlag propertyObserverFlag)
-            : this(propertyExpression, action, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(
+                propertyExpression,
+                action,
+                synchronizationContext,
+                fallback,
+                false,
+                LazyThreadSafetyMode.None,
+                observerFlag)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
+        /// <param name="synchronizationContext">The synchronization context.</param>
+        /// <param name="fallback">The fallback.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ObserverWithActionAndCachedGetterAndDeferrer(
+        internal ObserverWithActionAndChachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
+            [NotNull] SynchronizationContext synchronizationContext,
+            [NotNull] TResult fallback,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            Action updateAction;
-            (updateAction, this.getValue) = this.CreateNullableValueCachedGetter(
-                this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree)),
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(Getter(propertyExpression, this.Tree, fallback), synchronizationContext),
                 isCached,
                 safetyMode,
                 action);
-            this.deferrer = new UpdateableMultipleDeferrer(updateAction);
-            this.action = () => this.deferrer.Update();
         }
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is deferred.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
         /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDeferred => this.deferrer.IsDeferred;
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <param name="propertyObserverFlag">The property observer flag.</param>
+        internal ObserverWithActionAndChachedGetterAndFallback(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action,
+            [NotNull] TResult fallback,
+            PropertyObserverFlag propertyObserverFlag)
+            : this(propertyExpression, action, fallback, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="fallback">The fallback.</param>
+        /// <param name="isCached">if set to <c>true</c> [is cached].</param>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <param name="observerFlag">The observer flag.</param>
+        internal ObserverWithActionAndChachedGetterAndFallback(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] Action action,
+            [NotNull] TResult fallback,
+            bool isCached,
+            LazyThreadSafetyMode safetyMode,
+            PropertyObserverFlag observerFlag)
+            : base(propertyExpression, observerFlag)
+        {
+            (this.action, this.getter) = this.CreateCachedGetter(
+                this.CreateGetter(Getter(propertyExpression, this.Tree, fallback)),
+                isCached,
+                safetyMode,
+                action);
+        }
 
         /// <summary>
         ///     Gets the value.
         /// </summary>
-        /// <returns>The result.</returns>
-        public TResult? GetValue() => this.getValue();
-
-        /// <summary>
-        ///     Defers this instance.
-        /// </summary>
-        /// <returns>
-        ///     Disposable deferrer.
-        /// </returns>
-        public IDisposable Defer() => this.deferrer.Create();
+        /// <returns>The result value.</returns>
+        public TResult GetValue() => this.getter();
 
         /// <summary>
         ///     On the action.
@@ -192,7 +206,10 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <returns>Getter.</returns>
-        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
-            ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, tree);
+        private static Func<TResult> Getter(
+            Expression<Func<TResult>> propertyExpression,
+            IExpressionTree tree,
+            TResult fallback) =>
+            ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback);
     }
 }

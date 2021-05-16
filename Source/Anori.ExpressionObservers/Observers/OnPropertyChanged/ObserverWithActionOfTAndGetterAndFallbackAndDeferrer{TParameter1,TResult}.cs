@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionOfTAndGetterAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionOfTAndGetterAndFallbackAndDeferrer{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,6 +12,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Tree.Interfaces;
@@ -24,7 +25,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class ObserverWithActionOfTAndGetterAndFallback<TParameter1, TResult> :
+    internal sealed class ObserverWithActionOfTAndGetterAndFallbackAndDeferrer<TParameter1, TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TResult>,
         IGetterPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
@@ -33,7 +34,12 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     The action.
         /// </summary>
         [NotNull]
-        private readonly Action<TResult> action;
+        private readonly Action action;
+
+        /// <summary>
+        ///     The deferrer.
+        /// </summary>
+        private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
         ///     The getter.
@@ -43,7 +49,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndGetterAndFallback{TParameter1,TResult}" />
+        ///     <see cref="ObserverWithActionOfTAndGetterAndFallbackAndDeferrer{TParameter1,TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
@@ -58,7 +64,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal ObserverWithActionOfTAndGetterAndFallback(
+        internal ObserverWithActionOfTAndGetterAndFallbackAndDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
@@ -66,13 +72,14 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getter()));
+            this.action = () => this.deferrer.Update();
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     <see cref="ObserverWithActionOfTAndGetterAndFallbackAndDeferrer{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -87,7 +94,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal ObserverWithActionOfTAndGetterAndFallback(
+        internal ObserverWithActionOfTAndGetterAndFallbackAndDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
@@ -96,13 +103,14 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1), taskScheduler);
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getter()));
+            this.action = () => this.deferrer.Update();
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionOfTAndGetterAndFallback{TParameter1,TResult}" /> class.
+        ///     <see cref="ObserverWithActionOfTAndGetterAndFallbackAndDeferrer{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -117,7 +125,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal ObserverWithActionOfTAndGetterAndFallback(
+        internal ObserverWithActionOfTAndGetterAndFallbackAndDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult> action,
@@ -126,11 +134,28 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            this.action = action ?? throw new ArgumentNullException(nameof(action));
             this.getter = this.CreateGetter(
                 Getter(propertyExpression, this.Tree, fallback, parameter1),
                 synchronizationContext);
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getter()));
+            this.action = () => this.deferrer.Update();
         }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is deferred.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDeferred => this.deferrer.IsDeferred;
+
+        /// <summary>
+        ///     Defers this instance.
+        /// </summary>
+        /// <returns>
+        ///     Disposable deferrer.
+        /// </returns>
+        public IDisposable Defer() => this.deferrer.Create();
 
         /// <summary>
         ///     Gets the value.
@@ -139,11 +164,11 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     The value.
         /// </returns>
         public TResult GetValue() => this.getter();
-
+        
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.action(this.getter());
+        protected override void OnAction() => this.action();
 
         /// <summary>
         ///     Getters the specified property expression.
