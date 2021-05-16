@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/Anori.ExpressionObservers/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/Anori.ExpressionObservers/assets/img/favicon.ico" type="image/x-icon">
-        <title>Anori.ExpressionObservers - API - IBuilderWithAction&lt;TResult&gt;.Deferred() Method</title>
+        <title>Anori.ExpressionObservers - API - IBuilder&lt;TResult&gt;.WithNullableAction(Action&lt;TResult?, TResult?&gt;) Method</title>
         <link href="/Anori.ExpressionObservers/assets/css/highlight.css" rel="stylesheet">
         <link href="/Anori.ExpressionObservers/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="/Anori.ExpressionObservers/assets/css/adminlte/AdminLTE.css" rel="stylesheet">
@@ -74,6 +74,7 @@
                     	
 	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#Summary">Summary</a></p>
 <p><a href="#Syntax">Syntax</a></p>
+<p><a href="#Parameters">Parameters</a></p>
 <p><a href="#ReturnValue">Return Value</a></p>
 <hr class="infobar-hidden">
 </div>
@@ -134,14 +135,17 @@
                     <ul class="sidebar-menu">
                         
 			<li class="header">Namespace</li>
-		<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged">Anori<wbr>.ExpressionObservers<wbr>.Interfaces<wbr>.Builder<wbr>.Value<wbr>.OnPropertyChanged</a></li>
+		<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged">Anori<wbr>.ExpressionObservers<wbr>.Interfaces<wbr>.Builder<wbr>.Reference<wbr>.OnValueChanged</a></li>
 		<li class="header">Type</li>
-		<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1">IBuilderWithAction<wbr>&lt;TResult&gt;<wbr></a></li>
+		<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1">IBuilder<wbr>&lt;TResult&gt;<wbr></a></li>
 		<li role="separator" class="divider"></li>
 			<li class="header">Method Members</li>
-				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1/3DD8A46F">Build<wbr>()<wbr></a></li>
-				<li class="selected"><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1/6B4C0D66">Deferred<wbr>()<wbr></a></li>
-				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1/B8942B19">WithGetter<wbr>()<wbr></a></li>
+				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1/45F905B4">Build<wbr>()<wbr></a></li>
+				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1/A4066E13">WithAction<wbr>(Action)<wbr></a></li>
+				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1/E43BBD1D">WithAction<wbr>(Action<wbr>&lt;TResult&gt;<wbr>)<wbr></a></li>
+				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1/F10AEFC7">WithAction<wbr>(Action<wbr>&lt;TResult, <wbr>TResult&gt;<wbr>)<wbr></a></li>
+				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1/1615E9F7">WithNullableAction<wbr>(Action<wbr>&lt;TResult?&gt;<wbr>)<wbr></a></li>
+				<li class="selected"><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1/73E5A8AC">WithNullableAction<wbr>(Action<wbr>&lt;TResult?, <wbr>TResult?&gt;<wbr>)<wbr></a></li>
 
 
                     </ul>
@@ -156,15 +160,15 @@
 
 
 <section class="content-header">
-			<h3><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1">IBuilderWithAction</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1#typeparam-TResult">TResult</a>&gt;<wbr>.</h3>
-	<h1>Deferred<wbr>()<wbr> <small>Method</small></h1>
+			<h3><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1">IBuilder</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1#typeparam-TResult">TResult</a>&gt;<wbr>.</h3>
+	<h1>WithNullableAction<wbr>(Action<wbr>&lt;TResult?, <wbr>TResult?&gt;<wbr>)<wbr> <small>Method</small></h1>
 </section>
 <section class="content">
 	
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-    Deferreds this instance.
+        Withes the nullable action.
     </div>
 
 		<div class="panel panel-default">
@@ -172,22 +176,41 @@
 				<dl class="dl-horizontal">	
 						
 						<dt>Namespace</dt>
-						<dd><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged">Anori<wbr>.ExpressionObservers<wbr>.Interfaces<wbr>.Builder<wbr>.Value<wbr>.OnPropertyChanged</a></dd>
+						<dd><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged">Anori<wbr>.ExpressionObservers<wbr>.Interfaces<wbr>.Builder<wbr>.Reference<wbr>.OnValueChanged</a></dd>
 					
 						<dt>Containing Type</dt>
-						<dd><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1">IBuilderWithAction</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1#typeparam-TResult">TResult</a>&gt;<wbr></dd>		
+						<dd><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1">IBuilder</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1#typeparam-TResult">TResult</a>&gt;<wbr></dd>		
 					
 				</dl>
   			</div>
 		</div>
 
 	<h1 id="Syntax">Syntax</h1>
-	<pre><code>IBuilderWithActionAndDeferrer&lt;TResult&gt; Deferred()</code></pre>
+	<pre><code>IBuilderWithActionOfNullT&lt;TResult&gt; WithNullableAction(Action&lt;TResult?, TResult?&gt; action)</code></pre>
 
 
 
 
 
+	<h1 id="Parameters">Parameters</h1>
+	<div class="box">
+		<div class="box-body no-padding table-responsive">
+			<table class="table table-striped table-hover three-cols">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+					<tbody><tr>
+						<td>action</td>
+						<td>Action<wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1#typeparam-TResult">TResult?</a>, <wbr><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1#typeparam-TResult">TResult?</a>&gt;<wbr></td>
+						<td>The action.</td>
+					</tr>
+			</tbody></table>
+		</div>
+	</div>	
 
 	<h1 id="ReturnValue">Return Value</h1>
 	<div class="box">
@@ -200,8 +223,10 @@
 					</tr>
 				</thead>
 				<tbody><tr>
-					<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithAction_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
-					<td>The Property Observer Builder.</td>
+					<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>Null<wbr>T</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilder_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
+					<td>
+        The Property Reference Observer Builder.
+    </td>
 				</tr>
 			</tbody></table>
 		</div>

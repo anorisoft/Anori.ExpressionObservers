@@ -72,7 +72,8 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#Syntax">Syntax</a></p>
+	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#Summary">Summary</a></p>
+<p><a href="#Syntax">Syntax</a></p>
 <p><a href="#TypeParameters">Type Parameters</a></p>
 <p><a href="#Methods">Methods</a></p>
 <hr class="infobar-hidden">
@@ -181,7 +182,11 @@
 <section class="content">
 	
 	
-	
+		<h1 id="Summary">Summary</h1>
+	<div class="lead">
+    The I Builder With Action Of T And Deferrer interface.
+    </div>
+
 		<div class="panel panel-default">
   			<div class="panel-body">
 				<div class="row">
@@ -195,7 +200,7 @@
 								<dd>
 									<ul class="list-unstyled">
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderBase_1">IObserverBuilderBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionOfTAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionOfTAndDeferrer_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderSchedulerBase_1">I<wbr>Observer<wbr>Builder<wbr>Scheduler<wbr>Base</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionOfTAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionOfTAndDeferrer_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/ISchedulerBase_1">ISchedulerBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionOfTAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionOfTAndDeferrer_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
 									</ul>
 								</dd>
 							
@@ -207,7 +212,7 @@
 						<div class="mermaid">
 							graph BT
 	Type-.-&gt;Interface0["IObserverBuilderBase&lt;IBuilderWithActionOfTAndDeferrer&lt;TResult&gt;&gt;"]
-	Type-.-&gt;Interface1["IObserverBuilderSchedulerBase&lt;IBuilderWithActionOfTAndDeferrer&lt;TResult&gt;&gt;"]
+	Type-.-&gt;Interface1["ISchedulerBase&lt;IBuilderWithActionOfTAndDeferrer&lt;TResult&gt;&gt;"]
 	Type["IBuilderWithActionOfTAndDeferrer&lt;TResult&gt;"]
 class Type type-node
 
@@ -220,7 +225,7 @@ class Type type-node
 	<h1 id="Syntax">Syntax</h1>
 	<pre><code>public interface IBuilderWithActionOfTAndDeferrer&lt;TResult&gt; : 
     IObserverBuilderBase&lt;IBuilderWithActionOfTAndDeferrer&lt;TResult&gt;&gt;, 
-    IObserverBuilderSchedulerBase&lt;IBuilderWithActionOfTAndDeferrer&lt;TResult&gt;&gt;
+    ISchedulerBase&lt;IBuilderWithActionOfTAndDeferrer&lt;TResult&gt;&gt;
     where TResult : struct</code></pre>
 
 
@@ -238,7 +243,7 @@ class Type type-node
 				</thead>
 					<tbody><tr id="typeparam-TResult">
 						<td>TResult</td>
-						<td></td>
+						<td>The type of the result.</td>
 					</tr>
 			</tbody></table>
 		</div>

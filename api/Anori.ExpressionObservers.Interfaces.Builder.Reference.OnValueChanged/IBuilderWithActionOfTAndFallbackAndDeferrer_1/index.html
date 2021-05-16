@@ -76,7 +76,6 @@
 <p><a href="#Syntax">Syntax</a></p>
 <p><a href="#TypeParameters">Type Parameters</a></p>
 <p><a href="#Methods">Methods</a></p>
-<p><a href="#SeeAlso">See Also</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -191,7 +190,7 @@
 								<dd>
 									<ul class="list-unstyled">
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderBase_1">IObserverBuilderBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfTAndFallbackAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Fallback<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfTAndFallbackAndDeferrer_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderSchedulerBase_1">I<wbr>Observer<wbr>Builder<wbr>Scheduler<wbr>Base</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfTAndFallbackAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Fallback<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfTAndFallbackAndDeferrer_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/ISchedulerBase_1">ISchedulerBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfTAndFallbackAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Fallback<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfTAndFallbackAndDeferrer_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
 									</ul>
 								</dd>
 							
@@ -203,7 +202,7 @@
 						<div class="mermaid">
 							graph BT
 	Type-.-&gt;Interface0["IObserverBuilderBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;&gt;"]
-	Type-.-&gt;Interface1["IObserverBuilderSchedulerBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;&gt;"]
+	Type-.-&gt;Interface1["ISchedulerBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;&gt;"]
 	Type["IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;"]
 class Type type-node
 
@@ -216,7 +215,7 @@ class Type type-node
 	<h1 id="Syntax">Syntax</h1>
 	<pre><code>public interface IBuilderWithActionOfTAndFallbackAndDeferrer&lt;out TResult&gt; : 
     IObserverBuilderBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;out TResult&gt;&gt;, 
-    IObserverBuilderSchedulerBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;out TResult&gt;&gt;
+    ISchedulerBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;out TResult&gt;&gt;
     where TResult : class</code></pre>
 
 
@@ -272,11 +271,6 @@ class Type type-node
 		
 
 
-	<h1 id="SeeAlso">See Also</h1>
-	<ul class="list-unstyled">
-			<li><code><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderBase_1">IObserverBuilderBase&lt;TSelf&gt;</a></code></li>
-			<li><code><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderSchedulerBase_1">IObserverBuilderSchedulerBase&lt;TSelf&gt;</a></code></li>
-	</ul>
 
 	
 </section>

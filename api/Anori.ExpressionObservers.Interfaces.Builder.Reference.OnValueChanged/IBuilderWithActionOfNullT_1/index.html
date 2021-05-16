@@ -175,10 +175,10 @@
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-        The I Property Reference Observer Builder With Action Of T Result interface.
+        The I Property Value Observer Builder With Action Of T Result Nullable And Getter Task Scheduler interface.
     
 
-        The I Property Value Observer Builder With Action Of T Result Nullable And Getter Task Scheduler interface.
+        The I Property Reference Observer Builder With Action Of T Result interface.
     </div>
 
 		<div class="panel panel-default">
@@ -194,7 +194,8 @@
 								<dd>
 									<ul class="list-unstyled">
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderBase_1">IObserverBuilderBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>Null<wbr>T</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderSchedulerBase_1">I<wbr>Observer<wbr>Builder<wbr>Scheduler<wbr>Base</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>Null<wbr>T</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/ISchedulerBase_1">ISchedulerBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>Null<wbr>T</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IDeferBase_1">IDeferBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullTAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>Null<wbr>T<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
 									</ul>
 								</dd>
 							
@@ -206,7 +207,8 @@
 						<div class="mermaid">
 							graph BT
 	Type-.-&gt;Interface0["IObserverBuilderBase&lt;IBuilderWithActionOfNullT&lt;TResult&gt;&gt;"]
-	Type-.-&gt;Interface1["IObserverBuilderSchedulerBase&lt;IBuilderWithActionOfNullT&lt;TResult&gt;&gt;"]
+	Type-.-&gt;Interface1["ISchedulerBase&lt;IBuilderWithActionOfNullT&lt;TResult&gt;&gt;"]
+	Type-.-&gt;Interface2["IDeferBase&lt;IBuilderWithActionOfNullTAndDeferrer&lt;TResult&gt;&gt;"]
 	Type["IBuilderWithActionOfNullT&lt;TResult&gt;"]
 class Type type-node
 
@@ -219,7 +221,8 @@ class Type type-node
 	<h1 id="Syntax">Syntax</h1>
 	<pre><code>public interface IBuilderWithActionOfNullT&lt;TResult&gt; : 
     IObserverBuilderBase&lt;IBuilderWithActionOfNullT&lt;TResult&gt;&gt;, 
-    IObserverBuilderSchedulerBase&lt;IBuilderWithActionOfNullT&lt;TResult&gt;&gt;
+    ISchedulerBase&lt;IBuilderWithActionOfNullT&lt;TResult&gt;&gt;, 
+    IDeferBase&lt;IBuilderWithActionOfNullTAndDeferrer&lt;TResult&gt;&gt;
     where TResult : class</code></pre>
 
 
@@ -262,15 +265,6 @@ class Type type-node
 						</thead>
 							<tbody><tr>
 								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1/EC2ED24D">Build<wbr>()<wbr></a></td>
-								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/INotifyReferencePropertyObserver_1">I<wbr>Notify<wbr>Reference<wbr>Property<wbr>Observer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
-								<td>
-									<div>
-        Creates this instance.
-    </div>
-								</td>
-							</tr>
-							<tr>
-								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1/EC2ED24D">Build<wbr>()<wbr></a></td>
 								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IGetterReferencePropertyObserver_1">I<wbr>Getter<wbr>Reference<wbr>Property<wbr>Observer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
 								<td>
 									<div>
@@ -279,11 +273,11 @@ class Type type-node
 								</td>
 							</tr>
 							<tr>
-								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1/7C81C611">Deferred<wbr>()<wbr></a></td>
-								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullTAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>Null<wbr>T<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
+								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1/EC2ED24D">Build<wbr>()<wbr></a></td>
+								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/INotifyReferencePropertyObserver_1">I<wbr>Notify<wbr>Reference<wbr>Property<wbr>Observer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged/IBuilderWithActionOfNullT_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
 								<td>
 									<div>
-    Deferreds this instance.
+        Creates this instance.
     </div>
 								</td>
 							</tr>
