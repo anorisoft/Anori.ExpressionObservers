@@ -24,7 +24,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref= Observer"ObserverBase{TSelf,TParameter1,TResult}" />
     internal sealed class ObserverWithAction<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterReferencePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         IGetterReferencePropertyObserver<TResult>
@@ -35,12 +34,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// <summary>
         ///     The action.
         /// </summary>
+        [NotNull]
         private readonly Action<TResult?> action;
 
         /// <summary>
-        ///     The getter.
+        ///     The getValue.
         /// </summary>
-        private readonly Func<TResult?> getter;
+        [NotNull]
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ObserverWithAction{TParameter1,TParameter2,TResult}" />
@@ -61,7 +62,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
+            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
         }
 
         /// <summary>
@@ -79,12 +80,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateGetter(
+            this.getValue = this.CreateGetter(
                 Getter(propertyExpression, this.Tree, parameter1, parameter2),
                 taskScheduler);
         }
@@ -104,12 +105,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
-            SynchronizationContext synchronizationContext,
+            [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateGetter(
+            this.getValue = this.CreateGetter(
                 Getter(propertyExpression, this.Tree, parameter1, parameter2),
                 synchronizationContext);
         }
@@ -118,12 +119,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getter();
+        public TResult? GetValue() => this.getValue();
 
         /// <summary>
         ///     The action.
         /// </summary>
-        protected override void OnAction() => this.action(this.getter());
+        protected override void OnAction() => this.action(this.getValue());
 
         /// <summary>
         ///     Getters the specified property expression.

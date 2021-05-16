@@ -1,12 +1,13 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionAndDeferrer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndDeferrer{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
+namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
 {
     using System;
+    using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
@@ -19,14 +20,16 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Reference Getter Observer.
+    ///     Property Value Getter Observer.
     /// </summary>
+    /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class ObserverWithActionAndDeferrer<TResult> :
-        ObserverBase<IGetterReferencePropertyObserverWithDeferrer<TResult>, TResult>,
-        IGetterReferencePropertyObserverWithDeferrer<TResult>
-        where TResult : class
+    /// <seealso cref="ObserverBase{TSelf,TResult}" />
+    internal sealed class ObserverWithActionAndDeferrer<TParameter1, TResult> :
+        ObserverBase<IGetterValuePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
+        IGetterValuePropertyObserverWithDeferrer<TResult>
+        where TParameter1 : INotifyPropertyChanged
+        where TResult : struct
     {
         /// <summary>
         ///     The action.
@@ -47,64 +50,67 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Func<TResult?> getValue;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TParameter1,TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     action
-        ///     or
-        ///     propertyExpression is null.
-        /// </exception>
+        /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithActionAndDeferrer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
-            this.getValue =
-                ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
+            this.getValue = Getter(propertyExpression, this.Tree, parameter1);
             this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
             this.action = () => this.deferrer.Update();
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TParameter1,TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
         internal ObserverWithActionAndDeferrer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
-            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler);
+            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, parameter1), taskScheduler);
             this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
             this.action = () => this.deferrer.Update();
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TParameter1,TResult}" /> class.
         /// </summary>
+        /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action is null.</exception>
+        /// <exception cref="ArgumentNullException">action is Null.</exception>
         internal ObserverWithActionAndDeferrer(
-            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] TParameter1 parameter1,
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag)
         {
-            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext);
+            this.getValue = this.CreateGetter(
+                Getter(propertyExpression, this.Tree, parameter1),
+                synchronizationContext);
             this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
             this.action = () => this.deferrer.Update();
         }
@@ -132,7 +138,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         public TResult? GetValue() => this.getValue();
 
         /// <summary>
-        ///     On the action.
+        ///     The action.
         /// </summary>
         protected override void OnAction() => this.action();
 
@@ -141,13 +147,17 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
-        /// <returns>
-        ///     Getter.
-        /// </returns>
-        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree)
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns>The Getter.</returns>
+        private static Func<TResult?> Getter(
+            Expression<Func<TParameter1, TResult>> propertyExpression,
+            IExpressionTree tree,
+            TParameter1 parameter1)
         {
-            var get = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
-            return () => get();
+            var get = ExpressionGetter.CreateValueGetterByTree<TParameter1, TResult>(
+                propertyExpression.Parameters,
+                tree);
+            return () => get(parameter1);
         }
     }
 }

@@ -1072,7 +1072,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             IGetterValuePropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ObserverWithActionWithDeferrer<TResult>(
+                observer = new ValueObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
                     this.ActionOfT!,
                     SynchronizationContext.Current,
@@ -1080,7 +1080,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ObserverWithActionWithDeferrer<TResult>(
+                observer = new ValueObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
                     this.ActionOfT!,
                     this.TaskScheduler,
@@ -1088,7 +1088,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             }
             else
             {
-                observer = new ObserverWithActionWithDeferrer<TResult>(
+                observer = new ValueObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
                     this.ActionOfT!,
                     this.ObserverFlag);

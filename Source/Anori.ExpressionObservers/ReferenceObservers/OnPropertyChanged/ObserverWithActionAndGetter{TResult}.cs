@@ -37,10 +37,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Action action;
 
         /// <summary>
-        ///     The getter.
+        ///     The getValue.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult?> getter;
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetter{TResult}" /> class.
@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree), taskScheduler);
+            this.getValue = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree), taskScheduler);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
+            this.getValue = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateNullableReferenceGetter(
+            this.getValue = this.CreateNullableReferenceGetter(
                 Getter(propertyExpression, this.Tree),
                 synchronizationContext);
         }
@@ -108,7 +108,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getter();
+        public TResult? GetValue() => this.getValue();
 
         /// <summary>
         ///     On the action.

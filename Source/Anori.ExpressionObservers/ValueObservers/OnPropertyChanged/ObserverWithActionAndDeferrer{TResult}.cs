@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionWithDeferrer{TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndDeferrer{TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class ObserverWithActionWithDeferrer<TResult> :
+    internal sealed class ObserverWithActionAndDeferrer<TResult> :
         ObserverBase<IGetterValuePropertyObserverWithDeferrer<TResult>, TResult>,
         IGetterValuePropertyObserverWithDeferrer<TResult>
         where TResult : struct
@@ -47,7 +47,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionWithDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -57,7 +57,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         ///     or
         ///     propertyExpression is null.
         /// </exception>
-        internal ObserverWithActionWithDeferrer(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             PropertyObserverFlag observerFlag)
@@ -69,14 +69,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionWithDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithActionWithDeferrer(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             TaskScheduler taskScheduler,
@@ -89,14 +89,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionWithDeferrer{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        internal ObserverWithActionWithDeferrer(
+        internal ObserverWithActionAndDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
             SynchronizationContext synchronizationContext,

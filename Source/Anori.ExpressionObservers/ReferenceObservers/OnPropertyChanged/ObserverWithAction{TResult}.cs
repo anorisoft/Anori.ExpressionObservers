@@ -34,10 +34,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Action<TResult?> action;
 
         /// <summary>
-        ///     The getter.
+        ///     The getValue.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult?> getter;
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
@@ -57,7 +57,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter =
+            this.getValue =
                 ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, this.Tree);
         }
 
@@ -77,7 +77,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler);
+            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree), taskScheduler);
         }
 
         /// <summary>
@@ -96,19 +96,19 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             : base(propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext);
+            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree), synchronizationContext);
         }
 
         /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getter();
+        public TResult? GetValue() => this.getValue();
 
         /// <summary>
         ///     On the action.
         /// </summary>
-        protected override void OnAction() => this.action(this.getter());
+        protected override void OnAction() => this.action(this.getValue());
 
         /// <summary>
         ///     Getters the specified property expression.

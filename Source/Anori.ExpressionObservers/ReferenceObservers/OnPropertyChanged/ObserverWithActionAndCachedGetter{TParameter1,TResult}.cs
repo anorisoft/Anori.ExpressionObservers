@@ -191,12 +191,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         protected override void OnAction() => this.action();
 
         /// <summary>
-        ///     Getters the specified property expression.
+        /// Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <param name="parameter1">The parameter1.</param>
-        /// <returns>The Getter.</returns>
+        /// <returns>
+        /// The Getter.
+        /// </returns>
         private static Func<TResult?> Getter(
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,

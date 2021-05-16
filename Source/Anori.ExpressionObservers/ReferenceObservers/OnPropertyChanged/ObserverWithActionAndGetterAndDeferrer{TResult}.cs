@@ -40,10 +40,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
-        ///     The getter.
+        ///     The getValue.
         /// </summary>
         [NotNull]
-        private readonly Func<TResult?> getter;
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ObserverWithActionAndGetterAndDeferrer{TResult}" /> class.
@@ -65,7 +65,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.getter = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree), taskScheduler);
+            this.getValue = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree), taskScheduler);
             this.deferrer = new UpdateableMultipleDeferrer(action);
             this.action = () => this.deferrer.Update();
         }
@@ -83,7 +83,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.getter = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
+            this.getValue = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree));
             this.deferrer = new UpdateableMultipleDeferrer(action);
             this.action = () => this.deferrer.Update();
         }
@@ -103,13 +103,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
-            this.getter = this.CreateNullableReferenceGetter(
+            this.getValue = this.CreateNullableReferenceGetter(
                 Getter(propertyExpression, this.Tree),
                 synchronizationContext);
             this.deferrer = new UpdateableMultipleDeferrer(action);
             this.action = () => this.deferrer.Update();
         }
-        
+
         /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
         /// </summary>
@@ -122,7 +122,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         ///     Gets the value.
         /// </summary>
         /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getter();
+        public TResult? GetValue() => this.getValue();
 
         /// <summary>
         ///     Defers this instance.
