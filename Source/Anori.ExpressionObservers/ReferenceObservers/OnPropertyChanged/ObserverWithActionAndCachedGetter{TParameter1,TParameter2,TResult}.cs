@@ -26,11 +26,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="INotifyPropertyChanged" />
-    /// <seealso cref="ComponentModel" />
-    /// <seealso cref="System" />
-    /// <seealso cref="ObserverWithActionAndCachedGetter{TResult}" />
     internal sealed class ObserverWithActionAndCachedGetter<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterReferencePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         IGetterReferencePropertyObserver<TResult>
@@ -51,24 +46,27 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal ObserverWithActionAndCachedGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            TaskScheduler taskScheduler,
+            [NotNull] Action action,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag propertyObserverFlag)
             : this(
                 parameter1,
                 parameter2,
                 propertyExpression,
+                action,
                 taskScheduler,
                 false,
                 LazyThreadSafetyMode.None,
@@ -77,12 +75,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
@@ -92,6 +91,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
             TaskScheduler taskScheduler,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
@@ -103,28 +103,32 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
                     Getter(propertyExpression, this.Tree, parameter1, parameter2),
                     taskScheduler),
                 isCached,
-                safetyMode);
+                safetyMode,
+                action);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal ObserverWithActionAndCachedGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
             SynchronizationContext synchronizationContext,
             PropertyObserverFlag propertyObserverFlag)
             : this(
                 parameter1,
                 parameter2,
                 propertyExpression,
+                action,
                 synchronizationContext,
                 false,
                 LazyThreadSafetyMode.None,
@@ -133,12 +137,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
@@ -147,6 +152,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
             SynchronizationContext synchronizationContext,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
@@ -158,34 +164,44 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
                     Getter(propertyExpression, this.Tree, parameter1, parameter2),
                     synchronizationContext),
                 isCached,
-                safetyMode);
+                safetyMode,
+                action);
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal ObserverWithActionAndCachedGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
             PropertyObserverFlag propertyObserverFlag)
-            : this(parameter1, parameter2, propertyExpression, false, LazyThreadSafetyMode.None, propertyObserverFlag)
+            : this(
+                parameter1,
+                parameter2,
+                propertyExpression,
+                action,
+                false,
+                LazyThreadSafetyMode.None,
+                propertyObserverFlag)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndCachedGetter{TResult}" />
-        ///     class.
+        /// Initializes a new instance of the
+        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
@@ -193,6 +209,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
+            [NotNull] Action action,
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
@@ -201,7 +218,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
                 this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2)),
                 isCached,
-                safetyMode);
+                safetyMode,
+                action);
         }
 
         /// <summary>

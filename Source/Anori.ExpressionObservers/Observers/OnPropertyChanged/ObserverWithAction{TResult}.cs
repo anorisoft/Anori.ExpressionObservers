@@ -18,7 +18,6 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     ///     Property Observer.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithAction<TResult> : ObserverBase<IPropertyObserver<TResult>, TResult>,
                                                         IPropertyObserver<TResult>
     {

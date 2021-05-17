@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverOnValueChangedBase - Copy.cs" company="AnoriSoft">
+// <copyright file="ObserverOnValueChangedBase{TSelf,TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -18,21 +18,23 @@ namespace Anori.ExpressionObservers.Observers.Base
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The Observer On Value Changed Base class.
+    ///     The Observer On Value Changed Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract class
-        ObserverOnValueChangedBase<TSelf, TParameter1, TParameter2, TResult> : ObserverBase<TSelf, TParameter1, TParameter2, TResult>,
-                                                                               INotifyPropertyChanged
+        ObserverOnValueChangedBase<TSelf, TParameter1, TParameter2, TResult> :
+            ObserverBase<TSelf, TParameter1, TParameter2, TResult>,
+            INotifyPropertyChanged
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverOnValueChangedBase{TSelf, TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverOnValueChangedBase{TSelf, TParameter1,TParameter2,TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>

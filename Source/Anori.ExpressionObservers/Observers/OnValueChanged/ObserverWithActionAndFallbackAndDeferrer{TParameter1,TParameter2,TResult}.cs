@@ -49,7 +49,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         ///     The action.
         /// </summary>
         [NotNull]
-        private readonly Action<TResult> valueChangedAction;
+        private readonly Action<TResult, TResult> valueChangedAction;
 
         /// <summary>
         ///     The value.
@@ -72,7 +72,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult> action,
+            [NotNull] Action<TResult, TResult> action,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
@@ -104,7 +104,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult> action,
+            [NotNull] Action<TResult, TResult> action,
             [NotNull] TaskScheduler taskScheduler,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
@@ -138,7 +138,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult> action,
+            [NotNull] Action<TResult, TResult> action,
             [NotNull] SynchronizationContext synchronizationContext,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
@@ -172,8 +172,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
                     return;
                 }
 
+                var old = this.value;
                 this.value = value;
-                this.valueChangedAction(value);
+                this.valueChangedAction(old, value);
                 this.OnPropertyChanged();
             }
         }

@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -69,7 +69,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -97,7 +97,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -122,7 +122,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -149,7 +149,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -165,7 +165,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>

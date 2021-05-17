@@ -54,7 +54,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         internal ObserverWithActionAndCachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag propertyObserverFlag)
             : this(propertyExpression, action, taskScheduler, false, LazyThreadSafetyMode.None, propertyObserverFlag)
         {

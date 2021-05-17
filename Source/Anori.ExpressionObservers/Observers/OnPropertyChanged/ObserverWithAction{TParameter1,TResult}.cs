@@ -20,7 +20,6 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="ObserverBase{TSelf,TResult}" />
     internal sealed class ObserverWithAction<TParameter1, TResult> :
         ObserverBase<IPropertyObserver<TResult>, TParameter1, TResult>,
         IPropertyObserver<TResult>

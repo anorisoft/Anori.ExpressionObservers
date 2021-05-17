@@ -52,7 +52,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     The value changed action.
         /// </summary>
         [NotNull]
-        private readonly Action<TResult?> valueChangedAction;
+        private readonly Action<TResult?, TResult?> valueChangedAction;
 
         /// <summary>
         ///     The value.
@@ -74,7 +74,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action,
+            [NotNull] Action<TResult?, TResult?> action,
             [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
@@ -104,7 +104,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action,
+            [NotNull] Action<TResult?, TResult?> action,
             [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
@@ -132,7 +132,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,
             [NotNull] Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
-            [NotNull] Action<TResult?> action,
+            [NotNull] Action<TResult?, TResult?> action,
             PropertyObserverFlag observerFlag)
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
@@ -179,8 +179,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
                     return;
                 }
 
+                var old = this.value;
                 this.value = value;
-                this.valueChangedAction.Raise(value);
+                this.valueChangedAction.Raise(old, value);
                 this.OnPropertyChanged();
             }
         }

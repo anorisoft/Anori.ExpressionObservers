@@ -26,9 +26,6 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IPropertyObserverOnNotifyPropertyChanged{TResult}, TParameter1, TParameter2, TResult}" />
-    /// <seealso cref="IGetterPropertyObserver{TResult}" />
     internal sealed class ObserverWithActionAndCachedGetterAndFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         IGetterPropertyObserver<TResult>

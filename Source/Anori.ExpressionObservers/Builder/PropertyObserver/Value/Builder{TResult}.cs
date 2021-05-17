@@ -264,7 +264,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             CreateGetterValuePropertyObserverAndDeferrer()
         {
             IGetterValuePropertyObserverWithDeferrer<TResult> observer;
-
             if (this.IsDispached)
             {
                 observer = new ObserverWithActionAndGetterAndDeferrer<TResult>(
@@ -355,7 +354,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             CreateGetterValuePropertyObserverCachedAndDeferrer()
         {
             IGetterValuePropertyObserverWithDeferrer<TResult> observer;
-
             if (this.IsDispached)
             {
                 observer = new ObserverWithActionAndCachedGetterAndDeferrer<TResult>(
