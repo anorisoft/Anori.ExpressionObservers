@@ -36,20 +36,17 @@ namespace Anori.ExpressionObservers.Base
         protected ObserverFoundationBase(PropertyObserverFlag observerFlag) => this.ObserverFlag = observerFlag;
 
         /// <summary>
+        ///     Occurs when [is active changed].
+        /// </summary>
+        public event EventHandler<EventArgs<bool>>? IsActiveChanged;
+
+        /// <summary>
         ///     Gets the expression string.
         /// </summary>
         /// <value>
         ///     The expression string.
         /// </value>
         public abstract string ExpressionString { get; }
-
-        /// <summary>
-        ///     Gets a value indicating whether this instance is fail fast.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is fail fast; otherwise, <c>false</c>.
-        /// </value>
-        private protected PropertyObserverFlag ObserverFlag { get; }
 
         /// <summary>
         ///     Gets the root nodes.
@@ -60,9 +57,12 @@ namespace Anori.ExpressionObservers.Base
         internal IList<RootPropertyObserverNode> RootNodes { get; } = new List<RootPropertyObserverNode>();
 
         /// <summary>
-        ///     Occurs when [is active changed].
+        ///     Gets a value indicating whether this instance is fail fast.
         /// </summary>
-        public event EventHandler<EventArgs<bool>>? IsActiveChanged;
+        /// <value>
+        ///     <c>true</c> if this instance is fail fast; otherwise, <c>false</c>.
+        /// </value>
+        private protected PropertyObserverFlag ObserverFlag { get; }
 
         /// <summary>
         ///     Gets a value indicating whether this instance is active.
@@ -368,10 +368,9 @@ namespace Anori.ExpressionObservers.Base
         protected abstract void OnAction();
 
         /// <summary>
-        /// Called when [activate].
+        ///     Called when [activate].
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
-        /// <returns></returns>
         protected virtual void OnActivate(bool silent)
         {
             if (!silent)
@@ -382,6 +381,13 @@ namespace Anori.ExpressionObservers.Base
             {
                 this.OnSilentActivate();
             }
+        }
+
+        /// <summary>
+        ///     Called when [deactivate].
+        /// </summary>
+        protected virtual void OnDeactivate()
+        {
         }
 
         /// <summary>
@@ -407,13 +413,6 @@ namespace Anori.ExpressionObservers.Base
                 previousNode = currentNode;
                 expressionNode = expressionNode.Next;
             }
-        }
-
-        /// <summary>
-        ///     Called when [deactivate].
-        /// </summary>
-        protected virtual void OnDeactivate()
-        {
         }
     }
 }

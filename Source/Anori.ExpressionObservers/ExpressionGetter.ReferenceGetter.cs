@@ -92,7 +92,7 @@ namespace Anori.ExpressionObservers
             }
 
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback)!);
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback) !);
             var lambda = Expression.Lambda<Func<TParameter, TResult>>(body, parameters);
             return lambda.Compile();
         }
@@ -165,7 +165,7 @@ namespace Anori.ExpressionObservers
             where TResult : class
         {
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback)!);
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback) !);
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TParameter3, TResult>>(body, parameters);
             return lambda.Compile();
         }
@@ -299,7 +299,7 @@ namespace Anori.ExpressionObservers
                 throw new ArgumentNullException(nameof(expressionTree));
             }
 
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback)!);
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback) !);
             var lambda = Expression.Lambda<Func<TResult?>>(body, parameters);
             return lambda.Compile();
         }

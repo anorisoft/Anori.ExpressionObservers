@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.Base
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The Observer Base class.
+    ///     The Observer Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -123,27 +123,5 @@ namespace Anori.ExpressionObservers.Base
                 }
             }
         }
-
-        /// <summary>
-        ///     Implements the operator op_Equality.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator ==(ObserverBase<TSelf, TResult>? a, ObserverBase<TSelf, TResult>? b) =>
-            Equals(a, b);
-
-        /// <summary>
-        ///     Implements the operator op_Inequality.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator !=(ObserverBase<TSelf, TResult>? a, ObserverBase<TSelf, TResult>? b) =>
-            !Equals(a, b);
     }
 }
