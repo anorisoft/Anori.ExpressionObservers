@@ -7,14 +7,11 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
     /// <summary>
-    /// The Builder With Action Of T And Fallback And Deferrer interface.
+    ///     The Builder With Action Of T And Fallback And Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallbackAndDeferrer{TResult}}" />
-    /// <seealso cref="ISchedulerBase{TSelf}.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfTAndFallbackAndDeferrer{TResult}}" />
     public interface IBuilderWithActionOfTAndFallbackAndDeferrer<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>,
-
         ISchedulerBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>
         where TResult : struct
     {

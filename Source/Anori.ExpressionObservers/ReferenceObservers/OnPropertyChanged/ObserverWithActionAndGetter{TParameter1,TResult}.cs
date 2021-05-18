@@ -53,10 +53,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        /// action
-        /// or
-        /// propertyExpression is null.
-        /// </exception>
         internal ObserverWithActionAndGetter(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,

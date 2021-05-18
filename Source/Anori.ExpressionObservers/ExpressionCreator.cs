@@ -4,20 +4,20 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Anori.ExpressionObservers.Tree;
-using Anori.ExpressionObservers.Tree.Interfaces;
-using Anori.ExpressionObservers.Tree.Nodes;
-using Anori.Extensions;
-
-using JetBrains.Annotations;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-
 namespace Anori.ExpressionObservers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+
+    using Anori.ExpressionObservers.Tree;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using Anori.ExpressionObservers.Tree.Nodes;
+    using Anori.Extensions;
+
+    using JetBrains.Annotations;
+
     /// <summary>
     ///     Expression Creator.
     /// </summary>
@@ -138,7 +138,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static Expression BinaryMakeExpression(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             BinaryNode binary,
             [NotNull] Expression ifNull)
         {
@@ -220,7 +220,7 @@ namespace Anori.ExpressionObservers
         /// <param name="ifNull">If null.</param>
         private static void BinaryNextElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression target,
             BinaryNode binary,
             [NotNull] Expression ifNull)
@@ -246,7 +246,7 @@ namespace Anori.ExpressionObservers
         /// <param name="returnTarget">The return target.</param>
         private static void BineryLastElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
             BinaryNode binary,
             [NotNull] Expression ifNull,
@@ -267,7 +267,7 @@ namespace Anori.ExpressionObservers
         /// <param name="returnTarget">The return target.</param>
         private static void ConditionalLastElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
             in ConditionalNode conditional,
             [NotNull] Expression ifNull,
@@ -290,7 +290,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static Expression ConditionalMakeExpression(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             ConditionalNode conditional,
             [NotNull] Expression ifNull)
         {
@@ -315,7 +315,7 @@ namespace Anori.ExpressionObservers
         /// <param name="ifNull">If null.</param>
         private static void ConditionalNextElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression target,
             ConditionalNode conditional,
             [NotNull] Expression ifNull)
@@ -337,6 +337,7 @@ namespace Anori.ExpressionObservers
         /// <param name="expressions">The expressions.</param>
         /// <param name="resultType">Type of the result.</param>
         /// <param name="constant">The constant.</param>
+        /// <param name="ifNull">If null.</param>
         /// <param name="returnTarget">The return target.</param>
         private static void ConstantLastElement(
             [NotNull] ICollection<Expression> expressions,
@@ -393,7 +394,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static Expression ConstructorMakeExpression(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             ConstructorNode constructor,
             [NotNull] Expression ifNull)
         {
@@ -414,7 +415,7 @@ namespace Anori.ExpressionObservers
         /// <param name="ifNull">If null.</param>
         private static void ConstructorNextElement(
             IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression targetParameter,
             ConstructorNode constructor,
             [NotNull] Expression ifNull)
@@ -445,7 +446,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static MemberBinding CreateBindingExpressions(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] IBindingNode binding,
             [NotNull] Expression ifNull)
         {
@@ -505,7 +506,7 @@ namespace Anori.ExpressionObservers
             [NotNull] LabelTarget returnTarget)
         {
             var expressions = new List<Expression>();
-            var variables = new VaribalesCollection();
+            var variables = new VariablesCollection();
             var ifNull = Expression.Return(returnTarget, NullExpressionOf(resultType));
 
             CreateValueExpressions(resultType, tree.Nodes, expressions, variables, ifNull, returnTarget);
@@ -531,7 +532,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Expression fallback)
         {
             var expressions = new List<Expression>();
-            var variables = new VaribalesCollection();
+            var variables = new VariablesCollection();
             var ifNull = Expression.Return(returnTarget, fallback);
 
             CreateValueExpressions(resultType, nodes.Nodes, expressions, variables, ifNull, returnTarget);
@@ -553,7 +554,7 @@ namespace Anori.ExpressionObservers
         private static void CreateValueChainExpressions(
             [NotNull] Type resultType,
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] INodeCollection nodes,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
@@ -576,7 +577,7 @@ namespace Anori.ExpressionObservers
             [NotNull] Type resultType,
             [NotNull] INodeCollection nodes,
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
         {
@@ -608,7 +609,7 @@ namespace Anori.ExpressionObservers
         private static void CreateValueSingleExpressions(
             [NotNull] Type resultType,
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] INodeCollection nodes,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
@@ -659,7 +660,7 @@ namespace Anori.ExpressionObservers
         /// <returns>The expression.</returns>
         private static Expression CreateVariableExpressions(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] INodeCollection nodes,
             [NotNull] Expression ifNull)
         {
@@ -686,7 +687,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentOutOfRangeException">Not supportet element type.</exception>
         private static Expression CreateVariableInnerExpressions(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] INodeCollection nodes,
             [NotNull] Expression ifNull)
         {
@@ -856,7 +857,7 @@ namespace Anori.ExpressionObservers
         /// <param name="returnTarget">The return target.</param>
         private static void FunctionLastElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
             FunctionNode function,
             [NotNull] Expression ifNull,
@@ -877,7 +878,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static Expression FunctionMakeExpression(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             FunctionNode function,
             [NotNull] Expression ifNull)
         {
@@ -898,7 +899,7 @@ namespace Anori.ExpressionObservers
         /// <param name="ifNull">If null.</param>
         private static void FunctionNextElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression targetParameter,
             FunctionNode function,
             [NotNull] Expression ifNull)
@@ -927,7 +928,7 @@ namespace Anori.ExpressionObservers
         private static void InsertEndValueExpression(
             [NotNull] Type resultType,
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression source,
             [NotNull] IExpressionNode node,
             [NotNull] Expression ifNull,
@@ -964,7 +965,7 @@ namespace Anori.ExpressionObservers
         /// <exception cref="ArgumentOutOfRangeException">Not supportet Expression Tree Node type.</exception>
         private static void InsertExpression(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression source,
             [NotNull] IExpressionNode node,
             [NotNull] Expression ifNull,
@@ -1024,7 +1025,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static Expression MemberInitMakeExpression(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             MemberInitNode memberInit,
             [NotNull] Expression ifNull)
         {
@@ -1048,7 +1049,7 @@ namespace Anori.ExpressionObservers
         /// <param name="ifNull">If null.</param>
         private static void MemberInitNextElement(
             IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression targetParameter,
             MemberInitNode memberInit,
             [NotNull] Expression ifNull)
@@ -1078,7 +1079,7 @@ namespace Anori.ExpressionObservers
         /// <param name="returnTarget">The return target.</param>
         private static void MethodLastElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
             MethodNode method,
             [NotNull] Expression ifNull,
@@ -1099,7 +1100,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static Expression MethodMakeExpression(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             MethodNode method,
             [NotNull] Expression ifNull)
         {
@@ -1122,7 +1123,7 @@ namespace Anori.ExpressionObservers
         /// <param name="ifNull">If null.</param>
         private static void MethodNextElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression targetParameter,
             MethodNode method,
             [NotNull] Expression ifNull)
@@ -1204,7 +1205,7 @@ namespace Anori.ExpressionObservers
         /// <param name="returnTarget">The return target.</param>
         private static void PropertyLastElement(
             [NotNull] ICollection<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression sourceParameter,
             [NotNull] Type resultType,
             PropertyNode property,
@@ -1274,7 +1275,7 @@ namespace Anori.ExpressionObservers
         /// <param name="returnTarget">The return target.</param>
         private static void UnaryLastElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
             UnaryNode unary,
             [NotNull] Expression ifNull,
@@ -1295,7 +1296,7 @@ namespace Anori.ExpressionObservers
         [NotNull]
         private static Expression UnaryMakeExpression(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             UnaryNode unary,
             [NotNull] Expression ifNull)
         {
@@ -1313,7 +1314,7 @@ namespace Anori.ExpressionObservers
         /// <param name="ifNull">If null.</param>
         private static void UnaryNextElement(
             [NotNull] IList<Expression> expressions,
-            [NotNull] VaribalesCollection variables,
+            [NotNull] VariablesCollection variables,
             [NotNull] Expression target,
             UnaryNode unary,
             [NotNull] Expression ifNull)

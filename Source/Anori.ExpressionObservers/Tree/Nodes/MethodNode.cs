@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.Tree.Nodes
         /// <value>
         ///     The type.
         /// </value>
-        public Type Type => this.MethodCallExpression.Method.ReturnParameter.ParameterType;
+        public Type Type => this.MethodCallExpression.Method.ReturnParameter?.ParameterType!;
 
         /// <summary>
         ///     Gets the previous.

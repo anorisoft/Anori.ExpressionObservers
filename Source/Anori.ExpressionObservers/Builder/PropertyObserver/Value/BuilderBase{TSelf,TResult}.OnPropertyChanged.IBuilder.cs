@@ -10,12 +10,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using System.Threading.Tasks;
 
     using Anori.Common;
-    using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
 
     /// <summary>
-    /// The Builder Base class.
+    ///     The Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -29,7 +28,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </returns>
         IBuilder<TResult> IObserverBuilderBase<IBuilder<TResult>>.AutoActivate() => this.AutoActivate();
 
-       
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
@@ -37,7 +35,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached(LazyThreadSafetyMode safetyMode) => this.Cached(safetyMode);
+        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached(LazyThreadSafetyMode safetyMode) =>
+            this.Cached(safetyMode);
 
         /// <summary>
         ///     Cacheds the specified safety mode.
@@ -47,7 +46,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </returns>
         IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached() => this.Cached();
 
-        
         /// <summary>
         ///     Withes the action.
         /// </summary>
@@ -83,9 +81,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.
-            WithGetterDispatcher() =>
-            this.WithGetterDispatcher();
+        IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.WithGetterDispatcher() => this.WithGetterDispatcher();
 
         /// <summary>
         ///     Withes the getter task scheduler.
@@ -94,8 +90,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.WithScheduler(
-            TaskScheduler taskScheduler) =>
+        IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.WithScheduler(TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }
 }

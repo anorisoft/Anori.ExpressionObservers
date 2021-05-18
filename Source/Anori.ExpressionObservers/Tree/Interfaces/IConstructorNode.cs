@@ -13,7 +13,6 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     /// <summary>
     ///     The Constructor Node interface.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IConstructorNode : IExpressionNode
     {
         /// <summary>

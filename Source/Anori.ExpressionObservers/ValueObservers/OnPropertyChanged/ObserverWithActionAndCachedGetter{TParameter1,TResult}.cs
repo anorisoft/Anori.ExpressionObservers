@@ -21,16 +21,10 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
-    /// Property Reference Observer With Getter.
+    ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IGetterValuePropertyObserver{TResult}, TParameter1, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterValuePropertyObserver{TResult}" />
-    /// <seealso cref="INotifyPropertyChanged" />
-    /// <seealso cref="ComponentModel" />
-    /// <seealso cref="System" />
-    /// <seealso cref="ObserverWithActionAndCachedGetter{TResult}" />
     internal sealed class ObserverWithActionAndCachedGetter<TParameter1, TResult> :
         ObserverBase<IGetterValuePropertyObserver<TResult>, TParameter1, TResult>,
         IGetterValuePropertyObserver<TResult>
@@ -50,7 +44,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -75,7 +69,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -102,7 +96,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -127,7 +121,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -157,7 +151,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        ///     <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -173,7 +167,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>

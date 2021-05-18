@@ -24,9 +24,6 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyObserverWithFallback{TResult}" />
-    /// <seealso cref="PropertyGetterObserverWithFallback{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionOfTAndFallback<TParameter1, TParameter2, TResult> :
         ObserverBase<IPropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         IPropertyObserver<TResult>
@@ -134,13 +131,16 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         protected override void OnAction() => this.action(this.getter());
 
         /// <summary>
-        ///     Getters the specified property expression.
+        /// Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="parameter1">The parameter1.</param>
-        /// <returns>The Getter.</returns>
+        /// <param name="parameter2">The parameter2.</param>
+        /// <returns>
+        /// The Getter.
+        /// </returns>
         private static Func<TResult> Getter(
             Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,
             IExpressionTree tree,

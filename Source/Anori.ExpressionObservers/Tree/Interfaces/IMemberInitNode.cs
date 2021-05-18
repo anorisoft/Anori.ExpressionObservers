@@ -12,7 +12,6 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     /// <summary>
     ///     The Member Initialize Node interface.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IMemberInitNode : IExpressionNode
     {
         /// <summary>

@@ -16,7 +16,6 @@ namespace Anori.ExpressionObservers.Tree.Nodes
     /// <summary>
     ///     Binary Expression Tree Node.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     internal struct BinaryNode : IInternalExpressionNode, IBinaryNode
     {
         /// <summary>

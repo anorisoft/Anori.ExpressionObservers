@@ -6,15 +6,18 @@
 
 namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
 {
-    using Anori.ExpressionObservers.Base;
-    using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using JetBrains.Annotations;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Anori.ExpressionObservers.Base;
+    using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Tree.Interfaces;
+
+    using JetBrains.Annotations;
+
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
@@ -41,7 +44,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -56,7 +59,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             PropertyObserverFlag propertyObserverFlag)
             : this(
                 parameter1,
-                propertyExpression, action,
+                propertyExpression,
+                action,
                 taskScheduler,
                 false,
                 LazyThreadSafetyMode.None,
@@ -69,6 +73,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
@@ -86,7 +91,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
                 this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1), taskScheduler),
                 isCached,
-                safetyMode);
+                safetyMode,
+                action);
         }
 
         /// <summary>
@@ -94,6 +100,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal ObserverWithActionAndCachedGetter(
@@ -102,7 +109,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             [NotNull] Action action,
             SynchronizationContext synchronizationContext,
             PropertyObserverFlag propertyObserverFlag)
-            : this(parameter1,
+            : this(
+                parameter1,
                 propertyExpression,
                 action,
                 synchronizationContext,
@@ -117,6 +125,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
@@ -146,6 +155,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
         internal ObserverWithActionAndCachedGetter(
             [NotNull] TParameter1 parameter1,
@@ -157,10 +167,11 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetter{TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="action">The action.</param>
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
@@ -176,7 +187,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             (this.action, this.getter) = this.CreateNullableReferenceCachedGetter(
                 this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1)),
                 isCached,
-                safetyMode);
+                safetyMode,
+                action);
         }
 
         /// <summary>
@@ -191,13 +203,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         protected override void OnAction() => this.action();
 
         /// <summary>
-        /// Getters the specified property expression.
+        ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>
-        /// The Getter.
+        ///     The Getter.
         /// </returns>
         private static Func<TResult?> Getter(
             Expression<Func<TParameter1, TResult>> propertyExpression,

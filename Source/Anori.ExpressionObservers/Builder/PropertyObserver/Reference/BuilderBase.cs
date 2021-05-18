@@ -17,7 +17,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : BuilderBase<TSelf>
-        where TSelf : BuilderBase<TSelf, TResult> where TResult : class
+        where TSelf : BuilderBase<TSelf, TResult>
+        where TResult : class
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="Reference.BuilderBase{TSelf,TResult}" /> class.
@@ -296,6 +297,19 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         protected TSelf OnValueChanged() => (TSelf)this;
 
         /// <summary>
+        ///     Withes the action of tt with fallback.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns>
+        ///     The Property Reference Observer Builder.
+        /// </returns>
+        protected TSelf WithActionOfTTWithFallback(Action<TResult, TResult> action)
+        {
+            this.ActionOfTTWithFallback = action;
+            return (TSelf)this;
+        }
+
+        /// <summary>
         ///     Withes the action of t result with fallback.
         /// </summary>
         /// <param name="action">The action.</param>
@@ -305,17 +319,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         protected TSelf WithActionOfTWithFallback(Action<TResult> action)
         {
             this.ActionOfTWithFallback = action;
-            return (TSelf)this;
-        }
-
-        /// <summary>
-        /// Withes the action of tt with fallback.
-        /// </summary>
-        /// <param name="action">The action.</param>
-        /// <returns></returns>
-        protected TSelf WithActionOfTTWithFallback(Action<TResult, TResult> action)
-        {
-            this.ActionOfTTWithFallback = action;
             return (TSelf)this;
         }
 
@@ -333,10 +336,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Withes the nullable action of tt.
+        ///     Withes the nullable action of tt.
         /// </summary>
         /// <param name="action">The action.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Reference Observer Builder.
+        /// </returns>
         protected TSelf WithNullableActionOfTT(Action<TResult?, TResult?> action)
         {
             this.ActionOfTT = action;

@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
-    using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
@@ -33,12 +32,14 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
-        [NotNull] private readonly UpdateableMultipleDeferrer deferrer;
+        [NotNull]
+        private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
         ///     The getter.
         /// </summary>
-        [NotNull] private readonly Func<TResult> getValue;
+        [NotNull]
+        private readonly Func<TResult> getValue;
 
         /// <summary>
         ///     The action.
@@ -138,14 +139,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
-        ///     Defers this instance.
-        /// </summary>
-        /// <returns>
-        ///     Disposable deferrer.
-        /// </returns>
-        public IDisposable Defer() => this.deferrer.Create();
-
-        /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
         /// </summary>
         /// <value>
@@ -177,6 +170,14 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
                 this.OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        ///     Defers this instance.
+        /// </summary>
+        /// <returns>
+        ///     Disposable deferrer.
+        /// </returns>
+        public IDisposable Defer() => this.deferrer.Create();
 
         /// <summary>
         ///     On the action.

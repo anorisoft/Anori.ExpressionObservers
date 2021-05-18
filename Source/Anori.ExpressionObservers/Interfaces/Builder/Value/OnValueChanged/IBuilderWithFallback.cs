@@ -6,8 +6,6 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
-    using Anori.Common;
-
     /// <summary>
     ///     The I Property Value Observer Builder With Value Changed interface.
     /// </summary>

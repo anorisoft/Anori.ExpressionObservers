@@ -21,11 +21,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     ///     Property Value Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IGetterValuePropertyObserver{TResult}, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterValuePropertyObserver{TResult}" />
-    internal sealed class ObserverWithActionAndGetter<TResult> : ObserverBase<IGetterValuePropertyObserver<TResult>, TResult>,
-                                                        IGetterValuePropertyObserver<TResult>
+    internal sealed class ObserverWithActionAndGetter<TResult> :
+        ObserverBase<IGetterValuePropertyObserver<TResult>, TResult>,
+        IGetterValuePropertyObserver<TResult>
         where TResult : struct
     {
         /// <summary>

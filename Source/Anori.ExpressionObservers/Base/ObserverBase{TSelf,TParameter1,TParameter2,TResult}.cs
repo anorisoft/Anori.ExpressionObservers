@@ -146,7 +146,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
                         {
-                            if (!(fieldElement is { Next: PropertyNode propertyElement }))
+                            if (fieldElement is not { Next: PropertyNode propertyElement })
                             {
                                 continue;
                             }

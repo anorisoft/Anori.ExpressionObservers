@@ -23,11 +23,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="PropertyReferenceObserverOnNotifyPropertyChanged{TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFoundationBase" />
-    internal sealed class ObserverWithActionAndChachedGetterAndFallback<TResult> :
+    internal sealed class ObserverWithActionAndCachedGetterAndFallback<TResult> :
         ObserverBase<IGetterPropertyObserver<TResult>, TResult>,
         IGetterPropertyObserver<TResult>
     {
@@ -44,14 +40,15 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         private readonly Func<TResult> getter;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ObserverWithActionAndChachedGetterAndFallback(
+        internal ObserverWithActionAndCachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TaskScheduler taskScheduler,
@@ -69,7 +66,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -79,7 +77,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="System.ArgumentNullException">propertyExpression is null.</exception>
-        internal ObserverWithActionAndChachedGetterAndFallback(
+        internal ObserverWithActionAndCachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TaskScheduler taskScheduler,
@@ -97,14 +95,15 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ObserverWithActionAndChachedGetterAndFallback(
+        internal ObserverWithActionAndCachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] SynchronizationContext synchronizationContext,
@@ -122,7 +121,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -131,7 +131,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ObserverWithActionAndChachedGetterAndFallback(
+        internal ObserverWithActionAndCachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] SynchronizationContext synchronizationContext,
@@ -149,13 +149,14 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="propertyObserverFlag">The property observer flag.</param>
-        internal ObserverWithActionAndChachedGetterAndFallback(
+        internal ObserverWithActionAndCachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TResult fallback,
@@ -165,7 +166,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetterAndFallback{TParameter1,TParameter2,TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
@@ -173,7 +175,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <param name="isCached">if set to <c>true</c> [is cached].</param>
         /// <param name="safetyMode">The safety mode.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        internal ObserverWithActionAndChachedGetterAndFallback(
+        internal ObserverWithActionAndCachedGetterAndFallback(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
             [NotNull] TResult fallback,
@@ -201,15 +203,18 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         protected override void OnAction() => this.action();
 
         /// <summary>
-        ///     Getters the specified property expression.
+        /// Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
-        /// <returns>Getter.</returns>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns>
+        /// Getter.
+        /// </returns>
         private static Func<TResult> Getter(
             Expression<Func<TResult>> propertyExpression,
             IExpressionTree tree,
             TResult fallback) =>
-            ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback);
+            ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback!);
     }
 }

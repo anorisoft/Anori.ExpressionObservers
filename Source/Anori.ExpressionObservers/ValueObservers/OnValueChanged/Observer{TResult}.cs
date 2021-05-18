@@ -12,7 +12,6 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.Tree.Interfaces;
@@ -24,18 +23,13 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Observer{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class Observer<TResult> :
         ObserverOnValueChangedBase<INotifyValuePropertyObserver<TResult>, TResult>,
         INotifyValuePropertyObserver<TResult>
         where TResult : struct
     {
-
         /// <summary>
-        /// The get value.
+        ///     The get value.
         /// </summary>
         [NotNull]
         private readonly Func<TResult?> getValue;

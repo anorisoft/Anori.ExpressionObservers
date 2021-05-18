@@ -6,8 +6,6 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
-    using System.Threading.Tasks;
-
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged;

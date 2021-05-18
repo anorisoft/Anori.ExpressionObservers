@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
-    using Anori.ExpressionObservers.ReferenceObservers.OnValueChanged;
     using Anori.ExpressionObservers.Tree.Interfaces;
     using Anori.Extensions.Threading;
 
@@ -113,8 +112,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
-            this.deferrer = new UpdateableMultipleDeferrer(
-                () => synchronizationContext.Send(() => this.Value = get()));
+            this.deferrer = new UpdateableMultipleDeferrer(() => synchronizationContext.Send(() => this.Value = get()));
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
@@ -157,7 +155,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// </summary>
         /// <returns>The deferrer.</returns>
         public IDisposable Defer() => this.deferrer.Create();
-
 
         /// <summary>
         ///     Getters the specified property expression.

@@ -83,7 +83,6 @@ namespace Anori.ExpressionObservers.Tree
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExpressionTree" /> with generic parameter class.
         /// </summary>
-        /// <typeparam name="TFunc">The type of the function.</typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns>
         ///     A new instance of the <see cref="ExpressionTree" />.

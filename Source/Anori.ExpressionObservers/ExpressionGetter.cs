@@ -6,13 +6,11 @@
 
 namespace Anori.ExpressionObservers
 {
+    using Anori.ExpressionObservers.Tree.Interfaces;
+    using JetBrains.Annotations;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
-
-    using Anori.ExpressionObservers.Tree.Interfaces;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     ///     The Expression Getter class.
@@ -40,8 +38,13 @@ namespace Anori.ExpressionObservers
                 throw new ArgumentNullException(nameof(expression));
             }
 
+            if (fallback == null)
+            {
+                throw new ArgumentNullException(nameof(fallback));
+            }
+
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback) !);
             var lambda = Expression.Lambda<Func<TParameter1, TResult>>(body, parameters);
             return lambda.Compile();
         }
@@ -64,6 +67,11 @@ namespace Anori.ExpressionObservers
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
+            }
+
+            if (fallback == null)
+            {
+                throw new ArgumentNullException(nameof(fallback));
             }
 
             var parameters = expression.Parameters;
@@ -94,8 +102,13 @@ namespace Anori.ExpressionObservers
                 throw new ArgumentNullException(nameof(expression));
             }
 
+            if (fallback == null)
+            {
+                throw new ArgumentNullException(nameof(fallback));
+            }
+
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback!)!);
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult>>(body, parameters);
             return lambda.Compile();
         }
@@ -119,7 +132,7 @@ namespace Anori.ExpressionObservers
                 [NotNull] TResult fallback)
         {
             var parameters = expression.Parameters;
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback));
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expression, Fallback(fallback)!);
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TParameter3, TResult>>(body, parameters);
             return lambda.Compile();
         }
@@ -153,7 +166,7 @@ namespace Anori.ExpressionObservers
                 throw new ArgumentNullException(nameof(expressionTree));
             }
 
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback));
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback)!);
             var lambda = Expression.Lambda<Func<TResult>>(body, parameters);
             return lambda.Compile();
         }
@@ -188,7 +201,7 @@ namespace Anori.ExpressionObservers
                 throw new ArgumentNullException(nameof(expressionTree));
             }
 
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback));
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback)!);
             var lambda = Expression.Lambda<Func<TParameter1, TResult>>(body, parameters);
             return lambda.Compile();
         }
@@ -224,7 +237,7 @@ namespace Anori.ExpressionObservers
                 throw new ArgumentNullException(nameof(expressionTree));
             }
 
-            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback));
+            var body = ExpressionCreator.CreateValueBody(typeof(TResult), expressionTree, Fallback(fallback)!);
             var lambda = Expression.Lambda<Func<TParameter1, TParameter2, TResult>>(body, parameters);
             return lambda.Compile();
         }

@@ -28,7 +28,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     internal sealed class ObserverWithActionAndDeferrer<TParameter1, TResult> :
         ObserverBase<IGetterReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         IGetterReferencePropertyObserverWithDeferrer<TResult>
-        where TParameter1 : INotifyPropertyChanged where TResult : class
+        where TParameter1 : INotifyPropertyChanged
+        where TResult : class
     {
         /// <summary>
         ///     The action.

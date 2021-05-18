@@ -21,10 +21,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="ObserverFoundationBase.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyReferenceObserverWithGetter{TResult}" />
-    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndGetter<TResult> :
         ObserverBase<IGetterReferencePropertyObserver<TResult>, TResult>,
         IGetterReferencePropertyObserver<TResult>

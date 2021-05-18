@@ -21,7 +21,6 @@ namespace Anori.ExpressionObservers.Exceptions
         /// <summary>
         ///     Initializes a new instance of the <see cref="NotActivatedException" /> class.
         /// </summary>
-        /// <param name="message">The message that describes the error.</param>
         public NotActivatedException()
             : base("Not activated.")
         {

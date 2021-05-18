@@ -10,14 +10,13 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -30,18 +29,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class Observer<TParameter1, TParameter2, TResult> :
-        ObserverBase<INotifyReferencePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
+        ObserverOnValueChangedBase<INotifyReferencePropertyObserver<TResult>, TParameter1, TParameter2, TResult>,
         INotifyReferencePropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TParameter2 : INotifyPropertyChanged
         where TResult : class
     {
-        /// <summary>
-        ///     The action.
-        /// </summary>
-        [NotNull]
-        private readonly Action action;
-
         /// <summary>
         ///     The getter.
         /// </summary>
@@ -51,16 +44,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         ///     The value.
         /// </summary>
         private TResult? value;
-
-        /// <summary>
-        /// The silent action.
-        /// </summary>
-        [NotNull] private readonly Action silentAction;
-
-        /// <summary>
-        ///     Called when [silent activate].
-        /// </summary>
-        protected override void OnSilentActivate() => this.silentAction.Raise();
 
         /// <summary>
         ///     Initializes a new instance of the
@@ -83,8 +66,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         {
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
             var taskFactory = new TaskFactory(taskScheduler);
-            this.action = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.UpdateValueProperty = () => taskFactory.StartNew(() => this.Value = get()).Wait();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -105,8 +90,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
-            this.action = () => synchronizationContext.Send(() => this.Value = get());
+            this.UpdateValueProperty = () => synchronizationContext.Send(() => this.Value = get());
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
 
         /// <summary>
@@ -125,15 +112,11 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             : base(parameter1, parameter2, propertyExpression, observerFlag)
         {
             var get = this.CreateNullableReferenceGetter(Getter(propertyExpression, this.Tree, parameter1, parameter2));
-            this.action = () => this.Value = get();
+            this.UpdateValueProperty = () => this.Value = get();
+            this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
+            this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
         }
-
-        /// <summary>
-        ///     Occurs when a property value changes.
-        /// </summary>
-        /// <returns></returns>
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets the value.
@@ -159,11 +142,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     On the action.
-        /// </summary>
-        protected override void OnAction() => this.action();
-
-        /// <summary>
         ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
@@ -179,13 +157,5 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TParameter2, TResult>(
                 propertyExpression.Parameters,
                 tree)(parameter1, parameter2);
-
-        /// <summary>
-        ///     Called when [property changed].
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            this.PropertyChanged.Raise(this, propertyName);
     }
 }

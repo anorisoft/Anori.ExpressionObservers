@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="VaribalesCollection.cs" company="AnoriSoft">
+// <copyright file="VariablesCollection.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -10,10 +10,9 @@ namespace Anori.ExpressionObservers
     using System.Linq.Expressions;
 
     /// <summary>
-    ///     Varibales Collection.
+    ///     The Variables Collection class.
     /// </summary>
-    /// <seealso cref="System.Collections.Generic.List{System.Linq.Expressions.ParameterExpression}" />
-    internal class VaribalesCollection : List<ParameterExpression>
+    internal class VariablesCollection : List<ParameterExpression>
     {
         /// <summary>
         ///     The index.
@@ -21,9 +20,9 @@ namespace Anori.ExpressionObservers
         private int index;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="VaribalesCollection" /> class.
+        ///     Initializes a new instance of the <see cref="VariablesCollection" /> class.
         /// </summary>
-        public VaribalesCollection() => this.index = 1;
+        public VariablesCollection() => this.index = 1;
 
         /// <summary>
         ///     Gets the index of the next.

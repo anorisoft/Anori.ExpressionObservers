@@ -8,8 +8,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
     using System;
 
-    using Anori.Common;
-
     /// <summary>
     ///     The Property Value Observer Builder With Notify Property Changed interface.
     /// </summary>

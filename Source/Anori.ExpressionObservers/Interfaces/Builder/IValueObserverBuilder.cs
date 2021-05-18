@@ -12,10 +12,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     ///     The Value Property Observer Builder interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.IBuilder{TResult}}" />
     public interface IValueObserverBuilder<TResult>
-        where TResult : struct
+       where TResult : struct
     {
         /// <summary>
         ///     Withes the notify Property changed.

@@ -10,17 +10,13 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
-    using Anori.Extensions;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -127,8 +123,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
-            this.deferrer = new UpdateableMultipleDeferrer(
-                () => synchronizationContext.Send(() => this.Value = get()));
+            this.deferrer = new UpdateableMultipleDeferrer(() => synchronizationContext.Send(() => this.Value = get()));
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = get();
             this.getValue = this.CreateGetProperty(() => this.value);
@@ -173,14 +168,14 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         public IDisposable Defer() => this.deferrer.Create();
 
         /// <summary>
-        /// Getters the specified property expression.
+        ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <param name="fallback">The fallback.</param>
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>
-        /// The Getter.
+        ///     The Getter.
         /// </returns>
         private static Func<TResult> Getter(
             Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -188,7 +183,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             TResult fallback,
             TParameter1 parameter1)
         {
-            var get = ExpressionGetter.CreateGetterByTree<TParameter1,TResult>(propertyExpression.Parameters, tree, fallback!);
+            var get = ExpressionGetter.CreateGetterByTree<TParameter1, TResult>(
+                propertyExpression.Parameters,
+                tree,
+                fallback!);
             return () => get(parameter1);
         }
     }

@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     /// <summary>
     ///     The Conditional Node interface.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IConditionalNode : IExpressionNode
     {
         /// <summary>

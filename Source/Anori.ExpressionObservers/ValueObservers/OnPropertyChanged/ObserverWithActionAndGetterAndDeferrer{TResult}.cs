@@ -22,9 +22,6 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     ///     Property Value Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Base.ObserverBase{Anori.ExpressionObservers.Interfaces.IGetterValuePropertyObserver{TResult}, TResult}" />
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IGetterValuePropertyObserver{TResult}" />
     internal sealed class ObserverWithActionAndGetterAndDeferrer<TResult> :
         ObserverBase<IGetterValuePropertyObserverWithDeferrer<TResult>, TResult>,
         IGetterValuePropertyObserverWithDeferrer<TResult>
@@ -39,7 +36,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
-        [NotNull] private readonly UpdateableMultipleDeferrer deferrer;
+        [NotNull]
+        private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
         ///     The getter.

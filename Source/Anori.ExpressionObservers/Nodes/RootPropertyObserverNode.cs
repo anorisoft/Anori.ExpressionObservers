@@ -13,8 +13,6 @@ namespace Anori.ExpressionObservers.Nodes
     /// <summary>
     ///     Root Property Observer Node.
     /// </summary>
-    /// <seealso cref="PropertyObserverNode" />
-    /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Observers.RootPropertyObserverNode}" />
     internal class RootPropertyObserverNode : PropertyObserverNode, IEquatable<RootPropertyObserverNode>
     {
         /// <summary>

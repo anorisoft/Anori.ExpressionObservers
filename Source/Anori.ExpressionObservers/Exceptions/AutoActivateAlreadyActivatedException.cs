@@ -21,7 +21,6 @@ namespace Anori.ExpressionObservers.Exceptions
         /// <summary>
         ///     Initializes a new instance of the <see cref="AutoActivateAlreadyActivatedException" /> class.
         /// </summary>
-        /// <param name="message">The message that describes the error.</param>
         public AutoActivateAlreadyActivatedException()
             : base("AutoActivate is already activated.")
         {

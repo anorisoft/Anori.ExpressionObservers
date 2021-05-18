@@ -7,11 +7,9 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
     /// <summary>
-    /// The I Builder With Action Of Null T And Deferrer interface.
+    ///     The I Builder With Action Of Null T And Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.Builder.IObserverBuilderBase{Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfNullTAndDeferrer{TResult}}" />
-    /// <seealso cref="ISchedulerBase{TSelf}.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged.IBuilderWithActionOfNullTAndDeferrer{TResult}}" />
     public interface IBuilderWithActionOfNullTAndDeferrer<TResult> :
         IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>,
         ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
@@ -20,7 +18,8 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>§
+        /// <returns>
+        ///     §
         ///     The Property Observer.
         /// </returns>
         INotifyValuePropertyObserverWithDeferrer<TResult> Build();

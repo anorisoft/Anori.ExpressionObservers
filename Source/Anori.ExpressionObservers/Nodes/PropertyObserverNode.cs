@@ -135,7 +135,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <param name="e">The <see cref="PropertyChangedEventArgs" /> instance containing the event data.</param>
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e?.PropertyName == this.PropertyInfo.Name || string.IsNullOrEmpty(e?.PropertyName))
+            if (e.PropertyName == this.PropertyInfo.Name || string.IsNullOrEmpty(e.PropertyName))
             {
                 this.action.Raise();
             }

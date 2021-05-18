@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithActionOfTAndFallback{TParameter1,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionOfTAndFallbackAndDeferrer{TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -42,12 +42,6 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
-        ///     The getValue.
-        /// </summary>
-        [NotNull]
-        private readonly Func<TResult> getValue;
-
-        /// <summary>
         ///     Initializes a new instance of the
         ///     <see cref="ObserverWithActionOfTAndFallbackAndDeferrer{TParameter1,TResult}" /> class.
         /// </summary>
@@ -65,10 +59,9 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
-            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
+            Func<TResult> getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(getValue()));
             this.action = () => this.deferrer.Update();
-
         }
 
         /// <summary>
@@ -91,10 +84,11 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1), taskScheduler);
-            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
+            Func<TResult> getValue = this.CreateGetter(
+                Getter(propertyExpression, this.Tree, fallback, parameter1),
+                taskScheduler);
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(getValue()));
             this.action = () => this.deferrer.Update();
-
         }
 
         /// <summary>
@@ -117,14 +111,12 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
-            this.getValue = this.CreateGetter(
+            Func<TResult> getValue = this.CreateGetter(
                 Getter(propertyExpression, this.Tree, fallback, parameter1),
                 synchronizationContext);
-            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(getValue()));
             this.action = () => this.deferrer.Update();
-
         }
-
 
         /// <summary>
         ///     Gets a value indicating whether this instance is deferred.

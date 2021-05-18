@@ -38,13 +38,6 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         [NotNull]
         private readonly UpdateableMultipleDeferrer deferrer;
 
-
-        /// <summary>
-        /// The get value.
-        /// </summary>
-        [NotNull]
-        private readonly Func<TResult> getValue;
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="ObserverWithActionOfTAndFallbackAndDeferrer{TResult}" /> class.
         /// </summary>
@@ -65,8 +58,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
                 throw new ArgumentNullException(nameof(action));
             }
 
-            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
-            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
+            Func<TResult> getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback));
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(getValue()));
             this.action = () => this.deferrer.Update();
         }
 
@@ -92,8 +85,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
                 throw new ArgumentNullException(nameof(action));
             }
 
-            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback), taskScheduler);
-            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
+            Func<TResult> getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback), taskScheduler);
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(getValue()));
             this.action = () => this.deferrer.Update();
         }
 
@@ -119,8 +112,10 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
                 throw new ArgumentNullException(nameof(action));
             }
 
-            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback), synchronizationContext);
-            this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getValue()));
+            Func<TResult> getValue = this.CreateGetter(
+                Getter(propertyExpression, this.Tree, fallback),
+                synchronizationContext);
+            this.deferrer = new UpdateableMultipleDeferrer(() => action(getValue()));
             this.action = () => this.deferrer.Update();
         }
 

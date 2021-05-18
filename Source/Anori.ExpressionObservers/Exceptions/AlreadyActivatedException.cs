@@ -11,13 +11,16 @@ namespace Anori.ExpressionObservers.Exceptions
 
     using JetBrains.Annotations;
 
+    /// <summary>
+    ///     The Already Activated Exception class.
+    /// </summary>
+    /// <seealso cref="Anori.ExpressionObservers.Exceptions.ExpressionObserversException" />
     [Serializable]
     public sealed class AlreadyActivatedException : ExpressionObserversException
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="AlreadyActivatedException" /> class.
         /// </summary>
-        /// <param name="message">The message that describes the error.</param>
         public AlreadyActivatedException()
             : base("Already activated.")
         {

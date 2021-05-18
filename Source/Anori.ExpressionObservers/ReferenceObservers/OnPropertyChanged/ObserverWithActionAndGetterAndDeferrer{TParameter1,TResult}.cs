@@ -61,10 +61,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="observerFlag">The observer flag.</param>
         /// <exception cref="ArgumentNullException">action is null.</exception>
-        /// action
-        /// or
-        /// propertyExpression is null.
-        /// </exception>
         internal ObserverWithActionAndGetterAndDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
@@ -127,12 +123,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Gets the value.
-        /// </summary>
-        /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getValue();
-
-        /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
         /// </summary>
         /// <value>
@@ -149,21 +139,27 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         public IDisposable Defer() => this.deferrer.Create();
 
         /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The result value.</returns>
+        public TResult? GetValue() => this.getValue();
+
+        /// <summary>
         ///     On the action.
         /// </summary>
         protected override void OnAction() => this.action();
 
         /// <summary>
-        /// Getters the specified property expression.
+        ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>
-        /// The Getter.
+        ///     The Getter.
         /// </returns>
         private static Func<TResult?> Getter(
-        Expression<Func<TParameter1, TResult>> propertyExpression,
+            Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
             TParameter1 parameter1) =>
             () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(

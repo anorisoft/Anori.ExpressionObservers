@@ -39,14 +39,16 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <param name="observerFlag">The observer flag.</param>
-        /// <exception cref="ArgumentNullException">action
-        /// or
-        /// propertyExpression is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     action
+        ///     or
+        ///     propertyExpression is null.
+        /// </exception>
         internal ObserverWithAction(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action<TResult?> action,
@@ -58,7 +60,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithAction{TResult}" /> class.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>

@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers.Interfaces
     ///     The Property Observer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="IPropertyObserverBase{TSelf}.ExpressionObservers.Builder.IPropertyObserver{TResult}}" />
     public interface IPropertyObserver<TResult> : IPropertyObserverBase<IPropertyObserver<TResult>>
     {
     }

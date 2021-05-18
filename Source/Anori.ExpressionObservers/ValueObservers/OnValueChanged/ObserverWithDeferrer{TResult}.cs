@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     ///     Property Value Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-     internal sealed class ObserverWithDeferrer<TResult> :
+    internal sealed class ObserverWithDeferrer<TResult> :
         ObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TResult>,
         INotifyValuePropertyObserverWithDeferrer<TResult>
         where TResult : struct
@@ -145,7 +145,6 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         ///     Defers this instance.
         /// </summary>
         /// <returns>The deferrer.</returns>
-        [NotNull]
         public IDisposable Defer() => this.deferrer.Create();
     }
 }

@@ -143,7 +143,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
 
                 var old = this.value;
                 this.value = value;
-                this.valueChangedAction.Raise(old,value);
+                this.valueChangedAction.Raise(old, value);
                 this.OnPropertyChanged();
             }
         }

@@ -13,11 +13,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -116,7 +114,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ObserverWithActionAndFallbackAndDeferrer{TParameter1, TParameter2, TResult}" />
+        ///     <see cref="ObserverWithActionAndFallback{TParameter1, TParameter2, TResult}" />
         ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>

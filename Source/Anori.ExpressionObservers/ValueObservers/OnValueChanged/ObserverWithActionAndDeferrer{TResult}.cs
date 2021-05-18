@@ -13,7 +13,6 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.Tree.Interfaces;
@@ -26,10 +25,6 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     ///     Property Reference Observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Observer{TParameter1,TParameter2,TResult}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-    /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndDeferrer<TResult> :
         ObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TResult>,
         INotifyValuePropertyObserverWithDeferrer<TResult>
@@ -38,12 +33,14 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
-        [NotNull] private readonly UpdateableMultipleDeferrer deferrer;
+        [NotNull]
+        private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
         ///     The getValue.
         /// </summary>
-        [NotNull] private readonly Func<TResult?> getValue;
+        [NotNull]
+        private readonly Func<TResult?> getValue;
 
         /// <summary>
         ///     The value changed action.

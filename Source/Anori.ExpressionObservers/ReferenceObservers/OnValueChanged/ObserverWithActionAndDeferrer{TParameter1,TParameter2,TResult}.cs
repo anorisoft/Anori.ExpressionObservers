@@ -146,14 +146,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
-        ///     Defers this instance.
-        /// </summary>
-        /// <returns>
-        ///     Disposable deferrer.
-        /// </returns>
-        public IDisposable Defer() => this.deferrer.Create();
-
-        /// <summary>
         ///     Gets a value indicating whether this instance is defer.
         /// </summary>
         /// <value>
@@ -185,6 +177,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
                 this.OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        ///     Defers this instance.
+        /// </summary>
+        /// <returns>
+        ///     Disposable deferrer.
+        /// </returns>
+        public IDisposable Defer() => this.deferrer.Create();
 
         /// <summary>
         ///     Getters the specified property expression.

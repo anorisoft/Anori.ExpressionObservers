@@ -11,7 +11,6 @@ namespace Anori.ExpressionObservers.Tree.Interfaces
     /// <summary>
     ///     The Binary Node Interface.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IExpressionNode" />
     public interface IBinaryNode : IExpressionNode
     {
         /// <summary>

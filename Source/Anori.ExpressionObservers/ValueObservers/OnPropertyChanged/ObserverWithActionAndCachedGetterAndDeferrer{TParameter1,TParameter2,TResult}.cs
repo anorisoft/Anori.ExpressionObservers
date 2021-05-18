@@ -239,18 +239,18 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Gets the value.
-        /// </summary>
-        /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getValue();
-
-        /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
         /// </summary>
         /// <value>
         ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
         /// </value>
         public bool IsDeferred => this.deferrer.IsDeferred;
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The result value.</returns>
+        public TResult? GetValue() => this.getValue();
 
         /// <summary>
         ///     Defers this instance.

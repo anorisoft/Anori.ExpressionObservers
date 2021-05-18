@@ -16,7 +16,6 @@ namespace Anori.ExpressionObservers.Tree.Nodes
     /// <summary>
     ///     Parameter Expression Tree Node.
     /// </summary>
-    /// <seealso cref="Anori.ExpressionObservers.Nodes.IInternalExpressionNode" />
     internal struct ParameterNode : IInternalExpressionNode, IParameterNode
     {
         /// <summary>

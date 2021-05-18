@@ -21,7 +21,6 @@ namespace Anori.ExpressionObservers.Exceptions
         /// <summary>
         ///     Initializes a new instance of the <see cref="AlreadyDeactivatedException" /> class.
         /// </summary>
-        /// <param name="message">The message that describes the error.</param>
         public AlreadyDeactivatedException()
             : base("Already deactivated.")
         {

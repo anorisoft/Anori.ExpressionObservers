@@ -20,11 +20,6 @@ namespace Anori.ExpressionObservers.Base
     /// <summary>
     ///     Property Observer Base.
     /// </summary>
-    /// <seealso cref="System.IDisposable" />
-    /// <seealso
-    ///     cref="System.Collections.Generic.IEqualityComparer{Anori.ExpressionObservers.Base.PropertyObserverFundatinBase}" />
-    /// <seealso cref="System.IEquatable{Anori.ExpressionObservers.Base.PropertyObserverFundatinBase}" />
-    /// <seealso cref="Anori.Common.IActivatable" />
 #pragma warning disable S3881 // "IDisposable" should be implemented correctly
     internal abstract class ObserverFoundationBase : IDisposable,
                                                      IEqualityComparer<ObserverFoundationBase>,
@@ -373,8 +368,10 @@ namespace Anori.ExpressionObservers.Base
         protected abstract void OnAction();
 
         /// <summary>
-        ///     Called when [activate].
+        /// Called when [activate].
         /// </summary>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <returns></returns>
         protected virtual void OnActivate(bool silent)
         {
             if (!silent)

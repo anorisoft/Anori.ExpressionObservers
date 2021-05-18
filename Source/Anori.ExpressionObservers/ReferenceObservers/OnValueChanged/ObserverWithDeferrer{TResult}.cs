@@ -70,7 +70,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
-
         }
 
         /// <summary>
@@ -90,13 +89,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             var getter = ExpressionGetter.CreateReferenceGetterByTree<TResult>(
                 propertyExpression.Parameters,
                 this.Tree);
-            this.deferrer = new UpdateableMultipleDeferrer(
-                () => new TaskFactory(taskScheduler).StartNew(() => this.Value = getter()).Wait());
+            var factory = new TaskFactory(taskScheduler);
+            this.deferrer = new UpdateableMultipleDeferrer(() => factory.StartNew(() => this.Value = getter()).Wait());
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
-
         }
 
         /// <summary>
@@ -122,7 +120,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
             this.ResetValueProperty = this.CreateValueResetter(() => this.Value = null);
-
         }
 
         /// <summary>

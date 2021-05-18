@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
-    using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.ValueObservers.OnPropertyChanged;
     using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
@@ -99,7 +98,10 @@ namespace Anori.ExpressionObservers
             [NotNull] Action action)
             where TResult : struct
         {
-            var observer = new ObserverWithActionAndGetter<TResult>(propertyExpression, action, PropertyObserverFlag.None);
+            var observer = new ObserverWithActionAndGetter<TResult>(
+                propertyExpression,
+                action,
+                PropertyObserverFlag.None);
             if (isAutoActivate)
             {
                 observer.Activate(true);
@@ -107,160 +109,6 @@ namespace Anori.ExpressionObservers
 
             return observer;
         }
-
-        ///// <summary>
-        /////     Observeses the on notify Property changed.
-        ///// </summary>
-        ///// <typeparam name="TResult">The type of the result.</typeparam>
-        ///// <param name="propertyExpression">The property expression.</param>
-        ///// <returns>
-        /////     The Property Value Observer.
-        ///// </returns>
-        //[NotNull]
-        //public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
-        //    [NotNull] Expression<Func<TResult>> propertyExpression)
-        //    where TResult : struct =>
-        //    new CachedObserver<TResult>(propertyExpression, PropertyObserverFlag.None);
-
-        ///// <summary>
-        /////     Observeses the on notify Property changed.
-        ///// </summary>
-        ///// <typeparam name="TResult">The type of the result.</typeparam>
-        ///// <param name="propertyExpression">The property expression.</param>
-        ///// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        ///// <param name="safetyMode">The safety mode.</param>
-        ///// <returns>
-        /////     The Property Value Observer.
-        ///// </returns>
-        //[NotNull]
-        //public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
-        //    [NotNull] Expression<Func<TResult>> propertyExpression,
-        //    bool isCached,
-        //    LazyThreadSafetyMode safetyMode)
-        //    where TResult : struct =>
-        //    new CachedObserver<TResult>(
-        //        propertyExpression,
-        //        isCached,
-        //        safetyMode,
-        //        PropertyObserverFlag.None);
-
-        ///// <summary>
-        /////     Observeses the on notify Property changed.
-        ///// </summary>
-        ///// <typeparam name="TResult">The type of the result.</typeparam>
-        ///// <param name="propertyExpression">The property expression.</param>
-        ///// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        ///// <param name="safetyMode">The safety mode.</param>
-        ///// <param name="taskScheduler">The task scheduler.</param>
-        ///// <returns>
-        /////     The Property Value Observer.
-        ///// </returns>
-        //[NotNull]
-        //public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
-        //    [NotNull] Expression<Func<TResult>> propertyExpression,
-        //    bool isCached,
-        //    LazyThreadSafetyMode safetyMode,
-        //    TaskScheduler taskScheduler)
-        //    where TResult : struct =>
-        //    new CachedObserver<TResult>(
-        //        propertyExpression,
-        //        taskScheduler,
-        //        isCached,
-        //        safetyMode,
-        //        PropertyObserverFlag.None);
-
-        ///// <summary>
-        /////     Observeses the on notify Property changed.
-        ///// </summary>
-        ///// <typeparam name="TResult">The type of the result.</typeparam>
-        ///// <param name="propertyExpression">The property expression.</param>
-        ///// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        ///// <param name="safetyMode">The safety mode.</param>
-        ///// <param name="taskScheduler">The task scheduler.</param>
-        ///// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
-        ///// <returns>
-        /////     The Property Value Observer.
-        ///// </returns>
-        //[NotNull]
-        //public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
-        //    [NotNull] Expression<Func<TResult>> propertyExpression,
-        //    bool isCached,
-        //    LazyThreadSafetyMode safetyMode,
-        //    TaskScheduler taskScheduler,
-        //    bool isAutoActivate)
-        //    where TResult : struct
-        //{
-        //    var observer = new CachedObserver<TResult>(
-        //        propertyExpression,
-        //        taskScheduler,
-        //        isCached,
-        //        safetyMode,
-        //        PropertyObserverFlag.None);
-        //    if (isAutoActivate)
-        //    {
-        //        observer.Activate(true);
-        //    }
-
-        //    return observer;
-        //}
-
-        ///// <summary>
-        /////     Observeses the on notify Property changed.
-        ///// </summary>
-        ///// <typeparam name="TResult">The type of the result.</typeparam>
-        ///// <param name="propertyExpression">The property expression.</param>
-        ///// <param name="isCached">if set to <c>true</c> [is cached].</param>
-        ///// <param name="safetyMode">The safety mode.</param>
-        ///// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
-        ///// <returns>
-        /////     The Property Value Observer.
-        ///// </returns>
-        //[NotNull]
-        //public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
-        //    [NotNull] Expression<Func<TResult>> propertyExpression,
-        //    bool isCached,
-        //    LazyThreadSafetyMode safetyMode,
-        //    bool isAutoActivate)
-        //    where TResult : struct
-        //{
-        //    var observer = new CachedObserver<TResult>(
-        //        propertyExpression,
-        //        isCached,
-        //        safetyMode,
-        //        PropertyObserverFlag.None);
-        //    if (isAutoActivate)
-        //    {
-        //        observer.Activate(true);
-        //    }
-
-        //    return observer;
-        //}
-
-        ///// <summary>
-        /////     Observeses the on notify Property changed.
-        ///// </summary>
-        ///// <typeparam name="TResult">The type of the result.</typeparam>
-        ///// <param name="propertyExpression">The property expression.</param>
-        ///// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
-        ///// <returns>
-        /////     The Property Value Observer.
-        ///// </returns>
-        //[NotNull]
-        //public static INotifyValuePropertyObserver<TResult> ObservesOnNotifyPropertyChanged<TResult>(
-        //    [NotNull] Expression<Func<TResult>> propertyExpression,
-        //    bool isAutoActivate)
-        //    where TResult : struct
-        //{
-        //    var observer = new CachedObserver<TResult>(
-        //        propertyExpression,
-        //        PropertyObserverFlag.None);
-        //    if (isAutoActivate)
-        //    {
-        //        observer.Activate(true);
-        //    }
-
-        //    return observer;
-        //}
 
         /// <summary>
         ///     Observeses the on value changed.
