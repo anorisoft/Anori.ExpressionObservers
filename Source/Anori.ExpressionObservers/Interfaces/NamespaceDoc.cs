@@ -4,10 +4,10 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Exceptions
+namespace Anori.ExpressionObservers.Interfaces
 {
     /// <summary>
-    ///     The namespace Anori.ExpressionObservers.Exceptions is a collection of exceptions classes.
+    ///     The namespace Anori.ExpressionObservers.Interfaces is a collection of interfaces.
     /// </summary>
     internal class NamespaceDoc
     {
