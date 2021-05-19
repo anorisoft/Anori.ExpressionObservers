@@ -13,12 +13,12 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     The I Property Observer Builder interface.
+    ///     The Property Observer Builder interface.
     /// </summary>
     public interface IPropertyObserverBuilder
     {
         /// <summary>
-        ///     References the observer builder.
+        ///     Creates a Reference Property Observer builder with one parameter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
             where TResult : class;
 
         /// <summary>
-        ///     References the observer builder.
+        ///     Creates a Reference Property Observer builder.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -42,7 +42,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
             where TResult : class;
 
         /// <summary>
-        ///     References the observer builder.
+        ///     Creates a Reference Property Observer builder with two parameters.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
@@ -60,7 +60,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
             where TResult : class;
 
         /// <summary>
-        ///     Values the observer builder.
+        ///     Creates a Value Property Observer builder with one parameter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -74,7 +74,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
             where TResult : struct;
 
         /// <summary>
-        ///     Values the observer builder.
+        ///     Creates a Value Property Observer builder.
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
@@ -84,7 +84,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
             where TResult : struct;
 
         /// <summary>
-        ///     Values the observer builder.
+        ///     Creates a Value Property Observer builder with two parameters.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>
