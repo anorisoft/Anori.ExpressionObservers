@@ -76,7 +76,6 @@
 <p><a href="#Syntax">Syntax</a></p>
 <p><a href="#TypeParameters">Type Parameters</a></p>
 <p><a href="#Methods">Methods</a></p>
-<p><a href="#SeeAlso">See Also</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -156,9 +155,6 @@
 				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithActionOfTAndGetter_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Getter<wbr>&lt;TResult&gt;<wbr></a></li>
 				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithActionOfTAndGetterAndFallback_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Getter<wbr>And<wbr>Fallback<wbr>&lt;TResult&gt;<wbr></a></li>
 				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Getter<wbr>And<wbr>Fallback<wbr>And<wbr>Deferrer<wbr>&lt;TResult&gt;<wbr></a></li>
-				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithDeferrer_1">IBuilderWithDeferrer<wbr>&lt;TResult&gt;<wbr></a></li>
-				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithGetterAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Getter<wbr>And<wbr>Deferrer<wbr>&lt;TResult&gt;<wbr></a></li>
-				<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithScheduler_1">I<wbr>Builder<wbr>With<wbr>Scheduler<wbr>&lt;TResult&gt;<wbr></a></li>
 
 
                     </ul>
@@ -180,10 +176,6 @@
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-        The I Property Value Observer Builder With Action Of T Result And Fallback And Getter Task Scheduler
-        interface.
-    
-
         The Property Value Observer Builder With Action Of T Result And Fallback interface.
     </div>
 
@@ -225,10 +217,10 @@ class Type type-node
 		</div>
 
 	<h1 id="Syntax">Syntax</h1>
-	<pre><code>public interface IBuilderWithActionOfTAndFallback&lt;out TResult&gt; : 
-    IObserverBuilderBase&lt;IBuilderWithActionOfTAndFallback&lt;out TResult&gt;&gt;, 
-    ISchedulerBase&lt;IBuilderWithActionOfTAndFallback&lt;out TResult&gt;&gt;, 
-    IDeferBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;out TResult&gt;&gt;
+	<pre><code>public interface IBuilderWithActionOfTAndFallback&lt;TResult&gt; : 
+    IObserverBuilderBase&lt;IBuilderWithActionOfTAndFallback&lt;TResult&gt;&gt;, 
+    ISchedulerBase&lt;IBuilderWithActionOfTAndFallback&lt;TResult&gt;&gt;, 
+    IDeferBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;&gt;
     where TResult : class</code></pre>
 
 
@@ -271,15 +263,6 @@ class Type type-node
 						</thead>
 							<tbody><tr>
 								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1/A35B11D1">Build<wbr>()<wbr></a></td>
-								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IGetterPropertyObserver_1">I<wbr>Getter<wbr>Property<wbr>Observer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
-								<td>
-									<div>
-        Creates this instance.
-    </div>
-								</td>
-							</tr>
-							<tr>
-								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1/A35B11D1">Build<wbr>()<wbr></a></td>
 								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces/IPropertyObserver_1">IPropertyObserver</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
 								<td>
 									<div>
@@ -302,10 +285,6 @@ class Type type-node
 		
 
 
-	<h1 id="SeeAlso">See Also</h1>
-	<ul class="list-unstyled">
-			<li>IObserverBuilderBase<tself>.ExpressionObservers.Interfaces.IPropertyReferenceObserverBuilderOnProperyChangedWithActionOfTAndFallback<tresult>&gt;</tresult></tself></li>
-	</ul>
 
 	
 </section>
