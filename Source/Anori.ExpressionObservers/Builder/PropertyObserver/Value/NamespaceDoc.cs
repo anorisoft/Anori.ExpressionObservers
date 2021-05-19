@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
     /// <summary>
-    ///     The namespace Anori.ExpressionObservers.Bulider is a collection of observer builder classes.
+    ///     The namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value is a collection of observer builder classes for value types.
     /// </summary>
     internal class NamespaceDoc
     {

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BuilderBase{TSelf,TResult}.OnValueChanged.IBuilderWithAction.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnValueChanged.IBuilderWithActionAndDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -23,7 +23,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Automatics the activate.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.AutoActivate() =>
+        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
+            AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -42,10 +43,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndFallbackAndDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.WithFallback(TResult fallback) =>
+        IBuilderWithActionAndFallbackAndDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.WithFallback(
+            TResult fallback) =>
             this.WithFallback(fallback);
-
-
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -53,7 +53,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionAndDeferrer<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionAndDeferrer<TResult>>.
+            WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>

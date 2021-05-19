@@ -46,14 +46,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         public PropertyObserverFlag ObserverFlag { get; set; }
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is dispached.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is dispached; otherwise, <c>false</c>.
-        /// </value>
-        private protected bool IsDispached { get; private set; }
-
-        /// <summary>
         ///     Gets or sets a value indicating whether this instance is automatic activate.
         /// </summary>
         /// <value>
@@ -68,6 +60,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         ///     <c>true</c> if this instance is silent activate; otherwise, <c>false</c>.
         /// </value>
         protected internal bool IsSilentActivate { get; set; }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is dispached.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is dispached; otherwise, <c>false</c>.
+        /// </value>
+        private protected bool IsDispached { get; private set; }
 
         /// <summary>
         ///     Gets the task scheduler.

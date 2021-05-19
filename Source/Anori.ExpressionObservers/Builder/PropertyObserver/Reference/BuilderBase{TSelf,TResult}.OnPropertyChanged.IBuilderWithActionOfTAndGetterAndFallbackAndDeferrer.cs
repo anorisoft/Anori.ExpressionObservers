@@ -1,22 +1,24 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndFallback.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
 {
+    using System.Threading.Tasks;
+
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
-    using System.Threading.Tasks;
 
     /// <summary>
     ///     The Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>
+    internal abstract partial class
+        BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -34,9 +36,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IGetterPropertyObserverWithDeferrer<TResult> IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>.Build() =>
+        IGetterPropertyObserverWithDeferrer<TResult> IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>.
+            Build() =>
             this.CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer();
-
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -45,8 +47,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Property Observer.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>
-            ISchedulerBase<IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>>.
-            WithGetterDispatcher() =>
+            ISchedulerBase<IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>

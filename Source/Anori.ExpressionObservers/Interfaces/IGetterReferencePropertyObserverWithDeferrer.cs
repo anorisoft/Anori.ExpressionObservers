@@ -9,20 +9,13 @@ namespace Anori.ExpressionObservers.Interfaces
     using System;
 
     /// <summary>
-    /// The Getter Reference Property Observer With Deferrer interface.
+    ///     The Getter Reference Property Observer With Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface
         IGetterReferencePropertyObserverWithDeferrer<out TResult> : IPropertyObserverBase<
             IGetterReferencePropertyObserverWithDeferrer<TResult>>
     {
-
-        /// <summary>
-        ///     Gets the value.
-        /// </summary>
-        /// <returns>The GetValue().</returns>
-        TResult? GetValue();
-
         /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
         /// </summary>
@@ -30,6 +23,12 @@ namespace Anori.ExpressionObservers.Interfaces
         ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
         /// </value>
         bool IsDeferred { get; }
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The GetValue().</returns>
+        TResult? GetValue();
 
         /// <summary>
         ///     Defers this instance.

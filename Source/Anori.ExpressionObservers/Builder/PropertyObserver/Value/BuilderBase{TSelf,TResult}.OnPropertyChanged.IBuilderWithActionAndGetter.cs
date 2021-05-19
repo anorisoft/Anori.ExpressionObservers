@@ -6,14 +6,15 @@
 
 namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
 {
+    using System.Threading.Tasks;
+
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
-    using System.Threading.Tasks;
 
     /// <summary>
-    /// The Builder Base class.
+    ///     The Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -79,8 +80,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult>
-            ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.
+            WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -90,17 +91,18 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult>
-            ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithScheduler(
-                TaskScheduler taskScheduler) =>
+        IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithScheduler(
+            TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
 
         /// <summary>
-        /// Deferreds this instance.
+        ///     Deferreds this instance.
         /// </summary>
         /// <returns>
-        /// The Value Property Observer Builder.
+        ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.Deferred() => this;
+        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
+            Deferred() =>
+            this;
     }
 }

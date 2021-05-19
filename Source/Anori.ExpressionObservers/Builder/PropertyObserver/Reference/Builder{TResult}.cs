@@ -47,7 +47,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -56,7 +56,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -65,7 +65,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndGetterAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -92,7 +92,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -101,7 +101,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -110,7 +110,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -445,7 +445,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWithOldAndNewValueWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -454,7 +454,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWithOldAndNewValueWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -463,7 +463,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWithOldAndNewValueWithFallback!,
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -490,7 +490,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -499,7 +499,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -508,7 +508,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -535,7 +535,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -543,7 +543,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -551,7 +551,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.ObserverFlag);
             }
 
@@ -852,7 +852,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -861,7 +861,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -870,7 +870,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -897,7 +897,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -906,7 +906,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!,
                     this.ObserverFlag);
@@ -915,7 +915,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ObserverWithActionOfTAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTWithFallback!,
+                    this.ActionWithNewValueWithFallback!,
                     this.Fallback!,
                     this.ObserverFlag);
             }
@@ -941,7 +941,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -949,7 +949,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -957,7 +957,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.ObserverFlag);
             }
 
@@ -983,7 +983,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -991,7 +991,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -999,7 +999,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             {
                 observer = new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.ObserverFlag);
             }
 

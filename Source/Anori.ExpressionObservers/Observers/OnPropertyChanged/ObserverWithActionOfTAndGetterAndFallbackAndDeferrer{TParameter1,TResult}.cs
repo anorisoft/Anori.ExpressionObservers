@@ -164,7 +164,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     The value.
         /// </returns>
         public TResult GetValue() => this.getter();
-        
+
         /// <summary>
         ///     On the action.
         /// </summary>

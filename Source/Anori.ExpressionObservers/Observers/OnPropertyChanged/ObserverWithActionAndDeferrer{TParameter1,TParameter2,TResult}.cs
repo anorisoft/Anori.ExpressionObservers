@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverWithAction{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
+// <copyright file="ObserverWithActionAndDeferrer{TParameter1,TParameter2,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -42,7 +42,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverWithActionAndDeferrer{TParameter1, TParameter2, TResult}" />
+        ///     class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>

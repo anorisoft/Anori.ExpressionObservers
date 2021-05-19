@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action) =>
-            this.WithActionOfTWithFallback(action);
+            this.WithActionWithNewValueWithFallback(action);
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -81,7 +81,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithNullableAction(Action<TResult?> action) =>
-            this.WithNullableActionOfT(action);
+            this.WithNullableActionWitNewValue(action);
 
         /// <summary>
         ///     Withes the getter task scheduler.

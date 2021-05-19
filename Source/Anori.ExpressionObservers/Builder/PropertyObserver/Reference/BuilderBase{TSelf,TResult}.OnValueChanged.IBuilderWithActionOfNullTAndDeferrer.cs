@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BuilderBase{TSelf,TResult}.OnValueChanged.IBuilderWithActionOfNullT.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnValueChanged.IBuilderWithActionOfNullTAndDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -23,7 +23,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Automatics the activate.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        IBuilderWithActionOfNullTAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.AutoActivate() =>
+        IBuilderWithActionOfNullTAndDeferrer<TResult>
+            IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -55,6 +56,5 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IBuilderWithActionOfNullTAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.
             WithScheduler(TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
-
     }
 }

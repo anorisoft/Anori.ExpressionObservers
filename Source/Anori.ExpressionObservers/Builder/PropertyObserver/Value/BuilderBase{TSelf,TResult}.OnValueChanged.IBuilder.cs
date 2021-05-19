@@ -81,7 +81,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action) =>
-            this.WithActionOfTTWithFallback((_, obj) => action(obj));
+            this.WithActionWithOldAndNewValueWithFallback((_, obj) => action(obj));
 
         /// <summary>
         ///     Withes the action.
@@ -91,7 +91,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult, TResult> action) =>
-            this.WithActionOfTTWithFallback(action);
+            this.WithActionWithOldAndNewValueWithFallback(action);
 
         /// <summary>
         ///     Withes the nullable action.
@@ -101,7 +101,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?> action) =>
-            this.WithActionOfTT((_, obj) => action(obj));
+            this.WithActionWithOldAndNewValue((_, obj) => action(obj));
 
         /// <summary>
         ///     Withes the action.
@@ -111,16 +111,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?, TResult?> action) =>
-            this.WithActionOfTT(action);
+            this.WithActionWithOldAndNewValue(action);
 
         /// <summary>
-        /// Withes the fallback.
+        ///     Withes the fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        /// The Property Observer Builder.
+        ///     The Property Observer Builder.
         /// </returns>
-        IBuilderWithFallback<TResult> IBuilder<TResult>.WithFallback(TResult fallback) => WithFallback(fallback);
+        IBuilderWithFallback<TResult> IBuilder<TResult>.WithFallback(TResult fallback) => this.WithFallback(fallback);
 
         /// <summary>
         ///     Withes the getter dispatcher.

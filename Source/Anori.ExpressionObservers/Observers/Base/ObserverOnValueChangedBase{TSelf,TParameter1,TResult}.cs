@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverOnValueChangedBase - Copy.cs" company="AnoriSoft">
+// <copyright file="ObserverOnValueChangedBase{TSelf,TParameter1,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Observers.Base
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The Observer On Value Changed Base class.
+    ///     The Observer On Value Changed Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.Observers.Base
         where TSelf : IPropertyObserverBase<TSelf>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObserverOnValueChangedBase{TSelf, TParameter1,TResult}" /> class.
+        ///     Initializes a new instance of the <see cref="ObserverOnValueChangedBase{TSelf, TParameter1,TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
@@ -42,6 +42,12 @@ namespace Anori.ExpressionObservers.Observers.Base
             : base(parameter1, propertyExpression, observerFlag)
         {
         }
+
+        /// <summary>
+        ///     Occurs when a property value changes.
+        /// </summary>
+        /// <returns></returns>
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     Gets or sets the update value action.
@@ -68,12 +74,6 @@ namespace Anori.ExpressionObservers.Observers.Base
         ///     The reset value property.
         /// </value>
         private protected Action ResetValueProperty { get; set; } = null!;
-
-        /// <summary>
-        ///     Occurs when a property value changes.
-        /// </summary>
-        /// <returns></returns>
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     The action.

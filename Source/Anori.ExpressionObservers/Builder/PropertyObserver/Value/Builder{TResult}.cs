@@ -494,7 +494,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!.Value,
                     this.ObserverFlag);
@@ -503,7 +503,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!.Value,
                     this.ObserverFlag);
@@ -512,7 +512,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ObserverWithActionAndFallback<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     this.Fallback!.Value,
                     this.ObserverFlag);
             }
@@ -539,7 +539,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ObserverWithActionAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!.Value,
                     this.ObserverFlag);
@@ -548,7 +548,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ObserverWithActionAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!.Value,
                     this.ObserverFlag);
@@ -557,7 +557,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ObserverWithActionAndFallbackAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     this.Fallback!.Value,
                     this.ObserverFlag);
             }
@@ -782,7 +782,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnValueChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -790,7 +790,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnValueChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -798,7 +798,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnValueChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.ObserverFlag);
             }
 
@@ -824,7 +824,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnValueChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -832,7 +832,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnValueChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -840,7 +840,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnValueChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.ObserverFlag);
             }
 
@@ -1031,7 +1031,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -1039,7 +1039,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -1047,7 +1047,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnPropertyChanged.ObserverWithAction<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.ObserverFlag);
             }
 
@@ -1072,7 +1072,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -1080,7 +1080,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -1088,7 +1088,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             {
                 observer = new ValueObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TResult>(
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.ObserverFlag);
             }
 

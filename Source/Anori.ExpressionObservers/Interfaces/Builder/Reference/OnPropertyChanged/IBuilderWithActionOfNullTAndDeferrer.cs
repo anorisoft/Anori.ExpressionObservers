@@ -6,9 +6,13 @@
 
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
-    public interface IBuilderWithActionOfNullTAndDeferrer<out TResult> : IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>,
-                                                                          ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
-
+    /// <summary>
+    /// The Builder With Action Of Null T And Deferrer interface.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    public interface IBuilderWithActionOfNullTAndDeferrer<out TResult> :
+        IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>,
+        ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>
         where TResult : class
     {
         /// <summary>
@@ -20,10 +24,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         IGetterReferencePropertyObserverWithDeferrer<TResult> Build();
 
         /// <summary>
-        /// Withes the getter.
+        ///     Withes the getter.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
         IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult> WithGetter();
-
     }
 }

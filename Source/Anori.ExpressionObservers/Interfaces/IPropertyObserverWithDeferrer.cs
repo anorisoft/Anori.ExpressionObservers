@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.Interfaces
     /// <seealso cref="IPropertyObserverWithDeferrer{TResult}" />
     public interface IPropertyObserverWithDeferrer<TResult> : IPropertyObserverBase<IPropertyObserverWithDeferrer<TResult>>
     {
-
         /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
         /// </summary>
@@ -24,7 +23,6 @@ namespace Anori.ExpressionObservers.Interfaces
         /// </value>
         bool IsDeferred { get; }
 
-        
         /// <summary>
         ///     Defers this instance.
         /// </summary>

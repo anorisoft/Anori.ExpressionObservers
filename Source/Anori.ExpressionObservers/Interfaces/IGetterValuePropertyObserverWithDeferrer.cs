@@ -16,7 +16,6 @@ namespace Anori.ExpressionObservers.Interfaces
         IGetterValuePropertyObserverWithDeferrer<TResult> : IPropertyObserverBase<
             IGetterValuePropertyObserverWithDeferrer<TResult>>
         where TResult : struct
-
     {
         /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
@@ -27,15 +26,15 @@ namespace Anori.ExpressionObservers.Interfaces
         bool IsDeferred { get; }
 
         /// <summary>
-        ///     Gets the value.
-        /// </summary>
-        /// <returns>The GetValue().</returns>
-        TResult? GetValue();
-
-        /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>Disposable deferrer.</returns>
         IDisposable Defer();
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The GetValue().</returns>
+        TResult? GetValue();
     }
 }

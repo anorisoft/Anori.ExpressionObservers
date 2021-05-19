@@ -51,7 +51,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <value>
         ///     The action of t result.
         /// </value>
-        private protected Action<TResult?>? ActionOfT { get; private set; }
+        private protected Action<TResult?>? ActionWithNewValue { get; private set; }
 
         /// <summary>
         ///     Gets the action of tt.
@@ -59,7 +59,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <value>
         ///     The action of tt.
         /// </value>
-        private protected Action<TResult?, TResult?>? ActionOfTT { get; private set; }
+        private protected Action<TResult?, TResult?>? ActionWithOldAndNewValue { get; private set; }
 
         /// <summary>
         ///     Gets the action of t result with fallback.
@@ -67,7 +67,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <value>
         ///     The action of t result with fallback.
         /// </value>
-        private protected Action<TResult>? ActionOfTWithFallback { get; private set; }
+        private protected Action<TResult>? ActionWithNewValueWithFallback { get; private set; }
 
         /// <summary>
         ///     Gets the action of tt with fallback.
@@ -75,7 +75,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <value>
         ///     The action of tt with fallback.
         /// </value>
-        private protected Action<TResult, TResult>? ActionOfTTWithFallback { get; private set; }
+        private protected Action<TResult, TResult>? ActionWithOldAndNewValueWithFallback { get; private set; }
 
         /// <summary>
         ///     Creates the property observer with action of t result and getter and fallback.
@@ -303,9 +303,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        protected TSelf WithActionOfTTWithFallback(Action<TResult, TResult> action)
+        protected TSelf WithActionWithOldAndNewValueWithFallback(Action<TResult, TResult> action)
         {
-            this.ActionOfTTWithFallback = action;
+            this.ActionWithOldAndNewValueWithFallback = action;
             return (TSelf)this;
         }
 
@@ -316,9 +316,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        protected TSelf WithActionOfTWithFallback(Action<TResult> action)
+        protected TSelf WithActionWithNewValueWithFallback(Action<TResult> action)
         {
-            this.ActionOfTWithFallback = action;
+            this.ActionWithNewValueWithFallback = action;
             return (TSelf)this;
         }
 
@@ -329,9 +329,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        protected TSelf WithNullableActionOfT(Action<TResult?> action)
+        protected TSelf WithNullableActionWitNewValue(Action<TResult?> action)
         {
-            this.ActionOfT = action;
+            this.ActionWithNewValue = action;
             return (TSelf)this;
         }
 
@@ -342,9 +342,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Reference Observer Builder.
         /// </returns>
-        protected TSelf WithNullableActionOfTT(Action<TResult?, TResult?> action)
+        protected TSelf WithNullableActionWithOldAndNewValue(Action<TResult?, TResult?> action)
         {
-            this.ActionOfTT = action;
+            this.ActionWithOldAndNewValue = action;
             return (TSelf)this;
         }
 

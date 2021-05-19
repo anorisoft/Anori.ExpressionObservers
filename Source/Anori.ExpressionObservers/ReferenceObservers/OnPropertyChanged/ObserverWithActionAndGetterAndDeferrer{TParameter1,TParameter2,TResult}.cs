@@ -28,7 +28,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     internal sealed class ObserverWithActionAndGetterAndDeferrer<TParameter1, TParameter2, TResult> :
         ObserverBase<IGetterReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TParameter2, TResult>,
         IGetterReferencePropertyObserverWithDeferrer<TResult>
-        where TResult : class where TParameter1 : INotifyPropertyChanged where TParameter2 : INotifyPropertyChanged
+        where TResult : class
+        where TParameter1 : INotifyPropertyChanged
+        where TParameter2 : INotifyPropertyChanged
     {
         /// <summary>
         ///     The action.
@@ -134,18 +136,18 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        ///     Gets the value.
-        /// </summary>
-        /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getValue();
-
-        /// <summary>
         ///     Gets a value indicating whether this instance is deferred.
         /// </summary>
         /// <value>
         ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
         /// </value>
         public bool IsDeferred => this.deferrer.IsDeferred;
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The result value.</returns>
+        public TResult? GetValue() => this.getValue();
 
         /// <summary>
         ///     Defers this instance.

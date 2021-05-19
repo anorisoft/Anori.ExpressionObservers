@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithAction.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionAndDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -23,7 +23,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Automatics the activate.
         /// </summary>
         /// <returns>The Property Value Observer Builder.</returns>
-        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.AutoActivate() =>
+        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
+            AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
@@ -32,15 +33,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Observer.
         /// </returns>
-        IPropertyObserverWithDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.Build() => this.CreatePropertyObserverWithActionAndDeferrer();
+        IPropertyObserverWithDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.Build() =>
+            this.CreatePropertyObserverWithActionAndDeferrer();
 
         /// <summary>
         ///     Withes the getter.
         /// </summary>
         /// <returns>The Value Property Observer Builder.</returns>
         IBuilderWithActionAndGetterAndDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.WithGetter() => this;
-
-
 
         /// <summary>
         ///     Cacheds the specified safety mode.
@@ -59,7 +59,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionAndDeferrer<TResult> ICacheBase<IBuilderWithActionAndDeferrer<TResult>>.Cached() => this.Cached();
-
+        IBuilderWithActionAndDeferrer<TResult> ICacheBase<IBuilderWithActionAndDeferrer<TResult>>.Cached() =>
+            this.Cached();
     }
 }

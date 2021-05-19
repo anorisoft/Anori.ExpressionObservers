@@ -634,7 +634,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     SynchronizationContext.Current,
                     this.Fallback!.Value,
                     this.ObserverFlag);
@@ -645,7 +645,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     this.TaskScheduler,
                     this.Fallback!.Value,
                     this.ObserverFlag);
@@ -656,7 +656,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfTTWithFallback!,
+                    this.ActionWitOldAndNewValueWithFallback!,
                     this.Fallback!.Value,
                     this.ObserverFlag);
             }
@@ -921,7 +921,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -931,7 +931,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -941,7 +941,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfTT!,
+                    this.ActionWithOldAndNewValue!,
                     this.ObserverFlag);
             }
 
@@ -970,7 +970,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                         this.parameter1,
                         this.parameter2,
                         this.propertyExpression,
-                        this.ActionOfTT!,
+                        this.ActionWithOldAndNewValue!,
                         SynchronizationContext.Current,
                         this.ObserverFlag);
             }
@@ -981,7 +981,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                         this.parameter1,
                         this.parameter2,
                         this.propertyExpression,
-                        this.ActionOfTT!,
+                        this.ActionWithOldAndNewValue!,
                         this.TaskScheduler,
                         this.ObserverFlag);
             }
@@ -992,7 +992,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                         this.parameter1,
                         this.parameter2,
                         this.propertyExpression,
-                        this.ActionOfTT!,
+                        this.ActionWithOldAndNewValue!,
                         this.ObserverFlag);
             }
 
@@ -1210,7 +1210,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     SynchronizationContext.Current,
                     this.ObserverFlag);
             }
@@ -1220,7 +1220,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.TaskScheduler,
                     this.ObserverFlag);
             }
@@ -1230,7 +1230,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                     this.parameter1,
                     this.parameter2,
                     this.propertyExpression,
-                    this.ActionOfT!,
+                    this.ActionWithNewValue!,
                     this.ObserverFlag);
             }
 
@@ -1259,7 +1259,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                         this.parameter1,
                         this.parameter2,
                         this.propertyExpression,
-                        this.ActionOfT!,
+                        this.ActionWithNewValue!,
                         SynchronizationContext.Current,
                         this.ObserverFlag);
             }
@@ -1271,7 +1271,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                         this.parameter1,
                         this.parameter2,
                         this.propertyExpression,
-                        this.ActionOfT!,
+                        this.ActionWithNewValue!,
                         this.TaskScheduler,
                         this.ObserverFlag);
             }
@@ -1283,7 +1283,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
                         this.parameter1,
                         this.parameter2,
                         this.propertyExpression,
-                        this.ActionOfT!,
+                        this.ActionWithNewValue!,
                         this.ObserverFlag);
             }
 

@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged;
 
     /// <summary>
-    /// The Builder Base class.
+    ///     The Builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -37,11 +37,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         INotifyPropertyObserver<TResult> IBuilderWithActionAndFallback<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithActionAndFallback();
+
         /// <summary>
-        /// Deferreds this instance.
+        ///     Deferreds this instance.
         /// </summary>
-        /// <returns></returns>
-        IBuilderWithActionAndFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndFallbackAndDeferrer<TResult>>.Deferred() => this;
+        /// <returns>
+        ///     The Property Observer.
+        /// </returns>
+        IBuilderWithActionAndFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndFallbackAndDeferrer<TResult>>.
+            Deferred() =>
+            this;
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -49,7 +54,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndFallback<TResult> ISchedulerBase<IBuilderWithActionAndFallback<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionAndFallback<TResult> ISchedulerBase<IBuilderWithActionAndFallback<TResult>>.
+            WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -60,7 +66,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndFallback<TResult> ISchedulerBase<IBuilderWithActionAndFallback<TResult>>.WithScheduler(
-                TaskScheduler taskScheduler) =>
+            TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }
 }

@@ -9,12 +9,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The Scheduler Base interface.
+    ///     The Scheduler Base interface.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     public interface ISchedulerBase<out TSelf>
     {
-
         /// <summary>
         ///     Withes the getter dispatcher.
         /// </summary>

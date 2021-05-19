@@ -39,8 +39,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             if (this.IsCached)
             {
                 return this.CreateGetterReferencePropertyObserverCached();
-
             }
+
             return this.CreateGetterReferencePropertyObserver();
         }
 
@@ -61,7 +61,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithGetterDispatcher() =>
+        IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.
+            WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -71,18 +72,19 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Value Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.
-            WithScheduler(
-                TaskScheduler taskScheduler) =>
+        IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithScheduler(
+            TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
 
         /// <summary>
-        /// Deferreds this instance.
+        ///     Deferreds this instance.
         /// </summary>
         /// <returns>
-        /// The Property Observer Builder.
+        ///     The Property Observer Builder.
         /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.Deferred() => this;
+        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
+            Deferred() =>
+            this;
 
         /// <summary>
         ///     Cacheds the specified safety mode.
@@ -102,7 +104,5 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Property Value Observer Builder.
         /// </returns>
         IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.Cached() => this.Cached();
-
-
     }
 }

@@ -15,7 +15,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ISchedulerBase<IBuilderWithActionOfTAndFallback<TResult>>,
         IDeferBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>
         where TResult : struct
-
     {
         /// <summary>
         ///     Creates this instance.

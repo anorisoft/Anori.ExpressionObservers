@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The Value Property Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?> action) =>
-            this.WithActionOfT(action);
+            this.WithActionWithNewValue(action);
 
         /// <summary>
         ///     Withes the action.

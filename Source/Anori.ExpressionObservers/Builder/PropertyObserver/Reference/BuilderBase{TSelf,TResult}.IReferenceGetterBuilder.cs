@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IReferenceObserverBuilder<TResult>.WithAction(Action<TResult> action) =>
-            this.WithActionOfTWithFallback(action);
+            this.WithActionWithNewValueWithFallback(action);
 
         /// <summary>
         ///     Withes the action.
@@ -65,6 +65,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IReferenceObserverBuilder<TResult>.WithNullableAction(
             Action<TResult?> action) =>
-            this.WithNullableActionOfT(action);
+            this.WithNullableActionWitNewValue(action);
     }
 }

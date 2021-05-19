@@ -49,22 +49,6 @@ namespace Anori.ExpressionObservers.Base
         public abstract string ExpressionString { get; }
 
         /// <summary>
-        ///     Gets the root nodes.
-        /// </summary>
-        /// <value>
-        ///     The root nodes.
-        /// </value>
-        internal IList<RootPropertyObserverNode> RootNodes { get; } = new List<RootPropertyObserverNode>();
-
-        /// <summary>
-        ///     Gets a value indicating whether this instance is fail fast.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is fail fast; otherwise, <c>false</c>.
-        /// </value>
-        private protected PropertyObserverFlag ObserverFlag { get; }
-
-        /// <summary>
         ///     Gets a value indicating whether this instance is active.
         /// </summary>
         /// <value>
@@ -82,6 +66,204 @@ namespace Anori.ExpressionObservers.Base
 
                 this.isActive = value;
                 this.IsActiveChanged.Raise(this, value);
+            }
+        }
+
+        /// <summary>
+        ///     Gets the root nodes.
+        /// </summary>
+        /// <value>
+        ///     The root nodes.
+        /// </value>
+        internal IList<RootPropertyObserverNode> RootNodes { get; } = new List<RootPropertyObserverNode>();
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is fail fast.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is fail fast; otherwise, <c>false</c>.
+        /// </value>
+        private protected PropertyObserverFlag ObserverFlag { get; }
+
+        /// <summary>
+        ///     Implements the operator ==.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator ==(ObserverFoundationBase? a, ObserverFoundationBase? b) => Equals(a, b);
+
+        /// <summary>
+        ///     Implements the operator ==.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator ==(ObserverFoundationBase a, object b) => Equals(a, b);
+
+        /// <summary>
+        ///     Implements the operator !=.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator !=(ObserverFoundationBase a, ObserverFoundationBase b) => !a.Equals(b);
+
+        /// <summary>
+        ///     Implements the operator !=.
+        /// </summary>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>
+        ///     The result of the operator.
+        /// </returns>
+        public static bool operator !=(ObserverFoundationBase a, object b) => !a.Equals(b);
+
+        /// <summary>
+        ///     Determines whether the specified objects are equal.
+        /// </summary>
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        ///     true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        public static bool Equals(ObserverFoundationBase? x, ObserverFoundationBase? y)
+        {
+            if (ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if (x is null)
+            {
+                return false;
+            }
+
+            if (y is null)
+            {
+                return false;
+            }
+
+            if (x.GetType() != y.GetType())
+            {
+                return false;
+            }
+
+            if (x.ExpressionString != y.ExpressionString)
+            {
+                return false;
+            }
+
+            if (!x.RootNodes.SequenceEqual(y.RootNodes))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Determines whether the specified objects are equal.
+        /// </summary>
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        ///     true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        bool IEqualityComparer<ObserverFoundationBase>.Equals(ObserverFoundationBase? x, ObserverFoundationBase? y) =>
+            Equals(x, y);
+
+        /// <summary>
+        ///     Determines whether the specified <see cref="object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object? obj)
+        {
+            if (obj is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj is not ObserverFoundationBase propertyObserver)
+            {
+                return false;
+            }
+
+            return this.Equals(propertyObserver);
+        }
+
+        /// <summary>
+        ///     Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(ObserverFoundationBase? other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (!this.RootNodes.SequenceEqual(other.RootNodes))
+            {
+                return false;
+            }
+
+            if (this.ExpressionString != other.ExpressionString)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return this.RootNodes.GetHashCode() * 397 ^ this.ExpressionString.GetHashCode();
+            }
+        }
+
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>
+        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public int GetHashCode(ObserverFoundationBase obj)
+        {
+            unchecked
+            {
+                return obj.ExpressionString.GetHashCode() * 397 ^ obj.RootNodes.GetHashCode();
             }
         }
 
@@ -129,65 +311,6 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Returns a hash code for this instance.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns>
-        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public int GetHashCode(ObserverFoundationBase obj)
-        {
-            unchecked
-            {
-                return ((obj.ExpressionString != null ? obj.ExpressionString.GetHashCode() : 0) * 397)
-                       ^ (obj.RootNodes != null ? obj.RootNodes.GetHashCode() : 0);
-            }
-        }
-
-        /// <summary>
-        ///     Determines whether the specified objects are equal.
-        /// </summary>
-        /// <param name="x">The first object of type T to compare.</param>
-        /// <param name="y">The second object of type T to compare.</param>
-        /// <returns>
-        ///     true if the specified objects are equal; otherwise, false.
-        /// </returns>
-        bool IEqualityComparer<ObserverFoundationBase>.Equals(ObserverFoundationBase? x, ObserverFoundationBase? y) =>
-            Equals(x, y);
-
-        /// <summary>
-        ///     Indicates whether the current object is equal to another object of the same type.
-        /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns>
-        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
-        /// </returns>
-        public bool Equals(ObserverFoundationBase? other)
-        {
-            if (other is null)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (!this.RootNodes.SequenceEqual(other.RootNodes))
-            {
-                return false;
-            }
-
-            if (this.ExpressionString != other.ExpressionString)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         ///     Releases unmanaged and - optionally - managed resources.
         /// </summary>
         /// <param name="disposing">
@@ -213,129 +336,22 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Determines whether the specified objects are equal.
+        ///     Looptrees the specified expression node.
         /// </summary>
-        /// <param name="x">The first object of type T to compare.</param>
-        /// <param name="y">The second object of type T to compare.</param>
-        /// <returns>
-        ///     true if the specified objects are equal; otherwise, false.
-        /// </returns>
-        public static bool Equals(ObserverFoundationBase? x, ObserverFoundationBase? y)
+        /// <param name="expressionNode">The expression node.</param>
+        /// <param name="observerNode">The observer node.</param>
+        internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
         {
-            if (ReferenceEquals(x, y))
+            var previousNode = observerNode;
+            while (expressionNode.Next is PropertyNode property)
             {
-                return true;
-            }
+                var currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
 
-            if (x is null)
-            {
-                return false;
-            }
-
-            if (y is null)
-            {
-                return false;
-            }
-
-            if (x.GetType() != y.GetType())
-            {
-                return false;
-            }
-
-            if (x.ExpressionString != y.ExpressionString)
-            {
-                return false;
-            }
-
-            if (!x.RootNodes.SequenceEqual(y.RootNodes))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        ///     Determines whether the specified <see cref="object" />, is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
-        /// <returns>
-        ///     <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object? obj)
-        {
-            if (obj is null)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj is not ObserverFoundationBase propertyObserver)
-            {
-                return false;
-            }
-
-            return this.Equals(propertyObserver);
-        }
-
-        /// <summary>
-        ///     Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((this.RootNodes != null ? this.RootNodes.GetHashCode() : 0) * 397)
-                       ^ (this.ExpressionString != null ? this.ExpressionString.GetHashCode() : 0);
+                previousNode.Previous = currentNode;
+                previousNode = currentNode;
+                expressionNode = expressionNode.Next;
             }
         }
-
-        /// <summary>
-        ///     Implements the operator ==.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator ==(ObserverFoundationBase? a, ObserverFoundationBase? b) => Equals(a, b);
-
-        /// <summary>
-        ///     Implements the operator ==.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator ==(ObserverFoundationBase a, object b) => Equals(a, b);
-
-        /// <summary>
-        ///     Implements the operator !=.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator !=(ObserverFoundationBase a, ObserverFoundationBase b) => !a.Equals(b);
-
-        /// <summary>
-        ///     Implements the operator !=.
-        /// </summary>
-        /// <param name="a">a.</param>
-        /// <param name="b">The b.</param>
-        /// <returns>
-        ///     The result of the operator.
-        /// </returns>
-        public static bool operator !=(ObserverFoundationBase a, object b) => !a.Equals(b);
 
         /// <summary>
         ///     Subscribes the specified silent.
@@ -395,24 +411,6 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         protected virtual void OnSilentActivate()
         {
-        }
-
-        /// <summary>
-        ///     Looptrees the specified expression node.
-        /// </summary>
-        /// <param name="expressionNode">The expression node.</param>
-        /// <param name="observerNode">The observer node.</param>
-        internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
-        {
-            var previousNode = observerNode;
-            while (expressionNode.Next is PropertyNode property)
-            {
-                var currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
-
-                previousNode.Previous = currentNode;
-                previousNode = currentNode;
-                expressionNode = expressionNode.Next;
-            }
         }
     }
 }

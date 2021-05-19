@@ -35,10 +35,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IPropertyObserver<TResult> IBuilderWithAction<TResult>.Build() => this.CreatePropertyObserverWithAction();
 
         /// <summary>
-        /// Deferreds this instance.
+        ///     Deferreds this instance.
         /// </summary>
         /// <returns>
-        /// The Property Observer Builder.
+        ///     The Property Observer Builder.
         /// </returns>
         IBuilderWithActionAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndDeferrer<TResult>>.Deferred() => this;
 
@@ -48,7 +48,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>The Value Property Observer Builder.</returns>
         IBuilderWithActionAndGetter<TResult> IBuilderWithAction<TResult>.WithGetter() => this;
 
-
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
@@ -56,8 +55,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     The Property Value Observer Builder.
         /// </returns>
-        IBuilderWithAction<TResult> ICacheBase<IBuilderWithAction<TResult>>.Cached(
-            LazyThreadSafetyMode safetyMode) =>
+        IBuilderWithAction<TResult> ICacheBase<IBuilderWithAction<TResult>>.Cached(LazyThreadSafetyMode safetyMode) =>
             this.Cached(safetyMode);
 
         /// <summary>

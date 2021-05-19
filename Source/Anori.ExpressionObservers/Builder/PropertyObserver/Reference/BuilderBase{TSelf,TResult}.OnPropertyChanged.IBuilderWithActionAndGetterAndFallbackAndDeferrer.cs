@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionAndGetterAndFallback.cs" company="AnoriSoft">
+// <copyright file="BuilderBase{TSelf,TResult}.OnPropertyChanged.IBuilderWithActionAndGetterAndFallbackAndDeferrer.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -17,7 +17,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>
+    internal abstract partial class
+        BuilderBase<TSelf, TResult> : IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>
     {
         /// <summary>
         ///     Automatics the activate.
@@ -33,9 +34,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <returns>
         ///     Property Observer With Getter And Fallback.
         /// </returns>
-        IGetterPropertyObserverWithDeferrer<TResult> IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>.Build() =>
+        IGetterPropertyObserverWithDeferrer<TResult> IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>.
+            Build() =>
             this.CreateGetterPropertyObserverWithFallbackAndDeferrer();
-
 
         /// <summary>
         ///     Withes the getter dispatcher.

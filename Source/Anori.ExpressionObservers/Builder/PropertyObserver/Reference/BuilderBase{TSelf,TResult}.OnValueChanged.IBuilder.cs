@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action) =>
-            this.WithActionOfTTWithFallback((_, obj) => action(obj));
+            this.WithActionWithOldAndNewValueWithFallback((_, obj) => action(obj));
 
         /// <summary>
         ///     Withes the getter dispatcher.
@@ -81,7 +81,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Property Reference Observer Builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithNullableAction(Action<TResult?> action) =>
-            this.WithNullableActionOfTT((_, obj) => action(obj));
+            this.WithNullableActionWithOldAndNewValue((_, obj) => action(obj));
 
         /// <summary>
         ///     Withes the action.
@@ -91,7 +91,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Property Reference Observer Builder.
         /// </returns>
         public IBuilderWithActionOfT<TResult> WithAction(Action<TResult, TResult> action) =>
-            this.WithActionOfTTWithFallback(action);
+            this.WithActionWithOldAndNewValueWithFallback(action);
 
         /// <summary>
         ///     Withes the nullable action.
@@ -101,7 +101,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The Property Reference Observer Builder.
         /// </returns>
         public IBuilderWithActionOfNullT<TResult> WithNullableAction(Action<TResult?, TResult?> action) =>
-            this.WithNullableActionOfTT(action);
+            this.WithNullableActionWithOldAndNewValue(action);
 
         /// <summary>
         ///     Withes the getter task scheduler.

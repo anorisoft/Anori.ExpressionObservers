@@ -134,10 +134,13 @@ namespace Anori.ExpressionObservers.Base
                             var parameterGetter = ExpressionGetter.GetParameterObjectFromExpression(
                                 parameterElement,
                                 this.propertyExpression);
+
+                            var parameter = parameterGetter(parameter1, parameter2) as INotifyPropertyChanged;
+
                             var root = new RootPropertyObserverNode(
                                 propertyElement.PropertyInfo,
                                 this.OnAction,
-                                (INotifyPropertyChanged)parameterGetter(parameter1, parameter2));
+                                parameter);
 
                             this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);

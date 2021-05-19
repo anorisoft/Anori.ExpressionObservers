@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ObserverOnValueChangedBase.cs" company="AnoriSoft">
+// <copyright file="ObserverOnValueChangedBase{TSelf,TResult}.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -41,6 +41,12 @@ namespace Anori.ExpressionObservers.Observers.Base
         }
 
         /// <summary>
+        ///     Occurs when a property value changes.
+        /// </summary>
+        /// <returns></returns>
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        /// <summary>
         ///     Gets or sets the update value action.
         /// </summary>
         /// <value>
@@ -58,7 +64,6 @@ namespace Anori.ExpressionObservers.Observers.Base
         [NotNull]
         private protected Action UpdateValueField { get; set; } = null!;
 
-
         /// <summary>
         ///     Gets or sets the reset value property.
         /// </summary>
@@ -68,24 +73,17 @@ namespace Anori.ExpressionObservers.Observers.Base
         private protected Action ResetValueProperty { get; set; } = null!;
 
         /// <summary>
-        ///     Occurs when a property value changes.
-        /// </summary>
-        /// <returns></returns>
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
         ///     Called when [silent activate].
         /// </summary>
         protected override void OnSilentActivate() => this.UpdateValueField.Raise();
 
-
         /// <summary>
-        /// The action.
+        ///     The action.
         /// </summary>
         protected override void OnAction() => this.UpdateValueProperty.Raise();
 
         /// <summary>
-        /// Called when [deactivate].
+        ///     Called when [deactivate].
         /// </summary>
         protected override void OnDeactivate() => this.ResetValueProperty.Raise();
 

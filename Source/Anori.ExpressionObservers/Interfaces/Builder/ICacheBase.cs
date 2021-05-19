@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     using Anori.Common;
 
     /// <summary>
-    /// The Cache Base interface.
+    ///     The Cache Base interface.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     public interface ICacheBase<out TSelf>
@@ -28,14 +28,5 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         ///     The Property Value Observer Builder.
         /// </returns>
         TSelf Cached();
-    }
-
-
-    public interface IDeferBase<out TTarget>
-    {
-        /// <summary>
-        /// Deferreds this instance.
-        /// </summary>
-        TTarget Deferred();
     }
 }

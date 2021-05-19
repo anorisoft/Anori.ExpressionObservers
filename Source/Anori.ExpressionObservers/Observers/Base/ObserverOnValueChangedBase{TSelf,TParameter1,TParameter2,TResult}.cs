@@ -50,6 +50,12 @@ namespace Anori.ExpressionObservers.Observers.Base
         }
 
         /// <summary>
+        ///     Occurs when a property value changes.
+        /// </summary>
+        /// <returns></returns>
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        /// <summary>
         ///     Gets or sets the update value action.
         /// </summary>
         /// <value>
@@ -74,12 +80,6 @@ namespace Anori.ExpressionObservers.Observers.Base
         ///     The reset value property.
         /// </value>
         private protected Action ResetValueProperty { get; set; } = null!;
-
-        /// <summary>
-        ///     Occurs when a property value changes.
-        /// </summary>
-        /// <returns></returns>
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         ///     The action.

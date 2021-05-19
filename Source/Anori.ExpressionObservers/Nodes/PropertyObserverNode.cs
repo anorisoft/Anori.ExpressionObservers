@@ -64,22 +64,7 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The property information.
         /// </value>
-        public PropertyInfo PropertyInfo { get; }
-
-        /// <summary>
-        ///     Subscribes the listener for.
-        /// </summary>
-        /// <param name="propertyChanged">The property changed.</param>
-        public void SubscribeListenerFor(INotifyPropertyChanged propertyChanged)
-        {
-            this.notifyPropertyChanged = propertyChanged;
-            this.notifyPropertyChanged.PropertyChanged += this.OnPropertyChanged;
-
-            if (this.Previous != null)
-            {
-                this.GenerateNextNode();
-            }
-        }
+        private PropertyInfo PropertyInfo { get; }
 
         /// <summary>
         ///     Unsubscribes the listener.
@@ -92,6 +77,21 @@ namespace Anori.ExpressionObservers.Nodes
             }
 
             this.Previous?.UnsubscribeListener();
+        }
+
+        /// <summary>
+        ///     Subscribes the listener for.
+        /// </summary>
+        /// <param name="propertyChanged">The property changed.</param>
+        protected void SubscribeListenerFor(INotifyPropertyChanged propertyChanged)
+        {
+            this.notifyPropertyChanged = propertyChanged;
+            this.notifyPropertyChanged.PropertyChanged += this.OnPropertyChanged;
+
+            if (this.Previous != null)
+            {
+                this.GenerateNextNode();
+            }
         }
 
         /// <summary>
@@ -111,18 +111,22 @@ namespace Anori.ExpressionObservers.Nodes
 
             if (nextProperty is not INotifyPropertyChanged propertyChanged)
             {
-                if (nextProperty.IsNullableTypeAssignableFrom<INotifyPropertyChanged>())
+                if (!nextProperty.IsNullableTypeAssignableFrom<INotifyPropertyChanged>())
                 {
-                    this.Previous?.SubscribeListenerFor(
-                        (INotifyPropertyChanged)Nullable.GetUnderlyingType(nextProperty.GetType())
-                            .GetProperty("Value")
-                            .GetValue(nextProperty));
+                    return;
                 }
 
+                var propertyInfo = Nullable.GetUnderlyingType(nextProperty.GetType())?.GetProperty("Value");
+
+                if (propertyInfo is null)
+                {
+                    return;
+                }
+
+                var nextPropertyChanged = (INotifyPropertyChanged)propertyInfo.GetValue(nextProperty);
+                this.Previous?.SubscribeListenerFor(nextPropertyChanged);
+
                 return;
-                throw new InvalidOperationException(
-                    "Trying to subscribe PropertyChanged listener in object that "
-                    + $"owns '{this.Previous?.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.");
             }
 
             this.Previous?.SubscribeListenerFor(propertyChanged);

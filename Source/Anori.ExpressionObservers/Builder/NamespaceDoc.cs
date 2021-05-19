@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Builder
 {
     /// <summary>
-    ///     The namespace Anori.ExpressionObservers.Bulider is a collection of observer builder classes.
+    ///     The namespace Anori.ExpressionObservers.Builder.PropertyObserver is a collection of different builder classes.
     /// </summary>
     internal class NamespaceDoc
     {
