@@ -1,9 +1,16 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
+﻿// -----------------------------------------------------------------------
+// <copyright file="Bindable.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.UnitTests.TestClasses
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    using JetBrains.Annotations;
+
     public abstract class Bindable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -11,7 +18,7 @@ namespace Anori.ExpressionObservers.UnitTests.TestClasses
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

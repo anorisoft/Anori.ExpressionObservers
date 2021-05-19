@@ -1,29 +1,44 @@
-﻿namespace Anori.ExpressionObservers.UnitTests.TestClasses
+﻿// -----------------------------------------------------------------------
+// <copyright file="NotifyPropertyChangedClass2.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Anori.ExpressionObservers.UnitTests.TestClasses
 {
     public class NotifyPropertyChangedClass2 : Bindable
     {
         private int _intProperty;
+
         private string _stringProperty;
 
         public int IntProperty
         {
-            get => _intProperty;
+            get => this._intProperty;
             set
             {
-                if (value == _intProperty) return;
-                _intProperty = value;
-                OnPropertyChanged();
+                if (value == this._intProperty)
+                {
+                    return;
+                }
+
+                this._intProperty = value;
+                this.OnPropertyChanged();
             }
         }
 
         public string StringProperty
         {
-            get => _stringProperty;
+            get => this._stringProperty;
             set
             {
-                if (value == _stringProperty) return;
-                _stringProperty = value;
-                OnPropertyChanged();
+                if (value == this._stringProperty)
+                {
+                    return;
+                }
+
+                this._stringProperty = value;
+                this.OnPropertyChanged();
             }
         }
     }

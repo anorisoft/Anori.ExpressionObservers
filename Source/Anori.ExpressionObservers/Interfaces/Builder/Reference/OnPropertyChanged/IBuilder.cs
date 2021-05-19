@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         where TResult : class
     {
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         IBuilderWithAction<TResult> WithAction(Action action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action and value parameter.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
@@ -36,7 +36,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         IBuilderWithActionOfT<TResult> WithAction(Action<TResult> action);
 
         /// <summary>
-        ///     Withes the nullable action.
+        ///     Builder with action and nullable value parameter.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>

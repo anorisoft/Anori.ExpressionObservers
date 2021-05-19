@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.UnitTests
 
         public int GetPropertyChangedSubscribedLength()
         {
-            return this.PropertyChanged?.GetInvocationList()?.Length ?? 0;
+            return this.PropertyChanged?.GetInvocationList().Length ?? 0;
         }
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)

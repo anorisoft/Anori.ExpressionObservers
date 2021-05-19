@@ -14,7 +14,7 @@ namespace Anori.ExpressionObservers.UnitTests
     using Anori.ExpressionObservers.Builder;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
     using Anori.Extensions;
-    using Anori.PropertyChain.UnitTest;
+
     using NUnit.Framework;
     using System;
     using System.Linq.Expressions;
