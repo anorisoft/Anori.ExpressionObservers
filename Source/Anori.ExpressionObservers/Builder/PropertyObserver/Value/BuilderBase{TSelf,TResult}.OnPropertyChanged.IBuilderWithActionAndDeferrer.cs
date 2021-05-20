@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The property value observer builder.</returns>
         IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
@@ -29,15 +29,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         IPropertyObserverWithDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.Build() =>
             this.CreatePropertyObserverWithActionAndDeferrer();
 
         /// <summary>
-        ///     Withes the getter.
+        ///     Builder with getter.
         /// </summary>
-        /// <returns>The Value Property Observer Builder.</returns>
+        /// <returns>The Value property observer builder.</returns>
         IBuilderWithActionAndGetter<TResult> IBuilderWithActionAndDeferrer<TResult>.WithGetter() => this;
     }
 }

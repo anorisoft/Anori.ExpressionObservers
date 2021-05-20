@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
 {
     /// <summary>
-    ///     The I Property Reference Observer Builder With Action Of T Result interface.
+    ///     The I property reference observer builder With Action Of T Result interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionOfNullT<out TResult> : IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>,
@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         INotifyReferencePropertyObserver<TResult> Build();
     }

@@ -19,7 +19,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         IGetterPropertyObserverWithDeferrer<TResult> Build();
     }

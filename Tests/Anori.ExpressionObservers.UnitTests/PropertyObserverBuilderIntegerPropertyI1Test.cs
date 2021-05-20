@@ -59,7 +59,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .WithAction(() => callCount++)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -196,7 +196,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .OnValueChanged()
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -238,7 +238,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .OnValueChanged()
                 .WithFallback(-99)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -279,7 +279,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .OnValueChanged()
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount++;
@@ -576,7 +576,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnValueChanged()
                 .WithAction((int i) => value = i)
                 .WithFallback(-99)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount1++;
@@ -645,7 +645,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         value = j;
                     })
                 .WithFallback(-99)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount1++;
@@ -715,7 +715,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .OnValueChanged()
                 .WithAction((int? i) => value = i)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount1++;
@@ -879,7 +879,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnValueChanged()
                 .WithAction(() => callCount2++)
                 .WithFallback(-99)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount1++;
@@ -940,7 +940,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .OnValueChanged()
                 .WithAction(() => callCount2++)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             observes.PropertyChanged += (sender, args) => callCount1++;
@@ -1079,7 +1079,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -1352,7 +1352,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached()
+                .WithCache()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -1394,8 +1394,8 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached()
-                .Deferred()
+                .WithCache()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -1434,7 +1434,7 @@ namespace Anori.ExpressionObservers.UnitTests
             using var observes = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .OnPropertyChanged()
-                .Cached()
+                .WithCache()
                 .WithAction(() => callCount++)
                 .WithGetter()
                 .AutoActivate()
@@ -1474,7 +1474,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -1515,7 +1515,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .AutoActivate()
                 .Build();
 
@@ -1553,7 +1553,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached()
+                .WithCache()
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
@@ -1596,7 +1596,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached()
+                .WithCache()
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
@@ -1636,7 +1636,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
@@ -1679,7 +1679,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
@@ -1718,7 +1718,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached()
+                .WithCache()
                 .WithGetterDispatcher()
                 .Build();
 
@@ -1761,7 +1761,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached()
+                .WithCache()
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
@@ -1800,7 +1800,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .Build();
 
@@ -1843,7 +1843,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .OnPropertyChanged()
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
@@ -1921,7 +1921,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                 .WithGetter()
                 .WithFallback(99)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -2192,7 +2192,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(() => instance.Class2.IntProperty)
                 .WithAction(() => callCount++)
                 .WithGetter()
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -2482,7 +2482,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -2858,7 +2858,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             value = v;
                             callCount++;
                         })
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -3207,7 +3207,7 @@ namespace Anori.ExpressionObservers.UnitTests
                             callCount++;
                         })
                 .WithFallback(99)
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -3533,7 +3533,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithFallback(99)
                 .WithGetter()
-                .Deferred()
+                .WithDeferrer()
                 .Build();
 
             Assert.AreEqual(0, callCount);

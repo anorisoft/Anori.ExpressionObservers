@@ -20,32 +20,32 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Observer Builder.
+        ///     The property observer builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IObserverBuilderBase<IBuilderWithActionOfT<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Observer Builder.</returns>
+        /// <returns>The property observer builder.</returns>
         IBuilderWithActionOfTAndFallback<TResult> IBuilderWithActionOfT<TResult>.WithFallback(TResult fallback) =>
             this.WithFallback(fallback);
 
         /// <summary>
-        ///     Withes the getter.
+        ///     Builder with getter.
         /// </summary>
-        /// <returns>The Property Observer Builder.</returns>
+        /// <returns>The property observer builder.</returns>
         IBuilderWithActionOfTAndGetter<TResult> IBuilderWithActionOfT<TResult>.WithGetter() => this;
 
         /// <summary>
         ///     Deferreds this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        IBuilderWithActionOfTAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfTAndDeferrer<TResult>>.Deferred() =>
+        IBuilderWithActionOfTAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfTAndDeferrer<TResult>>.WithDeferrer() =>
             this;
     }
 }

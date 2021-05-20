@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     using System;
 
     /// <summary>
-    ///     The Property Value Observer Builder With Value Changed interface.
+    ///     The property value observer builder With Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithAction<TResult> WithAction(Action action);
 
@@ -38,7 +38,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> WithAction(Action<TResult> action);
 
@@ -47,7 +47,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> WithAction(Action<TResult, TResult> action);
 
@@ -56,7 +56,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?> action);
 
@@ -65,15 +65,15 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?, TResult?> action);
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Observer Builder.</returns>
+        /// <returns>The property observer builder.</returns>
         IBuilderWithFallback<TResult> WithFallback(TResult fallback);
     }
 }

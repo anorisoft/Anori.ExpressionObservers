@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Observer Builder.
+        ///     The property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>
             IObserverBuilderBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>.AutoActivate() =>
@@ -33,33 +33,33 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         IPropertyObserverWithDeferrer<TResult> IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>.Build() =>
             this.CreatePropertyObserverWithActionOfTAndFallbackAndDeferrer();
 
         /// <summary>
-        ///     Withes the getter.
+        ///     Builder with getter.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>
             IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>.WithGetter() =>
             this;
 
         /// <summary>
-        ///     Withes the getter dispatcher.
+        ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>
             ISchedulerBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
-        ///     Withes the getter task scheduler.
+        ///     Builder with getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>

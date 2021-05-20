@@ -169,15 +169,31 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Determines whether the specified objects are equal.
+        ///     Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        /// <param name="x">The first object of type T to compare.</param>
-        /// <param name="y">The second object of type T to compare.</param>
-        /// <returns>
-        ///     true if the specified objects are equal; otherwise, false.
-        /// </returns>
-        bool IEqualityComparer<ObserverFoundationBase>.Equals(ObserverFoundationBase? x, ObserverFoundationBase? y) =>
-            Equals(x, y);
+        /// <param name="disposing">
+        ///     <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        ///     unmanaged resources.
+        /// </param>
+        public virtual void Dispose(bool disposing)
+        {
+            if (!disposing)
+            {
+                return;
+            }
+
+            if (!this.IsActive)
+            {
+                return;
+            }
+
+            this.IsActive = false;
+
+            foreach (var rootPropertyObserverNode in this.RootNodes)
+            {
+                rootPropertyObserverNode.UnsubscribeListener();
+            }
+        }
 
         /// <summary>
         ///     Determines whether the specified <see cref="object" />, is equal to this instance.
@@ -207,38 +223,6 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Indicates whether the current object is equal to another object of the same type.
-        /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns>
-        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
-        /// </returns>
-        public bool Equals(ObserverFoundationBase? other)
-        {
-            if (other is null)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (!this.RootNodes.SequenceEqual(other.RootNodes))
-            {
-                return false;
-            }
-
-            if (this.ExpressionString != other.ExpressionString)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -248,22 +232,7 @@ namespace Anori.ExpressionObservers.Base
         {
             unchecked
             {
-                return this.RootNodes.GetHashCode() * 397 ^ this.ExpressionString.GetHashCode();
-            }
-        }
-
-        /// <summary>
-        ///     Returns a hash code for this instance.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns>
-        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
-        public int GetHashCode(ObserverFoundationBase obj)
-        {
-            unchecked
-            {
-                return obj.ExpressionString.GetHashCode() * 397 ^ obj.RootNodes.GetHashCode();
+                return (this.RootNodes.GetHashCode() * 397) ^ this.ExpressionString.GetHashCode();
             }
         }
 
@@ -311,32 +280,54 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Releases unmanaged and - optionally - managed resources.
+        ///     Returns a hash code for this instance.
         /// </summary>
-        /// <param name="disposing">
-        ///     <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
-        ///     unmanaged resources.
-        /// </param>
-        public virtual void Dispose(bool disposing)
+        /// <param name="obj">The object.</param>
+        /// <returns>
+        ///     A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// </returns>
+        public int GetHashCode(ObserverFoundationBase obj)
         {
-            if (disposing)
+            unchecked
             {
-                if (!this.IsActive)
-                {
-                    return;
-                }
-
-                this.IsActive = false;
-
-                foreach (var rootPropertyObserverNode in this.RootNodes)
-                {
-                    rootPropertyObserverNode.UnsubscribeListener();
-                }
+                return (obj.ExpressionString.GetHashCode() * 397) ^ obj.RootNodes.GetHashCode();
             }
         }
 
         /// <summary>
-        ///     Looptrees the specified expression node.
+        ///     Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(ObserverFoundationBase? other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (!this.RootNodes.SequenceEqual(other.RootNodes))
+            {
+                return false;
+            }
+
+            if (this.ExpressionString != other.ExpressionString)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Loops the expression tree.
         /// </summary>
         /// <param name="expressionNode">The expression node.</param>
         /// <param name="observerNode">The observer node.</param>
@@ -354,9 +345,10 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Subscribes the specified silent.
+        ///     Activates the property observer with silent parameter.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <exception cref="AlreadyActivatedException">Already activated exception.</exception>
         protected void Activate(bool silent)
         {
             if (this.IsActive)
@@ -379,7 +371,7 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     The action.
+        ///     Called when [action].
         /// </summary>
         protected abstract void OnAction();
 
@@ -412,5 +404,16 @@ namespace Anori.ExpressionObservers.Base
         protected virtual void OnSilentActivate()
         {
         }
+
+        /// <summary>
+        ///     Determines whether the specified objects are equal.
+        /// </summary>
+        /// <param name="x">The first object of type T to compare.</param>
+        /// <param name="y">The second object of type T to compare.</param>
+        /// <returns>
+        ///     true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        bool IEqualityComparer<ObserverFoundationBase>.Equals(ObserverFoundationBase? x, ObserverFoundationBase? y) =>
+            Equals(x, y);
     }
 }

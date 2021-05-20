@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.Base
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     /// <summary>
-    ///     Property Observer Base for flurnent.
+    ///     Property observer base for fluent API.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <seealso cref="ObserverFoundationBase" />
@@ -70,11 +70,11 @@ namespace Anori.ExpressionObservers.Base
         public new TSelf Activate() => this.Activate(false);
 
         /// <summary>
-        ///     Subscribes the specified silent.
+        /// Subscribes the specified silent.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>
-        ///     Self object.
+        /// Self object.
         /// </returns>
         public new TSelf Activate(bool silent)
         {

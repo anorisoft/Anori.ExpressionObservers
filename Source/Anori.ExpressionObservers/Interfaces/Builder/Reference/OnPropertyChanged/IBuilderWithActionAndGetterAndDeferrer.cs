@@ -19,14 +19,14 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>The Property Observer.</returns>
+        /// <returns>The property observer.</returns>
         IGetterReferencePropertyObserverWithDeferrer<TResult> Build();
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Observer Builder.</returns>
+        /// <returns>The property observer builder.</returns>
         IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult> WithFallback(TResult fallback);
     }
 }

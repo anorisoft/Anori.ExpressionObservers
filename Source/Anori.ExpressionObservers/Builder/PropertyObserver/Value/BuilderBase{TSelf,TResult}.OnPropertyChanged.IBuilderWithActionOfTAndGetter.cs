@@ -22,17 +22,17 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Observer Builder.
+        ///     The property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetter<TResult> IObserverBuilderBase<IBuilderWithActionOfTAndGetter<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Observer Builder.</returns>
+        /// <returns>The property observer builder.</returns>
         IBuilderWithActionOfTAndGetterAndFallback<TResult> IBuilderWithActionOfTAndGetter<TResult>.WithFallback(
             TResult fallback) =>
             this.WithFallback(fallback);
@@ -41,24 +41,24 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// Deferreds this instance.
         /// </summary>
         /// <returns></returns>
-        IBuilderWithActionOfTAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfTAndGetterAndDeferrer<TResult>>.Deferred() => this;
+        IBuilderWithActionOfTAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfTAndGetterAndDeferrer<TResult>>.WithDeferrer() => this;
 
         /// <summary>
-        ///     Withes the getter dispatcher.
+        ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetter<TResult> ISchedulerBase<IBuilderWithActionOfTAndGetter<TResult>>.
             WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
-        ///     Withes the getter task scheduler.
+        ///     Builder with getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetter<TResult> ISchedulerBase<IBuilderWithActionOfTAndGetter<TResult>>.
             WithScheduler(TaskScheduler taskScheduler) =>

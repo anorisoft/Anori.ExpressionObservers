@@ -93,17 +93,13 @@ namespace Anori.ExpressionObservers.Base
         protected IExpressionTree Tree { get; }
 
         /// <summary>
-        ///     Creates the chain.
+        ///     Creates the observer tree with two parameters.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <returns>
-        ///     The ExpressionString.
+        ///     The expression tree.
         /// </returns>
-        /// <exception cref="NotSupportedException">
-        ///     Operation not supported for the given expression type {expression.Type}. "
-        ///     + "Only MemberExpression and ConstantExpression are currently supported.
-        /// </exception>
         protected IExpressionTree CreateObserverTree(TParameter1 parameter1, TParameter2 parameter2)
         {
             var tree = ExpressionTree.New(this.propertyExpression);
@@ -112,12 +108,11 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Creates the chain.
+        /// Creates the observer tree.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="nodes">The nodes.</param>
-        /// <exception cref="NotSupportedException">Expression Tree Node not supported.</exception>
         private void CreateObserverTree(TParameter1 parameter1, TParameter2 parameter2, IRootAware nodes)
         {
             foreach (var treeRoot in nodes.Roots)
@@ -166,7 +161,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case ConstantNode constantElement:
                         {
-                            if (!(treeRoot is { Next: PropertyNode propertyElement }))
+                            if (treeRoot is not { Next: PropertyNode propertyElement })
                             {
                                 continue;
                             }

@@ -18,13 +18,13 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>The Property Observer.</returns>
+        /// <returns>The property observer.</returns>
         IPropertyObserverWithDeferrer<TResult> Build();
 
         /// <summary>
-        ///     Withes the getter.
+        ///     Builder with getter.
         /// </summary>
-        /// <returns>The Property Observer Builder.</returns>
+        /// <returns>The property observer builder.</returns>
         IBuilderWithActionAndGetterAndDeferrer<TResult> WithGetter();
     }
 }

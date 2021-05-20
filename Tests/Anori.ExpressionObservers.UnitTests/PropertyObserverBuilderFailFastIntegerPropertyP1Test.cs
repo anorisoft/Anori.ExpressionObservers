@@ -686,7 +686,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                                 .WithGetter()
 
-                .Cached()
+                .WithCache()
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -729,7 +729,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                                 .WithGetter()
 
-                .Cached()
+                .WithCache()
                 .AutoActivate()
                 .Build();
 
@@ -768,7 +768,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                                 .WithGetter()
 
-                .Cached()
+                .WithCache()
                 .WithGetterDispatcher()
                 .Build();
 
@@ -813,7 +813,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                                 .WithGetter()
 
-                .Cached()
+                .WithCache()
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
@@ -852,7 +852,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
                 .WithAction(() => callCount++).WithGetter()
 
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .Build();
 
             Assert.AreEqual(0, callCount);
@@ -894,7 +894,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
                 .WithAction(() => callCount++).WithGetter()
 
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .AutoActivate()
                 .Build();
 
@@ -933,7 +933,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                                 .WithGetter()
 
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .Build();
 
@@ -978,7 +978,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                                 .WithGetter()
 
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .WithGetterDispatcher()
                 .AutoActivate()
                 .Build();
@@ -1018,7 +1018,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
                 .WithAction(() => callCount++).WithGetter()
 
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
@@ -1062,7 +1062,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .ValueObserverBuilder(instance, i => i.Class2.IntProperty)
                 .WithAction(() => callCount++).WithGetter()
 
-                .Cached(LazyThreadSafetyMode.Full)
+                .WithCache(LazyThreadSafetyMode.Full)
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();
@@ -1102,7 +1102,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                                 .WithGetter()
 
-                .Cached()
+                .WithCache()
                 .WithScheduler(TaskScheduler.Current)
                 .Build();
 
@@ -1147,7 +1147,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .WithAction(() => callCount++)
                                 .WithGetter()
 
-                .Cached()
+                .WithCache()
                 .WithScheduler(TaskScheduler.Current)
                 .AutoActivate()
                 .Build();

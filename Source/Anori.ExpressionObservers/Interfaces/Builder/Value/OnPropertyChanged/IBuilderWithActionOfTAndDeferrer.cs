@@ -10,14 +10,14 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         where TResult : struct
     {
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The property value observer builder.</returns>
         IBuilderWithActionOfTAndFallbackAndDeferrer<TResult> WithFallback(TResult fallback);
 
         /// <summary>
-        ///     Withes the getter.
+        ///     Builder with getter.
         /// </summary>
         /// <returns>The getter.</returns>
         IBuilderWithActionOfTAndGetterAndDeferrer<TResult> WithGetter();

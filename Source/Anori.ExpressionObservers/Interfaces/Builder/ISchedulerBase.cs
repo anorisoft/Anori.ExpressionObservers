@@ -15,13 +15,13 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     public interface ISchedulerBase<out TSelf>
     {
         /// <summary>
-        ///     Withes the getter dispatcher.
+        ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>The target object.</returns>
         TSelf WithGetterDispatcher();
 
         /// <summary>
-        ///     Withes the getter task scheduler.
+        ///     Builder with getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>The target object.</returns>

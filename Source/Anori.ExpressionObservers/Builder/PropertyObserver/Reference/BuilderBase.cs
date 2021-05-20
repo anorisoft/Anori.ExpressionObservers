@@ -86,7 +86,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         protected abstract IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithActionOfTAndFallback();
 
         /// <summary>
-        ///     Creates the getter property observer with action of t and fallback and deferrer.
+        ///     Creates the getter property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
         ///     The Property Reference Observer.
@@ -112,7 +112,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             CreateGetterPropertyObserverWithFallbackAndDeferrer();
 
         /// <summary>
-        ///     Creates the Property Reference observer builder with action and getter.
+        ///     Creates the property reference observer builder with action and getter.
         /// </summary>
         /// <returns>
         ///     The Property Reference Observer.
@@ -162,7 +162,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallback();
 
         /// <summary>
-        ///     Creates the notify property observer with action of t and fallback and deferrer.
+        ///     Creates the notify property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
         ///     The Property Reference Observer.
@@ -174,7 +174,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the notify property observer with action of t null and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         protected abstract INotifyReferencePropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionOfTNullAndDeferrer();
@@ -222,7 +222,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             CreateNotifyReferencePropertyObserverWithActionAndDeferrer();
 
         /// <summary>
-        ///     Creates the Property Reference observer builder with value changed and deferrer.
+        ///     Creates the property reference observer builder with value changed and deferrer.
         /// </summary>
         /// <returns>
         ///     The Property Reference Observer.
@@ -231,7 +231,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             CreateNotifyReferencePropertyObserverWithDeferrer();
 
         /// <summary>
-        ///     Creates the Property Reference observer builder with action.
+        ///     Creates the property reference observer builder with action.
         /// </summary>
         /// <returns>
         ///     The Property Reference Observer.
@@ -255,7 +255,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         protected abstract IPropertyObserver<TResult> CreatePropertyObserverWithActionOfTAndFallback();
 
         /// <summary>
-        ///     Creates the property observer with action of t and fallback and deferrer.
+        ///     Creates the property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
         ///     The Property Reference Observer.
@@ -284,7 +284,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Withes the notify Property changed.
         /// </summary>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         protected TSelf OnPropertyChanged() => (TSelf)this;
 
@@ -292,7 +292,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Withes the value changed.
         /// </summary>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         protected TSelf OnValueChanged() => (TSelf)this;
 
@@ -301,7 +301,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         protected TSelf WithActionWithOldAndNewValueWithFallback(Action<TResult, TResult> action)
         {
@@ -314,7 +314,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         protected TSelf WithActionWithNewValueWithFallback(Action<TResult> action)
         {
@@ -327,7 +327,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         protected TSelf WithNullableActionWitNewValue(Action<TResult?> action)
         {
@@ -340,7 +340,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         protected TSelf WithNullableActionWithOldAndNewValue(Action<TResult?, TResult?> action)
         {
@@ -349,11 +349,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         /// <exception cref="Anori.ExpressionObservers.Exceptions.FallbackAlreadyDefineException">
         ///     Fallback Already Define

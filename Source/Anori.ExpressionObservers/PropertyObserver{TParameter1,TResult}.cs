@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         public static IGetterPropertyObserver<TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
@@ -56,7 +56,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         public static IGetterPropertyObserver<TResult> Observes<TParameter1, TResult>(
             [NotNull] this TParameter1 parameter1,
@@ -89,7 +89,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         [NotNull]
         public static IPropertyObserver<TResult> Observes<TParameter1, TResult>(
@@ -114,7 +114,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         [NotNull]
         public static IGetterPropertyObserver<TResult> Observes<TParameter1, TResult>(
@@ -149,7 +149,7 @@ namespace Anori.ExpressionObservers
         /// <param name="action">The action.</param>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         [NotNull]
         public static IGetterPropertyObserver<TResult> Observes<TParameter1, TResult>(
@@ -175,7 +175,7 @@ namespace Anori.ExpressionObservers
         /// <param name="autoSubscribe">if set to <c>true</c> [automatic subscribe].</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         [NotNull]
         public static IPropertyObserver<TResult> Observes<TParameter1, TResult>(

@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Observer Builder.
+        ///     The property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallback<TResult>
             IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>.AutoActivate() =>
@@ -33,23 +33,23 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         IGetterPropertyObserver<TResult> IBuilderWithActionOfTAndGetterAndFallback<TResult>.Build() =>
             this.CreateGetterPropertyObserverWithActionOfTAndFallback();
 
         /// <summary>
-        ///     Withes the getter dispatcher.
+        ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallback<TResult>
             ISchedulerBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
-        ///     Withes the getter task scheduler.
+        ///     Builder with getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
@@ -65,7 +65,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <returns></returns>
         IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>>
-            .Deferred() =>
+            .WithDeferrer() =>
             this;
     }
 }

@@ -12,11 +12,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         where TResult : struct
     {
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult> WithFallback(TResult fallback);
     }

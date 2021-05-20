@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The property value observer builder.</returns>
         IBuilder<TResult> IObserverBuilderBase<IBuilder<TResult>>.AutoActivate() => this.AutoActivate();
 
         /// <summary>
@@ -39,34 +39,34 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached() => this.Cached();
+        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.WithCache() => this.WithCache();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.Cached(LazyThreadSafetyMode safetyMode) =>
-            this.Cached(safetyMode);
+        IBuilder<TResult> ICacheBase<IBuilder<TResult>>.WithCache(LazyThreadSafetyMode safetyMode) =>
+            this.WithCache(safetyMode);
 
         /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        IBuilderWithDeferrer<TResult> IDeferBase<IBuilderWithDeferrer<TResult>>.Deferred() => this;
+        IBuilderWithDeferrer<TResult> IDeferBase<IBuilderWithDeferrer<TResult>>.WithDeferrer() => this;
 
         /// <summary>
         ///     Withes the action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithAction<TResult> IBuilder<TResult>.WithAction(Action action)
         {
@@ -78,7 +78,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult> action) =>
             this.WithActionWithOldAndNewValueWithFallback((_, obj) => action(obj));
@@ -88,7 +88,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IBuilder<TResult>.WithAction(Action<TResult, TResult> action) =>
             this.WithActionWithOldAndNewValueWithFallback(action);
@@ -98,7 +98,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?> action) =>
             this.WithActionWithOldAndNewValue((_, obj) => action(obj));
@@ -108,34 +108,34 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IBuilder<TResult>.WithAction(Action<TResult?, TResult?> action) =>
             this.WithActionWithOldAndNewValue(action);
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Property Observer Builder.
+        ///     The property observer builder.
         /// </returns>
         IBuilderWithFallback<TResult> IBuilder<TResult>.WithFallback(TResult fallback) => this.WithFallback(fallback);
 
         /// <summary>
-        ///     Withes the getter dispatcher.
+        ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
         IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.WithGetterDispatcher() => this.WithGetterDispatcher();
 
         /// <summary>
-        ///     Withes the getter task scheduler.
+        ///     Builder with getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         IBuilder<TResult> ISchedulerBase<IBuilder<TResult>>.WithScheduler(TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);

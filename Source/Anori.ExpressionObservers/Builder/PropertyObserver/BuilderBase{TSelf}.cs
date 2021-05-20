@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
     using Anori.ExpressionObservers.Exceptions;
 
     /// <summary>
-    ///     The Property Observer Builder Base class.
+    ///     The property observer builder Base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     internal abstract class BuilderBase<TSelf>
@@ -105,7 +105,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         ///     Automatics the activate.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
         protected TSelf AutoActivate()
         {
@@ -122,9 +122,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         ///     Cacheds this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        protected TSelf Cached()
+        protected TSelf WithCache()
         {
             this.IsCached = true;
             this.SafetyMode = LazyThreadSafetyMode.None;
@@ -135,8 +135,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         ///     Cacheds the specified mode.
         /// </summary>
         /// <param name="mode">The mode.</param>
-        /// <returns>The Property Value Observer Builder.</returns>
-        protected TSelf Cached(LazyThreadSafetyMode mode)
+        /// <returns>The property value observer builder.</returns>
+        protected TSelf WithCache(LazyThreadSafetyMode mode)
         {
             this.IsCached = true;
             this.SafetyMode = mode;
@@ -148,7 +148,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
         protected TSelf WithAction(Action action)
         {
@@ -157,9 +157,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         }
 
         /// <summary>
-        ///     Withes the getter dispatcher.
+        ///     Builder with getter dispatcher.
         /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The property value observer builder.</returns>
         protected TSelf WithGetterDispatcher()
         {
             this.IsDispached = true;
@@ -167,11 +167,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         }
 
         /// <summary>
-        ///     Withes the getter task scheduler.
+        ///     Builder with getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
         protected TSelf WithScheduler(TaskScheduler taskScheduler)
         {

@@ -16,6 +16,6 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         ///     Deferreds this instance.
         /// </summary>
         /// <returns>The Target.</returns>
-        TTarget Deferred();
+        TTarget WithDeferrer();
     }
 }

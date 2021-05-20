@@ -19,10 +19,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IReferenceObserverBuilder<TResult>
     {
         /// <summary>
-        ///     Withes the notify Property changed.
+        ///     Withes the notify property changed.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         IBuilder<TResult> IReferenceObserverBuilder<TResult>.OnPropertyChanged() => this.OnPropertyChanged();
 
@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Withes the value changed.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         Interfaces.Builder.Reference.OnValueChanged.IBuilder<TResult> IReferenceObserverBuilder<TResult>.
             OnValueChanged() =>
@@ -41,7 +41,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> IReferenceObserverBuilder<TResult>.WithAction(Action<TResult> action) =>
             this.WithActionWithNewValueWithFallback(action);
@@ -51,7 +51,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         IBuilderWithAction<TResult> IReferenceObserverBuilder<TResult>.WithAction(Action action) =>
             this.WithAction(action);
@@ -61,7 +61,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IReferenceObserverBuilder<TResult>.WithNullableAction(
             Action<TResult?> action) =>

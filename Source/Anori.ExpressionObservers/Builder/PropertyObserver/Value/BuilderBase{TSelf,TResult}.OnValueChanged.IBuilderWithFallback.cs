@@ -14,7 +14,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
 
     /// <summary>
-    ///     The Property Value Observer Builder Base class.
+    ///     The property value observer builder base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -23,7 +23,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Automatics the activate.
         /// </summary>
-        /// <returns>The Property Value Observer Builder.</returns>
+        /// <returns>The property value observer builder.</returns>
         IBuilderWithFallback<TResult> IObserverBuilderBase<IBuilderWithFallback<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
@@ -40,30 +40,30 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        IBuilderWithFallback<TResult> ICacheBase<IBuilderWithFallback<TResult>>.Cached() => this.Cached();
+        IBuilderWithFallback<TResult> ICacheBase<IBuilderWithFallback<TResult>>.WithCache() => this.WithCache();
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        IBuilderWithFallback<TResult> ICacheBase<IBuilderWithFallback<TResult>>.Cached(LazyThreadSafetyMode safetyMode) =>
-            this.Cached(safetyMode);
+        IBuilderWithFallback<TResult> ICacheBase<IBuilderWithFallback<TResult>>.WithCache(LazyThreadSafetyMode safetyMode) =>
+            this.WithCache(safetyMode);
 
         /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        IBuilderWithFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithFallbackAndDeferrer<TResult>>.Deferred() => this;
+        IBuilderWithFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithFallbackAndDeferrer<TResult>>.WithDeferrer() => this;
 
         /// <summary>
-        ///     Withes the getter dispatcher.
+        ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
         ///     The target object.
@@ -73,7 +73,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.WithGetterDispatcher();
 
         /// <summary>
-        ///     Withes the getter task scheduler.
+        ///     Builder with getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>

@@ -16,7 +16,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Observer.
+    ///     property observer.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionAndDeferrer<TResult> :

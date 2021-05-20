@@ -44,7 +44,7 @@ namespace Anori.ExpressionObservers.Builder.ExpressionGetter
             this.expression = expression;
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>The Getter Builder With Fallback.</returns>

@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     using System;
 
     /// <summary>
-    ///     The Property Value Observer Builder With Notify Property Changed interface.
+    ///     The property value observer builder With Notify Property Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
@@ -22,7 +22,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithAction<TResult> WithAction(Action action);
 
@@ -31,7 +31,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfT<TResult> WithAction(Action<TResult> action);
 
@@ -40,7 +40,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Reference Observer Builder.
+        ///     The property reference observer builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> WithNullableAction(Action<TResult?> action);
     }

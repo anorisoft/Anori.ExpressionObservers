@@ -16,10 +16,10 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
           where TResult : struct
     {
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Observer Builder.</returns>
+        /// <returns>The property observer builder.</returns>
         IBuilderWithActionOfTAndFallbackAndDeferrer<TResult> WithFallback(TResult fallback);
     }
 }

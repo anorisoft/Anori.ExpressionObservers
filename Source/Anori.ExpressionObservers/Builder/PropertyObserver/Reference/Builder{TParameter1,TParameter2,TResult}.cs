@@ -111,7 +111,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the getter property observer with action of t and fallback and deferrer.
+        /// Creates the getter property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
         /// The Property Reference Observer.
@@ -563,7 +563,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the notify property observer with action of t and fallback and deferrer.
+        /// Creates the notify property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
         /// The Property Reference Observer.
@@ -617,7 +617,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// Creates the notify property observer with action of t null and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer Builder.
+        /// The property reference observer builder.
         /// </returns>
         protected override INotifyReferencePropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionOfTNullAndDeferrer()
@@ -944,7 +944,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         protected override IPropertyObserver<TResult> CreatePropertyObserverWithAction()
         {
@@ -1035,7 +1035,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the property observer with action of t and fallback and deferrer.
+        /// Creates the property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
         /// The Property Reference Observer.
@@ -1089,7 +1089,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates the property value observer.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         protected override IGetterReferencePropertyObserver<TResult> CreatePropertyReferenceObserver()
         {

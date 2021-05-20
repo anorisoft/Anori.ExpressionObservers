@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.ValueObservers.OnValueChanged;
 
     /// <summary>
-    ///     The Value Property Observer Builder class.
+    ///     The Value property observer builder class.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -95,7 +95,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         }
 
         /// <summary>
-        ///     Creates the getter property observer with action of t and fallback and deferrer.
+        ///     Creates the getter property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
         ///     The Property Value Observer.
@@ -572,7 +572,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         }
 
         /// <summary>
-        ///     Creates the notify property observer with action of t and fallback and deferrer.
+        ///     Creates the notify property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
         ///     The Property Value Observer.
@@ -973,7 +973,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Observer.
+        ///     The property observer.
         /// </returns>
         protected override IPropertyObserver<TResult> CreatePropertyObserverWithAction()
         {
@@ -1110,7 +1110,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property value observer.
         /// </summary>
         /// <returns>
-        ///     The Value Property Observer Builder.
+        ///     The Value property observer builder.
         /// </returns>
         protected override IGetterValuePropertyObserver<TResult> CreatePropertyValueObserver()
         {

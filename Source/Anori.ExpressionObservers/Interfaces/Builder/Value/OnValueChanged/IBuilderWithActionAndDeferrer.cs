@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
     /// <summary>
-    ///     The Property Value Observer Builder With Action And Getter interface.
+    ///     The property value observer builder With Action And Getter interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionAndDeferrer<TResult> :
@@ -18,14 +18,14 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>The Property Observer.</returns>
+        /// <returns>The property observer.</returns>
         INotifyValuePropertyObserverWithDeferrer<TResult> Build();
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
-        /// <returns>The Property Observer Builder.</returns>
+        /// <returns>The property observer builder.</returns>
         IBuilderWithActionAndFallbackAndDeferrer<TResult> WithFallback(TResult fallback);
     }
 }

@@ -55,7 +55,7 @@ namespace Anori.ExpressionObservers.Builder.ExpressionGetter
             Anori.ExpressionObservers.ExpressionGetter.CreateValueGetter(this.expression);
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>The Getter Builder With Fallback.</returns>

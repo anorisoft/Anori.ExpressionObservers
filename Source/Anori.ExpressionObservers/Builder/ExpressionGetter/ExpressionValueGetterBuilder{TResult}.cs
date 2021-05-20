@@ -39,7 +39,7 @@ namespace Anori.ExpressionObservers.Builder.ExpressionGetter
         }
 
         /// <summary>
-        ///     Withes the fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>The Getter Builder With Fallback.</returns>

@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
     using Anori.ExpressionObservers.Interfaces.Builder;
 
     /// <summary>
-    ///     The Property Observer Builder class.
+    ///     The property observer builder class.
     /// </summary>
     /// <seealso cref="IPropertyObserverBuilder" />
     public class PropertyObserverBuilder : IPropertyObserverBuilder
@@ -65,7 +65,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Reference Property Observer Builder.
+        ///     Reference property observer builder.
         /// </returns>
         public IReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TParameter1, TResult>(
             TParameter1 parameter1,
@@ -88,7 +88,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Reference Property Observer Builder.
+        ///     Reference property observer builder.
         /// </returns>
         public IReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TResult>(
             Expression<Func<TResult>> propertyExpression)
@@ -113,7 +113,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Reference Property Observer Builder.
+        ///     Reference property observer builder.
         /// </returns>
         public IReferenceObserverBuilder<TResult> ReferenceObserverBuilder<TParameter1, TParameter2, TResult>(
             TParameter1 parameter1,
@@ -141,7 +141,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value Property Observer Builder.
+        ///     Value property observer builder.
         /// </returns>
         public IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
             TParameter1 parameter1,
@@ -168,7 +168,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value Property Observer Builder.
+        ///     Value property observer builder.
         /// </returns>
         public IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
             TParameter1 parameter1,
@@ -194,7 +194,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     Value Property Observer Builder.
+        ///     Value property observer builder.
         /// </returns>
         public IValueObserverBuilder<TResult> ValueObserverBuilder<TResult>(
             Expression<Func<TResult>> propertyExpression)

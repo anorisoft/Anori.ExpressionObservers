@@ -17,7 +17,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Observer.
+    ///     property observer.
     /// </summary>
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>

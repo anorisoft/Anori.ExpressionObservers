@@ -86,7 +86,6 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="tree">The nodes.</param>
-        /// <exception cref="NotSupportedException">Expression Tree Node not supported.</exception>
         protected void CreateObserverTree(INotifyPropertyChanged parameter1, IRootAware tree)
         {
             foreach (var treeRoot in tree.Roots)
@@ -151,14 +150,12 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        ///     Creates the chain.
+        /// Creates the observer tree.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
-        /// <returns>Expression Tree.</returns>
-        /// <exception cref="NotSupportedException">
-        ///     Operation not supported for the given expression type {expression.Type}. "
-        ///     + "Only MemberExpression and ConstantExpression are currently supported.
-        /// </exception>
+        /// <returns>
+        ///     The expression tree.
+        /// </returns>
         private IExpressionTree CreateObserverTree(TParameter1 parameter1)
         {
             var tree = ExpressionTree.New(this.propertyExpression);

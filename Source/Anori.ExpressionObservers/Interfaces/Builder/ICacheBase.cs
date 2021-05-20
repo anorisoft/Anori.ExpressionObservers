@@ -18,15 +18,15 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>The Property Value Observer Builder.</returns>
-        TSelf Cached(LazyThreadSafetyMode safetyMode);
+        /// <returns>The property value observer builder.</returns>
+        TSelf WithCache(LazyThreadSafetyMode safetyMode);
 
         /// <summary>
         ///     Cacheds the specified safety mode.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer Builder.
+        ///     The property value observer builder.
         /// </returns>
-        TSelf Cached();
+        TSelf WithCache();
     }
 }
