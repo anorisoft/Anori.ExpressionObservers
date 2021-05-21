@@ -196,7 +196,7 @@
 									<ul class="list-unstyled">
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderBase_1">IObserverBuilderBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Fallback</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/ISchedulerBase_1">ISchedulerBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Fallback</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IDeferBase_1">IDeferBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallbackAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Fallback<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IDeferrerBase_1">IDeferrerBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallbackAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Fallback<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
 									</ul>
 								</dd>
 							
@@ -209,7 +209,7 @@
 							graph BT
 	Type-.-&gt;Interface0["IObserverBuilderBase&lt;IBuilderWithActionOfTAndFallback&lt;TResult&gt;&gt;"]
 	Type-.-&gt;Interface1["ISchedulerBase&lt;IBuilderWithActionOfTAndFallback&lt;TResult&gt;&gt;"]
-	Type-.-&gt;Interface2["IDeferBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;&gt;"]
+	Type-.-&gt;Interface2["IDeferrerBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;&gt;"]
 	Type["IBuilderWithActionOfTAndFallback&lt;TResult&gt;"]
 class Type type-node
 
@@ -223,7 +223,7 @@ class Type type-node
 	<pre><code>public interface IBuilderWithActionOfTAndFallback&lt;TResult&gt; : 
     IObserverBuilderBase&lt;IBuilderWithActionOfTAndFallback&lt;TResult&gt;&gt;, 
     ISchedulerBase&lt;IBuilderWithActionOfTAndFallback&lt;TResult&gt;&gt;, 
-    IDeferBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;&gt;
+    IDeferrerBase&lt;IBuilderWithActionOfTAndFallbackAndDeferrer&lt;TResult&gt;&gt;
     where TResult : struct</code></pre>
 
 
@@ -278,7 +278,7 @@ class Type type-node
 								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndGetterAndFallback_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>Of<wbr>T<wbr>And<wbr>Getter<wbr>And<wbr>Fallback</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged/IBuilderWithActionOfTAndFallback_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
 								<td>
 									<div>
-        Withes the getter.
+        Builder with getter.
     </div>
 								</td>
 							</tr>

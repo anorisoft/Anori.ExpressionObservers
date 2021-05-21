@@ -173,7 +173,7 @@
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-        The Property Value Observer Builder With Action And Getter interface.
+        The value property observer builder With Action And Getter interface.
     </div>
 
 		<div class="panel panel-default">
@@ -190,7 +190,7 @@
 									<ul class="list-unstyled">
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IObserverBuilderBase_1">IObserverBuilderBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithAction_1">IBuilderWithAction</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithAction_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
 											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/ISchedulerBase_1">ISchedulerBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithAction_1">IBuilderWithAction</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithAction_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
-											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IDeferBase_1">IDeferBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithAction_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
+											<li><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder/IDeferrerBase_1">IDeferrerBase</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionAndDeferrer_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>And<wbr>Deferrer</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithAction_1#typeparam-TResult">TResult</a>&gt;<wbr>&gt;<wbr></li>								
 									</ul>
 								</dd>
 							
@@ -203,7 +203,7 @@
 							graph BT
 	Type-.-&gt;Interface0["IObserverBuilderBase&lt;IBuilderWithAction&lt;TResult&gt;&gt;"]
 	Type-.-&gt;Interface1["ISchedulerBase&lt;IBuilderWithAction&lt;TResult&gt;&gt;"]
-	Type-.-&gt;Interface2["IDeferBase&lt;IBuilderWithActionAndDeferrer&lt;TResult&gt;&gt;"]
+	Type-.-&gt;Interface2["IDeferrerBase&lt;IBuilderWithActionAndDeferrer&lt;TResult&gt;&gt;"]
 	Type["IBuilderWithAction&lt;TResult&gt;"]
 class Type type-node
 
@@ -215,7 +215,8 @@ class Type type-node
 
 	<h1 id="Syntax">Syntax</h1>
 	<pre><code>public interface IBuilderWithAction&lt;TResult&gt; : IObserverBuilderBase&lt;IBuilderWithAction&lt;TResult&gt;&gt;, 
-    ISchedulerBase&lt;IBuilderWithAction&lt;TResult&gt;&gt;, IDeferBase&lt;IBuilderWithActionAndDeferrer&lt;TResult&gt;&gt;
+    ISchedulerBase&lt;IBuilderWithAction&lt;TResult&gt;&gt;, 
+    IDeferrerBase&lt;IBuilderWithActionAndDeferrer&lt;TResult&gt;&gt;
     where TResult : struct</code></pre>
 
 
@@ -270,7 +271,7 @@ class Type type-node
 								<td><a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithActionAndFallback_1">I<wbr>Builder<wbr>With<wbr>Action<wbr>And<wbr>Fallback</a><wbr>&lt;<a href="/Anori.ExpressionObservers/api/Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged/IBuilderWithAction_1#typeparam-TResult">TResult</a>&gt;<wbr></td>
 								<td>
 									<div>
-        Withes the fallback.
+        Buider with fallback.
     </div>
 								</td>
 							</tr>
