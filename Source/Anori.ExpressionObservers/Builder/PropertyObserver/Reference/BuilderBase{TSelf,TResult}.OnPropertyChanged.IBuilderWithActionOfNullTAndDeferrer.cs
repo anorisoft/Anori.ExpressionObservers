@@ -13,17 +13,17 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
 
     /// <summary>
-    ///     The property value observer builder base class.
+    ///     The value property observer builder base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullTAndDeferrer<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
+        ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndDeferrer<TResult>
             IObserverBuilderBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.AutoActivate() =>
@@ -42,7 +42,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Builder with getter.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult> IBuilderWithActionOfNullTAndDeferrer<TResult>.
             WithGetter() =>
@@ -52,7 +52,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.
             WithGetterDispatcher() =>
@@ -63,7 +63,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.
             WithScheduler(TaskScheduler taskScheduler) =>

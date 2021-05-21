@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Withes the notify Property changed.
         /// </summary>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         Interfaces.Builder.Value.OnPropertyChanged.IBuilder<TResult> IValueObserverBuilder<TResult>.
             OnPropertyChanged() =>
@@ -31,39 +31,39 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Withes the value changed.
         /// </summary>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         Interfaces.Builder.Value.OnValueChanged.IBuilder<TResult> IValueObserverBuilder<TResult>.OnValueChanged() =>
             this.OnValueChanged();
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithAction<TResult> IValueObserverBuilder<TResult>.
             WithAction(Action action) =>
             this.WithAction(action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfNullT<TResult> IValueObserverBuilder<TResult>.
             WithAction(Action<TResult?> action) =>
             this.WithActionWithNewValue(action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         Interfaces.Builder.Value.OnPropertyChanged.IBuilderWithActionOfT<TResult> IValueObserverBuilder<TResult>.
             WithAction(Action<TResult> action) =>

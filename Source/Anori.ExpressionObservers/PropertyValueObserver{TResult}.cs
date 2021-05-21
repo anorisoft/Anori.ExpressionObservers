@@ -17,7 +17,7 @@ namespace Anori.ExpressionObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     The Property Value Observer class.
+    ///     The value property observer class.
     /// </summary>
     public static partial class PropertyValueObserver
     {
@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> Observes<TResult>(
@@ -48,7 +48,7 @@ namespace Anori.ExpressionObservers
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> Observes<TResult>(
@@ -75,7 +75,7 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Value Observer.</returns>
+        /// <returns>The value property observer.</returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> ObservesAndGet<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
@@ -90,7 +90,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Value Observer.</returns>
+        /// <returns>The value property observer.</returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> ObservesAndGet<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression,
@@ -116,7 +116,7 @@ namespace Anori.ExpressionObservers
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TResult>(
@@ -131,7 +131,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TResult>(
@@ -155,7 +155,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TResult>(
@@ -172,7 +172,7 @@ namespace Anori.ExpressionObservers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TResult>(

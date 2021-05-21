@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndFallback<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
+        ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>
         ///     The property observer builder.
@@ -53,7 +53,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The target object.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallback<TResult>
             ISchedulerBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>.WithScheduler(
@@ -61,9 +61,11 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.WithScheduler(taskScheduler);
 
         /// <summary>
-        ///     Deferreds this instance.
+        ///    Builder with deferrer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
         IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>>
             .WithDeferrer() =>
             this;

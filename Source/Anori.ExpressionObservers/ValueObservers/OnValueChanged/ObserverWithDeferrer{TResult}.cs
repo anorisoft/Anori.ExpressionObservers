@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Observer With Getter.
+    ///     value property observer With Getter.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithDeferrer<TResult> :

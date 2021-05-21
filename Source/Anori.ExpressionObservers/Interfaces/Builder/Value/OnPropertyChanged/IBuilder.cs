@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     using System;
 
     /// <summary>
-    ///     The property value observer builder With Notify Property Changed interface.
+    ///     The value property observer builder with notify property changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
@@ -18,24 +18,24 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         where TResult : struct
     {
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
-        /// <returns>The Value property observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?> action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
-        /// <returns>The Value property observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IBuilderWithActionOfT<TResult> WithAction(Action<TResult> action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
-        /// <returns>The Value property observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IBuilderWithAction<TResult> WithAction(Action action);
     }
 }

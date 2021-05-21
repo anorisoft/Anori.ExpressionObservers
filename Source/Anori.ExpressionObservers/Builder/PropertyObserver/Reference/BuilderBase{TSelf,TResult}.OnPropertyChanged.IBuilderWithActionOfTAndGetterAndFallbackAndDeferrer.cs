@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
+        ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>
         ///     The property observer builder.

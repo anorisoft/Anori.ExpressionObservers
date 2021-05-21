@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         ///     Builds this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         IPropertyObserverWithDeferrer<TResult> Build();
     }

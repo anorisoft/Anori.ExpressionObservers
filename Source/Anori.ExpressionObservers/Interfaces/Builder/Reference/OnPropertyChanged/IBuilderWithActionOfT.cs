@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndFallback<TResult> WithFallback(TResult fallback);
 
@@ -26,7 +26,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
         ///     Builder with getter.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetter<TResult> WithGetter();
     }

@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
 
     /// <summary>
-    ///     The property value observer builder base class.
+    ///     The value property observer builder base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -20,9 +20,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndDeferrer<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
+        ///     Automatic activation when creating the property observer.
         /// </summary>
-        /// <returns>The property value observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
@@ -39,25 +39,25 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// <summary>
         ///     Builder with getter.
         /// </summary>
-        /// <returns>The Value property observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IBuilderWithActionAndGetterAndDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.WithGetter() => this;
 
         /// <summary>
-        ///     Cacheds the specified safety mode.
+        /// Builder with cache.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionAndDeferrer<TResult> ICacheBase<IBuilderWithActionAndDeferrer<TResult>>.WithCache(
             LazyThreadSafetyMode safetyMode) =>
             this.WithCache(safetyMode);
 
         /// <summary>
-        ///     Cacheds the specified safety mode.
+        /// Builder with cache.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionAndDeferrer<TResult> ICacheBase<IBuilderWithActionAndDeferrer<TResult>>.WithCache() =>
             this.WithCache();

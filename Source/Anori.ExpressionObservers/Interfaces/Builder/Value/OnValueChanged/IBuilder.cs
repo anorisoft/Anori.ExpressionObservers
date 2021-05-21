@@ -9,7 +9,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     using System;
 
     /// <summary>
-    ///     The property value observer builder With Value Changed interface.
+    ///     The value property observer builder With Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
@@ -21,11 +21,11 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>Property Value Observer On Notify Property Changed.</returns>
+        /// <returns>value property observer On Notify Property Changed.</returns>
         INotifyValuePropertyObserver<TResult> Build();
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
@@ -34,7 +34,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         IBuilderWithAction<TResult> WithAction(Action action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
@@ -43,7 +43,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         IBuilderWithActionOfT<TResult> WithAction(Action<TResult> action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
@@ -61,7 +61,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         IBuilderWithActionOfNullT<TResult> WithAction(Action<TResult?> action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>

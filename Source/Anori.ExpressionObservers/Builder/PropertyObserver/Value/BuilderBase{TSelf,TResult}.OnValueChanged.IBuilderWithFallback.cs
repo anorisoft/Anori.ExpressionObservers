@@ -14,53 +14,55 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
 
     /// <summary>
-    ///     The property value observer builder base class.
+    ///     The value property observer builder base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithFallback<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
-        /// </summary>
-        /// <returns>The property value observer builder.</returns>
-        IBuilderWithFallback<TResult> IObserverBuilderBase<IBuilderWithFallback<TResult>>.AutoActivate() =>
-            this.AutoActivate();
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Property Changed.
+        ///     value property observer On Notify Property Changed.
         /// </returns>
         INotifyPropertyObserver<TResult> IBuilderWithFallback<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithFallback();
 
         /// <summary>
-        ///     Cacheds the specified safety mode.
+        ///     Builder with cache.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithFallback<TResult> ICacheBase<IBuilderWithFallback<TResult>>.WithCache() => this.WithCache();
 
         /// <summary>
-        ///     Cacheds the specified safety mode.
+        ///     Builder with cache.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
-        IBuilderWithFallback<TResult> ICacheBase<IBuilderWithFallback<TResult>>.WithCache(LazyThreadSafetyMode safetyMode) =>
+        IBuilderWithFallback<TResult> ICacheBase<IBuilderWithFallback<TResult>>.WithCache(
+            LazyThreadSafetyMode safetyMode) =>
             this.WithCache(safetyMode);
 
         /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
-        IBuilderWithFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithFallbackAndDeferrer<TResult>>.WithDeferrer() => this;
+        IBuilderWithFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithFallbackAndDeferrer<TResult>>.WithDeferrer() =>
+            this;
+
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>The value property observer builder.</returns>
+        IBuilderWithFallback<TResult> IObserverBuilderBase<IBuilderWithFallback<TResult>>.AutoActivate() =>
+            this.AutoActivate();
 
         /// <summary>
         ///     Builder with getter dispatcher.
@@ -68,8 +70,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilderWithFallback<TResult> ISchedulerBase<IBuilderWithFallback<TResult>>.
-            WithGetterDispatcher() =>
+        IBuilderWithFallback<TResult> ISchedulerBase<IBuilderWithFallback<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -79,8 +80,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The target object.
         /// </returns>
-        IBuilderWithFallback<TResult> ISchedulerBase<IBuilderWithFallback<TResult>>.
-            WithScheduler(TaskScheduler taskScheduler) =>
+        IBuilderWithFallback<TResult> ISchedulerBase<IBuilderWithFallback<TResult>>.WithScheduler(
+            TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }
 }

@@ -20,7 +20,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndFallback<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
+        ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>
         ///     The property observer builder.
@@ -39,7 +39,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.CreateGetterPropertyObserverWithActionOfTAndFallback();
 
         /// <summary>
-        ///     Deferreds this instance.
+        ///    Builder with deferrer.
         /// </summary>
         /// <returns>
         ///     The property observer.

@@ -18,9 +18,9 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndDeferrer<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
+        ///     Automatic activation when creating the property observer.
         /// </summary>
-        /// <returns>The property value observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
@@ -37,7 +37,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <summary>
         ///     Builder with getter.
         /// </summary>
-        /// <returns>The Value property observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IBuilderWithActionAndGetter<TResult> IBuilderWithActionAndDeferrer<TResult>.WithGetter() => this;
     }
 }

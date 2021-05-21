@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
     /// <summary>
-    ///     The property value observer builder base interface.
+    ///     The value property observer builder base interface.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     public interface IObserverBuilderBase<out TSelf>

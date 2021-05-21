@@ -9,12 +9,12 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     using System;
 
     /// <summary>
-    ///     The property value observer builder With Notify Property Changed interface.
+    ///     The value property observer builder with notify property changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
-                                                              ISchedulerBase<IBuilder<TResult>>,
-                                                              ICacheBase<IBuilder<TResult>>
+                                         ISchedulerBase<IBuilder<TResult>>,
+                                         ICacheBase<IBuilder<TResult>>
         where TResult : class
     {
         /// <summary>

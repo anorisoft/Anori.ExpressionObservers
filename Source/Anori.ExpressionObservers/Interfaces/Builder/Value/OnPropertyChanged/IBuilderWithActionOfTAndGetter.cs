@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
 {
     /// <summary>
-    ///     The I property value observer builder With Action Of T Result And Getter interface.
+    ///     The I value property observer builder With Action Of T Result And Getter interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionOfTAndGetter<TResult> :
@@ -21,7 +21,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetterAndFallback<TResult> WithFallback(TResult fallback);
     }

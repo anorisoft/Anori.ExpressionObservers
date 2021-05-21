@@ -26,7 +26,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         ///     Builder with getter.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult> WithGetter();
     }

@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
 {
     /// <summary>
-    ///     The I property value observer builder With Value Changed interface.
+    ///     The I value property observer builder With Value Changed interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithFallback<out TResult> : IObserverBuilderBase<IBuilderWithFallback<TResult>>,
@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         /// <summary>
         ///     Creates this instance.
         /// </summary>
-        /// <returns>Property Value Observer On Notify Property Changed.</returns>
+        /// <returns>value property observer On Notify Property Changed.</returns>
         INotifyPropertyObserver<TResult> Build();
     }
 }

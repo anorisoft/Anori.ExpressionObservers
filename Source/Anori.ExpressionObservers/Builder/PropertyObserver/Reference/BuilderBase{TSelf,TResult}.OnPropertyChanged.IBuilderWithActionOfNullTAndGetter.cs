@@ -13,22 +13,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
 
     /// <summary>
-    ///     The property value observer builder base class.
+    ///     The value property observer builder base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullTAndGetter<TResult>
     {
-        /// <summary>
-        ///     Automatics the activate.
-        /// </summary>
-        /// <returns>
-        ///     The Value property observer builder.
-        /// </returns>
-        IBuilderWithActionOfNullTAndGetter<TResult> IObserverBuilderBase<IBuilderWithActionOfNullTAndGetter<TResult>>.
-            AutoActivate() =>
-            this.AutoActivate();
-
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -39,18 +29,30 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.CreatePropertyReferenceObserver();
 
         /// <summary>
-        ///     Deferreds this instance.
+        ///     Builder with deferrer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
         IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>
             IDeferBase<IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>>.WithDeferrer() =>
             this;
 
         /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionOfNullTAndGetter<TResult> IObserverBuilderBase<IBuilderWithActionOfNullTAndGetter<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
+
+        /// <summary>
         ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndGetter<TResult> ISchedulerBase<IBuilderWithActionOfNullTAndGetter<TResult>>.
             WithGetterDispatcher() =>
@@ -61,7 +63,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndGetter<TResult> ISchedulerBase<IBuilderWithActionOfNullTAndGetter<TResult>>.
             WithScheduler(TaskScheduler taskScheduler) =>

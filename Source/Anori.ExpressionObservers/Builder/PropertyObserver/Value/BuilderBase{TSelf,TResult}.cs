@@ -81,15 +81,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property observer with action of t result and getter and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithActionOfTAndFallback();
 
         /// <summary>
-        ///     Creates the getter property observer With Action Of T and fallback anddeferrer.
+        ///     Creates the getter property observer with action of t and fallback and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IGetterPropertyObserverWithDeferrer<TResult>
             CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer();
@@ -98,7 +98,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the getter property observer with fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IGetterPropertyObserver<TResult> CreateGetterPropertyObserverWithFallback();
 
@@ -106,16 +106,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the getter property observer with fallback with deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IGetterPropertyObserverWithDeferrer<TResult>
             CreateGetterPropertyObserverWithFallbackAndDeferrer();
 
         /// <summary>
-        ///     Creates the property value observer builder with action and getter.
+        ///     Creates the value property observer builder with action and getter.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IGetterValuePropertyObserver<TResult> CreateGetterValuePropertyObserver();
 
@@ -132,7 +132,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the getter value property observer cached.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IGetterValuePropertyObserver<TResult> CreateGetterValuePropertyObserverCached();
 
@@ -149,7 +149,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with action and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionAndFallback();
 
@@ -157,7 +157,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with action and fallback and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionAndFallbackAndDeferrer();
@@ -166,15 +166,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with action of T and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithActionOfTAndFallback();
 
         /// <summary>
-        ///     Creates the notify property observer With Action Of T and fallback anddeferrer.
+        ///     Creates the notify property observer with action of t and fallback and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrer();
@@ -183,7 +183,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify value property observer with fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyPropertyObserver<TResult> CreateNotifyPropertyObserverWithFallback();
 
@@ -191,7 +191,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with fallback and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithFallbackAndDeferrer();
@@ -200,7 +200,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyValuePropertyObserver<TResult> CreateNotifyValuePropertyObserver();
 
@@ -208,7 +208,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify value property observer with action.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyValuePropertyObserver<TResult> CreateNotifyValuePropertyObserverWithAction();
 
@@ -216,7 +216,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with action and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyValuePropertyObserverWithDeferrer<TResult>
             CreateNotifyValuePropertyObserverWithActionAndDeferrer();
@@ -225,7 +225,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with action of null t.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyValuePropertyObserver<TResult> CreateNotifyValuePropertyObserverWithActionOfNullT();
 
@@ -233,25 +233,25 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the notify property observer with action of null t and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyValuePropertyObserverWithDeferrer<TResult>
             CreateNotifyValuePropertyObserverWithActionOfNullTAndDeferrer();
 
         /// <summary>
-        ///     Creates the property value observer builder with value changed and deferrer.
+        ///     Creates the value property observer builder with value changed and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract INotifyValuePropertyObserverWithDeferrer<TResult>
             CreateNotifyValuePropertyObserverWithDeferrer();
 
         /// <summary>
-        ///     Creates the property value observer builder with action.
+        ///     Creates the value property observer builder with action.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IPropertyObserver<TResult> CreatePropertyObserverWithAction();
 
@@ -259,7 +259,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property observer with action and deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionAndDeferrer();
 
@@ -267,7 +267,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the getter property observer with action of T and fallback.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IPropertyObserver<TResult> CreatePropertyObserverWithActionOfTAndFallback();
 
@@ -275,16 +275,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property observer with action of t and fallback with deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IPropertyObserverWithDeferrer<TResult>
             CreatePropertyObserverWithActionOfTAndFallbackAndDeferrer();
 
         /// <summary>
-        ///     Creates the property value observer.
+        ///     Creates the value property observer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IGetterValuePropertyObserver<TResult> CreatePropertyValueObserver();
 
@@ -292,7 +292,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Creates the property observer on notify property changed with deferrer.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         protected abstract IGetterValuePropertyObserverWithDeferrer<TResult> CreatePropertyValueObserverWithDeferrer();
 
@@ -300,76 +300,76 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     Withes the notify Property changed.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
-        protected TSelf OnPropertyChanged() => (TSelf)this;
+        private TSelf OnPropertyChanged() => (TSelf)this;
 
         /// <summary>
         ///     Withes the value changed.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
-        protected TSelf OnValueChanged() => (TSelf)this;
+        private TSelf OnValueChanged() => (TSelf)this;
 
         /// <summary>
-        ///     Withes the action of t result.
+        ///     Builder with action with new value.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
-        protected TSelf WithActionWithNewValue(Action<TResult?> action)
+        private TSelf WithActionWithNewValue(Action<TResult?> action)
         {
             this.ActionWithNewValue = action;
             return (TSelf)this;
         }
 
         /// <summary>
-        ///     Withes the action of tt.
+        ///     Builder with action with old and new value.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
-        protected TSelf WithActionWithOldAndNewValue(Action<TResult?, TResult?> action)
+        private TSelf WithActionWithOldAndNewValue(Action<TResult?, TResult?> action)
         {
             this.ActionWithOldAndNewValue = action;
             return (TSelf)this;
         }
 
         /// <summary>
-        ///     Withes the action of tt with fallback.
+        ///     Builder with action of tt with fallback.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
-        protected TSelf WithActionWithOldAndNewValueWithFallback(Action<TResult, TResult> action)
+        private TSelf WithActionWithOldAndNewValueWithFallback(Action<TResult, TResult> action)
         {
             this.ActionWitOldAndNewValueWithFallback = action;
             return (TSelf)this;
         }
 
         /// <summary>
-        ///     Withes the action of t result with fallback.
+        ///     Builder with action of t result with fallback.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
-        protected TSelf WithActionOfTWithFallback(Action<TResult> action)
+        private TSelf WithActionOfTWithFallback(Action<TResult> action)
         {
             this.ActionOfTWithFallback = action;
             return (TSelf)this;
         }
 
         /// <summary>
-        ///     Buider with fallback.
+        ///     Builder with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         /// <exception cref="Anori.ExpressionObservers.Exceptions.FallbackAlreadyDefineException">
         ///     Fallback Already Define

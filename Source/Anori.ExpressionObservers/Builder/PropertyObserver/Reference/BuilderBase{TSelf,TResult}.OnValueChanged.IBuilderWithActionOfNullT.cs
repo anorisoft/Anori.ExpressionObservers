@@ -20,13 +20,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullT<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
-        /// </summary>
-        /// <returns>The property value observer builder.</returns>
-        IBuilderWithActionOfNullT<TResult> IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>.AutoActivate() =>
-            this.AutoActivate();
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
@@ -36,30 +29,34 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.CreateNotifyReferencePropertyObserver();
 
         /// <summary>
+        ///     Builder with deferrer.
+        /// </summary>
+        /// <returns>The reference property observer builder.</returns>
+        IBuilderWithActionOfNullTAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.
+            WithDeferrer() =>
+            this;
+
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>The reference property observer builder.</returns>
+        IBuilderWithActionOfNullT<TResult> IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>.AutoActivate() =>
+            this.AutoActivate();
+
+        /// <summary>
         ///     Builder with getter dispatcher.
         /// </summary>
-        /// <returns>
-        ///     The target object.
-        /// </returns>
-        IBuilderWithActionOfNullT<TResult> ISchedulerBase<IBuilderWithActionOfNullT<TResult>>.
-            WithGetterDispatcher() =>
+        /// <returns>The reference property observer builder.</returns>
+        IBuilderWithActionOfNullT<TResult> ISchedulerBase<IBuilderWithActionOfNullT<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
         ///     Builder with getter task scheduler.
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
-        /// <returns>
-        ///     The target object.
-        /// </returns>
-        IBuilderWithActionOfNullT<TResult> ISchedulerBase<IBuilderWithActionOfNullT<TResult>>.
-            WithScheduler(TaskScheduler taskScheduler) =>
+        /// <returns>The reference property observer builder.</returns>
+        IBuilderWithActionOfNullT<TResult> ISchedulerBase<IBuilderWithActionOfNullT<TResult>>.WithScheduler(
+            TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
-
-        /// <summary>
-        ///     Deferreds this instance.
-        /// </summary>
-        /// <returns></returns>
-        IBuilderWithActionOfNullTAndDeferrer<TResult> IDeferBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.WithDeferrer() => this;
     }
 }

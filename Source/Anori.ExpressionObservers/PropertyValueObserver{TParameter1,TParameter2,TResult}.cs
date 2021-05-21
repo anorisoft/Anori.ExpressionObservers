@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Observer.
+    ///     value property observer.
     /// </summary>
     public static partial class PropertyValueObserver
     {
@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
-        /// <returns>The Property Value Observer.</returns>
+        /// <returns>The value property observer.</returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
@@ -61,7 +61,7 @@ namespace Anori.ExpressionObservers
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
@@ -99,7 +99,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> Observes<TParameter1, TParameter2, TResult>(
@@ -128,7 +128,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> ObservesAndGet<TParameter1, TParameter2, TResult>(
@@ -158,7 +158,7 @@ namespace Anori.ExpressionObservers
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static IGetterValuePropertyObserver<TResult> ObservesAndGet<TParameter1, TParameter2, TResult>(
@@ -195,7 +195,7 @@ namespace Anori.ExpressionObservers
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
@@ -222,7 +222,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
@@ -258,7 +258,7 @@ namespace Anori.ExpressionObservers
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TParameter2, TResult>(
@@ -288,7 +288,7 @@ namespace Anori.ExpressionObservers
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <param name="isAutoActivate">if set to <c>true</c> [is automatic activate].</param>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         [NotNull]
         public static INotifyValuePropertyObserver<TResult> ObservesOnValueChanged<TParameter1, TParameter2, TResult>(

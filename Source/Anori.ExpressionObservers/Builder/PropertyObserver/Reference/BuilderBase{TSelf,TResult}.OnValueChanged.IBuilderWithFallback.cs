@@ -13,16 +13,16 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged;
 
     /// <summary>
-    ///     The property value observer builder base class.
+    ///     The value property observer builder base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithFallback<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
+        ///     Automatic activation when creating the property observer.
         /// </summary>
-        /// <returns>The property value observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IBuilderWithFallback<TResult> IObserverBuilderBase<IBuilderWithFallback<TResult>>.AutoActivate() =>
             this.AutoActivate();
 
@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Creates this instance.
         /// </summary>
         /// <returns>
-        ///     Property Value Observer On Notify Property Changed.
+        ///     value property observer On Notify Property Changed.
         /// </returns>
         INotifyPropertyObserver<TResult> IBuilderWithFallback<TResult>.Build() =>
             this.CreateNotifyPropertyObserverWithFallback();
@@ -39,7 +39,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     Defers this instance.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithFallbackAndDeferrer<TResult>>.WithDeferrer() =>
             this;

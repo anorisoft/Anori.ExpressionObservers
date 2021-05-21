@@ -66,7 +66,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>The Value property observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression)
@@ -78,7 +78,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>The Value property observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IValueObserverBuilder<TResult> ValueObserverBuilder<TResult>(
             [NotNull] Expression<Func<TResult>> propertyExpression)
             where TResult : struct;
@@ -92,7 +92,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <param name="propertyExpression">The property expression.</param>
-        /// <returns>The Value property observer builder.</returns>
+        /// <returns>The value property observer builder.</returns>
         IValueObserverBuilder<TResult> ValueObserverBuilder<TParameter1, TParameter2, TResult>(
             [NotNull] TParameter1 parameter1,
             [NotNull] TParameter2 parameter2,

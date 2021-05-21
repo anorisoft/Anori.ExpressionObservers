@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     public interface IDeferBase<out TTarget>
     {
         /// <summary>
-        ///     Deferreds this instance.
+        ///    Builder with deferrer.
         /// </summary>
         /// <returns>The Target.</returns>
         TTarget WithDeferrer();

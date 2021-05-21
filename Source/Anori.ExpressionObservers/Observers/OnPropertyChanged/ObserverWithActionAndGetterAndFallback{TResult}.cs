@@ -18,7 +18,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     Property Value Observer With Getter And Fallback.
+    ///     value property observer With Getter And Fallback.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionAndGetterAndFallback<TResult> :

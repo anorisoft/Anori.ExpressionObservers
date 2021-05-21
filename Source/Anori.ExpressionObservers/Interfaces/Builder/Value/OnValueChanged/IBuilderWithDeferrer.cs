@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
 {
     /// <summary>
-    ///     The I property value observer builder With Value Changed And Deferrer interface.
+    ///     The I value property observer builder With Value Changed And Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithDeferrer<TResult> : IObserverBuilderBase<IBuilderWithDeferrer<TResult>>
@@ -17,7 +17,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         ///     Builds this instance.
         /// </summary>
         /// <returns>
-        ///     The Property Value Observer.
+        ///     The value property observer.
         /// </returns>
         INotifyValuePropertyObserverWithDeferrer<TResult> Build();
     }

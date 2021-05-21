@@ -21,14 +21,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndGetter<TResult>
     {
         /// <summary>
-        ///     Automatics the activate.
-        /// </summary>
-        /// <returns>The property value observer builder.</returns>
-        IBuilderWithActionAndGetter<TResult> IObserverBuilderBase<IBuilderWithActionAndGetter<TResult>>.
-            AutoActivate() =>
-            this.AutoActivate();
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
@@ -45,40 +37,59 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         }
 
         /// <summary>
-        ///     Cacheds the specified safety mode.
-        /// </summary>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>
-        ///     The Value property observer builder.
-        /// </returns>
-        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.WithCache(
-            LazyThreadSafetyMode safetyMode) =>
-            this.WithCache(safetyMode);
-
-        /// <summary>
-        ///     Cacheds this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Value property observer builder.
-        /// </returns>
-        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.WithCache() => this.WithCache();
-
-        /// <summary>
-        ///     Buider with fallback.
+        ///     Builder with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionAndGetterAndFallback<TResult> IBuilderWithActionAndGetter<TResult>.WithFallback(
             TResult fallback) =>
             this.WithFallback(fallback);
 
         /// <summary>
+        ///     Builder with cache.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.WithCache(
+            LazyThreadSafetyMode safetyMode) =>
+            this.WithCache(safetyMode);
+
+        /// <summary>
+        ///     Builder with cache.
+        /// </summary>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.WithCache() =>
+            this.WithCache();
+
+        /// <summary>
+        ///     Builder with deferrer.
+        /// </summary>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
+            WithDeferrer() =>
+            this;
+
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>The value property observer builder.</returns>
+        IBuilderWithActionAndGetter<TResult> IObserverBuilderBase<IBuilderWithActionAndGetter<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
+
+        /// <summary>
         ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
-        ///     The property value observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.
             WithGetterDispatcher() =>
@@ -89,20 +100,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <param name="taskScheduler">The task scheduler.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithScheduler(
             TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
-
-        /// <summary>
-        ///     Deferreds this instance.
-        /// </summary>
-        /// <returns>
-        ///     The Value property observer builder.
-        /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
-            WithDeferrer() =>
-            this;
     }
 }

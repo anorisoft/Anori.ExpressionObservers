@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         INotifyReferencePropertyObserver<TResult> Build();
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
@@ -33,7 +33,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         IBuilderWithAction<TResult> WithAction(Action action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
@@ -42,7 +42,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
         IBuilderWithActionOfT<TResult> WithAction(Action<TResult> action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>

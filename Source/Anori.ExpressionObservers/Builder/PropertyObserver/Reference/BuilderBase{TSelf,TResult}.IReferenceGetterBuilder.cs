@@ -12,32 +12,32 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
 
     /// <summary>
-    ///     The Builder Base class.
+    ///     The builder base class.
     /// </summary>
     /// <typeparam name="TSelf">The type of the self.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IReferenceObserverBuilder<TResult>
     {
         /// <summary>
-        ///     Withes the notify property changed.
+        ///     Called when [property changed].
         /// </summary>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilder<TResult> IReferenceObserverBuilder<TResult>.OnPropertyChanged() => this.OnPropertyChanged();
 
         /// <summary>
-        ///     Withes the value changed.
+        ///     Called when [value changed].
         /// </summary>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         Interfaces.Builder.Reference.OnValueChanged.IBuilder<TResult> IReferenceObserverBuilder<TResult>.
             OnValueChanged() =>
             this.OnValueChanged();
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
@@ -47,24 +47,24 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.WithActionWithNewValueWithFallback(action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithAction<TResult> IReferenceObserverBuilder<TResult>.WithAction(Action action) =>
             this.WithAction(action);
 
         /// <summary>
-        ///     Withes the action.
+        ///     Builder with action.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>
-        ///     The Value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullT<TResult> IReferenceObserverBuilder<TResult>.WithNullableAction(
             Action<TResult?> action) =>
-            this.WithNullableActionWitNewValue(action);
+            this.WithNullableActionWithNewValue(action);
     }
 }
