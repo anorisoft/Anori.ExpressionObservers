@@ -114,7 +114,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
-        IBuilderWithDeferrer<TResult> IDeferBase<IBuilderWithDeferrer<TResult>>.WithDeferrer() => this;
+        IBuilderWithDeferrer<TResult> IDeferrerBase<IBuilderWithDeferrer<TResult>>.WithDeferrer() => this;
 
         /// <summary>
         ///     Automatic activation when creating the property observer.

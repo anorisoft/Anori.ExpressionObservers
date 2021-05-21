@@ -66,7 +66,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>
-            IDeferBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>.WithDeferrer() =>
+            IDeferrerBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>.WithDeferrer() =>
             this;
     }
 }

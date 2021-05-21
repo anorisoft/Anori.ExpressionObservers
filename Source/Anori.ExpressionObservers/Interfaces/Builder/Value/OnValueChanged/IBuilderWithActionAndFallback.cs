@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     public interface IBuilderWithActionAndFallback<out TResult> :
         IObserverBuilderBase<IBuilderWithActionAndFallback<TResult>>,
     ISchedulerBase<IBuilderWithActionAndFallback<TResult>>,
-        IDeferBase<IBuilderWithActionAndFallbackAndDeferrer<TResult>>
+        IDeferrerBase<IBuilderWithActionAndFallbackAndDeferrer<TResult>>
     {
         /// <summary>
         ///     Creates this instance.

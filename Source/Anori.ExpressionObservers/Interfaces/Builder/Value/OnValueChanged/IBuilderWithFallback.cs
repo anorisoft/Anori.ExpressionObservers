@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     public interface IBuilderWithFallback<out TResult> : IObserverBuilderBase<IBuilderWithFallback<TResult>>,
                                                          ISchedulerBase<IBuilderWithFallback<TResult>>,
                                                          ICacheBase<IBuilderWithFallback<TResult>>,
-                                                         IDeferBase<IBuilderWithFallbackAndDeferrer<TResult>>
+                                                         IDeferrerBase<IBuilderWithFallbackAndDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>

@@ -15,7 +15,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
     public interface IBuilder<TResult> : IObserverBuilderBase<IBuilder<TResult>>,
                                          ISchedulerBase<IBuilder<TResult>>,
                                          ICacheBase<IBuilder<TResult>>,
-                                         IDeferBase<IBuilderWithDeferrer<TResult>>
+                                         IDeferrerBase<IBuilderWithDeferrer<TResult>>
         where TResult : struct
     {
         /// <summary>

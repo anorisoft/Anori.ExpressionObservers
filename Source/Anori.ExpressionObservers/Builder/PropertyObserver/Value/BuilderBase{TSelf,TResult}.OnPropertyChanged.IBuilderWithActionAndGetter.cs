@@ -73,7 +73,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
+        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
             WithDeferrer() =>
             this;
 

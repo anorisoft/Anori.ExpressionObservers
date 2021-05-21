@@ -1,35 +1,27 @@
-﻿using System;
-using System.Diagnostics;
+﻿// -----------------------------------------------------------------------
+// <copyright file="Program.cs" company="AnoriSoft">
+// Copyright (c) AnoriSoft. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using static Anori.ExpressionObservers.ExpressionGetter;
 
 namespace Anori.ExpressionObservers.ConsoleTests
 {
-    using System.Linq.Expressions;
-    using System.Reflection.Metadata;
-    using System.Windows;
+    using System;
+    using System.Diagnostics;
 
     internal static class Program
     {
         private static void Main()
         {
-            var test = new TestClass1()
-            {
-                Property = 1,
-                Test2 = new TestClass2
-                {
-                    Property = 2,
-                    Test3 = new TestClass3 { Property = 3 }
-                }
-            };
+            var test = new TestClass1
+                           {
+                               Property = 1,
+                               Test2 = new TestClass2 { Property = 2, Test3 = new TestClass3 { Property = 3 } }
+                           };
 
-            var test2 = new TestClass1()
-            {
-                Property = 1,
-                Test2 = new TestClass2
-                {
-                    Property = 2,
-                }
-            };
+            var test2 = new TestClass1 { Property = 1, Test2 = new TestClass2 { Property = 2, } };
 
             Console.WriteLine("Reference Getter (TestClass1 t) => t.Test2.Test3");
             var referenceGetter = CreateReferenceGetter((TestClass1 t) => t.Test2.Test3);
@@ -82,15 +74,11 @@ namespace Anori.ExpressionObservers.ConsoleTests
             s = f1(test);
             Console.WriteLine(s.HasValue ? s.ToString() : "null");
 
-            test = new TestClass1()
-            {
-                Property = 1,
-                Test2 = new TestClass2
-                {
-                    Property = 2,
-                    Test3 = new TestClass3 { Property = 3 }
-                }
-            };
+            test = new TestClass1
+                       {
+                           Property = 1,
+                           Test2 = new TestClass2 { Property = 2, Test3 = new TestClass3 { Property = 3 } }
+                       };
 
             var count = 1;
 
@@ -101,6 +89,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 f1(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -111,6 +100,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test1Method(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -121,6 +111,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test2Method(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -131,6 +122,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test3MethodExcepion(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -142,6 +134,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 f1(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -152,6 +145,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test1Method(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -162,6 +156,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test2Method(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -172,6 +167,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test3MethodExcepion(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -182,6 +178,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 f1(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -192,6 +189,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test1Method(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -202,6 +200,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test2Method(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
 
@@ -212,6 +211,7 @@ namespace Anori.ExpressionObservers.ConsoleTests
             {
                 Test3MethodExcepion(test);
             }
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedTicks);
         }

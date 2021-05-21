@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChang
     public interface IBuilderWithActionAndGetter<TResult> : IObserverBuilderBase<IBuilderWithActionAndGetter<TResult>>,
                                                             ISchedulerBase<IBuilderWithActionAndGetter<TResult>>,
                                                             ICacheBase<IBuilderWithActionAndGetter<TResult>>,
-                                                            IDeferBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>
+                                                            IDeferrerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>
         where TResult : class
     {
         /// <summary>

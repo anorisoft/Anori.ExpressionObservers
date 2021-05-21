@@ -64,7 +64,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
-        IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult> IDeferBase<IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>>.
+        IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>>.
             WithDeferrer() =>
             this;
     }

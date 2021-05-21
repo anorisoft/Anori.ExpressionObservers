@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IDeferBase.cs" company="AnoriSoft">
+// <copyright file="IDeferrerBase.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,10 +7,10 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder
 {
     /// <summary>
-    /// The I Defer Base interface.
+    /// The deferrer base interface.
     /// </summary>
     /// <typeparam name="TTarget">The type of the target.</typeparam>
-    public interface IDeferBase<out TTarget>
+    public interface IDeferrerBase<out TTarget>
     {
         /// <summary>
         ///    Builder with deferrer.

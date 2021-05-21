@@ -12,7 +12,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnValueChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithFallback<out TResult> : IObserverBuilderBase<IBuilderWithFallback<TResult>>,
                                                          ISchedulerBase<IBuilderWithFallback<TResult>>,
-                                                         IDeferBase<IBuilderWithFallbackAndDeferrer<TResult>>
+                                                         IDeferrerBase<IBuilderWithFallbackAndDeferrer<TResult>>
         where TResult : class
     {
         /// <summary>
