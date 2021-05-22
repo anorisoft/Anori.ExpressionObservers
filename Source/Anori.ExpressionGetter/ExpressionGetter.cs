@@ -10,7 +10,7 @@ namespace Anori.ExpressionGetters
     using System.Collections.ObjectModel;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionGetters.Tree.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
 

@@ -11,9 +11,9 @@ namespace Anori.ExpressionObservers.Base
     using System.Linq;
 
     using Anori.Common;
-    using Anori.ExpressionGetters.Tree.Interfaces;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Nodes;
+    using Anori.ExpressionTrees.Interfaces;
     using Anori.Extensions;
 
     /// <summary>

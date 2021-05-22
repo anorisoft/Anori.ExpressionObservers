@@ -49,7 +49,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Anori.ExpressionGetter\Anori.ExpressionGetters.csproj" >
+    <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
+    <ProjectReference Include="..\Anori.ExpressionGetter\Anori.ExpressionGetters.csproj">
       <PrivateAssets>All</PrivateAssets>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </ProjectReference>
@@ -57,6 +58,9 @@
       <BuildAction>None</BuildAction>
       <PackagePath>lib\$(TargetFramework)</PackagePath>
     </_PackageFiles>
+    <!--<PackageFiles Include="$(OutputPath)\Anori.ExpressionGetters.pdb" Condition="IncludeSymbols==true">
+      <BuildAction>None</BuildAction>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </PackageFiles>-->
   </ItemGroup>
-
 </Project>

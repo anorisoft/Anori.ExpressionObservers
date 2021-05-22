@@ -11,10 +11,10 @@ namespace Anori.ExpressionObservers.Base
     using System.Linq.Expressions;
 
     using Anori.ExpressionGetters;
-    using Anori.ExpressionGetters.Tree;
-    using Anori.ExpressionGetters.Tree.Interfaces;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
+    using Anori.ExpressionTrees;
+    using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
 

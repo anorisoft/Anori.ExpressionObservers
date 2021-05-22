@@ -15,7 +15,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-        using Anori.ExpressionGetters;using Anori.ExpressionGetters.Tree.Interfaces;
+        using Anori.ExpressionGetters;using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
 

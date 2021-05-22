@@ -6,7 +6,7 @@
 
 namespace Anori.ExpressionGetters
 {
-    using Anori.ExpressionGetters.Tree.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
     using JetBrains.Annotations;
     using System;
     using System.Collections.ObjectModel;

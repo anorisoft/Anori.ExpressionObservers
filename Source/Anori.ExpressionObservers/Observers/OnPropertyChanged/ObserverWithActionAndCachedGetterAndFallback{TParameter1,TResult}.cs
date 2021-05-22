@@ -13,7 +13,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using System.Threading.Tasks;
 
     using Anori.ExpressionGetters;
-    using Anori.ExpressionGetters.Tree.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
 

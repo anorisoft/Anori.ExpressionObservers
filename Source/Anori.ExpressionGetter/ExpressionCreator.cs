@@ -11,9 +11,8 @@ namespace Anori.ExpressionGetters
     using System.Linq;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionGetters.Tree;
-    using Anori.ExpressionGetters.Tree.Interfaces;
-    using Anori.ExpressionGetters.Tree.Nodes;
+    using Anori.ExpressionTrees;
+    using Anori.ExpressionTrees.Interfaces;
     using Anori.Extensions;
 
     using JetBrains.Annotations;
@@ -139,7 +138,7 @@ namespace Anori.ExpressionGetters
         private static Expression BinaryMakeExpression(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            BinaryNode binary,
+            IBinaryNode binary,
             [NotNull] Expression ifNull)
         {
             switch (binary.BinaryExpression.NodeType)
@@ -222,7 +221,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Expression target,
-            BinaryNode binary,
+            IBinaryNode binary,
             [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(target, BinaryMakeExpression(expressions, variables, binary, ifNull)));
@@ -248,7 +247,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
-            BinaryNode binary,
+            IBinaryNode binary,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget) =>
             expressions.Add(
@@ -269,7 +268,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
-            in ConditionalNode conditional,
+            in IConditionalNode conditional,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget) =>
             expressions.Add(
@@ -291,7 +290,7 @@ namespace Anori.ExpressionGetters
         private static Expression ConditionalMakeExpression(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            ConditionalNode conditional,
+            IConditionalNode conditional,
             [NotNull] Expression ifNull)
         {
             var test = CreateVariableExpressions(expressions, variables, conditional.Test, ifNull);
@@ -317,7 +316,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Expression target,
-            ConditionalNode conditional,
+            IConditionalNode conditional,
             [NotNull] Expression ifNull)
         {
             expressions.Add(
@@ -342,7 +341,7 @@ namespace Anori.ExpressionGetters
         private static void ConstantLastElement(
             [NotNull] ICollection<Expression> expressions,
             [NotNull] Type resultType,
-            ConstantNode constant,
+            IConstantNode constant,
             Expression ifNull,
             [NotNull] LabelTarget returnTarget)
         {
@@ -369,7 +368,7 @@ namespace Anori.ExpressionGetters
         private static void ConstantNextElement(
             [NotNull] ICollection<Expression> expressions,
             [NotNull] Expression targetParameter,
-            ConstantNode constant,
+            IConstantNode constant,
             [NotNull] Expression ifExpression)
         {
             expressions.Add(Expression.Assign(targetParameter, Expression.Constant(constant.Value, constant.Type)));
@@ -395,7 +394,7 @@ namespace Anori.ExpressionGetters
         private static Expression ConstructorMakeExpression(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            ConstructorNode constructor,
+            IConstructorNode constructor,
             [NotNull] Expression ifNull)
         {
             var args = constructor.Parameters
@@ -417,7 +416,7 @@ namespace Anori.ExpressionGetters
             IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Expression targetParameter,
-            ConstructorNode constructor,
+            IConstructorNode constructor,
             [NotNull] Expression ifNull)
         {
             expressions.Add(
@@ -452,7 +451,7 @@ namespace Anori.ExpressionGetters
         {
             switch (binding)
             {
-                case MemberAssignmentNode memberAssignment:
+                case IMemberAssignmentNode memberAssignment:
                     {
                         var expression = CreateVariableExpressions(
                             expressions,
@@ -462,7 +461,7 @@ namespace Anori.ExpressionGetters
                         return Expression.Bind(memberAssignment.Binding.Member, expression);
                     }
 
-                case MemberListBindingNode memberListBinding:
+                case IMemberListBindingNode memberListBinding:
                     {
                         var memberInitCollection = new List<ElementInit>();
                         foreach (var initializer in memberListBinding.Initializers)
@@ -480,7 +479,7 @@ namespace Anori.ExpressionGetters
                         return Expression.ListBind(memberListBinding.Binding.Member, memberInitCollection);
                     }
 
-                case MemberMemberBindingNode memberMemberBindingElement:
+                case IMemberMemberBindingNode memberMemberBindingElement:
                     {
                         var m = memberMemberBindingElement.Bindings.Select(
                             s => CreateBindingExpressions(expressions, variables, s, ifNull));
@@ -617,31 +616,31 @@ namespace Anori.ExpressionGetters
             var element = nodes.First();
             switch (element)
             {
-                case FunctionNode function:
+                case IFunctionNode function:
                     FunctionLastElement(expressions, variables, resultType, function, ifNull, returnTarget);
                     break;
 
-                case ConstantNode constant:
+                case IConstantNode constant:
                     ConstantLastElement(expressions, resultType, constant, ifNull, returnTarget);
                     break;
 
-                case ParameterNode parameter:
+                case IParameterNode parameter:
                     ParameterLastElement(expressions, resultType, parameter, returnTarget);
                     break;
 
-                case MethodNode method:
+                case IMethodNode method:
                     MethodLastElement(expressions, variables, resultType, method, ifNull, returnTarget);
                     break;
 
-                case BinaryNode binary:
+                case IBinaryNode binary:
                     BineryLastElement(expressions, variables, resultType, binary, ifNull, returnTarget);
                     break;
 
-                case UnaryNode unary:
+                case IUnaryNode unary:
                     UnaryLastElement(expressions, variables, resultType, unary, ifNull, returnTarget);
                     break;
 
-                case ConditionalNode conditional:
+                case IConditionalNode conditional:
                     ConditionalLastElement(expressions, variables, resultType, conditional, ifNull, returnTarget);
                     break;
 
@@ -698,7 +697,7 @@ namespace Anori.ExpressionGetters
             var element = list.First();
             switch (element)
             {
-                case ParameterNode parameter:
+                case IParameterNode parameter:
                     {
                         var p = parameter.Expression;
                         target = p;
@@ -706,13 +705,13 @@ namespace Anori.ExpressionGetters
                         break;
                     }
 
-                case ConstantNode constant:
+                case IConstantNode constant:
                     {
                         target = constant.Expression;
                         break;
                     }
 
-                case MethodNode method:
+                case IMethodNode method:
                     {
                         var p = Expression.Variable(method.Type, $"value{variables.GetNextIndex()}");
                         target = p;
@@ -721,7 +720,7 @@ namespace Anori.ExpressionGetters
                         break;
                     }
 
-                case ConstructorNode constructor:
+                case IConstructorNode constructor:
                     {
                         var p = Expression.Variable(constructor.Type, $"value{variables.GetNextIndex()}");
                         target = p;
@@ -730,7 +729,7 @@ namespace Anori.ExpressionGetters
                         break;
                     }
 
-                case FunctionNode function:
+                case IFunctionNode function:
                     {
                         var p = Expression.Variable(function.Type, $"value{variables.GetNextIndex()}");
                         target = p;
@@ -739,7 +738,7 @@ namespace Anori.ExpressionGetters
                         break;
                     }
 
-                case BinaryNode binary:
+                case IBinaryNode binary:
                     {
                         var p = Expression.Variable(binary.Type, $"value{variables.GetNextIndex()}");
                         target = p;
@@ -748,7 +747,7 @@ namespace Anori.ExpressionGetters
                         break;
                     }
 
-                case UnaryNode unary:
+                case IUnaryNode unary:
                     {
                         var p = Expression.Variable(unary.Type, $"value{variables.GetNextIndex()}");
                         target = p;
@@ -757,7 +756,7 @@ namespace Anori.ExpressionGetters
                         break;
                     }
 
-                case ConditionalNode conditional:
+                case IConditionalNode conditional:
                     {
                         var p = Expression.Variable(conditional.Type, $"value{variables.GetNextIndex()}");
                         target = p;
@@ -766,7 +765,7 @@ namespace Anori.ExpressionGetters
                         break;
                     }
 
-                case MemberInitNode memberInit:
+                case IMemberInitNode memberInit:
                     {
                         var p = Expression.Variable(memberInit.Type, $"value{variables.GetNextIndex()}");
                         target = p;
@@ -813,7 +812,7 @@ namespace Anori.ExpressionGetters
             [NotNull] ICollection<Expression> expressions,
             Expression sourceParameter,
             [NotNull] Type resultType,
-            FieldNode field,
+            IFieldNode field,
             [NotNull] LabelTarget returnTarget) =>
             expressions.Add(
                 Expression.Return(
@@ -832,7 +831,7 @@ namespace Anori.ExpressionGetters
             [NotNull] ICollection<Expression> expressions,
             [NotNull] Expression sourceParameter,
             [NotNull] Expression targetParameter,
-            FieldNode field,
+            IFieldNode field,
             [NotNull] Expression ifExpression)
         {
             expressions.Add(Expression.Assign(targetParameter, Expression.Field(sourceParameter, field.FieldInfo)));
@@ -859,7 +858,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
-            FunctionNode function,
+            IFunctionNode function,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget) =>
             expressions.Add(
@@ -879,7 +878,7 @@ namespace Anori.ExpressionGetters
         private static Expression FunctionMakeExpression(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            FunctionNode function,
+            IFunctionNode function,
             [NotNull] Expression ifNull)
         {
             var args = function.Parameters.Select(
@@ -901,7 +900,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Expression targetParameter,
-            FunctionNode function,
+            IFunctionNode function,
             [NotNull] Expression ifNull)
         {
             expressions.Add(
@@ -936,15 +935,15 @@ namespace Anori.ExpressionGetters
         {
             switch (node)
             {
-                case MethodNode method:
+                case IMethodNode method:
                     MethodLastElement(expressions, variables, resultType, method, ifNull, returnTarget);
                     break;
 
-                case PropertyNode property:
+                case IPropertyNode property:
                     PropertyLastElement(expressions, variables, source, resultType, property, ifNull, returnTarget);
                     break;
 
-                case FieldNode field:
+                case IFieldNode field:
                     FieldLastElement(expressions, source, resultType, field, returnTarget);
                     break;
 
@@ -973,39 +972,39 @@ namespace Anori.ExpressionGetters
         {
             switch (node)
             {
-                case ParameterNode parameter:
+                case IParameterNode parameter:
                     ParameterNextParameter(expressions, target, parameter, ifNull);
                     break;
 
-                case ConstantNode constant:
+                case IConstantNode constant:
                     ConstantNextElement(expressions, target, constant, ifNull);
                     break;
 
-                case FunctionNode function:
+                case IFunctionNode function:
                     FunctionNextElement(expressions, variables, target, function, ifNull);
                     break;
 
-                case MethodNode method:
+                case IMethodNode method:
                     MethodNextElement(expressions, variables, target, method, ifNull);
                     break;
 
-                case PropertyNode property:
+                case IPropertyNode property:
                     PropertyNextElement(expressions, source, target, property, ifNull);
                     break;
 
-                case FieldNode field:
+                case IFieldNode field:
                     FieldNextElement(expressions, source, target, field, ifNull);
                     break;
 
-                case BinaryNode binary:
+                case IBinaryNode binary:
                     BinaryNextElement(expressions, variables, target, binary, ifNull);
                     break;
 
-                case UnaryNode unary:
+                case IUnaryNode unary:
                     UnaryNextElement(expressions, variables, target, unary, ifNull);
                     break;
 
-                case ConditionalNode conditional:
+                case IConditionalNode conditional:
                     ConditionalNextElement(expressions, variables, target, conditional, ifNull);
                     break;
 
@@ -1026,7 +1025,7 @@ namespace Anori.ExpressionGetters
         private static Expression MemberInitMakeExpression(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            MemberInitNode memberInit,
+            IMemberInitNode memberInit,
             [NotNull] Expression ifNull)
         {
             var args = memberInit.Parameters
@@ -1051,7 +1050,7 @@ namespace Anori.ExpressionGetters
             IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Expression targetParameter,
-            MemberInitNode memberInit,
+            IMemberInitNode memberInit,
             [NotNull] Expression ifNull)
         {
             expressions.Add(
@@ -1081,7 +1080,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
-            MethodNode method,
+            IMethodNode method,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget) =>
             expressions.Add(
@@ -1101,7 +1100,7 @@ namespace Anori.ExpressionGetters
         private static Expression MethodMakeExpression(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            MethodNode method,
+            IMethodNode method,
             [NotNull] Expression ifNull)
         {
             var @object = CreateVariableExpressions(expressions, variables, method.Object, ifNull);
@@ -1125,7 +1124,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Expression targetParameter,
-            MethodNode method,
+            IMethodNode method,
             [NotNull] Expression ifNull)
         {
             expressions.Add(
@@ -1180,7 +1179,7 @@ namespace Anori.ExpressionGetters
         private static void ParameterLastElement(
             [NotNull] ICollection<Expression> expressions,
             [NotNull] Type resultType,
-            ParameterNode parameter,
+            IParameterNode parameter,
             [NotNull] LabelTarget returnTarget) =>
             expressions.Add(
                 Expression.Return(returnTarget, Expression.Convert(ParameterMakeExpression(parameter), resultType)));
@@ -1191,7 +1190,7 @@ namespace Anori.ExpressionGetters
         /// <param name="parameter">The parameter.</param>
         /// <returns>The expression.</returns>
         [NotNull]
-        private static Expression ParameterMakeExpression(ParameterNode parameter) => parameter.Expression;
+        private static Expression ParameterMakeExpression(IParameterNode parameter) => parameter.Expression;
 
         /// <summary>
         ///     Properties the last element.
@@ -1208,7 +1207,7 @@ namespace Anori.ExpressionGetters
             [NotNull] VariablesCollection variables,
             [NotNull] Expression sourceParameter,
             [NotNull] Type resultType,
-            PropertyNode property,
+            IPropertyNode property,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
         {
@@ -1235,7 +1234,7 @@ namespace Anori.ExpressionGetters
         /// <param name="property">The property.</param>
         /// <returns>The expression.</returns>
         [NotNull]
-        private static Expression PropertyMakeExpression([NotNull] Expression sourceParameter, PropertyNode property) =>
+        private static Expression PropertyMakeExpression([NotNull] Expression sourceParameter, IPropertyNode property) =>
             Expression.Call(sourceParameter, property.MethodInfo, property.Args);
 
         /// <summary>
@@ -1250,7 +1249,7 @@ namespace Anori.ExpressionGetters
             [NotNull] ICollection<Expression> expressions,
             [NotNull] Expression sourceParameter,
             [NotNull] Expression targetParameter,
-            PropertyNode property,
+            IPropertyNode property,
             [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(targetParameter, PropertyMakeExpression(sourceParameter, property)));
@@ -1277,7 +1276,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Type resultType,
-            UnaryNode unary,
+            IUnaryNode unary,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget) =>
             expressions.Add(
@@ -1297,7 +1296,7 @@ namespace Anori.ExpressionGetters
         private static Expression UnaryMakeExpression(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            UnaryNode unary,
+            IUnaryNode unary,
             [NotNull] Expression ifNull)
         {
             var operand = CreateVariableExpressions(expressions, variables, unary.Operand, ifNull);
@@ -1316,7 +1315,7 @@ namespace Anori.ExpressionGetters
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Expression target,
-            UnaryNode unary,
+            IUnaryNode unary,
             [NotNull] Expression ifNull)
         {
             expressions.Add(Expression.Assign(target, UnaryMakeExpression(expressions, variables, unary, ifNull)));

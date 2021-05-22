@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items"
 		..\.gitignore = ..\.gitignore
 		..\build.ps1 = ..\build.ps1
 		..\build.sh = ..\build.sh
+		..\config.wyam = ..\config.wyam
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
 		..\recipe.cake = ..\recipe.cake
@@ -50,6 +51,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.ExpressionGetters", "Anori.ExpressionGetter\Anori.ExpressionGetters.csproj", "{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anori.ExpressionGetters.UnitTests", "..\Tests\Anori.ExpressionGetters.UnitTests\Anori.ExpressionGetters.UnitTests.csproj", "{F6D54EF3-9614-44E9-B812-2AF53122FCC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anori.ExpressionTrees", "Anori.ExpressionTrees\Anori.ExpressionTrees.csproj", "{FB669043-5F22-421A-9040-0FAC9887F7E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anori.ExpressionTrees.UnitTests", "..\Tests\Anori.ExpressionTrees.UnitTests\Anori.ExpressionTrees.UnitTests.csproj", "{7EC8585F-7716-40FB-81C2-C1EB333868BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +126,22 @@ Global
 		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Release Submodules|Any CPU.Build.0 = Release|Any CPU
 		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB669043-5F22-421A-9040-0FAC9887F7E8}.Debug Submodules|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB669043-5F22-421A-9040-0FAC9887F7E8}.Debug Submodules|Any CPU.Build.0 = Debug|Any CPU
+		{FB669043-5F22-421A-9040-0FAC9887F7E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB669043-5F22-421A-9040-0FAC9887F7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB669043-5F22-421A-9040-0FAC9887F7E8}.Release Submodules|Any CPU.ActiveCfg = Release|Any CPU
+		{FB669043-5F22-421A-9040-0FAC9887F7E8}.Release Submodules|Any CPU.Build.0 = Release|Any CPU
+		{FB669043-5F22-421A-9040-0FAC9887F7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB669043-5F22-421A-9040-0FAC9887F7E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA}.Debug Submodules|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA}.Debug Submodules|Any CPU.Build.0 = Debug|Any CPU
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA}.Release Submodules|Any CPU.ActiveCfg = Release|Any CPU
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA}.Release Submodules|Any CPU.Build.0 = Release|Any CPU
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -134,6 +155,8 @@ Global
 		{9C250161-BE34-48E5-AAC8-76F1822DAFA5} = {221613C9-C2BB-4707-B345-53D377E8E39F}
 		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC} = {F7ACE4F7-C711-42B6-96D1-06E13E761659}
 		{F6D54EF3-9614-44E9-B812-2AF53122FCC5} = {7B787744-DF68-49AF-89C8-B8DD0AE2A08E}
+		{FB669043-5F22-421A-9040-0FAC9887F7E8} = {F7ACE4F7-C711-42B6-96D1-06E13E761659}
+		{7EC8585F-7716-40FB-81C2-C1EB333868BA} = {7B787744-DF68-49AF-89C8-B8DD0AE2A08E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBA0E37C-4CB3-40D3-B84D-D374EBCEB2EB}
