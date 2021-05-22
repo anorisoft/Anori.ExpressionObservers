@@ -11,10 +11,9 @@ namespace Anori.ExpressionObservers.Base
     using System.Linq;
 
     using Anori.Common;
+    using Anori.ExpressionGetters.Tree.Interfaces;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Nodes;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.ExpressionObservers.Tree.Nodes;
     using Anori.Extensions;
 
     /// <summary>
@@ -334,7 +333,7 @@ namespace Anori.ExpressionObservers.Base
         internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
         {
             var previousNode = observerNode;
-            while (expressionNode.Next is PropertyNode property)
+            while (expressionNode.Next is IPropertyNode property)
             {
                 var currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
 

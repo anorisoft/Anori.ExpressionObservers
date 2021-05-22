@@ -10,11 +10,10 @@ namespace Anori.ExpressionObservers.Base
     using System.ComponentModel;
     using System.Linq.Expressions;
 
+    using Anori.ExpressionGetters.Tree;
+    using Anori.ExpressionGetters.Tree.Interfaces;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
-    using Anori.ExpressionObservers.Tree;
-    using Anori.ExpressionObservers.Tree.Interfaces;
-    using Anori.ExpressionObservers.Tree.Nodes;
 
     using JetBrains.Annotations;
 
@@ -92,9 +91,9 @@ namespace Anori.ExpressionObservers.Base
             {
                 switch (treeRoot)
                 {
-                    case ParameterNode parameterElement:
+                    case IParameterNode parameterElement:
                         {
-                            if (!(parameterElement is { Next: PropertyNode propertyElement }))
+                            if (!(parameterElement is { Next: IPropertyNode propertyElement }))
                             {
                                 continue;
                             }
@@ -108,9 +107,9 @@ namespace Anori.ExpressionObservers.Base
                             break;
                         }
 
-                    case ConstantNode constantElement when treeRoot.Next is FieldNode fieldElement:
+                    case IConstantNode constantElement when treeRoot.Next is IFieldNode fieldElement:
                         {
-                            if (fieldElement.Next is not PropertyNode propertyElement)
+                            if (fieldElement.Next is not IPropertyNode propertyElement)
                             {
                                 continue;
                             }
@@ -125,9 +124,9 @@ namespace Anori.ExpressionObservers.Base
                             break;
                         }
 
-                    case ConstantNode constantElement:
+                    case IConstantNode constantElement:
                         {
-                            if (treeRoot.Next is not PropertyNode propertyElement)
+                            if (treeRoot.Next is not IPropertyNode propertyElement)
                             {
                                 continue;
                             }

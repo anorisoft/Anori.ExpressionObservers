@@ -15,17 +15,17 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
     public interface ICacheBase<out TSelf>
     {
         /// <summary>
-        ///     Cacheds the specified safety mode.
+        /// Builder with cache whit specified mode.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>The value property observer builder.</returns>
         TSelf WithCache(LazyThreadSafetyMode safetyMode);
 
         /// <summary>
-        ///     Cacheds the specified safety mode.
+        /// Builder with cache.
         /// </summary>
         /// <returns>
-        ///     The value property observer builder.
+        /// The value property observer builder.
         /// </returns>
         TSelf WithCache();
     }

@@ -47,6 +47,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.Common", "..\Submodul
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori", "..\Submodules\Anori.Common\Source\Anori\Anori.csproj", "{9C250161-BE34-48E5-AAC8-76F1822DAFA5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anori.ExpressionGetters", "Anori.ExpressionGetter\Anori.ExpressionGetters.csproj", "{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anori.ExpressionGetters.UnitTests", "..\Tests\Anori.ExpressionGetters.UnitTests\Anori.ExpressionGetters.UnitTests.csproj", "{F6D54EF3-9614-44E9-B812-2AF53122FCC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Submodules|Any CPU = Debug Submodules|Any CPU
@@ -101,6 +105,22 @@ Global
 		{9C250161-BE34-48E5-AAC8-76F1822DAFA5}.Release Submodules|Any CPU.Build.0 = Release Submodules|Any CPU
 		{9C250161-BE34-48E5-AAC8-76F1822DAFA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C250161-BE34-48E5-AAC8-76F1822DAFA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}.Debug Submodules|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}.Debug Submodules|Any CPU.Build.0 = Debug|Any CPU
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}.Release Submodules|Any CPU.ActiveCfg = Release|Any CPU
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}.Release Submodules|Any CPU.Build.0 = Release|Any CPU
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Debug Submodules|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Debug Submodules|Any CPU.Build.0 = Debug|Any CPU
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Release Submodules|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Release Submodules|Any CPU.Build.0 = Release|Any CPU
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +132,8 @@ Global
 		{1F0F835C-F1E5-4FF3-AF5D-6261EBE36F1D} = {221613C9-C2BB-4707-B345-53D377E8E39F}
 		{0146337B-F8A7-4F1A-94DE-EE5B87727230} = {221613C9-C2BB-4707-B345-53D377E8E39F}
 		{9C250161-BE34-48E5-AAC8-76F1822DAFA5} = {221613C9-C2BB-4707-B345-53D377E8E39F}
+		{35F316E2-BB45-4CFD-964A-F279CFBAE4CC} = {F7ACE4F7-C711-42B6-96D1-06E13E761659}
+		{F6D54EF3-9614-44E9-B812-2AF53122FCC5} = {7B787744-DF68-49AF-89C8-B8DD0AE2A08E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBA0E37C-4CB3-40D3-B84D-D374EBCEB2EB}

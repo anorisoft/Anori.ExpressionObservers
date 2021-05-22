@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using static Anori.ExpressionObservers.ExpressionGetter;
+using static Anori.ExpressionGetters.ExpressionGetter;
 
 namespace Anori.ExpressionObservers.ConsoleTests
 {

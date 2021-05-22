@@ -48,4 +48,15 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Anori.ExpressionGetter\Anori.ExpressionGetters.csproj" >
+      <PrivateAssets>All</PrivateAssets>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </ProjectReference>
+    <_PackageFiles Include="$(OutputPath)\Anori.ExpressionGetters.dll">
+      <BuildAction>None</BuildAction>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </_PackageFiles>
+  </ItemGroup>
+
 </Project>

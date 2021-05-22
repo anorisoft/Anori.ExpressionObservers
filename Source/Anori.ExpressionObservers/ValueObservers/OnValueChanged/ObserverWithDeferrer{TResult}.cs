@@ -13,6 +13,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
     using Anori.Extensions.Threading;

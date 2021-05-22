@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Anori.ExpressionGetter\Anori.ExpressionGetters.csproj" />
     <ProjectReference Include="..\..\Source\Anori.ExpressionObservers\Anori.ExpressionObservers.csproj" />
   </ItemGroup>
 
