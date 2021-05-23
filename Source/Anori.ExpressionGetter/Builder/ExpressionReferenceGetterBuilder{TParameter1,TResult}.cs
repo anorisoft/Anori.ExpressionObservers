@@ -39,22 +39,22 @@ namespace Anori.ExpressionGetters.Builder
             this.expression = expression;
 
         /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     The getter function.
-        /// </returns>
-        Func<TParameter1, TResult?> IReferenceGetterBuilder<TParameter1, TResult>.Build() =>
-            Anori.ExpressionGetters.ExpressionGetter.CreateReferenceGetter(this.expression);
-
-        /// <summary>
         ///     Creates this instance of a getter function.
         /// </summary>
         /// <returns>
         ///     The getter function.
         /// </returns>
         Func<TParameter1, TResult> IGetterBuilderWithFallback<TParameter1, TResult>.Build() =>
-            Anori.ExpressionGetters.ExpressionGetter.CreateGetter(this.expression, this.fallbackResult!);
+            ExpressionGetter.CreateGetter(this.expression, this.fallbackResult!);
+
+        /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>
+        ///     The getter function.
+        /// </returns>
+        Func<TParameter1, TResult?> IReferenceGetterBuilder<TParameter1, TResult>.Build() =>
+            ExpressionGetter.CreateReferenceGetter(this.expression);
 
         /// <summary>
         ///     Getter Builder with Fallback.

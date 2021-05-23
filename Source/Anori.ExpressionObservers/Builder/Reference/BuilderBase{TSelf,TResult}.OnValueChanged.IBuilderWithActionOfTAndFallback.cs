@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using System.Threading.Tasks;
 
@@ -20,6 +20,24 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndFallback<TResult>
     {
         /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>
+        ///     The property observer.
+        /// </returns>
+        INotifyPropertyObserver<TResult> IBuilderWithActionOfTAndFallback<TResult>.Build() =>
+            this.CreateNotifyPropertyObserverWithActionOfTAndFallback();
+
+        /// <summary>
+        ///     Builder with deferrer.
+        /// </summary>
+        /// <returns>
+        ///     The property observer builder.
+        /// </returns>
+        IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>
+            IDeferrerBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>.WithDeferrer() =>
+            this;
+        /// <summary>
         ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>
@@ -28,15 +46,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IBuilderWithActionOfTAndFallback<TResult> IObserverBuilderBase<IBuilderWithActionOfTAndFallback<TResult>>.
             AutoActivate() =>
             this.AutoActivate();
-
-        /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     The property observer.
-        /// </returns>
-        INotifyPropertyObserver<TResult> IBuilderWithActionOfTAndFallback<TResult>.Build() =>
-            this.CreateNotifyPropertyObserverWithActionOfTAndFallback();
 
         /// <summary>
         ///     Builder with getter dispatcher.
@@ -58,15 +67,5 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IBuilderWithActionOfTAndFallback<TResult> ISchedulerBase<IBuilderWithActionOfTAndFallback<TResult>>.
             WithScheduler(TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
-
-        /// <summary>
-        ///    Builder with deferrer.
-        /// </summary>
-        /// <returns>
-        ///     The property observer builder.
-        /// </returns>
-        IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>
-            IDeferrerBase<IBuilderWithActionOfTAndFallbackAndDeferrer<TResult>>.WithDeferrer() =>
-            this;
     }
 }

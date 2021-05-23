@@ -9,11 +9,9 @@ namespace Anori.ExpressionObservers.Interfaces
     using System.ComponentModel;
 
     /// <summary>
-    /// The notify reference property observer interface.
+    ///     The notify reference property observer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.INotifyReferencePropertyObserver{TResult}}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public interface INotifyReferencePropertyObserver<out TResult> :
         IPropertyObserverBase<INotifyReferencePropertyObserver<TResult>>,
         INotifyPropertyChanged

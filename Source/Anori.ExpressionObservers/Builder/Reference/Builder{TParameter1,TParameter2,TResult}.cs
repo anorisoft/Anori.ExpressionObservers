@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using System;
     using System.ComponentModel;
@@ -111,10 +111,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the getter property observer With Action Of T and fallback and deferrer.
+        ///     Creates the getter property observer With Action Of T and fallback and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override IGetterPropertyObserverWithDeferrer<TResult>
             CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer()
@@ -212,10 +212,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the getter property observer with fallback and deferrer.
+        ///     Creates the getter property observer with fallback and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override IGetterPropertyObserverWithDeferrer<TResult>
             CreateGetterPropertyObserverWithFallbackAndDeferrer()
@@ -311,10 +311,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the getter reference property observer and deferrer.
+        ///     Creates the getter reference property observer and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override IGetterReferencePropertyObserverWithDeferrer<TResult>
             CreateGetterReferencePropertyObserverAndDeferrer()
@@ -359,10 +359,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the getter value property observer cached.
+        ///     Creates the getter value property observer cached.
         /// </summary>
         /// <returns>
-        /// The value property observer.
+        ///     The value property observer.
         /// </returns>
         protected override IGetterReferencePropertyObserver<TResult> CreateGetterReferencePropertyObserverCached()
         {
@@ -462,10 +462,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the notify property observer with action and fallback and deferrer.
+        ///     Creates the notify property observer with action and fallback and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionAndFallbackAndDeferrer()
@@ -563,10 +563,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the notify property observer With Action Of T and fallback and deferrer.
+        ///     Creates the notify property observer With Action Of T and fallback and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrer()
@@ -614,10 +614,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the notify property observer with action of t null and deferrer.
+        ///     Creates the notify property observer with action of t null and deferrer.
         /// </summary>
         /// <returns>
-        /// The property reference observer builder.
+        ///     The property reference observer builder.
         /// </returns>
         protected override INotifyReferencePropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionOfTNullAndDeferrer()
@@ -625,32 +625,38 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             INotifyReferencePropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    this.ActionWithOldAndNewValue!,
-                    SynchronizationContext.Current,
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        this.ActionWithOldAndNewValue!,
+                        SynchronizationContext.Current,
+                        this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    this.ActionWithOldAndNewValue!,
-                    this.TaskScheduler,
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        this.ActionWithOldAndNewValue!,
+                        this.TaskScheduler,
+                        this.ObserverFlag);
             }
             else
             {
-                observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    this.ActionWithOldAndNewValue!,
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        this.ActionWithOldAndNewValue!,
+                        this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -848,10 +854,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the notify reference property observer with action and deferrer.
+        ///     Creates the notify reference property observer with action and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override INotifyReferencePropertyObserverWithDeferrer<TResult>
             CreateNotifyReferencePropertyObserverWithActionAndDeferrer()
@@ -859,32 +865,38 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             INotifyReferencePropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    (_, _) => this.Action!(),
-                    SynchronizationContext.Current,
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        (_, _) => this.Action!(),
+                        SynchronizationContext.Current,
+                        this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    (_, _) => this.Action!(),
-                    this.TaskScheduler,
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        (_, _) => this.Action!(),
+                        this.TaskScheduler,
+                        this.ObserverFlag);
             }
             else
             {
-                observer = new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    (_, _) => this.Action!(),
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnValueChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        (_, _) => this.Action!(),
+                        this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)
@@ -963,19 +975,20 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the property observer with action and deferrer.
+        ///     Creates the property observer with action and deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override IPropertyObserverWithDeferrer<TResult> CreatePropertyObserverWithActionAndDeferrer()
         {
-            var observer = new Observers.OnPropertyChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                this.parameter1,
-                this.parameter2,
-                this.propertyExpression,
-                this.Action!,
-                this.ObserverFlag);
+            var observer =
+                new Observers.OnPropertyChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
+                    this.parameter1,
+                    this.parameter2,
+                    this.propertyExpression,
+                    this.Action!,
+                    this.ObserverFlag);
             if (this.IsAutoActivate)
             {
                 observer.Activate(this.IsSilentActivate);
@@ -1035,10 +1048,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the property observer With Action Of T and fallback anddeferrer.
+        ///     Creates the property observer With Action Of T and fallback anddeferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override IPropertyObserverWithDeferrer<TResult>
             CreatePropertyObserverWithActionOfTAndFallbackAndDeferrer()
@@ -1136,10 +1149,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         }
 
         /// <summary>
-        /// Creates the property reference observer with deferrer.
+        ///     Creates the property reference observer with deferrer.
         /// </summary>
         /// <returns>
-        /// The Property Reference Observer.
+        ///     The Property Reference Observer.
         /// </returns>
         protected override IGetterReferencePropertyObserverWithDeferrer<TResult>
             CreatePropertyReferenceObserverWithDeferrer()
@@ -1147,32 +1160,38 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             IGetterReferencePropertyObserverWithDeferrer<TResult> observer;
             if (this.IsDispached)
             {
-                observer = new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    this.ActionWithNewValue!,
-                    SynchronizationContext.Current,
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        this.ActionWithNewValue!,
+                        SynchronizationContext.Current,
+                        this.ObserverFlag);
             }
             else if (this.TaskScheduler != null)
             {
-                observer = new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    this.ActionWithNewValue!,
-                    this.TaskScheduler,
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        this.ActionWithNewValue!,
+                        this.TaskScheduler,
+                        this.ObserverFlag);
             }
             else
             {
-                observer = new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2, TResult>(
-                    this.parameter1,
-                    this.parameter2,
-                    this.propertyExpression,
-                    this.ActionWithNewValue!,
-                    this.ObserverFlag);
+                observer =
+                    new ReferenceObservers.OnPropertyChanged.ObserverWithActionAndDeferrer<TParameter1, TParameter2,
+                        TResult>(
+                        this.parameter1,
+                        this.parameter2,
+                        this.propertyExpression,
+                        this.ActionWithNewValue!,
+                        this.ObserverFlag);
             }
 
             if (this.IsAutoActivate)

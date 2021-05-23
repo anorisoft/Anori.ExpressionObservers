@@ -85,7 +85,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder
 
         /// <summary>
         ///     Creates a Value property observer builder with two
-        /// parameters.
+        ///     parameters.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TParameter2">The type of the parameter2.</typeparam>

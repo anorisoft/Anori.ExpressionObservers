@@ -39,6 +39,24 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <returns>
+        ///     Self object.
+        /// </returns>
+        public new TSelf Activate() => this.Activate(false);
+
+        /// <summary>
+        ///     Unsubscribes this instance.
+        /// </summary>
+        /// <returns>Self object.</returns>
+        public new TSelf Deactivate()
+        {
+            base.Deactivate();
+            return (TSelf)(IPropertyObserverBase<TSelf>)this;
+        }
+
+        /// <summary>
         ///     Determines whether the specified objects are equal.
         /// </summary>
         /// <param name="x">The first object of type T to compare.</param>
@@ -62,33 +80,15 @@ namespace Anori.ExpressionObservers.Base
             this.GetHashCode((ObserverFoundationBase)(IPropertyObserverBase<TSelf>)obj);
 
         /// <summary>
-        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <returns>
-        ///     Self object.
-        /// </returns>
-        public new TSelf Activate() => this.Activate(false);
-
-        /// <summary>
-        /// Subscribes the specified silent.
+        ///     Subscribes the specified silent.
         /// </summary>
         /// <param name="silent">if set to <c>true</c> [silent].</param>
         /// <returns>
-        /// Self object.
+        ///     Self object.
         /// </returns>
         public new TSelf Activate(bool silent)
         {
             base.Activate(silent);
-            return (TSelf)(IPropertyObserverBase<TSelf>)this;
-        }
-
-        /// <summary>
-        ///     Unsubscribes this instance.
-        /// </summary>
-        /// <returns>Self object.</returns>
-        public new TSelf Deactivate()
-        {
-            base.Deactivate();
             return (TSelf)(IPropertyObserverBase<TSelf>)this;
         }
 

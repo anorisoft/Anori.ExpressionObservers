@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver
+namespace Anori.ExpressionObservers.Builder
 {
     /// <summary>
     ///     The namespace Anori.ExpressionObservers.Bulider is a collection of observer builder classes.

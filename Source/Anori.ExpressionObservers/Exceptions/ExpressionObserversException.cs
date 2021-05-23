@@ -9,6 +9,8 @@ namespace Anori.ExpressionObservers.Exceptions
     using System;
     using System.Runtime.Serialization;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     ///     ExpressionObservers Exception.
     /// </summary>
@@ -37,6 +39,18 @@ namespace Anori.ExpressionObservers.Exceptions
         ///     information about the source or destination.
         /// </param>
         protected ExpressionObserversException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
+
+    public class ParameterNullReferenceException : ExpressionObserversException
+    {
+        public ParameterNullReferenceException([NotNull] string message)
+            : base(message)
+        {
+        }
+        public ParameterNullReferenceException([NotNull] SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

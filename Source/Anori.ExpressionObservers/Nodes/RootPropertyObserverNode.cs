@@ -34,28 +34,6 @@ namespace Anori.ExpressionObservers.Nodes
         public object? Parameter { get; }
 
         /// <summary>
-        ///     Indicates whether the current object is equal to another object of the same type.
-        /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
-        /// <returns>
-        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
-        /// </returns>
-        public bool Equals(RootPropertyObserverNode? other)
-        {
-            if (other is null)
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            return Equals(this.Parameter, other.Parameter);
-        }
-
-        /// <summary>
         ///     Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
@@ -99,6 +77,28 @@ namespace Anori.ExpressionObservers.Nodes
             {
                 this.SubscribeListenerFor(notifyPropertyChanged);
             }
+        }
+
+        /// <summary>
+        ///     Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(RootPropertyObserverNode? other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Equals(this.Parameter, other.Parameter);
         }
     }
 }

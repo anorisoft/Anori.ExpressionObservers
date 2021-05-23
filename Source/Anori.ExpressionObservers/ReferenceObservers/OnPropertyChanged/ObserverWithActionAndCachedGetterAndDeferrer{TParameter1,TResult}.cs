@@ -13,9 +13,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionGetters;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -222,18 +222,18 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
-        ///     Gets the value.
-        /// </summary>
-        /// <returns>The result value.</returns>
-        public TResult? GetValue() => this.getValue();
-
-        /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>
         ///     Disposable deferrer.
         /// </returns>
         public IDisposable Defer() => this.deferrer.Create();
+
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <returns>The result value.</returns>
+        public TResult? GetValue() => this.getValue();
 
         /// <summary>
         ///     On the action.
@@ -251,7 +251,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
             TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-                parameter1);
+            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(
+                propertyExpression.Parameters,
+                tree)(parameter1);
     }
 }

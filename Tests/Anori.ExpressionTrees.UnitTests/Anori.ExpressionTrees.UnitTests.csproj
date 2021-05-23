@@ -16,4 +16,14 @@
     <ProjectReference Include="..\..\Source\Anori.ExpressionTrees\Anori.ExpressionTrees.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">
+    <PackageReference Include="Anori.Common" Version="1.0.0-alpha0017" />
+    <PackageReference Include="Anori.Extensions" Version="1.0.0-alpha0019" />
+  </ItemGroup>
+
+  <ItemGroup Condition="($(Configuration.Contains('Submodules')))">
+    <ProjectReference Include="$(SolutionDir)..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
+    <ProjectReference Include="$(SolutionDir)..\Submodules\Anori.Common\Source\Anori.Common\Anori.Common.csproj" />
+  </ItemGroup>
+
 </Project>

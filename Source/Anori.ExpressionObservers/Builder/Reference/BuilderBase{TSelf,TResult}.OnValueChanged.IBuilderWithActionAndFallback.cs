@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using System.Threading.Tasks;
 
@@ -20,16 +20,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndFallback<TResult>
     {
         /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>
-        ///     The value property observer builder.
-        /// </returns>
-        IBuilderWithActionAndFallback<TResult> IObserverBuilderBase<IBuilderWithActionAndFallback<TResult>>.
-            AutoActivate() =>
-            this.AutoActivate();
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
@@ -39,14 +29,23 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.CreateNotifyPropertyObserverWithActionAndFallback();
 
         /// <summary>
-        ///    Builder with deferrer.
+        ///     Builder with deferrer.
         /// </summary>
         /// <returns>
         ///     The property observer.
         /// </returns>
-        IBuilderWithActionAndFallbackAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionAndFallbackAndDeferrer<TResult>>.
-            WithDeferrer() =>
+        IBuilderWithActionAndFallbackAndDeferrer<TResult>
+            IDeferrerBase<IBuilderWithActionAndFallbackAndDeferrer<TResult>>.WithDeferrer() =>
             this;
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionAndFallback<TResult> IObserverBuilderBase<IBuilderWithActionAndFallback<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
 
         /// <summary>
         ///     Builder with getter dispatcher.

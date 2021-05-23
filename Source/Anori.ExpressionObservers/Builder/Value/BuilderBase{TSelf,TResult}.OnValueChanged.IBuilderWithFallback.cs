@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using System.Threading.Tasks;
 
@@ -54,7 +54,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
-        IBuilderWithFallbackAndDeferrer<TResult> IDeferrerBase<IBuilderWithFallbackAndDeferrer<TResult>>.WithDeferrer() =>
+        IBuilderWithFallbackAndDeferrer<TResult> IDeferrerBase<IBuilderWithFallbackAndDeferrer<TResult>>.
+            WithDeferrer() =>
             this;
 
         /// <summary>

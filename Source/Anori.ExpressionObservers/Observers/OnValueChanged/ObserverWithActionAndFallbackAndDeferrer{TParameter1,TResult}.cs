@@ -14,9 +14,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
-        using Anori.ExpressionGetters;using Anori.ExpressionTrees.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
     using Anori.Extensions.Threading;
 
     using JetBrains.Annotations;
@@ -147,6 +148,14 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         }
 
         /// <summary>
+        ///     Gets a value indicating whether this instance is deferred.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDeferred => this.deferrer.IsDeferred;
+
+        /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <value>
@@ -170,14 +179,6 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
                 this.OnPropertyChanged();
             }
         }
-
-        /// <summary>
-        ///     Gets a value indicating whether this instance is deferred.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
         ///     Defers this instance.

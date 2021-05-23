@@ -57,7 +57,7 @@ namespace Anori.ExpressionGetters.Builder
         ///     The getter function.
         /// </returns>
         Func<TParameter1, TResult> IGetterBuilderWithFallback<TParameter1, TResult>.Build() =>
-            Anori.ExpressionGetters.ExpressionGetter.CreateGetter(this.expression, this.fallbackResult);
+            ExpressionGetter.CreateGetter(this.expression, this.fallbackResult);
 
         /// <summary>
         ///     Creates this instance.
@@ -66,6 +66,6 @@ namespace Anori.ExpressionGetters.Builder
         ///     The getter function.
         /// </returns>
         Func<TParameter1, TResult?> IValueGetterBuilder<TParameter1, TResult>.Build() =>
-            Anori.ExpressionGetters.ExpressionGetter.CreateValueGetter(this.expression);
+            ExpressionGetter.CreateValueGetter(this.expression);
     }
 }

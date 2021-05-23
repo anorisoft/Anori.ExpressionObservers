@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,6 +13,15 @@
     <AssemblyOriginatorKeyFile>..\Anorisoft.snk</AssemblyOriginatorKeyFile>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="($(Configuration.Contains('Debug')))">
+    <WarningLevel>0</WarningLevel>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup >
+    <DocumentationFile>Anori.ExpressionTrees.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

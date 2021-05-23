@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using System.Threading.Tasks;
 
@@ -19,14 +19,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndDeferrer<TResult>
     {
-        /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>The value property observer builder.</returns>
-        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
-            AutoActivate() =>
-            this.AutoActivate();
-
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -46,6 +38,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         IBuilderWithActionAndFallbackAndDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.WithFallback(
             TResult fallback) =>
             this.WithFallback(fallback);
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>The value property observer builder.</returns>
+        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
 
         /// <summary>
         ///     Builder with getter dispatcher.
@@ -64,8 +63,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
-        IBuilderWithActionAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionAndDeferrer<TResult>>.
-            WithScheduler(TaskScheduler taskScheduler) =>
+        IBuilderWithActionAndDeferrer<TResult> ISchedulerBase<IBuilderWithActionAndDeferrer<TResult>>.WithScheduler(
+            TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }
 }

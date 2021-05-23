@@ -12,9 +12,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-        using Anori.ExpressionGetters;using Anori.ExpressionTrees.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -168,18 +169,18 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
-        ///     Gets the Reference.
-        /// </summary>
-        /// <returns>The result.</returns>
-        public TResult? GetValue() => this.getValue();
-
-        /// <summary>
         ///     Defers this instance.
         /// </summary>
         /// <returns>
         ///     Disposable deferrer.
         /// </returns>
         public IDisposable Defer() => this.deferrer.Create();
+
+        /// <summary>
+        ///     Gets the Reference.
+        /// </summary>
+        /// <returns>The result.</returns>
+        public TResult? GetValue() => this.getValue();
 
         /// <summary>
         ///     On the action.

@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using System.Threading.Tasks;
 
@@ -21,6 +21,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         BuilderBase<TSelf, TResult> : IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>
     {
         /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>
+        ///     Property Observer With Getter And Fallback.
+        /// </returns>
+        IGetterPropertyObserverWithDeferrer<TResult> IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>.
+            Build() =>
+            this.CreateGetterPropertyObserverWithFallbackAndDeferrer();
+        /// <summary>
         ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>The value property observer builder.</returns>
@@ -29,23 +38,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.AutoActivate();
 
         /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     Property Observer With Getter And Fallback.
-        /// </returns>
-        IGetterPropertyObserverWithDeferrer<TResult> IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>.Build() =>
-            this.CreateGetterPropertyObserverWithFallbackAndDeferrer();
-
-        /// <summary>
         ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>
-            ISchedulerBase<IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>>.
-            WithGetterDispatcher() =>
+            ISchedulerBase<IBuilderWithActionAndGetterAndFallbackAndDeferrer<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>

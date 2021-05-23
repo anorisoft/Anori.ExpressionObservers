@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using System.Threading.Tasks;
 
@@ -20,6 +20,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>
     {
         /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>
+        ///     The property observer.
+        /// </returns>
+        IGetterReferencePropertyObserverWithDeferrer<TResult> IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>.
+            Build() =>
+            this.CreatePropertyReferenceObserverWithDeferrer();
+        /// <summary>
         ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>
@@ -30,24 +39,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.AutoActivate();
 
         /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     The property observer.
-        /// </returns>
-        IGetterReferencePropertyObserverWithDeferrer<TResult> IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>.
-            Build() =>
-            this.CreatePropertyReferenceObserverWithDeferrer();
-
-        /// <summary>
         ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>
-            ISchedulerBase<IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>>.
-            WithGetterDispatcher() =>
+            ISchedulerBase<IBuilderWithActionOfNullTAndGetterAndDeferrer<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>

@@ -6,12 +6,14 @@
 
 namespace Anori.ExpressionObservers.UnitTests
 {
-    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
     using NUnit.Framework;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Anori.ExpressionObservers.Builder;
+
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
     public class PropertyObserverBuilderFailFastIntegerPropertyP1Test

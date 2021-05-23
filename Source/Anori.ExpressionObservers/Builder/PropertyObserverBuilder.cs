@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver
+namespace Anori.ExpressionObservers.Builder
 {
     using System;
     using System.ComponentModel;

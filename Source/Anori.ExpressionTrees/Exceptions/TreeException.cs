@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionGetters.Exceptions
+namespace Anori.ExpressionTrees.Exceptions
 {
     using System;
     using System.Runtime.Serialization;

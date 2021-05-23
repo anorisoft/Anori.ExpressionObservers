@@ -12,9 +12,9 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-    using Anori.ExpressionGetters;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -159,7 +159,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         protected override void OnAction() => this.action();
 
         /// <summary>
-        /// Getters the specified property expression.
+        ///     Getters the specified property expression.
         /// </summary>
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
@@ -167,7 +167,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
         /// <returns>
-        /// Getter.
+        ///     Getter.
         /// </returns>
         private static Func<TResult> Getter(
             Expression<Func<TParameter1, TParameter2, TResult>> propertyExpression,

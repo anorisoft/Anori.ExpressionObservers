@@ -9,8 +9,6 @@ namespace Anori.ExpressionGetters.Interfaces.Builder
     using System;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionGetters.Interfaces.Builder;
-
     /// <summary>
     ///     The expression getter builder interface.
     /// </summary>

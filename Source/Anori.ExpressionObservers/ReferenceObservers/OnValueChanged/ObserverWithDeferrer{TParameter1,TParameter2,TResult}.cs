@@ -101,8 +101,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
                 propertyExpression.Parameters,
                 this.Tree);
             var factory = new TaskFactory(taskScheduler);
-            this.deferrer = new UpdateableMultipleDeferrer(
-                () => factory.StartNew(() => this.Value = getter()).Wait());
+            this.deferrer = new UpdateableMultipleDeferrer(() => factory.StartNew(() => this.Value = getter()).Wait());
             this.UpdateValueProperty = () => this.deferrer.Update();
             this.UpdateValueField = () => this.value = getter();
             this.getValue = this.CreateGetPropertyNullableReference(() => this.value);
@@ -140,6 +139,14 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         }
 
         /// <summary>
+        ///     Gets a value indicating whether this instance is deferred.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDeferred => this.deferrer.IsDeferred;
+
+        /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <value>
@@ -161,14 +168,6 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
                 this.OnPropertyChanged();
             }
         }
-
-        /// <summary>
-        ///     Gets a value indicating whether this instance is deferred.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is deferred; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDeferred => this.deferrer.IsDeferred;
 
         /// <summary>
         ///     Defers this instance.

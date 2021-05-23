@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged;
@@ -16,15 +16,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfT<TResult>
     {
-        /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>
-        ///     The property observer builder.
-        /// </returns>
-        IBuilderWithActionOfT<TResult> IObserverBuilderBase<IBuilderWithActionOfT<TResult>>.AutoActivate() =>
-            this.AutoActivate();
-
         /// <summary>
         ///     Builder with fallback.
         /// </summary>
@@ -40,5 +31,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfTAndGetter<TResult> IBuilderWithActionOfT<TResult>.WithGetter() => this;
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>
+        ///     The property observer builder.
+        /// </returns>
+        IBuilderWithActionOfT<TResult> IObserverBuilderBase<IBuilderWithActionOfT<TResult>>.AutoActivate() =>
+            this.AutoActivate();
     }
 }

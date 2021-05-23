@@ -16,7 +16,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged
         where TResult : struct
     {
         /// <summary>
-        /// Buider with fallback.
+        ///     Buider with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>The property observer builder.</returns>

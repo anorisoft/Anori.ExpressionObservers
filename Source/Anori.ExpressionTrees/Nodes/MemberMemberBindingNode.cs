@@ -11,8 +11,6 @@ namespace Anori.ExpressionTrees.Nodes
 
     using Anori.ExpressionTrees.Interfaces;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     ///     Member Member Binding Node.
     /// </summary>
@@ -41,7 +39,6 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The member member binding.
         /// </value>
-        [NotNull]
         public MemberMemberBinding MemberMemberBinding { get; }
 
         /// <summary>

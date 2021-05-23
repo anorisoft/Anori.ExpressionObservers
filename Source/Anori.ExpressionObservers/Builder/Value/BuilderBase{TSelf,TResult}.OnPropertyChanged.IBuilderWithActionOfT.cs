@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged;
@@ -16,15 +16,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfT<TResult>
     {
-        /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>
-        ///     The property observer builder.
-        /// </returns>
-        IBuilderWithActionOfT<TResult> IObserverBuilderBase<IBuilderWithActionOfT<TResult>>.AutoActivate() =>
-            this.AutoActivate();
-
         /// <summary>
         ///     Builder with fallback.
         /// </summary>
@@ -40,12 +31,21 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         IBuilderWithActionOfTAndGetter<TResult> IBuilderWithActionOfT<TResult>.WithGetter() => this;
 
         /// <summary>
-        ///    Builder with deferrer.
+        ///     Builder with deferrer.
         /// </summary>
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
-        IBuilderWithActionOfTAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionOfTAndDeferrer<TResult>>.WithDeferrer() =>
+        IBuilderWithActionOfTAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionOfTAndDeferrer<TResult>>.
+            WithDeferrer() =>
             this;
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>
+        ///     The property observer builder.
+        /// </returns>
+        IBuilderWithActionOfT<TResult> IObserverBuilderBase<IBuilderWithActionOfT<TResult>>.AutoActivate() =>
+            this.AutoActivate();
     }
 }

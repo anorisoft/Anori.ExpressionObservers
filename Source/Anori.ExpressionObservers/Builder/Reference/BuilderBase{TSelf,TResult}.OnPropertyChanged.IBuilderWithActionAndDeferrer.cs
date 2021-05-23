@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using Anori.Common;
     using Anori.ExpressionObservers.Interfaces;
@@ -19,14 +19,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     // ReSharper disable UnusedTypeParameter
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndDeferrer<TResult>
     {
-        /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>The value property observer builder.</returns>
-        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
-            AutoActivate() =>
-            this.AutoActivate();
-
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -43,7 +35,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IBuilderWithActionAndGetterAndDeferrer<TResult> IBuilderWithActionAndDeferrer<TResult>.WithGetter() => this;
 
         /// <summary>
-        /// Builder with cache.
+        ///     Builder with cache.
         /// </summary>
         /// <param name="safetyMode">The safety mode.</param>
         /// <returns>
@@ -54,12 +46,19 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.WithCache(safetyMode);
 
         /// <summary>
-        /// Builder with cache.
+        ///     Builder with cache.
         /// </summary>
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionAndDeferrer<TResult> ICacheBase<IBuilderWithActionAndDeferrer<TResult>>.WithCache() =>
             this.WithCache();
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>The value property observer builder.</returns>
+        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
     }
 }

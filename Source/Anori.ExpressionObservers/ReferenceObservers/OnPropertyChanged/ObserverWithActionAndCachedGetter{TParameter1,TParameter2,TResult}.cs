@@ -12,9 +12,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-        using Anori.ExpressionGetters;using Anori.ExpressionTrees.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -46,8 +47,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         private readonly Func<TResult?> getter;
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -75,8 +76,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -108,8 +109,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -137,8 +138,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -169,8 +170,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -195,8 +196,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="ObserverWithActionAndCachedGetter{TParameter1, TParameter2, TResult}" /> class.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>

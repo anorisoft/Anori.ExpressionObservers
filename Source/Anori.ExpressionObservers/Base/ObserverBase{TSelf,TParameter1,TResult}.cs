@@ -149,7 +149,7 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the observer tree.
+        ///     Creates the observer tree.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>

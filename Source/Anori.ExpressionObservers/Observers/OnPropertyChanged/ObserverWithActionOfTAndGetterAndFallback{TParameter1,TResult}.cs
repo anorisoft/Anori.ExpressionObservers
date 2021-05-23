@@ -12,9 +12,10 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-        using Anori.ExpressionGetters;using Anori.ExpressionTrees.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
 

@@ -4,10 +4,11 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     /// <summary>
-    ///     The namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference is a collection of observer builder classes for reference types.
+    ///     The namespace Anori.ExpressionObservers.Builder.Reference is a collection of observer builder classes for reference
+    ///     types.
     /// </summary>
     internal class NamespaceDoc
     {

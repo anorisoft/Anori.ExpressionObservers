@@ -10,7 +10,6 @@ namespace Anori.ExpressionObservers.UnitTests
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Builder;
-    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
 

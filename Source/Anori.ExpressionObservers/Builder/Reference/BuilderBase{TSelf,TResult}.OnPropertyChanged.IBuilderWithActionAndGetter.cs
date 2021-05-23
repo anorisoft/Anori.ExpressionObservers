@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using System.Threading.Tasks;
 
@@ -20,14 +20,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndGetter<TResult>
     {
-        /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>The value property observer builder.</returns>
-        IBuilderWithActionAndGetter<TResult> IObserverBuilderBase<IBuilderWithActionAndGetter<TResult>>.
-            AutoActivate() =>
-            this.AutoActivate();
-
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -56,6 +48,43 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.WithFallback(fallback);
 
         /// <summary>
+        ///     Builder with cache.
+        /// </summary>
+        /// <param name="safetyMode">The safety mode.</param>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.WithCache(
+            LazyThreadSafetyMode safetyMode) =>
+            this.WithCache(safetyMode);
+
+        /// <summary>
+        ///     Builder with cache.
+        /// </summary>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.WithCache() =>
+            this.WithCache();
+
+        /// <summary>
+        ///     Builder with deferrer.
+        /// </summary>
+        /// <returns>
+        ///     The property observer builder.
+        /// </returns>
+        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
+            WithDeferrer() =>
+            this;
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>The value property observer builder.</returns>
+        IBuilderWithActionAndGetter<TResult> IObserverBuilderBase<IBuilderWithActionAndGetter<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
+
+        /// <summary>
         ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
@@ -75,34 +104,5 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IBuilderWithActionAndGetter<TResult> ISchedulerBase<IBuilderWithActionAndGetter<TResult>>.WithScheduler(
             TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
-
-        /// <summary>
-        ///    Builder with deferrer.
-        /// </summary>
-        /// <returns>
-        ///     The property observer builder.
-        /// </returns>
-        IBuilderWithActionAndGetterAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionAndGetterAndDeferrer<TResult>>.
-            WithDeferrer() =>
-            this;
-
-        /// <summary>
-        /// Builder with cache.
-        /// </summary>
-        /// <param name="safetyMode">The safety mode.</param>
-        /// <returns>
-        ///     The value property observer builder.
-        /// </returns>
-        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.WithCache(
-            LazyThreadSafetyMode safetyMode) =>
-            this.WithCache(safetyMode);
-
-        /// <summary>
-        /// Builder with cache.
-        /// </summary>
-        /// <returns>
-        ///     The value property observer builder.
-        /// </returns>
-        IBuilderWithActionAndGetter<TResult> ICacheBase<IBuilderWithActionAndGetter<TResult>>.WithCache() => this.WithCache();
     }
 }

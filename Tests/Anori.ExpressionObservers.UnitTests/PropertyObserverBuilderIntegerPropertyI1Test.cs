@@ -7,7 +7,6 @@
 namespace Anori.ExpressionObservers.UnitTests
 {
     using Anori.ExpressionObservers.Builder;
-    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
     using NUnit.Framework;
     using System.Threading;

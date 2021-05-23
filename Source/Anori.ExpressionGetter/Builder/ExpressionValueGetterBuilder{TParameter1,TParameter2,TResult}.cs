@@ -45,14 +45,14 @@ namespace Anori.ExpressionGetters.Builder
         /// </summary>
         /// <returns>The getter.</returns>
         Func<TParameter1, TParameter2, TResult> IGetterBuilderWithFallback<TParameter1, TParameter2, TResult>.Build() =>
-            Anori.ExpressionGetters.ExpressionGetter.CreateGetter(this.expression, this.fallbackResult);
+            ExpressionGetter.CreateGetter(this.expression, this.fallbackResult);
 
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>The getter.</returns>
         Func<TParameter1, TParameter2, TResult?> IValueGetterBuilder<TParameter1, TParameter2, TResult>.Build() =>
-            Anori.ExpressionGetters.ExpressionGetter.CreateValueGetter(this.expression);
+            ExpressionGetter.CreateValueGetter(this.expression);
 
         /// <summary>
         ///     Buider with fallback.

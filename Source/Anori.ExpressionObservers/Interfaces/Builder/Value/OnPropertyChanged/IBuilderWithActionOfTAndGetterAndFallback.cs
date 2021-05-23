@@ -11,10 +11,10 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionOfTAndGetterAndFallback<out TResult> :
-       IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>,
-       ISchedulerBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>,
-       IDeferrerBase<IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>>
-       where TResult : struct
+        IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>,
+        ISchedulerBase<IBuilderWithActionOfTAndGetterAndFallback<TResult>>,
+        IDeferrerBase<IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>>
+        where TResult : struct
     {
         /// <summary>
         ///     Creates this instance.

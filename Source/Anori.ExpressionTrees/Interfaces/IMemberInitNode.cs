@@ -9,8 +9,6 @@ namespace Anori.ExpressionTrees.Interfaces
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
-    using Anori.ExpressionTrees.Interfaces;
-
     /// <summary>
     ///     The Member Initialize Node interface.
     /// </summary>

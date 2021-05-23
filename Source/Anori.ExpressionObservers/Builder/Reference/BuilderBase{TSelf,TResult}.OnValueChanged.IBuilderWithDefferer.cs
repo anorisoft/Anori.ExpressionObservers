@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
@@ -18,15 +18,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithDeferrer<TResult>
     {
         /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>
-        ///     The property observer builder.
-        /// </returns>
-        IBuilderWithDeferrer<TResult> IObserverBuilderBase<IBuilderWithDeferrer<TResult>>.AutoActivate() =>
-            this.AutoActivate();
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
@@ -34,5 +25,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         /// </returns>
         INotifyReferencePropertyObserverWithDeferrer<TResult> IBuilderWithDeferrer<TResult>.Build() =>
             this.CreateNotifyReferencePropertyObserverWithDeferrer();
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>
+        ///     The property observer builder.
+        /// </returns>
+        IBuilderWithDeferrer<TResult> IObserverBuilderBase<IBuilderWithDeferrer<TResult>>.AutoActivate() =>
+            this.AutoActivate();
     }
 }

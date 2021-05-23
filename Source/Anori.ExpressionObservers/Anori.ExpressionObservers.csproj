@@ -15,6 +15,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="($(Configuration.Contains('Debug')))">
+    <WarningLevel>0</WarningLevel>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>$(OutputPath)\Anori.ExpressionObservers.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Builder\ReferenceObserver\**" />
     <EmbeddedResource Remove="Builder\ReferenceObserver\**" />
@@ -49,12 +58,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
     <ProjectReference Include="..\Anori.ExpressionGetter\Anori.ExpressionGetters.csproj">
       <PrivateAssets>All</PrivateAssets>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </ProjectReference>
-    <_PackageFiles Include="$(OutputPath)\Anori.ExpressionGetters.dll">
+    <_PackageFiles Include="$(OutputPath)\Anori.ExpressionGetters.dll;$(OutputPath)\Anori.ExpressionGetters.XML">
+      <BuildAction>None</BuildAction>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </_PackageFiles>
+    <!--<PackageFiles Include="$(OutputPath)\Anori.ExpressionGetters.pdb" Condition="IncludeSymbols==true">
+      <BuildAction>None</BuildAction>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </PackageFiles>-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Anori.ExpressionTrees\Anori.ExpressionTrees.csproj">
+      <PrivateAssets>All</PrivateAssets>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </ProjectReference>
+    <_PackageFiles Include="$(OutputPath)\Anori.ExpressionTrees.dll;$(OutputPath)\Anori.ExpressionTrees.xml">
       <BuildAction>None</BuildAction>
       <PackagePath>lib\$(TargetFramework)</PackagePath>
     </_PackageFiles>

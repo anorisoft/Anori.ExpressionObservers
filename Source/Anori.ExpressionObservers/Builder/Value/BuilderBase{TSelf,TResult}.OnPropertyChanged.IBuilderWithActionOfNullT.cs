@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using System.Threading.Tasks;
 
@@ -20,15 +20,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullT<TResult>
     {
         /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>
-        ///     The value property observer builder.
-        /// </returns>
-        IBuilderWithActionOfNullT<TResult> IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>.AutoActivate() =>
-            this.AutoActivate();
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
@@ -38,7 +29,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.CreatePropertyValueObserver();
 
         /// <summary>
-        ///    Builder with deferrer.
+        ///     Builder with deferrer.
         /// </summary>
         /// <returns>
         ///     The value property observer builder.
@@ -46,6 +37,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         IBuilderWithActionOfNullTAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.
             WithDeferrer() =>
             this;
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionOfNullT<TResult> IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>.AutoActivate() =>
+            this.AutoActivate();
 
         /// <summary>
         ///     Builder with getter dispatcher.

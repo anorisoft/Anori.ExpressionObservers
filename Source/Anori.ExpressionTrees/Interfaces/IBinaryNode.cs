@@ -8,8 +8,6 @@ namespace Anori.ExpressionTrees.Interfaces
 {
     using System.Linq.Expressions;
 
-    using Anori.ExpressionTrees.Interfaces;
-
     /// <summary>
     ///     The Binary Node Interface.
     /// </summary>

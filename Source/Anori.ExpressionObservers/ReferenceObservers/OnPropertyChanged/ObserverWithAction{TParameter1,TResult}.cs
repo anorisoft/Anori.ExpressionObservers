@@ -12,9 +12,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
-        using Anori.ExpressionGetters;using Anori.ExpressionTrees.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
 
@@ -100,7 +101,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             : base(parameter1, propertyExpression, observerFlag)
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
-            this.getValue = this.CreateGetter(Getter(propertyExpression, this.Tree, parameter1), synchronizationContext);
+            this.getValue = this.CreateGetter(
+                Getter(propertyExpression, this.Tree, parameter1),
+                synchronizationContext);
         }
 
         /// <summary>

@@ -15,6 +15,15 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="($(Configuration.Contains('Debug')))">
+    <WarningLevel>0</WarningLevel>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>Anori.ExpressionGetters.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -36,11 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tree\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Submodules\Anori.Extensions\Source\Anori.Extensions\Anori.Extensions.csproj" />
     <ProjectReference Include="..\Anori.ExpressionTrees\Anori.ExpressionTrees.csproj" />
   </ItemGroup>
 

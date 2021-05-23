@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionGetters.Exceptions
+namespace Anori.ExpressionTrees.Exceptions
 {
     /// <summary>
     ///     The namespace Anori.ExpressionObservers.Exceptions is a collection of exceptions classes.

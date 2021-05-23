@@ -44,7 +44,6 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The nodes.
         /// </value>
-        [NotNull]
         public INodeCollection Nodes { get; }
 
         /// <summary>
@@ -53,7 +52,6 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The binding.
         /// </value>
-        [NotNull]
         public MemberBinding Binding => this.MemberAssignment;
     }
 }

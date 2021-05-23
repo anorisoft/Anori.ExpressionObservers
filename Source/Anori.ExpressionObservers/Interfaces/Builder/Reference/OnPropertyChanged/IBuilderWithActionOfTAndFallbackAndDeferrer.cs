@@ -7,7 +7,7 @@
 namespace Anori.ExpressionObservers.Interfaces.Builder.Reference.OnPropertyChanged
 {
     /// <summary>
-    /// The I Builder With Action Of T and fallback anddeferrer interface.
+    ///     The I Builder With Action Of T and fallback anddeferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface IBuilderWithActionOfTAndFallbackAndDeferrer<TResult> :

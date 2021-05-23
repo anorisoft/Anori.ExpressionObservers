@@ -4,10 +4,10 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     /// <summary>
-    ///     The namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value is a collection of observer builder classes for value types.
+    ///     The namespace Anori.ExpressionObservers.Builder.Value is a collection of observer builder classes for value types.
     /// </summary>
     internal class NamespaceDoc
     {

@@ -9,11 +9,12 @@ namespace Anori.ExpressionObservers.Interfaces
     using System;
 
     /// <summary>
-    /// The Property Observer With Deferrer interface.
+    ///     The Property Observer With Deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="IPropertyObserverWithDeferrer{TResult}" />
-    public interface IPropertyObserverWithDeferrer<TResult> : IPropertyObserverBase<IPropertyObserverWithDeferrer<TResult>>
+    public interface
+        IPropertyObserverWithDeferrer<TResult> : IPropertyObserverBase<IPropertyObserverWithDeferrer<TResult>>
     {
         /// <summary>
         ///     Gets a value indicating whether this instance is deferred.

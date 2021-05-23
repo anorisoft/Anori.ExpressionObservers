@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using System;
     using System.Linq.Expressions;
@@ -526,10 +526,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         }
 
         /// <summary>
-        /// Creates the notify property observer with action of t and fallback and deferrer.
+        ///     Creates the notify property observer with action of t and fallback and deferrer.
         /// </summary>
         /// <returns>
-        /// The value property observer.
+        ///     The value property observer.
         /// </returns>
         protected override INotifyPropertyObserverWithDeferrer<TResult>
             CreateNotifyPropertyObserverWithActionOfTAndFallbackAndDeferrer()

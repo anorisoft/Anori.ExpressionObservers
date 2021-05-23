@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using System.Threading.Tasks;
 
@@ -21,16 +21,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         BuilderBase<TSelf, TResult> : IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>
     {
         /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>
-        ///     The property observer builder.
-        /// </returns>
-        IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>
-            IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>>.AutoActivate() =>
-            this.AutoActivate();
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
@@ -39,6 +29,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         IGetterPropertyObserverWithDeferrer<TResult> IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>.
             Build() =>
             this.CreateGetterPropertyObserverWithActionOfTAndFallbackAndDeferrer();
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>
+        ///     The property observer builder.
+        /// </returns>
+        IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>
+            IObserverBuilderBase<IBuilderWithActionOfTAndGetterAndFallbackAndDeferrer<TResult>>.AutoActivate() =>
+            this.AutoActivate();
 
         /// <summary>
         ///     Builder with getter dispatcher.

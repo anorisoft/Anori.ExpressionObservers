@@ -14,9 +14,10 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
-        using Anori.ExpressionGetters;using Anori.ExpressionTrees.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
 
@@ -187,7 +188,8 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
             Expression<Func<TParameter1, TResult>> propertyExpression,
             IExpressionTree tree,
             TParameter1 parameter1) =>
-            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
-                parameter1);
+            () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(
+                propertyExpression.Parameters,
+                tree)(parameter1);
     }
 }

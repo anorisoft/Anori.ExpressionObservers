@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
@@ -17,14 +17,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionAndDeferrer<TResult>
     {
-        /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>The value property observer builder.</returns>
-        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
-            AutoActivate() =>
-            this.AutoActivate();
-
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -39,5 +31,12 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         /// </summary>
         /// <returns>The value property observer builder.</returns>
         IBuilderWithActionAndGetter<TResult> IBuilderWithActionAndDeferrer<TResult>.WithGetter() => this;
+        /// <summary>
+        ///     Automatic activation when creating the property observer.
+        /// </summary>
+        /// <returns>The value property observer builder.</returns>
+        IBuilderWithActionAndDeferrer<TResult> IObserverBuilderBase<IBuilderWithActionAndDeferrer<TResult>>.
+            AutoActivate() =>
+            this.AutoActivate();
     }
 }

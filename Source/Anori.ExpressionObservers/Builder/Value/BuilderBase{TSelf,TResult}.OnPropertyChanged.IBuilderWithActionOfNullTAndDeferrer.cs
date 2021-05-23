@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
+namespace Anori.ExpressionObservers.Builder.Value
 {
     using System.Threading.Tasks;
 
@@ -19,6 +19,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullTAndDeferrer<TResult>
     {
         /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>
+        ///     The property observer.
+        /// </returns>
+        IGetterValuePropertyObserverWithDeferrer<TResult> IBuilderWithActionOfNullTAndDeferrer<TResult>.Build() =>
+            this.CreatePropertyValueObserverWithDeferrer();
+        /// <summary>
         ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>
@@ -29,23 +37,13 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
             this.AutoActivate();
 
         /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>
-        ///     The property observer.
-        /// </returns>
-        IGetterValuePropertyObserverWithDeferrer<TResult> IBuilderWithActionOfNullTAndDeferrer<TResult>.Build() =>
-            this.CreatePropertyValueObserverWithDeferrer();
-
-        /// <summary>
         ///     Builder with getter dispatcher.
         /// </summary>
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndDeferrer<TResult>
-            Interfaces.Builder.ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.
-            WithGetterDispatcher() =>
+            Interfaces.Builder.ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.WithGetterDispatcher() =>
             this.WithGetterDispatcher();
 
         /// <summary>
@@ -56,8 +54,8 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Value
         ///     The value property observer builder.
         /// </returns>
         IBuilderWithActionOfNullTAndDeferrer<TResult>
-            Interfaces.Builder.ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.
-            WithScheduler(TaskScheduler taskScheduler) =>
+            Interfaces.Builder.ISchedulerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.WithScheduler(
+                TaskScheduler taskScheduler) =>
             this.WithScheduler(taskScheduler);
     }
 }

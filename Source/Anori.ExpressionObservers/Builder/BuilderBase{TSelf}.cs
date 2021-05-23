@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver
+namespace Anori.ExpressionObservers.Builder
 {
     using System;
     using System.Threading.Tasks;
@@ -119,10 +119,10 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         }
 
         /// <summary>
-        /// Builder with cache.
+        ///     Builder with cache.
         /// </summary>
         /// <returns>
-        /// The value property observer builder.
+        ///     The value property observer builder.
         /// </returns>
         protected TSelf WithCache()
         {
@@ -132,7 +132,7 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver
         }
 
         /// <summary>
-        /// Builder with cache.
+        ///     Builder with cache.
         /// </summary>
         /// <param name="mode">The mode.</param>
         /// <returns>The value property observer builder.</returns>

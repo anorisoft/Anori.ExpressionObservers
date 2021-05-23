@@ -6,17 +6,16 @@
 
 namespace Anori.ExpressionObservers.Base
 {
-    using System;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
-
     using Anori.ExpressionGetters;
+    using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionTrees;
     using Anori.ExpressionTrees.Interfaces;
-
     using JetBrains.Annotations;
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
 
     /// <summary>
     ///     Property Observer Base.
@@ -108,7 +107,7 @@ namespace Anori.ExpressionObservers.Base
         }
 
         /// <summary>
-        /// Creates the observer tree.
+        ///     Creates the observer tree.
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="parameter2">The parameter2.</param>
@@ -121,7 +120,7 @@ namespace Anori.ExpressionObservers.Base
                 {
                     case IParameterNode parameterElement:
                         {
-                            if (!(parameterElement is { Next: IPropertyNode propertyElement }))
+                            if (parameterElement is not { Next: IPropertyNode propertyElement })
                             {
                                 continue;
                             }
@@ -129,6 +128,11 @@ namespace Anori.ExpressionObservers.Base
                             var parameterGetter = ExpressionGetter.GetParameterObjectFromExpression(
                                 parameterElement,
                                 this.propertyExpression);
+
+                            if (parameterGetter == null)
+                            {
+                                throw new ParameterNullReferenceException("Parameter Null");
+                            }
 
                             var parameter = parameterGetter(parameter1, parameter2) as INotifyPropertyChanged;
 
@@ -139,6 +143,7 @@ namespace Anori.ExpressionObservers.Base
 
                             this.LoopTree(propertyElement, root);
                             this.RootNodes.Add(root);
+
                             break;
                         }
 

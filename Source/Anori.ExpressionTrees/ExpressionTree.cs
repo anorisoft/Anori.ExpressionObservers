@@ -12,7 +12,7 @@ namespace Anori.ExpressionTrees
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using Anori.ExpressionGetters.Exceptions;
+    using Anori.ExpressionTrees.Exceptions;
     using Anori.ExpressionTrees.Interfaces;
     using Anori.ExpressionTrees.Nodes;
     using Anori.Extensions;

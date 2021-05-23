@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
+namespace Anori.ExpressionObservers.Builder.Reference
 {
     using System.Threading.Tasks;
 
@@ -20,15 +20,6 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithActionOfNullT<TResult>
     {
         /// <summary>
-        ///     Automatic activation when creating the property observer.
-        /// </summary>
-        /// <returns>
-        ///     The value property observer builder.
-        /// </returns>
-        IBuilderWithActionOfNullT<TResult> IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>.AutoActivate() =>
-            this.AutoActivate();
-
-        /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
@@ -38,7 +29,15 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
             this.CreatePropertyReferenceObserver();
 
         /// <summary>
-        ///    Builder with deferrer.
+        ///     Builder with getter.
+        /// </summary>
+        /// <returns>
+        ///     The value property observer builder.
+        /// </returns>
+        IBuilderWithActionOfNullTAndGetter<TResult> IBuilderWithActionOfNullT<TResult>.WithGetter() => this;
+
+        /// <summary>
+        ///     Builder with deferrer.
         /// </summary>
         /// <returns>
         ///     The value property observer builder.
@@ -46,14 +45,14 @@ namespace Anori.ExpressionObservers.Builder.PropertyObserver.Reference
         IBuilderWithActionOfNullTAndDeferrer<TResult> IDeferrerBase<IBuilderWithActionOfNullTAndDeferrer<TResult>>.
             WithDeferrer() =>
             this;
-
         /// <summary>
-        ///     Builder with getter.
+        ///     Automatic activation when creating the property observer.
         /// </summary>
         /// <returns>
         ///     The value property observer builder.
         /// </returns>
-        IBuilderWithActionOfNullTAndGetter<TResult> IBuilderWithActionOfNullT<TResult>.WithGetter() => this;
+        IBuilderWithActionOfNullT<TResult> IObserverBuilderBase<IBuilderWithActionOfNullT<TResult>>.AutoActivate() =>
+            this.AutoActivate();
 
         /// <summary>
         ///     Builder with getter dispatcher.

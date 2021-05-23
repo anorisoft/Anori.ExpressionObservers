@@ -6,15 +6,14 @@
 
 namespace Anori.ExpressionObservers.UnitTests
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-
     using Anori.ExpressionObservers.Builder;
-    using Anori.ExpressionObservers.Builder.PropertyObserver;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
 
     using NUnit.Framework;
+
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
@@ -811,8 +810,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void
-            PropertyObserver_OnPropertyChanged_Observes_instance_IntProperty_Cashed_Dispatcher_AutoActivate()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_IntProperty_Cashed_Dispatcher_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
@@ -1019,8 +1017,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void
-            PropertyObserver_OnPropertyChanged_Observes_instance_IntProperty_Cashed_Full_TaskSchedulerCurrent()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_IntProperty_Cashed_Full_TaskSchedulerCurrent()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
@@ -1315,8 +1312,7 @@ namespace Anori.ExpressionObservers.UnitTests
         }
 
         [Test]
-        public void
-            PropertyObserver_OnPropertyChanged_Observes_instance_IntProperty_TaskSchedulerCurrent_AutoActivate()
+        public void PropertyObserver_OnPropertyChanged_Observes_instance_IntProperty_TaskSchedulerCurrent_AutoActivate()
         {
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
@@ -1692,7 +1688,7 @@ namespace Anori.ExpressionObservers.UnitTests
                         })
                 .WithGetter()
                 .WithFallback(99)
-                 .AutoActivate()
+                .AutoActivate()
                 .Build();
 
             Assert.AreEqual(0, callCount);

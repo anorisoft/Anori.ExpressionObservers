@@ -13,11 +13,12 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     using System.Threading.Tasks;
 
     using Anori.Deferrers;
+    using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged;
-        using Anori.ExpressionGetters;using Anori.ExpressionTrees.Interfaces;
+    using Anori.ExpressionTrees.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
 

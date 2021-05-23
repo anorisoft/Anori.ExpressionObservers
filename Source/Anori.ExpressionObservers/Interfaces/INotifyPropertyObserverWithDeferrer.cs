@@ -13,9 +13,6 @@ namespace Anori.ExpressionObservers.Interfaces
     ///     The notify property observer with deferrer interface.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    /// <seealso
-    ///     cref="Anori.ExpressionObservers.Interfaces.IPropertyObserverBase{Anori.ExpressionObservers.Interfaces.INotifyPropertyObserverWithDeferrer{TResult}}" />
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public interface INotifyPropertyObserverWithDeferrer<out TResult> :
         IPropertyObserverBase<INotifyPropertyObserverWithDeferrer<TResult>>,
         INotifyPropertyChanged
