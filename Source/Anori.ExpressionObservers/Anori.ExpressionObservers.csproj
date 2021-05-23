@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <DocumentationFile>$(OutputPath)\Anori.ExpressionObservers.xml</DocumentationFile>
+    <DocumentationFile>Anori.ExpressionObservers.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
