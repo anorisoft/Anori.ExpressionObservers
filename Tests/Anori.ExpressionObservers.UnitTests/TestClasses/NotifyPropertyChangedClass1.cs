@@ -6,6 +6,8 @@
 
 namespace Anori.ExpressionObservers.UnitTests.TestClasses
 {
+    using System.Collections.ObjectModel;
+
     public class NotifyPropertyChangedClass1 : Bindable
     {
         public const string StringConstant = "Constant";
@@ -17,6 +19,8 @@ namespace Anori.ExpressionObservers.UnitTests.TestClasses
         private string _stringProperty;
 
         private NotifyPropertyChangedClass2 _class2 = new NotifyPropertyChangedClass2();
+
+        private ObservableCollection<NotifyPropertyChangedClass2> collection = new ObservableCollection<NotifyPropertyChangedClass2>();
 
         public int IntProperty
         {
@@ -59,6 +63,17 @@ namespace Anori.ExpressionObservers.UnitTests.TestClasses
                 }
 
                 this._class2 = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<NotifyPropertyChangedClass2> Collection
+        {
+            get => this.collection;
+            set
+            {
+                if (Equals(value, this.collection)) return;
+                this.collection = value;
                 this.OnPropertyChanged();
             }
         }

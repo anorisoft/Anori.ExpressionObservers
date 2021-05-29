@@ -17,7 +17,7 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Method Expression Tree Node.
     /// </summary>
     /// <seealso cref="IInternalExpressionNode" />
-    internal struct MethodNode : IInternalExpressionNode, IMethodNode
+    internal class MethodNode : IInternalExpressionNode, IMethodNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MethodNode" /> struct.
@@ -47,7 +47,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The object.
         /// </value>
-        public INodeCollection Object { get; set; }
+        public IExpressionNode Object { get; set; }
 
         /// <summary>
         ///     Gets or sets the arguments.
@@ -55,7 +55,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The arguments.
         /// </value>
-        public IList<INodeCollection> Arguments { get; set; }
+        public IList<IExpressionNode> Arguments { get; set; }
 
         /// <summary>
         ///     Gets the type.

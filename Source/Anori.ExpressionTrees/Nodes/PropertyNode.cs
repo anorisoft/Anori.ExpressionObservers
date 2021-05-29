@@ -19,7 +19,7 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Property Expression Tree Node.
     /// </summary>
     /// <seealso cref="IInternalExpressionNode" />
-    internal struct PropertyNode : IInternalExpressionNode, IPropertyNode
+    internal class PropertyNode : IInternalExpressionNode, IPropertyNode
     {
         private static readonly IEnumerable<Expression> NullArgs = Array.Empty<Expression>();
 
@@ -37,6 +37,18 @@ namespace Anori.ExpressionTrees.Nodes
             this.Args = NullArgs;
             this.Previous = null;
             this.Next = null;
+            this.Parent = null;
+        }
+
+        public PropertyNode([NotNull] MemberExpression memberExpression, [NotNull] PropertyInfo propertyInfo, IExpressionNode next)
+        {
+            this.MemberExpression = memberExpression;
+            this.PropertyInfo = propertyInfo;
+            this.Type = memberExpression.Type;
+            this.MethodInfo = propertyInfo.GetMethod;
+            this.Args = NullArgs;
+            this.Previous = null;
+            this.Next = next;
             this.Parent = null;
         }
 

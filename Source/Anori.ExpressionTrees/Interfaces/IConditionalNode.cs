@@ -27,7 +27,7 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     The test.
         /// </value>
-        INodeCollection Test { get; }
+        IExpressionNode Test { get; }
 
         /// <summary>
         ///     Gets if true.
@@ -35,7 +35,7 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     If true.
         /// </value>
-        INodeCollection IfTrue { get; }
+        IExpressionNode IfTrue { get; }
 
         /// <summary>
         ///     Gets if false.
@@ -43,6 +43,6 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     If false.
         /// </value>
-        INodeCollection IfFalse { get; }
+        IExpressionNode IfFalse { get; }
     }
 }

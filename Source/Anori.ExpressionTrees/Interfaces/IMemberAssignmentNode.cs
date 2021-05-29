@@ -20,7 +20,7 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         /// The nodes.
         /// </value>
-        INodeCollection Nodes { get; }
+        IExpressionNode Node { get; }
         /// <summary>
         /// Gets the binding.
         /// </summary>

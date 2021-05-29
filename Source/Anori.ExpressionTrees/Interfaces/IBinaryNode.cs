@@ -35,7 +35,7 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     The left nodes.
         /// </value>
-        INodeCollection LeftNodes { get; }
+        IExpressionNode LeftNode { get; }
 
         /// <summary>
         ///     Gets the righttree.
@@ -43,6 +43,6 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     The righttree.
         /// </value>
-        INodeCollection RightNodes { get; }
+        IExpressionNode RightNode { get; }
     }
 }

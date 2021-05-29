@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IMethodNode.cs" company="AnoriSoft">
+// <copyright file="IIndexerNode.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace Anori.ExpressionTrees.Interfaces
     /// <summary>
     ///     The Method Node interface.
     /// </summary>
-    public interface IMethodNode : IExpressionNode
+    public interface IIndexerNode : IExpressionNode
     {
         /// <summary>
         ///     Gets the method call expression.

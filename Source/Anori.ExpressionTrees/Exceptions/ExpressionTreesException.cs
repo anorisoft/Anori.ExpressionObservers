@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ExpressionGettersException.cs" company="AnoriSoft">
+// <copyright file="ExpressionTreesException.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,19 +14,19 @@ namespace Anori.ExpressionTrees.Exceptions
     /// </summary>
     /// <seealso cref="System.Exception" />
     [Serializable]
-    public abstract class ExpressionGettersException : Exception
+    public abstract class ExpressionTreesException : Exception
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ExpressionGettersException" /> class.
+        ///     Initializes a new instance of the <see cref="ExpressionTreesException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        protected ExpressionGettersException(string message)
+        protected ExpressionTreesException(string message)
             : base(message)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ExpressionGettersException" /> class.
+        ///     Initializes a new instance of the <see cref="ExpressionTreesException" /> class.
         /// </summary>
         /// <param name="info">
         ///     The <see cref="T:System.Runtime.Serialization.SerializationInfo"></see> that holds the serialized
@@ -36,7 +36,7 @@ namespace Anori.ExpressionTrees.Exceptions
         ///     The <see cref="T:System.Runtime.Serialization.StreamingContext"></see> that contains contextual
         ///     information about the source or destination.
         /// </param>
-        protected ExpressionGettersException(SerializationInfo info, StreamingContext context)
+        protected ExpressionTreesException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

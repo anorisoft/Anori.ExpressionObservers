@@ -16,7 +16,7 @@ namespace Anori.ExpressionTrees.Nodes
     /// <summary>
     ///     Binary Expression Tree Node.
     /// </summary>
-    internal struct BinaryNode : IInternalExpressionNode, IBinaryNode
+    internal class BinaryNode : IInternalExpressionNode, IBinaryNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="BinaryNode" /> struct.
@@ -26,8 +26,8 @@ namespace Anori.ExpressionTrees.Nodes
         {
             this.BinaryExpression = binaryExpression;
             this.NodeType = binaryExpression.NodeType;
-            this.LeftNodes = null!;
-            this.RightNodes = null!;
+            this.LeftNode = null!;
+            this.RightNode = null!;
             this.Type = binaryExpression.Type;
             this.Previous = null;
             this.Next = null;
@@ -88,7 +88,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The left nodes.
         /// </value>
-        public INodeCollection LeftNodes { get; internal set; }
+        public IExpressionNode LeftNode { get; internal set; }
 
         /// <summary>
         ///     Gets or sets the righttree.
@@ -96,7 +96,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The righttree.
         /// </value>
-        public INodeCollection RightNodes { get; internal set; }
+        public IExpressionNode RightNode { get; internal set; }
 
         /// <summary>
         ///     Sets the previous.

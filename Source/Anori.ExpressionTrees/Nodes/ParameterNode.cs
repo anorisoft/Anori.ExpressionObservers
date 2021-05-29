@@ -16,7 +16,7 @@ namespace Anori.ExpressionTrees.Nodes
     /// <summary>
     ///     Parameter Expression Tree Node.
     /// </summary>
-    internal struct ParameterNode : IInternalExpressionNode, IParameterNode
+    internal class ParameterNode : IInternalExpressionNode, IParameterNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ParameterNode" /> struct.

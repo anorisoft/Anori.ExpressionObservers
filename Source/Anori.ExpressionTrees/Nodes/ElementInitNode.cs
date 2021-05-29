@@ -16,14 +16,14 @@ namespace Anori.ExpressionTrees.Nodes
     /// <summary>
     ///     Element Init Node.
     /// </summary>
-    internal readonly struct ElementInitNode : IElementInitNode
+    internal class ElementInitNode : IElementInitNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ElementInitNode" /> struct.
         /// </summary>
         /// <param name="elementInit">The element initialize.</param>
         /// <param name="arguments">The arguments.</param>
-        public ElementInitNode([NotNull] ElementInit elementInit, IEnumerable<INodeCollection> arguments)
+        public ElementInitNode([NotNull] ElementInit elementInit, IEnumerable<IExpressionNode> arguments)
         {
             this.ElementInit = elementInit;
             this.Arguments = arguments;
@@ -43,6 +43,6 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The arguments.
         /// </value>
-        public IEnumerable<INodeCollection> Arguments { get; }
+        public IEnumerable<IExpressionNode> Arguments { get; }
     }
 }

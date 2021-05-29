@@ -11,7 +11,7 @@ namespace Anori.ExpressionTrees.Interfaces
 
     public interface IElementInitNode
     {
-        IEnumerable<INodeCollection> Arguments { get; }
+        IEnumerable<IExpressionNode> Arguments { get; }
 
         ElementInit ElementInit { get; }
     }

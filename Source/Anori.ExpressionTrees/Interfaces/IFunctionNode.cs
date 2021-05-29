@@ -31,7 +31,7 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     The parameters.
         /// </value>
-        IList<INodeCollection> Parameters { get; set; }
+        IList<IExpressionNode> Parameters { get; set; }
 
         /// <summary>
         ///     Gets the type of the return.

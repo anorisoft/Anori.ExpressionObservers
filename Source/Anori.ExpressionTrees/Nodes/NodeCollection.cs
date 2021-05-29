@@ -18,7 +18,7 @@ namespace Anori.ExpressionTrees.Nodes
     /// </summary>
     /// <seealso cref="IExpressionNode" />
     /// <seealso cref="IRootAware" />
-    internal class NodeCollection : List<IExpressionNode>, INodeCollection
+    internal class NodeCollection : List<IExpressionNode>,IRootAware
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="NodeCollection" /> class.
@@ -57,7 +57,7 @@ namespace Anori.ExpressionTrees.Nodes
         public IList<IExpressionNode> Roots => this.RootAware.Roots;
 
         /// <summary>
-        ///     Adds an Expressione Tree Node and update relations.
+        ///     Adds an Expression Tree Node and update relations.
         /// </summary>
         /// <param name="node">The node.</param>
         /// <returns>
@@ -71,6 +71,10 @@ namespace Anori.ExpressionTrees.Nodes
                 ((IInternalExpressionNode)this.Last()).SetPrevious(node);
 
                 internalNode.SetNext(this.Last());
+            }
+            else
+            {
+                internalNode.SetNext(this.Parent);
             }
 
             internalNode.SetParent(this.Parent);

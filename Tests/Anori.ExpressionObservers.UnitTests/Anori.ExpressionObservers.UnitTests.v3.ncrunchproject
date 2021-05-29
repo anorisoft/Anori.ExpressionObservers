@@ -11,6 +11,9 @@
       <FixtureTestSelector>
         <FixtureName>Anori.ExpressionObservers.UnitTests.ExpressionGetterTests</FixtureName>
       </FixtureTestSelector>
+      <NamedTestSelector>
+        <TestName>Anori.ExpressionObservers.UnitTests.Collection.Class1.PropertyObserver_Observes_instance_IntProperty_Index</TestName>
+      </NamedTestSelector>
     </IgnoredTests>
   </Settings>
 </ProjectConfiguration>

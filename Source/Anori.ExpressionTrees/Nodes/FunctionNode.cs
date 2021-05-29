@@ -20,7 +20,7 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Function Expression Tree Node.
     /// </summary>
     /// <seealso cref="IInternalExpressionNode" />
-    internal struct FunctionNode : IInternalExpressionNode, IFunctionNode
+    internal class FunctionNode : IInternalExpressionNode, IFunctionNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="FunctionNode" /> struct.
@@ -53,7 +53,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The parameters.
         /// </value>
-        public IList<INodeCollection> Parameters { get; set; }
+        public IList<IExpressionNode> Parameters { get; set; }
 
         /// <summary>
         ///     Gets the type of the return.

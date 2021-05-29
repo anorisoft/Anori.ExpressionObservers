@@ -7,6 +7,7 @@
 namespace Anori.ExpressionObservers.Nodes
 {
     using System;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Reflection;
 
@@ -73,6 +74,11 @@ namespace Anori.ExpressionObservers.Nodes
         /// </summary>
         public void SubscribeListenerForRoot()
         {
+            if (this.Parameter is INotifyCollectionChanged notifyCollectionChanged)
+            {
+                this.SubscribeListenerFor(notifyCollectionChanged);
+            }
+
             if (this.Parameter is INotifyPropertyChanged notifyPropertyChanged)
             {
                 this.SubscribeListenerFor(notifyPropertyChanged);

@@ -17,7 +17,7 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Member List Binding Node.
     /// </summary>
     /// <seealso cref="IBindingNode" />
-    internal readonly struct MemberListBindingNode : IMemberListBindingNode
+    internal class MemberListBindingNode : IMemberListBindingNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MemberListBindingNode" /> struct.

@@ -17,7 +17,7 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Constant Expressen Tree Node.
     /// </summary>
     /// <seealso cref="IInternalExpressionNode" />
-    internal struct ConstantNode : IInternalExpressionNode, IConstantNode
+    internal class ConstantNode : IInternalExpressionNode, IConstantNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ConstantNode" /> struct.

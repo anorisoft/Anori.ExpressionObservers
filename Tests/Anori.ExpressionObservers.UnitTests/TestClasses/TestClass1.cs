@@ -7,6 +7,7 @@
 namespace Anori.ExpressionObservers.UnitTests.TestClasses
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     public class TestClass1
     {
@@ -51,6 +52,7 @@ namespace Anori.ExpressionObservers.UnitTests.TestClasses
         public IList<int> IntArrayProperty { get; set; }
 
         public TestClass2 GetTest2() => this.Test2;
+
     }
 
     public struct TestStruct1

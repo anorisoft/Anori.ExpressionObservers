@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="FieldNode.cs" company="AnoriSoft">
+// <copyright file="IndexerNode.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,51 +7,39 @@
 namespace Anori.ExpressionTrees.Nodes
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
 
     using Anori.ExpressionTrees.Interfaces;
 
-    using JetBrains.Annotations;
-
     /// <summary>
-    ///     Field Expression Tree Node.
+    ///     Method Expression Tree Node.
     /// </summary>
     /// <seealso cref="IInternalExpressionNode" />
-    internal class FieldNode : IInternalExpressionNode, IFieldNode
+    internal class IndexerNode : IInternalExpressionNode, IIndexerNode
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="FieldNode" /> struct.
+        ///     Initializes a new instance of the <see cref="MethodNode" /> struct.
         /// </summary>
-        /// <param name="expression">The expression.</param>
-        /// <param name="fieldInfo">The field information.</param>
-        public FieldNode([NotNull] MemberExpression expression, [NotNull] FieldInfo fieldInfo)
+        /// <param name="methodCallExpression">The method call expression.</param>
+        public IndexerNode(MethodCallExpression methodCallExpression)
         {
-            this.Expression = expression;
-            this.Type = expression.Type;
-            this.FieldInfo = fieldInfo;
+            this.MethodCallExpression = methodCallExpression;
+            this.Object = null!;
+            this.Arguments = null!;
             this.Previous = null;
             this.Next = null;
             this.Parent = null;
         }
 
-        public FieldNode([NotNull] MemberExpression expression, [NotNull] FieldInfo fieldInfo, IExpressionNode next)
-        {
-            this.Expression = expression;
-            this.Type = expression.Type;
-            this.FieldInfo = fieldInfo;
-            this.Previous = null;
-            this.Next = next;
-            this.Parent = null;
-        }
-
         /// <summary>
-        ///     Gets the expression.
+        ///     Gets the method call expression.
         /// </summary>
         /// <value>
-        ///     The expression.
+        ///     The method call expression.
         /// </value>
-        public MemberExpression Expression { get; }
+        public MethodCallExpression MethodCallExpression { get; }
 
         /// <summary>
         ///     Gets the type.
@@ -59,7 +47,31 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The type.
         /// </value>
-        public Type Type { get; }
+        public Type Type => this.MethodCallExpression.Method.ReturnParameter?.ParameterType!;
+
+        /// <summary>
+        ///     Gets the method information.
+        /// </summary>
+        /// <value>
+        ///     The method information.
+        /// </value>
+        public MethodInfo MethodInfo => this.MethodCallExpression.Method;
+
+        /// <summary>
+        ///     Gets or sets the object.
+        /// </summary>
+        /// <value>
+        ///     The object.
+        /// </value>
+        public IExpressionNode Object { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the arguments.
+        /// </summary>
+        /// <value>
+        ///     The arguments.
+        /// </value>
+        public IList<IExpressionNode> Arguments { get; set; }
 
         /// <summary>
         ///     Gets the previous.
@@ -84,14 +96,6 @@ namespace Anori.ExpressionTrees.Nodes
         ///     The parent.
         /// </value>
         public IExpressionNode? Parent { get; private set; }
-
-        /// <summary>
-        ///     Gets the field information.
-        /// </summary>
-        /// <value>
-        ///     The field information.
-        /// </value>
-        public FieldInfo FieldInfo { get; }
 
         /// <summary>
         ///     Sets the previous.

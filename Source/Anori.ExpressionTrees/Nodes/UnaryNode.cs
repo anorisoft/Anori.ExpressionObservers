@@ -17,7 +17,7 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Unary Expression Tree Node.
     /// </summary>
     /// <seealso cref="IInternalExpressionNode" />
-    internal struct UnaryNode : IInternalExpressionNode, IUnaryNode
+    internal class UnaryNode : IInternalExpressionNode, IUnaryNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="UnaryNode" /> struct.
@@ -47,7 +47,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The operand.
         /// </value>
-        public INodeCollection Operand { get; set; }
+        public IExpressionNode Operand { get; set; }
 
         /// <summary>
         ///     Gets the type.

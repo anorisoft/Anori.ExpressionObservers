@@ -17,7 +17,7 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Conditional Node.
     /// </summary>
     /// <seealso cref="IExpressionNode" />
-    internal struct ConditionalNode : IInternalExpressionNode, IConditionalNode
+    internal class ConditionalNode : IInternalExpressionNode, IConditionalNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ConditionalNode" /> struct.
@@ -49,7 +49,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The test.
         /// </value>
-        public INodeCollection Test { get; set; }
+        public IExpressionNode Test { get; set; }
 
         /// <summary>
         ///     Gets or sets if true.
@@ -57,7 +57,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     If true.
         /// </value>
-        public INodeCollection IfTrue { get; set; }
+        public IExpressionNode IfTrue { get; set; }
 
         /// <summary>
         ///     Gets or sets if false.
@@ -65,7 +65,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     If false.
         /// </value>
-        public INodeCollection IfFalse { get; set; }
+        public IExpressionNode IfFalse { get; set; }
 
         /// <summary>
         ///     Gets the type.

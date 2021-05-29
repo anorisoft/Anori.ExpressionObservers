@@ -14,9 +14,9 @@ namespace Anori.ExpressionTrees.Exceptions
     /// <summary>
     ///     The Tree Exception class.
     /// </summary>
-    /// <seealso cref="ExpressionGettersException" />
+    /// <seealso cref="ExpressionTreesException" />
     [Serializable]
-    public class TreeException : ExpressionGettersException
+    public class TreeException : ExpressionTreesException
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TreeException" /> class.

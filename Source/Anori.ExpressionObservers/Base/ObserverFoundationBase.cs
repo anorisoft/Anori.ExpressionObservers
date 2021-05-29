@@ -330,16 +330,11 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         /// <param name="expressionNode">The expression node.</param>
         /// <param name="observerNode">The observer node.</param>
-        internal void LoopTree(IExpressionNode expressionNode, PropertyObserverNode observerNode)
+        internal void LoopTree(IExpressionNode expressionNode, IObserverNode observerNode)
         {
             var previousNode = observerNode;
-            while (expressionNode.Next is IPropertyNode property)
+            while (this.CreateNote(expressionNode, previousNode, out expressionNode, out previousNode))
             {
-                var currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
-
-                previousNode.Previous = currentNode;
-                previousNode = currentNode;
-                expressionNode = expressionNode.Next;
             }
         }
 
@@ -402,6 +397,47 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         protected virtual void OnSilentActivate()
         {
+        }
+
+        private bool CreateNote(
+            IExpressionNode expressionNode,
+            IObserverNode previousNode,
+            out IExpressionNode? nextExpressionNode,
+            out IObserverNode? currentNode)
+        {
+            switch (expressionNode.Next)
+            {
+                case IPropertyNode property:
+                    {
+                        currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
+                        previousNode.Next = currentNode;
+                        nextExpressionNode = expressionNode.Next;
+                        if (nextExpressionNode == null)
+                        {
+                            nextExpressionNode = null;
+                            return false;
+                        }
+
+                        return true;
+                    }
+                case IIndexerNode indexer:
+                    {
+                        currentNode = new IndexerObserverNode(indexer.MethodInfo, indexer.Arguments, this.OnAction);
+                        previousNode.Next = currentNode;
+                        nextExpressionNode = expressionNode.Next;
+                        if (nextExpressionNode == null)
+                        {
+                            nextExpressionNode = null;
+                            return false;
+                        }
+
+                        return true;
+                    }
+            }
+
+            nextExpressionNode = null;
+            currentNode = null;
+            return false;
         }
 
         /// <summary>

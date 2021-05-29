@@ -1,15 +1,16 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="NamespaceDoc.cs" company="AnoriSoft">
+// <copyright file="IObserverNode.cs" company="AnoriSoft">
 // Copyright (c) AnoriSoft. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Anori.ExpressionObservers.Nodes
 {
-    /// <summary>
-    ///     The namespace Anori.ExpressionObservers.Node is a collection of property observer nodes.
-    /// </summary>
-    internal class NamespaceDoc
+    internal interface IObserverNode
     {
+        void UnsubscribeListener();
+        void SubscribeListenerFor(object obj);
+        IObserverNode Next { get; set; }
+        void GenerateNextNode();
     }
 }

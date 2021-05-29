@@ -148,14 +148,14 @@ namespace Anori.ExpressionGetters
                         var right = new List<Expression>();
                         right.Add(
                             Expression.Condition(
-                                CreateVariableExpressions(right, variables, binary.RightNodes, ifNull),
+                                CreateVariableExpressions(right, variables, binary.RightNode, ifNull),
                                 TrueConstantExpression,
                                 FalseConstantExpression));
 
                         var left = new List<Expression>();
                         left.Add(
                             Expression.Condition(
-                                CreateVariableExpressions(left, variables, binary.LeftNodes, ifNull),
+                                CreateVariableExpressions(left, variables, binary.LeftNode, ifNull),
                                 TrueConstantExpression,
                                 Expression.Block(right)));
 
@@ -168,14 +168,14 @@ namespace Anori.ExpressionGetters
                         var right = new List<Expression>();
                         right.Add(
                             Expression.Condition(
-                                CreateVariableExpressions(right, variables, binary.RightNodes, ifNull),
+                                CreateVariableExpressions(right, variables, binary.RightNode, ifNull),
                                 TrueConstantExpression,
                                 FalseConstantExpression));
 
                         var left = new List<Expression>();
                         left.Add(
                             Expression.Condition(
-                                CreateVariableExpressions(left, variables, binary.LeftNodes, ifNull),
+                                CreateVariableExpressions(left, variables, binary.LeftNode, ifNull),
                                 Expression.Block(right),
                                 FalseConstantExpression));
 
@@ -187,11 +187,11 @@ namespace Anori.ExpressionGetters
                     {
                         var lable = Expression.Label();
                         var right = new List<Expression>();
-                        right.Add(CreateVariableExpressions(right, variables, binary.RightNodes, ifNull));
+                        right.Add(CreateVariableExpressions(right, variables, binary.RightNode, ifNull));
                         var rightBlock = Expression.Block(right);
                         var left = new List<Expression>();
                         var coalesce = Expression.Coalesce(
-                            CreateVariableExpressions(left, variables, binary.LeftNodes, Expression.Goto(lable)),
+                            CreateVariableExpressions(left, variables, binary.LeftNode, Expression.Goto(lable)),
                             rightBlock);
                         left.Add(Expression.Label(lable));
                         left.Add(coalesce);
@@ -202,8 +202,8 @@ namespace Anori.ExpressionGetters
 
                 default:
                     {
-                        var left = CreateVariableExpressions(expressions, variables, binary.LeftNodes, ifNull);
-                        var right = CreateVariableExpressions(expressions, variables, binary.RightNodes, ifNull);
+                        var left = CreateVariableExpressions(expressions, variables, binary.LeftNode, ifNull);
+                        var right = CreateVariableExpressions(expressions, variables, binary.RightNode, ifNull);
                         return Expression.MakeBinary(binary.BinaryExpression.NodeType, left, right);
                     }
             }
@@ -456,7 +456,7 @@ namespace Anori.ExpressionGetters
                         var expression = CreateVariableExpressions(
                             expressions,
                             variables,
-                            memberAssignment.Nodes,
+                            memberAssignment.Node,
                             ifNull);
                         return Expression.Bind(memberAssignment.Binding.Member, expression);
                     }
@@ -469,7 +469,11 @@ namespace Anori.ExpressionGetters
                             var args = new List<Expression>();
                             foreach (var argument in initializer.Arguments)
                             {
-                                var expression = CreateVariableExpressions(expressions, variables, argument, ifNull);
+                                var expression = CreateVariableExpressions(
+                                    expressions,
+                                    variables,
+                                    argument,
+                                    ifNull);
                                 args.Add(expression);
                             }
 
@@ -495,7 +499,7 @@ namespace Anori.ExpressionGetters
         ///     Creates the value block.
         /// </summary>
         /// <param name="resultType">Type of the result.</param>
-        /// <param name="tree">The nodes.</param>
+        /// <param name="tree">The tree.</param>
         /// <param name="returnTarget">The return target.</param>
         /// <returns>The block expression.</returns>
         [NotNull]
@@ -508,7 +512,7 @@ namespace Anori.ExpressionGetters
             var variables = new VariablesCollection();
             var ifNull = Expression.Return(returnTarget, NullExpressionOf(resultType));
 
-            CreateValueExpressions(resultType, tree.Nodes, expressions, variables, ifNull, returnTarget);
+            CreateValueExpressions(resultType, tree.Head, expressions, variables, ifNull, returnTarget);
 
             expressions.Add(Expression.Label(returnTarget, NullExpressionOf(resultType)));
             var body = Expression.Block(variables, expressions);
@@ -519,14 +523,14 @@ namespace Anori.ExpressionGetters
         ///     Creates the value block.
         /// </summary>
         /// <param name="resultType">Type of the result.</param>
-        /// <param name="nodes">The nodes.</param>
+        /// <param name="tree">The tree.</param>
         /// <param name="returnTarget">The return target.</param>
         /// <param name="fallback">The fallback.</param>
         /// <returns>The expression.</returns>
         [NotNull]
         private static BlockExpression CreateValueBlock(
             [NotNull] Type resultType,
-            [NotNull] IExpressionTree nodes,
+            [NotNull] IExpressionTree tree,
             [NotNull] LabelTarget returnTarget,
             [NotNull] Expression fallback)
         {
@@ -534,7 +538,7 @@ namespace Anori.ExpressionGetters
             var variables = new VariablesCollection();
             var ifNull = Expression.Return(returnTarget, fallback);
 
-            CreateValueExpressions(resultType, nodes.Nodes, expressions, variables, ifNull, returnTarget);
+            CreateValueExpressions(resultType, tree.Head, expressions, variables, ifNull, returnTarget);
 
             expressions.Add(Expression.Label(returnTarget, fallback));
             var body = Expression.Block(variables, expressions);
@@ -547,26 +551,26 @@ namespace Anori.ExpressionGetters
         /// <param name="resultType">Type of the result.</param>
         /// <param name="expressions">The expressions.</param>
         /// <param name="variables">The variables.</param>
-        /// <param name="nodes">The nodes.</param>
+        /// <param name="node">The tree.</param>
         /// <param name="ifNull">If null.</param>
         /// <param name="returnTarget">The return target.</param>
         private static void CreateValueChainExpressions(
             [NotNull] Type resultType,
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            [NotNull] INodeCollection nodes,
+            [NotNull] IExpressionNode node,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
         {
-            var target = CreateVariableInnerExpressions(expressions, variables, nodes, ifNull);
-            InsertEndValueExpression(resultType, expressions, variables, target, nodes.First(), ifNull, returnTarget);
+            var target = CreateVariableInnerExpressions(expressions, variables, node, ifNull);
+            InsertEndValueExpression(resultType, expressions, variables, target, node, ifNull, returnTarget);
         }
 
         /// <summary>
         ///     Creates the value expressions.
         /// </summary>
         /// <param name="resultType">Type of the result.</param>
-        /// <param name="nodes">The nodes.</param>
+        /// <param name="nodes">The tree.</param>
         /// <param name="expressions">The expressions.</param>
         /// <param name="variables">The variables.</param>
         /// <param name="ifNull">If null.</param>
@@ -574,24 +578,20 @@ namespace Anori.ExpressionGetters
         /// <exception cref="NotSupportedException">Not supported node numbers.</exception>
         private static void CreateValueExpressions(
             [NotNull] Type resultType,
-            [NotNull] INodeCollection nodes,
+            [NotNull] IExpressionNode node,
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
         {
-            switch (nodes.Count)
+            if (node.Previous == null)
+
             {
-                case 0:
-                    throw new NotSupportedException();
-
-                case 1:
-                    CreateValueSingleExpressions(resultType, expressions, variables, nodes, ifNull, returnTarget);
-                    break;
-
-                default:
-                    CreateValueChainExpressions(resultType, expressions, variables, nodes, ifNull, returnTarget);
-                    break;
+                CreateValueSingleExpressions(resultType, expressions, variables, node, ifNull, returnTarget);
+            }
+            else
+            {
+                CreateValueChainExpressions(resultType, expressions, variables, node, ifNull, returnTarget);
             }
         }
 
@@ -601,7 +601,7 @@ namespace Anori.ExpressionGetters
         /// <param name="resultType">Type of the result.</param>
         /// <param name="expressions">The expressions.</param>
         /// <param name="variables">The variables.</param>
-        /// <param name="nodes">The nodes.</param>
+        /// <param name="nodes">The tree.</param>
         /// <param name="ifNull">If null.</param>
         /// <param name="returnTarget">The return target.</param>
         /// <exception cref="ArgumentOutOfRangeException">Not supported Expression Tree Node type.</exception>
@@ -609,11 +609,11 @@ namespace Anori.ExpressionGetters
             [NotNull] Type resultType,
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            [NotNull] INodeCollection nodes,
+            [NotNull] IExpressionNode node,
             [NotNull] Expression ifNull,
             [NotNull] LabelTarget returnTarget)
         {
-            var element = nodes.First();
+            var element = node;
             switch (element)
             {
                 case IFunctionNode function:
@@ -630,6 +630,10 @@ namespace Anori.ExpressionGetters
 
                 case IMethodNode method:
                     MethodLastElement(expressions, variables, resultType, method, ifNull, returnTarget);
+                    break;
+
+                case IIndexerNode indexer:
+                    IndexerLastElement(expressions, variables, resultType, indexer, ifNull, returnTarget);
                     break;
 
                 case IBinaryNode binary:
@@ -654,24 +658,24 @@ namespace Anori.ExpressionGetters
         /// </summary>
         /// <param name="expressions">The expressions.</param>
         /// <param name="variables">The variables.</param>
-        /// <param name="nodes">The nodes.</param>
+        /// <param name="nodes">The tree.</param>
         /// <param name="ifNull">If null.</param>
         /// <returns>The expression.</returns>
         private static Expression CreateVariableExpressions(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            [NotNull] INodeCollection nodes,
+            [NotNull] IExpressionNode node,
             [NotNull] Expression ifNull)
         {
-            var source = CreateVariableInnerExpressions(expressions, variables, nodes, ifNull);
-            if (nodes.Count == 1)
+            var source = CreateVariableInnerExpressions(expressions, variables, node, ifNull);
+            if (node.Previous == null)
             {
                 return source;
             }
 
-            var target = Expression.Variable(nodes.First().Type, $"value{variables.GetNextIndex()}");
+            var target = Expression.Variable(node.Type, $"value{variables.GetNextIndex()}");
             variables.Add(target);
-            InsertExpression(expressions, variables, source, nodes.First(), ifNull, target);
+            InsertExpression(expressions, variables, source, node, ifNull, target);
             return target;
         }
 
@@ -680,18 +684,43 @@ namespace Anori.ExpressionGetters
         /// </summary>
         /// <param name="expressions">The expressions.</param>
         /// <param name="variables">The variables.</param>
-        /// <param name="nodes">The nodes.</param>
+        /// <param name="nodes">The tree.</param>
         /// <param name="ifNull">If null.</param>
         /// <returns>The expression.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Not supported element type.</exception>
         private static Expression CreateVariableInnerExpressions(
             [NotNull] IList<Expression> expressions,
             [NotNull] VariablesCollection variables,
-            [NotNull] INodeCollection nodes,
+            [NotNull] IExpressionNode node,
             [NotNull] Expression ifNull)
         {
-            var list = nodes.ToList();
-            list.Reverse();
+            List<IExpressionNode> list = new List<IExpressionNode>();
+            while (true)
+            {
+                list.Insert(0, node);
+                if (node.Previous == null)
+                {
+                    break;
+                }
+
+                //if(!(node is IPropertyNode
+                //    || node is IParameterNode
+                //    || node is IFieldNode
+                //    || node is IBinaryNode
+                //    || node is IUnaryNode
+                //    || node is IMethodNode
+                //    || node is IConstantNode
+                //    || node is IConditionalNode
+                //    || node is IFunctionNode
+                //    || node is IConstructorNode
+                //    || node is IMemberInitNode
+                //    || node is IIndexerNode))
+                //{
+                //    break;
+                //}
+                node = node.Previous;
+            }
+
             var i = 1;
             Expression target;
             var element = list.First();
@@ -701,7 +730,7 @@ namespace Anori.ExpressionGetters
                     {
                         var p = parameter.Expression;
                         target = p;
-                        ParameterNextParameter(expressions, target, parameter, ifNull);
+                        ParameterNextElement(expressions, target, parameter, ifNull);
                         break;
                     }
 
@@ -717,6 +746,15 @@ namespace Anori.ExpressionGetters
                         target = p;
                         variables.Add(p);
                         MethodNextElement(expressions, variables, target, method, ifNull);
+                        break;
+                    }
+
+                case IIndexerNode indexer:
+                    {
+                        var p = Expression.Variable(indexer.Type, $"value{variables.GetNextIndex()}");
+                        target = p;
+                        variables.Add(p);
+                        IndexerNextElement(expressions, variables, target, indexer, ifNull);
                         break;
                     }
 
@@ -882,7 +920,11 @@ namespace Anori.ExpressionGetters
             [NotNull] Expression ifNull)
         {
             var args = function.Parameters.Select(
-                    functionParameter => CreateVariableExpressions(expressions, variables, functionParameter, ifNull))
+                    functionParameter => CreateVariableExpressions(
+                        expressions,
+                        variables,
+                        functionParameter,
+                        ifNull))
                 .ToList();
 
             return Expression.Call(function.MethodInfo, args);
@@ -939,6 +981,10 @@ namespace Anori.ExpressionGetters
                     MethodLastElement(expressions, variables, resultType, method, ifNull, returnTarget);
                     break;
 
+                case IIndexerNode indexer:
+                    IndexerLastElement(expressions, variables, resultType, indexer, ifNull, returnTarget);
+                    break;
+
                 case IPropertyNode property:
                     PropertyLastElement(expressions, variables, source, resultType, property, ifNull, returnTarget);
                     break;
@@ -973,7 +1019,7 @@ namespace Anori.ExpressionGetters
             switch (node)
             {
                 case IParameterNode parameter:
-                    ParameterNextParameter(expressions, target, parameter, ifNull);
+                    ParameterNextElement(expressions, target, parameter, ifNull);
                     break;
 
                 case IConstantNode constant:
@@ -986,6 +1032,10 @@ namespace Anori.ExpressionGetters
 
                 case IMethodNode method:
                     MethodNextElement(expressions, variables, target, method, ifNull);
+                    break;
+
+                case IIndexerNode indexer:
+                    IndexerNextElement(expressions, variables, target, indexer, ifNull);
                     break;
 
                 case IPropertyNode property:
@@ -1088,6 +1138,18 @@ namespace Anori.ExpressionGetters
                     returnTarget,
                     Expression.Convert(MethodMakeExpression(expressions, variables, method, ifNull), resultType)));
 
+        private static void IndexerLastElement(
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VariablesCollection variables,
+            [NotNull] Type resultType,
+            IIndexerNode indexer,
+            [NotNull] Expression ifNull,
+            [NotNull] LabelTarget returnTarget) =>
+            expressions.Add(
+                Expression.Return(
+                    returnTarget,
+                    Expression.Convert(IndexerMakeExpression(expressions, variables, indexer, ifNull), resultType)));
+
         /// <summary>
         ///     Methods the make expression.
         /// </summary>
@@ -1110,6 +1172,22 @@ namespace Anori.ExpressionGetters
                 .ToList();
 
             return Expression.Call(@object, method.MethodInfo, args);
+        }
+
+        [NotNull]
+        private static Expression IndexerMakeExpression(
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VariablesCollection variables,
+            IIndexerNode indexer,
+            [NotNull] Expression ifNull)
+        {
+            var @object = CreateVariableExpressions(expressions, variables, indexer.Object, ifNull);
+
+            var args = indexer.Arguments.Select(
+                    argument => CreateVariableExpressions(expressions, variables, argument, ifNull))
+                .ToList();
+
+            return Expression.Call(@object, indexer.MethodInfo, args);
         }
 
         /// <summary>
@@ -1139,6 +1217,25 @@ namespace Anori.ExpressionGetters
                 Expression.IfThen(Expression.Equal(targetParameter, NullExpressionOf(method.Type)), ifNull));
         }
 
+        private static void IndexerNextElement(
+            [NotNull] IList<Expression> expressions,
+            [NotNull] VariablesCollection variables,
+            [NotNull] Expression targetParameter,
+            IIndexerNode indexer,
+            [NotNull] Expression ifNull)
+        {
+            expressions.Add(
+                Expression.Assign(targetParameter, IndexerMakeExpression(expressions, variables, indexer, ifNull)));
+
+            if (indexer.Type.IsValueType && !indexer.Type.IsNullable())
+            {
+                return;
+            }
+
+            expressions.Add(
+                Expression.IfThen(Expression.Equal(targetParameter, NullExpressionOf(indexer.Type)), ifNull));
+        }
+
         /// <summary>
         ///     Nulls the expression of.
         /// </summary>
@@ -1154,7 +1251,7 @@ namespace Anori.ExpressionGetters
         /// <param name="targetParameter">The target parameter.</param>
         /// <param name="parameter">The parameter.</param>
         /// <param name="ifExpression">If expression.</param>
-        private static void ParameterNextParameter(
+        private static void ParameterNextElement(
             [NotNull] ICollection<Expression> expressions,
             [NotNull] Expression targetParameter,
             [NotNull] IExpressionNode parameter,
@@ -1234,7 +1331,8 @@ namespace Anori.ExpressionGetters
         /// <param name="property">The property.</param>
         /// <returns>The expression.</returns>
         [NotNull]
-        private static Expression PropertyMakeExpression([NotNull] Expression sourceParameter, IPropertyNode property) =>
+        private static Expression
+            PropertyMakeExpression([NotNull] Expression sourceParameter, IPropertyNode property) =>
             Expression.Call(sourceParameter, property.MethodInfo, property.Args);
 
         /// <summary>

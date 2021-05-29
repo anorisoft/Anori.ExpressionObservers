@@ -28,7 +28,7 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     The parameters.
         /// </value>
-        IList<INodeCollection> Parameters { get; }
+        IList<IExpressionNode> Parameters { get; }
 
         /// <summary>
         ///     Gets the bindings.

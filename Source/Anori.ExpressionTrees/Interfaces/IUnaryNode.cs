@@ -28,6 +28,6 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     The operand.
         /// </value>
-        INodeCollection Operand { get; }
+        IExpressionNode Operand { get; }
     }
 }

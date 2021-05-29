@@ -18,7 +18,7 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     The nodes.
         /// </value>
-        INodeCollection Nodes { get; }
+    //    INodeCollection Nodes { get; }
 
         /// <summary>
         ///     Gets the expression string.

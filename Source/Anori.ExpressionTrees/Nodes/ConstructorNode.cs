@@ -19,7 +19,7 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Constructor Expression Tree Node.
     /// </summary>
     /// <seealso cref="IInternalExpressionNode" />
-    internal struct ConstructorNode : IInternalExpressionNode, IConstructorNode
+    internal class ConstructorNode : IInternalExpressionNode, IConstructorNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ConstructorNode" /> struct.
@@ -88,7 +88,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The parameters.
         /// </value>
-        public IList<INodeCollection> Parameters { get; internal set; }
+        public IList<IExpressionNode> Parameters { get; internal set; }
 
         /// <summary>
         ///     Sets the previous.

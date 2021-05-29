@@ -16,17 +16,17 @@ namespace Anori.ExpressionTrees.Nodes
     ///     Member Assignment Node.
     /// </summary>
     /// <seealso cref="IBindingNode" />
-    internal readonly struct MemberAssignmentNode : IMemberAssignmentNode
+    internal class MemberAssignmentNode : IMemberAssignmentNode
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MemberAssignmentNode" /> struct.
         /// </summary>
         /// <param name="memberAssignment">The member assignment.</param>
         /// <param name="nodes">The nodes.</param>
-        public MemberAssignmentNode([NotNull] MemberAssignment memberAssignment, [NotNull] INodeCollection nodes)
+        public MemberAssignmentNode([NotNull] MemberAssignment memberAssignment, [NotNull] IExpressionNode nodes)
         {
             this.MemberAssignment = memberAssignment;
-            this.Nodes = nodes;
+            this.Node = nodes;
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The nodes.
         /// </value>
-        public INodeCollection Nodes { get; }
+        public IExpressionNode Node { get; }
 
         /// <summary>
         ///     Gets the binding.
