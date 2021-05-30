@@ -47,6 +47,7 @@ namespace Anori.ExpressionObservers.Nodes
             this.MethodInfo = methodInfo ?? throw new ArgumentNullException(nameof(methodInfo));
 
             args = new List<Func<object>>(arguments.Count);
+
             foreach (var argument in arguments)
             {
                 var first = argument;

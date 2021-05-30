@@ -6,7 +6,7 @@
     <IsPackable>false</IsPackable>
     <Configurations>Debug;Release;Debug Submodules</Configurations>
     <Guid>f89c2fd8-91f3-4f5a-87b6-094ee19712cf</Guid>
-
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

@@ -28,7 +28,6 @@ namespace Anori.ExpressionTrees.Nodes
             this.Expression = expression;
             this.Previous = null;
             this.Next = null;
-            this.Parent = null;
         }
 
         /// <summary>
@@ -56,14 +55,6 @@ namespace Anori.ExpressionTrees.Nodes
         public IExpressionNode? Next { get; private set; }
 
         /// <summary>
-        ///     Gets the parent.
-        /// </summary>
-        /// <value>
-        ///     The parent.
-        /// </value>
-        public IExpressionNode? Parent { get; private set; }
-
-        /// <summary>
         ///     Gets the expression.
         /// </summary>
         /// <value>
@@ -82,11 +73,5 @@ namespace Anori.ExpressionTrees.Nodes
         /// </summary>
         /// <param name="node">The node.</param>
         void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
-
-        /// <summary>
-        ///     Sets the parent.
-        /// </summary>
-        /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetParent(IExpressionNode? node) => this.Parent = node;
     }
 }

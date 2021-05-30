@@ -18,12 +18,6 @@ namespace Anori.ExpressionTrees.Interfaces
         void SetNext(IExpressionNode? node);
 
         /// <summary>
-        ///     Sets the parent.
-        /// </summary>
-        /// <param name="node">The node.</param>
-        void SetParent(IExpressionNode? node);
-
-        /// <summary>
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>

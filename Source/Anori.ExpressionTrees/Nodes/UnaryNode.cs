@@ -30,7 +30,6 @@ namespace Anori.ExpressionTrees.Nodes
             this.Type = unaryExpression.Type;
             this.Previous = null;
             this.Next = null;
-            this.Parent = null;
         }
 
         /// <summary>
@@ -42,20 +41,20 @@ namespace Anori.ExpressionTrees.Nodes
         public UnaryExpression UnaryExpression { get; }
 
         /// <summary>
-        ///     Gets or sets the operand.
-        /// </summary>
-        /// <value>
-        ///     The operand.
-        /// </value>
-        public IExpressionNode Operand { get; set; }
-
-        /// <summary>
         ///     Gets the type.
         /// </summary>
         /// <value>
         ///     The type.
         /// </value>
         public Type Type { get; }
+
+        /// <summary>
+        ///     Gets or sets the operand.
+        /// </summary>
+        /// <value>
+        ///     The operand.
+        /// </value>
+        public IExpressionNode Operand { get; set; }
 
         /// <summary>
         ///     Gets the previous.
@@ -74,14 +73,6 @@ namespace Anori.ExpressionTrees.Nodes
         public IExpressionNode? Next { get; private set; }
 
         /// <summary>
-        ///     Gets the parent.
-        /// </summary>
-        /// <value>
-        ///     The parent.
-        /// </value>
-        public IExpressionNode? Parent { get; private set; }
-
-        /// <summary>
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
@@ -92,11 +83,5 @@ namespace Anori.ExpressionTrees.Nodes
         /// </summary>
         /// <param name="node">The node.</param>
         void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
-
-        /// <summary>
-        ///     Sets the parent.
-        /// </summary>
-        /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetParent(IExpressionNode? node) => this.Parent = node;
     }
 }

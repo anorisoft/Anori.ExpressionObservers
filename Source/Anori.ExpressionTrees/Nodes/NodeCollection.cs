@@ -77,7 +77,6 @@ namespace Anori.ExpressionTrees.Nodes
                 internalNode.SetNext(this.Parent);
             }
 
-            internalNode.SetParent(this.Parent);
             this.Add(internalNode);
             return internalNode;
         }

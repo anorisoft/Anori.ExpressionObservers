@@ -78,19 +78,19 @@ namespace Anori.ExpressionObservers.Nodes
             this.Next?.UnsubscribeListener();
         }
 
+        /// <summary>
+        /// Subscribes the listener for.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
         public void SubscribeListenerFor(object obj)
         {
-            if (obj is INotifyPropertyChanged propertyChanged)
+            if (obj is not INotifyPropertyChanged propertyChanged)
             {
-                SubscribeListenerFor(propertyChanged);
                 return;
             }
 
-            if (obj is INotifyCollectionChanged collectionChanged)
-            {
-                SubscribeListenerFor(collectionChanged);
-                return;
-            }
+            this.SubscribeListenerFor(propertyChanged);
         }
 
         /// <summary>

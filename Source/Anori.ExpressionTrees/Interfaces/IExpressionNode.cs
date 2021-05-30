@@ -11,7 +11,7 @@ namespace Anori.ExpressionTrees.Interfaces
     using JetBrains.Annotations;
 
     /// <summary>
-    ///     The Expresson Tree Node Interface.
+    ///     The Expression Tree Node Interface.
     /// </summary>
     public interface IExpressionNode
     {
@@ -42,13 +42,6 @@ namespace Anori.ExpressionTrees.Interfaces
         [CanBeNull]
         IExpressionNode? Next { get; }
 
-        /// <summary>
-        ///     Gets the parent.
-        /// </summary>
-        /// <value>
-        ///     The parent.
-        /// </value>
-        [CanBeNull]
-        IExpressionNode? Parent { get; }
+       
     }
 }

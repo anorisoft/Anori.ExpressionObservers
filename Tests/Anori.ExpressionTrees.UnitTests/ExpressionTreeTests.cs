@@ -36,7 +36,6 @@ namespace Anori.ExpressionTrees.UnitTests
             Assert.AreEqual(typeof(int), head.Type);
             Assert.IsNull(head.Next);
             Assert.IsNull(head.Previous);
-            Assert.IsNull(head.Parent);
             var node = (IBinaryNode)head;
             Assert.AreEqual(ExpressionType.Add, node.NodeType);
             Assert.IsNull(node.RightNode.Previous);
@@ -54,7 +53,6 @@ namespace Anori.ExpressionTrees.UnitTests
             Assert.IsNotNull(head.Previous);
             Assert.IsInstanceOf<IParameterNode>(head.Previous);
             Assert.AreEqual(typeof(TestClass1), head.Previous.Type);
-            Assert.IsNull(head.Parent);
         }
 
         [Test]
@@ -66,7 +64,6 @@ namespace Anori.ExpressionTrees.UnitTests
             Assert.AreEqual(typeof(int), head.Type);
             Assert.IsNull(head.Next);
             Assert.IsNull(head.Previous);
-            Assert.IsNull(head.Parent);
             var node = (IBinaryNode)head;
             Assert.AreEqual(ExpressionType.Add, node.NodeType);
             Assert.IsNull(node.RightNode.Previous);
@@ -83,7 +80,6 @@ namespace Anori.ExpressionTrees.UnitTests
             Assert.AreEqual(typeof(ObservableCollection<int>), head.Type);
             Assert.IsNull(head.Next);
             Assert.IsNotNull(head.Previous);
-            Assert.IsNull(head.Parent);
             var node = (IPropertyNode)head;
             //Assert.AreEqual(ExpressionType.Add, node.NodeType);
             //Assert.AreEqual(1, node.RightNode.Count);
@@ -100,7 +96,6 @@ namespace Anori.ExpressionTrees.UnitTests
             Assert.AreEqual(typeof(int), head.Type);
             Assert.IsNull(head.Next);
             Assert.IsNotNull(head.Previous);
-            Assert.IsNull(head.Parent);
             var node = (IIndexerNode)head;
             Assert.IsTrue(typeof(INotifyCollectionChanged).IsAssignableFrom(node.Object.Type));
             //Assert.AreEqual(1, node.RightNode.Count);
@@ -117,7 +112,6 @@ namespace Anori.ExpressionTrees.UnitTests
             Assert.AreEqual(typeof(int), head.Type);
             Assert.IsNull(head.Next);
             Assert.IsNotNull(head.Previous);
-            Assert.IsNull(head.Parent);
             var node = (IPropertyNode)head;
            
             var previous = node.Previous;
@@ -142,7 +136,6 @@ namespace Anori.ExpressionTrees.UnitTests
             Assert.AreEqual(typeof(int), head.Type);
             Assert.IsNull(head.Next);
             Assert.IsNotNull(head.Previous);
-            Assert.IsNull(head.Parent);
             var node = (IPropertyNode)head;
 
             var previous = node.Previous;
