@@ -25,6 +25,14 @@ namespace Anori.ExpressionObservers.Base
     internal abstract class ObserverBase<TSelf, TResult> : ObserverFoundationBase<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
+        private static ClassDebugger DebugExtensions { get; } = new ClassDebugger(typeof(ObserverBase<TSelf, TResult>));
+
+
+        /// <summary>
+        ///     The property expression.
+        /// </summary>
+        private readonly Expression<Func<TResult>> propertyExpression;
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ObserverBase{TSelf,TResult}" /> class.
         /// </summary>
@@ -34,8 +42,12 @@ namespace Anori.ExpressionObservers.Base
         protected ObserverBase(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             PropertyObserverFlag observerFlag)
-            : base(observerFlag) =>
-            this.Tree = this.CreateObserverTree(propertyExpression);
+            : base(observerFlag)
+        {
+            using var debug = DebugExtensions.DebugMethod();
+            this.propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
+            this.Tree = this.CreateObserverTree();
+        }
 
         /// <summary>
         ///     Gets the expression string.
@@ -60,12 +72,37 @@ namespace Anori.ExpressionObservers.Base
         /// <returns>
         ///     The expression tree.
         /// </returns>
-        protected IExpressionTree CreateObserverTree(Expression<Func<TResult>> propertyExpression)
+        private IExpressionTree CreateObserverTree()
         {
-            var tree = ExpressionTree.New(propertyExpression);
-            this.CreateObserverTree(tree);
+            using var debug = DebugExtensions.DebugMethod();
+
+            var tree = ExpressionTree.Factory.New(this.propertyExpression);
+            //        this.CreateObserverTree(tree);
             return tree;
         }
+
+        ///// <summary>
+        /////     Creates the observer tree from head.
+        ///// </summary>
+        ///// <param name="resultType">Type of the result.</param>
+        ///// <param name="tree">The tree.</param>
+        ///// <param name="fallback">The fallback.</param>
+        //protected void CreateObserverTreeFromHead([NotNull] Type resultType, [NotNull] IExpressionTree tree,[NotNull] TResult fallback)
+        //{
+        //    this.GetRootStruct(resultType, tree, () => { }, Fallback(fallback));
+        //    this.CreateObserverTree(tree);
+        //}
+
+        ///// <summary>
+        /////     Creates the observer tree from head.
+        ///// </summary>
+        ///// <param name="resultType">Type of the result.</param>
+        ///// <param name="tree">The tree.</param>
+        //protected void CreateObserverTreeFromHead([NotNull] Type resultType, [NotNull] IExpressionTree tree)
+        //{
+        //    this.GetRootStruct(resultType, tree, () => { });
+        //    this.CreateObserverTree(tree);
+        //}
 
         /// <summary>
         ///     Creates the observer tree.
@@ -73,13 +110,14 @@ namespace Anori.ExpressionObservers.Base
         /// <param name="tree">The tree.</param>
         protected void CreateObserverTree(IRootAware tree)
         {
+            using var debug = DebugExtensions.DebugMethod();
             foreach (var treeRoot in tree.Roots)
             {
                 switch (treeRoot)
                 {
-                    case IConstantNode constantElement when treeRoot.Next is IFieldNode fieldElement:
+                    case IConstantNode constantElement when treeRoot.Result is IFieldNode fieldElement:
                         {
-                            if (fieldElement.Next is not IPropertyNode propertyElement)
+                            if (fieldElement.Result is not IPropertyNode propertyElement)
                             {
                                 continue;
                             }
@@ -96,7 +134,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case IConstantNode constantElement:
                         {
-                            if (treeRoot is not { Next: IPropertyNode propertyElement })
+                            if (treeRoot is not { Result: IPropertyNode propertyElement })
                             {
                                 continue;
                             }

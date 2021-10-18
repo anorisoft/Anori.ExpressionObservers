@@ -101,7 +101,7 @@ namespace Anori.ExpressionObservers.Base
         /// </returns>
         protected IExpressionTree CreateObserverTree(TParameter1 parameter1, TParameter2 parameter2)
         {
-            var tree = ExpressionTree.New(this.propertyExpression);
+            var tree = ExpressionTree.Factory.New(this.propertyExpression);
             this.CreateObserverTree(parameter1, parameter2, tree);
             return tree;
         }
@@ -120,7 +120,7 @@ namespace Anori.ExpressionObservers.Base
                 {
                     case IParameterNode parameterElement:
                         {
-                            if (parameterElement is not { Next: IPropertyNode propertyElement })
+                            if (parameterElement is not { Result: IPropertyNode propertyElement })
                             {
                                 continue;
                             }
@@ -147,9 +147,9 @@ namespace Anori.ExpressionObservers.Base
                             break;
                         }
 
-                    case IConstantNode constantElement when treeRoot.Next is IFieldNode fieldElement:
+                    case IConstantNode constantElement when treeRoot.Result is IFieldNode fieldElement:
                         {
-                            if (fieldElement is not { Next: IPropertyNode propertyElement })
+                            if (fieldElement is not { Result: IPropertyNode propertyElement })
                             {
                                 continue;
                             }
@@ -166,7 +166,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case IConstantNode constantElement:
                         {
-                            if (treeRoot is not { Next: IPropertyNode propertyElement })
+                            if (treeRoot is not { Result: IPropertyNode propertyElement })
                             {
                                 continue;
                             }

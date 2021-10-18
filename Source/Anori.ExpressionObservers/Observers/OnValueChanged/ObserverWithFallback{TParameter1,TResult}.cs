@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithFallback<TParameter1, TResult> :
-        ObserverOnValueChangedBase<INotifyPropertyObserver<TResult>, TParameter1, TResult>,
+        GenericObserverOnValueChangedBase<INotifyPropertyObserver<TResult>, TParameter1, TResult>,
         INotifyPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
@@ -106,7 +106,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             var get = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
@@ -150,10 +150,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         ///     The Getter.
         /// </returns>
         private static Func<TResult> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TResult fallback,
-            TParameter1 parameter1)
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TResult fallback,
+            [NotNull] TParameter1 parameter1)
         {
             var get = ExpressionGetter.CreateGetterByTree<TParameter1, TResult>(
                 propertyExpression.Parameters,

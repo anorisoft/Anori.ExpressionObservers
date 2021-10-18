@@ -29,7 +29,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionAndDeferrer<TParameter1, TResult> :
-        ObserverOnValueChangedBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
+        ReferenceObserverOnValueChangedBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         INotifyReferencePropertyObserverWithDeferrer<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : class

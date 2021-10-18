@@ -21,7 +21,7 @@ namespace Anori.ExpressionTrees
         /// <param name="expression">The expression.</param>
         /// <returns>The Expression Tree.</returns>
         public static IExpressionTree ExpressionTree(this LambdaExpression expression) =>
-            ExpressionTrees.ExpressionTree.New(expression);
+            ExpressionTrees.ExpressionTree.Factory.New(expression);
 
         /// <summary>
         ///     The Expression Tree by Expression{TFunc}.
@@ -30,6 +30,6 @@ namespace Anori.ExpressionTrees
         /// <param name="expression">The expression.</param>
         /// <returns>The Expression Tree.</returns>
         public static IExpressionTree ExpressionTree<TFunc>(this Expression<TFunc> expression) =>
-            ExpressionTrees.ExpressionTree.New(expression);
+            ExpressionTrees.ExpressionTree.Factory.New(expression);
     }
 }

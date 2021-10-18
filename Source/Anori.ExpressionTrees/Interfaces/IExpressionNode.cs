@@ -7,6 +7,7 @@
 namespace Anori.ExpressionTrees.Interfaces
 {
     using System;
+    using System.Collections.Generic;
 
     using JetBrains.Annotations;
 
@@ -31,7 +32,18 @@ namespace Anori.ExpressionTrees.Interfaces
         ///     The previous.
         /// </value>
         [CanBeNull]
-        IExpressionNode? Previous { get; }
+        IExpressionNode? Parameter { get; }
+
+
+        /// <summary>
+        /// Gets the parameter notes.
+        /// </summary>
+        /// <value>
+        /// The parameter notes.
+        /// </value>
+        [NotNull]
+        IEnumerable<IExpressionNode> ParameterNotes { get; }
+
 
         /// <summary>
         ///     Gets the next.
@@ -40,7 +52,7 @@ namespace Anori.ExpressionTrees.Interfaces
         ///     The next.
         /// </value>
         [CanBeNull]
-        IExpressionNode? Next { get; }
+        IExpressionNode? Result { get; }
 
        
     }

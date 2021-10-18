@@ -16,6 +16,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -27,7 +28,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionOfTAndGetterAndFallbackAndDeferrer<TParameter1, TResult> :
-        ObserverBase<IGetterPropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
+        GenericObserverBase<IGetterPropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         IGetterPropertyObserverWithDeferrer<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
@@ -40,7 +41,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
-        private readonly UpdateableMultipleDeferrer deferrer;
+        [NotNull] private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
         ///     The getter.
@@ -71,7 +72,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             [NotNull] Action<TResult> action,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1));
             this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getter()));
@@ -102,7 +103,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             [NotNull] TaskScheduler taskScheduler,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             this.getter = this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1), taskScheduler);
             this.deferrer = new UpdateableMultipleDeferrer(() => action(this.getter()));
@@ -133,7 +134,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             [NotNull] SynchronizationContext synchronizationContext,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             this.getter = this.CreateGetter(
                 Getter(propertyExpression, this.Tree, fallback, parameter1),
@@ -180,10 +181,10 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>Getter.</returns>
         private static Func<TResult> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TResult fallback,
-            TParameter1 parameter1)
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TResult fallback,
+            [NotNull] TParameter1 parameter1)
         {
             var get = ExpressionGetter.CreateGetterByTree<TParameter1, TResult>(
                 propertyExpression.Parameters,

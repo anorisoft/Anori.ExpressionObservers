@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -24,7 +25,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithAction<TResult> :
-        ObserverBase<IGetterReferencePropertyObserver<TResult>, TResult>,
+        ReferenceObserverBase<IGetterReferencePropertyObserver<TResult>, TResult>,
         IGetterReferencePropertyObserver<TResult>
         where TResult : class
     {
@@ -119,7 +120,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// <returns>
         ///     Getter.
         /// </returns>
-        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree)
+        private static Func<TResult?> Getter(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree)
         {
             var get = ExpressionGetter.CreateReferenceGetterByTree<TResult>(propertyExpression.Parameters, tree);
             return () => get();

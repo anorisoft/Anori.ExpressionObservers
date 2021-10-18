@@ -312,6 +312,61 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
         }
 
+
+        [Test]
+        public void PropertyObserver_Getter_Observes_instance_GetClass2_IntProperty()
+        {
+            var instance = new NotifyPropertyChangedClass1();
+            var callCount = 0;
+            using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
+                .ValueObserverBuilder(instance,(i) => i.Class2.IntProperty)
+                .WithAction(() => callCount++)
+                .WithGetter()
+                .Build();
+
+
+            //using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
+            //    .ValueObserverBuilder(instance, (i) => i.GetClass2().IntProperty + i.Class2.IntProperty)
+            //    .WithAction(() => callCount++)
+            //    .WithGetter()
+            //    .Build();
+
+
+            Assert.AreEqual(0, callCount);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
+            instance.GetClass2().IntProperty = 1;
+
+            //instance.Class2 = new NotifyPropertyChangedClass2 { IntProperty = 1 };
+            //Assert.AreEqual(0, callCount);
+            //Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
+
+            observes.Activate();
+            Assert.Throws<AlreadyActivatedException>(() => observes.Activate());
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, observes.GetValue());
+
+            instance.GetClass2().IntProperty = 2;
+            Assert.AreEqual(2, callCount);
+            Assert.AreEqual(2, observes.GetValue());
+
+            instance.GetClass2().IntProperty = 3;
+            Assert.AreEqual(3, callCount);
+            Assert.AreEqual(3, observes.GetValue());
+
+            observes.Deactivate();
+            Assert.Throws<AlreadyDeactivatedException>(() => observes.Deactivate());
+            Assert.AreEqual(2, callCount);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
+
+            instance.Class2.IntProperty = 3;
+            Assert.AreEqual(2, callCount);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
+
+            instance.Class2 = null;
+            Assert.AreEqual(2, callCount);
+            Assert.Throws<NotActivatedException>(() => _ = observes.GetValue());
+        }
+
         [Test]
         public void PropertyObserver_Getter_Observes_instance_IntProperty_AutoActivate()
         {
@@ -515,7 +570,7 @@ namespace Anori.ExpressionObservers.UnitTests
             var instance = new NotifyPropertyChangedClass1 { Class2 = null };
             var callCount = 0;
             using var observes = new PropertyObserverBuilder(PropertyObserverFlag.ThrowsAllExceptions)
-                .ValueObserverBuilder(() => instance.Class2.IntProperty)
+                .ValueObserverBuilder(() => instance.Class2.Class3.IntProperty)
                 .WithAction(() => callCount++)
                 .Build();
 

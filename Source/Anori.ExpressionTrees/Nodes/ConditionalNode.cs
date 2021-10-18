@@ -7,6 +7,7 @@
 namespace Anori.ExpressionTrees.Nodes
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq.Expressions;
 
     using Anori.ExpressionTrees.Interfaces;
@@ -30,8 +31,8 @@ namespace Anori.ExpressionTrees.Nodes
             this.IfTrue = null!;
             this.IfFalse = null!;
             this.Type = conditionalExpression.Type;
-            this.Previous = null;
-            this.Next = null;
+            this.Parameter = null;
+            this.Result = null;
         }
 
         /// <summary>
@@ -80,7 +81,17 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The previous.
         /// </value>
-        public IExpressionNode? Previous { get; private set; }
+        public IExpressionNode? Parameter { get; private set; }
+
+        public IEnumerable<IExpressionNode> ParameterNotes
+        {
+            get
+            {
+                yield return this.Test;
+                yield return this.IfTrue;
+                yield return this.IfFalse;
+            }
+        }
 
         /// <summary>
         ///     Gets the next.
@@ -88,18 +99,18 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The next.
         /// </value>
-        public IExpressionNode? Next { get; private set; }
+        public IExpressionNode? Result { get; private set; }
 
         /// <summary>
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetPrevious(IExpressionNode? node) => this.Previous = node;
+        void IInternalExpressionNode.SetParameter(IExpressionNode? node) => this.Parameter = node;
 
         /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
+        void IInternalExpressionNode.SetResult(IExpressionNode? node) => this.Result = node;
     }
 }

@@ -15,6 +15,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -28,7 +29,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
     ///     cref="ObserverWithActionAndGetter{TResult}" />
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndGetter<TParameter1, TResult> :
-        ObserverBase<IGetterReferencePropertyObserver<TResult>, TParameter1, TResult>,
+        ReferenceObserverBase<IGetterReferencePropertyObserver<TResult>, TParameter1, TResult>,
         IGetterReferencePropertyObserver<TResult>
         where TResult : class
         where TParameter1 : INotifyPropertyChanged
@@ -58,7 +59,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
@@ -100,7 +101,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
-            SynchronizationContext synchronizationContext,
+            [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
@@ -121,10 +122,17 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnPropertyChanged
         /// </summary>
         protected override void OnAction() => this.action();
 
+        /// <summary>
+        ///     Getters the specified property expression.
+        /// </summary>
+        /// <param name="propertyExpression">The property expression.</param>
+        /// <param name="tree">The tree.</param>
+        /// <param name="parameter1">The parameter1.</param>
+        /// <returns></returns>
         private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1) =>
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TParameter1 parameter1) =>
             () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(
                 propertyExpression.Parameters,
                 tree)(parameter1);

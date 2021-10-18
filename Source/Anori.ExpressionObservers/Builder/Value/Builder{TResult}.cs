@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.Builder.Value
     using System.Threading;
 
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Observers.OnPropertyChanged;
     using Anori.ExpressionObservers.Observers.OnValueChanged;
     using Anori.ExpressionObservers.ValueObservers.OnPropertyChanged;
@@ -23,6 +24,8 @@ namespace Anori.ExpressionObservers.Builder.Value
     internal sealed class Builder<TResult> : BuilderBase<Builder<TResult>, TResult>
         where TResult : struct
     {
+        private static ClassDebugger DebugExtensions { get; } = new ClassDebugger(typeof(Builder<TResult>));
+
         /// <summary>
         ///     The property expression.
         /// </summary>
@@ -694,6 +697,8 @@ namespace Anori.ExpressionObservers.Builder.Value
         /// </returns>
         protected override INotifyValuePropertyObserver<TResult> CreateNotifyValuePropertyObserverWithAction()
         {
+            using var debug = DebugExtensions.DebugMethod();
+
             INotifyValuePropertyObserver<TResult> observer;
             if (this.IsDispached)
             {

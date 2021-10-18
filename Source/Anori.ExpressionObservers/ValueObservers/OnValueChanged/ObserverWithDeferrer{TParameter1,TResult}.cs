@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithDeferrer<TParameter1, TResult> :
-        ObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
+        ValueObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         INotifyValuePropertyObserverWithDeferrer<TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
@@ -82,7 +82,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         internal ObserverWithDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
@@ -107,7 +107,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         internal ObserverWithDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            SynchronizationContext synchronizationContext,
+            [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {

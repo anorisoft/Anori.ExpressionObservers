@@ -29,8 +29,8 @@ namespace Anori.ExpressionTrees.Nodes
             this.MemberInitExpression = memberInitExpression;
             this.Parameters = null!;
             this.Bindings = null!;
-            this.Previous = null;
-            this.Next = null;
+            this.Parameter = null;
+            this.Result = null;
         }
 
         /// <summary>
@@ -55,7 +55,15 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The previous.
         /// </value>
-        public IExpressionNode? Previous { get; private set; }
+        public IExpressionNode? Parameter { get; private set; }
+
+        public IEnumerable<IExpressionNode> ParameterNotes
+        {
+            get
+            {
+                return this.Parameters;
+            }
+        }
 
         /// <summary>
         ///     Gets the next.
@@ -63,7 +71,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The next.
         /// </value>
-        public IExpressionNode? Next { get; private set; }
+        public IExpressionNode? Result { get; private set; }
 
         /// <summary>
         ///     Gets or sets the parameters.
@@ -85,12 +93,12 @@ namespace Anori.ExpressionTrees.Nodes
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetPrevious(IExpressionNode? node) => this.Previous = node;
+        void IInternalExpressionNode.SetParameter(IExpressionNode? node) => this.Parameter = node;
 
         /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
+        void IInternalExpressionNode.SetResult(IExpressionNode? node) => this.Result = node;
     }
 }

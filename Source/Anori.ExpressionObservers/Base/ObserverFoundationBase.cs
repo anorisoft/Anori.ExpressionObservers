@@ -399,19 +399,28 @@ namespace Anori.ExpressionObservers.Base
         {
         }
 
+        /// <summary>
+        /// Creates the note.
+        /// </summary>
+        /// <param name="expressionNode">The expression node.</param>
+        /// <param name="previousNode">The previous node.</param>
+        /// <param name="nextExpressionNode">The next expression node.</param>
+        /// <param name="currentNode">The current node.</param>
+        /// <returns></returns>
         private bool CreateNote(
             IExpressionNode expressionNode,
             IObserverNode previousNode,
             out IExpressionNode? nextExpressionNode,
             out IObserverNode? currentNode)
         {
-            switch (expressionNode.Next)
+            switch (expressionNode.Result)
             {
                 case IPropertyNode property:
                     {
                         currentNode = new PropertyObserverNode(property.PropertyInfo, this.OnAction);
                         previousNode.Next = currentNode;
-                        nextExpressionNode = expressionNode.Next;
+                        currentNode.Previous = previousNode;
+                        nextExpressionNode = expressionNode.Result;
                         if (nextExpressionNode == null)
                         {
                             nextExpressionNode = null;
@@ -422,9 +431,10 @@ namespace Anori.ExpressionObservers.Base
                     }
                 case IIndexerNode indexer:
                     {
-                        currentNode = new IndexerObserverNode(indexer.MethodInfo, indexer.Arguments, this.OnAction);
+                        currentNode = new CollectionObserverNode(indexer.MethodInfo, indexer.Arguments, this.OnAction);
                         previousNode.Next = currentNode;
-                        nextExpressionNode = expressionNode.Next;
+                        currentNode.Previous = previousNode;
+                        nextExpressionNode = expressionNode.Result;
                         if (nextExpressionNode == null)
                         {
                             nextExpressionNode = null;

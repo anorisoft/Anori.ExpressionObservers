@@ -12,6 +12,8 @@ namespace Anori.ExpressionObservers.UnitTests.TestClasses
 
         private string _stringProperty;
 
+        private NotifyPropertyChangedClass3 _class3 = new NotifyPropertyChangedClass3();
+
         public int IntProperty
         {
             get => this._intProperty;
@@ -23,6 +25,21 @@ namespace Anori.ExpressionObservers.UnitTests.TestClasses
                 }
 
                 this._intProperty = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public NotifyPropertyChangedClass3 Class3
+        {
+            get => this._class3;
+            set
+            {
+                if (Equals(value, this._class3))
+                {
+                    return;
+                }
+
+                this._class3 = value;
                 this.OnPropertyChanged();
             }
         }

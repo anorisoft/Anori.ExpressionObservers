@@ -32,7 +32,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithDeferrer<TParameter1, TResult> :
-        ObserverOnValueChangedBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
+        ReferenceObserverOnValueChangedBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         INotifyReferencePropertyObserverWithDeferrer<TResult>
         where TResult : class
         where TParameter1 : INotifyPropertyChanged
@@ -90,7 +90,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         internal ObserverWithDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
@@ -118,7 +118,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         internal ObserverWithDeferrer(
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
-            SynchronizationContext synchronizationContext,
+            [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {

@@ -12,6 +12,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
 
     using JetBrains.Annotations;
 
@@ -20,7 +21,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionAndDeferrer<TResult> :
-        ObserverBase<IPropertyObserverWithDeferrer<TResult>, TResult>,
+        GenericObserverBase<IPropertyObserverWithDeferrer<TResult>, TResult>,
         IPropertyObserverWithDeferrer<TResult>
     {
         /// <summary>

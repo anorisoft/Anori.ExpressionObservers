@@ -15,6 +15,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -28,7 +29,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     ///     cref="ObserverWithActionAndGetter{TParameter1,TParameter2,TResult}" />
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndGetter<TParameter1, TResult> :
-        ObserverBase<IGetterValuePropertyObserver<TResult>, TParameter1, TResult>,
+        ValueObserverBase<IGetterValuePropertyObserver<TResult>, TParameter1, TResult>,
         IGetterValuePropertyObserver<TResult>
         where TResult : struct
         where TParameter1 : INotifyPropertyChanged
@@ -59,7 +60,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
@@ -103,7 +104,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
             [NotNull] TParameter1 parameter1,
             [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
             [NotNull] Action action,
-            SynchronizationContext synchronizationContext,
+            [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(parameter1, propertyExpression, observerFlag)
         {
@@ -134,9 +135,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>The Getter.</returns>
         private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1) =>
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TParameter1 parameter1) =>
             () => ExpressionGetter.CreateValueGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
                 parameter1);
     }

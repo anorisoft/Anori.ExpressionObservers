@@ -13,14 +13,6 @@ namespace Anori.ExpressionTrees.Interfaces
     public interface IExpressionTree : IRootAware
     {
         /// <summary>
-        ///     Gets the nodes.
-        /// </summary>
-        /// <value>
-        ///     The nodes.
-        /// </value>
-    //    INodeCollection Nodes { get; }
-
-        /// <summary>
         ///     Gets the expression string.
         /// </summary>
         /// <value>

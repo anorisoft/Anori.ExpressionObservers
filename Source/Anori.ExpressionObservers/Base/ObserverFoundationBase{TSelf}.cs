@@ -8,14 +8,19 @@ namespace Anori.ExpressionObservers.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Anori.Common;
     using Anori.ExpressionObservers.Exceptions;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Nodes;
+    using Anori.ExpressionTrees.Interfaces;
     using Anori.Extensions;
     using Anori.Extensions.Threading;
+
+    using JetBrains.Annotations;
 
     using LazyThreadSafetyMode = Anori.Common.LazyThreadSafetyMode;
 
@@ -29,6 +34,10 @@ namespace Anori.ExpressionObservers.Base
                                                             IEqualityComparer<TSelf>
         where TSelf : IPropertyObserverBase<TSelf>
     {
+
+        private static ClassDebugger DebugExtensions { get; } = new(typeof(ObserverFoundationBase<TSelf>));
+
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ObserverFoundationBase{TSelf}" /> class.
         /// </summary>
@@ -37,6 +46,41 @@ namespace Anori.ExpressionObservers.Base
             : base(observerFlag)
         {
         }
+
+        /// <summary>
+        /// Fallbacks the specified fallback.
+        /// </summary>
+        /// <typeparam name="TFallback">The type of the fallback.</typeparam>
+        /// <param name="fallback">The fallback.</param>
+        /// <returns></returns>
+        [NotNull]
+        private protected static Expression Fallback<TFallback>([NotNull] TFallback fallback) =>
+            Expression.Constant(fallback, typeof(TFallback));
+
+        ///// <summary>
+        ///// Gets the root structure.
+        ///// </summary>
+        ///// <param name="resultType">Type of the result.</param>
+        ///// <param name="tree">The tree.</param>
+        ///// <param name="action">The action.</param>
+        //private protected BlockExpression GetRootStruct(Type resultType, IExpressionNode head, Action action)
+        //{
+        //    ObserverValueNode node = new ObserverValueNode(action);
+        //    return ObserverNodeCreator.CreateValueBody(node, resultType, head);
+        //}
+
+        ///// <summary>
+        ///// Gets the root structure.
+        ///// </summary>
+        ///// <param name="resultType">Type of the result.</param>
+        ///// <param name="tree">The tree.</param>
+        ///// <param name="action">The action.</param>
+        ///// <param name="fallback">The fallback.</param>
+        //private protected void GetRootStruct([NotNull] Type resultType, [NotNull] IExpressionTree tree, [NotNull] Action action, [NotNull] Expression fallback)
+        //{
+        //    ObserverValueNode node = new ObserverValueNode(action);
+        //    ObserverNodeCreator.CreateValueBody(node, resultType, tree, fallback);
+        //}
 
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -336,7 +380,7 @@ namespace Anori.ExpressionObservers.Base
                 : () => synchronizationContext.Send(get);
 
         /// <summary>
-        ///     Creaters the getter.
+        ///     Creates the getter.
         /// </summary>
         /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
         /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -596,19 +640,22 @@ namespace Anori.ExpressionObservers.Base
             {
                 action = () => propertyChanged.Raise();
                 getter = this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated)
-                             ? () =>
-                                 {
-                                     if (this.IsActive)
-                                     {
-                                         return get();
-                                     }
-
-                                     throw new NotActivatedException();
-                                 }
+                             ? () => this.CheckIsActiveThrowException(get)
                              : get;
             }
 
             return (action, getter);
+        }
+        private TResult? CheckIsActiveThrowException<TResult>(Func<TResult?> get)
+            where TResult : struct
+        {
+            using var debug = DebugExtensions.DebugMethod();
+            if (this.IsActive)
+            {
+                return get();
+            }
+
+            throw new NotActivatedException();
         }
 
         /// <summary>
@@ -638,7 +685,7 @@ namespace Anori.ExpressionObservers.Base
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="get">The get.</param>
         /// <param name="synchronizationContext">The synchronization context.</param>
-        /// <returns>Valeu getter function.</returns>
+        /// <returns>Value getter function.</returns>
 #pragma warning disable S4144 // Methods should not have identical implementations
         protected Func<TResult?> CreateNullableValueGetter<TResult>(
             Func<TResult?> get,
@@ -647,16 +694,21 @@ namespace Anori.ExpressionObservers.Base
             where TResult : struct
         {
             return this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated)
-                       ? () =>
-                           {
-                               if (this.IsActive)
-                               {
-                                   return synchronizationContext.Send(get);
-                               }
-
-                               throw new NotActivatedException();
-                           }
+                       ? () => this.CheckIsActiveThrowException(get, synchronizationContext)
                        : () => synchronizationContext.Send(get);
+        }
+
+
+        private TResult? CheckIsActiveThrowException<TResult>(Func<TResult?> get, SynchronizationContext synchronizationContext)
+            where TResult : struct
+        {
+            using var debug = DebugExtensions.DebugMethod();
+            if (this.IsActive)
+            {
+                return synchronizationContext.Send(get);
+            }
+
+            throw new NotActivatedException();
         }
 
         /// <summary>
@@ -668,6 +720,7 @@ namespace Anori.ExpressionObservers.Base
         protected Func<TResult?> CreateNullableValueGetter<TResult>(Func<TResult?> get)
             where TResult : struct
         {
+            using var debug = DebugExtensions.DebugMethod();
             return this.ObserverFlag.HasFlag(PropertyObserverFlag.ThrowsExceptionOnGetIfDeactivated)
                        ? () =>
                            {

@@ -67,6 +67,11 @@ namespace Anori.ExpressionObservers.UnitTests.TestClasses
             }
         }
 
+        public NotifyPropertyChangedClass2 GetClass2()
+        {
+            return Class2;
+        }
+
         public ObservableCollection<NotifyPropertyChangedClass2> Collection
         {
             get => this.collection;

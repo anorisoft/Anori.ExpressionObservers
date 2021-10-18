@@ -9,12 +9,18 @@ namespace Anori.ExpressionObservers.UnitTests
     using System.Threading.Tasks;
 
     using Anori.ExpressionObservers.Builder;
+    using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
+
+    using JetBrains.dotMemoryUnit.Util;
 
     using NUnit.Framework;
 
     public class PropertyObserverStringPropertyTest
     {
+
+        private static ClassDebugger DebugExtensions { get;} = new ClassDebugger(typeof(PropertyObserverStringPropertyTest));
+
         [Test]
         public void PropertyObserver_Getter_Fallback_Observes_instance_StringProperty()
         {
@@ -810,9 +816,13 @@ namespace Anori.ExpressionObservers.UnitTests
 
     public class PropertyObserverBuilderCountTests
     {
+        private static ClassDebugger DebugExtensions { get; } = new ClassDebugger(typeof(PropertyObserverStringPropertyTest));
+
         [Test]
         public void PropertyObserver_Count_OnNotify()
         {
+            using var debug = DebugExtensions.DebugMethod();
+
             var instance = new NotifyPropertyChangedClass1();
             var callCount = 0;
 
@@ -895,6 +905,7 @@ namespace Anori.ExpressionObservers.UnitTests
         [Test]
         public void PropertyValueObserver_Count_OnValue_ABC()
         {
+            using var debug = DebugExtensions.DebugMethod();
             var instance1 = new NotifyPropertyChangedClass1 { IntProperty = 0 };
             var instance21 = new NotifyPropertyChangedClass1 { IntProperty = 1 };
             var instance22 = new NotifyPropertyChangedClass1 { IntProperty = 2 };
@@ -906,13 +917,18 @@ namespace Anori.ExpressionObservers.UnitTests
             var callCountB = 0;
             var callCountC = 0;
             var callCountAB = 0;
-
+            debug.WriteLine("Create a");
             using var a = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => instance1.IntProperty)
                 .OnValueChanged()
-                .WithAction(() => callCountA++)
+                .WithAction(() =>
+                    {
+                        debug.WriteLine("callCountA");
+                        callCountA++;
+                    })
                 .Build()
                 .Activate();
 
+            debug.WriteLine("Create b");
             using var b = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(() => instance21.IntProperty + instance22.IntProperty)
                 .OnValueChanged()
@@ -920,6 +936,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build()
                 .Activate();
 
+            debug.WriteLine("Create c");
             using var c = PropertyObserverBuilder.Builder
                 .ValueObserverBuilder(() => instance31.IntProperty + instance32.IntProperty + instance33.IntProperty)
                 .OnValueChanged()
@@ -927,6 +944,7 @@ namespace Anori.ExpressionObservers.UnitTests
                 .Build()
                 .Activate();
 
+            debug.WriteLine("Create ab");
             using var ab = PropertyObserverBuilder.Builder.ValueObserverBuilder(() => a.Value.Value + b.Value.Value)
                 .OnValueChanged()
                 .WithAction(() => callCountAB++)

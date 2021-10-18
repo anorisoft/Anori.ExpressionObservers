@@ -22,7 +22,7 @@ namespace Anori.ExpressionTrees.Interfaces
         /// <value>
         ///     The member expression.
         /// </value>
-        MemberExpression MemberExpression { get; }
+        Expression MemberExpression { get; }
 
         /// <summary>
         ///     Gets the property information.

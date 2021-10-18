@@ -15,12 +15,12 @@ namespace Anori.ExpressionTrees.Interfaces
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void SetNext(IExpressionNode? node);
+        void SetResult(IExpressionNode? node);
 
         /// <summary>
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void SetPrevious(IExpressionNode? node);
+        void SetParameter(IExpressionNode? node);
     }
 }

@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.Builder.Value
     using Anori.ExpressionObservers.Interfaces;
     using Anori.ExpressionObservers.Interfaces.Builder;
     using Anori.ExpressionObservers.Interfaces.Builder.Value.OnValueChanged;
+    using Anori.ExpressionObservers.Nodes;
 
     /// <summary>
     ///     The Builder Base class.
@@ -19,14 +20,19 @@ namespace Anori.ExpressionObservers.Builder.Value
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal abstract partial class BuilderBase<TSelf, TResult> : IBuilderWithAction<TResult>
     {
+        private static ClassDebugger DebugExtensions { get; } = new ClassDebugger(typeof(BuilderBase<TSelf, TResult>));
+
         /// <summary>
         ///     Creates this instance.
         /// </summary>
         /// <returns>
         ///     value property observer On Notify Property Changed.
         /// </returns>
-        INotifyValuePropertyObserver<TResult> IBuilderWithAction<TResult>.Build() =>
-            this.CreateNotifyValuePropertyObserverWithAction();
+        INotifyValuePropertyObserver<TResult> IBuilderWithAction<TResult>.Build()
+        {
+            using var debug = DebugExtensions.DebugMethod();
+            return this.CreateNotifyValuePropertyObserverWithAction();
+        }
 
         /// <summary>
         ///     Builder with fallback.

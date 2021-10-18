@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
 
     using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
     using Anori.Extensions;
@@ -26,10 +27,12 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithAction<TResult> :
-        ObserverOnValueChangedBase<INotifyValuePropertyObserver<TResult>, TResult>,
+        ValueObserverOnValueChangedBase<INotifyValuePropertyObserver<TResult>, TResult>,
         INotifyValuePropertyObserver<TResult>
         where TResult : struct
     {
+        private static ClassDebugger DebugExtensions { get; } = new ClassDebugger(typeof(ObserverWithAction<TResult>));
+
         /// <summary>
         ///     The get value.
         /// </summary>
@@ -107,6 +110,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
+            using var debug = DebugExtensions.DebugMethod();
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
             var get = this.CreateNullableValueGetter(Getter(propertyExpression, this.Tree));
             this.UpdateValueProperty = () => this.Value = get();

@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.Interfaces.Builder.Value.OnPropertyChanged
         IGetterValuePropertyObserver<TResult> Build();
 
         /// <summary>
-        ///     Buider with fallback.
+        ///     Builder with fallback.
         /// </summary>
         /// <param name="fallback">The fallback.</param>
         /// <returns>

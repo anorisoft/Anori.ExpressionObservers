@@ -6,11 +6,14 @@
 
 namespace Anori.ExpressionObservers.Nodes
 {
-    internal interface IObserverNode
+    public interface IObserverNode
     {
         void UnsubscribeListener();
-        void SubscribeListenerFor(object obj);
+       // void SubscribeListener(object obj);
         IObserverNode Next { get; set; }
-        void GenerateNextNode();
+        IObserverNode Previous { get; set; }
+        object Observable { get; }
+        void SubscribeNextNode();
+        void SubscribeListener();
     }
 }

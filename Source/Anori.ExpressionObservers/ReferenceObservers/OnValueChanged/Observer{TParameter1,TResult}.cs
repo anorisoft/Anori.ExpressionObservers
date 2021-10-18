@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class Observer<TParameter1, TResult> :
-        ObserverOnValueChangedBase<INotifyReferencePropertyObserver<TResult>, TParameter1, TResult>,
+        ReferenceObserverOnValueChangedBase<INotifyReferencePropertyObserver<TResult>, TParameter1, TResult>,
         INotifyReferencePropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : class
@@ -139,9 +139,9 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>Getter.</returns>
         private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1) =>
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TParameter1 parameter1) =>
             () => ExpressionGetter.CreateReferenceGetterByTree<TParameter1, TResult>(
                 propertyExpression.Parameters,
                 tree)(parameter1);

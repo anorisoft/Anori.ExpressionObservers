@@ -7,6 +7,7 @@
 namespace Anori.ExpressionObservers.Base
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq.Expressions;
 
@@ -85,7 +86,7 @@ namespace Anori.ExpressionObservers.Base
         /// </summary>
         /// <param name="parameter1">The parameter1.</param>
         /// <param name="tree">The nodes.</param>
-        protected void CreateObserverTree(INotifyPropertyChanged parameter1, IRootAware tree)
+        protected void CreateObserverTree(INotifyPropertyChanged parameter1, IExpressionTree tree)
         {
             foreach (var treeRoot in tree.Roots)
             {
@@ -93,7 +94,7 @@ namespace Anori.ExpressionObservers.Base
                 {
                     case IParameterNode parameterElement:
                         {
-                            if (!(parameterElement is { Next: IPropertyNode propertyElement }))
+                            if (parameterElement is not { Result: IPropertyNode propertyElement })
                             {
                                 continue;
                             }
@@ -107,9 +108,9 @@ namespace Anori.ExpressionObservers.Base
                             break;
                         }
 
-                    case IConstantNode constantElement when treeRoot.Next is IFieldNode fieldElement:
+                    case IConstantNode constantElement when treeRoot.Result is IFieldNode fieldElement:
                         {
-                            if (fieldElement.Next is not IPropertyNode propertyElement)
+                            if (fieldElement.Result is not IPropertyNode propertyElement)
                             {
                                 continue;
                             }
@@ -126,7 +127,7 @@ namespace Anori.ExpressionObservers.Base
 
                     case IConstantNode constantElement:
                         {
-                            if (treeRoot.Next is not IPropertyNode propertyElement)
+                            if (treeRoot.Result is not IPropertyNode propertyElement)
                             {
                                 continue;
                             }
@@ -148,6 +149,46 @@ namespace Anori.ExpressionObservers.Base
             }
         }
 
+        ///// <summary>
+        /////     Creates the observer tree from head.
+        ///// </summary>
+        ///// <param name="resultType">Type of the result.</param>
+        ///// <param name="parameter1">The parameter1.</param>
+        ///// <param name="tree">The tree.</param>
+        ///// <param name="fallback">The fallback.</param>
+        ///// <returns></returns>
+        //protected void CreateObserverTreeFromHead(
+        //    Type resultType,
+        //    INotifyPropertyChanged parameter1,
+        //    IExpressionTree tree,
+        //    TResult fallback)
+        //{
+        //    this.GetRootStruct(resultType, tree, () => { }, Fallback(fallback));
+        //    this.CreateObserverTree(parameter1, tree);
+        //}
+
+        ///// <summary>
+        /////     Creates the observer tree from head.
+        ///// </summary>
+        ///// <param name="resultType">Type of the result.</param>
+        ///// <param name="parameter1">The parameter1.</param>
+        ///// <param name="tree">The tree.</param>
+        ///// <param name="propertyExpressionParameters"></param>
+        ///// <returns></returns>
+        //protected virtual void CreateObserverTreeFromHead(
+        //    Type resultType,
+        //    INotifyPropertyChanged parameter1,
+        //    IExpressionTree tree,
+        //    ReadOnlyCollection<ParameterExpression> parameters)
+        //{
+        //    var body = this.GetRootStruct(resultType, tree, () => { }); 
+        //    var lambda = Expression.Lambda<Func<TParameter1, TResult>>(body, parameters);
+        //    lambda.Compile();
+
+           
+        //    this.CreateObserverTree(parameter1, tree);
+        //}
+
         /// <summary>
         ///     Creates the observer tree.
         /// </summary>
@@ -157,8 +198,8 @@ namespace Anori.ExpressionObservers.Base
         /// </returns>
         private IExpressionTree CreateObserverTree(TParameter1 parameter1)
         {
-            var tree = ExpressionTree.New(this.propertyExpression);
-            this.CreateObserverTree(parameter1, tree);
+            var tree = ExpressionTree.Factory.New(this.propertyExpression);
+            // this.CreateObserverTree(parameter1, tree);
             return tree;
         }
     }

@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithAction<TParameter1, TResult> :
-        ObserverOnValueChangedBase<INotifyValuePropertyObserver<TResult>, TParameter1, TResult>,
+        ValueObserverOnValueChangedBase<INotifyValuePropertyObserver<TResult>, TParameter1, TResult>,
         INotifyValuePropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : struct
@@ -159,9 +159,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
         ///     Getter.
         /// </returns>
         private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1) =>
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TParameter1 parameter1) =>
             () => ExpressionGetter.CreateValueGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
                 parameter1);
     }

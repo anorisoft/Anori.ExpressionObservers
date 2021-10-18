@@ -165,7 +165,7 @@ namespace Anori.ExpressionObservers.UnitTests
             Assert.AreEqual(-99, observes.Value);
 
             observes.Activate();
-            observes.Activate();
+            //observes.Activate();
             Assert.AreEqual(1, callCount);
             Assert.AreEqual(1, observes.Value);
 

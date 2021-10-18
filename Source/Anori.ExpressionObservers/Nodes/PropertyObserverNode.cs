@@ -6,12 +6,13 @@
 
 namespace Anori.ExpressionObservers.Nodes
 {
-    using Anori.Common;
-    using Anori.Extensions;
     using System;
-    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Reflection;
+
+    using Anori.Common;
+    using Anori.ExpressionTrees.Interfaces;
+    using Anori.Extensions;
 
     /// <summary>
     ///     Represents each node of nested properties expression and takes care of
@@ -20,38 +21,71 @@ namespace Anori.ExpressionObservers.Nodes
     internal class PropertyObserverNode : IObserverNode
     {
         /// <summary>
-        ///     The action.
+        /// The action.
         /// </summary>
         private readonly Action action;
 
         /// <summary>
+        ///     The propertyChangedAction.
+        /// </summary>
+        private Action propertyChangedAction;
+
+        /// <summary>
         ///     The notify property changed.
         /// </summary>
- //       private INotifyPropertyChanged? notifyPropertyChanged;
-
         private IDisposable? unsubscribe;
+
+        /// <summary>
+        ///     The property changed.
+        /// </summary>
+        private INotifyPropertyChanged? propertyChanged;
+
+        /// <summary>
+        ///     Gets or sets the get next observable.
+        /// </summary>
+        /// <value>
+        ///     The get next observable.
+        /// </value>
+        private Func<object>? getNextObservable;
+
+        /// <summary>
+        /// The next.
+        /// </summary>
+        private IObserverNode? next;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PropertyObserverNode" /> class.
         /// </summary>
         /// <param name="propertyInfo">The property information.</param>
-        /// <param name="action">The action.</param>
+        /// <param name="action">The propertyChangedAction.</param>
         /// <exception cref="ArgumentNullException">propertyInfo is null.</exception>
         public PropertyObserverNode(PropertyInfo propertyInfo, Action action)
         {
             this.PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
-            this.action = () =>
-                {
-                    action.Raise();
-                    if (this.Next == null)
-                    {
-                        return;
-                    }
+            this.getNextObservable = () => this.PropertyInfo.GetValue(this.propertyChanged);
+            this.GetObservable ??= () => this.Previous?.Observable;
 
-                    this.Next.UnsubscribeListener();
-                    this.GenerateNextNode();
-                };
+            this.action = action;
+            this.propertyChangedAction = action;
         }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyObserverNode"/> class.
+        /// </summary>
+        /// <param name="propertyNode">The property node.</param>
+        /// <param name="action">The action.</param>
+        public PropertyObserverNode(IPropertyNode propertyNode, Action action) :this(propertyNode.PropertyInfo, action)
+        {
+        }
+
+        /// <summary>
+        ///     Gets the observable.
+        /// </summary>
+        /// <value>
+        ///     The observable.
+        /// </value>
+        public object Observable => this.getNextObservable.Raise();
 
         /// <summary>
         ///     Gets or sets the next.
@@ -59,7 +93,34 @@ namespace Anori.ExpressionObservers.Nodes
         /// <value>
         ///     The next.
         /// </value>
-        public IObserverNode? Next { get; set; }
+        public IObserverNode? Next
+        {
+            get => this.next;
+            set
+            {
+                this.next = value;
+                this.propertyChangedAction =
+                    value != null ? 
+                        () => SubscribeUnsubscribeListener(this.action, this.next) :
+                        this.action;
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the previous.
+        /// </summary>
+        /// <value>
+        ///     The previous.
+        /// </value>
+        public IObserverNode? Previous { get; set; } = null!;
+
+        /// <summary>
+        ///     Gets or sets the get observable.
+        /// </summary>
+        /// <value>
+        ///     The get observable.
+        /// </value>
+        protected Func<object>? GetObservable { get; set; }
 
         /// <summary>
         ///     Gets the property information.
@@ -70,117 +131,53 @@ namespace Anori.ExpressionObservers.Nodes
         private PropertyInfo PropertyInfo { get; }
 
         /// <summary>
+        ///     Subscribes the listener.
+        /// </summary>
+        public void SubscribeListener()
+        {
+            var changed = this.propertyChanged = this.GetObservable.Raise() as INotifyPropertyChanged;
+            if (changed == null)
+            {
+                this.unsubscribe?.Dispose();
+                return;
+            }
+
+            this.unsubscribe?.Dispose();
+            changed.PropertyChanged += this.OnPropertyChanged;
+            this.unsubscribe = new Disposable(
+                () =>
+                    {
+                        this.unsubscribe = null;
+                        this.getNextObservable = null;
+                        changed.PropertyChanged -= this.OnPropertyChanged;
+                        this.Next?.UnsubscribeListener();
+                    });
+
+            if (this.Next != null)
+            {
+                this.SubscribeNextNode();
+            }
+        }
+
+        /// <summary>
+        ///     Subscribes the next node.
+        /// </summary>
+        public void SubscribeNextNode() => this.Next?.SubscribeListener();
+
+        /// <summary>
         ///     Unsubscribes the listener.
         /// </summary>
-        public void UnsubscribeListener()
-        {
-            this.unsubscribe?.Dispose();
-            this.Next?.UnsubscribeListener();
-        }
+        public void UnsubscribeListener() => this.unsubscribe?.Dispose();
 
         /// <summary>
-        /// Subscribes the listener for.
+        ///     Subscribes the unsubscribe listener.
         /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public void SubscribeListenerFor(object obj)
+        /// <param name="next">The next.</param>
+        private static void SubscribeUnsubscribeListener(Action action, IObserverNode next)
         {
-            if (obj is not INotifyPropertyChanged propertyChanged)
-            {
-                return;
-            }
-
-            this.SubscribeListenerFor(propertyChanged);
-        }
-
-        /// <summary>
-        ///     Subscribes the listener for.
-        /// </summary>
-        /// <param name="propertyChanged">The property changed.</param>
-        protected void SubscribeListenerFor(INotifyPropertyChanged propertyChanged)
-        {
-            //this.notifyPropertyChanged = propertyChanged;
-
-            this.next = () => this.PropertyInfo.GetValue(propertyChanged);
-            propertyChanged.PropertyChanged += this.OnPropertyChanged;
-
-            this.unsubscribe = new Disposable(() =>
-                {
-                    this.next = null;
-                    propertyChanged.PropertyChanged -= this.OnPropertyChanged;
-                });
-
-            if (this.Next != null)
-            {
-                this.GenerateNextNode();
-            }
-        }
-
-        private Func<object>? next;
-
-        /// <summary>
-        ///     Generates the next node.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">
-        ///     Trying to subscribe PropertyChanged listener in object that "
-        ///     + $"owns '{this.Previous.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.
-        /// </exception>
-        public void GenerateNextNode()
-        {
-            var nextProperty = next.Raise();
-
-            if (nextProperty == null)
-            {
-                return;
-            }
-
-            if (nextProperty is INotifyCollectionChanged notifyCollectionChanged)
-            {
-                this.Next?.SubscribeListenerFor(notifyCollectionChanged);
-                return;
-            }
-
-            if (nextProperty is INotifyPropertyChanged propertyChanged)
-            {
-                this.Next?.SubscribeListenerFor(propertyChanged);
-                return;
-            }
-
-            if (nextProperty.IsNullableTypeAssignableFrom<INotifyPropertyChanged>())
-            {
-                var propertyInfo = Nullable.GetUnderlyingType(nextProperty.GetType())?.GetProperty("Value");
-
-                if (propertyInfo is null)
-                {
-                    return;
-                }
-
-                var nextPropertyChanged = (INotifyPropertyChanged)propertyInfo.GetValue(nextProperty);
-                this.Next?.SubscribeListenerFor(nextPropertyChanged);
-                return;
-            }
-        }
-
-        protected void SubscribeListenerFor(INotifyCollectionChanged notifyCollectionChanged)
-        {
-            //    this.next = () => this.PropertyInfo.GetValue(propertyChanged);
-            notifyCollectionChanged.CollectionChanged += this.OnCollectionChanged;
-
-            this.unsubscribe = new Disposable(() =>
-                {
-                    this.next = null;
-                    notifyCollectionChanged.CollectionChanged -= this.OnCollectionChanged;
-                });
-
-            if (this.Next != null)
-            {
-                this.GenerateNextNode();
-            }
-        }
-
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            throw new NotImplementedException();
+            action.Raise();
+            next.UnsubscribeListener();
+            next.SubscribeListener();
         }
 
         /// <summary>
@@ -192,7 +189,7 @@ namespace Anori.ExpressionObservers.Nodes
         {
             if (e.PropertyName == this.PropertyInfo.Name || string.IsNullOrEmpty(e.PropertyName))
             {
-                this.action.Raise();
+                this.propertyChangedAction.Raise();
             }
         }
     }

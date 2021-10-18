@@ -13,8 +13,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
     using Anori.Deferrers;
     using Anori.ExpressionGetters;
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -24,7 +24,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionOfTAndFallbackAndDeferrer<TResult> :
-        ObserverBase<IPropertyObserverWithDeferrer<TResult>, TResult>,
+        GenericObserverBase<IPropertyObserverWithDeferrer<TResult>, TResult>,
         IPropertyObserverWithDeferrer<TResult>
     {
         /// <summary>
@@ -149,9 +149,9 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         /// <param name="fallback">The fallback.</param>
         /// <returns>The Getter.</returns>
         private static Func<TResult> Getter(
-            Expression<Func<TResult>> propertyExpression,
-            IExpressionTree tree,
-            TResult fallback)
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TResult fallback)
         {
             var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback!);
             return () => get();

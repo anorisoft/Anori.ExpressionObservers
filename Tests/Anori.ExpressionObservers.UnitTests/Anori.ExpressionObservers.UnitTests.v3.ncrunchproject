@@ -14,6 +14,57 @@
       <NamedTestSelector>
         <TestName>Anori.ExpressionObservers.UnitTests.Collection.Class1.PropertyObserver_Observes_instance_IntProperty_Index</TestName>
       </NamedTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.Collection.Class1</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderCountTests</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderFailFastIntegerPropertyI1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderFailFastIntegerPropertyP1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderFailFastIntegerPropertyP2Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderIntegerPropertyI1P1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderIntegerPropertyI1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderIntegerPropertyI2Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderIntegerPropertyP1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderIntegerPropertyP2Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverBuilderStringPropertyI1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverIntegerPropertyI1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverIntegerPropertyP1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverIntegerPropertyP2Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverStringPropertyP1Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverStringPropertyP2Test</FixtureName>
+      </FixtureTestSelector>
+      <FixtureTestSelector>
+        <FixtureName>Anori.ExpressionObservers.UnitTests.PropertyObserverStringPropertyTest</FixtureName>
+      </FixtureTestSelector>
     </IgnoredTests>
   </Settings>
 </ProjectConfiguration>

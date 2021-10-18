@@ -20,11 +20,17 @@ namespace Anori.ExpressionObservers.Nodes
         ///     Initializes a new instance of the <see cref="RootPropertyObserverNode" /> class.
         /// </summary>
         /// <param name="propertyInfo">The property information.</param>
-        /// <param name="action">The action.</param>
+        /// <param name="action">The propertyChangedAction.</param>
         /// <param name="parameter">The parameter.</param>
         public RootPropertyObserverNode(PropertyInfo propertyInfo, Action action, object? parameter)
-            : base(propertyInfo, action) =>
+            : base(propertyInfo, action)
+        {
             this.Parameter = parameter;
+            if (this.Parameter is INotifyPropertyChanged notifyPropertyChanged)
+            {
+                GetObservable = () => notifyPropertyChanged;
+            }
+        }
 
         /// <summary>
         ///     Gets the parameter.
@@ -74,9 +80,14 @@ namespace Anori.ExpressionObservers.Nodes
         /// </summary>
         public void SubscribeListenerForRoot()
         {
-            if (this.Parameter is INotifyPropertyChanged notifyPropertyChanged)
+            if (this.Parameter is INotifyCollectionChanged)
             {
-                this.SubscribeListenerFor(notifyPropertyChanged);
+                this.SubscribeListener();
+            }
+
+            if (this.Parameter is INotifyPropertyChanged)
+            {
+                this.SubscribeListener();
             }
         }
 

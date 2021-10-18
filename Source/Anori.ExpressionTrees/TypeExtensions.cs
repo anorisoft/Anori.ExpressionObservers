@@ -39,6 +39,24 @@ namespace Anori.ExpressionTrees
         }
 
         /// <summary>
+        /// Implements the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="interface">The interface.</param>
+        /// <returns></returns>
+        public static bool Implements(this Type type, Type @interface) => type.IsAssignableFrom(@interface);
+
+        /// <summary>
+        /// Implements the specified type.
+        /// </summary>
+        /// <typeparam name="TType">The type of the type.</typeparam>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
+        public static bool Implements<TType>(this Type type)
+         =>
+             typeof(TType).IsAssignableFrom(type);
+
+        /// <summary>
         ///     Gets the indexers.
         /// </summary>
         /// <param name="type">The type.</param>

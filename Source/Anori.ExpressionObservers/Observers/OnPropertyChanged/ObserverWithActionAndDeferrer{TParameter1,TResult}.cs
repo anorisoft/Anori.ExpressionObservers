@@ -13,6 +13,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using Anori.Deferrers;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
 
     using JetBrains.Annotations;
 
@@ -23,7 +24,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <seealso cref="ObserverBase{TSelf,TResult}" />
     internal sealed class ObserverWithActionAndDeferrer<TParameter1, TResult> :
-        ObserverBase<IPropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
+        GenericObserverBase<IPropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         IPropertyObserverWithDeferrer<TResult>
         where TParameter1 : INotifyPropertyChanged
     {

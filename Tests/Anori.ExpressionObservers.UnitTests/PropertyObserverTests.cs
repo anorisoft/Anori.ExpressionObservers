@@ -9,8 +9,10 @@
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
 // ReSharper disable UnusedVariable
 
-namespace Anori.ExpressionObservers.UnitTests
+namespace Anori.ExpressionObservers.SplitTree.UnitTests
 {
+    using Anori.ExpressionObservers.UnitTests;
+
     using NUnit.Framework;
 
     public class PropertyObserverTests

@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionAndFallbackAndDeferrer<TParameter1, TResult> :
-        ObserverOnValueChangedBase<INotifyPropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
+        GenericObserverOnValueChangedBase<INotifyPropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         INotifyPropertyObserverWithDeferrer<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
@@ -72,7 +72,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] Action<TResult, TResult> action,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
@@ -103,7 +103,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] TaskScheduler taskScheduler,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
@@ -135,7 +135,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] SynchronizationContext synchronizationContext,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
@@ -197,10 +197,10 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>The Getter.</returns>
         private static Func<TResult> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TResult fallback,
-            TParameter1 parameter1)
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TResult fallback,
+            [NotNull] TParameter1 parameter1)
         {
             var get = ExpressionGetter.CreateGetterByTree<TParameter1, TResult>(
                 propertyExpression.Parameters,

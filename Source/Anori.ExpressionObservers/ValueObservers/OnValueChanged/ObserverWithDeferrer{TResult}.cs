@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithDeferrer<TResult> :
-        ObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TResult>,
+        ValueObserverOnValueChangedBase<INotifyValuePropertyObserverWithDeferrer<TResult>, TResult>,
         INotifyValuePropertyObserverWithDeferrer<TResult>
         where TResult : struct
     {

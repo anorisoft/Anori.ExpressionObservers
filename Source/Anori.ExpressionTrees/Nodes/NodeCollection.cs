@@ -68,13 +68,13 @@ namespace Anori.ExpressionTrees.Nodes
             var internalNode = (IInternalExpressionNode)node;
             if (this.Any())
             {
-                ((IInternalExpressionNode)this.Last()).SetPrevious(node);
+                ((IInternalExpressionNode)this.Last()).SetParameter(node);
 
-                internalNode.SetNext(this.Last());
+                internalNode.SetResult(this.Last());
             }
             else
             {
-                internalNode.SetNext(this.Parent);
+                internalNode.SetResult(this.Parent);
             }
 
             this.Add(internalNode);

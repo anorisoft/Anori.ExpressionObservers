@@ -86,4 +86,8 @@
       <PackagePath>lib\$(TargetFramework)</PackagePath>
     </PackageFiles>-->
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Anori.ExpressionObservers.UnitTests" />
+  </ItemGroup>
 </Project>

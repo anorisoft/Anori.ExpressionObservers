@@ -14,8 +14,8 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
 
     using Anori.Deferrers;
     using Anori.ExpressionGetters;
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -28,7 +28,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionAndCachedGetterAndDeferrer<TParameter1, TResult> :
-        ObserverBase<IGetterValuePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
+        ValueObserverBase<IGetterValuePropertyObserverWithDeferrer<TResult>, TParameter1, TResult>,
         IGetterValuePropertyObserverWithDeferrer<TResult>
         where TParameter1 : INotifyPropertyChanged
         where TResult : struct
@@ -42,6 +42,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <summary>
         ///     The deferrer.
         /// </summary>
+        [NotNull]
         private readonly UpdateableMultipleDeferrer deferrer;
 
         /// <summary>
@@ -248,9 +249,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="parameter1">The parameter1.</param>
         /// <returns>The Getter.</returns>
         private static Func<TResult?> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TParameter1 parameter1) =>
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TParameter1 parameter1) =>
             () => ExpressionGetter.CreateValueGetterByTree<TParameter1, TResult>(propertyExpression.Parameters, tree)(
                 parameter1);
     }

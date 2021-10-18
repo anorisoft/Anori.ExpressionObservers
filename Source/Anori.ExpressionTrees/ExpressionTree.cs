@@ -27,6 +27,30 @@ namespace Anori.ExpressionTrees
     /// <seealso cref="IRootAware" />
     public class ExpressionTree : IExpressionTree
     {
+        public class ExpressionTreeFactory : IExpressionTreeFactory
+        {
+            /// <summary>
+            ///     Initializes a new instance of the <see cref="ExpressionTree" /> with generic parameter class.
+            /// </summary>
+            /// <typeparam name="TFunc">The type of the function.</typeparam>
+            /// <param name="expression">The expression.</param>
+            /// <returns>
+            ///     A new instance of the <see cref="ExpressionTree" />.
+            /// </returns>
+            public IExpressionTree New<TFunc>(Expression<TFunc> expression) => new ExpressionTree(expression);
+
+            /// <summary>
+            ///     Initializes a new instance of the <see cref="ExpressionTree" /> with generic parameter class.
+            /// </summary>
+            /// <param name="expression">The expression.</param>
+            /// <returns>
+            ///     A new instance of the <see cref="ExpressionTree" />.
+            /// </returns>
+            public IExpressionTree New(LambdaExpression expression) => new ExpressionTree(expression);
+        }
+
+        public static IExpressionTreeFactory Factory { get; } = new ExpressionTreeFactory();
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExpressionTree" /> class.
         /// </summary>
@@ -61,24 +85,7 @@ namespace Anori.ExpressionTrees
         /// </value>
         public IExpressionNode Head { get; }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ExpressionTree" /> with generic parameter class.
-        /// </summary>
-        /// <typeparam name="TFunc">The type of the function.</typeparam>
-        /// <param name="expression">The expression.</param>
-        /// <returns>
-        ///     A new instance of the <see cref="ExpressionTree" />.
-        /// </returns>
-        public static IExpressionTree New<TFunc>(Expression<TFunc> expression) => new ExpressionTree(expression);
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ExpressionTree" /> with generic parameter class.
-        /// </summary>
-        /// <param name="expression">The expression.</param>
-        /// <returns>
-        ///     A new instance of the <see cref="ExpressionTree" />.
-        /// </returns>
-        public static IExpressionTree New(LambdaExpression expression) => new ExpressionTree(expression);
+       
 
         /// <summary>
         ///     Gets the tree.
@@ -122,135 +129,49 @@ namespace Anori.ExpressionTrees
                 switch (expression)
                 {
                     case MemberExpression { Member: PropertyInfo propertyInfo } memberExpression:
-                        {
-                            expression = memberExpression.Expression;
-                            nodeCollection.AddElement(new PropertyNode(memberExpression, propertyInfo));
-                            break;
-                        }
+                        expression = AddPropertyNode(memberExpression, nodeCollection, propertyInfo);
+                        break;
 
                     case MemberExpression { Member: FieldInfo fieldInfo } memberExpression:
-                        {
-                            expression = memberExpression.Expression;
-                            nodeCollection.AddElement(new FieldNode(memberExpression, fieldInfo));
-                            break;
-                        }
+                        expression = AddFieldNode(memberExpression, nodeCollection, fieldInfo);
+                        break;
 
                     case MemberExpression:
                         throw new TreeException("Expression member is not a PropertyInfo");
 
                     case ParameterExpression parameterExpression:
-                        {
-                            var element = new ParameterNode(parameterExpression);
-                            var node = nodeCollection.AddElement(element);
-                            nodeCollection.Roots.Add(node);
-                            return nodeCollection.First();
-                        }
+                        return AddParameterNode(parameterExpression, nodeCollection);
 
-                    case MethodCallExpression methodCallExpression
-                        when methodCallExpression.Method.ReturnParameter == null:
+                    case MethodCallExpression { Method: { ReturnParameter: null } }:
                         throw new TreeException("Method call has no ReturnParameter");
 
-                    case MethodCallExpression methodCallExpression:
-                        expression = methodCallExpression.Object;
-                        if (expression != null)
-                        {
-                            if (expression.Type.IsIndexer(methodCallExpression))
-                            {
-                                var element = new IndexerNode(methodCallExpression);
-                                element.Object = GetBranches(expression, nodeCollection, element);
+                    case MethodCallExpression { Object: null } methodCallExpression:
+                        return AddFunctionNode(methodCallExpression, nodeCollection);
 
-                                var arguments = methodCallExpression.Arguments.Select(argument => GetBranches(argument, nodeCollection, element)).ToList();
+                    case MethodCallExpression
+                            { Object: { } expr } methodCallExpression when expr.Type.IsIndexer(methodCallExpression):
+                        return AddIndexerNode(expr, methodCallExpression, nodeCollection);
 
-                                element.Arguments = arguments;
-                                ((IInternalExpressionNode)element.Object).SetNext(element);
-                                ((IInternalExpressionNode)element).SetPrevious(element.Object);
-                                nodeCollection.AddElement(element);
-
-                                return nodeCollection.First();
-                            }
-                            else
-                            {
-                                var element = new MethodNode(methodCallExpression);
-                                element.Object = GetBranches(expression, nodeCollection, element);
-
-                                var arguments = methodCallExpression.Arguments.Select(argument => GetBranches(argument, nodeCollection, element)).ToList();
-
-                                element.Arguments = arguments;
-                                nodeCollection.AddElement(element);
-
-                                return nodeCollection.First();
-                            }
-                        }
-                        else
-                        {
-                            var element = new FunctionNode(methodCallExpression);
-                            var parameters = methodCallExpression.Arguments.Select(argument => GetBranches(argument, nodeCollection, element)).ToList();
-
-                            element.Parameters = parameters;
-                            nodeCollection.AddElement(element);
-                            return nodeCollection.First();
-                        }
+                    case MethodCallExpression { Object: { } expr } methodCallExpression:
+                        return AddMethodNode(expr, methodCallExpression, nodeCollection);
 
                     case ConstantExpression constantExpression:
-                        {
-                            var element = new ConstantNode(constantExpression);
-                            var node = nodeCollection.AddElement(element);
-                            nodeCollection.Roots.Add(node);
-                            return nodeCollection.First();
-                        }
+                        return AddConstantNode(constantExpression, nodeCollection);
 
                     case BinaryExpression binaryExpression:
-                        {
-                            var element = new BinaryNode(binaryExpression);
-                            element.LeftNode = GetBranches(binaryExpression.Left, nodeCollection, element);
-                            element.RightNode = GetBranches(binaryExpression.Right, nodeCollection, element);
-                            nodeCollection.AddElement(element);
-                            return nodeCollection.First();
-                        }
+                        return AddBinaryNode(binaryExpression, nodeCollection);
 
                     case UnaryExpression unaryExpression:
-                        {
-                            var element = new UnaryNode(unaryExpression);
-                            element.Operand = GetBranches(unaryExpression.Operand, nodeCollection, element);
-                            nodeCollection.AddElement(element);
-                            return nodeCollection.First();
-                        }
+                        return AddUnaryNode(unaryExpression, nodeCollection);
 
                     case ConditionalExpression conditionalExpression:
-                        {
-                            var element = new ConditionalNode(conditionalExpression);
-                            element.Test = GetBranches(conditionalExpression.Test, nodeCollection, element);
-                            element.IfTrue = GetBranches(conditionalExpression.IfTrue, nodeCollection, element);
-                            element.IfFalse = GetBranches(conditionalExpression.IfFalse, nodeCollection, element);
-
-                            nodeCollection.AddElement(element);
-                            return nodeCollection.First();
-                        }
+                        return AddConditionalNode(conditionalExpression, nodeCollection);
 
                     case NewExpression newExpression:
-                        {
-                            var element = new ConstructorNode(newExpression);
-                            var parameters = newExpression.Arguments.Select(argument => GetBranches(argument, nodeCollection, element)).ToList();
-
-                            element.Parameters = parameters;
-                            nodeCollection.AddElement(element);
-                            return nodeCollection.First();
-                        }
+                        return AddConstructorNode(newExpression, nodeCollection);
 
                     case MemberInitExpression memberInitExpression:
-                        {
-                            var element = new MemberInitNode(memberInitExpression);
-                            var parameters = memberInitExpression.NewExpression.Arguments.Select(argument => GetBranches(argument, nodeCollection, element)).ToList();
-
-                            element.Parameters = parameters;
-
-                            var bindings = memberInitExpression.Bindings;
-                            var bindingTree = CreateBindingTree(nodeCollection, bindings, element);
-
-                            element.Bindings = bindingTree;
-                            nodeCollection.AddElement(element);
-                            return nodeCollection.First();
-                        }
+                        return AddMemberInitNode(memberInitExpression, nodeCollection);
 
                     case null:
                         throw new TreeException("Expression body is null");
@@ -260,6 +181,147 @@ namespace Anori.ExpressionTrees
                             $"Expression body is not a supported Expression {expression} type {expression.Type}");
                 }
             }
+        }
+        private static IExpressionNode AddMemberInitNode(
+            MemberInitExpression memberInitExpression,
+            NodeCollection nodeCollection)
+        {
+            var element = new MemberInitNode(memberInitExpression);
+            var parameters = memberInitExpression.NewExpression.Arguments
+                .Select(argument => GetBranches(argument, nodeCollection, element))
+                .ToList();
+
+            element.Parameters = parameters;
+
+            var bindings = memberInitExpression.Bindings;
+            var bindingTree = CreateBindingTree(nodeCollection, bindings, element);
+
+            element.Bindings = bindingTree;
+            nodeCollection.AddElement(element);
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddConstructorNode(NewExpression newExpression, NodeCollection nodeCollection)
+        {
+            var element = new ConstructorNode(newExpression);
+            var parameters = newExpression.Arguments.Select(argument => GetBranches(argument, nodeCollection, element))
+                .ToList();
+
+            element.Parameters = parameters;
+            nodeCollection.AddElement(element);
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddConditionalNode(
+            ConditionalExpression conditionalExpression,
+            NodeCollection nodeCollection)
+        {
+            var element = new ConditionalNode(conditionalExpression);
+            element.Test = GetBranches(conditionalExpression.Test, nodeCollection, element);
+            element.IfTrue = GetBranches(conditionalExpression.IfTrue, nodeCollection, element);
+            element.IfFalse = GetBranches(conditionalExpression.IfFalse, nodeCollection, element);
+
+            nodeCollection.AddElement(element);
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddUnaryNode(UnaryExpression unaryExpression, NodeCollection nodeCollection)
+        {
+            var element = new UnaryNode(unaryExpression);
+            element.Operand = GetBranches(unaryExpression.Operand, nodeCollection, element);
+            nodeCollection.AddElement(element);
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddBinaryNode(BinaryExpression binaryExpression, NodeCollection nodeCollection)
+        {
+            var element = new BinaryNode(binaryExpression);
+            element.LeftNode = GetBranches(binaryExpression.Left, nodeCollection, element);
+            element.RightNode = GetBranches(binaryExpression.Right, nodeCollection, element);
+            nodeCollection.AddElement(element);
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddConstantNode(
+            ConstantExpression constantExpression,
+            NodeCollection nodeCollection)
+        {
+            var element = new ConstantNode(constantExpression);
+            var node = nodeCollection.AddElement(element);
+            nodeCollection.Roots.Add(node);
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddMethodNode(
+            Expression expression,
+            MethodCallExpression methodCallExpression,
+            NodeCollection nodeCollection)
+        {
+            var element = new MethodNode(methodCallExpression);
+            element.Object = GetBranches(expression, nodeCollection, element);
+            var arguments = methodCallExpression.Arguments
+                .Select(argument => GetBranches(argument, nodeCollection, element))
+                .ToList();
+
+            element.Arguments = arguments;
+            nodeCollection.AddElement(element);
+
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddIndexerNode(
+            Expression expression,
+            MethodCallExpression methodCallExpression,
+            NodeCollection nodeCollection)
+        {
+            var element = new IndexerNode(methodCallExpression);
+            element.Object = GetBranches(expression, nodeCollection, element);
+
+            var arguments = methodCallExpression.Arguments
+                .Select(argument => GetBranches(argument, nodeCollection, element))
+                .ToList();
+
+            element.Arguments = arguments;
+            ((IInternalExpressionNode)element.Object).SetResult(element);
+            ((IInternalExpressionNode)element).SetParameter(element.Object);
+            nodeCollection.AddElement(element);
+
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddFunctionNode(
+            MethodCallExpression methodCallExpression,
+            NodeCollection nodeCollection)
+        {
+            var element = new FunctionNode(methodCallExpression);
+            var parameters = methodCallExpression.Arguments
+                .Select(argument => GetBranches(argument, nodeCollection, element))
+                .ToList();
+
+            element.Parameters = parameters;
+            nodeCollection.AddElement(element);
+            return nodeCollection.First();
+        }
+        private static IExpressionNode AddParameterNode(
+            ParameterExpression parameterExpression,
+            NodeCollection nodeCollection)
+        {
+            var element = new ParameterNode(parameterExpression);
+            var node = nodeCollection.AddElement(element);
+            nodeCollection.Roots.Add(node);
+            return nodeCollection.First();
+        }
+        private static Expression AddFieldNode(
+            MemberExpression memberExpression,
+            NodeCollection nodeCollection,
+            FieldInfo fieldInfo)
+        {
+            var expression = memberExpression.Expression;
+            var node = new FieldNode(memberExpression, fieldInfo);
+            nodeCollection.AddElement(node);
+            return expression;
+        }
+        private static Expression AddPropertyNode(
+            MemberExpression memberExpression,
+            NodeCollection nodeCollection,
+            PropertyInfo propertyInfo)
+        {
+            var expression = memberExpression.Expression;
+            var node = new PropertyNode(memberExpression, propertyInfo);
+            nodeCollection.AddElement(node);
+            return expression;
         }
 
         /// <summary>
@@ -277,41 +339,65 @@ namespace Anori.ExpressionTrees
             var bindingTree = new List<IBindingNode>();
             foreach (var binding in bindings)
             {
-                switch (binding)
-                {
-                    case MemberAssignment memberAssignment:
-                        {
-                            bindingTree.Add(
-                                new MemberAssignmentNode(
-                                    memberAssignment,
-                                    GetBranches(memberAssignment.Expression, expressionTree, node)));
-                            break;
-                        }
-
-                    case MemberMemberBinding memberMemberBinding:
-                        {
-                            var bs = CreateBindingTree(expressionTree, memberMemberBinding.Bindings, node);
-                            bindingTree.Add(new MemberMemberBindingNode(memberMemberBinding, bs, node));
-                            break;
-                        }
-
-                    case MemberListBinding memberListBinding:
-                        {
-                            var elementInits = memberListBinding.Initializers
-                                .Select(
-                                    i => new ElementInitNode(
-                                        i,
-                                        i.Arguments.Select(a => GetBranches(a, expressionTree, node)).ToList()))
-                                .Cast<IElementInitNode>()
-                                .ToList();
-
-                            bindingTree.Add(new MemberListBindingNode(memberListBinding, elementInits));
-                            break;
-                        }
-                }
+                SwitchBinding(expressionTree, node, binding, bindingTree);
             }
 
             return bindingTree;
+        }
+        private static void SwitchBinding(
+            IRootAware expressionTree,
+            MemberInitNode node,
+            MemberBinding binding,
+            List<IBindingNode> bindingTree)
+        {
+            switch (binding)
+            {
+                case MemberAssignment memberAssignment:
+                    AddMemberAssignmentNode(expressionTree, node, memberAssignment, bindingTree);
+                    break;
+
+                case MemberMemberBinding memberMemberBinding:
+                    AddMemberMemberBindingNode(expressionTree, node, memberMemberBinding, bindingTree);
+                    break;
+
+                case MemberListBinding memberListBinding:
+                    AddMemberListBindingNode(expressionTree, node, memberListBinding, bindingTree);
+                    break;
+            }
+        }
+        private static void AddMemberListBindingNode(
+            IRootAware expressionTree,
+            IExpressionNode node,
+            MemberListBinding memberListBinding,
+            ICollection<IBindingNode> bindingTree)
+        {
+            var elementInits = memberListBinding.Initializers
+                .Select(
+                    i => new ElementInitNode(i, i.Arguments.Select(a => GetBranches(a, expressionTree, node)).ToList()))
+                .Cast<IElementInitNode>()
+                .ToList();
+
+            bindingTree.Add(new MemberListBindingNode(memberListBinding, elementInits));
+        }
+        private static void AddMemberMemberBindingNode(
+            IRootAware expressionTree,
+            MemberInitNode node,
+            MemberMemberBinding memberMemberBinding,
+            ICollection<IBindingNode> bindingTree)
+        {
+            var bs = CreateBindingTree(expressionTree, memberMemberBinding.Bindings, node);
+            bindingTree.Add(new MemberMemberBindingNode(memberMemberBinding, bs, node));
+        }
+        private static void AddMemberAssignmentNode(
+            IRootAware expressionTree,
+            IExpressionNode node,
+            MemberAssignment memberAssignment,
+            ICollection<IBindingNode> bindingTree)
+        {
+            var n = new MemberAssignmentNode(
+                memberAssignment,
+                GetBranches(memberAssignment.Expression, expressionTree, node));
+            bindingTree.Add(n);
         }
     }
 }

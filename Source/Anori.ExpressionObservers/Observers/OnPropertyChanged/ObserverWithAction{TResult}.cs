@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
 
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
 
     using JetBrains.Annotations;
 
@@ -18,7 +19,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     ///     property observer.
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    internal sealed class ObserverWithAction<TResult> : ObserverBase<IPropertyObserver<TResult>, TResult>,
+    internal sealed class ObserverWithAction<TResult> : GenericObserverBase<IPropertyObserver<TResult>, TResult>,
                                                         IPropertyObserver<TResult>
     {
         /// <summary>

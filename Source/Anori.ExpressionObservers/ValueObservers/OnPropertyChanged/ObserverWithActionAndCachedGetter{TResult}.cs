@@ -14,6 +14,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     using Anori.ExpressionGetters;
     using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -29,7 +30,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithActionAndCachedGetter<TResult> :
-        ObserverBase<IGetterValuePropertyObserver<TResult>, TResult>,
+        ValueObserverBase<IGetterValuePropertyObserver<TResult>, TResult>,
         IGetterValuePropertyObserver<TResult>
         where TResult : struct
     {
@@ -55,7 +56,7 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         internal ObserverWithActionAndCachedGetter(
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] Action action,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag propertyObserverFlag)
             : this(propertyExpression, action, taskScheduler, false, LazyThreadSafetyMode.None, propertyObserverFlag)
         {
@@ -166,7 +167,9 @@ namespace Anori.ExpressionObservers.ValueObservers.OnPropertyChanged
         /// <param name="propertyExpression">The property expression.</param>
         /// <param name="tree">The tree.</param>
         /// <returns>Getter.</returns>
-        private static Func<TResult?> Getter(Expression<Func<TResult>> propertyExpression, IExpressionTree tree) =>
+        private static Func<TResult?> Getter(
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree) =>
             ExpressionGetter.CreateValueGetterByTree<TResult>(propertyExpression.Parameters, tree);
     }
 }

@@ -19,6 +19,8 @@ namespace Anori.ExpressionTrees.Nodes
     /// <seealso cref="IInternalExpressionNode" />
     internal class MethodNode : IInternalExpressionNode, IMethodNode
     {
+        private IExpressionNode @object;
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="MethodNode" /> struct.
         /// </summary>
@@ -28,8 +30,7 @@ namespace Anori.ExpressionTrees.Nodes
             this.MethodCallExpression = methodCallExpression;
             this.Object = null!;
             this.Arguments = null!;
-            this.Previous = null;
-            this.Next = null;
+            this.Result = null;
         }
 
         /// <summary>
@@ -41,44 +42,12 @@ namespace Anori.ExpressionTrees.Nodes
         public MethodCallExpression MethodCallExpression { get; }
 
         /// <summary>
-        ///     Gets or sets the object.
-        /// </summary>
-        /// <value>
-        ///     The object.
-        /// </value>
-        public IExpressionNode Object { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        ///     The arguments.
-        /// </value>
-        public IList<IExpressionNode> Arguments { get; set; }
-
-        /// <summary>
         ///     Gets the type.
         /// </summary>
         /// <value>
         ///     The type.
         /// </value>
         public Type Type => this.MethodCallExpression.Method.ReturnParameter?.ParameterType!;
-
-        /// <summary>
-        ///     Gets the previous.
-        /// </summary>
-        /// <value>
-        ///     The previous.
-        /// </value>
-        public IExpressionNode? Previous { get; private set; }
-
-        /// <summary>
-        ///     Gets the next.
-        /// </summary>
-        /// <value>
-        ///     The next.
-        /// </value>
-        public IExpressionNode? Next { get; private set; }
 
         /// <summary>
         ///     Gets the method information.
@@ -89,15 +58,67 @@ namespace Anori.ExpressionTrees.Nodes
         public MethodInfo MethodInfo => this.MethodCallExpression.Method;
 
         /// <summary>
+        ///     Gets or sets the object.
+        /// </summary>
+        /// <value>
+        ///     The object.
+        /// </value>
+        public IExpressionNode Object
+        {
+            get => this.@object;
+            set
+            {
+                this.@object = value;
+    //            this.ParameterNotes = value;
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the arguments.
+        /// </summary>
+        /// <value>
+        ///     The arguments.
+        /// </value>
+        public IList<IExpressionNode> Arguments { get; set; }
+
+        /// <summary>
+        ///     Gets the previous.
+        /// </summary>
+        /// <value>
+        ///     The previous.
+        /// </value>
+        public IExpressionNode? Parameter { get; private set; }
+
+        public IEnumerable<IExpressionNode> ParameterNotes
+        {
+            get
+            {
+                yield return this.Object;
+                foreach (var argument in this.Arguments)
+                {
+                    yield return argument;
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Gets the next.
+        /// </summary>
+        /// <value>
+        ///     The next.
+        /// </value>
+        public IExpressionNode? Result { get; private set; }
+
+        /// <summary>
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetPrevious(IExpressionNode? node) => this.Previous = node;
+        void IInternalExpressionNode.SetParameter(IExpressionNode? node) => this.Parameter = node;
 
         /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
+        void IInternalExpressionNode.SetResult(IExpressionNode? node) => this.Result = node;
     }
 }

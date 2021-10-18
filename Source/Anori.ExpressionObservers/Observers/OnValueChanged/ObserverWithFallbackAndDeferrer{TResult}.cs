@@ -26,7 +26,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithFallbackAndDeferrer<TResult> :
-        ObserverOnValueChangedBase<INotifyPropertyObserverWithDeferrer<TResult>, TResult>,
+        GenericObserverOnValueChangedBase<INotifyPropertyObserverWithDeferrer<TResult>, TResult>,
         INotifyPropertyObserverWithDeferrer<TResult>
     {
         /// <summary>
@@ -57,7 +57,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] Expression<Func<TResult>> propertyExpression,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
@@ -82,7 +82,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] TResult fallback,
             [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
@@ -108,7 +108,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] TResult fallback,
             [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             propertyExpression = propertyExpression ?? throw new ArgumentNullException(nameof(propertyExpression));
@@ -167,9 +167,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         ///     The Getter.
         /// </returns>
         private static Func<TResult> Getter(
-            Expression<Func<TResult>> propertyExpression,
-            IExpressionTree tree,
-            TResult fallback)
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TResult fallback)
         {
             var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback!);
             return () => get();

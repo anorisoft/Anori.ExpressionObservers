@@ -35,8 +35,8 @@ namespace Anori.ExpressionTrees.Nodes
             this.Type = memberExpression.Type;
             this.MethodInfo = propertyInfo.GetMethod;
             this.Args = NullArgs;
-            this.Previous = null;
-            this.Next = null;
+            this.Parameter = null;
+            this.Result = null;
         }
 
         public PropertyNode([NotNull] MemberExpression memberExpression, [NotNull] PropertyInfo propertyInfo, IExpressionNode next)
@@ -46,8 +46,8 @@ namespace Anori.ExpressionTrees.Nodes
             this.Type = memberExpression.Type;
             this.MethodInfo = propertyInfo.GetMethod;
             this.Args = NullArgs;
-            this.Previous = null;
-            this.Next = next;
+            this.Parameter = null;
+            this.Result = next;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The member expression.
         /// </value>
-        public MemberExpression MemberExpression { get; }
+        public Expression MemberExpression { get; }
 
         /// <summary>
         ///     Gets the property information.
@@ -80,7 +80,18 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The previous.
         /// </value>
-        public IExpressionNode? Previous { get; private set; }
+        public IExpressionNode? Parameter { get; private set; }
+
+        public IEnumerable<IExpressionNode> ParameterNotes
+        {
+            get
+            {
+                if (this.Parameter != null)
+                {
+                    yield return this.Parameter;
+                }
+            }
+        }
 
         /// <summary>
         ///     Gets the next.
@@ -88,7 +99,7 @@ namespace Anori.ExpressionTrees.Nodes
         /// <value>
         ///     The next.
         /// </value>
-        public IExpressionNode? Next { get; private set; }
+        public IExpressionNode? Result { get; private set; }
 
         /// <summary>
         ///     Gets the method information.
@@ -110,12 +121,12 @@ namespace Anori.ExpressionTrees.Nodes
         ///     Sets the previous.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetPrevious(IExpressionNode? node) => this.Previous = node;
+        void IInternalExpressionNode.SetParameter(IExpressionNode? node) => this.Parameter = node;
 
         /// <summary>
         ///     Sets the next.
         /// </summary>
         /// <param name="node">The node.</param>
-        void IInternalExpressionNode.SetNext(IExpressionNode? node) => this.Next = node;
+        void IInternalExpressionNode.SetResult(IExpressionNode? node) => this.Result = node;
     }
 }

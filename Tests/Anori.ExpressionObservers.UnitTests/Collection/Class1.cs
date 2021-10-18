@@ -7,15 +7,21 @@ using System.Threading.Tasks;
 namespace Anori.ExpressionObservers.UnitTests.Collection
 {
     using Anori.ExpressionObservers.Builder;
+    using Anori.ExpressionObservers.Nodes;
     using Anori.ExpressionObservers.UnitTests.TestClasses;
 
     using NUnit.Framework;
 
     public class Class1
     {
+        private static ClassDebugger DebugExtensions { get; } = new(typeof(Class1));
+
+
         [Test]
         public void PropertyObserver_Observes_instance_IntProperty()
         {
+            using var debug = DebugExtensions.DebugMethod();
+
             var instance = new NotifyPropertyChangedClass1() { Class2 = null };
             instance.Collection.Add(new NotifyPropertyChangedClass2() { IntProperty = 1 });
             instance.Collection.Add(new NotifyPropertyChangedClass2() { IntProperty = 2 });

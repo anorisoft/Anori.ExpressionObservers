@@ -30,7 +30,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
     /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     /// <seealso cref="ObserverFoundationBase" />
     internal sealed class ObserverWithDeferrer<TResult> :
-        ObserverOnValueChangedBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TResult>,
+        ReferenceObserverOnValueChangedBase<INotifyReferencePropertyObserverWithDeferrer<TResult>, TResult>,
         INotifyReferencePropertyObserverWithDeferrer<TResult>
         where TResult : class
     {
@@ -82,7 +82,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            TaskScheduler taskScheduler,
+            [NotNull] TaskScheduler taskScheduler,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {
@@ -107,7 +107,7 @@ namespace Anori.ExpressionObservers.ReferenceObservers.OnValueChanged
         /// <exception cref="ArgumentNullException">propertyExpression is null.</exception>
         internal ObserverWithDeferrer(
             [NotNull] Expression<Func<TResult>> propertyExpression,
-            SynchronizationContext synchronizationContext,
+            [NotNull] SynchronizationContext synchronizationContext,
             PropertyObserverFlag observerFlag)
             : base(propertyExpression, observerFlag)
         {

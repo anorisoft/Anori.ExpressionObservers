@@ -25,7 +25,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
     /// </summary>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionAndFallback<TResult> :
-        ObserverOnValueChangedBase<INotifyPropertyObserver<TResult>, TResult>,
+        GenericObserverOnValueChangedBase<INotifyPropertyObserver<TResult>, TResult>,
         INotifyPropertyObserver<TResult>
     {
         /// <summary>
@@ -62,7 +62,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] TaskScheduler taskScheduler,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
@@ -91,7 +91,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] SynchronizationContext synchronizationContext,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
@@ -117,7 +117,7 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
             [NotNull] Action<TResult, TResult> action,
             [NotNull] TResult fallback,
             PropertyObserverFlag observerFlag)
-            : base(propertyExpression, observerFlag)
+            : base(propertyExpression, observerFlag, fallback)
         {
             this.value = fallback;
             this.valueChangedAction = action ?? throw new ArgumentNullException(nameof(action));
@@ -163,9 +163,9 @@ namespace Anori.ExpressionObservers.Observers.OnValueChanged
         ///     The Getter.
         /// </returns>
         private static Func<TResult> Getter(
-            Expression<Func<TResult>> propertyExpression,
-            IExpressionTree tree,
-            TResult fallback)
+            [NotNull] Expression<Func<TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TResult fallback)
         {
             var get = ExpressionGetter.CreateGetterByTree(propertyExpression.Parameters, tree, fallback!);
             return () => get();

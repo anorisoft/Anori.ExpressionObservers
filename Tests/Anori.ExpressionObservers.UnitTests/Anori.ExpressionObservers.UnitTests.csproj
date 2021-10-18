@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Anori.Asserts\Anori.Asserts.csproj" />
     <ProjectReference Include="..\..\Source\Anori.ExpressionObservers\Anori.ExpressionObservers.csproj" />
+    <ProjectReference Include="..\..\Source\Anori.ExpressionTrees\Anori.ExpressionTrees.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="!($(Configuration.Contains('Submodules')))">

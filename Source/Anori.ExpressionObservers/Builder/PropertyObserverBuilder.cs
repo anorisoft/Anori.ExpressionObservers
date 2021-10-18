@@ -11,6 +11,7 @@ namespace Anori.ExpressionObservers.Builder
     using System.Linq.Expressions;
 
     using Anori.ExpressionObservers.Interfaces.Builder;
+    using Anori.ExpressionObservers.Nodes;
 
     /// <summary>
     ///     The property observer builder class.
@@ -18,6 +19,8 @@ namespace Anori.ExpressionObservers.Builder
     /// <seealso cref="IPropertyObserverBuilder" />
     public class PropertyObserverBuilder : IPropertyObserverBuilder
     {
+        private static ClassDebugger DebugExtensions { get; } = new ClassDebugger(typeof(PropertyObserverBuilder));
+
         /// <summary>
         ///     The is automatic activate.
         /// </summary>
@@ -44,6 +47,7 @@ namespace Anori.ExpressionObservers.Builder
             bool autoActivate = false,
             bool silentActivate = true)
         {
+            using var debug = DebugExtensions.DebugMethod();
             this.observerFlag = propertyObserverFlag;
             this.isAutoActivate = autoActivate;
             this.isSilentActivate = silentActivate;

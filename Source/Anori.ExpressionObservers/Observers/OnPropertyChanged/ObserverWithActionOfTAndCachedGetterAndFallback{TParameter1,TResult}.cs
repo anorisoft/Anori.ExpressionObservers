@@ -13,8 +13,8 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     using System.Threading.Tasks;
 
     using Anori.ExpressionGetters;
-    using Anori.ExpressionObservers.Base;
     using Anori.ExpressionObservers.Interfaces;
+    using Anori.ExpressionObservers.Observers.Base;
     using Anori.ExpressionTrees.Interfaces;
 
     using JetBrains.Annotations;
@@ -27,7 +27,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
     /// <typeparam name="TParameter1">The type of the parameter1.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     internal sealed class ObserverWithActionOfTAndCachedGetterAndFallback<TParameter1, TResult> :
-        ObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TResult>,
+        GenericObserverBase<IGetterPropertyObserver<TResult>, TParameter1, TResult>,
         IGetterPropertyObserver<TResult>
         where TParameter1 : INotifyPropertyChanged
     {
@@ -94,7 +94,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             (this.action, this.getter) = this.CreateCachedGetter(
                 this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1), taskScheduler),
@@ -153,7 +153,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             (this.action, this.getter) = this.CreateCachedGetter(
                 this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1), synchronizationContext),
@@ -207,7 +207,7 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
             bool isCached,
             LazyThreadSafetyMode safetyMode,
             PropertyObserverFlag observerFlag)
-            : base(parameter1, propertyExpression, observerFlag)
+            : base(parameter1, propertyExpression, observerFlag, fallback)
         {
             (this.action, this.getter) = this.CreateCachedGetter(
                 this.CreateGetter(Getter(propertyExpression, this.Tree, fallback, parameter1)),
@@ -238,10 +238,10 @@ namespace Anori.ExpressionObservers.Observers.OnPropertyChanged
         ///     Getter.
         /// </returns>
         private static Func<TResult> Getter(
-            Expression<Func<TParameter1, TResult>> propertyExpression,
-            IExpressionTree tree,
-            TResult fallback,
-            TParameter1 parameter1)
+            [NotNull] Expression<Func<TParameter1, TResult>> propertyExpression,
+            [NotNull] IExpressionTree tree,
+            [NotNull] TResult fallback,
+            [NotNull] TParameter1 parameter1)
         {
             var get = ExpressionGetter.CreateGetterByTree<TParameter1, TResult>(
                 propertyExpression.Parameters,
